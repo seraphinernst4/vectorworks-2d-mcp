@@ -28,7 +28,16 @@ say "2/4  Brücke in den Vectorworks-Plug-in-Ordner kopieren (Vectorworks $VW_VE
 
 say "3/4  In Claude Desktop eintragen"
 CFG="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
+RESTART_CLAUDE=0
 if [ -d "$(dirname "$CFG")" ]; then
+  # A running Claude Desktop writes its own copy of the config when it
+  # quits, which would undo this change: quit it first, reopen it after.
+  if pgrep -xq "Claude"; then
+    echo "Claude Desktop wird kurz beendet (sonst überschreibt es die Einstellung) ..."
+    osascript -e 'tell application "Claude" to quit' >/dev/null 2>&1 || true
+    for _ in $(seq 1 30); do pgrep -xq "Claude" || break; sleep 1; done
+    RESTART_CLAUDE=1
+  fi
   [ -f "$CFG" ] && cp "$CFG" "$CFG.bak-vwmcp"
   "$UVX" python - "$CFG" "$UVX" "$SOURCE" "$VW_VERSION" <<'PY'
 import json, sys, pathlib
@@ -41,6 +50,10 @@ cfg.setdefault("mcpServers", {})["vectorworks"] = entry
 path.write_text(json.dumps(cfg, indent=2) + "\n")
 print(f"'vectorworks' eingetragen in {path} (Sicherung: {path}.bak-vwmcp)")
 PY
+  if [ "$RESTART_CLAUDE" = 1 ]; then
+    echo "Claude Desktop wird wieder geöffnet ..."
+    open -a "Claude" || true
+  fi
 else
   echo "Claude Desktop nicht gefunden - übersprungen (siehe docs/claude-config.md)."
 fi
@@ -72,6 +85,6 @@ den Menübefehl "MCP Run Job" noch nicht hast:
   3. Extras > Arbeitsumgebungen > Aktuelle Arbeitsumgebung bearbeiten... > Register "Menüs":
      "MCP Run Job" (unter "Sonstiges") in ein Menü ziehen, z. B. "Extras".
 
-Dann Claude Desktop beenden und neu öffnen. Beim ersten Zugriff fragt macOS,
-ob Claude Vectorworks steuern darf: "OK" klicken.
+Claude Desktop wurde neu gestartet (falls es lief). Beim ersten Zugriff fragt
+macOS, ob Claude Vectorworks steuern darf: "OK" klicken.
 MSG

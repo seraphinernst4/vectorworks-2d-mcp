@@ -47,7 +47,9 @@ curl -LsSf https://raw.githubusercontent.com/seraphinernst4/vectorworks-2d-mcp/m
 Der Installer holt sich bei Bedarf [uv](https://docs.astral.sh/uv/), kopiert
 die kleine Brücke in den Vectorworks-Plug-in-Ordner und trägt den Server in
 Claude Desktop ein (deine Einstellungen bleiben erhalten, eine Sicherung
-wird angelegt).
+wird angelegt). Läuft Claude Desktop gerade, beendet der Installer es kurz
+und öffnet es danach wieder – sonst würde Claude die Einstellung beim
+Beenden überschreiben. git oder Xcode brauchst du nicht.
 
 ### 2. Menübefehl „MCP Run Job“ anlegen (einmalig, 2 Minuten)
 
@@ -72,10 +74,10 @@ im Plug-in-Manager anlegen:
 Test: **Extras ▸ MCP Run Job** wählen – es passiert sichtbar nichts und es
 kommt keine Fehlermeldung. Genau so soll es sein.
 
-### 3. Claude neu starten
+### 3. Ausprobieren
 
-Claude Desktop beenden und neu öffnen. Mit einer offenen Zeichnung in
-Vectorworks schreibst du: *„Ping Vectorworks.“* Beim ersten Mal fragt macOS,
+Mit einer offenen Zeichnung in Vectorworks schreibst du Claude: *„Ping
+Vectorworks.“* Beim ersten Mal fragt macOS,
 ob Claude Vectorworks steuern darf – **OK** klicken.
 
 **Update:** Installer einfach erneut ausführen. **Vectorworks 2027:**
