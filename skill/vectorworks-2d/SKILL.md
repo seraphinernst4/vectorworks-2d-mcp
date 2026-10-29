@@ -1,6 +1,6 @@
 ---
 name: vectorworks-2d
-description: Exakte, sauber organisierte 2D-Architekturzeichnungen in Vectorworks mit den vw2d-Werkzeugen (Vectorworks 2D MCP). Verwenden, wenn in einer offenen Vectorworks-Datei gezeichnet, geprüft, bereinigt oder nach Ebenen/Klassen organisiert werden soll.
+description: Exakte, sauber organisierte 2D-Architekturzeichnungen in Vectorworks mit den vw2d-Werkzeugen (Keystone for Vectorworks). Verwenden, wenn in einer offenen Vectorworks-Datei gezeichnet, geprüft, bereinigt oder nach Ebenen/Klassen organisiert werden soll.
 ---
 
 # Exakt zeichnen in Vectorworks (2D)

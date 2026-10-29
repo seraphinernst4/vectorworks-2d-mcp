@@ -40,3 +40,18 @@ def install_plugin(target: Path) -> str:
         "(Tools > Plug-ins > Plug-in Manager > New > Command, Language: Python) with:\n\n"
         + MENU_SCRIPT
     )
+
+
+def ensure_plugin(vw_version: str = "2026", home: Path | None = None,
+                  platform: str = sys.platform) -> str | None:
+    """Install or update the bridge if Vectorworks <vw_version> exists on this
+    Mac (used by the Claude Desktop extension at every start). Writes only
+    when something changed; returns a message, or None when up to date."""
+    target = plugin_dir(vw_version, platform=platform, home=home)
+    if not target.parent.parent.is_dir():  # ~/Library/Application Support/Vectorworks/<ver>
+        return f"Vectorworks {vw_version} not found ({target.parent.parent}); bridge not installed"
+    src = app.bundled_bridge_source()
+    cur = target / "vwmcp_bridge.py"
+    if cur.is_file() and (target / "__init__.py").is_file() and cur.read_text(encoding="utf-8") == src:
+        return None
+    return install_plugin(target).splitlines()[0]

@@ -120,6 +120,44 @@ def _scope(uuids, layer, class_name, selection, bbox=None) -> dict:
             "bbox": list(bbox) if bbox else None}
 
 
+def _restrict(res, uuids) -> tuple[dict, list[dict]]:
+    """Summary and issues of a check limited to issues involving uuids."""
+    want = set(uuids)
+    issues = [i for i in res["_all_issues"] if want & set(i.get("uuids", []))]
+    sev = {"error": 0, "warning": 0, "info": 0}
+    kinds: dict[str, int] = {}
+    for i in issues:
+        sev[i["severity"]] += 1
+        kinds[i["kind"]] = kinds.get(i["kind"], 0) + 1
+    s = dict(res["summary"])
+    s.update(scope_objects=len(want), errors=sev["error"], warnings=sev["warning"], infos=sev["info"],
+             by_kind=kinds, clean=sev["error"] == 0)
+    return s, issues
+
+
+def _uuid_map(ops) -> dict[str, str]:
+    """old uuid -> new uuid for objects that were rebuilt."""
+    m = {}
+    for op in ops:
+        if op.get("op") == "replaced":
+            for snap, new in zip(op.get("before", []), op.get("after", [])):
+                old = (snap.get("rec") or {}).get("uuid")
+                if old and new and old != new:
+                    m[old] = new
+    return m
+
+
+def _focus_of(data, uuids, pad_units):
+    want = set(uuids)
+    bs = [r["bbox"] for r in data["objects"] if r["uuid"] in want and r.get("bbox")]
+    if not bs:
+        return None
+    x1, y1 = min(b[0] for b in bs), min(b[1] for b in bs)
+    x2, y2 = max(b[2] for b in bs), max(b[3] for b in bs)
+    pad = max(pad_units, 0.08 * max(x2 - x1, y2 - y1))
+    return (x1 - pad, y1 - pad, x2 + pad, y2 + pad)
+
+
 def _new_issues(res, uuids) -> list[dict]:
     want = set(uuids)
     return [_issue_out(i) for i in res["_all_issues"] if want & set(i.get("uuids", []))
@@ -684,10 +722,13 @@ def vw2d_fix(
     if issue_ids:
         want = set(issue_ids)
         issues = [i for i in issues if i["id"] in want]
-    if uuids and neighbours:
+    focused = bool(uuids and neighbours)
+    if focused:
         sel = set(uuids)
         issues = [i for i in issues if sel & set(i.get("uuids", []))]
-    before = res["summary"]
+        before = _restrict(res, uuids)[0]
+    else:
+        before = res["summary"]
     shapes = res["_shapes"]
     applied: dict[str, Any] = {"action": action}
     ops: list[dict] = []
@@ -760,12 +801,23 @@ def vw2d_fix(
         lays = sorted({r["layer"] for r in data["objects"]})
         scope = _scope(None, layer or (lays[0] if len(lays) == 1 else "*"), class_name, False)
     data2, res2 = _check(scope, tolerance_mm, None, compare, ignore_classes)
-    out = {"document": doc, "applied": applied, "before": before, "after": res2["summary"],
-           "remaining": [_issue_out(i) for i in res2["issues"][:30]]}
+    focus = None
+    if focused:
+        # report only on the given objects (and their neighbours' shared issues)
+        m = _uuid_map(ops)
+        now = [m.get(u, u) for u in uuids]
+        after, remaining = _restrict(res2, now)
+        if m:
+            applied["new_uuids"] = m
+        focus = _focus_of(data2, now, t["tol"] * 40)
+    else:
+        after, remaining = res2["summary"], res2["issues"]
+    out = {"document": doc, "applied": applied, "before": before, "after": after,
+           "remaining": [_issue_out(i) for i in remaining[:30]]}
     text = json.dumps(out, ensure_ascii=False, indent=1)
     if not image:
         return text
-    return [text, _image(data2, res2)]
+    return [text, _image(data2, res2, focus=focus)]
 
 
 @mcp.tool(annotations=READ)

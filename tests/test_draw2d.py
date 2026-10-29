@@ -128,6 +128,19 @@ def test_fix_snap_makes_drawing_clean_and_is_revertable(fake):
     assert fn == "revert2d" and kw["ops"][0]["op"] == "replaced"
 
 
+def test_fix_with_uuids_reports_only_on_those_objects(fake):
+    mine = draw2d.vw2d_draw([_wall(0, 4), _wall(4.0003, 8)], layer="EG", check=False)
+    draw2d.vw2d_draw([_wall(20, 24), _wall(24.0004, 28)], layer="EG", check=False)  # someone else's gap
+    uuids = [o["uuid"] for o in mine["created"]]
+    rep = json.loads(draw2d.vw2d_fix("snap", uuids=uuids, image=False))
+    assert rep["applied"]["moved"] == 2
+    assert rep["before"]["errors"] == 1 and rep["after"]["errors"] == 0 and rep["after"]["clean"]
+    assert rep["remaining"] == [] and rep["after"]["scope_objects"] == 2
+    # the other pair was not touched
+    other = [o for o in fake.objs.values() if o["uuid"] not in uuids]
+    assert sorted(v[0] for o in other for v in o["vertices"])[:4] == [20, 20, 24, 24]
+
+
 def test_preview_focus_issue(fake):
     draw2d.vw2d_draw([_wall(0, 4), _wall(4.0003, 8)], layer="EG", check=False)
     text, img = draw2d.vw2d_preview(layer="EG", focus_issue=1)

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/mcpb/main/schemas/mcpb-manifest-v0.4.schema.json",
+  "manifest_version": "0.4",
+  "name": "keystone-vectorworks",
+  "display_name": "Keystone for Vectorworks",
+  "version": "@VERSION@",
+  "description": "Lets Claude draw exact, well-organised 2D plans in your open Vectorworks drawing: no gaps, no overlaps, true arcs, every object in the right class and layer.",
+  "long_description": "Keystone for Vectorworks by Seraphin Ernst – exact 2D drawing tools for architects – inside Claude. Claude draws polygons, polylines with true arcs, rectangles, circles, lines, text and dimensions in your open Vectorworks file, reads back what Vectorworks stored (deviation: 0), checks the drawing for overlaps, gaps, near misses, duplicates, double lines and open outlines with a numbered check image, and fixes them exactly. Layers and classes are used properly: new objects get their attributes by class.\n\nRequires Vectorworks 2026 on macOS and the one-time menu command \"MCP Run Job\" (see the README). The bridge into Vectorworks is installed automatically. Everything stays on this Mac (~/.vwmcp); nothing is sent anywhere else. Based on giorgiomoroder/vectorworks-mcp (MIT).",
+  "author": {
+    "name": "Seraphin Ernst",
+    "url": "https://www.seraphinernst.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seraphinernst4/vectorworks-2d-mcp"
+  },
+  "homepage": "https://github.com/seraphinernst4/vectorworks-2d-mcp",
+  "documentation": "https://github.com/seraphinernst4/vectorworks-2d-mcp#readme",
+  "support": "https://github.com/seraphinernst4/vectorworks-2d-mcp/issues",
+  "icon": "icon.png",
+  "server": {
+    "type": "uv",
+    "entry_point": "server/main.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": ["run", "--directory", "${__dirname}", "server/main.py"],
+      "env": {
+        "VWMCP_VW_VERSION": "${user_config.vw_version}"
+      }
+    }
+  },
+  "user_config": {
+    "vw_version": {
+      "type": "string",
+      "title": "Vectorworks-Version",
+      "description": "Jahreszahl deiner Vectorworks-Version, z. B. 2026. Getestet ist 2026.",
+      "required": false,
+      "default": "2026"
+    }
+  },
+  "tools": [
+    { "name": "vw2d_structure", "description": "Layers, classes and scales of the open drawing, with organisation problems." },
+    { "name": "vw2d_read", "description": "2D objects with exact geometry and attributes." },
+    { "name": "vw2d_draw", "description": "Draws exact 2D objects (true arcs, mm/cm/m, chains) in a layer and class." },
+    { "name": "vw2d_check", "description": "Finds overlaps, gaps, near misses, duplicates, double lines and open outlines, with a check image." },
+    { "name": "vw2d_fix", "description": "Fixes check issues exactly: snap, close, clean, duplicates, overlaps, merge, by class." },
+    { "name": "vw2d_edit", "description": "Replaces outlines or moves single points exactly." },
+    { "name": "vw2d_transform", "description": "Moves, rotates, mirrors or scales objects, also point onto point." },
+    { "name": "vw2d_boolean", "description": "Union, subtract, intersect and split with arcs kept as arcs." },
+    { "name": "vw2d_offset", "description": "Exact offset of outlines." },
+    { "name": "vw2d_setup", "description": "Creates classes with attributes and design layers with scale." },
+    { "name": "vw2d_set_attributes", "description": "Sets class, layer, name and attributes (default: by class)." },
+    { "name": "vw2d_delete", "description": "Deletes objects (restorable)." },
+    { "name": "vw2d_preview", "description": "Check image of an area or one issue." },
+    { "name": "vw2d_resources", "description": "Hatches and line types of the drawing and the Vectorworks library." },
+    { "name": "vw2d_select", "description": "Selects and zooms to objects in Vectorworks." },
+    { "name": "vw_revert_last", "description": "Undoes exactly Claude's last step." },
+    { "name": "vw_ping", "description": "Checks the connection to Vectorworks." }
+  ],
+  "tools_generated": true,
+  "compatibility": {
+    "platforms": ["darwin"],
+    "runtimes": {
+      "python": ">=3.11"
+    }
+  },
+  "keywords": ["vectorworks", "cad", "2d", "architecture", "drawing", "floor plan", "keystone"],
+  "license": "MIT"
+}

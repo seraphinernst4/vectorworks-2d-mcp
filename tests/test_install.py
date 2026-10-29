@@ -19,6 +19,18 @@ def test_install_writes_package_and_reports_version(tmp_path):
     assert app.EXPECTED_BRIDGE_VERSION in msg
 
 
+def test_ensure_plugin_installs_once_and_only_with_vectorworks(tmp_path):
+    assert "not found" in install.ensure_plugin("2026", home=tmp_path, platform="darwin")
+    vw = tmp_path / "Library/Application Support/Vectorworks/2026"
+    vw.mkdir(parents=True)
+    assert "Installed" in install.ensure_plugin("2026", home=tmp_path, platform="darwin")
+    target = vw / "Plug-ins/vwmcp"
+    assert (target / "vwmcp_bridge.py").read_text() == app.bundled_bridge_source()
+    assert install.ensure_plugin("2026", home=tmp_path, platform="darwin") is None  # up to date
+    (target / "vwmcp_bridge.py").write_text("old")
+    assert "Installed" in install.ensure_plugin("2026", home=tmp_path, platform="darwin")
+
+
 def test_install_is_idempotent(tmp_path):
     target = tmp_path / "vwmcp"
     install.install_plugin(target)

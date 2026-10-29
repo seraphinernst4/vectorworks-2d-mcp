@@ -1,73 +1,78 @@
 #!/bin/bash
-# Vectorworks 2D MCP - Installer für macOS
+# Keystone for Vectorworks - Installer für macOS
 #   curl -LsSf https://raw.githubusercontent.com/seraphinernst4/vectorworks-2d-mcp/main/scripts/install-macos.sh | bash
+# Lädt die Claude-Erweiterung, räumt eine alte Einrichtung ("vectorworks")
+# auf und öffnet die Erweiterung in Claude Desktop zum Installieren.
 # Optionen (Umgebungsvariablen):
-#   VW_VERSION=2026          Vectorworks-Version (Ordnername), z. B. 2027
-#   VWMCP_SOURCE=<spec>      Quelle des Servers (Standard: GitHub main)
+#   VWMCP_MCPB_URL=<url>     andere Quelle der Erweiterung
+#   VWMCP_SOURCE=<spec>      Quelle des Servers für Claude Code (Standard: GitHub main)
 set -euo pipefail
 
-VW_VERSION="${VW_VERSION:-2026}"
-# Archive URL instead of git+https: works without git / Xcode command line tools.
+RAW="https://raw.githubusercontent.com/seraphinernst4/vectorworks-2d-mcp/main"
+MCPB_URL="${VWMCP_MCPB_URL:-$RAW/release/Keystone-for-Vectorworks.mcpb}"
 SOURCE="${VWMCP_SOURCE:-https://github.com/seraphinernst4/vectorworks-2d-mcp/archive/refs/heads/main.zip}"
+CFG="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
 say() { printf '\n\033[1m%s\033[0m\n' "$*"; }
 
-say "1/4  uv (Python-Paketmanager) suchen"
-if command -v uvx >/dev/null 2>&1; then
-  UVX="$(command -v uvx)"
-elif [ -x "$HOME/.local/bin/uvx" ]; then
-  UVX="$HOME/.local/bin/uvx"
-else
-  echo "Installiere uv von astral.sh ..."
-  curl -LsSf https://astral.sh/uv/install.sh | sh
-  UVX="$HOME/.local/bin/uvx"
-fi
-echo "Verwende $UVX"
-
-say "2/4  Brücke in den Vectorworks-Plug-in-Ordner kopieren (Vectorworks $VW_VERSION)"
-"$UVX" --refresh --from "$SOURCE" vwmcp install-plugin --vw-version "$VW_VERSION"
-
-say "3/4  In Claude Desktop eintragen"
-CFG="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
-RESTART_CLAUDE=0
-if [ -d "$(dirname "$CFG")" ]; then
-  # A running Claude Desktop writes its own copy of the config when it
-  # quits, which would undo this change: quit it first, reopen it after.
-  if pgrep -xq "Claude"; then
-    echo "Claude Desktop wird kurz beendet (sonst überschreibt es die Einstellung) ..."
-    osascript -e 'tell application "Claude" to quit' >/dev/null 2>&1 || true
-    for _ in $(seq 1 30); do pgrep -xq "Claude" || break; sleep 1; done
-    RESTART_CLAUDE=1
+find_uvx() {
+  if command -v uvx >/dev/null 2>&1; then command -v uvx
+  elif [ -x "$HOME/.local/bin/uvx" ]; then echo "$HOME/.local/bin/uvx"
   fi
-  [ -f "$CFG" ] && cp "$CFG" "$CFG.bak-vwmcp"
-  "$UVX" python - "$CFG" "$UVX" "$SOURCE" "$VW_VERSION" <<'PY'
+}
+
+say "1/3  Erweiterung herunterladen"
+DIR="$HOME/Downloads"; [ -d "$DIR" ] || DIR="$HOME"
+MCPB="$DIR/Keystone-for-Vectorworks.mcpb"
+curl -fL --progress-bar -o "$MCPB" "$MCPB_URL"
+echo "Gespeichert: $MCPB"
+
+say "2/3  Alte Einrichtung entfernen (falls vorhanden)"
+if [ -f "$CFG" ] && grep -q '"vectorworks"[[:space:]]*:' "$CFG"; then
+  UVX="$(find_uvx || true)"
+  if [ -n "$UVX" ]; then
+    # A running Claude Desktop writes its own copy of the config when it
+    # quits, which would undo this change: quit it first (it reopens below).
+    if pgrep -xq "Claude"; then
+      echo "Claude Desktop wird kurz beendet (sonst überschreibt es die Einstellung) ..."
+      osascript -e 'tell application "Claude" to quit' >/dev/null 2>&1 || true
+      for _ in $(seq 1 30); do pgrep -xq "Claude" || break; sleep 1; done
+    fi
+    cp "$CFG" "$CFG.bak-vwmcp"
+    "$UVX" python - "$CFG" <<'PY'
 import json, sys, pathlib
-path, uvx, source, version = pathlib.Path(sys.argv[1]), sys.argv[2], sys.argv[3], sys.argv[4]
-cfg = json.loads(path.read_text()) if path.exists() and path.read_text().strip() else {}
-entry = {"command": uvx, "args": ["--from", source, "vwmcp"]}
-if version != "2026":
-    entry["env"] = {"VWMCP_APP": f"Vectorworks {version}"}
-cfg.setdefault("mcpServers", {})["vectorworks"] = entry
+path = pathlib.Path(sys.argv[1])
+cfg = json.loads(path.read_text())
+cfg.get("mcpServers", {}).pop("vectorworks", None)
 path.write_text(json.dumps(cfg, indent=2) + "\n")
-print(f"'vectorworks' eingetragen in {path} (Sicherung: {path}.bak-vwmcp)")
+print(f"Alter Eintrag 'vectorworks' entfernt (Sicherung: {path}.bak-vwmcp)")
 PY
-  if [ "$RESTART_CLAUDE" = 1 ]; then
-    echo "Claude Desktop wird wieder geöffnet ..."
-    open -a "Claude" || true
+  else
+    echo "Bitte in Claude ▸ Einstellungen ▸ Entwickler ▸ Konfiguration bearbeiten"
+    echo "den Eintrag \"vectorworks\" unter \"mcpServers\" löschen."
   fi
 else
-  echo "Claude Desktop nicht gefunden - übersprungen (siehe docs/claude-config.md)."
+  echo "Nichts zu tun."
+fi
+if command -v claude >/dev/null 2>&1; then
+  # Claude Code: same server under the new name, bridge kept up to date.
+  UVX="$(find_uvx || true)"
+  if [ -z "$UVX" ]; then
+    echo "Installiere uv von astral.sh (für Claude Code) ..."
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    UVX="$HOME/.local/bin/uvx"
+  fi
+  claude mcp remove --scope user vectorworks >/dev/null 2>&1 || true
+  claude mcp remove --scope user keystone-vectorworks >/dev/null 2>&1 || true
+  claude mcp add --scope user -e VWMCP_AUTO_BRIDGE=1 keystone-vectorworks -- "$UVX" --refresh --from "$SOURCE" vwmcp
+  echo "Claude Code: 'keystone-vectorworks' eingetragen."
 fi
 
-say "4/4  In Claude Code eintragen (falls installiert)"
-if command -v claude >/dev/null 2>&1; then
-  claude mcp remove --scope user vectorworks >/dev/null 2>&1 || true
-  if [ "$VW_VERSION" != "2026" ]; then
-    claude mcp add --scope user -e VWMCP_APP="Vectorworks $VW_VERSION" vectorworks -- "$UVX" --from "$SOURCE" vwmcp
-  else
-    claude mcp add --scope user vectorworks -- "$UVX" --from "$SOURCE" vwmcp
-  fi
+say "3/3  In Claude Desktop installieren"
+if [ -d "/Applications/Claude.app" ] || [ -d "$HOME/Applications/Claude.app" ]; then
+  open -a "Claude" "$MCPB"
+  echo "Claude Desktop zeigt jetzt \"Keystone for Vectorworks\": auf \"Installieren\" klicken."
 else
-  echo "Claude Code nicht gefunden - übersprungen."
+  echo "Claude Desktop nicht gefunden. Installiere es und öffne dann $MCPB per Doppelklick."
 fi
 
 cat <<'MSG'
@@ -85,6 +90,6 @@ den Menübefehl "MCP Run Job" noch nicht hast:
   3. Extras > Arbeitsumgebungen > Aktuelle Arbeitsumgebung bearbeiten... > Register "Menüs":
      "MCP Run Job" (unter "Sonstiges") in ein Menü ziehen, z. B. "Extras".
 
-Claude Desktop wurde neu gestartet (falls es lief). Beim ersten Zugriff fragt
-macOS, ob Claude Vectorworks steuern darf: "OK" klicken.
+Die Brücke in Vectorworks legt die Erweiterung beim Start selbst an. Beim
+ersten Zugriff fragt macOS, ob Claude Vectorworks steuern darf: "OK" klicken.
 MSG

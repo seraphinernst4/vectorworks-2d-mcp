@@ -28,6 +28,16 @@ def main() -> None:
         target = Path(args.target) if args.target else install.plugin_dir(args.vw_version)
         print(install.install_plugin(target))
         return
+    if os.environ.get("VWMCP_AUTO_BRIDGE"):
+        # Claude Desktop extension: keep the bridge in Vectorworks up to date.
+        import sys
+
+        try:
+            msg = install.ensure_plugin(os.environ.get("VWMCP_VW_VERSION") or "2026")
+            if msg:
+                print(msg, file=sys.stderr)
+        except (Exception, SystemExit) as e:  # never block the server
+            print(f"bridge install skipped: {e}", file=sys.stderr)
     mcp.run("stdio")
 
 

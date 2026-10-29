@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
+import base64
 import functools
 from importlib import resources
 from pathlib import Path
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
-from mcp.types import ToolAnnotations
+from mcp.types import Icon, ToolAnnotations
 
 from vwmcp import calls
 from vwmcp.client import Bridge, BridgeError
@@ -60,7 +61,28 @@ GENERAL
 - Prefer typed tools over raw Python (raw edits can't be reverted).
 """
 
-mcp = MCPServer("vectorworks", instructions=INSTRUCTIONS)
+DISPLAY_NAME = "Keystone for Vectorworks"
+HOMEPAGE = "https://github.com/seraphinernst4/vectorworks-2d-mcp"
+
+
+def _version() -> str:
+    from vwmcp import __version__
+
+    return __version__
+
+
+def _icons() -> list[Icon]:
+    """The Keystone icon, inline (shown by clients that display server icons)."""
+    try:
+        png = resources.files("vwmcp").joinpath("assets", "icon.png").read_bytes()
+    except (FileNotFoundError, OSError):
+        return []
+    return [Icon(src="data:image/png;base64," + base64.b64encode(png).decode("ascii"),
+                 mime_type="image/png", sizes=["256x256"])]
+
+
+mcp = MCPServer(DISPLAY_NAME, title=DISPLAY_NAME, instructions=INSTRUCTIONS, website_url=HOMEPAGE,
+                icons=_icons() or None, version=_version())
 
 
 @functools.cache

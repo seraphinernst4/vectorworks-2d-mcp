@@ -1,6 +1,8 @@
-# Vectorworks 2D MCP
+# Keystone for Vectorworks
 
 <!-- mcp-name: io.github.seraphinernst4/vectorworks-2d-mcp -->
+
+<img src="src/vwmcp/assets/icon.png" width="96" align="right" alt="">
 
 **Claude zeichnet in deiner offenen Vectorworks-Datei – exakt und sauber organisiert.**
 Für Architekturpläne in 2D: Flächen schließen lückenlos und ohne Überlappung
@@ -31,25 +33,33 @@ So fragst du Claude zum Beispiel:
 > - „Prüf die Ebene Grundriss und behebe alle Fehler.“
 > - „Räum die Klassen auf: alles, was in ‚Keine‘ liegt, in passende Klassen.“
 
-## Installation (macOS, ca. 10 Minuten)
+## Installation (macOS, ca. 5 Minuten)
 
 Du brauchst **Vectorworks 2026** (2027 geht vermutlich auch, siehe unten) und
 die **Claude-Desktop-App**.
 
-### 1. Installer ausführen
+### 1. Erweiterung installieren
 
-Öffne das **Terminal** (Programme ▸ Dienstprogramme) und füge ein:
+1. **[Keystone-for-Vectorworks.mcpb herunterladen](https://github.com/seraphinernst4/vectorworks-2d-mcp/raw/main/release/Keystone-for-Vectorworks.mcpb)**
+2. Doppelklicken – Claude Desktop öffnet sich und zeigt „Keystone for
+   Vectorworks“ – **Installieren** klicken.
+
+Das war's: Python und alle Pakete holt sich Claude selbst, die kleine Brücke
+in den Vectorworks-Plug-in-Ordner kopiert die Erweiterung bei jedem Start
+selbst (und hält sie aktuell). Terminal, git oder Xcode brauchst du nicht.
+
+<details>
+<summary>Alternativ per Terminal (auch für Claude Code und zum Umstieg von der alten Einrichtung „vectorworks“)</summary>
 
 ```bash
 curl -LsSf https://raw.githubusercontent.com/seraphinernst4/vectorworks-2d-mcp/main/scripts/install-macos.sh | bash
 ```
 
-Der Installer holt sich bei Bedarf [uv](https://docs.astral.sh/uv/), kopiert
-die kleine Brücke in den Vectorworks-Plug-in-Ordner und trägt den Server in
-Claude Desktop ein (deine Einstellungen bleiben erhalten, eine Sicherung
-wird angelegt). Läuft Claude Desktop gerade, beendet der Installer es kurz
-und öffnet es danach wieder – sonst würde Claude die Einstellung beim
-Beenden überschreiben. git oder Xcode brauchst du nicht.
+Lädt die Erweiterung, entfernt einen alten Eintrag „vectorworks“ aus der
+Claude-Konfiguration (mit Sicherung; Claude Desktop wird dafür kurz beendet),
+trägt den Server in Claude Code ein, falls vorhanden, und öffnet die
+Erweiterung in Claude Desktop – dort **Installieren** klicken.
+</details>
 
 ### 2. Menübefehl „MCP Run Job“ anlegen (einmalig, 2 Minuten)
 
@@ -80,9 +90,9 @@ Mit einer offenen Zeichnung in Vectorworks schreibst du Claude: *„Ping
 Vectorworks.“* Beim ersten Mal fragt macOS,
 ob Claude Vectorworks steuern darf – **OK** klicken.
 
-**Update:** Installer einfach erneut ausführen. **Vectorworks 2027:**
-`curl -LsSf …/install-macos.sh | VW_VERSION=2027 bash`. Getestet ist bisher
-nur 2026.
+**Update:** Neue `.mcpb` herunterladen und doppelklicken. **Vectorworks 2027:**
+Claude ▸ Einstellungen ▸ Erweiterungen ▸ Keystone for Vectorworks ▸
+Konfigurieren ▸ Vectorworks-Version `2027`. Getestet ist bisher nur 2026.
 
 ## Optional: Skill für Claude
 
@@ -138,7 +148,8 @@ prüfen, ob das erlaubt ist. Die Brücke läuft komplett auf deinem Mac
 | „did not pick up the job“ | Zeichnung öffnen, Dialoge schließen, prüfen, ob **MCP Run Job** in einem Menü liegt (Schritt 2.4). Einmal von Hand ausführen – es darf nichts passieren. |
 | „is not running“ / „still starting“ | Vectorworks öffnen und ein paar Sekunden warten. |
 | Fenster „Skriptfehler“ in Vectorworks | OK klicken und Claude bitten, es anders zu versuchen. |
-| `vw_ping` warnt wegen der Brücken-Version | Installer erneut ausführen. |
+| `vw_ping` warnt wegen der Brücken-Version | Vectorworks neu starten (die Erweiterung hat die Brücke aktualisiert). |
+| Werkzeuge doppelt („vectorworks“ und „Keystone for Vectorworks“) | Terminal-Installer einmal ausführen – er entfernt den alten Eintrag. |
 | Keine macOS-Nachfrage, nichts passiert | Systemeinstellungen ▸ Datenschutz & Sicherheit ▸ Automation: Claude darf Vectorworks steuern. |
 
 ## Für Entwickler
@@ -147,7 +158,12 @@ prüfen, ob das erlaubt ist. Die Brücke läuft komplett auf deinem Mac
 uv sync
 uv run pytest -q          # Server-Logik; Code, der in Vectorworks läuft, wird live getestet
 uv run vwmcp              # Server über stdio
+scripts/build-mcpb.sh     # baut release/Keystone-for-Vectorworks.mcpb (braucht node)
 ```
+
+Die Erweiterung (`mcpb/`: Manifest, Abhängigkeiten, Startdatei) nutzt die
+uv-Laufzeit von Claude Desktop (`server.type: "uv"`) und enthält den
+Server-Code als Quelltext. Version: `src/vwmcp/__init__.py`.
 
 Aufbau: `vw-plugin/` ist die Brücke in Vectorworks (unverändert vom
 Original), `src/vwmcp/vwlib2d.py` läuft *in* Vectorworks (Python 3.9!),
