@@ -1236,9 +1236,19 @@ def offset(uuid, distance, smooth=False, replace=False):
     name = _str(vs.GetName(h)) if replace else ""
     d = float(distance)
     xs, ys = _coord_values([h])
-    xs = sorted(set(x + s * d for x in xs for s in (-1.0, 0.0, 1.0)))
-    ys = sorted(set(y + s * d for y in ys for s in (-1.0, 0.0, 1.0)))
-    nh = vs.OffsetPolyN(h, d, bool(smooth))
+    # exact candidates: 2.615 - 0.01 is 2.605, not 2.6050000000000004
+    from decimal import Decimal
+    dd = Decimal(repr(d))
+    xs = sorted(set(float(Decimal(repr(x)) + s * dd) for x in xs for s in (-1, 0, 1)))
+    ys = sorted(set(float(Decimal(repr(y)) + s * dd) for y in ys for s in (-1, 0, 1)))
+    # Vectorworks puts the result on the active layer: make the original's layer active
+    par = vs.GetParent(h)
+    lay = _str(vs.GetLName(par)) if not _is_nil(par) and vs.GetTypeN(par) == 31 else None
+    state = _begin(lay, create_layer=False)
+    try:
+        nh = vs.OffsetPolyN(h, d, bool(smooth))
+    finally:
+        _end(state)
     if _is_nil(nh):
         raise RuntimeError("offset failed")
     res = _results(nh)
