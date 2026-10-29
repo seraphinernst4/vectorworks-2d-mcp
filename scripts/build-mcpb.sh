@@ -21,6 +21,9 @@ cp LICENSE "$STAGE/LICENSE"
   while read -r f; do mkdir -p "$STAGE/server/$(dirname "$f")"; cp "src/$f" "$STAGE/server/$f"; done
 mkdir -p "$STAGE/server/vwmcp/_plugin"
 cp vw-plugin/vwmcp/vwmcp_bridge.py "$STAGE/server/vwmcp/_plugin/vwmcp_bridge.py"
+# handshake answers of exactly this server, for the launcher's instant start
+PYTHON="${PYTHON:-uv run --quiet python}"
+$PYTHON scripts/dump_static.py "$STAGE/server" "$STAGE/server/static.json"
 
 MCPB="npx -y @anthropic-ai/mcpb@2.1.2"
 $MCPB validate "$STAGE/manifest.json"

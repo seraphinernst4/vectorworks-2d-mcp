@@ -171,8 +171,11 @@ scripts/build-mcpb.sh     # baut release/Keystone-for-Vectorworks.mcpb (braucht 
 Die Erweiterung (`mcpb/`: Manifest, Abhängigkeiten, Startdateien) ist eine
 Node-Erweiterung: `server/index.js` läuft mit dem Node von Claude Desktop,
 sucht uv (oder lädt es einmal nach `~/.vwmcp/uv`) und startet damit
-`server/main.py` (Python und Pakete in `~/.vwmcp/venv`). Der Server-Code
-liegt als Quelltext bei. Version: `src/vwmcp/__init__.py`.
+`server/main.py` (Python und Pakete in `~/.vwmcp/venv`). Den Verbindungsaufbau
+(`server/discover`, `initialize`, erste `tools/list`) beantwortet der Starter
+sofort aus `server/static.json`, das der Build aus dem echten Server erzeugt –
+Claude bricht Verbindungen ab, die darauf nicht in ~3 s antworten. Der
+Server-Code liegt als Quelltext bei. Version: `src/vwmcp/__init__.py`.
 
 Aufbau: `vw-plugin/` ist die Brücke in Vectorworks (unverändert vom
 Original), `src/vwmcp/vwlib2d.py` läuft *in* Vectorworks (Python 3.9!),

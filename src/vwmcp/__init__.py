@@ -1,3 +1,3 @@
 """Keystone for Vectorworks – exact 2D drawing in Vectorworks for Claude."""
 
-__version__ = "0.3.2"
+__version__ = "0.3.3"
