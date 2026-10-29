@@ -164,6 +164,27 @@ def _new_issues(res, uuids) -> list[dict]:
             and i["kind"] not in ("attributes", "approx")]
 
 
+def _post_check(recs: list[dict], tolerance_mm: float = 1.0, units: dict | None = None) -> list[dict]:
+    """Check issues involving these (new or changed) objects, checked
+    against their neighbours in the area around them."""
+    recs = [r for r in recs if r.get("layer")]
+    if not recs:
+        return []
+    t = units_tolerances(units or _units(), tolerance_mm)
+    boxes = [r["bbox"] for r in recs if r.get("bbox")]
+    area = None
+    if boxes:
+        x1, y1 = min(b[0] for b in boxes), min(b[1] for b in boxes)
+        x2, y2 = max(b[2] for b in boxes), max(b[3] for b in boxes)
+        pad = max(t["tol"] * 10, 0.01 * max(x2 - x1, y2 - y1))
+        area = [x1 - pad, y1 - pad, x2 + pad, y2 + pad]
+    issues = []
+    for lay in sorted({r["layer"] for r in recs}):
+        _, cres = _check({"layer": lay, "bbox": area}, tolerance_mm)
+        issues += _new_issues(cres, [r["uuid"] for r in recs])
+    return issues
+
+
 # ---- reading ----------------------------------------------------------------------
 
 @mcp.tool(annotations=READ)
@@ -368,18 +389,7 @@ def vw2d_draw(
     out = {"document": res["document"], "created": out_objs, "max_deviation_mm": worst,
            "all_exact": all(o["exact"] for o in out_objs)}
     if check:
-        layers = sorted({o["layer"] for o in out_objs})
-        boxes = [r["bbox"] for r in recs if r.get("bbox")]
-        area = None
-        if boxes:
-            x1, y1 = min(b[0] for b in boxes), min(b[1] for b in boxes)
-            x2, y2 = max(b[2] for b in boxes), max(b[3] for b in boxes)
-            pad = max(t["tol"] * 10, 0.01 * max(x2 - x1, y2 - y1))
-            area = [x1 - pad, y1 - pad, x2 + pad, y2 + pad]
-        issues = []
-        for lay in layers:
-            _, cres = _check({"layer": lay, "bbox": area}, tolerance_mm)
-            issues += _new_issues(cres, [o["uuid"] for o in out_objs])
+        issues = _post_check(recs, tolerance_mm, units)
         out["issues"] = issues
         out["clean"] = not any(i["severity"] == "error" for i in issues)
     return out
@@ -442,9 +452,13 @@ def vw2d_edit(
     if exp:
         chk = S.check_created({"kind": "poly"}, exp, rec, t["eps"])
         dev = _mm(units, chk["deviation"]) if math.isfinite(chk["deviation"]) else None
-    return {"document": res["document"], "uuid": rec["uuid"], "uuid_changed": rec["uuid"] != uuid,
-            "kind": rec["kind"], "deviation_mm": dev, "exact": dev is None or dev <= 1e-6,
-            "object": _slim(rec)}
+    out = {"document": res["document"], "uuid": rec["uuid"], "uuid_changed": rec["uuid"] != uuid,
+           "kind": rec["kind"], "deviation_mm": dev, "exact": dev is None or dev <= 1e-6,
+           "object": _slim(rec)}
+    issues = _post_check([rec], 1.0, units)
+    out["issues"] = issues
+    out["clean"] = not any(i["severity"] == "error" for i in issues)
+    return out
 
 
 @mcp.tool(annotations=WRITE)
@@ -539,9 +553,17 @@ def vw2d_boolean(
     res = app.vw2d("boolean", timeout=WRITE_TIMEOUT, operation=operation, targets=targets, tools=tools or [],
                    keep_tools=keep_tools, line=line, eps=units_tolerances(_units(), 1.0)["eps"])
     _journal(res["document"], "vw2d_boolean", res["ops"])
-    return {"document": res["document"], "noise_fixed": res["noise_fixed"],
-            "results": [{"uuid": r["uuid"], "kind": r["kind"], "area": r.get("area"),
-                         "holes": len(r.get("holes") or [])} for r in res["objects"]]}
+    out = {"document": res["document"], "noise_fixed": res["noise_fixed"],
+           "results": [{"uuid": r["uuid"], "kind": r["kind"], "class": r.get("class"), "area": r.get("area"),
+                        "holes": len(r.get("holes") or [])} for r in res["objects"]]}
+    issues = _post_check(res["objects"])
+    out["issues"] = issues
+    out["clean"] = not any(i["severity"] == "error" for i in issues)
+    if operation == "union" and any(i["kind"] == "self_intersection" for i in issues):
+        out["warning"] = ("Das Ergebnis ist eingeschnürt: Teile berühren sich nur in einem Punkt. "
+                          "Rückgängig mit vw_revert_last und die Teile erst exakt aneinanderlegen "
+                          "(gemeinsame Kante).")
+    return out
 
 
 @mcp.tool(annotations=WRITE)
@@ -559,7 +581,11 @@ def vw2d_offset(
     res = app.vw2d("offset", timeout=WRITE_TIMEOUT, uuid=uuid, distance=cv.f(distance),
                    smooth=smooth_corners, replace=replace)
     _journal(res["document"], "vw2d_offset", res["ops"])
-    return {"document": res["document"], "results": [_slim(r) for r in res["objects"]]}
+    out = {"document": res["document"], "results": [_slim(r) for r in res["objects"]]}
+    issues = _post_check(res["objects"])
+    out["issues"] = issues
+    out["clean"] = not any(i["severity"] == "error" for i in issues)
+    return out
 
 
 @mcp.tool(annotations=WRITE)
@@ -709,7 +735,7 @@ def vw2d_fix(
       class'.
     issue_ids limits the fix to issues from the last vw2d_check with the
     same scope/settings."""
-    neighbours = action in ("snap", "overlaps", "duplicates")
+    neighbours = action in ("snap", "overlaps", "duplicates", "clean")
     if uuids and neighbours:
         # neighbours matter: check the whole layer(s) of these objects
         lays = sorted({r["layer"] for r in _read(uuids=uuids, geometry=False)["objects"]})
@@ -746,8 +772,8 @@ def vw2d_fix(
     if action == "snap":
         plan = F.plan_snap(issues, shapes, t, fixed or (), share_vertices)
         apply_polys(plan["polys"], plan["lines"])
-        applied.update(moved=plan["moved"], inserted=plan["inserted"], skipped=plan["skipped"][:20],
-                       objects_changed=len(plan["polys"]) + len(plan["lines"]))
+        applied.update(moved=plan["moved"], inserted=plan["inserted"], kept_square=plan["kept_square"],
+                       skipped=plan["skipped"][:20], objects_changed=len(plan["polys"]) + len(plan["lines"]))
     elif action == "close":
         plan = F.plan_close(issues, shapes, t)
         apply_polys(plan["polys"])
@@ -796,19 +822,27 @@ def vw2d_fix(
         ops += r["ops"]
         applied["objects"] = len(targets)
     _journal(doc, "vw2d_fix", ops)
-    if action in ("merge",) or (uuids and not neighbours and action != "by_class"):
-        # rebuilt objects have new uuids: re-check the layer(s) instead
-        lays = sorted({r["layer"] for r in data["objects"]})
-        scope = _scope(None, layer or (lays[0] if len(lays) == 1 else "*"), class_name, False)
+    m = _uuid_map(ops)
+    if m:
+        # rebuilt objects have new uuids: report those
+        applied["new_uuids"] = m
+        for k in ("clipped", "deleted_covered"):
+            if k in applied:
+                applied[k] = [m.get(u, u) for u in applied[k]]
+    if action == "merge":
+        if uuids:
+            scope = _scope(applied["result"], None, None, False)
+        else:
+            lays = sorted({r["layer"] for r in data["objects"]})
+            scope = _scope(None, layer or (lays[0] if len(lays) == 1 else "*"), class_name, False)
+    elif uuids and not neighbours:
+        scope = _scope([m.get(u, u) for u in uuids], None, None, False)
     data2, res2 = _check(scope, tolerance_mm, None, compare, ignore_classes)
     focus = None
     if focused:
         # report only on the given objects (and their neighbours' shared issues)
-        m = _uuid_map(ops)
         now = [m.get(u, u) for u in uuids]
         after, remaining = _restrict(res2, now)
-        if m:
-            applied["new_uuids"] = m
         focus = _focus_of(data2, now, t["tol"] * 40)
     else:
         after, remaining = res2["summary"], res2["issues"]

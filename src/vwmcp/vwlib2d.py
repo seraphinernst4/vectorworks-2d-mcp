@@ -1231,6 +1231,9 @@ def subtract_many(pairs, eps=1e-9):
 def offset(uuid, distance, smooth=False, replace=False):
     h = handle(uuid)
     snap = snapshot(h) if replace else None
+    cls = _str(vs.GetClass(h))
+    attrs = raw_attrs(h)
+    name = _str(vs.GetName(h)) if replace else ""
     d = float(distance)
     xs, ys = _coord_values([h])
     xs = sorted(set(x + s * d for x in xs for s in (-1.0, 0.0, 1.0)))
@@ -1242,9 +1245,14 @@ def offset(uuid, distance, smooth=False, replace=False):
     eps = 1e-9 * max(1.0, abs(d))
     for x in res:
         _clean_noise(x, xs, ys, eps)
+        # the result is a new object: same class and attributes as the original
+        vs.SetClass(x, cls)
+        restore_raw_attrs(x, attrs)
         vs.ResetObject(x)
     if replace:
         vs.DelObject(h)
+        if name and len(res) == 1:
+            vs.SetName(res[0], name)
         ops = [{"op": "replaced", "before": [snap], "after": [h_uuid(x) for x in res]}]
     else:
         ops = [{"op": "created", "uuid": h_uuid(x)} for x in res]

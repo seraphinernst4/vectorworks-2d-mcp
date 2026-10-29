@@ -11,7 +11,9 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.collections import LineCollection, PatchCollection  # noqa: E402
+from matplotlib.patches import PathPatch  # noqa: E402
 from matplotlib.patches import Polygon as MplPolygon  # noqa: E402
+from matplotlib.path import Path  # noqa: E402
 
 from vwmcp.geom import curves as C  # noqa: E402
 from vwmcp.geom.shapes import Shape  # noqa: E402
@@ -64,19 +66,25 @@ def render(records: list[dict], shapes: list[Shape], issues: list[dict], chord: 
         a = s.attrs
         pen = a.get("pen", "#000000")
         if s.is_area:
-            for i, ring in enumerate(s.rings):
+            # outline and holes as one path: holes are really empty
+            verts, codes = [], []
+            for ring in s.rings:
                 pts = C.discretize(ring, view_chord)
                 if len(pts) < 3:
                     continue
-                fill = a.get("fill", "solid")
-                face = "none"
-                if fill == "solid":
-                    face = a.get("fill_color", "#ffffff") if i == 0 else "#ffffff"
-                elif fill in ("hatch", "pattern"):
-                    face = "#d9d9d9" if i == 0 else "#ffffff"
-                polys.append(MplPolygon(pts, closed=True))
-                faces.append(face)
-                edges.append(pen)
+                verts += [tuple(q) for q in pts] + [tuple(pts[0])]
+                codes += [Path.MOVETO] + [Path.LINETO] * (len(pts) - 1) + [Path.CLOSEPOLY]
+            if not verts:
+                continue
+            fill = a.get("fill", "solid")
+            face = "none"
+            if fill == "solid":
+                face = a.get("fill_color", "#ffffff")
+            elif fill in ("hatch", "pattern"):
+                face = "#d9d9d9"
+            polys.append(PathPatch(Path(verts, codes)))
+            faces.append(face)
+            edges.append(pen)
         else:
             pts = C.discretize(s.segments, view_chord)
             lines.append(pts)
@@ -89,7 +97,10 @@ def render(records: list[dict], shapes: list[Shape], issues: list[dict], chord: 
     for r in records:
         if r["kind"] == "text" and r.get("origin"):
             ax.plot(*r["origin"], marker="o", ms=2, color="#555555")
-            ax.text(r["origin"][0], r["origin"][1], r.get("text", "")[:40], fontsize=6, color="#555555")
+            ha = {1: "left", 2: "center", 3: "right"}.get(r.get("just"), "left")
+            va = {1: "top", 2: "top", 3: "center", 4: "baseline", 5: "bottom"}.get(r.get("valign"), "baseline")
+            ax.text(r["origin"][0], r["origin"][1], r.get("text", "")[:40], fontsize=6, color="#555555",
+                    ha=ha, va=va, rotation=r.get("angle") or 0.0, rotation_mode="anchor")
         elif r["kind"] == "dimension" and r.get("p1"):
             ax.plot([r["p1"][0], r["p2"][0]], [r["p1"][1], r["p2"][1]], ls=":", lw=0.6, color="#888888")
 

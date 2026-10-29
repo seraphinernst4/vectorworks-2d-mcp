@@ -75,3 +75,60 @@ def test_duplicates_keep_the_top_copy():
     recs = [poly("A", [(0, 0), (4, 0), (4, 3), (0, 3)]), poly("A2", [(0, 0), (4, 0), (4, 3), (0, 3)])]
     res = run_checks(recs, U, 1.0)
     assert F.plan_duplicates(res["_all_issues"], res["_shapes"]) == {"delete": ["A"]}
+
+
+def _apply(recs, plan):
+    for ch in plan["polys"]:
+        for r in recs:
+            if r["uuid"] == ch["uuid"]:
+                r["vertices"] = ch["verts"]
+                r["holes"] = ch.get("holes") or []
+
+
+def test_snap_shifts_the_whole_edge_so_walls_stay_square():
+    # live test 29.10.: the partition only touched the wall at one corner; snapping that
+    # corner alone left the partition 0.6 mm skewed. The edge must move as a whole.
+    wall = poly("W", [(0, 2.5), (1.2, 2.5), (1.2, 2.615), (0, 2.615)])
+    part = poly("P", [(1.2006, 2.615), (1.315, 2.615), (1.315, 3.4), (1.2006, 3.4)])
+    res, plan = _plan([wall, part])
+    (ch,) = plan["polys"]
+    assert ch["uuid"] == "P"  # the newer object adapts
+    assert sorted(tuple(v[:2]) for v in ch["verts"]) == [(1.2, 2.615), (1.2, 3.4), (1.315, 2.615), (1.315, 3.4)]
+    assert plan["kept_square"] == 1
+
+
+def test_snap_does_not_drag_corners_that_touch_other_objects():
+    wall = poly("W", [(0, 2.5), (1.2, 2.5), (1.2, 2.615), (0, 2.615)])
+    part = poly("P", [(1.2006, 2.615), (1.315, 2.615), (1.315, 3.4), (1.2006, 3.4)])
+    cap = poly("C", [(1.2006, 3.4), (1.4, 3.4), (1.4, 3.6), (1.2006, 3.6)])  # sits on P's upper corner
+    _, plan = _plan([wall, part, cap])
+    p = next(c for c in plan["polys"] if c["uuid"] == "P")
+    assert (1.2006, 3.4) in {tuple(v[:2]) for v in p["verts"]}
+
+
+def test_check_arrows_show_the_newer_object_moving():
+    a = poly("A", [(0, 0), (4, 0), (4, 3), (0, 3)])
+    b = poly("B", [(4.0003, 3), (8, 3), (8, 6), (4.0003, 6)])  # meets A only at a corner
+    res = run_checks([a, b], U, 1.0)
+    moves = [m for i in res["_all_issues"] for m in i.get("moves", [])]
+    assert moves and all(m["uuid"] == "B" for m in moves)
+
+
+def test_shared_t_junction_nodes_are_not_superfluous_and_survive_clean():
+    wall = poly("W", [(0, 0), (8, 0), (8, 3), (4, 3), (2, 3), (0, 3)])  # (4, 3) and (2, 3) on a straight edge
+    part = poly("P", [(4, 3), (4.2, 3), (4.2, 5), (4, 5)])  # T-junction at (4, 3)
+    res = run_checks([wall, part], U, 1.0)
+    flagged = [i["at"] for i in res["_all_issues"] if i["kind"] == "vertices"]
+    assert flagged == [[2, 3]]
+    plan = F.plan_clean(res["_shapes"], units_tolerances(U, 1.0))
+    (ch,) = plan["polys"]
+    pts = {tuple(v[:2]) for v in ch["verts"]}
+    assert (4, 3) in pts and (2, 3) not in pts and plan["removed"] == 1
+
+
+def test_attribute_issue_points_to_a_real_fix_action():
+    r = poly("A", [(0, 0), (1, 0), (1, 1), (0, 1)])
+    r["attrs"] = {"fill": "solid", "by_class": {"fill": False}}
+    res = run_checks([r], U, 1.0)
+    acts = {i["fix"]["action"] for i in res["_all_issues"] if i["kind"] == "attributes"}
+    assert acts <= {"by_class"}

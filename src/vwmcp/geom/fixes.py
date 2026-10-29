@@ -13,7 +13,7 @@ import copy
 import math
 
 from vwmcp.geom import curves as C
-from vwmcp.geom.shapes import Shape
+from vwmcp.geom.shapes import PointIndex, Shape
 
 
 class _Editable:
@@ -111,6 +111,50 @@ def _edges_containing(ring, closed, p, eps):
     return None
 
 
+def _parallel(u, v, rel=1e-6) -> bool:
+    nu, nv = math.hypot(*u), math.hypot(*v)
+    return nu == 0 or nv == 0 or abs(u[0] * v[1] - u[1] * v[0]) <= rel * nu * nv
+
+
+def _keep_edges(e, ri, vi, d, eps, free) -> int:
+    """After corner vi moved by d: move the neighbouring corner too where
+    that keeps every edge direction (a wall edge is shifted, not tilted).
+    free(point) says whether that corner may move. Returns corners moved."""
+    ring = e.rings[ri]
+    n = len(ring)
+    closed = e.closed or ri > 0
+    if n < 2:
+        return 0
+    p = (ring[vi][0], ring[vi][1])
+    moved = 0
+    for step in (-1, 1):
+        wi = vi + step
+        if not closed and not 0 <= wi < n:
+            continue
+        wi %= n
+        if wi == vi or (ri, wi) in e.frozen or ring[wi][2] != 0:
+            continue
+        w = (ring[wi][0], ring[wi][1])
+        w_old = (w[0], w[1])
+        e1 = (w[0] - (p[0] - d[0]), w[1] - (p[1] - d[1]))  # edge before the move
+        if _parallel(d, e1):
+            continue  # the edge only gets longer or shorter: direction kept
+        xi = wi + step
+        if closed or 0 <= xi < n:
+            xi %= n
+            if xi == vi or ring[xi][2] != 0:
+                continue
+            e2 = (ring[xi][0] - w[0], ring[xi][1] - w[1])
+            if not _parallel(d, e2):
+                continue  # moving w would tilt its other edge instead
+        if not free(w_old):
+            continue
+        ring[wi] = [w[0] + d[0], w[1] + d[1], 0, 0.0]
+        e.frozen.add((ri, wi))
+        moved += 1
+    return moved
+
+
 def plan_snap(issues, shapes, tol, fixed=(), share_vertices=True):
     """Move near-miss points exactly onto their targets (another object's
     vertex or edge). fixed: uuids that must not move."""
@@ -137,6 +181,17 @@ def plan_snap(issues, shapes, tol, fixed=(), share_vertices=True):
             moves += it["moves"]
     moves.sort(key=lambda m: m["distance_mm"])
     order = {s.uuid: s.order for s in shapes}
+    pidx = PointIndex(shapes, tol["tol"])
+    busy = {(m[k][0], m[k][1]) for m in moves for k in ("point", "target")}
+    kept = 0
+
+    def free_for(u):
+        def free(w):
+            # a corner that snaps by itself, or touches another object, stays put
+            if any(abs(w[0] - b[0]) <= eps and abs(w[1] - b[1]) <= eps for b in busy):
+                return False
+            return not pidx.touches_other(w, u, eps)
+        return free
     for m in moves:
         mover, other = m["uuid"], m["other"]
         p, t = tuple(m["point"]), tuple(m["target"])
@@ -160,7 +215,10 @@ def plan_snap(issues, shapes, tol, fixed=(), share_vertices=True):
             continue
         ri, vi = loc
         if e.neighbors_are_corners(ri, vi):
+            old = e.rings[ri][vi]
             e.rings[ri][vi] = [t[0], t[1], 0, 0.0]
+            e.frozen.add((ri, vi))
+            kept += _keep_edges(e, ri, vi, (t[0] - old[0], t[1] - old[1]), eps, free_for(mover))
         elif not e.move_arc_safe(ri, vi, t, eps):
             skipped.append({"uuid": mover, "point": list(p),
                             "reason": "Ziel liegt nicht auf dem Kreis des angrenzenden Bogens"})
@@ -194,7 +252,8 @@ def plan_snap(issues, shapes, tol, fixed=(), share_vertices=True):
             lines.append({"uuid": u, "p1": r[0][:2], "p2": r[1][:2]})
         else:
             polys.append({"uuid": u, "verts": e.rings[0], "closed": e.closed, "holes": e.rings[1:]})
-    return {"polys": polys, "lines": lines, "moved": moved, "inserted": inserted, "skipped": skipped}
+    return {"polys": polys, "lines": lines, "moved": moved, "inserted": inserted, "skipped": skipped,
+            "kept_square": kept}
 
 
 def plan_close(issues, shapes, tol):
@@ -216,9 +275,11 @@ def plan_close(issues, shapes, tol):
 
 def plan_clean(shapes, tol, merge_short=False, uuids=None):
     """Remove duplicate and collinear corner vertices (and optionally merge
-    corners closer than the tolerance)."""
+    corners closer than the tolerance). A collinear corner that is another
+    object's corner too (a T-junction node) stays."""
     eps, lim = tol["eps"], tol["tol"] if merge_short else tol["eps"]
     polys, removed = [], 0
+    pidx = PointIndex(shapes, tol["tol"])
     for s in shapes:
         if s.kind not in ("polygon", "polyline") or s.approx or (uuids and s.uuid not in uuids):
             continue
@@ -246,7 +307,8 @@ def plan_clean(shapes, tol, merge_short=False, uuids=None):
                     continue
                 a, p, b = out[i - 1], out[i], out[(i + 1) % n]
                 if a[2] == p[2] == b[2] == 0 and \
-                        C.point_segment_distance(p[:2], ("L", tuple(a[:2]), tuple(b[:2]))) <= eps:
+                        C.point_segment_distance(p[:2], ("L", tuple(a[:2]), tuple(b[:2]))) <= eps and \
+                        not pidx.vertex_of_other(p[:2], s.uuid, eps, lambda o, s=s: o.layer == s.layer):
                     out.pop(i)
                     changed = True
                     removed += 1

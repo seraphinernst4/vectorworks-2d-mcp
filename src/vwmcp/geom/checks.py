@@ -15,7 +15,7 @@ from shapely.geometry import Point, Polygon
 from shapely.ops import unary_union
 
 from vwmcp.geom import curves as C
-from vwmcp.geom.shapes import Shape, from_records, polygonal, shapely_parts, units_tolerances
+from vwmcp.geom.shapes import PointIndex, Shape, from_records, polygonal, shapely_parts, units_tolerances
 
 ALL_CHECKS = (
     "overlap", "duplicate", "near", "gap", "self_intersection", "open",
@@ -238,8 +238,12 @@ def run_checks(records: list[dict], units: dict, tolerance_mm: float = 1.0,
                     continue
                 seen.add(key)
                 pair = tuple(sorted((s.uuid, o.uuid)))
-                near_pairs[pair].append({"uuid": s.uuid, "other": o.uuid, "point": [p[0], p[1]],
-                                         "target": [target[0], target[1]], "target_kind": kind,
+                mover, other, pt, tg = s, o, p, target
+                if kind == "node" and o.order > s.order:
+                    # node to node: the newer object (drawn later) adapts, as vw2d_fix snap does
+                    mover, other, pt, tg = o, s, target, p
+                near_pairs[pair].append({"uuid": mover.uuid, "other": other.uuid, "point": [pt[0], pt[1]],
+                                         "target": [tg[0], tg[1]], "target_kind": kind,
                                          "distance": d})
         for pair, moves in near_pairs.items():
             a, b = by_uuid[pair[0]], by_uuid[pair[1]]
@@ -335,6 +339,7 @@ def run_checks(records: list[dict], units: dict, tolerance_mm: float = 1.0,
 
     # ---- vertex hygiene -------------------------------------------------------------------
     if "vertices" in checks:
+        pidx = PointIndex(geo, tol)
         for s in shapes:
             if s.kind not in ("polygon", "polyline") or s.approx:
                 continue
@@ -361,6 +366,8 @@ def run_checks(records: list[dict], units: dict, tolerance_mm: float = 1.0,
                         continue
                     if C.point_segment_distance(p[:2], ("L", tuple(a[:2]), tuple(b[:2]))) <= eps and \
                             math.hypot(p[0] - a[0], p[1] - a[1]) > eps and math.hypot(p[0] - b[0], p[1] - b[1]) > eps:
+                        if pidx.vertex_of_other(p[:2], s.uuid, eps, lambda o, s=s: comparable(s, o)):
+                            continue  # shared node (T-junction with a neighbour): needed
                         rep.add("vertices", "info", [s.uuid], p[:2],
                                 "Überflüssiger Punkt (liegt auf gerader Kante)", vertex=i + 1, ring=ring_i,
                                 fix={"action": "clean"})
@@ -413,7 +420,7 @@ def run_checks(records: list[dict], units: dict, tolerance_mm: float = 1.0,
         for cls, rs in sorted(by_cls.items()):
             rep.add("attributes", "info", [r["uuid"] for r in rs[:100]], _center(rs),
                     "%d Objekte in Klasse '%s' haben eigene Attribute statt 'nach Klasse'" % (len(rs), cls),
-                    count=len(rs), fix={"action": "attributes_by_class"})
+                    count=len(rs), fix={"action": "by_class"})
     if "approx" in checks:
         ap = [s for s in shapes if s.approx]
         if ap:

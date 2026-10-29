@@ -197,6 +197,53 @@ def from_records(recs: list[dict], chord: float) -> list[Shape]:
     return [from_record(r, i, chord) for i, r in enumerate(recs)]
 
 
+class PointIndex:
+    """Where the objects are, for 'is this point attached to another
+    object?': exact corner points (anchors) in a grid, outlines by bbox."""
+
+    def __init__(self, shapes: list[Shape], cell: float):
+        self.cell = max(cell, 1e-12)
+        self.grid: dict[tuple[int, int], list[tuple[tuple[float, float], Shape]]] = {}
+        self.shapes = [s for s in shapes if s.rings]
+        self.boxes = {}
+        for s in self.shapes:
+            for p in s.anchors():
+                self.grid.setdefault(self._key(p), []).append((p, s))
+            pts = [q for ring in s.rings for seg in ring for q in (seg[1], seg[2])]
+            if pts:
+                r = max((seg[4] for ring in s.rings for seg in ring if seg[0] == "A"), default=0.0)
+                self.boxes[s.uuid] = (min(q[0] for q in pts) - r, min(q[1] for q in pts) - r,
+                                      max(q[0] for q in pts) + r, max(q[1] for q in pts) + r)
+
+    def _key(self, p):
+        return (math.floor(p[0] / self.cell), math.floor(p[1] / self.cell))
+
+    def vertex_of_other(self, p, uuid, eps, accept=None) -> bool:
+        """Another object has a corner point at p."""
+        kx, ky = self._key(p)
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                for q, s in self.grid.get((kx + dx, ky + dy), ()):
+                    if s.uuid != uuid and (accept is None or accept(s)) and \
+                            abs(q[0] - p[0]) <= eps and abs(q[1] - p[1]) <= eps:
+                        return True
+        return False
+
+    def touches_other(self, p, uuid, eps, accept=None) -> bool:
+        """Another object's outline passes through p (corner or edge)."""
+        if self.vertex_of_other(p, uuid, eps, accept):
+            return True
+        for s in self.shapes:
+            if s.uuid == uuid or (accept is not None and not accept(s)):
+                continue
+            b = self.boxes.get(s.uuid)
+            if b is None or p[0] < b[0] - eps or p[0] > b[2] + eps or p[1] < b[1] - eps or p[1] > b[3] + eps:
+                continue
+            if s.distance_to(p)[0] <= eps:
+                return True
+        return False
+
+
 def units_tolerances(units: dict, tolerance_mm: float) -> dict:
     """Document-unit tolerances. mm_per_unit is rounded to 12 significant
     digits (25.4 / 0.0254 is not exactly 1000 in floating point)."""
