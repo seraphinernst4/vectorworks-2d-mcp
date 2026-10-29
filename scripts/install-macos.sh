@@ -7,7 +7,8 @@
 set -euo pipefail
 
 VW_VERSION="${VW_VERSION:-2026}"
-SOURCE="${VWMCP_SOURCE:-git+https://github.com/seraphinernst4/vectorworks-2d-mcp}"
+# Archive URL instead of git+https: works without git / Xcode command line tools.
+SOURCE="${VWMCP_SOURCE:-https://github.com/seraphinernst4/vectorworks-2d-mcp/archive/refs/heads/main.zip}"
 say() { printf '\n\033[1m%s\033[0m\n' "$*"; }
 
 say "1/4  uv (Python-Paketmanager) suchen"
