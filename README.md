@@ -71,7 +71,9 @@ Erweiterung in Claude Desktop – dort **Installieren** klicken.
 ### 2. Menübefehl „MCP Run Job“ anlegen (einmalig, 2 Minuten)
 
 Claude erreicht Vectorworks über einen einzigen Menübefehl. Den kann man nur
-im Plug-in-Manager anlegen:
+im Plug-in-Manager anlegen. **Vorher Vectorworks einmal neu starten**, damit
+es die Brücke findet, die die Erweiterung gerade in den Plug-in-Ordner gelegt
+hat.
 
 1. **Extras ▸ Plug-ins ▸ Plug-in-Manager…** ▸ Register **Eigene Plug-ins** ▸ **Neu…**
    (englisch: *Tools ▸ Plug-ins ▸ Plug-in Manager… ▸ Custom Plug-ins ▸ New…*)

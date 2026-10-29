@@ -78,6 +78,18 @@ UV=""
 if command -v uv >/dev/null 2>&1; then UV="$(command -v uv)"
 elif [ -x "$HOME/.local/bin/uv" ]; then UV="$HOME/.local/bin/uv"
 elif [ -x "$HOME/.vwmcp/uv/uv" ]; then UV="$HOME/.vwmcp/uv/uv"
+else
+  # fresh Mac: fetch uv into ~/.vwmcp/uv, where the extension looks first
+  # (no admin rights, no changes to shell settings)
+  ARCH="$(uname -m)"; [ "$ARCH" = "arm64" ] && ARCH="aarch64"
+  echo "Lade uv (Python-Verwaltung) nach ~/.vwmcp/uv ..."
+  mkdir -p "$HOME/.vwmcp/uv"
+  if curl -fsSL "https://github.com/astral-sh/uv/releases/latest/download/uv-$ARCH-apple-darwin.tar.gz" |
+      tar -xz -C "$HOME/.vwmcp/uv" --strip-components=1 && [ -x "$HOME/.vwmcp/uv/uv" ]; then
+    UV="$HOME/.vwmcp/uv/uv"
+  else
+    echo "uv konnte nicht geladen werden - die Erweiterung versucht es beim ersten Start selbst."
+  fi
 fi
 if [ -n "$UV" ] && command -v unzip >/dev/null 2>&1; then
   echo "Bereite Python und Pakete vor (beim ersten Mal 1-2 Minuten) ..."
