@@ -33,7 +33,7 @@ start it again.
 ## Claude Code
 
 ```bash
-claude mcp add --scope user -e VWMCP_AUTO_BRIDGE=1 keystone-vectorworks -- uvx --from https://github.com/seraphinernst4/vectorworks-2d-mcp/archive/refs/heads/main.zip vwmcp
+claude mcp add --scope user keystone-vectorworks -e VWMCP_AUTO_BRIDGE=1 -- uvx --from https://github.com/seraphinernst4/vectorworks-2d-mcp/archive/refs/heads/main.zip vwmcp
 ```
 
 Or in a project's `.mcp.json`:

@@ -63,8 +63,12 @@ if command -v claude >/dev/null 2>&1; then
   fi
   claude mcp remove --scope user vectorworks >/dev/null 2>&1 || true
   claude mcp remove --scope user keystone-vectorworks >/dev/null 2>&1 || true
-  claude mcp add --scope user -e VWMCP_AUTO_BRIDGE=1 keystone-vectorworks -- "$UVX" --refresh --from "$SOURCE" vwmcp
-  echo "Claude Code: 'keystone-vectorworks' eingetragen."
+  # name before -e: --env takes several values and would swallow it
+  if claude mcp add --scope user keystone-vectorworks -e VWMCP_AUTO_BRIDGE=1 -- "$UVX" --refresh --from "$SOURCE" vwmcp; then
+    echo "Claude Code: 'keystone-vectorworks' eingetragen."
+  else
+    echo "Claude Code: Eintragen fehlgeschlagen (siehe docs/claude-config.md) - weiter mit Claude Desktop."
+  fi
 fi
 
 say "3/3  In Claude Desktop installieren"
