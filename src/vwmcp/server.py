@@ -4,10 +4,14 @@ installs the in-app bridge."""
 from __future__ import annotations
 
 import argparse
+import os
 
 from vwmcp import install
 from vwmcp.app import mcp
-from vwmcp.tools import generic, spotlight  # noqa: F401  (registers tools)
+from vwmcp.tools import draw2d, generic  # noqa: F401  (registers tools)
+
+if os.environ.get("VWMCP_SPOTLIGHT"):  # lighting tools from upstream, off by default
+    from vwmcp.tools import spotlight  # noqa: F401
 
 
 def main() -> None:

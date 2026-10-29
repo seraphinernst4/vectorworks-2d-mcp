@@ -47,6 +47,27 @@ class Journal:
                 return i
         raise JournalError(f"nothing to revert in {document!r} (only typed write tools are journaled)")
 
+    def remap(self, document: str, mapping: dict[str, str]) -> None:
+        """After a revert recreated objects under new UUIDs, point older
+        entries at the new objects."""
+        if not mapping:
+            return
+
+        def sub(x):
+            if isinstance(x, str):
+                return mapping.get(x, x)
+            if isinstance(x, list):
+                return [sub(v) for v in x]
+            if isinstance(x, dict):
+                return {k: sub(v) for k, v in x.items()}
+            return x
+
+        entries = self._load()
+        for e in entries:
+            if e["document"] == document and e["ops"]:
+                e["ops"] = sub(e["ops"])
+        self._save(entries)
+
     def peek(self, document: str) -> dict:
         entries = self._load()
         return entries[self._last_index(entries, document)]

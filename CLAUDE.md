@@ -1,10 +1,27 @@
-# vectorworks-mcp: guide for Claude Code sessions
+# vectorworks-2d-mcp: guide for Claude Code sessions
 
-Mac-native MCP server for Vectorworks, Spotlight-first, pure Python.
-Public repo: https://github.com/giorgiomoroder/vectorworks-mcp (MIT).
-Status: **v0.1.0 beta**, tested only on Vectorworks 2026 Update 3 (English,
-Spotlight) on macOS. Read `docs/architecture.md` and `docs/vs-notes.md`
-before changing anything that touches Vectorworks.
+Mac-native MCP server for exact, well-organised 2D drawing in Vectorworks.
+Fork of https://github.com/giorgiomoroder/vectorworks-mcp (MIT), repo
+https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.2.0
+beta**, tested on Vectorworks 2026 Update 7 (German) on macOS. Read
+`docs/architecture.md` and `docs/vs-notes.md` before changing anything that
+touches Vectorworks.
+
+## 2D layer (this fork)
+
+- `src/vwmcp/vwlib2d.py`: runs **inside** Vectorworks after vwlib (Python 3.9,
+  stdlib only). Reads exact geometry, draws, edits, booleans, snapshots +
+  `revert2d`. Every write returns journal ops: `created`, `replaced`
+  (snapshots before + uuids after), `attrs`, `fields`.
+- `src/vwmcp/geom/curves.py`: exact segment math incl. the Vectorworks
+  arc-vertex (fillet) model, also 3.9-compatible. `shapes.py` turns records
+  into shapes, `checks.py` finds issues, `fixes.py` plans corrections,
+  `specs.py` validates draw requests (Decimal units), `render.py` draws the
+  check image.
+- `src/vwmcp/tools/draw2d.py`: the `vw2d_*` MCP tools. `calls.call2d` sends
+  vwlib + vwlib2d with each call; results come back as a JSON string.
+- Live-test VW-side changes on a throwaway document (the tests only cover
+  server-side logic plus a fake for the tool flow).
 
 ## Layout
 

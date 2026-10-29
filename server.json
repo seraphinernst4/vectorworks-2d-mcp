@@ -1,18 +1,18 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
-  "name": "io.github.giorgiomoroder/vectorworks-mcp",
-  "title": "Vectorworks",
-  "description": "Mac-native MCP server for Vectorworks, Spotlight-first: lighting devices, positions, paperwork, records, symbols, and Python.",
+  "name": "io.github.seraphinernst4/vectorworks-2d-mcp",
+  "title": "Vectorworks 2D",
+  "description": "Exact, well-organised 2D drawing in Vectorworks on macOS: draw with true arcs, check gaps/overlaps/double lines, fix them, keep classes and layers clean.",
   "repository": {
-    "url": "https://github.com/giorgiomoroder/vectorworks-mcp",
+    "url": "https://github.com/seraphinernst4/vectorworks-2d-mcp",
     "source": "github"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "packages": [
     {
       "registryType": "pypi",
-      "identifier": "vwmcp",
-      "version": "0.1.0",
+      "identifier": "vectorworks-2d-mcp",
+      "version": "0.2.0",
       "transport": { "type": "stdio" }
     }
   ]

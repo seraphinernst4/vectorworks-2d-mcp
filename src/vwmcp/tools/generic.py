@@ -200,11 +200,12 @@ def vw_insert_symbol(
 
 @mcp.tool(annotations=WRITE)
 def vw_revert_last() -> dict:
-    """Undo exactly the last MCP write in the active document: restores the
-    previous field values of vw_set_record / vw_set_lighting_device_fields,
-    or deletes the symbol vw_insert_symbol placed. Call repeatedly to step
-    further back. (Vectorworks' own Cmd-Z merges consecutive MCP edits.)
-    Raw vw_exec_python edits can't be reverted this way."""
+    """Undo exactly the last MCP write in the active document: deletes what
+    a tool created, restores objects a tool changed or deleted (geometry,
+    attributes, class, name, group and stacking position) and restores
+    record fields. Call repeatedly to step further back. (Vectorworks' own
+    Cmd-Z merges consecutive MCP edits.) Raw vw_exec_python edits can't be
+    reverted this way. Restored objects get new UUIDs (returned in mapping)."""
     journal = app.get_journal()
     document = vw("current_document")
     try:
@@ -212,8 +213,9 @@ def vw_revert_last() -> dict:
     except JournalError as e:
         raise ToolError(str(e)) from e
     try:
-        result = vw("revert", ops=entry["ops"])
+        result = app.vw2d("revert2d", ops=entry["ops"], timeout=120)
     except ToolError:
         journal.record(entry["document"], entry["tool"], entry["ops"])  # put it back
         raise
+    journal.remap(document, result.get("mapping") or {})
     return {"reverted_tool": entry["tool"], **result}

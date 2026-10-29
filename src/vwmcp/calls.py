@@ -8,6 +8,7 @@ from importlib import resources
 from vwmcp.client import Bridge
 
 VWLIB_SOURCE = resources.files("vwmcp").joinpath("vwlib.py").read_text(encoding="utf-8")
+VWLIB2D_SOURCE = resources.files("vwmcp").joinpath("vwlib2d.py").read_text(encoding="utf-8")
 
 
 class VWError(RuntimeError):
@@ -34,3 +35,15 @@ def call(bridge: Bridge, fn: str, **kwargs):
         f"result = {fn}(**_json.loads({json.dumps(kwargs)!r}))\n"
     )
     return raise_for_result(bridge.run(code))["value"]
+
+
+def call2d(bridge: Bridge, fn: str, timeout: float | None = None, **kwargs):
+    """Run vwlib2d.<fn>(**kwargs) (with vwlib loaded first) in Vectorworks.
+    Results travel as a JSON string so floats round-trip bit-exactly."""
+    code = (
+        f"{VWLIB_SOURCE}\n{VWLIB2D_SOURCE}\n"
+        "import json as _json\n"
+        f"result = _json.dumps({fn}(**_json.loads({json.dumps(kwargs)!r})))\n"
+    )
+    value = raise_for_result(bridge.run(code, timeout=timeout))["value"]
+    return json.loads(value) if isinstance(value, str) else value

@@ -73,3 +73,55 @@ See `architecture.md`: only `run VectorScript` calling
 `DoMenuTextByName('MCP Run Job', 0)` is safe; `run Python script` writes,
 and any script sent during launch or a modal dialog, crash Vectorworks.
 The dictionary has no usable document list (`every document` → `missing value`).
+
+## 2D drawing (Vectorworks 2026 Update 7, German UI, live-tested for the vw2d tools)
+
+- Coordinates go through `vs` in document units; Vectorworks stores mm
+  internally, so a value can come back 1 ulp off (39 of 43 random points
+  were bit-exact, the rest within 2e-15 m). Treat 1 nm as "identical".
+- Polyline vertex types: 0 corner, 1 bezier, 2 cubic, 3 arc, 4 radius.
+  `GetPolylineVertex` -> `(p, type, radius)`, radius in document units.
+- **Arc vertex (3) = fillet.** The vertex is a control point; the corner is
+  replaced by an arc tangent to both edges. Tangent distance
+  d = r·(1+cos φ)/sin φ, clamped to the available edge length; radius 0 or
+  too big = largest that fits; an edge between two arc vertices gives each
+  half. Matches `ConvertToPolygon` to 1e-14 m (`geom/curves.py`). Arcs at
+  the ends of an open polyline are dropped to corners.
+- **Radius vertex (4)** with radius 0 draws an arc *through* the vertex
+  (point on arc); evaluated via Vectorworks' polygonization only.
+- `ArcTo(p, r)` takes r in document units (unlike `InsertVertex`, which
+  wants mm for arcs).
+- Rectangles: `Get2DPt(h, 1..4)` are the (rotated) corners; `HAngle`,
+  `HWidth`, `HHeight`, `HCenter` give the true size and rotation.
+- Arcs: `Get2DPt(h, 1)` centre, `2` start point, `3` end point; `GetArc` ->
+  (start, sweep). A full circle is an arc with sweep 360.
+- `ClipSurfaceN(a, b)`: deletes `a`, keeps `b`, result keeps a's class,
+  attributes and name; a tool fully inside makes a polyline with a hole.
+  `AddSurface(a, b)` deletes both, result keeps a's attributes.
+  `IntersectSurface` keeps both. All of them add ~1e-15 noise to vertices
+  (27 -> 26.999999999999996); vwlib2d snaps it back to input coordinates.
+- `AddHole(outer, hole)` keeps outer's UUID, leaves the hole template
+  (delete it) and may reverse the vertex order of the outline.
+- `ConvertToPolyline(rect)` replaces the object (new UUID).
+- `OffsetPolyN(h, d, False)`: positive d grows a counter-clockwise outline;
+  output has float noise too.
+- Stacking: `FInLayer` -> `NextObj` runs bottom to top; new objects go on
+  top; `HMoveBackward(h, False)` moves one step down.
+- Solid fill uses the fill **background** color (default object: fore
+  black, back white, shows white). Set both.
+- `SetVectorFill(h, name)` needs the hatch in the document:
+  `BuildResourceList(66, -105/-131/..., "")` + `ImportResourceToCurrentFile`.
+  Line types: type 96, folder 174, then `SetLSN(h, -Name2Index(name))`.
+  German default content names, e.g. "Beton  SRF" (two spaces),
+  "ISO-02 Strichlinie".
+- `SetCLOpacityN(class, fill, pen)` (fill first!), `SetClPenFore(class,
+  (r, g, b))` accepts a 16-bit tuple.
+- `TextSize/TextJust/TextVerticalAlign` before `CreateText` keep the origin;
+  `SetTextJustN` afterwards moves it. Just 1/2/3 = left/center/right,
+  valign 1 top, 3 center, 4 baseline, 5 bottom.
+- `LinearDim(p1, p2, offset, type, 0, 0, 0)`: type 0 horizontal, 1
+  vertical, 4 aligned; dimensions land in the document's dimension class
+  ("Bemaßung"). `CreateChainDimension(h1, h2)` returns a plug-in object and
+  accepts a chain as h1.
+- `NameClass` / `Layer` create and *activate*; restore the previous active
+  class/layer afterwards.

@@ -1,219 +1,159 @@
-# Vectorworks MCP
+# Vectorworks 2D MCP
 
-<!-- mcp-name: io.github.giorgiomoroder/vectorworks-mcp -->
+<!-- mcp-name: io.github.seraphinernst4/vectorworks-2d-mcp -->
 
-> **Beta.** Tested on Vectorworks 2026 (Update 3, English) with Spotlight on
-> macOS only. Other versions, languages and Windows may not work yet. Save
-> your file before asking for edits, and please
-> [report what you find](https://github.com/giorgiomoroder/vectorworks-mcp/issues/new/choose).
-> Working under an NDA? Read [Your drawing data](#your-drawing-data-and-ndas) first.
+**Claude zeichnet in deiner offenen Vectorworks-Datei – exakt und sauber organisiert.**
+Für Architekturpläne in 2D: Flächen schließen lückenlos und ohne Überlappung
+aneinander, Bögen sind echte Bögen, jedes Objekt liegt in der richtigen
+Klasse und Ebene. Claude prüft seine Arbeit selbst und korrigiert Fehler,
+bevor du sie siehst.
 
-Let Claude work inside your open Vectorworks drawing. Spotlight first:
-read and bulk-edit Lighting Devices, check positions, pull paperwork, and
-run any Vectorworks Python when you need more.
+> **Beta.** Getestet mit Vectorworks 2026 (Update 7, deutsch) auf macOS.
+> Speichere deine Datei, bevor du Claude zeichnen lässt.
+> Fork von [giorgiomoroder/vectorworks-mcp](https://github.com/giorgiomoroder/vectorworks-mcp) (MIT),
+> dessen Original-README unter [docs/README-upstream.md](docs/README-upstream.md) liegt.
 
-- **Mac-native.** Pure Python, no C++ SDK, no compiling. Built and tested on
-  macOS with Vectorworks 2026.
-- **Spotlight-first.** Channels, addresses, purposes, colors, gobos, positions.
-- **Safe edits.** Every bulk edit is validated before anything changes, and
-  `vw_revert_last` undoes exactly the last thing Claude did.
+## Was Claude damit kann
 
-> Example asks, once it's set up:
-> - "List every device on the 1E with its channel and color."
-> - "Which devices have no position? Which position names have no position object?"
-> - "Renumber channels on FOH TRUSS 101 to 127 in unit-number order."
-> - "Move FOH TRUSS units 1–6 to universe 2, starting at address 1."
-> - "Give me a channel hookup as CSV on my Desktop."
-> - "Undo that last change."
+| | |
+|---|---|
+| **Zeichnen** | Polygone, Polylinien mit echten Bögen, Rechtecke, Kreise, Bögen, Linien, Text, Bemaßung und Maßketten. Maße in mm/cm/m, auch als Maßkette (relativ) – exakt gerechnet (3650 mm = 3,65 m, nicht 3,6499999). Nach jedem Zeichnen liest Claude zurück, was Vectorworks gespeichert hat, und meldet die Abweichung (soll: 0). |
+| **Prüfen** | Überlappungen und übereinanderliegende Füllflächen, Spalte und Lücken zwischen Nachbarn, Punkte, die knapp danebenliegen, doppelte Flächen und Doppellinien, offene oder sich selbst schneidende Umrisse, überflüssige Punkte, Splitterflächen, Objekte ohne Klasse, Attribute nicht „nach Klasse“. Gemessen an der exakten Geometrie (auch an Bögen), Genauigkeit 0,005 mm. Dazu ein **Prüfbild** mit nummerierten Fehlern. |
+| **Korrigieren** | Punkte exakt fangen (Spalte und kleine Überlappungen verschwinden, Bögen bleiben auf ihrem Kreis), Umrisse schließen, Punkte bereinigen, Doppeltes löschen, Überlappungen wegschneiden (das oben liegende Objekt gewinnt – das Bild bleibt gleich), Teile zu einer Fläche vereinigen. |
+| **Bearbeiten** | Umriss exakt ersetzen, verschieben (auch Punkt auf Punkt), drehen, spiegeln, skalieren, vereinigen, abziehen, schneiden, teilen, versetzen, Attribute/Klasse/Ebene setzen, löschen. |
+| **Organisieren** | Ebenen und Klassen anzeigen und prüfen, Klassen mit Attributen anlegen (optional mit einer Architektur-Vorlage), Ebenen mit Maßstab anlegen. Neue Objekte bekommen ihre Attribute **nach Klasse**. Schraffuren und Linienarten aus dem Vectorworks-Zubehör werden automatisch importiert. |
+| **Rückgängig** | `vw_revert_last` macht genau den letzten Schritt von Claude rückgängig (Geometrie, Attribute, Klasse, Name, Stapelreihenfolge). |
 
----
+So fragst du Claude zum Beispiel:
 
-## Install (about 10 minutes, macOS)
+> - „Zeichne im EG einen 3,65 × 4,80 m Raum mit 24 cm Wänden in Klasse Wand-Tragend.“
+> - „Zeichne die Cavea als Ringe mit echten Bögen, jeder Ring eine Fläche.“
+> - „Prüf die Ebene Grundriss und behebe alle Fehler.“
+> - „Räum die Klassen auf: alles, was in ‚Keine‘ liegt, in passende Klassen.“
 
-You need: Vectorworks 2026, and [Claude Desktop](https://claude.ai/download)
-and/or [Claude Code](https://claude.com/claude-code).
+## Installation (macOS, ca. 10 Minuten)
 
-### 1. Run the installer (2 minutes)
+Du brauchst **Vectorworks 2026** (2027 geht vermutlich auch, siehe unten) und
+die **Claude-Desktop-App**.
 
-Open **Terminal** (Applications > Utilities) and paste:
+### 1. Installer ausführen
+
+Öffne das **Terminal** (Programme ▸ Dienstprogramme) und füge ein:
 
 ```bash
-curl -LsSf https://raw.githubusercontent.com/giorgiomoroder/vectorworks-mcp/main/scripts/install-macos.sh | bash
+curl -LsSf https://raw.githubusercontent.com/seraphinernst4/vectorworks-2d-mcp/main/scripts/install-macos.sh | bash
 ```
 
-It installs [uv](https://docs.astral.sh/uv/) if needed, copies the small
-bridge script into your Vectorworks Plug-ins folder
-(`~/Library/Application Support/Vectorworks/2026/Plug-ins/vwmcp/`), and adds
-Vectorworks to Claude Desktop and Claude Code. Your existing Claude Desktop
-settings are kept (a backup is saved next to them).
+Der Installer holt sich bei Bedarf [uv](https://docs.astral.sh/uv/), kopiert
+die kleine Brücke in den Vectorworks-Plug-in-Ordner und trägt den Server in
+Claude Desktop ein (deine Einstellungen bleiben erhalten, eine Sicherung
+wird angelegt).
 
-### 2. Create the "MCP Run Job" menu command in Vectorworks (once, 2 minutes)
+### 2. Menübefehl „MCP Run Job“ anlegen (einmalig, 2 Minuten)
 
-Claude reaches into Vectorworks through one menu command. Vectorworks only
-allows plug-ins like this to be made in its Plug-in Manager:
+Claude erreicht Vectorworks über einen einzigen Menübefehl. Den kann man nur
+im Plug-in-Manager anlegen:
 
-1. **Tools ▸ Plug-ins ▸ Plug-in Manager…** ▸ **Custom Plug-ins** tab ▸ **New…**
-2. Choose **Command**, name it exactly **`MCP Run Job`**, click **OK**.
-3. With it selected, click **Edit Script…**, set **Language: Python**, and paste:
+1. **Extras ▸ Plug-ins ▸ Plug-in-Manager…** ▸ Register **Eigene Plug-ins** ▸ **Neu…**
+   (englisch: *Tools ▸ Plug-ins ▸ Plug-in Manager… ▸ Custom Plug-ins ▸ New…*)
+2. Typ **Befehl**, Name genau **`MCP Run Job`**, **OK**.
+3. Den Befehl auswählen ▸ **Skript bearbeiten…** ▸ Sprache **Python**, einfügen:
 
    ```python
    from vwmcp import vwmcp_bridge
    vwmcp_bridge.run_pending()
    ```
 
-   Click **OK**, then **Close**.
-4. **Tools ▸ Workspaces ▸ Edit Current Workspace…** ▸ **Menus** tab. Find
-   **MCP Run Job** in the left list (under *Miscellaneous*) and drag it into
-   any menu on the right, e.g. **Tools**. Click **OK**.
+   **OK**, dann **Schließen**.
+4. **Extras ▸ Arbeitsumgebungen ▸ Aktuelle Arbeitsumgebung bearbeiten…** ▸
+   Register **Menüs**: **MCP Run Job** (links unter *Sonstiges*) in ein Menü
+   rechts ziehen, z. B. **Extras**. **OK**.
 
-Test it: choose **Tools ▸ MCP Run Job**. Nothing visible happens, and no
-error appears. That's correct; there's no work queued yet.
+Test: **Extras ▸ MCP Run Job** wählen – es passiert sichtbar nichts und es
+kommt keine Fehlermeldung. Genau so soll es sein.
 
-### 3. Restart Claude and say hello (1 minute)
+### 3. Claude neu starten
 
-Quit and reopen Claude Desktop. With a drawing open in Vectorworks, ask:
+Claude Desktop beenden und neu öffnen. Mit einer offenen Zeichnung in
+Vectorworks schreibst du: *„Ping Vectorworks.“* Beim ersten Mal fragt macOS,
+ob Claude Vectorworks steuern darf – **OK** klicken.
 
-> Ping Vectorworks.
+**Update:** Installer einfach erneut ausführen. **Vectorworks 2027:**
+`curl -LsSf …/install-macos.sh | VW_VERSION=2027 bash`. Getestet ist bisher
+nur 2026.
 
-The first time, macOS asks whether Claude may control Vectorworks.
-Click **Allow**. You should get back your Vectorworks version and the name
-of your open drawing.
+## Optional: Skill für Claude
 
----
+Die Zeichenregeln stecken schon im Server. Wer möchte, kann zusätzlich den
+Skill [`skill/vectorworks-2d/SKILL.md`](skill/vectorworks-2d/SKILL.md) in
+Claude hinzufügen (Einstellungen ▸ Funktionen ▸ Skills). Er beschreibt den
+Arbeitsablauf ausführlicher und lässt sich an euren Klassenstandard anpassen.
 
-## Tools
+## So arbeitet Claude damit
 
-| Tool | What it does |
+1. **Struktur lesen** (`vw2d_structure`): welche Ebenen, Klassen, Maßstäbe gibt es?
+2. **Zeichnen** (`vw2d_draw`) in der richtigen Ebene und Klasse – exakt.
+3. **Prüfen** (`vw2d_check`) mit Prüfbild.
+4. **Korrigieren** (`vw2d_fix`) und erneut prüfen, bis keine Fehler mehr da sind.
+5. **Zeigen** (`vw2d_select`): Claude markiert, was es gezeichnet hat.
+
+Alle Werkzeuge: `vw2d_read`, `vw2d_structure`, `vw2d_resources`, `vw2d_setup`,
+`vw2d_draw`, `vw2d_edit`, `vw2d_transform`, `vw2d_boolean`, `vw2d_offset`,
+`vw2d_set_attributes`, `vw2d_delete`, `vw2d_check`, `vw2d_preview`,
+`vw2d_fix`, `vw2d_select`, dazu aus dem Original `vw_ping`,
+`vw_document_info`, `vw_list_layers`, `vw_list_classes`, `vw_get_selection`,
+`vw_find_objects`, `vw_get_record`, `vw_set_record`, `vw_list_symbols`,
+`vw_insert_symbol`, `vw_revert_last`, `vw_exec_python`, `vw_vs_lookup`.
+(Die Spotlight-Lichttechnik-Werkzeuge des Originals gibt es mit
+`VWMCP_SPOTLIGHT=1`.)
+
+## Gut zu wissen
+
+- **Rückgängig:** Vectorworks fasst mehrere Claude-Schritte zu einem Cmd-Z
+  zusammen. Einen einzelnen Schritt von Claude machst du mit „mach das
+  rückgängig“ (`vw_revert_last`) rückgängig.
+- **Dialoge blockieren:** Ist in Vectorworks ein Dialog offen, wartet Claude
+  und meldet dann einen Timeout. Dialog schließen, nochmal fragen.
+- **Gerade gestartet?** Claude wartet, bis Vectorworks ~30 Sekunden läuft.
+- **Exakt heißt:** Koordinaten werden ungerundet durchgereicht und
+  zurückgelesen. Rechenrauschen von Vectorworks' Booleschen Operationen
+  (z. B. 26,999999999999996 statt 27) wird automatisch auf die exakten
+  Eingangswerte zurückgesetzt.
+- **Log:** Fehler der Brücke stehen in `~/.vwmcp/vwmcp.log`.
+
+## Deine Zeichnungsdaten
+
+Was Claude aus deiner Zeichnung liest (Koordinaten, Namen, Klassen, Texte),
+geht als Teil deiner Unterhaltung an Anthropic. Die `.vwx`-Datei selbst wird
+nicht hochgeladen. Bei Projekten mit Vertraulichkeitsvereinbarung vorher
+prüfen, ob das erlaubt ist. Die Brücke läuft komplett auf deinem Mac
+(`~/.vwmcp/`).
+
+## Fehlersuche
+
+| Problem | Lösung |
 |---|---|
-| `vw_ping` | Bridge alive? Vectorworks version, open document, bridge version check |
-| `vw_document_info` | Units, active layer/class, counts, selection size |
-| `vw_list_layers`, `vw_list_classes` | Layers (design/sheet, visibility) and classes |
-| `vw_get_selection` | Selected objects: type, name, class, layer, bbox, records |
-| `vw_find_objects` | Find by class, layer, type, plug-in, record field value, name |
-| `vw_get_record`, `vw_set_record` | Read/write record fields or plug-in parameters |
-| `vw_list_symbols`, `vw_insert_symbol` | Symbol definitions by name/folder; place one at x, y(, z) |
-| `vw_list_lighting_devices` | Every Lighting Device: unit, channel, address, purpose, position, type, color, gobo, focus… |
-| `vw_set_lighting_device_fields` | Bulk edit by position + unit number, channel, or uuid |
-| `vw_list_positions` | Positions with their devices, plus unassigned devices and orphan position names |
-| `vw_lighting_device_report` | Paperwork export (CSV or JSON), naturally sorted |
-| `vw_revert_last` | Undo exactly the last Claude edit in this drawing (repeatable) |
-| `vw_exec_python` | Run any Vectorworks Python (`vs.*`) and get stdout, value, traceback |
-| `vw_vs_lookup` | Search the `vs.*` API of *your* Vectorworks, with signatures |
+| „did not pick up the job“ | Zeichnung öffnen, Dialoge schließen, prüfen, ob **MCP Run Job** in einem Menü liegt (Schritt 2.4). Einmal von Hand ausführen – es darf nichts passieren. |
+| „is not running“ / „still starting“ | Vectorworks öffnen und ein paar Sekunden warten. |
+| Fenster „Skriptfehler“ in Vectorworks | OK klicken und Claude bitten, es anders zu versuchen. |
+| `vw_ping` warnt wegen der Brücken-Version | Installer erneut ausführen. |
+| Keine macOS-Nachfrage, nichts passiert | Systemeinstellungen ▸ Datenschutz & Sicherheit ▸ Automation: Claude darf Vectorworks steuern. |
 
-## Your drawing data and NDAs
-
-**What leaves your Mac:** whatever Claude reads from your drawing, plus
-whatever you type, is sent to Anthropic as part of your Claude conversation.
-That includes fixture lists, channel and address data, position and layer
-names, venue and show names, and anything else the tools return. The
-`.vwx` file itself is never uploaded, but Claude can read most of what's in
-it if you ask.
-
-**What stays local:** the bridge runs entirely on your Mac. Requests and
-results pass through `~/.vwmcp/`, and nothing in this project sends data
-anywhere except through your Claude app.
-
-**If a project is under NDA or a client confidentiality clause:**
-
-- Check whether your agreement allows project data to be processed by a
-  third-party AI service. Many NDAs don't address it, and some forbid it.
-  When in doubt, ask the client or producer first.
-- Your Claude plan and privacy settings govern how Anthropic stores
-  conversations and whether they may be used for model training. Review them
-  at [claude.ai/settings](https://claude.ai/settings) and in
-  [Anthropic's privacy policy](https://www.anthropic.com/legal/privacy).
-  Team and Enterprise plans have different terms from personal plans.
-- Limit what Claude sees: ask about one position or layer rather than the
-  whole drawing, and prefer report tools that return only the columns you
-  need.
-- Don't use it on a confidential drawing if you can't share that drawing's
-  contents with Anthropic.
-
-## Good to know
-
-- **Undo.** Vectorworks lumps back-to-back Claude edits into a single
-  Cmd-Z, so Cmd-Z may undo several of them at once (never your own work).
-  To undo exactly one Claude edit, ask Claude to "undo that" (`vw_revert_last`).
-  This works for all typed edit tools. Changes made with raw Python
-  (`vw_exec_python`) can only be undone with Cmd-Z.
-- **Bulk edits are all-or-nothing.** If any device in a bulk edit can't be
-  found or any field name is wrong, nothing changes. Unit numbers repeat per
-  position, so give the position too.
-- **Addresses.** Spotlight treats *UniverseAddress* (e.g. `2/101`) as the
-  source of truth. Edits to Universe or DMX Address are applied through it
-  automatically, and the tool re-reads each device afterwards and reports
-  anything Spotlight overrode.
-- **Dialogs block Claude.** If a Vectorworks dialog is open, Claude's request
-  waits and then times out with a message saying so. Close the dialog and ask again.
-- **Just launched?** Claude waits until Vectorworks has been open ~30 seconds.
-  Scripts sent while Vectorworks is still starting can crash it.
-- **Log file.** Bridge errors and timeouts are logged to `~/.vwmcp/vwmcp.log`.
-
-## Troubleshooting
-
-When reporting a problem, please use the
-[bug report form](https://github.com/giorgiomoroder/vectorworks-mcp/issues/new/choose).
-
-| Symptom | Fix |
-|---|---|
-| "did not pick up the job" | Open a drawing, close any dialog, and check **MCP Run Job** is in a menu (step 2, part 4). Run it once by hand; it should do nothing silently. |
-| "is not running" / "still starting" | Open Vectorworks and wait a few seconds. |
-| A "Script Errors" window in Vectorworks | Usually raw Python calling a `vs` function with the wrong arguments. Click OK; ask Claude to check the signature with `vw_vs_lookup`. |
-| `vw_ping` warns about bridge version | Re-run the installer (or `uvx --from git+https://github.com/giorgiomoroder/vectorworks-mcp vwmcp install-plugin`). |
-| Nothing happens, no macOS permission prompt | System Settings ▸ Privacy & Security ▸ Automation: allow Claude (or Terminal) to control Vectorworks 2026. |
-| `vw_ping` warns the Vectorworks version is untested | It may work; save first, check results, and please open an issue either way. |
-| Different Vectorworks version | `VW_VERSION=2025` before the installer command, and set `VWMCP_APP="Vectorworks 2025"` in the server's environment. Only 2026 is tested. |
-
-## Manual configuration
-
-See [docs/claude-config.md](docs/claude-config.md) for the Claude Desktop and
-Claude Code config blocks, and the environment variables.
-
-## How it works
-
-```
-Claude ──MCP──▶ vwmcp server ──writes──▶ ~/.vwmcp/jobs/<id>.json
-                     │
-                     └─AppleScript: run VectorScript "DoMenuTextByName('MCP Run Job')"
-                                          │
-Vectorworks ◀────────────────────────────┘
-  MCP Run Job ▶ vwmcp_bridge.run_pending(): exec job with `vs` in scope
-              ▶ ~/.vwmcp/results/<id>.json ──▶ server ──▶ Claude
-```
-
-The in-app bridge is a ~120-line "dumb executor" and rarely changes. All
-logic, including the helper library run inside Vectorworks, is sent from the
-server with each request. Details and the reasons for this design are in
-[docs/architecture.md](docs/architecture.md); `vs.*` findings are in [docs/vs-notes.md](docs/vs-notes.md).
-
-## Windows
-
-Experimental and untested. `scripts/install-windows.ps1` installs the bridge
-and registers Claude Desktop, but there's no automatic trigger yet: run
-**MCP Run Job** yourself to process each request. Contributions welcome.
-
-## Development
+## Für Entwickler
 
 ```bash
 uv sync
-uv run pytest            # bridge round-trips with a fake Vectorworks
-uv run vwmcp             # run the server on stdio
+uv run pytest -q          # Server-Logik; Code, der in Vectorworks läuft, wird live getestet
+uv run vwmcp              # Server über stdio
 ```
 
-Code sent into Vectorworks (`src/vwmcp/vwlib.py`, `vw-plugin/`) must stay
-**Python 3.9**-compatible: that's what Vectorworks 2026 embeds.
+Aufbau: `vw-plugin/` ist die Brücke in Vectorworks (unverändert vom
+Original), `src/vwmcp/vwlib2d.py` läuft *in* Vectorworks (Python 3.9!),
+`src/vwmcp/geom/` rechnet auf dem Server (exakte Bögen, Prüfungen,
+Korrekturen, Prüfbild), `src/vwmcp/tools/draw2d.py` sind die MCP-Werkzeuge.
+Details in [CLAUDE.md](CLAUDE.md), [docs/architecture.md](docs/architecture.md)
+und [docs/vs-notes.md](docs/vs-notes.md).
 
-Nothing from the Vectorworks install (stubs, SDK headers, libraries, sample
-files) is included. Bring your own licensed Vectorworks.
+## Lizenz
 
-## Related projects
-
-[vicquick/vwx-mcp](https://github.com/vicquick/vwx-mcp) and
-[SRVR-JOE/showcad-mcp](https://github.com/SRVR-JOE/showcad-mcp) (Windows,
-native palette), [BhaveshY/vectorworks-mcp](https://github.com/BhaveshY/vectorworks-mcp)
-(Windows, architecture), [mako-357/vectorworks-mcp](https://github.com/mako-357/vectorworks-mcp)
-(C++ SDK).
-
-## License
-
-MIT
+MIT – © giorgiomoroder (Original) und Seraphin Ernst (2D-Werkzeuge).

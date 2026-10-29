@@ -26,8 +26,8 @@ class FakeVW:
             return [{"uuid": "ld-1", "Channel": "101"}]
         if fn == "current_document":
             return self.document
-        if fn == "revert":
-            return {"document": self.document, "reverted": len(kw["ops"])}
+        if fn == "revert2d":
+            return {"document": self.document, "reverted": len(kw["ops"]), "mapping": {}}
         raise AssertionError(fn)
 
 
@@ -36,6 +36,7 @@ def fake(tmp_path, monkeypatch):
     f = FakeVW()
     for mod in (app, generic, spotlight):
         monkeypatch.setattr(mod, "vw", f)
+    monkeypatch.setattr(app, "vw2d", lambda fn, timeout=None, **kw: f(fn, **kw))
     monkeypatch.setattr(app, "get_journal", lambda: Journal(tmp_path / "j.jsonl"))
     monkeypatch.setattr(generic, "_run_raw", lambda code: {"ok": True, "value": None, "stdout": "", "error": None, "traceback": None})
     return f
@@ -45,7 +46,7 @@ def test_set_record_then_revert_restores_before_values(fake):
     assert generic.vw_set_record("u1", "Notes", {"Note": "new"}) == {"Note": "new"}
     out = generic.vw_revert_last()
     fn, kw = fake.calls[-1]
-    assert fn == "revert"
+    assert fn == "revert2d"
     assert kw["ops"] == [{"op": "fields", "uuid": "u1", "record": "Notes", "before": {"Note": "old"}}]
     assert out["reverted_tool"] == "vw_set_record"
 
