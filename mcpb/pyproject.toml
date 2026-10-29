@@ -1,5 +1,5 @@
-# Dependencies of the Claude Desktop extension (server.type "uv"): Claude
-# Desktop installs them with uv. The server code ships as source in server/.
+# Dependencies of the Claude Desktop extension: server/index.js runs
+# server/main.py with uv, which installs these. The code ships in server/.
 [project]
 name = "keystone-vectorworks"
 version = "@VERSION@"

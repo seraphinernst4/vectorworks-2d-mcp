@@ -72,6 +72,25 @@ if command -v claude >/dev/null 2>&1; then
 fi
 
 say "3/3  In Claude Desktop installieren"
+# Prepare Python and the packages now (same environment the extension uses),
+# so the first start in Claude Desktop is quick.
+UV=""
+if command -v uv >/dev/null 2>&1; then UV="$(command -v uv)"
+elif [ -x "$HOME/.local/bin/uv" ]; then UV="$HOME/.local/bin/uv"
+elif [ -x "$HOME/.vwmcp/uv/uv" ]; then UV="$HOME/.vwmcp/uv/uv"
+fi
+if [ -n "$UV" ] && command -v unzip >/dev/null 2>&1; then
+  echo "Bereite Python und Pakete vor (beim ersten Mal 1-2 Minuten) ..."
+  TMP="$(mktemp -d)"
+  unzip -q "$MCPB" -d "$TMP"
+  if UV_PROJECT_ENVIRONMENT="$HOME/.vwmcp/venv" UV_PYTHON_PREFERENCE=only-managed \
+      "$UV" sync --project "$TMP" --no-dev --quiet; then
+    echo "Fertig."
+  else
+    echo "Vorbereitung übersprungen - die Erweiterung lädt beim ersten Start selbst."
+  fi
+  rm -rf "$TMP"
+fi
 if [ -d "/Applications/Claude.app" ] || [ -d "$HOME/Applications/Claude.app" ]; then
   open -a "Claude" "$MCPB"
   echo "Claude Desktop zeigt jetzt \"Keystone for Vectorworks\": auf \"Installieren\" klicken."

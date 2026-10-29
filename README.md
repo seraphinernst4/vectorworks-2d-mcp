@@ -44,9 +44,15 @@ die **Claude-Desktop-App**.
 2. Doppelklicken – Claude Desktop öffnet sich und zeigt „Keystone for
    Vectorworks“ – **Installieren** klicken.
 
-Das war's: Python und alle Pakete holt sich Claude selbst, die kleine Brücke
-in den Vectorworks-Plug-in-Ordner kopiert die Erweiterung bei jedem Start
-selbst (und hält sie aktuell). Terminal, git oder Xcode brauchst du nicht.
+Das war's: Python und alle Pakete holt sich die Erweiterung selbst (mit
+[uv](https://docs.astral.sh/uv/), nach `~/.vwmcp`), die kleine Brücke in den
+Vectorworks-Plug-in-Ordner kopiert sie bei jedem Start selbst (und hält sie
+aktuell). Terminal, git oder Xcode brauchst du nicht.
+
+> Der **allererste Start** lädt Python und Pakete (1–2 Minuten). Zeigt Claude
+> danach keine Vectorworks-Werkzeuge oder einen Fehler bei der Erweiterung,
+> Claude einmal beenden und neu öffnen – ab dann startet sie in 2 Sekunden.
+> Log: `~/.vwmcp/extension.log`.
 
 <details>
 <summary>Alternativ per Terminal (auch für Claude Code und zum Umstieg von der alten Einrichtung „vectorworks“)</summary>
@@ -57,7 +63,8 @@ curl -LsSf https://raw.githubusercontent.com/seraphinernst4/vectorworks-2d-mcp/m
 
 Lädt die Erweiterung, entfernt einen alten Eintrag „vectorworks“ aus der
 Claude-Konfiguration (mit Sicherung; Claude Desktop wird dafür kurz beendet),
-trägt den Server in Claude Code ein, falls vorhanden, und öffnet die
+trägt den Server in Claude Code ein, falls vorhanden, bereitet Python und
+Pakete vor (dann ist auch der erste Start schnell) und öffnet die
 Erweiterung in Claude Desktop – dort **Installieren** klicken.
 </details>
 
@@ -161,9 +168,11 @@ uv run vwmcp              # Server über stdio
 scripts/build-mcpb.sh     # baut release/Keystone-for-Vectorworks.mcpb (braucht node)
 ```
 
-Die Erweiterung (`mcpb/`: Manifest, Abhängigkeiten, Startdatei) nutzt die
-uv-Laufzeit von Claude Desktop (`server.type: "uv"`) und enthält den
-Server-Code als Quelltext. Version: `src/vwmcp/__init__.py`.
+Die Erweiterung (`mcpb/`: Manifest, Abhängigkeiten, Startdateien) ist eine
+Node-Erweiterung: `server/index.js` läuft mit dem Node von Claude Desktop,
+sucht uv (oder lädt es einmal nach `~/.vwmcp/uv`) und startet damit
+`server/main.py` (Python und Pakete in `~/.vwmcp/venv`). Der Server-Code
+liegt als Quelltext bei. Version: `src/vwmcp/__init__.py`.
 
 Aufbau: `vw-plugin/` ist die Brücke in Vectorworks (unverändert vom
 Original), `src/vwmcp/vwlib2d.py` läuft *in* Vectorworks (Python 3.9!),
