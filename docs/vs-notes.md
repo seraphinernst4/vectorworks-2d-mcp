@@ -159,3 +159,35 @@ The dictionary has no usable document list (`every document` → `missing value`
 - While Vectorworks runs a script, Apple Events queue up; a job that is
   cancelled (renamed to .cancelled) before the queued event runs is never
   executed (live test `busy_cancel`).
+
+## Symbols and assets (31.10.2026, Update 7, live)
+
+- `BeginSym(name)` … `EndSym()`: components keep the coordinates they were
+  drawn at; the insertion point is the user origin (0, 0 here). Component
+  layer is nil (`GetLayer` of a symbol component) - guard `GetLName`.
+- Symbol folders: `NameObject(name); BeginFolderN(16); EndFolder()` makes an
+  empty folder (type 92); `InsertSymbolInFolder(folder, symdef)` moves a
+  definition into it; `FInFolder` / `NextObj` walk it.
+- `FInGroup` works on symbol definitions as well (same as `FInSymDef`), and
+  the components' parent is the definition (type 16).
+- `GetObjectUuid` / `GetObjectByUuid` work for symbol definitions and
+  folders, too.
+- `Count("(S='name')")` counts the instances of a symbol.
+- `SetSymbolOptionsN(name, 0, 4, class)` sets the default class shown when a
+  user places the symbol from the resource manager.
+- `GetSymRot` reads 29.999999999999996 for a symbol placed at 30°;
+  location is exact.
+- **`vs.Mirror(h, False, p1, p2)` on a symbol instance does not mirror the
+  drawing**: the bounding box stays, `IsObjectFlipped` becomes true and
+  `GetSymLoc`/`GetSymRot`/`GetEntityMatrix` report nonsense (e.g. location
+  (2000, 0) for an instance at (1000, 2000), a 3D flip of 180° about x).
+  Keystone never flips instances; left/right variants are separate,
+  exactly mirrored symbol definitions ("… gespiegelt").
+- Class line weights are stored in mils: 0.18 mm is stored as 7 mils
+  (0.1778 mm), 0.13 mm as 5 mils (0.127 mm) - what Vectorworks shows as
+  0.18 / 0.13.
+- Python inside Vectorworks 2026 opens files as **ASCII** by default:
+  `open(path).read()` of a UTF-8 file with umlauts raises
+  `UnicodeDecodeError`. Always pass `encoding="utf-8"` (the bridge does).
+- Placing an asset (new symbol definition with 3-13 components + instance,
+  classes, folder) takes ~0.5 s per call including the round trip.

@@ -115,6 +115,9 @@ def vw_exec_python(code: str, modifies_document: bool = True) -> dict:
     MirrorN, LinearDim (7 args), DoMenuTextByName('Fit To Objects', 0).
     GetBBox of rotated text is a screen box (use GetTextOrientation).
     Import/export commands open modal dialogs: don't call them.
+    open() defaults to ASCII in Vectorworks: pass encoding="utf-8".
+    vs.Mirror on a symbol instance breaks it (place a mirrored definition
+    instead - vw2d_place_asset does that).
     """
     res = _run_raw(code)
     if modifies_document:

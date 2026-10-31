@@ -434,7 +434,7 @@ def asset_tests(report: dict) -> None:
 
 
 PERF_LAYER = "KS-Test-Perf"
-PERF_SIZES = [int(x) for x in os.environ.get("VWMCP_PERF_SIZES", "2000,10000").split(",") if x]
+PERF_SIZES = [int(x) for x in os.environ.get("VWMCP_PERF_SIZES", "2000,10000,25000").split(",") if x]
 
 # A messy "DWG import" on PERF_LAYER: n objects on a 1 m grid in classes A-WALL,
 # A-DOOR, A-ANNO and 0 - rectangles (every 7th 1 mm too wide: overlap with its
@@ -446,26 +446,31 @@ _state = _begin(%(layer)r)
 try:
     _cols = int(math.sqrt(%(n)d)) or 1
     _made = 0
+    _cell = 0
     for _i in range(%(n)d):
-        _x, _y = (_i %% _cols) * 1000 * _mm, -(_i // _cols) * 1000 * _mm
         _k = _i %% 10
-        if _k <= 5 or _k == 9:
+        if _k <= 5:  # a tile filling its cell (tiles share edges), every 7th 1 mm too wide
+            _x, _y = (_cell %% _cols) * 1000 * _mm, -(_cell // _cols) * 1000 * _mm
+            _cell += 1
             vs.NameClass("A-WALL")
-            _w = (801 if _i %% 7 == 0 else 800) * _mm
-            if _k == 9:
-                _x, _y = ((_i - 1) %% _cols) * 1000 * _mm, -((_i - 1) // _cols) * 1000 * _mm
-            vs.Rect((_x, _y), (_x + _w, _y - 800 * _mm))
+            _w = (1001 if _cell %% 7 == 0 else 1000) * _mm
+            vs.Rect((_x, _y), (_x + _w, _y - 1000 * _mm))
+            _last = (_x, _y, _w)
+        elif _k == 9:  # an exact duplicate of the last tile
+            vs.NameClass("A-WALL")
+            vs.Rect((_last[0], _last[1]), (_last[0] + _last[2], _last[1] - 1000 * _mm))
         elif _k == 6:
             vs.NameClass("0")
             vs.ClosePoly()
-            vs.Poly((_x, _y), (_x + 600 * _mm, _y), (_x + 600 * _mm, _y - 400 * _mm), (_x, _y - 400 * _mm))
+            vs.Poly((_x + 100 * _mm, _y - 100 * _mm), (_x + 600 * _mm, _y - 100 * _mm),
+                    (_x + 600 * _mm, _y - 400 * _mm), (_x + 100 * _mm, _y - 400 * _mm))
         elif _k == 7:
             vs.NameClass("A-DOOR")
-            vs.MoveTo((_x, _y))
-            vs.LineTo((_x + 900 * _mm, _y - 900 * _mm))
+            vs.MoveTo((_x + 100 * _mm, _y - 900 * _mm))
+            vs.LineTo((_x + 900 * _mm, _y - 500 * _mm))
         else:
             vs.NameClass("A-ANNO")
-            vs.TextOrigin((_x, _y))
+            vs.TextOrigin((_x + 500 * _mm, _y - 700 * _mm))
             vs.CreateText("Raum %%d" %% _i)
         _made += 1
 finally:
@@ -515,16 +520,44 @@ def perf_tests(report: dict) -> None:
         r["read_count"] = len((rd or {}).get("objects", [])) if isinstance(rd, dict) else None
         timed("read_geometry", lambda: draw2d.vw2d_read(layer=PERF_LAYER, include_geometry=True, limit=n + 10))
         timed("structure", draw2d.vw2d_structure)
-        chk = timed("check", lambda: draw2d.vw2d_check(layer=PERF_LAYER, image=False))
-        if isinstance(chk, dict):
-            r["check_summary"] = {k: chk["summary"].get(k) for k in ("objects", "errors", "warnings", "by_kind")}
-        fx = timed("fix_duplicates", lambda: draw2d.vw2d_fix("duplicates", layer=PERF_LAYER, image=False))
-        if isinstance(fx, dict):
-            r["fix_duplicates"] = {k: fx.get(k) for k in ("deleted", "fixed", "changed") if k in fx}
-            r["fix_duplicates_keys"] = sorted(fx)[:12]
-        rv = timed("revert_fix", generic.vw_revert_last)
-        if isinstance(rv, dict):
-            r["revert_fix"] = {k: rv.get(k) for k in ("restored", "deleted", "reverted_tool")}
+        def as_dict(v):
+            if isinstance(v, list):
+                v = v[0]
+            if isinstance(v, str):
+                try:
+                    v = json.loads(v)
+                except ValueError:
+                    return {"text": v[:300]}
+            return v if isinstance(v, dict) else {}
+
+        chk = as_dict(timed("check", lambda: draw2d.vw2d_check(layer=PERF_LAYER, image=False)))
+        summ = chk.get("summary") or {}
+        r["check_summary"] = {k: summ.get(k) for k in ("objects", "checked", "errors", "warnings", "by_kind",
+                                                       "warning")}
+        def fix_info(fx):
+            ap = fx.get("applied") or {}
+            return {"applied": {k: (len(v) if isinstance(v, (list, dict)) else v) for k, v in ap.items()},
+                    "errors_before": (fx.get("before") or {}).get("errors"),
+                    "errors_after": (fx.get("after") or {}).get("errors"),
+                    "by_kind_after": (fx.get("after") or {}).get("by_kind")}
+
+        def changed(fx):
+            ap = fx.get("applied") or {}
+            return bool(ap.get("deleted") or ap.get("clipped") or ap.get("deleted_covered"))
+
+        fx = as_dict(timed("fix_duplicates", lambda: draw2d.vw2d_fix("duplicates", layer=PERF_LAYER, image=False)))
+        r["fix_duplicates"] = fix_info(fx)
+        if changed(fx):
+            fo = as_dict(timed("fix_overlaps", lambda: draw2d.vw2d_fix("overlaps", layer=PERF_LAYER,
+                                                                       image=False)))
+            r["fix_overlaps"] = fix_info(fo)
+            if changed(fo):
+                rv = timed("revert_overlaps", generic.vw_revert_last)
+                if isinstance(rv, dict):
+                    r["revert_overlaps"] = {k: rv.get(k) for k in ("restored", "deleted", "reverted_tool")}
+            rv = timed("revert_duplicates", generic.vw_revert_last)
+            if isinstance(rv, dict):
+                r["revert_duplicates"] = {k: rv.get(k) for k in ("restored", "deleted", "reverted_tool")}
         cmap = {"A-WALL": "Wand-Tragend", "A-DOOR": "Öffnung-Tür", "A-ANNO": "Beschriftung", "0": "Hilfslinien"}
         dr = timed("organize_dry", lambda: organize.vw2d_organize(class_map=cmap, layer=PERF_LAYER))
         if isinstance(dr, dict):
@@ -536,9 +569,10 @@ def perf_tests(report: dict) -> None:
         after = timed("organize_check", lambda: organize.vw2d_organize(class_map=cmap, layer=PERF_LAYER))
         if isinstance(after, dict):
             r["organize_after"] = {"to_change": after.get("to_change"), "unchanged": after.get("unchanged")}
-        rv = timed("revert_organize", generic.vw_revert_last)
-        if isinstance(rv, dict):
-            r["revert_organize"] = {k: rv.get(k) for k in ("restored", "reverted_tool")}
+        if r.get("organize_changed"):
+            rv = timed("revert_organize", generic.vw_revert_last)
+            if isinstance(rv, dict):
+                r["revert_organize"] = {k: rv.get(k) for k in ("restored", "reverted_tool")}
         back = timed("organize_back", lambda: organize.vw2d_organize(class_map=cmap, layer=PERF_LAYER))
         if isinstance(back, dict):
             r["organize_back_to_change"] = back.get("to_change")

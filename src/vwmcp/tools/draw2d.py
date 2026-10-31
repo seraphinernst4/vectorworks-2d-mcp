@@ -101,10 +101,16 @@ def _issue_out(it: dict, max_moves: int = 4) -> dict:
     return o
 
 
+CHECK_LIMIT = 100000
+
+
 def _check(scope: dict, tolerance_mm: float, checks=None, compare="layer", ignore_classes=None):
-    data = _read(**scope)
+    data = _read(**scope, limit=CHECK_LIMIT)
     res = K.run_checks(data["objects"], data["units"], tolerance_mm, checks=checks,
                        none_class=data["none_class"], compare=compare, ignore_classes=ignore_classes)
+    if data.get("truncated"):
+        res["summary"]["warning"] = ("more than %d objects in scope: only the first %d were checked - "
+                                     "check layer by layer" % (CHECK_LIMIT, CHECK_LIMIT))
     return data, res
 
 

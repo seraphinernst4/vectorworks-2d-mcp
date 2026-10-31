@@ -31,6 +31,10 @@ Build 879357, deutsch, macOS).
 | `LNewObj()` liefert nach Operationen, die Objekte ersetzen, das falsche Objekt | vwx-mcp, vwmcp | – | Keystone liest Ergebnisse von Booleans/Offset gezielt aus; `vw_insert_symbol` prüft jetzt Typ und „wirklich neu“. |
 | Kreis/Bogen: Radius beim Zurücklesen mit Rauschen (0,6000000000000014 statt 0,6) | Keystone | bestätigt, Ursache gefunden | **Behoben**: Vectorworks speichert exakt; das Rauschen entstand erst in Keystone bei *Startpunkt − Mittelpunkt*. Vollkreise lesen den Radius jetzt aus der gespeicherten Breite (bitgenau), Bögen ohne Rauschen unter 1 Pikometer. Rückleseprüfung meldet für Kreise und Bögen jetzt **0**, und `vw_revert_last` stellt Kreise bitgenau wieder her (vorher wanderte der Mittelpunkt um 2·10⁻¹⁶ m). |
 
+| `vs.Mirror` auf eine Symbolinstanz spiegelt **nicht** die Zeichnung, sondern hinterlässt eine kaputte 3D-Matrix (Lage/Drehung lesen sich falsch) | Keystone | bestätigt (31.10.) | **Umgangen**: Keystone spiegelt nie Instanzen; eine gespiegelte Variante ist eine eigene, exakt gespiegelte Symboldefinition („… gespiegelt“). |
+| Python in Vectorworks 2026 öffnet Dateien standardmäßig als **ASCII** – UTF-8 mit Umlauten wirft `UnicodeDecodeError` | Keystone | bestätigt (31.10.) | Brücke und Bibliotheken lesen immer mit `encoding="utf-8"`; Hinweis für `vw_exec_python`. |
+| `GetLName(GetLayer(h))` für Bestandteile einer Symboldefinition: die haben keine Ebene (nil) | Keystone | bestätigt (31.10.) | **Abgesichert**: Lesen fragt die Ebene nur ab, wenn es eine gibt. |
+
 ## Geprüft und bewusst nicht übernommen
 
 | Vorschlag | Quelle | Live auf 2026 U7 | Entscheidung |

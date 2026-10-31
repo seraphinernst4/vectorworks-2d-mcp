@@ -52,6 +52,13 @@ EXACT 2D DRAWING (vw2d_* tools) - rules for architectural drawings:
   duplicates, overlaps) and check again until there are no errors,
   5) show the check image / vw2d_select so the user sees the result.
 - Work in the document that is open; 2D tasks stay 2D.
+- Sorting a drawing onto classes/layers (e.g. after a DWG import): vw2d_structure,
+  then vw2d_organize with rules as a dry run, show the user what would change and
+  what stays unmatched, refine the rules, then apply (dry_run=false).
+- Furniture, sanitary objects, trees, people, cars: use the asset catalogue
+  (vw2d_assets to find/preview, vw2d_place_asset to place exact symbols) instead
+  of drawing them by hand. Mind the insertion point and orientation of each
+  asset (wall-mounted objects reach towards -y; rotate to face into the room).
 
 GENERAL
 - Vectorworks merges back-to-back MCP edits into one Cmd-Z step, so to undo

@@ -26,6 +26,8 @@ bevor du sie siehst.
 | **Korrigieren** | Punkte exakt fangen (Spalte und kleine Überlappungen verschwinden, Bögen bleiben auf ihrem Kreis, Kanten behalten ihre Richtung – Wände bleiben rechtwinklig), Umrisse schließen, Punkte bereinigen (Knotenpunkte an T-Stößen bleiben), Doppeltes löschen, Überlappungen wegschneiden (das oben liegende Objekt gewinnt – das Bild bleibt gleich), Teile zu einer Fläche vereinigen. |
 | **Bearbeiten** | Umriss exakt ersetzen, verschieben (auch Punkt auf Punkt), drehen, spiegeln, skalieren, vereinigen, abziehen, schneiden, teilen, versetzen, Attribute/Klasse/Ebene setzen, löschen. |
 | **Organisieren** | Ebenen und Klassen anzeigen und prüfen, Klassen mit Attributen anlegen (optional mit einer Architektur-Vorlage), Ebenen mit Maßstab anlegen. Neue Objekte bekommen ihre Attribute **nach Klasse**. Schraffuren und Linienarten aus dem Vectorworks-Zubehör werden automatisch importiert. |
+| **Sortieren** | Ganze Zeichnungen auf Klassen und Ebenen verteilen – nach Regeln (Klasse/Ebene als Muster wie `A-WALL*`, Objektart, Text, Stiftfarbe, Strichstärke, Fläche, Größe …), z. B. nach einem DWG-Import. Erst eine Probe („was würde sich ändern, was bleibt übrig?“), dann alles in **einem** Schritt, der sich als Ganzes zurücknehmen lässt. |
+| **Assets** | Exakt gezeichnete Symbole für Pläne: WC (wandhängend/stehend), Urinal, Waschtisch, Handwaschbecken, Dusche, Badewanne, Spüle, Kochfeld, Kühlschrank, Stuhl, Esstisch mit Stühlen, Bett, Sofa, Schrank, Schreibtisch, Baum, Strauch, Person, PKW – im **Grundriss** und, wo sinnvoll, in **Ansicht** und **Seitenansicht/Schnitt**. Maße änderbar (z. B. WC-Höhe 460 für barrierefrei), gespiegelt, gedreht, mehrfach in einem Aufruf. Jede Variante wird **ein** Vectorworks-Symbol (Ordner „Keystone …“ im Zubehör-Manager), Linien in Klasse und Detail-Klasse, alles nach Klasse. |
 | **Rückgängig** | `vw_revert_last` macht genau den letzten Schritt von Claude rückgängig (Geometrie, Attribute, Klasse, Name, Stapelreihenfolge). |
 
 So fragst du Claude zum Beispiel:
@@ -34,6 +36,9 @@ So fragst du Claude zum Beispiel:
 > - „Zeichne die Cavea als Ringe mit echten Bögen, jeder Ring eine Fläche.“
 > - „Prüf die Ebene Grundriss und behebe alle Fehler.“
 > - „Räum die Klassen auf: alles, was in ‚Keine‘ liegt, in passende Klassen.“
+> - „Sortier den DWG-Import: A-WALL* nach Wand-Tragend, Texte nach Beschriftung, Bemaßungen nach Bemaßung.“
+> - „Setz in das Bad ein wandhängendes WC (barrierefrei, 46 cm), einen Waschtisch 80 cm und eine bodengleiche Dusche 120 × 120.“
+> - „Zeichne vor die Fassade drei Bäume und zwei Personen in der Ansicht.“
 
 ## Installation (macOS, ca. 5 Minuten)
 
@@ -127,7 +132,8 @@ Arbeitsablauf ausführlicher und lässt sich an euren Klassenstandard anpassen.
 Alle Werkzeuge: `vw2d_read`, `vw2d_structure`, `vw2d_resources`, `vw2d_setup`,
 `vw2d_draw`, `vw2d_edit`, `vw2d_transform`, `vw2d_boolean`, `vw2d_offset`,
 `vw2d_set_attributes`, `vw2d_delete`, `vw2d_check`, `vw2d_preview`,
-`vw2d_fix`, `vw2d_select`, dazu aus dem Original `vw_ping`,
+`vw2d_fix`, `vw2d_select`, `vw2d_organize`, `vw2d_assets`,
+`vw2d_place_asset`, dazu aus dem Original `vw_ping`,
 `vw_document_info`, `vw_list_layers`, `vw_list_classes`, `vw_get_selection`,
 `vw_find_objects`, `vw_get_record`, `vw_set_record`, `vw_list_symbols`,
 `vw_insert_symbol`, `vw_revert_last`, `vw_exec_python`, `vw_vs_lookup`.
