@@ -229,9 +229,13 @@ zusätzlich als `Git-Verlauf.bundle` (`git clone Git-Verlauf.bundle vectorworks-
   Reihenfolge ABCDEF bleibt (0.4.0 legte wiederhergestellte Objekte nach
   vorne).
 - **10 000 Objekte** (1000 Duplikate, 1849 Überlappungen): lesen 0,6 s,
-  prüfen 2,4 s, Duplikate löschen 4,8 s, Überlappungen wegschneiden 4,6 s
-  (danach 0 Fehler), Rückgängig 17 s / 12,6 s, sortieren 1,2 s,
-  Rückgängig 0,8 s.
+  prüfen 2,4 s, Duplikate löschen 4,8 s, Überlappungen wegschneiden 4,5 s
+  (danach 0 Fehler), Rückgängig 1,1 s / 1,0 s (Stapelreihenfolge
+  identisch), sortieren 1,2 s, Rückgängig 0,8 s. **25 000 Objekte:** prüfen
+  5,7 s, Duplikate 11 s, Rückgängig 1,5 s, sortieren 2,2 s.
+- **Gemessen:** `GetObjectByUuid` 4,6 ms bei 20 000 Objekten (durchsucht
+  alles), aktiver Ebenenwechsel 13 ms, `NumObj` 1,1 ms; Stapel-Verschieben
+  12 µs, `SetParent` 1 µs.
 - **Gefunden und behoben:** `vs.Mirror` zerstört Symbolinstanzen;
   `GetObjectByUuid` durchsucht die ganze Zeichnung (quadratisch bei vielen
   Objekten); Stapelreihenfolge beim Wiederherstellen; Rückgängig von

@@ -191,3 +191,20 @@ The dictionary has no usable document list (`every document` → `missing value`
   `UnicodeDecodeError`. Always pass `encoding="utf-8"` (the bridge does).
 - Placing an asset (new symbol definition with 3-13 components + instance,
   classes, folder) takes ~0.5 s per call including the round trip.
+
+## Speed in big drawings (31.10.2026, 20 000 objects in one layer, live)
+
+| Call | Time |
+|---|---|
+| `GetObjectByUuid` | 4.6 ms (searches the document: quadratic in loops - use one `ForEachObject` walk) |
+| `Layer(name)` (switch the active layer) | 12.8 ms (switch once per run, not per object) |
+| `NumObj(layer)` | 1.1 ms |
+| `HMoveForward/Backward` (one step or to front/back) | ~12 µs |
+| `Rect` + `LNewObj` | 16 µs |
+| `SetClass` | 7.5 µs |
+| `SetParent` (lands in front) | 1 µs |
+| `NextObj` / `PrevObj` / `GetParent` / `GetObjectUuid` | < 1 µs |
+
+Lists run from the back (first object, `FInLayer`) to the front (last; new
+objects are appended there). `HMoveBackward(h, False)` moves one step
+towards the first object, `HMoveBackward(h, True)` to the first.

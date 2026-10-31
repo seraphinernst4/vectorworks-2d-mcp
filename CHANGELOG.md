@@ -67,8 +67,23 @@ Assets und Sortieren.
 - Lange Schreibaufträge (tausende Überlappungen wegschneiden) dürfen bis
   zu 10 min dauern – sonst ginge der Rückgängig-Eintrag verloren.
 - `vw2d_check` liest bis zu 100 000 Objekte und sagt, wenn es mehr gibt.
-- Live gemessen (10 000 Objekte): lesen 0,6 s, prüfen 2,4 s, Duplikate
-  löschen 12 s, Überlappungen wegschneiden 16 s.
+- Der aktive Ebenenwechsel kostet in großen Ebenen ~13 ms: beim
+  Wiederherstellen, Zeichnen und Neuaufbauen wird die Ebene einmal je Lauf
+  gewechselt statt zweimal je Objekt.
+- Live gemessen (Testebene mit 1000 Duplikaten und 1849 Überlappungen je
+  10 000 Objekte; Stapelreihenfolge nach jedem Rückgängig geprüft):
+
+  | | 10 000 Objekte | 25 000 Objekte |
+  |---|---|---|
+  | lesen | 0,6 s | 1,2 s |
+  | prüfen | 2,4 s | 5,7 s |
+  | Duplikate löschen (inkl. 2× prüfen) | 4,8 s | 11 s |
+  | … rückgängig | 1,0 s (vorher 13 s) | 1,5 s (vorher 75 s) |
+  | Überlappungen wegschneiden | 4,5 s (vorher > 120 s) | – |
+  | … rückgängig | 1,1 s (vorher > 120 s) | – |
+  | sortieren (alle Objekte) | 1,2 s (vorher 6 s) | 2,2 s (vorher 29 s) |
+  | … rückgängig | 0,8 s | 1,1 s (vorher 28 s) |
+
 ## 0.4.1 – 31.10.2026
 
 - **Stapelreihenfolge:** Wiederhergestellte (`vw_revert_last`) und neu
