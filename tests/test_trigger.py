@@ -188,3 +188,28 @@ def test_auto_mode_keeps_the_menu_when_osascript_fails(root):
     t = MacTrigger(root, apps=lambda: [("Vectorworks 2026", 600.0)], spawn=lambda a: Failed(), mode="auto")
     t()
     assert t.on_unclaimed() is False and t.on_unclaimed() is False and not t.direct
+
+
+@pytest.mark.parametrize("files, runs", [
+    ({}, False),                                                    # no bridge installed
+    ({"vwmcp/__init__.py": ""}, False),                             # package without the bridge
+    ({"vwmcp/__init__.py": "", "vwmcp/vwmcp_bridge.py":
+      "def run_pending():\n    open(__file__ + '.ran', 'w').close()\n"}, True),
+])
+def test_direct_vectorscript_runs_only_an_installed_bridge(tmp_path, files, runs):
+    """The three PythonExecute lines, run like Vectorworks does: no error
+    (= no error dialog) without the bridge, run_pending() with it."""
+    import re
+    import subprocess
+    import sys
+
+    from vwmcp.trigger import DIRECT_VSS
+
+    for name, text in files.items():
+        (tmp_path / name).parent.mkdir(parents=True, exist_ok=True)
+        (tmp_path / name).write_text(text)
+    lines = [a.replace("''", "'") for a in re.findall(r"PythonExecute\('((?:[^']|'')*)'\)", DIRECT_VSS)]
+    code = "import sys\nsys.path.insert(0, %r)\n" % str(tmp_path) + "\n".join(lines)
+    # -S: no site-packages, so the real vwmcp package can't be found
+    subprocess.run([sys.executable, "-I", "-S", "-c", code], check=True, cwd=tmp_path)
+    assert (tmp_path / "vwmcp" / "vwmcp_bridge.py.ran").exists() is runs

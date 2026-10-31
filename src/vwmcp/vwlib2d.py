@@ -1009,6 +1009,46 @@ def handles(uuids):
     return [m.get(u) or handle(u) for u in uuids]
 
 
+def _outermost(hs):
+    """Without duplicates and without objects whose group is in the list too
+    (the group carries them along; handling them again would touch a deleted
+    or already moved object)."""
+    keys = set(str(h) for h in hs)
+    out, seen = [], set()
+    for h in hs:
+        if str(h) in seen:
+            continue
+        seen.add(str(h))
+        par, n, inside = vs.GetParent(h), 0, False
+        while not _is_nil(par) and vs.GetTypeN(par) == 11 and n < 50:
+            if str(par) in keys:
+                inside = True
+                break
+            par = vs.GetParent(par)
+            n += 1
+        if not inside:
+            out.append(h)
+    return out
+
+
+def _forget(h, hmap):
+    """Before deleting a group: its parts go with it, drop their handles."""
+    if hmap and vs.GetTypeN(h) == 11:
+        for k in children(h):
+            hmap.pop(h_uuid(k), None)
+            _forget(k, hmap)
+
+
+def _front_neighbours(hs):
+    """{str(handle): uuid of the object directly in front of it (or None)},
+    taken before anything moves."""
+    out = {}
+    for h in hs:
+        nxt = vs.NextObj(h)
+        out[str(h)] = None if _is_nil(nxt) else h_uuid(nxt)
+    return out
+
+
 def _get_by_uuid(u, m):
     h = m.get(u)
     return h if h is not None else vs.GetObjectByUuid(u)
@@ -1024,22 +1064,8 @@ def _z_map(hs):
         if key in done:
             continue
         done.add(key)
-        k = vs.FInGroup(par) if (not _is_nil(par) and vs.GetTypeN(par) == 11) else None
-        if _is_nil(k):
-            # layer list: walk back from h to its first object, then forward
-            k = h
-            n = 0
-            while n < 1000000:
-                p = vs.PrevObj(k)
-                if _is_nil(p):
-                    break
-                k = p
-                n += 1
-        i = 0
-        while not _is_nil(k) and i < 1000000:
+        for i, k in enumerate(_list_of(h)):
             out[str(k)] = i
-            i += 1
-            k = vs.NextObj(k)
     return out
 
 
@@ -1147,15 +1173,16 @@ BULK_RESTACK = 32  # from this many objects in one list on, restack the list in 
 
 def _list_of(h):
     """All objects of h's list (layer or group), back to front."""
+    par = str(vs.GetParent(h))
     k, n = h, 0
     while n < 1000000:
         p = vs.PrevObj(k)
-        if _is_nil(p):
+        if _is_nil(p) or str(vs.GetParent(p)) != par:
             break
         k = p
         n += 1
     out = []
-    while not _is_nil(k) and len(out) < 1000000:
+    while not _is_nil(k) and len(out) < 1000000 and str(vs.GetParent(k)) == par:
         out.append(k)
         k = vs.NextObj(k)
     return out
@@ -1192,13 +1219,22 @@ def _restack(entries, hmap=None, mapping=None, restored=None):
                 tail.append((h, z))
         final, seen = [], set()
 
-        def emit(k, depth=0):
-            if str(k) in seen or depth > 100000:
-                return
-            seen.add(str(k))
-            for h2, _z in sorted(before.get(str(k), []), key=lambda e: e[1] if e[1] is not None else 0):
-                emit(h2, depth + 1)
-            final.append(k)
+        def emit(root):
+            # iterative (a chain of thousands of objects would overflow recursion):
+            # everything that goes directly behind k first (back to front), then k
+            stack = [(root, False)]
+            while stack:
+                k, ready = stack.pop()
+                if ready:
+                    final.append(k)
+                    continue
+                if str(k) in seen:
+                    continue
+                seen.add(str(k))
+                stack.append((k, True))
+                behind = sorted(before.get(str(k), []), key=lambda e: e[1] if e[1] is not None else 0)
+                for h2, _z in reversed(behind):
+                    stack.append((h2, False))
 
         for k in base:
             emit(k)
@@ -1256,7 +1292,15 @@ def restore(snap, mapping, hmap=None, place=True):
 
 def revert2d(ops):
     """Undo journaled ops (newest last). Returns uuid remapping for the
-    journal plus counts."""
+    journal plus counts. The active layer is restored even on errors."""
+    home = _str(vs.GetLName(vs.ActLayer()))
+    try:
+        return _revert2d(ops)
+    finally:
+        _use_layer(home)
+
+
+def _revert2d(ops):
     mapping, deleted, restored, missing, kept, restack = {}, 0, 0, [], [], []
     home = _str(vs.GetLName(vs.ActLayer()))
     replaced = [op for op in ops if op.get("op") == "replaced"]  # ("attrs" ops keep a dict in "before")
@@ -1271,6 +1315,7 @@ def revert2d(ops):
                 missing.append(op["uuid"])
             else:
                 hmap.pop(op["uuid"], None)
+                _forget(h, hmap)
                 vs.DelObject(h)
                 deleted += 1
         elif kind == "replaced":
@@ -1278,10 +1323,12 @@ def revert2d(ops):
                 h = _get_by_uuid(u, hmap)
                 if not _is_nil(h):
                     hmap.pop(u, None)
+                    _forget(h, hmap)
                     vs.DelObject(h)
                     deleted += 1
             befores = sorted(op.get("before", []), key=lambda s: -s["z"])
-            if len(befores) >= BULK_RESTACK:
+            if len(befores) >= BULK_RESTACK:  # placed afterwards: order by layer (fewer switches)
+                befores.sort(key=lambda s: (s["rec"].get("layer") or "", -s["z"]))
                 placed = []
                 for s in befores:
                     _use_layer(s["rec"].get("layer"))
@@ -1357,13 +1404,33 @@ def _snaps(uuids, hs=None):
     return [snapshot(h, zm.get(str(h))) for h in hs]
 
 
+def _unique(hs):
+    out, seen = [], set()
+    for h in hs:
+        if str(h) not in seen:
+            seen.add(str(h))
+            out.append(h)
+    return out
+
+
 def set_attributes(uuids, attributes, layer=None):
-    hs = handles(uuids)
+    # a layer move carries a group's contents along: move only the outermost;
+    # attributes and class go to every object named (a group's class is its own)
+    hs = _outermost(handles(uuids)) if layer else _unique(handles(uuids))
+    if layer:
+        for h in hs:  # refuse before anything changes
+            par = vs.GetParent(h)
+            if not _is_nil(par) and vs.GetTypeN(par) == 11:
+                raise ValueError("object %s is inside a group; move the group instead" % h_uuid(h))
     ops = []
+    zm = _z_map(hs) if layer else {}
+    front = _front_neighbours(hs) if layer else {}
     for h in hs:
         t = vs.GetTypeN(h)
         op = {"op": "attrs", "uuid": h_uuid(h), "class_before": _str(vs.GetClass(h)),
               "layer_before": _str(vs.GetLName(vs.GetLayer(h))) if layer else None}
+        if layer:
+            op["above"], op["z"] = front.get(str(h)), zm.get(str(h))
         if t in SHAPE_TYPES or t in (10, 17, 63, 11, 15):
             op["before"] = raw_attrs(h)
         ops.append(op)
@@ -1374,9 +1441,6 @@ def set_attributes(uuids, attributes, layer=None):
     for h in hs:
         apply_attrs(h, attributes)
         if target is not None:
-            par = vs.GetParent(h)
-            if not _is_nil(par) and vs.GetTypeN(par) == 11:
-                raise ValueError("object %s is inside a group; move the group instead" % h_uuid(h))
             vs.SetParent(h, target)
     return {"document": current_document(), "ops": ops,
             "objects": [read_obj(h, False) for h in hs]}
@@ -1391,6 +1455,7 @@ def organize_apply(moves):
     hmap = _uuid_map([u for m in moves for u in m["uuids"]])
     movers = [hmap.get(u) or handle(u) for m in moves if m.get("layer") for u in m["uuids"]]
     zm = _z_map(movers) if movers else {}
+    front = _front_neighbours(movers)  # before anything moves
     have = set(class_names())
     try:
         for m in moves:
@@ -1413,8 +1478,7 @@ def organize_apply(moves):
                     par = vs.GetParent(h)
                     if not _is_nil(par) and vs.GetTypeN(par) == 11:
                         raise ValueError("object %s is inside a group; move the group instead" % u)
-                    nxt = vs.NextObj(h)
-                    op["above"] = None if _is_nil(nxt) else h_uuid(nxt)
+                    op["above"] = front.get(str(h))
                     op["z"] = zm.get(str(h))
                 applied.append(op)
                 if cls:
@@ -1437,7 +1501,8 @@ def organize_apply(moves):
 
 
 def delete_objects(uuids):
-    hs = handles(uuids)
+    hs = _outermost(handles(uuids))
+    uuids = [h_uuid(h) for h in hs]
     snaps = _snaps(uuids, hs)
     for h in hs:
         vs.DelObject(h)
@@ -1460,10 +1525,15 @@ def replace_geometry(changes):
 
 
 def _replace_all(changes, hmap, zm, snaps, after, out):
-    for ch in changes:
-        h = hmap.get(ch["uuid"]) or handle(ch["uuid"])
-        t = vs.GetTypeN(h)
+    hs = [hmap.get(ch["uuid"]) or handle(ch["uuid"]) for ch in changes]
+    # every snapshot and old front neighbour before the first rebuild: a
+    # rebuilt neighbour would otherwise be recorded under its new uuid
+    for h in hs:
         snaps.append(snapshot(h, zm.get(str(h))))
+    front = _front_neighbours(hs)
+    rebuilt, mapping, new_by_uuid = [], {}, {}
+    for ch, h, snap in zip(changes, hs, snaps):
+        t = vs.GetTypeN(h)
         holes = ch.get("holes") or []
         verts = ch["verts"]
         inplace = (t in (5, 21) and vs.GetVertNum(h) == len(verts) and not holes
@@ -1478,16 +1548,33 @@ def _replace_all(changes, hmap, zm, snaps, after, out):
                 vs.SetPolyClosed(h, bool(ch["closed"]))
             vs.ResetObject(h)
         else:
-            hmap.pop(ch["uuid"], None)  # the old object goes away
+            old_u, above, z = ch["uuid"], front.get(str(h)), snap["z"]
+            hmap.pop(old_u, None)  # the old object goes away
             _use_layer(_layer_name(h))
-            h = _replace_with_poly(h, verts, ch["closed"], holes, hmap)
+            h = _replace_with_poly(h, verts, ch["closed"], holes, hmap, place=False)
+            nu = h_uuid(h)
+            mapping[old_u], new_by_uuid[nu] = nu, h
+            rebuilt.append((h, above, z))
         after.append(h_uuid(h))
         out.append(read_obj(h, True, None, False))
+    _place_new(rebuilt, hmap, mapping, new_by_uuid)
     return {"document": current_document(), "objects": out,
             "ops": [{"op": "replaced", "before": snaps, "after": after}]}
 
 
-def _replace_with_poly(old, verts, closed, holes, hmap=None):
+def _place_new(entries, hmap, mapping, new_by_uuid):
+    """Rebuilt objects (in front) back to their old places: entries
+    [(handle, old front neighbour uuid, old z)]; neighbours that were rebuilt
+    too are found through mapping (old uuid -> new)."""
+    if len(entries) >= BULK_RESTACK:
+        _restack(entries, hmap, mapping, new_by_uuid)
+        return
+    for h, above, z in sorted(entries, key=lambda e: -(e[2] or 0)):
+        a = mapping.get(above, above) if above else None
+        _place_below(h, a, z, hmap)
+
+
+def _replace_with_poly(old, verts, closed, holes, hmap=None, place=True):
     raw = raw_attrs(old) if vs.GetTypeN(old) in SHAPE_TYPES else None
     name = obj_name(old)
     cls = _str(vs.GetClass(old))
@@ -1505,7 +1592,8 @@ def _replace_with_poly(old, verts, closed, holes, hmap=None):
         restore_raw_attrs(h, raw)
     if not _is_nil(par) and vs.GetTypeN(par) == 11:
         vs.SetParent(h, par)
-    _place_below(h, above, None, hmap)
+    if place:
+        _place_below(h, above, None, hmap)
     vs.DelObject(old)
     if name:
         _set_name(h, name)
@@ -1554,7 +1642,7 @@ def insert_vertices(inserts):
 
 
 def transform(uuids, op, params, copy=False):
-    hs = [handle(u) for u in uuids]
+    hs = _outermost(handles(uuids))
     snaps = [] if copy else [snapshot(h) for h in hs]
     out = []
     for h in hs:
@@ -1726,10 +1814,12 @@ def subtract_many(pairs, eps=1e-9):
     snaps, after, fixed = [], [], 0
     hmap = _uuid_map([pr["target"] for pr in pairs] + [u for pr in pairs for u in pr["tools"]])
     zm = _z_map([hmap[pr["target"]] for pr in pairs if pr["target"] in hmap]) if hmap else {}
-    for pr in pairs:
-        # a target is replaced by its clipped result: never use its old handle again
-        t = hmap.pop(pr["target"], None) or handle(pr["target"])
+    targets = [hmap.pop(pr["target"], None) or handle(pr["target"]) for pr in pairs]
+    # every snapshot before the first clip (neighbours still have their old uuids)
+    for t in targets:
         snaps.append(snapshot(t, zm.get(str(t))))
+    for pr, t in zip(pairs, targets):
+        # a target is replaced by its clipped result: never use its old handle again
         if pr.get("covered"):
             vs.DelObject(t)
             continue

@@ -74,9 +74,10 @@ def _area_m2(rec: dict, mpu: float) -> float | None:
         try:
             from vwmcp.geom.shapes import from_record
 
-            sh = from_record(rec)
+            chord = 0.01 / mpu  # 0.01 mm: ovals and curves to well below any area tolerance
+            sh = from_record(rec, chord=chord)
             if sh.is_area:
-                a = sh.geometry(0.01 / mpu).area * (mpu / 1000.0) ** 2
+                a = sh.geometry(chord).area * (mpu / 1000.0) ** 2
         except Exception:  # noqa: BLE001 - objects without usable geometry don't match
             a = None
         rec["_area_m2"] = a

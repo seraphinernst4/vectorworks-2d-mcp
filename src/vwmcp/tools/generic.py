@@ -305,13 +305,19 @@ def vw_revert_last() -> dict:
                         if op.get("op") == "replaced" else 0) for op in entry["ops"])
         result = app.vw2d("revert2d", ops=entry["ops"], timeout=max(120.0, 0.1 * size))
     except ToolError as e:
+        if getattr(e.__cause__, "never_ran", False):
+            # cancelled before Vectorworks took it: nothing changed, keep the step
+            journal.record(entry["document"], entry["tool"], entry["ops"])
+            raise
+        # Vectorworks took it: it is still running, ran partway or stopped with
+        # an error. Putting the step back would let a second revert restore the
+        # same objects twice.
         if "still working on this request" in str(e):
-            # Vectorworks has taken it and finishes it: putting the entry back
-            # would let a second revert restore the same objects twice
             raise ToolError("The revert of %s is still running in Vectorworks (large step). Wait until "
                             "Vectorworks is responsive again and check the drawing; this step is no longer "
                             "in the revert journal." % entry["tool"]) from e
-        journal.record(entry["document"], entry["tool"], entry["ops"])  # never ran: put it back
-        raise
+        raise ToolError("The revert of %s did not finish in Vectorworks, it may be partly done: %s\n\n"
+                        "Check the drawing (Vectorworks' own Undo may take back the partial revert). This step is "
+                        "no longer in the revert journal." % (entry["tool"], e)) from e
     journal.remap(document, result.get("mapping") or {})
     return {"reverted_tool": entry["tool"], **result}

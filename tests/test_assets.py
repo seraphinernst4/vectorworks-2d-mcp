@@ -661,6 +661,28 @@ def test_bad_parameters_are_clear_errors(fake):
         assets.vw2d_place_asset("bett", params={"b": "breit"})
 
 
+@pytest.mark.parametrize("asset, params, msg", [
+    ("tisch", {"chairs": 100}, "whole number from 0 to 24"),
+    ("tisch", {"chairs": 4.5}, "whole number"),
+    ("tisch", {"round_table": 0.5}, "one of 0, 1"),
+    ("waschtisch", {"bowls": 3}, "one of 1, 2"),
+    ("baum", {"style": 5}, "one of 0, 1, 2"),
+    ("baum", {"seed": -1}, "from 0 to 1000"),
+    ("baum", {"d": 500000}, "at most 100000 mm"),
+    ("kuechenzeile", {"sink_w": -800}, "from 0 to 100000 mm"),
+    ("bett", {"b": float("nan")}, "not a number"),
+])
+def test_parameter_ranges(asset, params, msg):
+    with pytest.raises(KeyError, match=msg):
+        catalog.build(asset, "plan", params)
+
+
+def test_every_default_passes_the_range_checks():
+    for a in catalog.CATALOG.values():
+        for v in a.views:
+            assert catalog.build(a.id, v, {k: d for k, (d, _) in a.params.items()})
+
+
 def test_unused_parameters_make_no_extra_symbols():
     import inspect as _i
 

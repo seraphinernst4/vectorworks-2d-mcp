@@ -66,7 +66,7 @@ entries whose parameter count disagrees with Vectorworks' own docstring
 are dropped, functions not in the index pass through. A job can switch
 the check off with `"check": false`.
 
-## Why the AppleScript → menu command hop
+## Why the AppleScript → VectorScript hop
 
 Vectorworks has no idle/timer callback for scripts outside of a modal dialog
 (`RegisterDialogForTimerEvents` exists, but only for dialogs), so an in-app
@@ -81,10 +81,10 @@ Update 3 (macOS):
 | any `run Python script` while launching / in a modal dialog | **crashes Vectorworks** |
 | `run VectorScript` with a write | works |
 | `run VectorScript "DoMenuTextByName('MCP Run Job', 0)"` | **works**: full document + undo context |
+| `run VectorScript` with `PythonExecute` (bridge import + `run_pending()`) | **works** (2026 U7, whole live suite): same context, no menu command |
 
-So the server only ever sends that one VectorScript line (inline since
-0.4; measured: as fast as a file or a compiled script, ~0.2 s to the claim,
-nearly all of it inside Vectorworks starting the menu command). Guards:
+So the server only ever sends one short VectorScript (inline since 0.4;
+measured: as fast as a file or a compiled script, ~0.2 s to the claim). Guards:
 refuse if Vectorworks isn't running or launched < 20 s ago; one request in
 flight per server; at most 3 unanswered Apple Events; the claim timeout
 decides when a request is given up (usually a dialog is open).
@@ -92,10 +92,12 @@ decides when a request is given up (usually a dialog is open).
 The running Vectorworks is found with `ps` (not `pgrep`, which hides its
 own ancestors); a configured version is only a preference.
 
-Trigger modes (`VWMCP_TRIGGER`): `menu` (default), `direct` (VectorScript
+Trigger modes (`VWMCP_TRIGGER`): `direct` (default since 0.5: VectorScript
 `PythonExecute` runs the bridge, no menu command needed; the pattern
-Vectorworks documents for AppleScript), `auto` (menu, switching to direct
-when Vectorworks answers but doesn't take the job).
+Vectorworks documents for AppleScript; it only imports the bridge if it is
+installed, so a missing bridge never ends in an error dialog), `menu` (the
+"MCP Run Job" menu command, the default up to 0.4), `auto` (menu, switching
+to direct when Vectorworks answers but doesn't take the job).
 
 ## Undo
 

@@ -61,6 +61,9 @@ NAME_MAX = 63  # Vectorworks object names: keep within the classic limit
 
 CATALOG: dict[str, Asset] = {}
 SIZES = {"b", "t", "h", "l", "d", "w", "trunk"}  # dimensions: must be > 0
+MAX_MM = 100000.0  # 100 m: no asset dimension or position beyond this
+CHOICES = {"bowls": (1, 2), "gully": (0, 1), "mirror": (0, 1), "round_table": (0, 1), "style": (0, 1, 2)}
+RANGES = {"chairs": (0, 24, True), "seed": (0, 1000, False)}  # (min, max, whole numbers only)
 
 
 def register(asset: Asset) -> Asset:
@@ -101,13 +104,29 @@ def build(asset_id: str, view: str = "plan", params: dict | None = None) -> list
             p[k] = float(v)
         except (TypeError, ValueError):
             raise KeyError("parameter %r must be a number, got %r" % (k, v)) from None
-        if k in SIZES and not p[k] > 0:
-            raise KeyError("parameter %r (%s) must be > 0 mm" % (k, a.params[k][1]))
-        if not (p[k] == p[k] and abs(p[k]) < 1e7):
-            raise KeyError("parameter %r is out of range" % k)
+        _check_param(k, p[k], a.params[k][1])
     fn = a.views[view]
     accepted = inspect.signature(fn).parameters
     return fn(**{k: v for k, v in p.items() if k in accepted})
+
+
+def _check_param(k: str, v: float, meaning: str) -> None:
+    if v != v or abs(v) == float("inf"):
+        raise KeyError("parameter %r is not a number" % k)
+    if k in CHOICES:
+        if v not in CHOICES[k]:
+            raise KeyError("parameter %r (%s) must be one of %s"
+                           % (k, meaning, ", ".join(str(c) for c in CHOICES[k])))
+    elif k in RANGES:
+        lo, hi, whole = RANGES[k]
+        if not lo <= v <= hi or (whole and v != int(v)):
+            raise KeyError("parameter %r (%s) must be a %s from %g to %g"
+                           % (k, meaning, "whole number" if whole else "number", lo, hi))
+    elif k in SIZES:
+        if not 0 < v <= MAX_MM:
+            raise KeyError("parameter %r (%s) must be > 0 and at most %g mm" % (k, meaning, MAX_MM))
+    elif not 0 <= v <= MAX_MM:  # positions and widths along the asset (0 = none)
+        raise KeyError("parameter %r (%s) must be from 0 to %g mm" % (k, meaning, MAX_MM))
 
 
 def resolve_params(asset_id: str, view: str, params: dict | None = None) -> dict:

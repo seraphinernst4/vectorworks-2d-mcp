@@ -98,6 +98,26 @@ Vectorworks.
   | sortieren (alle Objekte) | 1,2 s (vorher 6 s) | 2,2 s (vorher 29 s) |
   | … rückgängig | 0,8 s | 1,1 s (vorher 28 s) |
 
+### Robustheit (aus zwei unabhängigen Code-Reviews)
+- Stapelreihenfolge auch in schwierigen Fällen exakt: Nachbarn, die im
+  selben Schritt mitbewegt oder neu aufgebaut werden (Sortieren mit
+  mehreren Regeln, Bearbeiten/Wegschneiden mehrerer benachbarter Objekte),
+  Ebenenwechsel mit `vw2d_set_attributes` (wird jetzt auch rückgängig an
+  die alte Stelle gesetzt), Ketten aus tausenden Objekten.
+- Gruppe und ihr Inhalt zugleich gewählt, oder ein Objekt doppelt: jedes
+  wird nur einmal gelöscht/verschoben; Teile einer Gruppe auf eine andere
+  Ebene zu legen wird abgelehnt, bevor sich etwas ändert.
+- Die aktive Ebene bleibt nach dem Rückgängigmachen dieselbe, auch nach
+  einem Fehler.
+- `vw_revert_last`: ein Schritt kommt nur zurück ins Rückgängig-Protokoll,
+  wenn Vectorworks den Auftrag nie angenommen hat; lief er an und brach ab,
+  heißt es „teilweise rückgängig, Zeichnung prüfen“ (sonst könnte ein
+  zweiter Versuch Objekte doppelt wiederherstellen).
+- Der direkte Auslöser prüft, dass das Brückenmodul selbst da ist (nicht
+  nur der Ordner).
+- Asset-Parameter mit klaren Grenzen (Stühle 0–24, Becken 1–2, Stil 0–2,
+  Schalter 0/1, Maße bis 100 m); Flächenregeln messen Ovale auf 0,01 mm genau.
+
 ## 0.4.1 – 31.10.2026
 
 - **Stapelreihenfolge:** Wiederhergestellte (`vw_revert_last`) und neu

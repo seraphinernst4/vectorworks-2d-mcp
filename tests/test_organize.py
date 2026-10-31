@@ -75,6 +75,19 @@ def test_area_from_exact_geometry():
     assert not O.matches(rec("l", "line", p1=[0, 0], p2=[1, 1]), {"area_m2": [0, None]}, 1.0)
 
 
+def test_oval_area_is_sampled_finely_but_fast():
+    import math
+    import time
+
+    t = time.perf_counter()
+    o = rec("o", "oval", center=[0.0, 0.0], width=2000.0, height=1000.0)  # mm document
+    exact = math.pi * 1.0 * 0.5
+    assert O.matches(o, {"area_m2": [exact - 1e-4, exact + 1e-4]}, 1.0)
+    m = rec("o2", "oval", center=[0.0, 0.0], width=2.0, height=1.0)  # m document: same oval
+    assert O.matches(m, {"area_m2": [exact - 1e-4, exact + 1e-4]}, 1000.0)
+    assert time.perf_counter() - t < 0.5
+
+
 def test_exact_names_with_brackets_match_themselves():
     assert O.matches({"class": "A-WALL [EXIST]"}, {"class": "A-WALL [EXIST]"}, 1.0)
     assert O.matches({"layer": "0"}, {"layer": "0"}, 1.0)
@@ -375,3 +388,66 @@ def test_vw_revert_of_attribute_ops_with_raw_attributes():
     out = ns["revert2d"]([{"op": "attrs", "uuid": "a", "class_before": "Keine", "layer_before": None,
                            "before": {"pen_fore": [0, 0, 0], "lw": 7}}])
     assert out["restored"] == 1 and objs["a"].cls == "Keine" and seen == [("a", {"pen_fore": [0, 0, 0], "lw": 7})]
+
+
+@pytest.mark.parametrize("n", [12, 80])  # one by one / in bulk
+def test_vw_organize_interleaved_targets_revert_restores_stacking(n):
+    """Two rules whose objects alternate in the stack: every object's front
+    neighbour is recorded before anything moves."""
+    names = ["o%02d" % i for i in range(n)]
+    objs = {u: H(u, "Keine", "EG") for u in names}
+    ns, vs = _vw(objs)
+    walls, doors = names[1:-1:2], names[2:-1:2]  # o01, o03, ... / o02, o04, ...
+    out = ns["organize_apply"]([{"uuids": walls, "class": "Wand", "layer": "OG", "by_class": False},
+                                {"uuids": doors, "class": "Tür", "layer": "OG", "by_class": False}])
+    assert [o.uid for o in vs.layers["EG"].objs] == [names[0], names[-1]]
+    ns["revert2d"](out["ops"])
+    assert [o.uid for o in vs.layers["EG"].objs] == names
+    assert vs.layers["OG"].objs == [] and all(objs[u].cls == "Keine" for u in names)
+
+
+@pytest.mark.parametrize("n", [10, 70])
+def test_vw_set_attributes_layer_move_revert_restores_stacking(n):
+    names = ["o%02d" % i for i in range(n)]
+    objs = {u: H(u, "Keine", "EG", t=99) for u in names}  # t=99: no raw attributes to read
+    ns, vs = _vw(objs)
+    ns["read_obj"] = lambda h, *a, **k: {"uuid": h.uid}
+    ns["apply_attrs"] = lambda h, a: None
+    moved = names[1:-1:3] + names[2:-1:3]  # not in stacking order, neighbours moved too
+    out = ns["set_attributes"](moved, {}, layer="OG")
+    assert all(objs[u].layer_name == "OG" for u in moved)
+    ns["revert2d"](out["ops"])
+    assert [o.uid for o in vs.layers["EG"].objs] == names
+
+
+def test_vw_set_attributes_refuses_group_parts_before_changing_anything():
+    g = H("g", "Keine", "EG", t=11)
+    k = H("k", "Keine", "EG", parent=g, t=99)
+    g.kids = [k]
+    objs = {"a": H("a", "Keine", "EG", t=99), "g": g, "k": k}
+    ns, vs = _vw(objs)
+    ns["read_obj"] = lambda h, *a, **kw: {"uuid": h.uid}
+    ns["raw_attrs"] = lambda h: {}
+    seen = []
+    ns["apply_attrs"] = lambda h, a: seen.append(h.uid)
+    with pytest.raises(ValueError, match="inside a group"):
+        ns["set_attributes"](["a", "k"], {"pen": "#ff0000"}, layer="OG")
+    assert seen == [] and objs["a"].layer_name == "EG"
+    out = ns["set_attributes"](["g", "k", "a", "a"], {"pen": "#ff0000"}, layer="OG")  # k goes with g
+    assert [op["uuid"] for op in out["ops"]] == ["g", "a"] and seen == ["g", "a"]
+    out = ns["set_attributes"](["g", "k", "a", "a"], {"pen": "#00ff00"})  # no layer: k gets it too
+    assert [op["uuid"] for op in out["ops"]] == ["g", "k", "a"]
+
+
+def test_vw_revert_restores_the_active_layer_after_an_error():
+    objs = {"a": H("a", "Keine", "EG")}
+    ns, vs = _vw(objs)
+
+    def broken(ops):
+        vs.Layer("OG")  # a restore switched layers, then failed
+        raise RuntimeError("boom")
+
+    ns["_revert2d"] = broken
+    with pytest.raises(RuntimeError, match="boom"):
+        ns["revert2d"]([{"op": "created", "uuid": "a"}])
+    assert vs.active == "EG"

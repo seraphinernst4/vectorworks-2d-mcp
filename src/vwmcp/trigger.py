@@ -1,10 +1,11 @@
-"""Ways to make Vectorworks run the "MCP Run Job" menu command.
+"""Ways to make Vectorworks run pending jobs.
 
-macOS: AppleScript `run VectorScript` calling DoMenuTextByName. The menu
-command gives the job a real document/undo context. Sending Python
-directly (`run Python script`) is NOT used: in Vectorworks 2026 any
-document write from that context, or any script sent while the app is
-launching, crashes Vectorworks.
+macOS: AppleScript `run VectorScript` with a short VectorScript that either
+runs the bridge through PythonExecute (direct, the default since 0.5) or
+calls the "MCP Run Job" menu command (menu). Both give the job a real
+document/undo context. Sending Python directly (`run Python script`) is
+NOT used: in Vectorworks 2026 any document write from that context, or any
+script sent while the app is launching, crashes Vectorworks.
 
 The Apple Event only returns when the menu command has finished, so a
 pending osascript means "Vectorworks is busy or a dialog is open". The
@@ -43,7 +44,8 @@ MENU_VSS = f"PROCEDURE T; BEGIN DoMenuTextByName('{MENU_COMMAND}', 0); END; RUN(
 DIRECT_VSS = ("PROCEDURE T; BEGIN PythonBeginContext; "
               "PythonExecute('import importlib, importlib.util'); "
               "PythonExecute('importlib.invalidate_caches()'); "
-              "PythonExecute('if importlib.util.find_spec(''vwmcp'') is not None: "
+              "PythonExecute('if importlib.util.find_spec(''vwmcp'') is not None "
+              "and importlib.util.find_spec(''vwmcp.vwmcp_bridge'') is not None: "
               "__import__(''vwmcp.vwmcp_bridge'', fromlist=[''run_pending'']).run_pending()'); "
               "PythonEndContext; END; RUN(T);")
 _APP_RE = re.compile(r"/(Vectorworks 20\d\d)\.app/Contents/MacOS/Vectorworks(?:$|\s+-)")

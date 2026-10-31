@@ -39,6 +39,10 @@ ALIVE_EVERY = 2.0
 class BridgeError(RuntimeError):
     """The bridge could not deliver a job or its result."""
 
+    # True when the job was cancelled before Vectorworks took it: then it can
+    # never run, nothing was changed (callers may safely retry or roll back)
+    never_ran = False
+
 
 class BridgeTimeout(BridgeError):
     pass
@@ -177,6 +181,7 @@ class Bridge:
         except TriggerError as e:
             if self._cancel(job_path):
                 self.log(f"trigger failed for job {job_id}: {e}")
+                e.never_ran = True
                 raise
             # an earlier Apple Event (or another server) already took it: wait for it
             claimed_at = time.monotonic()
@@ -195,7 +200,9 @@ class Bridge:
                 if self._cancel(job_path):
                     msg = self._not_claimed_message()
                     self.log(f"not claimed in {self.claim_timeout:g}s, cancelled {job_id}: {msg}")
-                    raise BridgeTimeout(msg)
+                    err = BridgeTimeout(msg)
+                    err.never_ran = True
+                    raise err
                 claimed_at = now  # claimed right now: wait for the result
                 break
             if now - last_fire >= RETRIGGER_AFTER and not self._trigger_in_flight():
@@ -254,7 +261,7 @@ class Bridge:
                 "Close the dialog in Vectorworks and try again. The request was cancelled "
                 "and will not run later."
             )
-        menu = getattr(self.trigger, "mode", "direct") == "menu"
+        menu = not getattr(self.trigger, "direct", True)  # menu, or auto still on the menu
         return (
             f"Vectorworks did not take the request within {self.claim_timeout:g}s. Check that "
             "a document is open and no dialog is showing"

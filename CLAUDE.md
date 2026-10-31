@@ -2,8 +2,8 @@
 
 Mac-native MCP server for exact, well-organised 2D drawing in Vectorworks.
 Fork of https://github.com/giorgiomoroder/vectorworks-mcp (MIT), repo
-https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.4.0
-beta**, tested on Vectorworks 2026 Update 7 (German) on macOS; Vectorworks
+https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.5.0
+beta** (branch `v0.5`; `main` = 0.4.1), tested on Vectorworks 2026 Update 7 (German) on macOS; Vectorworks
 2027 prepared (Python 3.14), not live-tested. Read `docs/architecture.md`,
 `docs/api-pitfalls.md` and `docs/vs-notes.md` before changing anything that
 touches Vectorworks.
@@ -59,7 +59,8 @@ touches Vectorworks.
 
 - **Never** send `run Python script` over AppleScript. Writes, or any call during
   launch / a modal dialog, segfault Vectorworks 2026. The only Apple Event the
-  server sends is the VectorScript menu hop.
+  server sends is the short VectorScript hop (`PythonExecute` of the bridge, or
+  the menu command in mode `menu`).
 - **Never** poll Vectorworks in a loop with probes. Announce each live test to the
   user, send one call at a time, and keep VectorScript in a file (shell quoting
   broke it once).
@@ -151,8 +152,10 @@ Distribution:
 
 ## Design decisions already made (don't relitigate)
 
-- Transport: job folder + AppleScript→menu-command hop (user chose it after the
-  direct-Python crash findings). No in-app polling loop.
+- Transport: job folder + AppleScript→VectorScript hop (user chose it after the
+  direct-Python crash findings). Since 0.5 the VectorScript runs the bridge via
+  `PythonExecute` (mode `direct`, no menu command to set up); the menu command
+  stays available (mode `menu`). Never `run Python script`. No in-app polling loop.
 - Bridge location: user Plug-ins subfolder `Plug-ins/vwmcp/` (user approved).
 - `vw_undo_mark` from the brief replaced by `vw_revert_last` + journal (user approved).
 - Objects are addressed by UUID (`GetObjectUuid` / `GetObjectByUuid`), never handles.

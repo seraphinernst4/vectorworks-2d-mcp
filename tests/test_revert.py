@@ -2,6 +2,7 @@ import pytest
 from mcp.server.mcpserver.exceptions import ToolError
 
 from vwmcp import app
+from vwmcp.client import BridgeError, BridgeTimeout
 from vwmcp.journal import Journal
 from vwmcp.tools import generic, spotlight
 
@@ -103,7 +104,9 @@ def test_revert_that_never_ran_is_put_back(fake, monkeypatch):
 
     def busy(fn, timeout=None, **kw):
         if fn == "revert2d":
-            raise ToolError("Vectorworks did not take the request within 15s ... will not run later.")
+            err = BridgeTimeout("Vectorworks did not take the request within 15s ... will not run later.")
+            err.never_ran = True
+            raise ToolError(str(err)) from err
         return fake(fn, **kw)
 
     monkeypatch.setattr(app, "vw2d", busy)
@@ -111,3 +114,22 @@ def test_revert_that_never_ran_is_put_back(fake, monkeypatch):
         generic.vw_revert_last()
     monkeypatch.setattr(app, "vw2d", lambda fn, timeout=None, **kw: fake(fn, **kw))
     assert generic.vw_revert_last()["reverted_tool"] == "vw_set_record"
+
+
+@pytest.mark.parametrize("cause", [
+    BridgeError("Vectorworks quit or restarted while working on this request; it did not finish."),
+    RuntimeError("Traceback ... KeyError: 'above'"),  # a Vectorworks-side error after some restores
+])
+def test_revert_that_ran_partway_is_not_put_back(fake, monkeypatch, cause):
+    generic.vw_set_record("u1", "Notes", {"Note": "new"})
+
+    def broken(fn, timeout=None, **kw):
+        if fn == "revert2d":
+            raise ToolError(str(cause)) from cause
+        return fake(fn, **kw)
+
+    monkeypatch.setattr(app, "vw2d", broken)
+    with pytest.raises(ToolError, match="(?s)may be partly done.*Check the drawing"):
+        generic.vw_revert_last()
+    with pytest.raises(ToolError, match="nothing to revert"):  # a second revert can't restore twice
+        generic.vw_revert_last()

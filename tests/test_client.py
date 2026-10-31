@@ -57,6 +57,7 @@ def test_unclaimed_job_is_cancelled_and_never_runs_later(root, fake_vs):
     with pytest.raises(BridgeTimeout) as e:
         b.run("vs.calls.append('ran')")
     assert "no dialog is showing" in str(e.value) and "will not run later" in str(e.value)
+    assert e.value.never_ran
     assert list((root / "jobs").glob("*.json")) == []
     assert len(list((root / "jobs").glob("*.cancelled"))) == 1
     # The dialog closes, the queued trigger finally runs the menu command:
@@ -89,8 +90,9 @@ def test_long_job_after_claim_is_waited_for(root, fake_vs):
 
 def test_result_timeout_after_claim(root, fake_vs):
     b = make_bridge(root, FakeExecutor(root, fake_vs), claim_timeout=1, timeout=0.2)
-    with pytest.raises(BridgeTimeout, match="still working"):
+    with pytest.raises(BridgeTimeout, match="still working") as e:
         b.run("import time\ntime.sleep(0.6)")
+    assert not e.value.never_ran  # Vectorworks took it: it may still change the drawing
     assert "result timeout" in (root / "vwmcp.log").read_text()
 
 
@@ -122,8 +124,9 @@ def test_trigger_failure_surfaces_as_error_and_cancels_job(root, fake_vs):
         raise TriggerError("Vectorworks is not running")
 
     b = make_bridge(root, broken)
-    with pytest.raises(TriggerError):
+    with pytest.raises(TriggerError) as e:
         b.run("1")
+    assert e.value.never_ran
     assert list((root / "jobs").glob("*.json")) == []
     assert "not running" in (root / "vwmcp.log").read_text()
 

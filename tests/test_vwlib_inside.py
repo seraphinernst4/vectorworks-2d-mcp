@@ -201,3 +201,100 @@ def test_restack_puts_many_objects_back_in_one_pass():
 def test_restack_moves_only_from_the_first_change_on():
     order, moves = _restack_case("ABCDEFGHIJ", {"H"})
     assert order == "ABCDEFGHIJ" and moves == ["H", "I", "J"]
+
+
+def test_restack_handles_entries_in_any_order():
+    """Entries back-to-front (not the usual front-first order) give the same result."""
+    names = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    for gone in ("BDFHJ", "ABC", "XYZ", "BCDEFGHIJKLMNOPQRSTUVWXY"):
+        st = StackVS(names)
+        ns = _ns()
+        ns["vs"].__dict__.update({k: getattr(st, k) for k in dir(st) if k[0].isupper()})
+        entries = []
+        for i, o in enumerate(st.objs):
+            if o.name in gone:
+                entries.append((o, st.objs[i + 1].uid if i + 1 < len(st.objs) else None, i))
+        for o, _a, _z in entries:
+            st.objs.remove(o)
+            st.objs.append(o)
+        ns["_restack"](entries, {})  # ascending z
+        assert st.order() == names, gone
+
+
+class FastStackVS(StackVS):
+    """StackVS with O(1) neighbours, for long lists."""
+
+    def _pos(self):
+        return {id(o): i for i, o in enumerate(self.objs)}
+
+    def NextObj(self, h):
+        i = self._p[id(h)] if getattr(self, "_p", None) else self._pos()[id(h)]
+        return self.objs[i + 1] if i + 1 < len(self.objs) else None
+
+    def PrevObj(self, h):
+        i = self._p[id(h)] if getattr(self, "_p", None) else self._pos()[id(h)]
+        return self.objs[i - 1] if i > 0 else None
+
+    def HMoveForward(self, h, to_front):
+        super().HMoveForward(h, to_front)
+        self._p = self._pos()
+
+    def HMoveBackward(self, h, to_back):
+        super().HMoveBackward(h, to_back)
+        self._p = self._pos()
+
+    def freeze(self):
+        self._p = self._pos()
+
+
+def test_restack_of_a_chain_longer_than_the_recursion_limit():
+    # 3000 neighbours that were all rebuilt: each one's `above` is the next one
+    import sys
+
+    names = ["o%04d" % i for i in range(3000)]
+    assert len(names) > sys.getrecursionlimit()
+    st = FastStackVS(names)
+    ns = _ns()
+    ns["vs"].__dict__.update({k: getattr(st, k) for k in dir(st) if k[0].isupper()})
+    entries = [(o, st.objs[i + 1].uid if i + 1 < len(st.objs) else None, i)
+               for i, o in enumerate(st.objs) if i > 0]
+    first = st.objs[0]
+    st.objs[:] = [first] + [o for o, _a, _z in reversed(entries)]  # restored, in reverse order
+    st.freeze()
+    ns["_restack"](sorted(entries, key=lambda e: -e[2]), {})
+    assert [o.name for o in st.objs] == names
+
+
+def test_outermost_drops_duplicates_and_parts_of_listed_groups():
+    N = types.SimpleNamespace  # str(handle) is unique in Vectorworks: give each a name
+    lay = N(n="lay", t=31)
+    g = N(n="g", t=11, p=lay)
+    inner = N(n="inner", t=11, p=g)
+    k1 = N(n="k1", t=2, p=g)
+    k2 = N(n="k2", t=2, p=inner)  # two levels down
+    a = N(n="a", t=2, p=lay)
+    lone = N(n="lone", t=2, p=N(n="g2", t=11, p=lay))  # its group isn't listed
+    ns = _ns(GetParent=lambda h: h.p, GetTypeN=lambda h: h.t)
+    assert ns["_outermost"]([a, k1, g, a, k2, lone, g]) == [a, g, lone]
+
+
+def test_place_new_puts_rebuilt_neighbours_back_in_order():
+    """replace_geometry: several neighbours rebuilt (new uuids, all in front);
+    each goes behind its old front neighbour, which may be rebuilt too."""
+    for n_total, rebuilt in ((10, (1, 2, 3, 7)), (60, tuple(range(5, 45)))):  # one by one / in bulk
+        names = ["o%02d" % i for i in range(n_total)]
+        st = FastStackVS(names)
+        ns = _ns()
+        ns["vs"].__dict__.update({k: getattr(st, k) for k in dir(st) if k[0].isupper()})
+        olds = {i: (st.objs[i], st.objs[i + 1].uid if i + 1 < n_total else None) for i in rebuilt}
+        mapping, new_by_uuid, entries = {}, {}, []
+        for i in rebuilt:
+            o, above = olds[i]
+            st.objs.remove(o)
+            new = types.SimpleNamespace(name=o.name, t=2, uid=o.uid + "'")
+            st.objs.append(new)  # rebuilt objects land in front
+            mapping[o.uid], new_by_uuid[new.uid] = new.uid, new
+            entries.append((new, above, i))
+        st.freeze()
+        ns["_place_new"](entries, {}, mapping, new_by_uuid)
+        assert [o.name for o in st.objs] == names, n_total
