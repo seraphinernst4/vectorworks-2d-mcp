@@ -8,7 +8,7 @@ import os
 
 from vwmcp import install
 from vwmcp.app import mcp
-from vwmcp.tools import assets, draw2d, generic  # noqa: F401  (registers tools)
+from vwmcp.tools import assets, draw2d, generic, organize  # noqa: F401  (registers tools)
 
 if os.environ.get("VWMCP_SPOTLIGHT"):  # lighting tools from upstream, off by default
     from vwmcp.tools import spotlight  # noqa: F401

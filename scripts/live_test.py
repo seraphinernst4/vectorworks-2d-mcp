@@ -433,6 +433,121 @@ def asset_tests(report: dict) -> None:
     log(f"assets: pass={r['pass']} ({len(placed)} placed, {len(problems)} problems) in {r['seconds']} s")
 
 
+PERF_LAYER = "KS-Test-Perf"
+PERF_SIZES = [int(x) for x in os.environ.get("VWMCP_PERF_SIZES", "2000,10000").split(",") if x]
+
+# A messy "DWG import" on PERF_LAYER: n objects on a 1 m grid in classes A-WALL,
+# A-DOOR, A-ANNO and 0 - rectangles (every 7th 1 mm too wide: overlap with its
+# neighbour), polygons, lines, texts and exact duplicates.
+PERF_GEN = """
+_mpu = units()["mm_per_unit"]
+_mm = 1.0 / _mpu
+_state = _begin(%(layer)r)
+try:
+    _cols = int(math.sqrt(%(n)d)) or 1
+    _made = 0
+    for _i in range(%(n)d):
+        _x, _y = (_i %% _cols) * 1000 * _mm, -(_i // _cols) * 1000 * _mm
+        _k = _i %% 10
+        if _k <= 5 or _k == 9:
+            vs.NameClass("A-WALL")
+            _w = (801 if _i %% 7 == 0 else 800) * _mm
+            if _k == 9:
+                _x, _y = ((_i - 1) %% _cols) * 1000 * _mm, -((_i - 1) // _cols) * 1000 * _mm
+            vs.Rect((_x, _y), (_x + _w, _y - 800 * _mm))
+        elif _k == 6:
+            vs.NameClass("0")
+            vs.ClosePoly()
+            vs.Poly((_x, _y), (_x + 600 * _mm, _y), (_x + 600 * _mm, _y - 400 * _mm), (_x, _y - 400 * _mm))
+        elif _k == 7:
+            vs.NameClass("A-DOOR")
+            vs.MoveTo((_x, _y))
+            vs.LineTo((_x + 900 * _mm, _y - 900 * _mm))
+        else:
+            vs.NameClass("A-ANNO")
+            vs.TextOrigin((_x, _y))
+            vs.CreateText("Raum %%d" %% _i)
+        _made += 1
+finally:
+    _end(_state)
+result = _made
+"""
+
+
+def perf_tests(report: dict) -> None:
+    """Large drawings: generate n objects, then time read, structure, check,
+    fix duplicates (+ revert), organize (dry run, apply, revert)."""
+    from vwmcp import app, calls
+    from vwmcp.tools import draw2d, generic, organize
+
+    b = app.get_bridge()
+
+    def vwrun(body: str, timeout: float = 600):
+        res = calls._run_with_libs(b, [("vwlib", calls.VWLIB_SOURCE), ("vwlib2d", calls.VWLIB2D_SOURCE)],
+                                   body, timeout=timeout)
+        return calls.raise_for_result(res)["value"]
+
+    def clear():
+        return vwrun("_k = []\ndef _c(h):\n    _k.append(h)\nvs.ForEachObject(_c, \"(L='%s')\")\n"
+                     "for _h in _k:\n    vs.DelObject(_h)\nresult = len(_k)" % PERF_LAYER)
+
+    out: dict = {}
+    for n in PERF_SIZES:
+        r: dict = {}
+        draw2d.vw2d_setup(layers=[{"name": PERF_LAYER, "scale": 100}])
+        clear()
+        t = time.monotonic()
+        r["generated"] = vwrun(PERF_GEN % {"layer": PERF_LAYER, "n": n})
+        r["generate_s"] = round(time.monotonic() - t, 2)
+
+        def timed(name, fn):
+            t0 = time.monotonic()
+            try:
+                v = fn()
+                r[name + "_s"] = round(time.monotonic() - t0, 2)
+                return v
+            except Exception as e:  # noqa: BLE001
+                r[name + "_s"] = round(time.monotonic() - t0, 2)
+                r[name + "_error"] = str(e)[:300]
+                return None
+
+        rd = timed("read", lambda: draw2d.vw2d_read(layer=PERF_LAYER, include_geometry=False, limit=n + 10))
+        r["read_count"] = len((rd or {}).get("objects", [])) if isinstance(rd, dict) else None
+        timed("read_geometry", lambda: draw2d.vw2d_read(layer=PERF_LAYER, include_geometry=True, limit=n + 10))
+        timed("structure", draw2d.vw2d_structure)
+        chk = timed("check", lambda: draw2d.vw2d_check(layer=PERF_LAYER, image=False))
+        if isinstance(chk, dict):
+            r["check_summary"] = {k: chk["summary"].get(k) for k in ("objects", "errors", "warnings", "by_kind")}
+        fx = timed("fix_duplicates", lambda: draw2d.vw2d_fix("duplicates", layer=PERF_LAYER, image=False))
+        if isinstance(fx, dict):
+            r["fix_duplicates"] = {k: fx.get(k) for k in ("deleted", "fixed", "changed") if k in fx}
+            r["fix_duplicates_keys"] = sorted(fx)[:12]
+        rv = timed("revert_fix", generic.vw_revert_last)
+        if isinstance(rv, dict):
+            r["revert_fix"] = {k: rv.get(k) for k in ("restored", "deleted", "reverted_tool")}
+        cmap = {"A-WALL": "Wand-Tragend", "A-DOOR": "Öffnung-Tür", "A-ANNO": "Beschriftung", "0": "Hilfslinien"}
+        dr = timed("organize_dry", lambda: organize.vw2d_organize(class_map=cmap, layer=PERF_LAYER))
+        if isinstance(dr, dict):
+            r["organize_dry"] = {k: dr.get(k) for k in ("objects", "to_change", "unmatched", "targets")}
+        ap = timed("organize_apply", lambda: organize.vw2d_organize(class_map=cmap, layer=PERF_LAYER,
+                                                                    dry_run=False))
+        if isinstance(ap, dict):
+            r["organize_changed"] = ap.get("changed")
+        after = timed("organize_check", lambda: organize.vw2d_organize(class_map=cmap, layer=PERF_LAYER))
+        if isinstance(after, dict):
+            r["organize_after"] = {"to_change": after.get("to_change"), "unchanged": after.get("unchanged")}
+        rv = timed("revert_organize", generic.vw_revert_last)
+        if isinstance(rv, dict):
+            r["revert_organize"] = {k: rv.get(k) for k in ("restored", "reverted_tool")}
+        back = timed("organize_back", lambda: organize.vw2d_organize(class_map=cmap, layer=PERF_LAYER))
+        if isinstance(back, dict):
+            r["organize_back_to_change"] = back.get("to_change")
+        r["cleared"] = clear()
+        out[str(n)] = r
+        log(f"perf {n}: " + ", ".join(f"{k}={v}" for k, v in r.items() if k.endswith("_s")))
+    report["perf"] = out
+
+
 async def _mcp_round_trip(server_dir: str) -> dict:
     """Start the packaged server like Claude Desktop does (stdio) and call tools."""
     from mcp import ClientSession
@@ -495,7 +610,7 @@ def main() -> None:
     report = {"started": time.strftime("%Y-%m-%d %H:%M:%S"), "python": sys.version.split()[0]}
     log(f"live test start ({args.only})")
     sections = (("protocol", protocol_tests), ("tools", tool_tests), ("pitfalls", pitfall_tests),
-                ("regression", regression_tests), ("assets", asset_tests),
+                ("regression", regression_tests), ("assets", asset_tests), ("perf", perf_tests),
                 ("mcp", lambda rep: mcp_tests(rep, args.server)))
     for name, fn in sections:
         if name not in args.only.split(","):

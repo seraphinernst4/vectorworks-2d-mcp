@@ -1140,6 +1140,47 @@ def set_attributes(uuids, attributes, layer=None):
             "objects": [read_obj(h, False) for h in hs]}
 
 
+def organize_apply(moves):
+    """Put objects into classes / onto layers (vw2d_organize), one job, one
+    journal entry. moves: [{"uuids", "class", "layer", "by_class"}]. On any
+    error everything done so far is undone."""
+    applied = []
+    try:
+        for m in moves:
+            attrs = {}
+            if m.get("class"):
+                attrs["class"] = m["class"]
+            if m.get("by_class"):
+                attrs["by_class"] = True
+            target = None
+            if m.get("layer"):
+                ensure_layer(m["layer"])
+                target = vs.GetLayerByName(m["layer"])
+            for u in m["uuids"]:
+                h = handle(u)
+                op = {"op": "attrs", "uuid": u, "class_before": _str(vs.GetClass(h)),
+                      "layer_before": _layer_name(h) if target is not None else None}
+                t = vs.GetTypeN(h)
+                if m.get("by_class") and (t in SHAPE_TYPES or t in (10, 17, 63, 11, 15)):
+                    op["before"] = raw_attrs(h)
+                if target is not None:
+                    par = vs.GetParent(h)
+                    if not _is_nil(par) and vs.GetTypeN(par) == 11:
+                        raise ValueError("object %s is inside a group; move the group instead" % u)
+                applied.append(op)
+                apply_attrs(h, attrs)
+                if target is not None:
+                    vs.SetParent(h, target)
+    except BaseException:
+        for op in reversed(applied):  # one by one: a failing object must not stop the rest
+            try:
+                revert2d([op])
+            except Exception:  # noqa: BLE001
+                pass
+        raise
+    return {"document": current_document(), "ops": applied, "changed": len(applied)}
+
+
 def delete_objects(uuids):
     snaps = _snaps(uuids)
     for u in uuids:
