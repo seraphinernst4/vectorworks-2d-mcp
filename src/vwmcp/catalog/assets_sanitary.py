@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from vwmcp.catalog.shapes import (arc, circle, front_rounded_rect, korb_oval, line, path, poly, rect,
-                                  rounded_rect)
+                                  rounded_rect, translate)
 
 # ---------------------------------------------------------------- WC
 
@@ -86,24 +86,36 @@ def urinal_front(b=350.0, t=330.0, h=650.0):
 # ---------------------------------------------------------------- wash basin
 
 
-def basin_plan(b=600.0, t=480.0):
-    return [
-        front_rounded_rect(-b / 2, 0, b / 2, -t, 60),
-        korb_oval(0, -t * 0.55, b * 0.62, t * 0.58, role="detail"),     # bowl
-        circle(0, -t * 0.55, 18, role="detail"),                       # drain
-        rect(-15, -25, 15, -95, role="detail"),                         # tap
-    ]
+def _bowl_centres(b: float, bowls: float) -> list[float]:
+    n = 2 if bowls >= 2 else 1
+    return [0.0] if n == 1 else [-b / 4, b / 4]
 
 
-def basin_front(b=600.0, t=480.0, h=850.0, mirror=0.0):
+def basin_plan(b=600.0, t=480.0, bowls=1.0):
+    xs = _bowl_centres(b, bowls)
+    bw = (b if len(xs) == 1 else b / 2) * 0.62
+    items = [front_rounded_rect(-b / 2, 0, b / 2, -t, 60)]
+    for x in xs:
+        items += [
+            korb_oval(x, -t * 0.55, bw, t * 0.58, role="detail"),          # bowl
+            circle(x, -t * 0.55, 18, role="detail"),                       # drain
+            rect(x - 15, -25, x + 15, -95, role="detail"),                 # tap
+        ]
+    return items
+
+
+def basin_front(b=600.0, t=480.0, h=850.0, mirror=0.0, bowls=1.0):
     items = [
         path((-b / 2, h), [("L", b / 2, h), ("L", b / 2, h - 40),
                            ("L", b / 2 - 60, h - 170), ("L", -b / 2 + 60, h - 170),
                            ("L", -b / 2, h - 40)]),
-        poly([(-15, h), (-15, h + 120), (60, h + 120), (60, h + 100), (15, h + 100), (15, h)],
-             role="detail"),                                            # tap
-        rect(-30, h - 170, 30, h - 420, role="detail"),                 # siphon
     ]
+    for x in _bowl_centres(b, bowls):
+        items += [
+            poly([(x - 15, h), (x - 15, h + 120), (x + 60, h + 120), (x + 60, h + 100), (x + 15, h + 100),
+                  (x + 15, h)], role="detail"),                         # tap
+            rect(x - 30, h - 170, x + 30, h - 420, role="detail"),      # siphon
+        ]
     if mirror >= 1:
         items.append(rect(-b / 2, h + 250, b / 2, h + 1000, role="detail"))
     return items
@@ -177,6 +189,42 @@ def hob_plan(b=600.0, t=600.0):
     return items
 
 
+def washer_plan(b=600.0, t=600.0):
+    """Washing machine / dryer at the wall."""
+    return [rect(-b / 2, 0, b / 2, -t), line(-b / 2, -t + 40, b / 2, -t + 40),
+            circle(0, -t / 2, min(b, t) * 0.3, role="detail")]
+
+
+def washer_front(b=600.0, t=600.0, h=850.0):
+    return [rect(-b / 2, 0, b / 2, h), line(-b / 2, h - 110, b / 2, h - 110),
+            circle(0, (h - 110) / 2, min(b, h) * 0.3), circle(0, (h - 110) / 2, min(b, h) * 0.23, role="detail"),
+            rect(-b / 2 + 30, h - 85, -b / 2 + 180, h - 25, role="detail")]       # drawer
+
+
+def kitchen_plan(l=3000.0, t=600.0, sink=600.0, hob=2100.0, sink_w=800.0, hob_w=600.0):
+    """Kitchen run along the wall from its left end (insertion point: left end
+    at the wall), counter towards -y; sink and hob centres measured from the left."""
+    items = [rect(0, 0, l, -t), line(0, -t + 20, l, -t + 20)]
+    if sink_w > 0:
+        items += translate([it for it in sink_plan(sink_w, t)[1:]], sink, 0)
+    if hob_w > 0:
+        items += translate(hob_plan(hob_w, t)[1:], hob, 0)
+    return items
+
+
+def kitchen_front(l=3000.0, t=600.0, sink=600.0, hob=2100.0, sink_w=800.0, hob_w=600.0, h=900.0):
+    """Base cabinets in elevation: counter, plinth, 600 mm fronts."""
+    items = [rect(0, h - 40, l, h), rect(0, 100, l, h - 40), rect(0, 0, l, 100, role="detail")]
+    n = max(1, int(round(l / 600.0)))
+    for i in range(1, n):
+        x = l * i / n
+        items.append(line(x, 100, x, h - 40))
+    if sink_w > 0:   # tap
+        items.append(poly([(sink - 15, h), (sink - 15, h + 250), (sink + 120, h + 250), (sink + 120, h + 230),
+                           (sink + 15, h + 230), (sink + 15, h)], role="detail"))
+    return items
+
+
 def fridge_plan(b=600.0, t=600.0):
     return [rect(-b / 2, 0, b / 2, -t), line(-b / 2, -t + 40, b / 2, -t + 40),
             line(-b / 2, 0, b / 2, -t + 40)]
@@ -199,8 +247,9 @@ ASSETS = [
          insertion="Mitte Wandseite", keywords=("pissoir", "urinal", "sanitär")),
     dict(id="waschtisch", name="Waschtisch", category="sanitary",
          views={"plan": basin_plan, "front": basin_front, "side": basin_side},
-         params={"b": (600.0, "Breite"), "t": (480.0, "Ausladung"), "h": (850.0, "Höhe Oberkante"),
-                 "mirror": (0.0, "1 = Spiegel in der Ansicht")},
+         params={"b": (600.0, "Breite (Doppelwaschtisch ab 1200)"), "t": (480.0, "Ausladung"),
+                 "h": (850.0, "Höhe Oberkante"), "mirror": (0.0, "1 = Spiegel in der Ansicht"),
+                 "bowls": (1.0, "Becken: 1 oder 2")},
          insertion="Grundriss: Mitte Wandseite, Objekt nach -y; Ansicht: Mitte am Boden",
          keywords=("waschbecken", "lavabo", "waschtisch", "sanitär")),
     dict(id="handwaschbecken", name="Handwaschbecken", category="sanitary",
@@ -225,6 +274,19 @@ ASSETS = [
          views={"plan": hob_plan},
          params={"b": (600.0, "Breite"), "t": (600.0, "Tiefe")},
          insertion="Mitte Wandseite", keywords=("herd", "kochfeld", "küche", "ceran")),
+    dict(id="waschmaschine", name="Waschmaschine / Trockner", category="sanitary",
+         views={"plan": washer_plan, "front": washer_front},
+         params={"b": (600.0, "Breite"), "t": (600.0, "Tiefe"), "h": (850.0, "Höhe")},
+         insertion="Grundriss: Mitte Wandseite, Gerät nach -y; Ansicht: Mitte am Boden",
+         keywords=("waschmaschine", "trockner", "hauswirtschaft", "hwr", "wäsche")),
+    dict(id="kuechenzeile", name="Küchenzeile", category="kitchen",
+         views={"plan": kitchen_plan, "front": kitchen_front},
+         params={"l": (3000.0, "Länge"), "t": (600.0, "Tiefe Arbeitsplatte"),
+                 "sink": (600.0, "Mitte Spüle ab linkem Ende"), "hob": (2100.0, "Mitte Kochfeld ab linkem Ende"),
+                 "sink_w": (800.0, "Breite Spüle (0 = ohne)"), "hob_w": (600.0, "Breite Kochfeld (0 = ohne)"),
+                 "h": (900.0, "Arbeitshöhe (nur Ansicht)")},
+         insertion="linkes Ende an der Wand, Zeile nach +x, Arbeitsplatte nach -y (Ansicht: linkes Ende am Boden)",
+         keywords=("küche", "küchenzeile", "unterschrank", "arbeitsplatte", "spüle", "herd")),
     dict(id="kuehlschrank", name="Kühlschrank", category="kitchen",
          views={"plan": fridge_plan},
          params={"b": (600.0, "Breite"), "t": (600.0, "Tiefe")},

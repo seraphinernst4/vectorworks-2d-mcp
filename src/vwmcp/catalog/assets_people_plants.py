@@ -28,11 +28,25 @@ def _cloud(cx: float, cy: float, rx: float, ry: float, lobes: int, seed: float =
     return path(pts[0], segs, role=role)
 
 
+def _star(cx: float, cy: float, r_out: float, r_in: float, n: int, rot: float = 0.0, role: str = "outline"):
+    pts = []
+    for i in range(2 * n):
+        a = math.pi * i / n + rot
+        r = r_out if i % 2 == 0 else r_in
+        pts.append((cx + r * math.cos(a), cy + r * math.sin(a)))
+    return poly(pts, role=role)
+
+
 def tree_plan(d=6000.0, trunk=300.0, style=0.0, seed=1.0):
-    """Tree from above: crown diameter d. style 0 = organic outline, 1 = circle."""
+    """Tree from above: crown diameter d. style 0 = organic outline (deciduous),
+    1 = circle, 2 = conifer (star)."""
     r = d / 2
     items = []
-    if style >= 1:
+    if style >= 2:
+        n = max(14, min(36, int(round(d / 180))))
+        items.append(_star(0, 0, r, r * 0.86, n, 0.1 * seed))
+        items.append(_star(0, 0, r * 0.5, r * 0.42, max(8, n // 2), 0.3 + 0.1 * seed, role="detail"))
+    elif style >= 1:
         items.append(circle(0, 0, r, role="outline"))
         items.append(circle(0, 0, r * 0.82, role="detail"))
     else:
@@ -44,8 +58,28 @@ def tree_plan(d=6000.0, trunk=300.0, style=0.0, seed=1.0):
     return items
 
 
+def _conifer_front(d: float, trunk: float, h: float):
+    """Conifer in elevation: tiered silhouette from the trunk base to the tip."""
+    base = h * 0.12
+    tiers = max(4, min(9, int(round((h - base) / 1500))))
+    tier_h = (h - base) / tiers
+    right = []
+    for i in range(tiers):
+        y_low = base + i * tier_h
+        w = d / 2 * (1 - i / tiers)
+        right.append((w, y_low))                               # tip of the branch layer
+        right.append((w * 0.55, y_low + tier_h * 0.45))        # notch above it
+    t0 = trunk / 2
+    pts = [(t0, 0), (t0, base)] + [(x, y) for x, y in right] + [(0, h)]
+    pts += [(-x, y) for x, y in reversed(right)] + [(-t0, base), (-t0, 0)]
+    # remove a notch point that would sit on the trunk side
+    return [poly(pts)]
+
+
 def tree_front(d=6000.0, trunk=300.0, style=0.0, seed=1.0, h=10000.0):
     """Tree in elevation: height h, crown width d."""
+    if style >= 2:
+        return _conifer_front(d, trunk, h)
     crown_h = min(h * 0.68, d * 1.25)
     crown_cy = h - crown_h / 2
     base = h - crown_h
@@ -90,13 +124,56 @@ def car_plan(l=4700.0, b=1850.0):
     ]
 
 
+def car_side(l=4700.0, b=1850.0, h=1480.0):
+    """Car in side elevation, front towards +x, centred on its length, on y = 0."""
+    k = l / 4700.0
+    kh = h / 1480.0
+
+    def X(x):
+        return x * k
+
+    def Y(y):
+        return y * kh
+
+    wx, wr, ar = 1400.0, 330.0, 380.0  # wheel centre x (+/-), tyre radius, arch radius
+    body = path((X(2200), Y(300)), [
+        ("L", X(wx) + ar * k, Y(300)), ("A", X(wx) - ar * k, Y(300), X(wx), Y(300), "ccw"),
+        ("L", -X(wx) + ar * k, Y(300)), ("A", -X(wx) - ar * k, Y(300), -X(wx), Y(300), "ccw"),
+        ("L", X(-2200), Y(300)), ("L", X(-2350), Y(500)), ("L", X(-2320), Y(950)), ("L", X(-1550), Y(1000)),
+        ("L", X(-1000), Y(1450)), ("L", X(500), Y(1480)), ("L", X(1200), Y(1020)), ("L", X(2270), Y(870)),
+        ("L", X(2350), Y(600)), ("L", X(2320), Y(380)),
+    ])
+    items = [body,
+             poly([(X(-1100), Y(1010)), (X(-930), Y(1400)), (X(470), Y(1425)), (X(1120), Y(1030))], role="detail"),
+             line(X(0), Y(1015), X(0), Y(1420)),
+             line(X(-2300), Y(700), X(2330), Y(700)),                     # belt line
+             ]
+    for x in (wx, -wx):
+        items.append(circle(X(x), wr * kh, wr * min(k, kh), role="outline"))
+        items.append(circle(X(x), wr * kh, wr * min(k, kh) * 0.6, role="detail"))
+    return items
+
+
+def bicycle_plan(l=1750.0, b=600.0):
+    """Bicycle from above, front towards +x."""
+    tyre = 660.0
+    return [
+        rect(-l / 2, -25, -l / 2 + tyre, 25), rect(l / 2 - tyre, -25, l / 2, 25),        # wheels
+        line(-l / 2 + tyre / 2, 0, l / 2 - tyre / 2, 0, role="outline"),                  # frame
+        line(l / 2 - tyre / 2 - 40, -b / 2, l / 2 - tyre / 2 - 40, b / 2, role="outline"),  # handlebar
+        rounded_rect(-l / 2 + tyre / 2 + 120, -80, -l / 2 + tyre / 2 + 380, 80, 60, role="detail"),  # saddle
+    ]
+
+
 ASSETS = [
     dict(id="baum", name="Baum", category="plants",
          views={"plan": tree_plan, "front": tree_front},
          params={"d": (6000.0, "Kronendurchmesser"), "trunk": (300.0, "Stammdurchmesser"),
-                 "style": (0.0, "0 = organische Krone, 1 = Kreis"), "seed": (1.0, "Variante der Kronenform"),
+                 "style": (0.0, "0 = Laubbaum (organische Krone), 1 = Kreis, 2 = Nadelbaum"),
+                 "seed": (1.0, "Variante der Kronenform"),
                  "h": (10000.0, "Höhe (nur Ansicht)")},
-         insertion="Stammmitte (Ansicht: am Boden)", keywords=("baum", "bäume", "pflanze", "vegetation", "grün", "staffage")),
+         insertion="Stammmitte (Ansicht: am Boden)",
+         keywords=("baum", "bäume", "pflanze", "vegetation", "grün", "staffage", "nadelbaum", "laubbaum", "tanne")),
     dict(id="strauch", name="Strauch", category="plants",
          views={"plan": shrub_plan},
          params={"d": (1500.0, "Durchmesser"), "seed": (2.0, "Variante")},
@@ -107,7 +184,12 @@ ASSETS = [
          insertion="Grundriss: Mitte; Ansicht: zwischen den Füßen am Boden",
          keywords=("person", "mensch", "figur", "maßstabsfigur", "staffage")),
     dict(id="pkw", name="PKW", category="vehicles",
-         views={"plan": car_plan},
-         params={"l": (4700.0, "Länge"), "b": (1850.0, "Breite")},
-         insertion="Fahrzeugmitte, Front nach +x", keywords=("auto", "pkw", "fahrzeug", "parkplatz", "stellplatz")),
+         views={"plan": car_plan, "side": car_side},
+         params={"l": (4700.0, "Länge"), "b": (1850.0, "Breite"), "h": (1480.0, "Höhe (nur Ansicht)")},
+         insertion="Fahrzeugmitte, Front nach +x (Ansicht: am Boden)",
+         keywords=("auto", "pkw", "fahrzeug", "parkplatz", "stellplatz", "garage")),
+    dict(id="fahrrad", name="Fahrrad", category="vehicles",
+         views={"plan": bicycle_plan},
+         params={"l": (1750.0, "Länge"), "b": (600.0, "Lenkerbreite")},
+         insertion="Mitte, Front nach +x", keywords=("fahrrad", "rad", "fahrradstellplatz", "bike")),
 ]

@@ -124,6 +124,35 @@ def desk_plan(b=1600.0, t=800.0):
     return [rect(-b / 2, 0, b / 2, -t)] + _chair_plan_at(0, -t - 150, 180.0)
 
 
+def armchair_plan(b=800.0, t=850.0):
+    """Armchair, back at y = 0, seat towards -y."""
+    return sofa_plan(b, t)
+
+
+def coffee_table_plan(b=1100.0, t=600.0):
+    return [rect(-b / 2, t / 2, b / 2, -t / 2), rect(-b / 2 + 40, t / 2 - 40, b / 2 - 40, -t / 2 + 40, role="detail")]
+
+
+def nightstand_plan(b=450.0, t=400.0):
+    return [rect(-b / 2, 0, b / 2, -t), line(-b / 2, -t + 30, b / 2, -t + 30)]
+
+
+def dresser_plan(b=1200.0, t=500.0):
+    return [rect(-b / 2, 0, b / 2, -t), line(-b / 2, -t + 30, b / 2, -t + 30)]
+
+
+def shelf_plan(b=1000.0, t=350.0):
+    """Open shelf at the wall: outline, sides and a division every ~800 mm."""
+    items = [rect(-b / 2, 0, b / 2, -t)]
+    n = max(1, int(round(b / 800.0)))
+    for i in range(1, n):
+        x = -b / 2 + b * i / n
+        items.append(line(x, 0, x, -t))
+    items.append(line(-b / 2 + 25, -t, -b / 2 + 25, 0))
+    items.append(line(b / 2 - 25, -t, b / 2 - 25, 0))
+    return items
+
+
 ASSETS = [
     dict(id="stuhl", name="Stuhl", category="furniture",
          views={"plan": chair_plan, "front": chair_front, "side": chair_side},
@@ -152,4 +181,24 @@ ASSETS = [
          views={"plan": desk_plan},
          params={"b": (1600.0, "Breite"), "t": (800.0, "Tiefe")},
          insertion="Mitte Wandseite, Arbeitsplatz nach -y", keywords=("schreibtisch", "arbeitsplatz", "büro", "möbel")),
+    dict(id="sessel", name="Sessel", category="furniture",
+         views={"plan": armchair_plan},
+         params={"b": (800.0, "Breite"), "t": (850.0, "Tiefe")},
+         insertion="Mitte Rückseite, Sitz nach -y", keywords=("sessel", "armchair", "möbel", "wohnen")),
+    dict(id="couchtisch", name="Couchtisch", category="furniture",
+         views={"plan": coffee_table_plan},
+         params={"b": (1100.0, "Länge"), "t": (600.0, "Breite")},
+         insertion="Tischmitte", keywords=("couchtisch", "beistelltisch", "möbel", "wohnen")),
+    dict(id="nachttisch", name="Nachttisch", category="furniture",
+         views={"plan": nightstand_plan},
+         params={"b": (450.0, "Breite"), "t": (400.0, "Tiefe")},
+         insertion="Mitte Wandseite, nach -y", keywords=("nachttisch", "nachtkästchen", "schlafen", "möbel")),
+    dict(id="kommode", name="Kommode / Sideboard", category="furniture",
+         views={"plan": dresser_plan},
+         params={"b": (1200.0, "Breite"), "t": (500.0, "Tiefe")},
+         insertion="Mitte Wandseite, nach -y", keywords=("kommode", "sideboard", "anrichte", "möbel")),
+    dict(id="regal", name="Regal", category="furniture",
+         views={"plan": shelf_plan},
+         params={"b": (1000.0, "Breite"), "t": (350.0, "Tiefe")},
+         insertion="Mitte Wandseite, nach -y", keywords=("regal", "bücherregal", "möbel")),
 ]

@@ -164,3 +164,30 @@ def mirror_items(items: list[Item]) -> list[Item]:
             raise ValueError("can't mirror item type %r" % t)
         out.append(n)
     return out
+
+
+def translate(items: list[Item], dx: float, dy: float) -> list[Item]:
+    """Items moved by (dx, dy) (rounded to 1e-6 mm like everything else)."""
+
+    def t(p):
+        return pt(p[0] + dx, p[1] + dy)
+
+    out = []
+    for it in items:
+        n = dict(it)
+        for k in ("p1", "p2", "center", "start"):
+            if k in n:
+                n[k] = t(n[k])
+        if "points" in n:
+            n["points"] = [t(p) for p in n["points"]]
+        if "segments" in n:
+            segs = []
+            for sg in n["segments"]:
+                sg = dict(sg)
+                for k in ("line_to", "arc_to", "center"):
+                    if k in sg:
+                        sg[k] = t(sg[k])
+                segs.append(sg)
+            n["segments"] = segs
+        out.append(n)
+    return out

@@ -521,3 +521,19 @@ def test_vw_revert_symdef_only_when_unused():
     v.names["F"].kids.clear()
     r = ns["revert2d"]([{"op": "symfolder", "name": "F"}])
     assert "F" not in v.names
+
+
+@pytest.mark.parametrize("asset_id,view,params", [
+    ("baum", "plan", {"style": 1}), ("baum", "plan", {"style": 2}), ("baum", "front", {"style": 1}),
+    ("baum", "front", {"style": 2, "h": 6000, "d": 3000}), ("waschtisch", "plan", {"b": 1200, "bowls": 2}),
+    ("waschtisch", "front", {"b": 1200, "bowls": 2, "mirror": 1}), ("kuechenzeile", "plan", {"sink_w": 0}),
+    ("kuechenzeile", "front", {"l": 4200, "sink": 900}), ("tisch", "plan", {"round_table": 1, "chairs": 5}),
+    ("tisch", "plan", {"chairs": 3}), ("dusche", "plan", {"gully": 0, "b": 1200, "t": 1200}),
+    ("pkw", "side", {"l": 4200, "h": 1600}), ("regal", "plan", {"b": 2400}),
+])
+def test_parameter_variants_normalize(asset_id, view, params):
+    a = catalog.CATALOG[asset_id]
+    for it in assets._classed(catalog.build(asset_id, view, params), a.category):
+        S.normalize(it, 1.0, {})
+    for it in SH.mirror_items(catalog.build(asset_id, view, params)):
+        S.normalize({k: v for k, v in it.items() if k != "role"}, 1.0, {})
