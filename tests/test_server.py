@@ -60,10 +60,22 @@ def test_ping_warns_on_bridge_version_mismatch(monkeypatch):
     assert "9.9.9" in out["warning"] and "install" in out["warning"]
 
 
-def test_vs_lookup_searches_names_and_docs():
+def test_vs_lookup_uses_the_index_without_vectorworks(bridge, monkeypatch):
+    monkeypatch.setattr(bridge, "trigger", lambda: pytest.fail("index lookup must not call Vectorworks"))
     out = server.vw_vs_lookup("record field")
     assert out[0]["name"] == "GetRField"
+    assert out[0]["signature"] == "vs.GetRField(h: HANDLE, record: STRING, field: STRING)"
+    rect = server.vw_vs_lookup("Rect")[0]
+    assert rect["name"] == "Rect" and rect["argument_check"] and "POINT" in rect["notes"][0]
+    new = server.vw_vs_lookup("GetActivePhase")[0]
+    assert new["since"] == "Vectorworks 2027"
+
+
+def test_vs_lookup_falls_back_to_live_docstrings():
+    out = server.vw_vs_lookup("GetRField", live=True)
+    assert out[0]["name"] == "GetRField" and out[0]["source"] == "live"
     assert "Definition" in out[0]["doc"]
+    assert server.vw_vs_lookup("zzz no such thing") == []
 
 
 def test_packaged_bridge_matches_repo_copy():

@@ -67,6 +67,25 @@ def _pt(p):
     return (float(p[0]), float(p[1]))
 
 
+_JOB_CACHE = {}  # per job: the libraries run in a fresh scope for every job
+
+
+def _arc_radius(h, c, p0, sweep):
+    """Radius of an arc as stored. Vectorworks stores it exactly, but
+    start - center in document units loses the last bits (20.6 - 20.0 =
+    0.6000000000000014). Full circle: half the stored width (exact).
+    Otherwise remove arithmetic noise below a picometre."""
+    if abs(abs(sweep) - 360.0) < 1e-9:
+        return vs.HWidth(h) / 2.0
+    r = math.hypot(p0[0] - c[0], p0[1] - c[1])
+    if not _JOB_CACHE.get("mmpu"):
+        _JOB_CACHE["mmpu"] = units()["mm_per_unit"]
+    mmpu = _JOB_CACHE["mmpu"]
+    r_mm = r * mmpu
+    clean = round(r_mm, 9)
+    return clean / mmpu if abs(r_mm - clean) < 1e-9 else r
+
+
 def _bbox(h):
     (x1, y1), (x2, y2) = vs.GetBBox(h)
     return [min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2)]
@@ -419,7 +438,7 @@ def read_obj(h, geometry=True, parent=None, allow_temp=True, depth=0):
         c, p0, p1 = vs.Get2DPt(h, 1), vs.Get2DPt(h, 2), vs.Get2DPt(h, 3)
         start, sweep = vs.GetArc(h)
         rec["center"], rec["start_point"], rec["end_point"] = list(c), list(p0), list(p1)
-        rec["radius"] = math.hypot(p0[0] - c[0], p0[1] - c[1])
+        rec["radius"] = _arc_radius(h, c, p0, sweep)
         rec["start_angle"], rec["sweep"] = start, sweep
     elif t == 10:
         origin, ang, mirrored = vs.GetTextOrientation(h)

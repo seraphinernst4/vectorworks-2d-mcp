@@ -90,15 +90,68 @@ def vw_exec_python(code: str, modifies_document: bool = True) -> dict:
     return {k: res.get(k) for k in ("ok", "value", "stdout", "error", "traceback")}
 
 
+TYPE_NOTES = {
+    "POINT": "POINT = (x, y) tuple or two numbers",
+    "POINT3D": "POINT3D = (x, y, z) tuple or three numbers",
+    "VECTOR": "VECTOR = (x, y, z) tuple or three numbers",
+    "COLOR": "COLOR = ONE (r, g, b) tuple, 0..65535 (loose numbers are ignored silently)",
+    "PROCEDURE": "callback: a def with named parameters (no lambda *a)",
+}
+
+
+def lookup_index(query: str, limit: int = 25) -> list[dict]:
+    """Search the bundled vs.* signature index (no Vectorworks needed)."""
+    idx = app.vs_index()
+    q = query.strip()
+    words = q.lower().split()
+    if not words:
+        return []
+    hits = []
+    for name, e in idx.items():
+        lname = name.lower()
+        hay = " ".join((lname, e.get("a", "").lower(), e.get("c", "").lower(), e.get("d", "").lower()))
+        if not all(w in hay for w in words):
+            continue
+        params = e.get("a", "").lower()
+        score = (0 if lname == q.lower() else 1, -sum(w in lname for w in words),
+                 -sum(w in params for w in words), len(name))
+        hits.append((score, name, e))
+    hits.sort(key=lambda h: (h[0], h[1]))
+    out = []
+    for _, name, e in hits[:limit]:
+        params = [p.split(":", 1) for p in e.get("a", "").split(", ") if p]
+        sig = ", ".join(f"{n}: {t}" if t and t != "?" else n for n, t in
+                        ((p[0], p[1] if len(p) > 1 else "") for p in params))
+        types = {p[1] for p in params if len(p) > 1}
+        row = {"name": name, "signature": f"vs.{name}({sig})", "returns": e.get("r") or None,
+               "category": e.get("c") or None, "doc": e.get("d") or None,
+               "argument_check": e.get("t") is not None}
+        if e.get("v") and e["v"] >= "2025":  # only where it matters for 2026/2027
+            row["since"] = f"Vectorworks {e['v']}"
+        notes = [TYPE_NOTES[t] for t in sorted(types) if t in TYPE_NOTES]
+        if notes:
+            row["notes"] = notes
+        out.append({k: v for k, v in row.items() if v is not None})
+    return out
+
+
 @mcp.tool(annotations=READ)
-def vw_vs_lookup(query: str, limit: int = 25) -> list[dict]:
-    """Search the live vs.* API (names and built-in docs) of the running
-    Vectorworks, e.g. "record field", "symbol insert", "LDevice". Returns
-    function names with their signature/description."""
+def vw_vs_lookup(query: str, limit: int = 25, live: bool = False) -> list[dict]:
+    """Look up vs.* functions: exact signature with parameter types, return
+    type, category, description and first Vectorworks version, from the
+    bundled index of all ~3,000 functions (instant, no Vectorworks needed).
+    Search by name or words, e.g. "Rect", "record field", "symbol insert".
+    POINT parameters take a tuple (x, y) or two numbers; COLOR takes one
+    (r, g, b) tuple. live=True searches the running Vectorworks' own
+    docstrings instead (also finds partner functions like CE_*/CW_*); this
+    happens automatically when the index has no match."""
+    hits = [] if live else lookup_index(query, limit)
+    if hits:
+        return hits
     res = _run_raw(LOOKUP_CODE % __import__("json").dumps({"query": query, "limit": limit}))
     if not res["ok"]:
         raise ToolError(res["error"])
-    return res["value"]
+    return [dict(r, source="live") for r in res["value"]]
 
 
 @mcp.tool(annotations=READ)

@@ -5,7 +5,8 @@ Based on tools/build_vs_index.py from vwx-mcp (github.com/vicquick/vwx-mcp,
 MIT, (c) 2026 vicquick), extended with parameter *types*:
 
     python tools/build_vs_index.py <vs.py> [--vwx <vwx vs_index.json>]
-        [--versions "<Functions By Version.md>"] [--out <file>]
+        [--versions "<Functions By Version.md>"] [--reference <Functions dir>]
+        [--out <file>]
 
 Sources:
 - <vs.py>: the Python stub from github.com/Vectorworks/developer-scripting
@@ -16,6 +17,8 @@ Sources:
   one-line description, used where the stub has none.
 - --versions: "Function Reference/Functions By Version.md" from the same
   repository, to note functions that only exist from a given version on.
+- --reference: "Function Reference/Functions" from the same repository, for
+  functions the stub doesn't have yet (e.g. new in Vectorworks 2027).
 
 Output, per function name:
     a   parameters "name:TYPE, ..." (Python order)
@@ -111,7 +114,33 @@ def _versions(path: Path | None) -> dict[str, str]:
     return out
 
 
-def build(stub: Path, vwx: Path | None = None, versions: Path | None = None) -> dict:
+def _from_reference(md: Path) -> dict | None:
+    """Entry from a Function Reference page (pascal + python blocks, parameter table)."""
+    text = md.read_text(encoding="utf-8", errors="ignore")
+    py = re.search(r"```python\s*def vs\.(\w+)\((.*?)\):", text, re.S)
+    pas = re.search(r"```pascal\s*(.*?)```", text, re.S)
+    if not py or py.group(1) != md.stem:
+        return None
+    names = [n.strip() for n in py.group(2).split(",") if n.strip()]
+    table = dict((m.group(1).strip(), re.sub(r"\(.*?\)", "", m.group(2)).strip().upper())
+                 for m in re.finditer(r"^\|([^|]+)\|([^|]+)\|", text, re.M)
+                 if m.group(1).strip() not in ("Name", "---"))
+    types = [table.get(n, "") for n in names]
+    sig = re.sub(r"\s+", " ", pas.group(1)).strip() if pas else ""
+    codes = [CODES.get(t) for t in types]
+    inputs = _vs_inputs(sig) if sig else None
+    checkable = all(codes) and inputs is not None and sum(WIDTH.get(c, 1) for c in codes) == inputs
+    ret = re.search(r"return\s+(\w+)", text[py.end():py.end() + 200])
+    desc = re.search(r"## Description\s*\n(.+)", text)
+    cat = re.search(r"## Category\s*\n\*\s*\[([^\]]+)\]", text)
+    return {"a": ", ".join(f"{n}:{t or '?'}" for n, t in zip(names, types)),
+            "t": "".join(codes) if checkable else None,
+            "r": "" if not ret or ret.group(1) == "None" else ret.group(1),
+            "c": cat.group(1) if cat else "", "d": (desc.group(1).strip() if desc else "")[:200]}
+
+
+def build(stub: Path, vwx: Path | None = None, versions: Path | None = None,
+          reference: Path | None = None) -> dict:
     src = stub.read_text(encoding="utf-8", errors="ignore")
     lines = src.splitlines()
     import warnings
@@ -164,6 +193,19 @@ def build(stub: Path, vwx: Path | None = None, versions: Path | None = None) -> 
         funcs[node.name] = entry
         stats["functions"] += 1
         stats["checked"] += bool(checkable)
+    # functions only documented in the function reference (e.g. new in 2027)
+    if reference and reference.is_dir():
+        for md in sorted(reference.glob("*.md")):
+            if md.stem in funcs:
+                continue
+            entry = _from_reference(md)
+            if entry is not None:
+                if md.stem in since:
+                    entry["v"] = since[md.stem]
+                funcs[md.stem] = entry
+                stats["functions"] += 1
+                stats["checked"] += entry["t"] is not None
+                stats["from_reference"] = stats.get("from_reference", 0) + 1
     # functions only the vwx index knows (kept for lookup, never checked)
     for name, x in extra.items():
         if name not in funcs:
@@ -185,10 +227,11 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("stub", type=Path)
     ap.add_argument("--vwx", type=Path)
     ap.add_argument("--versions", type=Path)
+    ap.add_argument("--reference", type=Path, help='"Function Reference/Functions" folder')
     ap.add_argument("--out", type=Path,
                     default=Path(__file__).resolve().parents[1] / "src/vwmcp/data/vs_index.json")
     args = ap.parse_args(argv)
-    idx = build(args.stub, args.vwx, args.versions)
+    idx = build(args.stub, args.vwx, args.versions, args.reference)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(idx, ensure_ascii=False, separators=(",", ":"), sort_keys=True),
                         encoding="utf-8")

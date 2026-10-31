@@ -201,8 +201,16 @@ def regression_tests(report: dict) -> None:
     revert, class change + revert, delete + revert, classes and layers."""
     from vwmcp.tools import draw2d, generic
 
+    from vwmcp import app
+
     r: dict = {}
     t0 = time.monotonic()
+    # start from an empty test layer (earlier runs leave their objects)
+    app.get_bridge().run(
+        "_l = vs.GetLayerByName(%r)\n_k = []\n"
+        "def _c(h):\n    _k.append(h)\n"
+        "vs.ForEachObject(_c, \"(L='%s')\")\n"
+        "for _h in _k:\n    vs.DelObject(_h)\nlen(_k)" % (REG_LAYER, REG_LAYER))
     draw2d.vw2d_setup(classes=[{"name": "KS-Test-Wand", "attributes": {"pen": "#000000", "fill": "#808080",
                                                                        "line_weight": 0.35}},
                                {"name": "KS-Test-Moebel", "attributes": {"pen": "#333333", "fill": "none",
@@ -232,7 +240,9 @@ def regression_tests(report: dict) -> None:
     circle2 = (rv.get("mapping") or {}).get(circle)
     circ = _first(draw2d.vw2d_read(uuids=[circle2])) if circle2 else {}
     r["delete_revert"] = {"restored": rv.get("restored"), "center": circ.get("center"), "radius": circ.get("radius"),
-                          "pass": bool(circle2) and abs((circ.get("radius") or 0) - 0.6) < 1e-9}
+                          "pass": bool(circle2) and abs((circ.get("radius") or 0) - 0.6) < 1e-9,
+                          "bit_exact": circ.get("radius") == 0.6 and circ.get("center") == [10.0, 1.5]}
+    r["deviation_zero"] = r["max_deviation_mm"] == 0.0
     st = draw2d.vw2d_structure()
     names = json.dumps(st)
     r["structure"] = {"has_layer": REG_LAYER in names, "has_classes": "KS-Test-Wand" in names and "KS-Test-Moebel" in names}
