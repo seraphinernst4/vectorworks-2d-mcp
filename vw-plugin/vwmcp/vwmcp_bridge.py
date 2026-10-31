@@ -38,7 +38,7 @@ import time
 import traceback
 import types
 
-BRIDGE_VERSION = "0.2.0"
+BRIDGE_VERSION = "0.2.1"
 DEFAULT_ROOT = os.path.join(os.path.expanduser("~"), ".vwmcp")
 INDEX_NAME = "vs_index.json"
 
@@ -155,8 +155,18 @@ def check_args(codes, args):
     return None
 
 
+def _unwrap(a):
+    """A proxied vs function passed as an argument (vs.ForEachObject(vs.SetSelect,
+    ...)) goes to Vectorworks as the original built-in."""
+    return getattr(a, "__wrapped__", a) if getattr(a, "_vwmcp_checked", False) else a
+
+
 def _make_checked(name, fn, codes, params):
     def checked(*args, **kwargs):
+        if any(getattr(a, "_vwmcp_checked", False) for a in args):
+            args = tuple(_unwrap(a) for a in args)
+        if kwargs and any(getattr(v, "_vwmcp_checked", False) for v in kwargs.values()):
+            kwargs = dict((k, _unwrap(v)) for k, v in kwargs.items())
         if not kwargs:
             problem = check_args(codes, args)
             if problem is not None:
@@ -170,6 +180,7 @@ def _make_checked(name, fn, codes, params):
     checked.__qualname__ = name
     checked.__doc__ = getattr(fn, "__doc__", None)
     checked.__wrapped__ = fn
+    checked._vwmcp_checked = True
     return checked
 
 
@@ -196,8 +207,10 @@ class CheckedVS(types.ModuleType):
 
 def load_check_table(vs_module, path=None):
     """{name: (codes, params)} for the functions of this Vectorworks that can be
-    checked. Entries whose parameter count disagrees with Vectorworks' own
-    docstring are dropped (the live API wins). Cached per file and module."""
+    checked. Only entries whose parameter count Vectorworks' own docstring
+    confirms are kept (the live API wins; a version whose docstrings differ
+    is simply not checked rather than checked against old signatures).
+    Cached per file and module."""
     path = path or (os.path.join(_HERE, INDEX_NAME) if _HERE else None)
     if not path or not os.path.isfile(path):
         return {}
@@ -215,7 +228,7 @@ def load_check_table(vs_module, path=None):
         if fn is None or not callable(fn):
             continue
         live = _live_param_count(fn)
-        if live is not None and live != len(codes):
+        if live is None or live != len(codes):
             continue
         table[name] = (codes, entry.get("a", ""))
     _CACHE["index"], _CACHE["index_key"] = table, key

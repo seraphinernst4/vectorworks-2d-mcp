@@ -74,7 +74,9 @@ def _arc_radius(h, c, p0, sweep):
     """Radius of an arc as stored. Vectorworks stores it exactly, but
     start - center in document units loses the last bits (20.6 - 20.0 =
     0.6000000000000014). Full circle: half the stored width (exact).
-    Otherwise remove arithmetic noise below a picometre."""
+    Otherwise snap to whole picometres only when the difference is within
+    the rounding noise of the subtraction (a few ulps of the coordinates), so
+    a real radius like 1000/3 mm is kept as it is."""
     if abs(abs(sweep) - 360.0) < 1e-9:
         return vs.HWidth(h) / 2.0
     r = math.hypot(p0[0] - c[0], p0[1] - c[1])
@@ -83,7 +85,8 @@ def _arc_radius(h, c, p0, sweep):
     mmpu = _JOB_CACHE["mmpu"]
     r_mm = r * mmpu
     clean = round(r_mm, 9)
-    return clean / mmpu if abs(r_mm - clean) < 1e-9 else r
+    noise = 16.0 * max(math.ulp(abs(p0[0]) + abs(c[0])), math.ulp(abs(p0[1]) + abs(c[1])), math.ulp(r)) * mmpu
+    return clean / mmpu if abs(r_mm - clean) <= noise else r
 
 
 def _bbox(h):

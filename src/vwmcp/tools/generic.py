@@ -6,7 +6,7 @@ from typing import Any
 
 from mcp.server.mcpserver.exceptions import ToolError
 
-from vwmcp import app
+from vwmcp import app, calls
 from vwmcp.app import READ, WRITE, mcp, vw
 from vwmcp.client import BridgeError
 from vwmcp.journal import JournalError
@@ -46,6 +46,12 @@ def vw_ping() -> dict:
     """Check the Vectorworks bridge: returns Vectorworks version, active document
     and bridge version. Warns if the installed bridge doesn't match this server."""
     res = _run_raw(PING_CODE)
+    if res.get("ok") and res.get("bridge_version") != app.EXPECTED_BRIDGE_VERSION:
+        # an old bridge still in memory: reload it now, then ask again
+        bridge = app.get_bridge()
+        calls.maybe_reload(bridge)
+        if bridge.bridge_version == app.EXPECTED_BRIDGE_VERSION:
+            res = _run_raw(PING_CODE)
     if not res["ok"]:
         raise ToolError(res["error"])
     out = {
