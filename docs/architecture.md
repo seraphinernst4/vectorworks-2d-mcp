@@ -12,9 +12,12 @@
   it. Vectorworks keeps Python state between runs, so the bridge caches
   the index and compiled helper libraries, and reloads itself when its
   file changes. Stdlib only, Python 3.9 and 3.14.
-- **"MCP Run Job" menu command**: two lines of Python that call
-  `run_pending()`. Created once by the user in the Plug-in Manager (`.vsm`
-  files can't be authored as text).
+- **Trigger** (since 0.5 `direct` by default): `osascript` → `run VectorScript`
+  → `PythonExecute` imports the bridge (only if importable, with fresh import
+  caches) and calls `run_pending()` - nothing to set up in Vectorworks. The
+  older `menu` mode runs the "MCP Run Job" menu command (two lines of Python,
+  created once by the user in the Plug-in Manager; `.vsm` files can't be
+  authored as text).
 - **`src/vwmcp/`**: the MCP server.
   - `client.py` writes jobs, fires the trigger, waits for results, withdraws
     unclaimed jobs on timeout (so they never run later by surprise), and

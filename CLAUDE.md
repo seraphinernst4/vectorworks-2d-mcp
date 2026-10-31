@@ -29,8 +29,9 @@ touches Vectorworks.
 - `vw-plugin/vwmcp/vwmcp_bridge.py`: in-app executor (atomic claim, checked
   `vs` proxy, lib cache, self-reload). Installed with `vs_index.json` to
   `~/Library/Application Support/Vectorworks/<year>/Plug-ins/vwmcp/` for every
-  year >= 2026. Run by the user-created **MCP Run Job** menu command (`from
-  vwmcp import vwmcp_bridge; vwmcp_bridge.run_pending()`). Stdlib only,
+  year >= 2026. Started directly by the trigger (VectorScript `PythonExecute`,
+  default since 0.5) or by the user-created **MCP Run Job** menu command
+  (mode `menu`). Stdlib only,
   Python 3.9 + 3.14. Bump `BRIDGE_VERSION` and `app.EXPECTED_BRIDGE_VERSION`
   together whenever the job/result format changes.
 - `src/vwmcp/data/vs_index.json`: signature index (build with
@@ -40,8 +41,9 @@ touches Vectorworks.
   `lib`): claim timeout 15 s → `.cancelled`, result timeout 600 s,
   re-trigger, housekeeping, timings, log.
 - `src/vwmcp/trigger.py`: macOS trigger: `osascript` → `run VectorScript` →
-  `DoMenuTextByName('MCP Run Job', 0)` (mode `menu`) or `PythonExecute`
-  (mode `direct`, `auto`). Finds the running Vectorworks with `ps`. Guards:
+  `PythonExecute` (mode `direct`, default since 0.5; whole live suite passed)
+  or `DoMenuTextByName('MCP Run Job', 0)` (mode `menu`; `auto` = menu, then
+  direct). Finds the running Vectorworks with `ps`. Guards:
   not running, launched <20 s, at most 3 pending Apple Events.
 - `src/vwmcp/vwlib.py`: helper library executed **inside** Vectorworks, sent with every
   typed tool call. **Must stay Python 3.9** (VW 2026 embeds 3.9.2): no `match`,

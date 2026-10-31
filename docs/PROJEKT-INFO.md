@@ -28,18 +28,14 @@ offen ist. Stand: **31.10.2026, Version 0.4.0 (Beta)**.
    Konfiguration) und öffnet die Erweiterung in Claude → **Installieren**.
    Ohne Terminal: `.mcpb` laden und doppelklicken (erster Start dann 1–2 min
    länger).
-2. **Vectorworks neu starten** – die Erweiterung legt die Brücke bei jedem
-   Start nach `~/Library/Application Support/Vectorworks/2026/Plug-ins/vwmcp/`.
-3. **Menübefehl „MCP Run Job“** (einmalig): Extras ▸ Plug-ins ▸
-   Plug-in-Manager ▸ Eigene Plug-ins ▸ Neu… ▸ Typ **Befehl**, Name genau
-   `MCP Run Job` ▸ Skript bearbeiten ▸ Python:
-   ```python
-   from vwmcp import vwmcp_bridge
-   vwmcp_bridge.run_pending()
-   ```
-   Dann Extras ▸ Arbeitsumgebungen ▸ Aktuelle Arbeitsumgebung bearbeiten ▸
-   Menüs: „MCP Run Job“ (unter *Sonstiges*) ins Menü **Extras** ziehen.
-4. **Test:** Zeichnung offen, neuer Chat: „Ping Vectorworks.“ macOS fragt,
+2. **In Vectorworks nichts** (ab 0.5): die Erweiterung legt die Brücke bei
+   jedem Start nach `~/Library/Application Support/Vectorworks/<Jahr>/Plug-ins/vwmcp/`
+   und startet sie direkt (AppleScript → VectorScript `PythonExecute`). Bis
+   0.4.x bzw. mit Einstellung „Auslöser“ = `menu`: Menübefehl „MCP Run Job“
+   (Extras ▸ Plug-ins ▸ Plug-in-Manager ▸ Eigene Plug-ins ▸ Neu… ▸ Befehl,
+   Python: `from vwmcp import vwmcp_bridge` / `vwmcp_bridge.run_pending()`,
+   dann in ein Menü der Arbeitsumgebung ziehen).
+3. **Test:** Zeichnung offen, neuer Chat: „Ping Vectorworks.“ macOS fragt,
    ob Claude Vectorworks steuern darf → **OK**.
 
 **Update:** Installer erneut ausführen (oder neue `.mcpb` doppelklicken) → in
@@ -59,8 +55,9 @@ Claude Desktop
             └─ vwmcp (src/vwmcp)  MCP-Server, 28 Werkzeuge
                  ├─ geom/          rechnet auf dem Server: exakte Bögen, Prüfungen,
                  │                 Korrekturen, Prüfbild (shapely, matplotlib)
-                 └─ Job-Ordner ~/.vwmcp/jobs → AppleScript ruft Menübefehl
-                    „MCP Run Job“ → vwmcp_bridge.py (in Vectorworks, Python 3.9)
+                 └─ Job-Ordner ~/.vwmcp/jobs → AppleScript → VectorScript
+                    PythonExecute (oder Menübefehl „MCP Run Job“)
+                    → vwmcp_bridge.py (in Vectorworks, Python 3.9)
                     führt vwlib.py + vwlib2d.py aus → ~/.vwmcp/results
 ```
 
