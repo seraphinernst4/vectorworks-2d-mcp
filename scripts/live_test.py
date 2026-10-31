@@ -394,7 +394,8 @@ def asset_tests(report: dict) -> None:
         if not inf:
             ok = False
             continue
-        base = {"WC": "Ausstattung-Sanitär", "Bau": "Staffage-Vegetation", "Ess": "Ausstattung-Möbel"}[n[:3]]
+        base = {"WC wandhängend - Grundriss": "Ausstattung-Sanitär", "Baum - Grundriss": "Staffage-Vegetation",
+                "Esstisch mit Stühlen - Grundriss": "Ausstattung-Möbel"}[n]
         ok = ok and inf["folder"] == ASSET_FOLDER and all(
             c["class"] in (base, base + "-Detail") and all(c["by_class"].values()) for c in inf["components"])
     r["definitions"] = {"info": info, "pass": ok}
