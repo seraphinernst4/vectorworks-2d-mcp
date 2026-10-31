@@ -56,7 +56,7 @@ def test_unclaimed_job_is_cancelled_and_never_runs_later(root, fake_vs):
     b = make_bridge(root, lambda: None, claim_timeout=0.1)
     with pytest.raises(BridgeTimeout) as e:
         b.run("vs.calls.append('ran')")
-    assert "MCP Run Job" in str(e.value) and "will not run later" in str(e.value)
+    assert "no dialog is showing" in str(e.value) and "will not run later" in str(e.value)
     assert list((root / "jobs").glob("*.json")) == []
     assert len(list((root / "jobs").glob("*.cancelled"))) == 1
     # The dialog closes, the queued trigger finally runs the menu command:

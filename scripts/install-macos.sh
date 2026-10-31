@@ -112,18 +112,7 @@ fi
 
 cat <<'MSG'
 
-Fast fertig. Einmalig in Vectorworks (ca. 2 Minuten) - nur nötig, wenn du
-den Menübefehl "MCP Run Job" noch nicht hast:
-
-  1. Extras > Plug-ins > Plug-in-Manager... > Register "Eigene Plug-ins" > Neu...
-     Typ: Befehl     Name: MCP Run Job     (genau so schreiben)
-  2. Auswählen > Skript bearbeiten... > Sprache: Python, diese zwei Zeilen einfügen:
-
-         from vwmcp import vwmcp_bridge
-         vwmcp_bridge.run_pending()
-
-  3. Extras > Arbeitsumgebungen > Aktuelle Arbeitsumgebung bearbeiten... > Register "Menüs":
-     "MCP Run Job" (unter "Sonstiges") in ein Menü ziehen, z. B. "Extras".
+Fertig. In Vectorworks ist nichts einzurichten (kein Menübefehl nötig).
 
 Die Brücke in Vectorworks legt die Erweiterung beim Start selbst an. Beim
 ersten Zugriff fragt macOS, ob Claude Vectorworks steuern darf: "OK" klicken.

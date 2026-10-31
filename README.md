@@ -40,7 +40,7 @@ So fragst du Claude zum Beispiel:
 > - „Setz in das Bad ein wandhängendes WC (barrierefrei, 46 cm), einen Waschtisch 80 cm und eine bodengleiche Dusche 120 × 120.“
 > - „Zeichne vor die Fassade drei Bäume und zwei Personen in der Ansicht.“
 
-## Installation (macOS, ca. 5 Minuten)
+## Installation (macOS, ca. 2 Minuten)
 
 Du brauchst **Vectorworks 2026 oder 2027** und die **Claude-Desktop-App**.
 
@@ -75,12 +75,20 @@ Pakete vor (dann ist auch der erste Start schnell) und öffnet die
 Erweiterung in Claude Desktop – dort **Installieren** klicken.
 </details>
 
-### 2. Menübefehl „MCP Run Job“ anlegen (einmalig, 2 Minuten)
+### 2. In Vectorworks: nichts einzurichten
 
-Claude erreicht Vectorworks über einen einzigen Menübefehl. Den kann man nur
-im Plug-in-Manager anlegen. **Vorher Vectorworks einmal neu starten**, damit
-es die Brücke findet, die die Erweiterung gerade in den Plug-in-Ordner gelegt
-hat.
+Seit Version 0.5 startet Keystone seine Brücke in Vectorworks direkt (über
+AppleScript und VectorScript `PythonExecute`, so wie Vectorworks es
+dokumentiert). Ein Menübefehl ist **nicht mehr nötig**. Hat Vectorworks
+schon offen gehabt, als du die Erweiterung zum ersten Mal installiert hast,
+findet es die Brücke trotzdem.
+
+<details>
+<summary>Nur falls gewünscht: der alte Weg über den Menübefehl „MCP Run Job“</summary>
+
+In Claude ▸ Einstellungen ▸ Erweiterungen ▸ Keystone for Vectorworks ▸
+Konfigurieren ▸ **Auslöser** `menu` eintragen und einmalig den Menübefehl
+anlegen:
 
 1. **Extras ▸ Plug-ins ▸ Plug-in-Manager…** ▸ Register **Eigene Plug-ins** ▸ **Neu…**
    (englisch: *Tools ▸ Plug-ins ▸ Plug-in Manager… ▸ Custom Plug-ins ▸ New…*)
@@ -96,9 +104,7 @@ hat.
 4. **Extras ▸ Arbeitsumgebungen ▸ Aktuelle Arbeitsumgebung bearbeiten…** ▸
    Register **Menüs**: **MCP Run Job** (links unter *Sonstiges*) in ein Menü
    rechts ziehen, z. B. **Extras**. **OK**.
-
-Test: **Extras ▸ MCP Run Job** wählen – es passiert sichtbar nichts und es
-kommt keine Fehlermeldung. Genau so soll es sein.
+</details>
 
 ### 3. Ausprobieren
 
@@ -110,9 +116,8 @@ ob Claude Vectorworks steuern darf – **OK** klicken.
 nichts einstellen – Keystone spricht mit dem Vectorworks, das gerade läuft.
 Nur wenn 2026 und 2027 gleichzeitig offen sind, entscheidet die Einstellung
 Claude ▸ Einstellungen ▸ Erweiterungen ▸ Keystone for Vectorworks ▸
-Konfigurieren ▸ Vectorworks-Version (z. B. `2027`). Den Menübefehl „MCP Run
-Job“ übernimmt Vectorworks 2027, wenn du beim ersten Start die Einstellungen
-und Plug-ins aus 2026 migrierst; sonst einmal wie oben anlegen.
+Konfigurieren ▸ Vectorworks-Version (z. B. `2027`). Die Brücke legt die
+Erweiterung auch in den Plug-in-Ordner von 2027.
 
 ## Optional: Skill für Claude
 
@@ -181,7 +186,7 @@ prüfen, ob das erlaubt ist. Die Brücke läuft komplett auf deinem Mac
 
 | Problem | Lösung |
 |---|---|
-| „did not take the request within 15s“ | Zeichnung öffnen, Dialoge schließen, prüfen, ob **MCP Run Job** in einem Menü liegt (Schritt 2.4). Einmal von Hand ausführen – es darf nichts passieren. Der abgebrochene Auftrag läuft nicht nach. |
+| „did not take the request within 15s“ | Zeichnung öffnen, Dialoge schließen, nochmal fragen. Der abgebrochene Auftrag läuft nicht nach. (Nur mit Auslöser `menu`: prüfen, ob **MCP Run Job** in einem Menü liegt.) |
 | „VSArgumentError: vs.… not called“ | Kein Problem: ein falscher Aufruf wurde abgefangen, bevor er Vectorworks erreicht hat. Claude korrigiert ihn. |
 | „is not running“ / „still starting“ | Vectorworks öffnen und ein paar Sekunden warten. |
 | Fenster „Skriptfehler“ in Vectorworks | Selten geworden (falsche Argumente fängt Keystone ab). OK klicken und Claude bitten, es anders zu versuchen. |

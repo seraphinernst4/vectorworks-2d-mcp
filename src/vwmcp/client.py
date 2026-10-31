@@ -254,10 +254,12 @@ class Bridge:
                 "Close the dialog in Vectorworks and try again. The request was cancelled "
                 "and will not run later."
             )
+        menu = getattr(self.trigger, "mode", "direct") == "menu"
         return (
             f"Vectorworks did not take the request within {self.claim_timeout:g}s. Check that "
-            "a document is open, no dialog is showing and the 'MCP Run Job' menu command is "
-            "in your workspace. The request was cancelled and will not run later."
+            "a document is open and no dialog is showing"
+            + (" and that the 'MCP Run Job' menu command is in your workspace" if menu else "")
+            + ". The request was cancelled and will not run later."
         )
 
     def _cancel(self, job_path: Path) -> bool:

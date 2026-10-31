@@ -41,6 +41,7 @@ def test_refuses_while_vectorworks_is_still_starting(root):
 
 def test_sends_menu_command_via_run_vectorscript(root):
     t, procs = make(root, running=[("Vectorworks 2026", 600.0)])
+    t.mode, t.direct = "menu", False
     t()
     ((args, _),) = procs
     assert args[0] == "osascript"
@@ -110,9 +111,29 @@ def test_direct_mode_runs_the_bridge_without_menu_command(root):
     t.mode, t.direct = "direct", True
     t()
     script = procs[0][0][2]
-    assert "PythonExecute('from vwmcp import vwmcp_bridge')" in script
-    assert "PythonExecute('vwmcp_bridge.run_pending()')" in script
+    assert "importlib.invalidate_caches()" in script
+    assert "find_spec(''vwmcp'') is not None" in script
+    assert "__import__(''vwmcp.vwmcp_bridge'', fromlist=[''run_pending'']).run_pending()" in script
     assert "DoMenuTextByName" not in script and '"' not in script.split("run VectorScript ")[1][1:-1]
+    assert "\\" not in script  # no backslashes for AppleScript to interpret
+
+
+def test_direct_vectorscript_becomes_valid_python():
+    """What PythonExecute receives ('' -> ') must be valid one-line Python."""
+    import re
+
+    from vwmcp.trigger import DIRECT_VSS
+
+    for arg in re.findall(r"PythonExecute\('((?:[^']|'')*)'\)", DIRECT_VSS):
+        compile(arg.replace("''", "'"), "<PythonExecute>", "exec")
+    assert DIRECT_VSS.count("PythonExecute(") == 3
+
+
+def test_direct_is_the_default(root, monkeypatch):
+    import vwmcp.trigger as T
+
+    assert T.MacTrigger(root, apps=lambda: [], mode=None).mode == T.TRIGGER_MODE
+    assert T.MacTrigger(root, apps=lambda: [], mode="bogus").mode == "direct"
 
 
 def test_auto_mode_switches_to_direct_once(root):

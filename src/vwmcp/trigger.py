@@ -28,15 +28,24 @@ from vwmcp.client import TriggerError
 MENU_COMMAND = "MCP Run Job"
 MIN_UPTIME = float(os.environ.get("VWMCP_MIN_UPTIME", "20"))
 MAX_PENDING = 3
-# menu:   run the "MCP Run Job" menu command (needs it in the workspace)
 # direct: run the bridge through VectorScript's PythonExecute (no menu
-#         command needed; the pattern Vectorworks documents for AppleScript)
+#         command needed; the pattern Vectorworks documents for AppleScript).
+#         Default since 0.5: the whole live test suite passed this way on
+#         Vectorworks 2026 U7 (protocol, writes, symbols, reverts).
+# menu:   run the "MCP Run Job" menu command (needs it in the workspace)
 # auto:   menu command; if Vectorworks answered but didn't take the job (no
 #         such command), switch to direct for the rest of the session
-TRIGGER_MODE = os.environ.get("VWMCP_TRIGGER", "menu")
+TRIGGER_MODE = (os.environ.get("VWMCP_TRIGGER") or "direct").strip().lower()
 MENU_VSS = f"PROCEDURE T; BEGIN DoMenuTextByName('{MENU_COMMAND}', 0); END; RUN(T);"
-DIRECT_VSS = ("PROCEDURE T; BEGIN PythonBeginContext; PythonExecute('from vwmcp import vwmcp_bridge'); "
-              "PythonExecute('vwmcp_bridge.run_pending()'); PythonEndContext; END; RUN(T);")
+# Fresh import caches (the bridge may have been installed while Vectorworks
+# ran) and only if the bridge is there - a failed import must not end in a
+# Vectorworks error dialog. '' is a quote inside a VectorScript string.
+DIRECT_VSS = ("PROCEDURE T; BEGIN PythonBeginContext; "
+              "PythonExecute('import importlib, importlib.util'); "
+              "PythonExecute('importlib.invalidate_caches()'); "
+              "PythonExecute('if importlib.util.find_spec(''vwmcp'') is not None: "
+              "__import__(''vwmcp.vwmcp_bridge'', fromlist=[''run_pending'']).run_pending()'); "
+              "PythonEndContext; END; RUN(T);")
 _APP_RE = re.compile(r"/(Vectorworks 20\d\d)\.app/Contents/MacOS/Vectorworks(?:$|\s+-)")
 
 
@@ -94,7 +103,7 @@ class MacTrigger:
         self.root = Path(root)
         self.mode = mode or TRIGGER_MODE
         if self.mode not in ("menu", "direct", "auto"):
-            self.mode = "menu"
+            self.mode = "direct"
         self.direct = self.mode == "direct"
         self.app = app if app is not None else configured_app()  # None: whichever runs
         self.min_uptime = min_uptime

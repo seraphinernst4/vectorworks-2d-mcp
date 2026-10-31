@@ -73,7 +73,8 @@ def install_plugin(target: Path) -> str:
     _write(target, _files())
     return (
         f"Installed vwmcp bridge {app.EXPECTED_BRIDGE_VERSION} to {target}\n\n"
-        "If you haven't yet, create the 'MCP Run Job' menu command once in Vectorworks "
+        "Nothing else to set up: Keystone starts the bridge directly. Only with "
+        "VWMCP_TRIGGER=menu you need the menu command 'MCP Run Job' "
         "(Tools > Plug-ins > Plug-in Manager > New > Command, Language: Python) with:\n\n"
         + MENU_SCRIPT
     )

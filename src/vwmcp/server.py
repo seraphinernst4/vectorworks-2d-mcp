@@ -29,7 +29,8 @@ def main() -> None:
             print(install.install_plugin(Path(args.target)))
         else:
             print(install.ensure_plugin(args.vw_version) or "Bridge is up to date.")
-            print("\nIf you haven't yet, create the 'MCP Run Job' menu command once (see README).")
+            print("\nNothing else to set up in Vectorworks (the menu command 'MCP Run Job' is only "
+                  "needed with VWMCP_TRIGGER=menu).")
         return
     if os.environ.get("VWMCP_AUTO_BRIDGE"):
         # Claude Desktop extension: keep the bridge in Vectorworks up to date.

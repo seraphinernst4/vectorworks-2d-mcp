@@ -20,6 +20,9 @@ if re.fullmatch(r"20\d\d", version):  # a fixed version from the settings
 else:  # empty or an unsubstituted ${...}: use whichever Vectorworks runs
     os.environ.pop("VWMCP_VW_VERSION", None)
     os.environ.pop("VWMCP_APP", None)
+trigger = (os.environ.get("VWMCP_TRIGGER") or "").strip().lower()
+if trigger not in ("direct", "menu", "auto"):  # empty or an unsubstituted ${...}
+    os.environ.pop("VWMCP_TRIGGER", None)   # default: direct
 os.environ.setdefault("VWMCP_AUTO_BRIDGE", "1")
 
 from vwmcp.server import main  # noqa: E402

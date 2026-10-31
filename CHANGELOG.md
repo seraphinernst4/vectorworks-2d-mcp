@@ -2,7 +2,21 @@
 
 ## 0.5.0 – Vorschau (Zweig v0.5)
 
-Assets und Sortieren.
+Assets, Sortieren, große Zeichnungen – und keine Einrichtung mehr in
+Vectorworks.
+
+### Kein Menübefehl mehr nötig
+- Keystone startet die Brücke direkt über AppleScript + VectorScript
+  `PythonExecute` (der von Vectorworks dokumentierte Weg). Die Installation
+  ist damit nur noch: `.mcpb` doppelklicken, Installieren.
+- Live geprüft auf 2026 U7 mit der kompletten Testreihe in diesem Modus
+  (Protokoll inkl. Abbrechen bei blockiertem Vectorworks und 18-s-Auftrag,
+  Werkzeuge, Fallstricke, Regression, Assets, Sortieren,
+  Stapelreihenfolge): alles bestanden, gleich schnell (0,2 s je Aufruf).
+- Die Brücke wird nur gestartet, wenn sie importierbar ist (kein
+  Fehlerdialog), mit frischem Import-Cache (Brücke frisch installiert,
+  Vectorworks lief schon).
+- Der alte Weg bleibt: Einstellung „Auslöser“ = `menu`.
 
 ### Asset-Katalog (`vw2d_assets`, `vw2d_place_asset`)
 - 28 Assets (43 Ansichten), exakt aus Code gezeichnet (mm, echte Bögen, Korbbögen statt

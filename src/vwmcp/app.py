@@ -27,7 +27,7 @@ DELETE = ToolAnnotations(read_only_hint=False, destructive_hint=True, open_world
 
 INSTRUCTIONS = """\
 Tools for a live Vectorworks session. Every call runs inside the user's open
-document via the "MCP Run Job" menu command.
+document (Keystone starts its bridge through AppleScript/VectorScript).
 
 EXACT 2D DRAWING (vw2d_* tools) - rules for architectural drawings:
 - Exactness first. Give coordinates in document units (or pass unit="mm"/"m";
