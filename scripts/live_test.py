@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Live test of Keystone against a running Vectorworks (macOS).
 
-    python scripts/live_test.py [--src <repo>/src] [--only protocol,tools]
+    python scripts/live_test.py [--src <repo>/src] [--only protocol,tools,pitfalls,regression]
 
 Uses the real path: job folder -> AppleScript -> "MCP Run Job" -> bridge.
 Sends one request at a time; don't work in Vectorworks while it runs
@@ -127,6 +127,124 @@ def protocol_tests(report: dict) -> None:
     log(f"long_job: pass={report['long_job']['pass']} in {report['long_job']['seconds']} s")
 
 
+PITFALL_CODE = r"""
+import math
+out = {}
+prev_layer = vs.GetLName(vs.ActLayer())
+vs.Layer("KS-Fallstricke")
+made = []
+def info(h):
+    t = vs.GetTypeN(h)
+    d = {"type": t}
+    if t == 6:
+        d["center"] = list(vs.Get2DPt(h, 1)); d["start_pt"] = list(vs.Get2DPt(h, 2))
+        d["arc"] = list(vs.GetArc(h))
+    d["hcenter"] = list(vs.HCenter(h)); d["w"] = vs.HWidth(h); d["h"] = vs.HHeight(h)
+    return d
+# circle: ArcByCenter vs Oval (center 10, 1.5 m, radius 0.6 m)
+vs.ArcByCenter(10.0, 1.5, 0.6, 0.0, 360.0); h = vs.LNewObj(); made.append(h); out["circle_arcbycenter"] = info(h)
+vs.Oval((9.4, 2.1), (10.6, 0.9)); h = vs.LNewObj(); made.append(h); out["circle_oval"] = info(h)
+vs.Oval((9400 / 1000.0, 2100 / 1000.0), (10600 / 1000.0, 900 / 1000.0)); h = vs.LNewObj(); made.append(h); out["circle_oval_mm"] = info(h)
+# arc: ArcByCenter vs Arc(bbox, start, sweep)
+vs.ArcByCenter(16.0, 1.0, 0.8, 0.0, 90.0); h = vs.LNewObj(); made.append(h); out["arc_arcbycenter"] = info(h)
+vs.Arc((15.2, 1.8), (16.8, 0.2), 0.0, 90.0); h = vs.LNewObj(); made.append(h); out["arc_arc_bbox"] = info(h)
+vs.Arc((15.2, 1.8), (16.8, 0.2), 30.0, 90.0); h = vs.LNewObj(); made.append(h); out["arc_30_90"] = info(h)
+# empty group: FInGroup must not point into the layer list
+vs.BeginGroup(); vs.Locus((0.0, 0.0)); vs.EndGroup(); g = vs.LNewObj()
+kid = vs.FInGroup(g); vs.DelObject(kid)
+raw = vs.FInGroup(g)
+out["empty_group"] = {"group_type": vs.GetTypeN(g), "raw_first_child_nil": str(raw) == "0",
+                      "raw_first_child_type": None if str(raw) == "0" else vs.GetTypeN(raw),
+                      "raw_child_parent_is_group": None if str(raw) == "0" else
+                          vs.GetObjectUuid(vs.GetParent(raw)) == vs.GetObjectUuid(g)}
+made.append(g)
+for h in made:
+    vs.DelObject(h)
+vs.Layer(prev_layer)
+lay = vs.GetLayerByName("KS-Fallstricke")
+if str(lay) != "0" and str(vs.FInLayer(lay)) == "0":
+    vs.DelObject(lay)
+result = out
+"""
+
+
+def pitfall_tests(report: dict) -> None:
+    from vwmcp.client import Bridge
+
+    b = Bridge(root=ROOT)
+    res = b.run(PITFALL_CODE, timeout=60)
+    report["pitfalls"] = res["value"] if res["ok"] else {"error": res["error"], "tb": res["traceback"]}
+    log(f"pitfalls: {'ok' if res['ok'] else res['error']}")
+
+
+REG_LAYER = "KS-Test-neu"
+REG_ITEMS = [
+    {"type": "rect", "corner": [0, 0], "width": 3650, "height": 4800},
+    {"type": "polygon", "points": [[5000, 0], [8000, 0], [8000, 1000], [6000, 1000], [6000, 3000], [5000, 3000]]},
+    {"type": "circle", "center": [10000, 1500], "radius": 600},
+    {"type": "path", "start": [12000, 0], "segments": [{"line_to": [14000, 0]},
+     {"arc_to": [14000, 2000], "center": [14000, 1000], "direction": "ccw"}, {"line_to": [12000, 2000]}],
+     "closed": True},
+    {"type": "arc", "center": [16000, 1000], "radius": 800, "start_angle": 0, "sweep": 90},
+    {"type": "line", "p1": [0, -1000], "p2": [3650, -1000]},
+    {"type": "text", "text": "KS Test", "position": [0, 5200], "size": 10},
+    {"type": "dimension", "p1": [0, 0], "p2": [3650, 0], "offset": -500, "orientation": "horizontal"},
+]
+
+
+def _first(objs: dict) -> dict:
+    return (objs.get("objects") or [{}])[0]
+
+
+def regression_tests(report: dict) -> None:
+    """Same scenario as the 0.3.6 baseline: draw (deviation 0), check, move +
+    revert, class change + revert, delete + revert, classes and layers."""
+    from vwmcp.tools import draw2d, generic
+
+    r: dict = {}
+    t0 = time.monotonic()
+    draw2d.vw2d_setup(classes=[{"name": "KS-Test-Wand", "attributes": {"pen": "#000000", "fill": "#808080",
+                                                                       "line_weight": 0.35}},
+                               {"name": "KS-Test-Moebel", "attributes": {"pen": "#333333", "fill": "none",
+                                                                         "line_weight": 0.18}}],
+                      layers=[{"name": REG_LAYER, "scale": 50}], active_layer=REG_LAYER)
+    d = draw2d.vw2d_draw(REG_ITEMS, unit="mm", layer=REG_LAYER, class_name="KS-Test-Wand")
+    r["draw"] = [[o["kind"], o["exact"], o["deviation_mm"]] for o in d["created"]]
+    r["all_exact"], r["max_deviation_mm"] = d["all_exact"], d["max_deviation_mm"]
+    rect, circle = d["created"][0]["uuid"], d["created"][2]["uuid"]
+    chk = draw2d.vw2d_check(layer=REG_LAYER, image=False)
+    r["check"] = chk.get("summary") if isinstance(chk, dict) else str(chk)[:400]
+    draw2d.vw2d_transform([rect], "move", dx=100, dy=0, unit="mm")
+    moved = _first(draw2d.vw2d_read(uuids=[rect]))
+    rv = generic.vw_revert_last()
+    rect2 = (rv.get("mapping") or {}).get(rect, rect)
+    back = _first(draw2d.vw2d_read(uuids=[rect2]))
+    r["move_revert"] = {"moved_bbox": moved.get("bbox"), "reverted_tool": rv.get("reverted_tool"),
+                        "corners_after_revert": back.get("corners"),
+                        "pass": back.get("corners") == [[0.0, 4.8], [3.65, 4.8], [3.65, 0.0], [0.0, 0.0]]}
+    draw2d.vw2d_set_attributes([rect2], class_name="KS-Test-Moebel")
+    c1 = _first(draw2d.vw2d_read(uuids=[rect2])).get("class")
+    rv = generic.vw_revert_last()
+    c2 = _first(draw2d.vw2d_read(uuids=[rect2])).get("class")
+    r["class_revert"] = {"changed_to": c1, "after_revert": c2, "pass": c1 == "KS-Test-Moebel" and c2 == "KS-Test-Wand"}
+    draw2d.vw2d_delete([circle])
+    rv = generic.vw_revert_last()
+    circle2 = (rv.get("mapping") or {}).get(circle)
+    circ = _first(draw2d.vw2d_read(uuids=[circle2])) if circle2 else {}
+    r["delete_revert"] = {"restored": rv.get("restored"), "center": circ.get("center"), "radius": circ.get("radius"),
+                          "pass": bool(circle2) and abs((circ.get("radius") or 0) - 0.6) < 1e-9}
+    st = draw2d.vw2d_structure()
+    names = json.dumps(st)
+    r["structure"] = {"has_layer": REG_LAYER in names, "has_classes": "KS-Test-Wand" in names and "KS-Test-Moebel" in names}
+    layers = generic.vw_list_layers()
+    r["layers"] = [l.get("name") for l in layers][:20]
+    r["seconds"] = round(time.monotonic() - t0, 2)
+    r["pass"] = (r["all_exact"] and r["move_revert"]["pass"] and r["class_revert"]["pass"]
+                 and r["delete_revert"]["pass"] and r["structure"]["has_layer"] and r["structure"]["has_classes"])
+    report["regression"] = r
+    log(f"regression: pass={r['pass']} in {r['seconds']} s")
+
+
 def tool_tests(report: dict) -> None:
     """The MCP tools in-process (same code Claude calls), read-only."""
     from vwmcp.tools import draw2d, generic
@@ -147,7 +265,7 @@ def tool_tests(report: dict) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default=str(Path(__file__).resolve().parents[1] / "src"))
-    ap.add_argument("--only", default="protocol,tools")
+    ap.add_argument("--only", default="protocol,tools,pitfalls,regression")
     ap.add_argument("--delay", type=float, default=0.0)
     args = ap.parse_args()
     sys.path.insert(0, args.src)
@@ -156,7 +274,9 @@ def main() -> None:
     wait_idle()
     report = {"started": time.strftime("%Y-%m-%d %H:%M:%S"), "python": sys.version.split()[0]}
     log(f"live test start ({args.only})")
-    for name, fn in (("protocol", protocol_tests), ("tools", tool_tests)):
+    sections = (("protocol", protocol_tests), ("tools", tool_tests), ("pitfalls", pitfall_tests),
+                ("regression", regression_tests))
+    for name, fn in sections:
         if name not in args.only.split(","):
             continue
         try:
