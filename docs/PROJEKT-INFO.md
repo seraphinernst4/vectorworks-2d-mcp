@@ -86,7 +86,7 @@ Claude Desktop
 | `scripts/build-mcpb.sh`, `scripts/dump_static.py` | Bauen der `.mcpb` (inkl. `static.json` aus dem echten Server) |
 | `skill/vectorworks-2d/SKILL.md` | Optionaler Skill (Arbeitsablauf, Regeln) |
 | `docs/vs-notes.md` | Geprüftes Wissen über die Vectorworks-API (`vs.*`) |
-| `tests/` | ~150 Tests (Server-Logik, Brücke mit Fake-`vs` unter 3.9/3.13/3.14; Code in Vectorworks wird live getestet) |
+| `tests/` | ~385 Tests (Server-Logik, Brücke mit Fake-`vs` unter 3.9/3.13/3.14; Code in Vectorworks wird live getestet) |
 | `docs/api-pitfalls.md` | Übernommene API-Fallstricke (vwx-mcp, vwmcp) mit Live-Befund |
 | `NOTICE`, `CHANGELOG.md` | Lizenzhinweise der Vorlagen; Änderungen |
 
@@ -238,6 +238,20 @@ zusätzlich als `Git-Verlauf.bundle` (`git clone Git-Verlauf.bundle vectorworks-
   Objekten); Stapelreihenfolge beim Wiederherstellen; Rückgängig von
   Attributschritten in der Vorschau; `open()` ohne Kodierung ist in
   Vectorworks ASCII.
+
+## Live-Test 31.10.2026 morgens (0.5.0 nach den Code-Reviews, „Ohne Titel 1“)
+
+Komplette Reihe mit dem Stand von Zweig `v0.5` (Commit ba5ccfa), direkter
+Auslöser, MCP-Rundlauf mit dem gepackten 0.5.0-Server (31 Werkzeuge):
+Protokoll (Ping 0,22 s, Abbrechen bei blockiertem Vectorworks, 18-s-Auftrag),
+Werkzeuge, Fallstricke, Regression (alles exakt, Abweichung 0), Assets (43
+Ansichten, 0 Probleme, 0,45 s je Asset), Stapelreihenfolge, Sortieren,
+direkter Modus – alles bestanden. Performance unverändert schnell
+(10 000 Objekte: prüfen 2,4 s, Duplikate 4,6 s, Überlappungen 4,5 s,
+Rückgängig 0,9/0,8 s, sortieren 1,1 s, Rückgängig 0,6 s; 25 000: prüfen
+5,6 s, Duplikate 10,8 s, Rückgängig 1,4 s, sortieren 2,1 s, Rückgängig
+0,8 s), Stapelreihenfolge nach jedem Rückgängig identisch. Danach die
+Testebenen, Testsymbole und Testklassen aus der Datei entfernt.
 
 ## Bekannte Grenzen / offene Punkte
 
