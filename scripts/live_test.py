@@ -272,6 +272,166 @@ def tool_tests(report: dict) -> None:
     log(f"tools: {out['seconds']} s, ping {out['vw_ping'].get('bridge_version')}")
 
 
+ASSET_LAYER = "KS-Test-Assets"
+ASSET_FOLDER = "KS-Test Assets"
+
+# Vectorworks-side probe: definition components of a symbol (class, by-class
+# attributes) and whether a name exists as symbol / folder.
+ASSET_PROBE = """
+def _sym_info(name):
+    sd = named(name, (16,))
+    if sd is None:
+        return None
+    comps = []
+    for k in children(sd):
+        bc = {"fill": bool(vs.IsFPatByClass(k)), "pen": bool(vs.IsPenColorByClass(k)),
+              "lw": bool(vs.IsLWByClass(k)), "ls": bool(vs.IsLSByClass(k))}
+        comps.append({"t": vs.GetTypeN(k), "class": _str(vs.GetClass(k)), "by_class": bc})
+    par = vs.GetParent(sd)
+    return {"components": comps, "folder": _str(vs.GetName(par)) if vs.GetTypeN(par) == 92 else None,
+            "instances": _symbol_instances(name)}
+"""
+
+
+def asset_tests(report: dict) -> None:
+    """Every catalogue asset view placed as a symbol (exact read-back),
+    reuse, mirror, parameters, rotation, groups, classes left alone, revert."""
+    from vwmcp import app, catalog, calls
+    from vwmcp.tools import assets, draw2d, generic
+
+    b = app.get_bridge()
+
+    def vwrun(body: str):
+        res = calls._run_with_libs(b, [("vwlib", calls.VWLIB_SOURCE), ("vwlib2d", calls.VWLIB2D_SOURCE)],
+                                   ASSET_PROBE + body, timeout=120)
+        return calls.raise_for_result(res)["value"]
+
+    r: dict = {}
+    t0 = time.monotonic()
+    # clean start: empty test layer, no definitions in the test folder
+    cleaned = vwrun(
+        "_k = []\n"
+        "def _c(h):\n    _k.append(h)\n"
+        "vs.ForEachObject(_c, \"(L='%s')\")\n"
+        "for _h in _k:\n    vs.DelObject(_h)\n"
+        "_f = named(%r, (92,))\n_d = 0\n"
+        "if _f is not None:\n"
+        "    _s = vs.FInFolder(_f)\n"
+        "    _all = []\n"
+        "    while not _is_nil(_s):\n        _all.append(_s)\n        _s = vs.NextObj(_s)\n"
+        "    for _s in _all:\n        vs.DelObject(_s)\n        _d += 1\n"
+        "    vs.DelObject(_f)\n"
+        "result = [len(_k), _d]" % (ASSET_LAYER, ASSET_FOLDER))
+    r["cleaned"] = cleaned
+    # a user class with its own look must stay untouched
+    draw2d.vw2d_setup(classes=[{"name": "Ausstattung-Möbel", "attributes": {"pen": "#123456", "fill": "#fafafa",
+                                                                             "line_weight": 0.25}}],
+                      layers=[{"name": ASSET_LAYER, "scale": 50}])
+    # 1) every asset view, laid out in a grid (3 m apart; rows per category)
+    rows: dict[str, int] = {}
+    cols: dict[str, int] = {}
+    placed, problems, times = [], [], []
+    for a in catalog.CATALOG.values():
+        row = rows.setdefault(a.category, len(rows))
+        for v in a.views:
+            t = time.monotonic()
+            col = cols.get(a.category, 0)
+            cols[a.category] = col + 1
+            step = 9000 if a.category in ("plants", "vehicles") else 2500
+            pos = [col * step, -row * 12000 if a.category in ("plants", "vehicles") else -row * 4000]
+            try:
+                o = assets.vw2d_place_asset(a.id, position=pos, view=v, unit="mm", layer=ASSET_LAYER,
+                                            folder=ASSET_FOLDER)
+            except Exception as e:  # noqa: BLE001
+                problems.append({"asset": a.id, "view": v, "error": str(e)[:400]})
+                continue
+            times.append(time.monotonic() - t)
+            placed.append([a.id, v, o["symbol"], o["symbol_created"], o["all_exact"], o.get("max_deviation_mm"),
+                           o["placement_deviation_mm"]])
+            if not (o["all_exact"] and o["symbol_created"] and o["placement_deviation_mm"] == 0.0):
+                problems.append({"asset": a.id, "view": v, "out": o})
+    r["placed"] = placed
+    r["problems"] = problems
+    r["place_seconds"] = {"n": len(times), "avg": round(sum(times) / max(1, len(times)), 3),
+                          "max": round(max(times or [0]), 3)}
+    # 2) reuse: three more WCs in one call
+    o = assets.vw2d_place_asset("wc_wand", unit="mm", layer=ASSET_LAYER, folder=ASSET_FOLDER,
+                                placements=[{"position": [0, 3000]}, {"position": [900, 3000]},
+                                            {"position": [1800, 3000], "rotation": 180}])
+    r["reuse"] = {"created": o["symbol_created"], "placed": o["placed"], "exact": o["all_exact"],
+                  "pass": not o["symbol_created"] and o["placed"] == 3 and o["all_exact"]}
+    # 3) mirror (asymmetric) and symmetric no-op, 4) parameters, 5) rotation 30
+    m = assets.vw2d_place_asset("spuele", position=[0, 6000], unit="mm", mirror=True, layer=ASSET_LAYER,
+                                folder=ASSET_FOLDER)
+    ms = assets.vw2d_place_asset("wc_wand", position=[2000, 6000], unit="mm", mirror=True, layer=ASSET_LAYER,
+                                 folder=ASSET_FOLDER)
+    pr = assets.vw2d_place_asset("wc_wand", view="front", params={"h": 460}, position=[4000, 6000], unit="mm",
+                                 layer=ASSET_LAYER, folder=ASSET_FOLDER)
+    rt = assets.vw2d_place_asset("bett", position=[7000, 6000], rotation=30, unit="mm", layer=ASSET_LAYER,
+                                 folder=ASSET_FOLDER)
+    r["variants"] = {
+        "mirror": [m["symbol"], m["mirrored"], m["all_exact"]],
+        "mirror_symmetric": [ms["symbol"], ms["mirrored"], ms.get("note_mirror")],
+        "params": [pr["symbol"], pr["symbol_created"], pr["all_exact"]],
+        "rotation": [rt["instances"][0].get("rotation"), rt["instances"][0].get("rotation_deviation_deg"),
+                     rt["placement_deviation_mm"]],
+    }
+    r["variants"]["pass"] = (m["mirrored"] and m["all_exact"] and m["symbol"].endswith("gespiegelt")
+                             and not ms["mirrored"] and pr["symbol"].endswith("(h=460)") and pr["all_exact"]
+                             and not rt["instances"][0].get("rotation_deviation_deg")
+                             and rt["placement_deviation_mm"] == 0.0)
+    # 6) groups instead of symbols
+    g = assets.vw2d_place_asset("baum", position=[0, 10000], unit="mm", as_symbol=False, layer=ASSET_LAYER,
+                                rotation=15)
+    gr = draw2d.vw2d_read(uuids=[g["instances"][0]["uuid"]])
+    r["group"] = {"kind": _first(gr).get("kind"), "class": _first(gr).get("class"), "exact": g["all_exact"],
+                  "pass": _first(gr).get("kind") == "group" and g["all_exact"]}
+    # 7) definition components: classes and by-class attributes; folder
+    info = vwrun("result = {n: _sym_info(n) for n in %r}" % ([
+        "WC wandhängend - Grundriss", "Baum - Grundriss", "Esstisch mit Stühlen - Grundriss"],))
+    ok = True
+    for n, inf in info.items():
+        if not inf:
+            ok = False
+            continue
+        base = {"WC": "Ausstattung-Sanitär", "Bau": "Staffage-Vegetation", "Ess": "Ausstattung-Möbel"}[n[:3]]
+        ok = ok and inf["folder"] == ASSET_FOLDER and all(
+            c["class"] in (base, base + "-Detail") and all(c["by_class"].values()) for c in inf["components"])
+    r["definitions"] = {"info": info, "pass": ok}
+    # 8) classes: created with attributes; the user's class unchanged
+    st = draw2d.vw2d_structure()
+    cls = {c["name"]: c.get("attributes") for c in st.get("classes", [])}
+    moebel = cls.get("Ausstattung-Möbel") or {}
+    r["classes"] = {"sanitaer": cls.get("Ausstattung-Sanitär"), "detail": cls.get("Ausstattung-Sanitär-Detail"),
+                    "moebel": moebel,
+                    "pass": moebel.get("pen") == "#123456" and "Ausstattung-Sanitär-Detail" in cls}
+    # 9) revert: a new definition goes with its instance; a reused one stays
+    t1 = assets.vw2d_place_asset("tisch", params={"chairs": 4}, position=[12000, 10000], unit="mm",
+                                 layer=ASSET_LAYER, folder=ASSET_FOLDER)
+    rv = generic.vw_revert_last()
+    gone = vwrun("result = _sym_info(%r)" % t1["symbol"])
+    k1 = assets.vw2d_place_asset("kochfeld", params={"b": 900}, position=[15000, 10000], unit="mm",
+                                 layer=ASSET_LAYER, folder=ASSET_FOLDER)
+    k2 = assets.vw2d_place_asset("kochfeld", params={"b": 900}, position=[16000, 10000], unit="mm",
+                                 layer=ASSET_LAYER, folder=ASSET_FOLDER)
+    rv2 = generic.vw_revert_last()
+    still = vwrun("result = _sym_info(%r)" % k1["symbol"])
+    rv3 = generic.vw_revert_last()
+    gone2 = vwrun("result = _sym_info(%r)" % k1["symbol"])
+    r["revert"] = {"new_def_removed": gone is None, "tool": rv.get("reverted_tool"),
+                   "reused_def_kept": bool(still) and still["instances"] == 1 and not k2["symbol_created"],
+                   "then_removed": gone2 is None,
+                   "pass": gone is None and bool(still) and still["instances"] == 1 and gone2 is None}
+    # 10) check on a layer full of symbols must work
+    chk = draw2d.vw2d_check(layer=ASSET_LAYER, image=False)
+    r["check"] = chk.get("summary") if isinstance(chk, dict) else str(chk)[:300]
+    r["seconds"] = round(time.monotonic() - t0, 2)
+    r["pass"] = (not problems and r["reuse"]["pass"] and r["variants"]["pass"] and r["group"]["pass"]
+                 and r["definitions"]["pass"] and r["classes"]["pass"] and r["revert"]["pass"])
+    report["assets"] = r
+    log(f"assets: pass={r['pass']} ({len(placed)} placed, {len(problems)} problems) in {r['seconds']} s")
+
+
 async def _mcp_round_trip(server_dir: str) -> dict:
     """Start the packaged server like Claude Desktop does (stdio) and call tools."""
     from mcp import ClientSession
@@ -334,7 +494,8 @@ def main() -> None:
     report = {"started": time.strftime("%Y-%m-%d %H:%M:%S"), "python": sys.version.split()[0]}
     log(f"live test start ({args.only})")
     sections = (("protocol", protocol_tests), ("tools", tool_tests), ("pitfalls", pitfall_tests),
-                ("regression", regression_tests), ("mcp", lambda rep: mcp_tests(rep, args.server)))
+                ("regression", regression_tests), ("assets", asset_tests),
+                ("mcp", lambda rep: mcp_tests(rep, args.server)))
     for name, fn in sections:
         if name not in args.only.split(","):
             continue

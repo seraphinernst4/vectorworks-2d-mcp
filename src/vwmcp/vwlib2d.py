@@ -403,11 +403,17 @@ def _approx_polygon(h):
     return pts
 
 
+def _layer_name(h):
+    """Layer of an object; '' for objects without one (symbol components)."""
+    lay = vs.GetLayer(h)
+    return "" if _is_nil(lay) else _str(vs.GetLName(lay))
+
+
 def read_obj(h, geometry=True, parent=None, allow_temp=True, depth=0):
     t = vs.GetTypeN(h)
     rec = {"uuid": h_uuid(h), "kind": KINDS.get(t, "type%d" % t), "type_code": t,
            "name": obj_name(h), "class": _str(vs.GetClass(h)),
-           "layer": _str(vs.GetLName(vs.GetLayer(h))), "bbox": _bbox(h)}
+           "layer": _layer_name(h), "bbox": _bbox(h)}
     if parent:
         rec["parent"] = parent
     if t in SHAPE_TYPES or t in (10, 17, 63):
@@ -740,6 +746,180 @@ def draw_items(items):
     return {"document": current_document(), "objects": recs}
 
 
+# ---- assets: symbol definitions + instances ---------------------------------------
+
+SYMDEF, SYMFOLDER, SYMBOL = 16, 92, 15
+
+
+def _draw_local(items):
+    """Draw normalized items with their own classes (inside BeginSym or
+    BeginGroup). Returns the handles."""
+    made = []
+    for it in items:
+        vs.NameClass(it["class"])
+        h = _make_one(it)
+        if _is_nil(h):
+            raise RuntimeError("Vectorworks did not create item %r" % it.get("kind"))
+        apply_attrs(h, it.get("attributes"))
+        made.append(h)
+    return made
+
+
+def _symbol_folder(name):
+    """Handle of the symbol folder `name`, created if missing. (handle, created)"""
+    h = named(name, (SYMFOLDER,))
+    if h is not None:
+        return h, False
+    if named(name) is not None:
+        raise ValueError("the name %r is already used by another object or resource" % name)
+    vs.NameObject(name)
+    vs.BeginFolderN(SYMDEF)
+    vs.EndFolder()
+    h = named(name, (SYMFOLDER,))
+    if h is None:
+        raise RuntimeError("Vectorworks did not create the symbol folder %r" % name)
+    return h, True
+
+
+def _define_symbol(name, items, default_class=None, description=None):
+    """Create symbol definition `name` from items drawn at local coordinates
+    (insertion point = 0, 0). All or nothing."""
+    opened = False
+    try:
+        vs.BeginSym(name)
+        opened = True
+        _draw_local(items)
+        vs.EndSym()
+        opened = False
+        sd = named(name, (SYMDEF,))
+        if sd is None:
+            raise RuntimeError("Vectorworks did not create the symbol %r" % name)
+        if default_class:
+            vs.SetSymbolOptionsN(name, 0, 4, default_class)  # centre line, no wall break
+        if description:
+            try:
+                vs.SetDescriptionText(sd, description)
+            except Exception:  # noqa: BLE001  (description is cosmetic)
+                pass
+        return sd
+    except BaseException:
+        if opened:
+            try:
+                vs.EndSym()
+            except Exception:  # noqa: BLE001
+                pass
+        sd = named(name, (SYMDEF,))
+        if sd is not None:
+            vs.DelObject(sd)
+        raise
+
+
+def _place_one(symbol, pl):
+    p = (float(pl["position"][0]), float(pl["position"][1]))
+    before = vs.LNewObj()
+    vs.Symbol(symbol, p, float(pl.get("rotation", 0.0)))
+    h = vs.LNewObj()
+    if _is_nil(h) or vs.GetTypeN(h) != SYMBOL or (not _is_nil(before) and str(h) == str(before)):
+        raise RuntimeError("Vectorworks did not place symbol %r" % symbol)
+    return h
+
+
+def _group_one(items, pl):
+    vs.BeginGroup()
+    try:
+        _draw_local(items)
+    finally:
+        vs.EndGroup()
+    g = vs.LNewObj()
+    if _is_nil(g) or vs.GetTypeN(g) != 11:
+        raise RuntimeError("Vectorworks did not create the group")
+    local = [read_obj(k, True, None, False) for k in children(g)]
+    x, y = float(pl["position"][0]), float(pl["position"][1])
+    if x or y:
+        vs.HMove(g, x, y)
+    rot = float(pl.get("rotation", 0.0))
+    if rot:
+        vs.HRotate(g, (x, y), rot)
+    return g, local
+
+
+def place_asset(symbol, items, placements, folder=None, layer=None, cls=None, as_symbol=True,
+                new_classes=None, description=None):
+    """Asset as symbol (definition reused if it exists) or as groups.
+
+    items: normalized items at local coordinates, each with its class.
+    new_classes: {name: attributes} for classes to create if missing (existing
+    classes are never changed). Returns the definition's components as read
+    back (for the exactness check) and the placed instances."""
+    created_classes = []
+    for name, attrs in (new_classes or {}).items():
+        if name not in class_names():
+            ensure_class(name, attrs)
+            created_classes.append(name)
+    if cls and cls not in class_names():
+        ensure_class(cls)
+        created_classes.append(cls)
+    out = {"classes_created": created_classes, "folder_created": False, "symbol_created": False}
+    state = _begin(layer)
+    made = []
+    try:
+        if as_symbol:
+            sd = named(symbol, (SYMDEF,))
+            if sd is None:
+                if named(symbol) is not None:
+                    raise ValueError("the name %r is already used by another object, class or layer"
+                                     % symbol)
+                fh = None
+                if folder:
+                    fh, out["folder_created"] = _symbol_folder(folder)
+                sd = _define_symbol(symbol, items, cls, description)
+                out["symbol_created"] = True
+                if fh is not None:
+                    vs.InsertSymbolInFolder(fh, sd)
+            out["symbol"] = {"name": symbol, "uuid": h_uuid(sd)}
+            out["definition"] = [read_obj(k, True, None, False) for k in children(sd)]
+            if cls:
+                vs.NameClass(cls)
+            for pl in placements:
+                h = _place_one(symbol, pl)
+                made.append(h)
+                if cls:
+                    vs.SetClass(h, cls)
+        else:
+            out["definition"] = None
+            for pl in placements:
+                g, local = _group_one(items, pl)
+                made.append(g)
+                if out["definition"] is None:
+                    out["definition"] = local
+                if cls:
+                    vs.SetClass(g, cls)
+    except BaseException:
+        for h in made:
+            vs.DelObject(h)
+        if out.get("symbol_created"):
+            sd = named(symbol, (SYMDEF,))
+            if sd is not None:
+                vs.DelObject(sd)
+        if out.get("folder_created"):
+            fh = named(folder, (SYMFOLDER,))
+            if fh is not None and _is_nil(vs.FInFolder(fh)):
+                vs.DelObject(fh)
+        raise
+    finally:
+        _end(state)
+    out["instances"] = [read_obj(h, True, None, False) for h in made]
+    out["document"] = current_document()
+    return out
+
+
+def _symbol_instances(name):
+    try:
+        return int(vs.Count("(S='%s')" % name.replace("'", "")))
+    except Exception:  # noqa: BLE001
+        return -1
+
+
 # ---- snapshots (exact revert) ------------------------------------------------------
 
 def _z_index(h):
@@ -864,7 +1044,7 @@ def restore(snap, mapping):
 def revert2d(ops):
     """Undo journaled ops (newest last). Returns uuid remapping for the
     journal plus counts."""
-    mapping, deleted, restored, missing = {}, 0, 0, []
+    mapping, deleted, restored, missing, kept = {}, 0, 0, [], []
     for op in reversed(ops):
         kind = op["op"]
         if kind == "created":
@@ -897,6 +1077,21 @@ def revert2d(ops):
                     if not _is_nil(lay):
                         vs.SetParent(h, lay)
                 restored += 1
+        elif kind == "symdef":
+            # only if nothing uses it any more (the user may have placed more)
+            sd = named(op["name"], (SYMDEF,))
+            if sd is None:
+                missing.append(op["name"])
+            elif _symbol_instances(op["name"]) == 0:
+                vs.DelObject(sd)
+                deleted += 1
+            else:
+                kept.append(op["name"])
+        elif kind == "symfolder":
+            fh = named(op["name"], (SYMFOLDER,))
+            if fh is not None and _is_nil(vs.FInFolder(fh)):
+                vs.DelObject(fh)
+                deleted += 1
         elif kind == "fields":
             h = vs.GetObjectByUuid(op["uuid"])
             if _is_nil(h):
@@ -904,8 +1099,11 @@ def revert2d(ops):
             else:
                 _write_fields(h, op["record"], op["before"])
                 restored += 1
-    return {"document": current_document(), "deleted": deleted, "restored": restored,
-            "missing": missing, "mapping": mapping}
+    out = {"document": current_document(), "deleted": deleted, "restored": restored,
+           "missing": missing, "mapping": mapping}
+    if kept:
+        out["kept_in_use"] = kept
+    return out
 
 
 # ---- editing ---------------------------------------------------------------------
