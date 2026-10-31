@@ -242,7 +242,13 @@ zusätzlich als `Git-Verlauf.bundle` (`git clone Git-Verlauf.bundle vectorworks-
 ## Bekannte Grenzen / offene Punkte
 
 - Frische Installation auf einem fremden Mac noch nie gemacht (Installer holt
-  seit 31.10. uv selbst – ungetestet).
+  seit 31.10. uv selbst – ungetestet). Direkter Auslöser (0.5) nur auf
+  diesem Mac mit Vectorworks 2026 U7 getestet; Rückfall: Auslöser `menu`.
+- Assets: Komponenten liegen in festen Klassen „Ausstattung-…“/„Staffage-…“
+  (+ „-Detail“); ein eigener Klassenstandard für die Symbol-Innereien ist
+  noch nicht einstellbar (Instanzen können in jede Klasse).
+- Überlappungen wegschneiden ist an Vectorworks' Boolesche Operationen
+  gebunden (~2,5 ms je Paar); Zehntausende Überlappungen dauern Minuten.
 - Vectorworks 2027 und englische Oberfläche ungetestet (2027 vorbereitet).
 - Skriptfehler-Dialoge werden nicht automatisch geschlossen (bräuchte die
   macOS-Freigabe „Bedienungshilfen“ und war nachts nicht zuverlässig
