@@ -1130,8 +1130,81 @@ def _rebuild(rec):
     return vs.LNewObj()
 
 
-def restore(snap, mapping, hmap=None):
-    """Recreate an object from its snapshot. Returns the new handle."""
+BULK_RESTACK = 32  # from this many objects in one list on, restack the list in one pass
+
+
+def _list_of(h):
+    """All objects of h's list (layer or group), back to front."""
+    k, n = h, 0
+    while n < 1000000:
+        p = vs.PrevObj(k)
+        if _is_nil(p):
+            break
+        k = p
+        n += 1
+    out = []
+    while not _is_nil(k) and len(out) < 1000000:
+        out.append(k)
+        k = vs.NextObj(k)
+    return out
+
+
+def _restack(entries, hmap=None, mapping=None, restored=None):
+    """Put many objects back to their old stacking positions at once.
+    entries: [(handle, above_uuid, z)] - each object goes directly behind the
+    object that was in front of it (`above`, possibly also in entries). Per
+    list: work out the final order, then move every object from the first
+    changed position on to the front, in that order (one move per object
+    instead of stepping each object through the list)."""
+    mapping, hmap, restored = mapping or {}, hmap or {}, restored or {}
+    by_list = {}
+    for h, above, z in entries:
+        by_list.setdefault(str(vs.GetParent(h)), []).append((h, above, z))
+    for items in by_list.values():
+        lst = _list_of(items[0][0])
+        moving = dict((str(h), (h, above, z)) for h, above, z in items)
+        base = [k for k in lst if str(k) not in moving]
+        in_list = set(str(k) for k in lst)
+        before = {}  # str(above handle) -> objects that go directly behind it
+        tail = []
+        for key, (h, above, z) in moving.items():
+            ah = None
+            if above:
+                u = mapping.get(above, above)
+                ah = restored.get(u)
+                if ah is None:
+                    ah = _get_by_uuid(u, hmap)
+            if ah is not None and not _is_nil(ah) and str(ah) in in_list and str(ah) != key:
+                before.setdefault(str(ah), []).append((h, z))
+            else:
+                tail.append((h, z))
+        final, seen = [], set()
+
+        def emit(k, depth=0):
+            if str(k) in seen or depth > 100000:
+                return
+            seen.add(str(k))
+            for h2, _z in sorted(before.get(str(k), []), key=lambda e: e[1] if e[1] is not None else 0):
+                emit(h2, depth + 1)
+            final.append(k)
+
+        for k in base:
+            emit(k)
+        for h2, _z in sorted(tail, key=lambda e: e[1] if e[1] is not None else 0):
+            emit(h2)
+        for h2, _a, _z in items:  # anything left over (cycles): keep it, in front
+            emit(h2)
+        cur = _list_of(items[0][0])
+        i = 0
+        while i < len(final) and i < len(cur) and str(final[i]) == str(cur[i]):
+            i += 1
+        for k in final[i:]:
+            vs.HMoveForward(k, True)
+
+
+def restore(snap, mapping, hmap=None, place=True):
+    """Recreate an object from its snapshot. Returns the new handle.
+    place=False leaves it in front (the caller restacks many at once)."""
     rec = snap["rec"]
     state = _begin(rec["layer"], create_layer=True)
     try:
@@ -1158,7 +1231,8 @@ def restore(snap, mapping, hmap=None):
         if not _is_nil(ph):
             vs.SetParent(h, ph)
     above = snap.get("above")
-    _place_below(h, mapping.get(above, above) if above else None, snap.get("z"), hmap)
+    if place:
+        _place_below(h, mapping.get(above, above) if above else None, snap.get("z"), hmap)
     if rec.get("name"):
         try:
             _set_name(h, rec["name"])
@@ -1192,9 +1266,19 @@ def revert2d(ops):
                     hmap.pop(u, None)
                     vs.DelObject(h)
                     deleted += 1
-            for s in sorted(op.get("before", []), key=lambda s: -s["z"]):
-                restore(s, mapping, hmap)
-                restored += 1
+            befores = sorted(op.get("before", []), key=lambda s: -s["z"])
+            if len(befores) >= BULK_RESTACK:
+                placed = []
+                for s in befores:
+                    h = restore(s, mapping, hmap, place=False)
+                    placed.append((h, s.get("above"), s.get("z")))
+                    restored += 1
+                new_by_uuid = dict((h_uuid(h), h) for h, _a, _z in placed)
+                _restack(placed, hmap, mapping, new_by_uuid)
+            else:
+                for s in befores:
+                    restore(s, mapping, hmap)
+                    restored += 1
         elif kind == "attrs":
             h = _get_by_uuid(op["uuid"], hmap)
             if _is_nil(h):
@@ -1235,8 +1319,11 @@ def revert2d(ops):
                 restored += 1
     # objects moved back to their layer: old stacking position, frontmost first
     # (so an object's `above` neighbour is already back in place)
-    for op, h in sorted(restack, key=lambda x: -(x[0].get("z") or 0)):
-        _place_below(h, op.get("above"), op.get("z"), hmap)
+    if len(restack) >= BULK_RESTACK:
+        _restack([(h, op.get("above"), op.get("z")) for op, h in restack], hmap)
+    else:
+        for op, h in sorted(restack, key=lambda x: -(x[0].get("z") or 0)):
+            _place_below(h, op.get("above"), op.get("z"), hmap)
     out = {"document": current_document(), "deleted": deleted, "restored": restored,
            "missing": missing, "mapping": mapping}
     if kept:

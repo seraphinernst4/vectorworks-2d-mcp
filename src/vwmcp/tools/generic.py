@@ -301,7 +301,8 @@ def vw_revert_last() -> dict:
     except JournalError as e:
         raise ToolError(str(e)) from e
     try:
-        result = app.vw2d("revert2d", ops=entry["ops"], timeout=max(120.0, 0.02 * len(entry["ops"])))
+        size = sum(1 + len(op.get("before") or []) + len(op.get("after") or []) for op in entry["ops"])
+        result = app.vw2d("revert2d", ops=entry["ops"], timeout=max(120.0, 0.1 * size))
     except ToolError:
         journal.record(entry["document"], entry["tool"], entry["ops"])  # put it back
         raise

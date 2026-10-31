@@ -345,3 +345,15 @@ def test_vw_organize_apply_refuses_layer_moves_inside_groups():
         ns["organize_apply"]([{"uuids": ["a", "k"], "class": None, "layer": "OG", "by_class": False}])
     assert objs["a"].layer_name == "EG"  # the first move was undone
     assert [o.uid for o in vs.layers["EG"].objs] == ["a", "g"]  # and back in its place
+
+
+def test_vw_organize_big_layer_move_revert_restores_stacking_in_bulk():
+    names = ["o%02d" % i for i in range(60)]
+    objs = {n: H(n, "Keine", "EG") for n in names}
+    ns, vs = _vw(objs)
+    moved = names[3:50:1]  # 47 objects: the bulk path
+    out = ns["organize_apply"]([{"uuids": moved, "class": "X", "layer": "OG", "by_class": False}])
+    assert [o.uid for o in vs.layers["OG"].objs] == moved
+    ns["revert2d"](out["ops"])
+    assert [o.uid for o in vs.layers["EG"].objs] == names
+    assert all(objs[n].cls == "Keine" for n in names)

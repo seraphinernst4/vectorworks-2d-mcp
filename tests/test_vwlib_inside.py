@@ -158,3 +158,46 @@ def test_read_objects_says_when_it_stopped_early():
     assert len(out["objects"]) == 5 and out["truncated"] is True
     out = ns["read_objects"](layer="EG", limit=12)
     assert len(out["objects"]) == 12 and out["truncated"] is False
+
+
+def _restack_case(names, gone, chain_rename=False):
+    """Remove `gone` from the list, put them back in front (as a revert does),
+    restack, and return the final order."""
+    st = StackVS(names)
+    ns = _ns()
+    ns["vs"].__dict__.update({k: getattr(st, k) for k in dir(st) if k[0].isupper()})
+    snaps = []
+    for i, o in enumerate(st.objs):
+        if o.name in gone:
+            above = st.objs[i + 1].uid if i + 1 < len(st.objs) else None
+            snaps.append((o, above, i))
+    for o, _a, _z in snaps:
+        st.objs.remove(o)
+    mapping, restored = {}, {}
+    entries = []
+    for o, above, z in sorted(snaps, key=lambda e: -e[2]):  # revert restores frontmost first
+        if chain_rename:  # restored objects get new uuids
+            mapping[o.uid] = o.uid + "'"
+            o.uid = o.uid + "'"
+            restored[o.uid] = o
+        st.objs.append(o)
+        entries.append((o, above, z))
+    moves = []
+    orig = st.HMoveForward
+    ns["vs"].HMoveForward = lambda h, f: (moves.append(h.name), orig(h, f))
+    ns["_restack"](entries, {}, mapping, restored)
+    return st.order(), moves
+
+
+def test_restack_puts_many_objects_back_in_one_pass():
+    names = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    for gone in ("BDFHJ", "ABC", "XYZ", "MNOP", "AZ", "Z", "A", "BCDEFGHIJKLMNOPQRSTUVWXY"):
+        order, moves = _restack_case(names, set(gone))
+        assert order == names, (gone, order)
+        order, moves = _restack_case(names, set(gone), chain_rename=True)
+        assert order == names, (gone, order)
+
+
+def test_restack_moves_only_from_the_first_change_on():
+    order, moves = _restack_case("ABCDEFGHIJ", {"H"})
+    assert order == "ABCDEFGHIJ" and moves == ["H", "I", "J"]
