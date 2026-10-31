@@ -14,6 +14,7 @@ decides); it only avoids stacking more than a few events.
 
 from __future__ import annotations
 
+import contextlib
 import os
 import re
 import subprocess
@@ -40,22 +41,28 @@ def parse_etime(text: str) -> int:
     return (int(days) if days else 0) * 86400 + h * 3600 + m * 60 + s
 
 
-def running_apps() -> list[tuple[str, float]]:
-    """Running Vectorworks versions as (app name, seconds since start),
-    e.g. [("Vectorworks 2027", 812.0)], most recently started first."""
-    found = subprocess.run(["pgrep", "-fl", "/Vectorworks 20[0-9][0-9].app/Contents/MacOS/Vectorworks"],
-                           capture_output=True, text=True)
+def parse_ps(text: str) -> list[tuple[str, float]]:
+    """Vectorworks apps in `ps -axo pid=,etime=,command=` output as
+    (app name, seconds since start), most recently started first."""
     apps = []
-    for line in found.stdout.splitlines():
-        pid, _, cmd = line.strip().partition(" ")
-        m = _APP_RE.search(cmd.strip())
-        if not (pid.isdigit() and m):
+    for line in text.splitlines():
+        parts = line.strip().split(None, 2)
+        if len(parts) < 3 or not parts[0].isdigit():
             continue
-        ps = subprocess.run(["ps", "-o", "etime=", "-p", pid], capture_output=True, text=True)
-        if ps.stdout.strip():
-            apps.append((m.group(1), float(parse_etime(ps.stdout))))
+        m = _APP_RE.search(parts[2].strip())
+        if m:
+            with contextlib.suppress(ValueError):
+                apps.append((m.group(1), float(parse_etime(parts[1]))))
     apps.sort(key=lambda a: a[1])
     return apps
+
+
+def running_apps() -> list[tuple[str, float]]:
+    """Running Vectorworks versions, e.g. [("Vectorworks 2027", 812.0)].
+    (ps, not pgrep: BSD pgrep hides its own ancestors, e.g. when a test is
+    started from inside Vectorworks.)"""
+    ps = subprocess.run(["ps", "-axo", "pid=,etime=,command="], capture_output=True, text=True)
+    return parse_ps(ps.stdout)
 
 
 def configured_app() -> str | None:

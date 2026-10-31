@@ -34,6 +34,37 @@ def h_uuid(h):
     return vs.GetObjectUuid(h)
 
 
+def named(name, types=None):
+    """Handle of the object/resource with this name, or None. Names are one
+    namespace for objects, classes, layers and resources, so pass the GetTypeN
+    values you expect (16 symbol definition, 94 class, 31 layer). Also treats
+    the type-0 dummy some Vectorworks versions return for unknown names as
+    missing."""
+    h = vs.GetObject(name)
+    if _is_nil(h):
+        return None
+    t = vs.GetTypeN(h)
+    if t == 0 or (types and t not in types):
+        return None
+    return h
+
+
+def children(h, limit=200000):
+    """Direct children of a group (or other container), safely: FInGroup of
+    an empty group can point into the parent's list, so every child's parent
+    must be h; the walk is also bounded."""
+    out = []
+    k = vs.FInGroup(h)
+    uid = vs.GetObjectUuid(h)
+    while not _is_nil(k) and len(out) < limit:
+        par = vs.GetParent(k)
+        if _is_nil(par) or vs.GetObjectUuid(par) != uid:
+            break
+        out.append(k)
+        k = vs.NextObj(k)
+    return out
+
+
 def handle(uuid):
     h = vs.GetObjectByUuid(uuid)
     if _is_nil(h):
@@ -248,14 +279,20 @@ def list_symbols(name_contains=None, folder=None, limit=1000):
 
 
 def insert_symbol(name, x, y, z=None, layer=None, cls=None, rotation=0.0):
-    if _is_nil(vs.GetObject(name)):
-        raise LookupError("no symbol definition named %r" % name)
+    if named(name, (16,)) is None:
+        what = vs.GetTypeN(vs.GetObject(name)) if not _is_nil(vs.GetObject(name)) else None
+        hint = " (that name belongs to a class)" if what == 94 else (
+            " (that name belongs to a layer)" if what == 31 else "")
+        raise LookupError("no symbol definition named %r%s" % (name, hint))
     if layer:
         if _is_nil(vs.GetLayerByName(layer)):
             raise LookupError("no layer named %r" % layer)
         vs.Layer(layer)
+    before = vs.LNewObj()
     vs.Symbol(name, (x, y), rotation)
     h = vs.LNewObj()
+    if _is_nil(h) or vs.GetTypeN(h) != 15 or (not _is_nil(before) and str(h) == str(before)):
+        raise RuntimeError("Vectorworks did not place symbol %r" % name)
     if cls:
         vs.SetClass(h, cls)
     if z is not None:

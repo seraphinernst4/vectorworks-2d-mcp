@@ -1,7 +1,7 @@
 from vwmcp.client import TriggerError
 import pytest
 
-from vwmcp.trigger import MacTrigger, _APP_RE, parse_etime
+from vwmcp.trigger import MacTrigger, _APP_RE, parse_etime, parse_ps
 
 
 class FakeProc:
@@ -92,3 +92,14 @@ def test_app_regex():
 )
 def test_parse_etime(text, secs):
     assert parse_etime(text) == secs
+
+
+def test_parse_ps_finds_vectorworks_only():
+    out = """ 1540 02-02:22:39 /Applications/Vectorworks Cloud Services.app/Contents/MacOS/Vectorworks Cloud Services
+ 4257 02-00:52:07 /Applications/Vectorworks 2026/Vectorworks 2026.app/Contents/PlugIns/QLThumbnailExtension.appex/Contents/MacOS/QLThumbnailExtension -B x
+31213       45:28 /Applications/Vectorworks 2026/Vectorworks 2026.app/Contents/MacOS/Vectorworks
+31218       45:27 /Applications/Vectorworks 2026/Vectorworks 2026.app/Contents/Frameworks/Vectorworks Web Helper (GPU).app/Contents/MacOS/Vectorworks Web Helper (GPU) --type=gpu
+  900       00:12 /Applications/Vectorworks 2027/Vectorworks 2027.app/Contents/MacOS/Vectorworks
+"""
+    assert parse_ps(out) == [("Vectorworks 2027", 12.0), ("Vectorworks 2026", 2728.0)]
+    assert parse_ps("") == []

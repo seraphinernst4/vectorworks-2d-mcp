@@ -292,9 +292,11 @@ def restore_raw_attrs(h, r):
 def _set_name(h, name):
     if not name:
         return
-    other = vs.GetObject(name)
-    if not _is_nil(other) and str(other) != str(h):
-        raise ValueError("object name %r is already used in this document" % name)
+    other = named(name)
+    if other is not None and str(other) != str(h):
+        kind = {94: "a class", 31: "a layer", 16: "a symbol"}.get(vs.GetTypeN(other), "another object")
+        raise ValueError("name %r is already used by %s in this document (names are shared by "
+                         "objects, classes, layers and resources)" % (name, kind))
     vs.SetName(h, name)
 
 
@@ -436,11 +438,7 @@ def read_obj(h, geometry=True, parent=None, allow_temp=True, depth=0):
     elif t == 17:
         rec["point"] = list(vs.GetLocPt(h))[:2]
     elif t == 11:
-        kids, k = [], vs.FInGroup(h)
-        while not _is_nil(k):
-            kids.append(h_uuid(k))
-            k = vs.NextObj(k)
-        rec["children"] = kids
+        rec["children"] = [h_uuid(k) for k in children(h)]
     elif t in (8, 13) and allow_temp:
         rec["approx_polygon"] = _approx_polygon(h)
     if t in (3, 4, 5, 6, 8, 13, 21):
@@ -501,10 +499,8 @@ def _walk(h, out, geometry, allow_temp, parent, cls, depth=0):
     if vs.GetTypeN(h) == 11:
         out.append(rec)
         if depth < 20:
-            k = vs.FInGroup(h)
-            while not _is_nil(k):
+            for k in children(h):
                 _walk(k, out, geometry, allow_temp, rec["uuid"], cls, depth + 1)
-                k = vs.NextObj(k)
         return
     if cls is None or rec["class"] == cls:
         out.append(rec)
@@ -555,10 +551,8 @@ def structure():
             except Exception:  # noqa: BLE001
                 pass
         if t == 11 and depth < 20:
-            k = vs.FInGroup(h)
-            while not _is_nil(k):
+            for k in children(h):
                 visit(k, depth + 1)
-                k = vs.NextObj(k)
 
     found = []
     vs.ForEachObject(found.append, "(ALL)")
@@ -750,11 +744,7 @@ def snapshot(h):
     if t in SHAPE_TYPES or t in (10, 17):
         snap["raw"] = raw_attrs(h)
     if t == 11:
-        kids, k = [], vs.FInGroup(h)
-        while not _is_nil(k):
-            kids.append(snapshot(k))
-            k = vs.NextObj(k)
-        snap["children"] = kids
+        snap["children"] = [snapshot(k) for k in children(h)]
     return snap
 
 
@@ -1113,11 +1103,7 @@ def _results(h):
     if _is_nil(h):
         return []
     if vs.GetTypeN(h) == 11:
-        kids, k = [], vs.FInGroup(h)
-        while not _is_nil(k):
-            kids.append(k)
-            k = vs.NextObj(k)
-        return kids
+        return children(h)
     return [h]
 
 

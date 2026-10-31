@@ -244,6 +244,17 @@ def test_wrong_rect_calls_raise_before_vectorworks(checked, args, why):
     assert vs.calls == []
 
 
+def test_number_tuple_may_cover_consecutive_number_parameters():
+    # ArcByCenter(x, y, radius, start, sweep): maybe Vectorworks flattens
+    # (x, y); the check must never block what Vectorworks could accept.
+    assert bridge.check_args("RRRRR", ((0.0, 0.0), 1.0, 0.0, 360.0)) is None
+    assert bridge.check_args("RRRRR", (0.0, 0.0, 1.0, 0.0, 360.0)) is None
+    assert "too few" in bridge.check_args("RRRRR", ((0.0, 0.0), 1.0, 0.0))
+    assert "tuple of 3" in bridge.check_args("HRR", (object(), (1.0, 2.0, 3.0)))
+    assert bridge.check_args("HRR", (object(), (1.0, 2.0))) is None
+    assert "tuple of 2" in bridge.check_args("RS", ((1.0, 2.0), "x"))
+
+
 def test_colour_must_be_one_tuple(checked):
     vs, proxy, _ = checked
     proxy.SetFillBack("h-placeholder" and object(), (65535, 0, 0))

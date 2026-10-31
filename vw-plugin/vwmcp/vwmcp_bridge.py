@@ -102,9 +102,12 @@ def _has_var_args(fn):
 
 
 def check_args(codes, args):
-    """None if args fit the type codes, else a short description of the problem."""
-    i, n = 0, len(args)
-    for k, c in enumerate(codes):
+    """None if args fit the type codes, else a short description of the problem.
+    Conservative: whatever Vectorworks might accept passes (a tuple of numbers
+    may also stand for consecutive number parameters, e.g. (x, y), r, ...)."""
+    i, n, k = 0, len(args), 0
+    while k < len(codes):
+        c = codes[k]
         pos = k + 1
         if c in _TUPLE_LEN:
             if i < n and isinstance(args[i], (tuple, list)):
@@ -112,6 +115,7 @@ def check_args(codes, args):
                     return "parameter %d (%s) needs %s values, got a tuple of %d" % (
                         pos, _TYPE_NAME[c], " or ".join(str(x) for x in _TUPLE_LEN[c]), len(args[i]))
                 i += 1
+                k += 1
                 continue
             if c == "C":
                 return ("parameter %d (COLOR) must be one tuple (r, g, b); loose numbers are "
@@ -121,12 +125,20 @@ def check_args(codes, args):
             if len(loose) < w or not all(isinstance(a, _NUMBER) for a in loose):
                 return "parameter %d (%s) needs a tuple or %d numbers" % (pos, _TYPE_NAME[c], w)
             i += w
+            k += 1
             continue
         if i >= n:
             return "too few arguments (%d given)" % n
         a = args[i]
         if c in "RIB" and isinstance(a, str):
             return "parameter %d (%s) got text %r" % (pos, _TYPE_NAME[c], a[:40])
+        if c in "RI" and isinstance(a, (tuple, list)) and len(a) > 1:
+            span = codes[k:k + len(a)]
+            if len(span) == len(a) and all(x in "RIB" for x in span):
+                i += 1  # one tuple covering consecutive number parameters
+                k += len(a)
+                continue
+            return "parameter %d (%s) got a tuple of %d" % (pos, _TYPE_NAME[c], len(a))
         if c == "H" and isinstance(a, str):
             return ("parameter %d (HANDLE) got text %r; for a UUID use "
                     "vs.GetObjectByUuid(uuid)" % (pos, a[:40]))
@@ -137,6 +149,7 @@ def check_args(codes, args):
                 return ("parameter %d (callback) uses *args; Vectorworks counts named parameters, "
                         "declare them explicitly (e.g. def f(h))" % pos)
         i += 1
+        k += 1
     if i != n:
         return "too many arguments (%d given)" % n
     return None
