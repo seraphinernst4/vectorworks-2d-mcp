@@ -291,7 +291,9 @@ def insert_symbol(name, x, y, z=None, layer=None, cls=None, rotation=0.0):
     before = vs.LNewObj()
     vs.Symbol(name, (x, y), rotation)
     h = vs.LNewObj()
-    if _is_nil(h) or vs.GetTypeN(h) != 15 or (not _is_nil(before) and str(h) == str(before)):
+    # usually a symbol (15); symbols set to "convert to group / plug-in object"
+    # arrive as a group (11) or plug-in object (86)
+    if _is_nil(h) or (not _is_nil(before) and str(h) == str(before)) or vs.GetTypeN(h) not in (15, 11, 86):
         raise RuntimeError("Vectorworks did not place symbol %r" % name)
     if cls:
         vs.SetClass(h, cls)

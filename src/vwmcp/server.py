@@ -36,7 +36,9 @@ def main() -> None:
         import sys
 
         try:
-            msg = install.ensure_plugin(os.environ.get("VWMCP_VW_VERSION") or None)
+            # every installed version (the version setting only picks which
+            # Vectorworks to talk to; an upgrade to 2027 must get the bridge too)
+            msg = install.ensure_plugin(None)
             if msg:
                 print(msg, file=sys.stderr)
         except (Exception, SystemExit) as e:  # never block the server

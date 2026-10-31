@@ -186,6 +186,15 @@ def make_vs():
     fn("GetFName", "vs.GetFName()")
     vs.Unindexed = lambda *a: vs.calls.append(("Unindexed", a))
     vs.kConstant = 7
+
+    class Builtin:  # like a C built-in: callable, no __code__
+        __doc__ = "Selects. Definition: vs.SetSelect(h)"
+
+        def __call__(self, h):
+            vs.calls.append(("SetSelect", (h,)))
+
+    vs.SetSelect = Builtin()
+    vs.NoDoc = lambda a: vs.calls.append(("NoDoc", (a,)))  # no "Definition:" to confirm
     return vs
 
 
@@ -198,6 +207,8 @@ INDEX = {"f": {
     "Changed": {"a": "a:REAL, b:REAL", "t": "RR"},
     "Missing": {"a": "a:REAL", "t": "R"},
     "GetFName": {"a": "", "t": ""},
+    "SetSelect": {"a": "h:HANDLE", "t": "H"},
+    "NoDoc": {"a": "a:REAL", "t": "R"},
 }}
 
 
@@ -212,7 +223,7 @@ def checked(tmp_path):
 
 def test_check_table_follows_the_live_api(checked):
     vs, proxy, table = checked
-    assert set(table) == {"Rect", "SetFillBack", "HMove", "ForEachObject", "Locus3D", "GetFName"}
+    assert set(table) == {"Rect", "SetFillBack", "HMove", "ForEachObject", "Locus3D", "GetFName", "SetSelect"}
 
 
 def test_functions_without_parameters_are_checked_too(checked):
@@ -284,6 +295,14 @@ def test_callbacks_must_name_their_parameters(checked):
         proxy.ForEachObject(lambda *a: None, "(ALL)")
     with pytest.raises(bridge.VSArgumentError, match="not callable"):
         proxy.ForEachObject("ok", "(ALL)")
+
+
+def test_proxied_builtins_work_as_callbacks(checked):
+    """vs.ForEachObject(vs.SetSelect, ...) - the proxy's wrapper is not passed on."""
+    vs, proxy, _ = checked
+    proxy.ForEachObject(proxy.SetSelect, "(ALL)")
+    name, args = vs.calls[-1]
+    assert name == "ForEachObject" and args[0] is vs.SetSelect
 
 
 def test_unchecked_names_pass_through(checked):

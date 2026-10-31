@@ -107,9 +107,19 @@ class MacTrigger:
         self.max_pending = max_pending
         self._pending: list[tuple[subprocess.Popen, float]] = []
         self.target: str | None = None  # app name of the last trigger
+        self._target_start: float | None = None  # its process start (monotonic estimate)
+        self.last_rc: int | None = None  # exit code of the last finished osascript
+        self._misses = 0
 
     def _reap(self) -> None:
-        self._pending = [(p, t) for p, t in self._pending if p.poll() is None]
+        still = []
+        for p, t in self._pending:
+            rc = p.poll()
+            if rc is None:
+                still.append((p, t))
+            else:
+                self.last_rc = rc
+        self._pending = still
 
     def in_flight(self) -> bool:
         self._reap()
@@ -141,16 +151,44 @@ class MacTrigger:
         vss_text = DIRECT_VSS if self.direct else MENU_VSS
         script = f'tell application "{app}" to run VectorScript "{vss_text}"'
         self.target = app
+        self._target_start = time.monotonic() - up
         self._pending.append((self.spawn(["osascript", "-e", script]), time.monotonic()))
+
+    def target_alive(self) -> bool | None:
+        """Does the Vectorworks we triggered still run (same process)? False
+        if it quit or was restarted, None if unknown."""
+        if not self.target:
+            return None
+        try:
+            running = self.apps()
+        except Exception:  # noqa: BLE001
+            return None
+        for name, up in running:
+            if name == self.target:
+                started = time.monotonic() - up
+                # started clearly after our trigger: a new process
+                if self._target_start is not None and started > self._target_start + 10:
+                    return False
+                return True
+        return False
 
     def on_unclaimed(self) -> bool:
         """Vectorworks answered the trigger but didn't take the job. In auto
-        mode that means the menu command is missing: switch to direct.
+        mode, twice in a row with osascript succeeding, that means the menu
+        command is missing: switch to direct. (A failed osascript - e.g. no
+        automation permission - or a single miss proves nothing.)
         True if the mode changed."""
-        if self.mode == "auto" and not self.direct:
-            self.direct = True
-            return True
-        return False
+        if self.mode != "auto" or self.direct:
+            return False
+        self._reap()
+        if self.last_rc not in (0, None):
+            self._misses = 0
+            return False
+        self._misses += 1
+        if self._misses < 2:
+            return False
+        self.direct = True
+        return True
 
 
 def manual_trigger() -> None:

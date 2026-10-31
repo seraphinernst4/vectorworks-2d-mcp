@@ -32,6 +32,8 @@ STALE_AFTER = 3600.0
 # Re-fire the trigger if the job is still unclaimed after this long and no
 # trigger is in flight (an Apple Event can get lost while Vectorworks is busy).
 RETRIGGER_AFTER = 2.0
+# while a claimed job runs: how often to check that Vectorworks still runs
+ALIVE_EVERY = 2.0
 
 
 class BridgeError(RuntimeError):
@@ -106,7 +108,7 @@ class Bridge:
         path = self.libdir / f"{sha}.py"
         if ref is None or not path.is_file():
             self.libdir.mkdir(parents=True, exist_ok=True)
-            tmp = path.with_suffix(f".{os.getpid()}.tmp")
+            tmp = path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")
             tmp.write_text(source, encoding="utf-8")
             os.replace(tmp, path)
             ref = {"name": name, "sha": sha, "path": str(path)}
@@ -168,24 +170,28 @@ class Bridge:
         tmp.write_text(json.dumps(job), encoding="utf-8")
         os.replace(tmp, job_path)
 
+        t0 = time.monotonic()
+        claimed_at = None
         try:
             self.trigger()
         except TriggerError as e:
-            self._cancel(job_path)
-            self.log(f"trigger failed for job {job_id}: {e}")
-            raise
+            if self._cancel(job_path):
+                self.log(f"trigger failed for job {job_id}: {e}")
+                raise
+            # an earlier Apple Event (or another server) already took it: wait for it
+            claimed_at = time.monotonic()
 
-        t0 = time.monotonic()
         # 1. wait for the claim (or a result, if it was quick)
         claim_deadline = t0 + self.claim_timeout
         last_fire = t0
-        claimed_at = None
         while claimed_at is None:
             if result_path.exists() or not job_path.exists():  # done, or renamed to .working
                 claimed_at = time.monotonic()
                 break
             now = time.monotonic()
-            if now >= claim_deadline:
+            # wall clock too: monotonic time stands still while the Mac sleeps,
+            # the bridge's ttl check doesn't
+            if now >= claim_deadline or time.time() - created >= self.claim_timeout:
                 if self._cancel(job_path):
                     msg = self._not_claimed_message()
                     self.log(f"not claimed in {self.claim_timeout:g}s, cancelled {job_id}: {msg}")
@@ -202,9 +208,19 @@ class Bridge:
                     self.trigger()
             time.sleep(self.poll_interval)
 
-        # 2. wait for the result
+        # 2. wait for the result; if Vectorworks quits or restarts meanwhile,
+        # stop waiting instead of hanging until the timeout
         deadline = claimed_at + timeout
+        alive = getattr(self.trigger, "target_alive", None)
+        next_probe = claimed_at + ALIVE_EVERY
         while time.monotonic() < deadline:
+            if callable(alive) and time.monotonic() >= next_probe:
+                next_probe = time.monotonic() + ALIVE_EVERY
+                if alive() is False and not result_path.exists():
+                    msg = ("Vectorworks quit or restarted while working on this request; it did not "
+                           "finish. Open Vectorworks with your document and check what was done.")
+                    self.log(f"target gone, job {job_id}: {msg}")
+                    raise BridgeError(msg)
             if result_path.exists():
                 res = self._consume(result_path)
                 self.bridge_version = res.get("bridge_version") or self.bridge_version

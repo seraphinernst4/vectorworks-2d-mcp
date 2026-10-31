@@ -39,7 +39,7 @@ def test_refuses_while_vectorworks_is_still_starting(root):
     assert procs == []
 
 
-def test_sends_menu_command_via_vectorscript_file(root):
+def test_sends_menu_command_via_run_vectorscript(root):
     t, procs = make(root, running=[("Vectorworks 2026", 600.0)])
     t()
     ((args, _),) = procs
@@ -126,8 +126,44 @@ def test_auto_mode_switches_to_direct_once(root):
     t = MacTrigger(root, apps=lambda: [("Vectorworks 2026", 600.0)], spawn=spawn, mode="auto")
     t()
     assert "DoMenuTextByName" in procs[-1][2]
+    assert t.on_unclaimed() is False  # one miss proves nothing (another job may have been first)
     assert t.on_unclaimed() is True and t.on_unclaimed() is False
     t()
     assert "PythonExecute" in procs[-1][2]
     menu = MacTrigger(root, apps=lambda: [("Vectorworks 2026", 600.0)], spawn=spawn, mode="menu")
     assert menu.on_unclaimed() is False
+
+
+def test_target_alive_tracks_the_triggered_process(root):
+    running = [("Vectorworks 2026", 600.0)]
+    t, _ = make(root, running=running)
+    assert t.target_alive() is None  # nothing triggered yet
+    t()
+    assert t.target_alive() is True
+    running[:] = []
+    assert t.target_alive() is False  # quit / crashed
+    running[:] = [("Vectorworks 2026", 30.0)]
+    assert t.target_alive() is False  # restarted: a younger process
+    running[:] = [("Vectorworks 2027", 900.0)]
+    assert t.target_alive() is False  # only another version runs
+
+
+def test_target_alive_unknown_when_ps_fails(root):
+    t, _ = make(root, running=[("Vectorworks 2026", 600.0)])
+    t()
+
+    def broken():
+        raise OSError("ps")
+
+    t.apps = broken
+    assert t.target_alive() is None
+
+
+def test_auto_mode_keeps_the_menu_when_osascript_fails(root):
+    class Failed(FakeProc):
+        def poll(self):
+            return 1  # e.g. no permission to control Vectorworks
+
+    t = MacTrigger(root, apps=lambda: [("Vectorworks 2026", 600.0)], spawn=lambda a: Failed(), mode="auto")
+    t()
+    assert t.on_unclaimed() is False and t.on_unclaimed() is False and not t.direct

@@ -101,3 +101,20 @@ def test_ping_notes_prepared_2027(vs):
     vs.GetVersionEx = lambda: (32, 0, 0, 1, 900000)  # Vectorworks 2027
     out = server.vw_ping()
     assert "warning" not in out and "2027" in out["note"] and "not been tested live" in out["note"]
+
+
+def test_ping_reloads_an_old_bridge_and_asks_again(bridge, monkeypatch):
+    from vwmcp import calls
+
+    monkeypatch.setattr(vwmcp_bridge, "BRIDGE_VERSION", "0.1.0")  # old module still in memory
+    reloads = []
+
+    def fake_reload(b):
+        reloads.append(b.bridge_version)
+        monkeypatch.setattr(vwmcp_bridge, "BRIDGE_VERSION", app.EXPECTED_BRIDGE_VERSION)
+        b.bridge_version = app.EXPECTED_BRIDGE_VERSION
+
+    monkeypatch.setattr(calls, "maybe_reload", fake_reload)
+    out = server.vw_ping()
+    assert reloads == ["0.1.0"]
+    assert out["bridge_version"] == app.EXPECTED_BRIDGE_VERSION and "warning" not in out

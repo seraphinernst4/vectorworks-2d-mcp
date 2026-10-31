@@ -15,7 +15,7 @@ from vwmcp import calls
 from vwmcp.client import Bridge, BridgeError
 from vwmcp.journal import Journal
 
-EXPECTED_BRIDGE_VERSION = "0.2.0"
+EXPECTED_BRIDGE_VERSION = "0.2.1"
 # Vectorworks major versions this release was tested against (31 = 2026).
 TESTED_VW_MAJORS = {31: "2026"}
 # Prepared but not yet tested live (32 = 2027: Python 3.14, same vs API + new functions).

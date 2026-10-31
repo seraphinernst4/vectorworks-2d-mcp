@@ -62,6 +62,20 @@ CODES = {
     "PROCEDURE": "F",
 }
 WIDTH = {"P": 2, "Q": 3, "V": 3, "C": 3}  # values each code takes in VectorScript
+# The stubs mistype some parameters (e.g. PDF_GetPageCount(inFilePath: PROCEDURE),
+# SetSkylight(symName: LONGINT)). A parameter whose name contradicts its type
+# gets no code, so the function stays unchecked rather than rejecting valid calls.
+CALLBACK_NAME = re.compile(r"(?i)(callback|actionfunc|func$|^p$)")
+TEXT_NAME = re.compile(r"(?i)(name|cstr)$")
+
+
+def _code(name: str, typ: str) -> str | None:
+    c = CODES.get(typ)
+    if c == "F" and not CALLBACK_NAME.search(name):
+        return None
+    if c in ("R", "I", "B") and TEXT_NAME.search(name):
+        return None
+    return c
 
 
 def _param_types(lines: list[str], node: ast.FunctionDef) -> list[tuple[str, str]]:
@@ -128,7 +142,7 @@ def _from_reference(md: Path) -> dict | None:
                  if m.group(1).strip() not in ("Name", "---"))
     types = [table.get(n, "") for n in names]
     sig = re.sub(r"\s+", " ", pas.group(1)).strip() if pas else ""
-    codes = [CODES.get(t) for t in types]
+    codes = [_code(n, t) for n, t in zip(names, types)]
     inputs = _vs_inputs(sig) if sig else None
     checkable = all(codes) and inputs is not None and sum(WIDTH.get(c, 1) for c in codes) == inputs
     ret = re.search(r"return\s+(\w+)", text[py.end():py.end() + 200])
@@ -166,7 +180,7 @@ def build(stub: Path, vwx: Path | None = None, versions: Path | None = None,
         # "in/out" parameters are passed in Python and are VAR in VectorScript
         inout = [t[len("IN/OUT "):] for _, t in params if t.startswith("IN/OUT ")]
         params = [(n, t[len("IN/OUT "):] if t.startswith("IN/OUT ") else t) for n, t in params]
-        codes = [CODES.get(t) for _, t in params]
+        codes = [_code(n, t) for n, t in params]
         inputs = _vs_inputs(vsig.group(1)) if vsig else None
         checkable = (
             all(codes)

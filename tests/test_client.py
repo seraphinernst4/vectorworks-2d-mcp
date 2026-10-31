@@ -6,7 +6,7 @@ import time
 import pytest
 import vwmcp_bridge
 
-from vwmcp.client import Bridge, BridgeTimeout, TriggerError
+from vwmcp.client import Bridge, BridgeError, BridgeTimeout, TriggerError
 
 
 class FakeExecutor:
@@ -216,3 +216,50 @@ def test_auto_trigger_falls_back_when_menu_command_is_missing(root, fake_vs, mon
     b = make_bridge(root, AutoTrigger())
     assert b.run("7")["value"] == 7
     assert "direct trigger" in (root / "vwmcp.log").read_text()
+
+
+def test_trigger_error_after_the_job_was_claimed_waits_for_it(root, fake_vs):
+    """An earlier Apple Event already took the job when the new trigger fails:
+    the job runs, so the server must wait for it, not report a failure."""
+    b = make_bridge(root, None)
+
+    def late_failure():
+        claimed = vwmcp_bridge._claim_oldest(str(b.jobs))
+        threading.Timer(0.1, vwmcp_bridge._run_one, (claimed, str(b.results), fake_vs)).start()
+        raise TriggerError("Vectorworks 2026 is still starting")
+
+    b.trigger = late_failure
+    assert b.run("7 * 6")["value"] == 42
+
+
+def test_vectorworks_quitting_during_a_job_fails_fast(root, fake_vs, monkeypatch):
+    import vwmcp.client as client
+
+    monkeypatch.setattr(client, "ALIVE_EVERY", 0.05)
+
+    class Gone:
+        def __call__(self):
+            vwmcp_bridge._claim_oldest(str(b.jobs))  # claimed, then Vectorworks crashes
+
+        def target_alive(self):
+            return False
+
+    b = make_bridge(root, Gone(), timeout=30)
+    t = time.monotonic()
+    with pytest.raises(BridgeError, match="quit or restarted"):
+        b.run("1")
+    assert time.monotonic() - t < 5
+    assert "target gone" in (root / "vwmcp.log").read_text()
+
+
+def test_alive_probe_does_not_disturb_normal_jobs(root, fake_vs, monkeypatch):
+    import vwmcp.client as client
+
+    monkeypatch.setattr(client, "ALIVE_EVERY", 0.01)
+
+    class Slow(FakeExecutor):
+        def target_alive(self):
+            return True
+
+    b = make_bridge(root, Slow(root, fake_vs), timeout=5)
+    assert b.run("import time\ntime.sleep(0.2)\n3")["value"] == 3

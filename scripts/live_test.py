@@ -313,7 +313,7 @@ def mcp_tests(report: dict, server_dir: str | None) -> None:
         report["mcp"] = {"skipped": "no --server"}
         return
     r = asyncio.run(_mcp_round_trip(server_dir))
-    r["pass"] = (not r["vw_ping"]["error"] and "0.2.0" in r["vw_ping"]["text"]
+    r["pass"] = (not r["vw_ping"]["error"] and "0.2.1" in r["vw_ping"]["text"]
                  and "vs.Rect(p1: POINT, p2: POINT)" in r["vw_vs_lookup"]["text"]
                  and "VSArgumentError" in r["exec_bad_rect"]["text"] and not r["vw2d_read"]["error"])
     report["mcp"] = r

@@ -21,6 +21,12 @@ Stabiler, schneller, bereit für Vectorworks 2027.
 - Aufräumen: alte Ergebnisse, abgebrochene und verwaiste Jobs (> 1 h).
 - Live getestet: Vectorworks blockiert, zweiter Auftrag wird abgebrochen und
   läuft auch nach dem Freiwerden nicht nach; 18-s-Auftrag wird abgewartet.
+- Stürzt Vectorworks ab oder wird beendet, während es einen Auftrag
+  bearbeitet, meldet Keystone das nach ~2 s (statt bis zu 10 min zu warten).
+- Scheitert ein Auslöser, nachdem ein früherer den Auftrag schon
+  übernommen hat, wartet der Server auf das Ergebnis statt einen Fehler zu
+  melden (der Auftrag läuft ja). Die Annahmefrist zählt auch die Uhrzeit,
+  damit ein Ruhezustand des Macs sie nicht verlängert.
 
 ### Signatur-Index und Argumentprüfung
 - `src/vwmcp/data/vs_index.json`: alle 3192 `vs.*`-Funktionen mit
@@ -31,7 +37,10 @@ Stabiler, schneller, bereit für Vectorworks 2027.
   `vw_exec_python` und `import vs`): falsche Argumentzahl, Text statt Zahl
   oder Handle, Farbe als lose Zahlen, `lambda *a`-Callbacks → Python-
   Exception `VSArgumentError` mit der richtigen Signatur statt des modalen
-  Skriptfehler-Dialogs. Was Vectorworks annehmen könnte, geht immer durch.
+  Skriptfehler-Dialogs. Was Vectorworks annehmen könnte, geht durch: geprüft
+  wird nur, was Vectorworks' eigener Docstring bestätigt; `vs`-Funktionen als
+  Callback (`vs.ForEachObject(vs.SetSelect, …)`) werden unverändert
+  weitergereicht; 17 im Stub falsch typisierte Funktionen bleiben ungeprüft.
   Live: 3077 Funktionen geprüft, 0 Widersprüche zu Vectorworks' Docstrings.
 - `vw_vs_lookup` antwortet aus dem Index (sofort, ohne Vectorworks), mit
   Typen und „ab Version“; nur ohne Treffer fragt es live in Vectorworks.
@@ -41,7 +50,11 @@ Stabiler, schneller, bereit für Vectorworks 2027.
   Keystones Radius-Berechnung, nicht in Vectorworks); `vw_revert_last`
   stellt Kreise bitgenau wieder her.
 - Namen sind ein Namensraum für Objekte, Klassen, Ebenen, Ressourcen:
-  `vw_insert_symbol` nimmt nur echte Symbole und prüft das gesetzte Objekt.
+  `vw_insert_symbol` nimmt nur echte Symbole und prüft das gesetzte Objekt
+  (auch Symbole, die beim Einsetzen zur Gruppe oder zum Plug-in-Objekt
+  werden).
+- Bogenradien: nur echtes Rechenrauschen wird geglättet; ein Radius wie
+  1000/3 mm bleibt unverändert (vorher auf 1 Pikometer gerundet).
 - Gruppen werden sicher durchlaufen (leere Gruppen, begrenzte Schleifen).
 - Kreise bleiben `ArcByCenter` (live exakt; `Oval` würde Ellipsen-Objekte
   erzeugen) – begründet in der Doku.
@@ -51,7 +64,9 @@ Stabiler, schneller, bereit für Vectorworks 2027.
 - Keystone spricht mit dem Vectorworks, das läuft (2026 oder 2027); die
   Versions-Einstellung ist nur noch eine Vorliebe, falls mehrere laufen.
 - Die Brücke und der Index werden in jede Vectorworks-Version ab 2026
-  installiert; ein laufendes Vectorworks lädt eine neue Brücke selbst nach.
+  installiert – auch wenn in den Einstellungen eine Version fest gewählt
+  ist; ein laufendes Vectorworks lädt eine neue Brücke selbst nach
+  (`vw_ping` stößt das bei einer alten Brücke auch selbst an).
 - Brücke und Bibliotheken laufen unter Python 3.9 (VW 2026) und 3.14
   (VW 2027) – getestet mit beiden Interpretern.
 - Vectorworks wird per `ps` erkannt (BSD-`pgrep` übersah es, wenn der

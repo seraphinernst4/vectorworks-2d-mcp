@@ -77,7 +77,7 @@ Claude Desktop
 | `src/vwmcp/tools/generic.py` | Werkzeuge aus dem Original (ping, records, Symbole, `vw_exec_python`, `vw_revert_last`) |
 | `src/vwmcp/journal.py` | Rückgängig-Journal `~/.vwmcp/journal.jsonl` |
 | `src/vwmcp/app.py` | Server, Anweisungen an Claude (Zeichen- und Organisationsregeln), Icon |
-| `vw-plugin/vwmcp/vwmcp_bridge.py` | Brücke in Vectorworks (0.2.0): atomares Beanspruchen (`.working`), geprüfter `vs`-Proxy, Bibliotheks-Cache, lädt sich bei Updates selbst neu; Python 3.9 + 3.14 |
+| `vw-plugin/vwmcp/vwmcp_bridge.py` | Brücke in Vectorworks (0.2.1): atomares Beanspruchen (`.working`), geprüfter `vs`-Proxy, Bibliotheks-Cache, lädt sich bei Updates selbst neu; Python 3.9 + 3.14 |
 | `src/vwmcp/data/vs_index.json` | Signatur-Index aller 3192 `vs.*`-Funktionen (Typen, Rückgabe, Kategorie, Version) – für die Argumentprüfung und `vw_vs_lookup` |
 | `tools/build_vs_index.py` | Baut den Index aus Vectorworks' Stub + Funktionsreferenz (+ vwx-mcp-Beschreibungen) |
 | `scripts/live_test.py`, `scripts/trigger_bench.py` | Live-Test gegen das laufende Vectorworks; Messung der Auslösung |

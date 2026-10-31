@@ -20,9 +20,11 @@
     unclaimed jobs on timeout (so they never run later by surprise), and
     logs failures to `~/.vwmcp/vwmcp.log`.
   - `trigger.py`: macOS trigger (below).
-  - `vwlib.py`: helper library executed *inside* Vectorworks, sent with
-    every typed tool call so the installed bridge never needs updating.
-    Must stay Python 3.9-compatible.
+  - `vwlib.py` / `vwlib2d.py`: helper libraries executed *inside*
+    Vectorworks. Sent by reference: written once to `~/.vwmcp/lib/<sha256>.py`,
+    compiled once per Vectorworks session by the bridge (bridges before 0.2.0
+    get the source inline), so the installed bridge never needs updating
+    when tools change. Must stay Python 3.9-compatible.
   - `journal.py`: per-call revert journal.
   - `tools/generic.py`, `tools/spotlight.py`: the MCP tools.
 

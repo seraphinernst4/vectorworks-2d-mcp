@@ -55,10 +55,15 @@ Build 879357, deutsch, macOS).
 
 ## Grundsatz
 
-Der Proxy blockiert nie etwas, das Vectorworks annehmen könnte: Punkte
+Der Proxy soll nie etwas blockieren, das Vectorworks annehmen könnte: Punkte
 dürfen als Tupel oder als zwei Zahlen kommen, ein Zahlentupel darf auch
-mehrere aufeinanderfolgende Zahlenparameter abdecken, und Funktionen ohne
-Indexeintrag oder mit abweichender Live-Signatur gehen ungeprüft durch.
+mehrere aufeinanderfolgende Zahlenparameter abdecken, `vs`-Funktionen dürfen
+selbst Callback sein (`vs.ForEachObject(vs.SetSelect, …)` – der Proxy reicht
+die Original-Funktion weiter). Geprüft wird nur, was Vectorworks' eigener
+Docstring bestätigt; Funktionen ohne Indexeintrag, ohne Docstring oder mit
+abweichender Live-Signatur gehen ungeprüft durch. Parameter, deren Typ im
+Stub offensichtlich falsch ist (17 Funktionen, z. B. `PDF_GetPageCount(inFilePath:
+PROCEDURE)`, `SetSkylight(symName: LONGINT)`), bleiben ungeprüft.
 Live auf 2026 U7: Von 3192 Funktionen im Index gibt es 3099 in Vectorworks
 2026 (der Rest ist neu in 2027 oder nur VectorScript); 3077 davon werden
 geprüft, keine einzige widerspricht Vectorworks' eigenen Docstrings.

@@ -150,7 +150,11 @@ Alle Werkzeuge: `vw2d_read`, `vw2d_structure`, `vw2d_resources`, `vw2d_setup`,
   (Anzahl und Art der Argumente, Farben als Tupel, Callbacks). Statt des
   modalen Fensters „Skriptfehler“ bekommt Claude eine klare Meldung mit der
   richtigen Signatur und korrigiert sich selbst.
-- **Gerade gestartet?** Claude wartet, bis Vectorworks ~20 Sekunden läuft.
+- **Gerade gestartet?** In den ersten ~20 Sekunden nach dem Start von Vectorworks lehnt Keystone
+  Aufträge ab („still starting“) – Skripte während des Starts bringen Vectorworks 2026 zum
+  Absturz. Kurz warten, dann nochmal fragen.
+- **Vectorworks abgestürzt oder beendet?** Merkt Keystone innerhalb von ~2 Sekunden und meldet
+  es, statt bis zu 10 Minuten auf ein Ergebnis zu warten.
 - **Exakt heißt:** Koordinaten werden ungerundet durchgereicht und
   zurückgelesen. Rechenrauschen von Vectorworks' Booleschen Operationen
   (z. B. 26,999999999999996 statt 27) wird automatisch auf die exakten
