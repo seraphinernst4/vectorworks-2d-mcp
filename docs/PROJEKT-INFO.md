@@ -74,6 +74,9 @@ Claude Desktop
 | `src/vwmcp/geom/specs.py` | Eingaben → exakte Geometrie (Decimal, mm/cm/m, Maßketten, Pfade mit Bögen) |
 | `src/vwmcp/geom/render.py` | Prüfbild |
 | `src/vwmcp/tools/draw2d.py` | Die vw2d-Werkzeuge |
+| `src/vwmcp/catalog/` | Asset-Katalog: Bausteine in mm mit echten Bögen (`shapes.py`), Assets (`assets_*.py`), Vorschaubilder (`preview.py`), Namen/Klassen (`__init__.py`) |
+| `src/vwmcp/tools/assets.py` | `vw2d_assets`, `vw2d_place_asset` (Symbol je Variante, Rückleseprüfung, Journal) |
+| `src/vwmcp/organize.py`, `src/vwmcp/tools/organize.py` | Regeln zum Sortieren auf Klassen/Ebenen (`vw2d_organize`, Probelauf + ein Schritt) |
 | `src/vwmcp/tools/generic.py` | Werkzeuge aus dem Original (ping, records, Symbole, `vw_exec_python`, `vw_revert_last`) |
 | `src/vwmcp/journal.py` | Rückgängig-Journal `~/.vwmcp/journal.jsonl` |
 | `src/vwmcp/app.py` | Server, Anweisungen an Claude (Zeichen- und Organisationsregeln), Icon |
@@ -90,7 +93,7 @@ Claude Desktop
 | `docs/api-pitfalls.md` | Übernommene API-Fallstricke (vwx-mcp, vwmcp) mit Live-Befund |
 | `NOTICE`, `CHANGELOG.md` | Lizenzhinweise der Vorlagen; Änderungen |
 
-## Werkzeuge (28)
+## Werkzeuge (31)
 
 **2D:** `vw2d_structure` (Ebenen/Klassen + Organisationsprobleme), `vw2d_read`,
 `vw2d_resources` (Schraffuren, Linienarten, Klassen, Ebenen), `vw2d_setup`
@@ -101,7 +104,9 @@ Prüfung), `vw2d_edit`, `vw2d_transform` (auch Punkt auf Punkt), `vw2d_boolean`
 (vereinigen, abziehen, schneiden, teilen), `vw2d_offset`, `vw2d_set_attributes`,
 `vw2d_delete`, `vw2d_check` (mit Prüfbild), `vw2d_preview`, `vw2d_fix` (snap,
 close, clean, duplicates, overlaps, merge, by_class), `vw2d_select` (markieren +
-zoomen).
+zoomen), `vw2d_organize` (nach Regeln auf Klassen/Ebenen sortieren),
+`vw2d_assets` / `vw2d_place_asset` (Asset-Katalog: Sanitär, Küche, Möbel,
+Bäume, Personen, Fahrzeuge als exakte Symbole).
 **Aus dem Original:** `vw_ping`, `vw_document_info`, `vw_list_layers`,
 `vw_list_classes`, `vw_get_selection`, `vw_find_objects`, `vw_get_record`,
 `vw_set_record`, `vw_list_symbols`, `vw_insert_symbol`, `vw_revert_last`,

@@ -80,3 +80,64 @@ def test_bulk_lookup_and_stacking_map_match_the_slow_versions():
     assert few[0].uid == "u3" and lookups == ["u3"]
     zm = ns["_z_map"](got)
     assert all(zm[str(h)] == ns["_z_index"](h) == h.i for h in got)
+
+
+class StackVS:
+    """A layer list like Vectorworks': first object = back, new objects at
+    the end (front); HMoveBackward moves one step towards the first."""
+
+    def __init__(self, names):
+        self.layer = types.SimpleNamespace(name="L", t=31)
+        self.objs = [types.SimpleNamespace(name=n, t=2, uid="u" + n) for n in names]
+
+    def order(self):
+        return "".join(o.name for o in self.objs)
+
+    def NextObj(self, h):
+        i = self.objs.index(h)
+        return self.objs[i + 1] if i + 1 < len(self.objs) else None
+
+    def PrevObj(self, h):
+        i = self.objs.index(h)
+        return self.objs[i - 1] if i > 0 else None
+
+    def HMoveBackward(self, h, to_back):
+        i = self.objs.index(h)
+        self.objs.pop(i)
+        self.objs.insert(0 if to_back else max(0, i - 1), h)
+
+    def HMoveForward(self, h, to_front):
+        i = self.objs.index(h)
+        self.objs.pop(i)
+        self.objs.insert(len(self.objs) if to_front else min(len(self.objs), i + 1), h)
+
+    def GetParent(self, h):
+        return self.layer
+
+    def GetTypeN(self, h):
+        return h.t
+
+    def NumObj(self, lay):
+        return len(self.objs)
+
+    def GetObjectByUuid(self, u):
+        return next((o for o in self.objs if o.uid == u), None)
+
+
+def test_place_below_restores_the_stacking_position_from_either_end():
+    for names, gone_idx in (("ABCDEFGHIJ", 1), ("ABCDEFGHIJ", 8), ("ABCDEFGHIJ", 5), ("AB", 0)):
+        st = StackVS(names)
+        ns = _ns()
+        ns["vs"].__dict__.update({k: getattr(st, k) for k in dir(st) if k[0].isupper()})
+        gone = st.objs[gone_idx]
+        z = gone_idx
+        above = st.objs[gone_idx + 1].uid if gone_idx + 1 < len(st.objs) else None
+        st.objs.remove(gone)
+        st.objs.append(gone)  # restored objects land in front
+        ns["_place_below"](gone, above, z)
+        assert st.order() == names, (names, gone_idx, st.order())
+        # without the old index: stepping back from the front
+        st.objs.remove(gone)
+        st.objs.append(gone)
+        ns["_place_below"](gone, above, None)
+        assert st.order() == names

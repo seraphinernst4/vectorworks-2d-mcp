@@ -1012,9 +1012,12 @@ def snapshot(h, z=None):
 
 
 def _place_below(h, above_uuid, z=None, hmap=None):
-    """Move a (new, frontmost) object down until it lies directly below
-    `above`. With its old stacking index z, an object near the back is sent
-    to the back first and moved up - fewer steps in big layers."""
+    """Move a new object to its old stacking position: directly behind
+    `above` (the object that was in front of it). Lists run from the back
+    (first object) to the front (last, where new objects land);
+    HMoveBackward moves one step towards the first. With the old index z
+    (from the back), an object near the back is sent to the back first and
+    moved forward - fewer steps in big layers."""
     if not above_uuid:
         return
     above = _get_by_uuid(above_uuid, hmap or {})
@@ -1034,11 +1037,12 @@ def _place_below(h, above_uuid, z=None, hmap=None):
         return
     while n < 1000000:
         nxt = vs.NextObj(h)
-        if _is_nil(nxt) or str(nxt) == str(above):
+        if not _is_nil(nxt) and str(nxt) == str(above):
             return
+        if _is_nil(vs.PrevObj(h)):
+            return  # at the back: `above` is not behind us
         vs.HMoveBackward(h, False)
         n += 1
-
 
 def _rebuild(rec):
     k = rec["kind"]

@@ -497,8 +497,10 @@ def perf_tests(report: dict) -> None:
                      "for _h in _k:\n    vs.DelObject(_h)\nresult = len(_k)" % PERF_LAYER)
 
     out: dict = {}
+    report["perf"] = out  # partial results survive an exception
     for n in PERF_SIZES:
         r: dict = {}
+        out[str(n)] = r
         draw2d.vw2d_setup(layers=[{"name": PERF_LAYER, "scale": 100}])
         clear()
         t = time.monotonic()
@@ -577,10 +579,116 @@ def perf_tests(report: dict) -> None:
         back = timed("organize_back", lambda: organize.vw2d_organize(class_map=cmap, layer=PERF_LAYER))
         if isinstance(back, dict):
             r["organize_back_to_change"] = back.get("to_change")
-        r["cleared"] = clear()
-        out[str(n)] = r
+        try:
+            r["cleared"] = clear()
+        except Exception:  # noqa: BLE001 - Vectorworks may still be busy for a moment
+            time.sleep(20)
+            r["cleared"] = clear()
         log(f"perf {n}: " + ", ".join(f"{k}={v}" for k, v in r.items() if k.endswith("_s")))
-    report["perf"] = out
+
+
+STACK_LAYER = "KS-Test-Stack"
+
+
+def stack_tests(report: dict) -> None:
+    """Stacking order survives delete + revert and a rebuilding edit."""
+    from vwmcp import app
+    from vwmcp.tools import draw2d, generic
+
+    b = app.get_bridge()
+    order_code = ("_l = vs.GetLayerByName(%r)\n_o = []\n_k = vs.FInLayer(_l)\n"
+                  "while _k is not None and str(_k) != '0' and len(_o) < 100:\n"
+                  "    _o.append(vs.GetName(_k))\n    _k = vs.NextObj(_k)\n"
+                  "result = ''.join(n.replace('KS-St-', '') for n in _o)" % STACK_LAYER)
+
+    def order():
+        return b.run(order_code)["value"]
+
+    b.run("_k = []\ndef _c(h):\n    _k.append(h)\nvs.ForEachObject(_c, \"(L='%s')\")\n"
+          "for _h in _k:\n    vs.DelObject(_h)\nlen(_k)" % STACK_LAYER)
+    draw2d.vw2d_setup(layers=[{"name": STACK_LAYER, "scale": 50}])
+    items = [{"type": "rect", "corner": [i * 500, 0], "width": 800, "height": 800, "name": "KS-St-" + c}
+             for i, c in enumerate("ABCDEF")]
+    d = draw2d.vw2d_draw(items, unit="mm", layer=STACK_LAYER, class_name="KS-Test-Wand", check=False)
+    u = {c: o["uuid"] for c, o in zip("ABCDEF", d["created"])}
+    r = {"start": order()}
+    draw2d.vw2d_delete([u["B"], u["E"]])
+    r["deleted"] = order()
+    generic.vw_revert_last()
+    r["reverted"] = order()
+    # rebuild C (rect -> polygon with an extra vertex): must keep its place
+    cu = [o["uuid"] for o in draw2d.vw2d_read(layer=STACK_LAYER, include_geometry=False)["objects"]
+          if o.get("name") == "KS-St-C"][0]
+    draw2d.vw2d_edit(cu, points=[[1000, 0], [1800, 0], [1800, 800], [1400, 900], [1000, 800]], unit="mm")
+    r["edited"] = order()
+    generic.vw_revert_last()
+    r["edit_reverted"] = order()
+    r["pass"] = (r["start"] == "ABCDEF" and r["deleted"] == "ACDF" and r["reverted"] == "ABCDEF"
+                 and r["edited"] == "ABCDEF" and r["edit_reverted"] == "ABCDEF")
+    report["stack"] = r
+    log(f"stack: pass={r['pass']} {r}")
+
+
+DIRECT_LAYER = "KS-Test-Direct"
+
+
+def direct_tests(report: dict) -> None:
+    """The direct trigger (VectorScript PythonExecute through AppleScript, no
+    menu command): read first, then writes, symbols and revert - stops at the
+    first failure. If Vectorworks crashes here, the direct trigger is not safe."""
+    from vwmcp import app
+    from vwmcp.client import Bridge
+    from vwmcp.tools import assets, draw2d, generic
+    from vwmcp.trigger import MacTrigger
+
+    r: dict = {"steps": []}
+    trig = MacTrigger(ROOT, mode="direct")
+    b = Bridge(root=ROOT, trigger=trig)
+    app.get_bridge.cache_clear()
+    orig = app.get_bridge
+    app.get_bridge = lambda: b  # every tool below goes through the direct trigger
+
+    def step(name, fn):
+        t0 = time.monotonic()
+        try:
+            v = fn()
+            r["steps"].append({"step": name, "ok": True, "s": round(time.monotonic() - t0, 3)})
+            return v
+        except Exception as e:  # noqa: BLE001
+            alive = trig.target_alive()
+            r["steps"].append({"step": name, "ok": False, "error": str(e)[:300], "vectorworks_alive": alive,
+                               "s": round(time.monotonic() - t0, 3)})
+            raise
+
+    try:
+        times = []
+        for _ in range(10):
+            step("ping", lambda: b.run("vs.GetFName()"))
+            times.append(b.last_timing["total_s"])
+        r["ping_median_s"] = sorted(times)[5]
+        step("read", lambda: draw2d.vw2d_structure())
+        draw2d.vw2d_setup(layers=[{"name": DIRECT_LAYER, "scale": 50}])
+        d = step("draw", lambda: draw2d.vw2d_draw(
+            [{"type": "rect", "corner": [0, 0], "width": 3650, "height": 4800},
+             {"type": "circle", "center": [6000, 1500], "radius": 600}],
+            unit="mm", layer=DIRECT_LAYER, class_name="KS-Test-Wand"))
+        r["draw_exact"] = d["all_exact"]
+        step("move", lambda: draw2d.vw2d_transform([d["created"][0]["uuid"]], "move", dx=100, dy=0, unit="mm"))
+        rv = step("revert", generic.vw_revert_last)
+        r["revert_tool"] = rv.get("reverted_tool")
+        a = step("asset", lambda: assets.vw2d_place_asset("waschtisch", position=[9000, 0], unit="mm",
+                                                         layer=DIRECT_LAYER, params={"b": 650}))
+        r["asset_exact"] = a["all_exact"]
+        step("asset_revert", generic.vw_revert_last)
+        step("draw_revert", generic.vw_revert_last)
+        r["pass"] = all(x["ok"] for x in r["steps"])
+    except Exception as e:  # noqa: BLE001
+        r["pass"] = False
+        r["error"] = str(e)[:400]
+    finally:
+        app.get_bridge = orig
+    report["direct"] = r
+    log(f"direct: pass={r.get('pass')} ping {r.get('ping_median_s')} s, steps {len(r['steps'])}")
 
 
 async def _mcp_round_trip(server_dir: str) -> dict:
@@ -645,7 +753,8 @@ def main() -> None:
     report = {"started": time.strftime("%Y-%m-%d %H:%M:%S"), "python": sys.version.split()[0]}
     log(f"live test start ({args.only})")
     sections = (("protocol", protocol_tests), ("tools", tool_tests), ("pitfalls", pitfall_tests),
-                ("regression", regression_tests), ("assets", asset_tests), ("perf", perf_tests),
+                ("regression", regression_tests), ("assets", asset_tests), ("stack", stack_tests),
+                ("perf", perf_tests), ("direct", direct_tests),
                 ("mcp", lambda rep: mcp_tests(rep, args.server)))
     for name, fn in sections:
         if name not in args.only.split(","):
