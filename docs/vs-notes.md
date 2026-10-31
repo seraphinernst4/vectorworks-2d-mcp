@@ -103,8 +103,14 @@ The dictionary has no usable document list (`every document` → `missing value`
 - `AddHole(outer, hole)` keeps outer's UUID, leaves the hole template
   (delete it) and may reverse the vertex order of the outline.
 - `ConvertToPolyline(rect)` replaces the object (new UUID).
-- `OffsetPolyN(h, d, False)`: positive d grows a counter-clockwise outline;
-  output has float noise too.
+- `OffsetPolyN(h, d, False)`: positive d grows a counter-clockwise outline.
+  The result goes on the **active** layer, in the active class with default
+  attributes (not the original's): make the original's layer active first,
+  then `SetClass` + copy the attributes. Its coordinates are exact – snap
+  candidates must be exact decimals too (2.615 - 0.01 in float is
+  2.6050000000000004).
+- `DoMenuTextByName("Fit To Objects", 0)` zooms to the selection; the name
+  is internal, it works with the German UI.
 - Stacking: `FInLayer` -> `NextObj` runs bottom to top; new objects go on
   top; `HMoveBackward(h, False)` moves one step down.
 - Solid fill uses the fill **background** color (default object: fore
