@@ -1,5 +1,51 @@
 # Changelog
 
+## 0.5.0 – Vorschau (Zweig v0.5)
+
+Assets und Sortieren.
+
+### Asset-Katalog (`vw2d_assets`, `vw2d_place_asset`)
+- 28 Assets (43 Ansichten), exakt aus Code gezeichnet (mm, echte Bögen, Korbbögen statt
+  angenäherter Ellipsen): Sanitär (WC wandhängend/stehend, Urinal,
+  Waschtisch einfach/doppelt, Handwaschbecken, Dusche mit Rinne oder
+  Punktablauf, Badewanne, Waschmaschine), Küche (Küchenzeile mit Spüle und
+  Kochfeld, Spüle, Kochfeld, Kühlschrank), Möbel (Stuhl, Esstisch mit
+  Stühlen eckig/rund, Bett, Sofa, Sessel, Couchtisch, Nachttisch, Kommode,
+  Regal, Schrank, Schreibtisch), Staffage (Laubbaum, Nadelbaum, Strauch,
+  Person, PKW, Fahrrad) – im Grundriss und, wo sinnvoll, in Ansicht und
+  Seitenansicht.
+- Maße als Parameter (z. B. WC-Höhe 460 barrierefrei, Dusche 1200 × 1200),
+  Vorschaubild ohne Vectorworks.
+- In Vectorworks wird jede Variante **ein Symbol** (Ordner „Keystone
+  Sanitär/Küche/Möbel/…“ im Zubehör-Manager, Beschreibung mit Maßen und
+  Einsetzpunkt), Linien in Klasse „Ausstattung-…“/„Staffage-…“ und
+  „…-Detail“, alle Attribute nach Klasse; vorhandene Klassen bleiben
+  unverändert, ein vorhandenes Symbol wird wiederverwendet (eigene
+  Änderungen bleiben).
+- Gespiegelte Varianten sind eigene, exakt gespiegelte Symbole
+  (`vs.Mirror` auf Symbolinstanzen ist in Vectorworks 2026 kaputt).
+- Mehrere Instanzen in einem Aufruf; als Gruppe statt Symbol möglich.
+- Rückleseprüfung der Symboldefinition gegen den Katalog; `vw_revert_last`
+  entfernt Instanzen und – wenn dieser Aufruf sie angelegt hat und nichts
+  anderes sie nutzt – Symbol und Ordner.
+- Live (VW 2026 U7): alle Ansichten exakt (Abweichung ≤ 5·10⁻¹³ mm), ~0,5 s je Asset.
+
+### Sortieren (`vw2d_organize`)
+- Regeln „wenn … dann Klasse/Ebene/nach Klasse“: Klasse, Ebene, Name,
+  Symbol (Muster wie `A-WALL*`), Objektart, Text (regulärer Ausdruck),
+  Stift-/Füllfarbe, Füllung, Schraffur, Linienart, Strichstärke, Fläche,
+  Größe, geschlossen, in Gruppe, `not`. Kurzformen `class_map`,
+  `layer_map`.
+- Probelauf zuerst: was jede Regel ändert, was übrig bleibt (gruppiert nach
+  Art/Klasse/Ebene/Stift/Strichstärke). Anwenden in **einem** Schritt,
+  als Ganzes rücknehmbar; bricht etwas ab, wird alles zurückgesetzt.
+- Live: 10 000 Objekte in ~6 s sortiert, in ~3,6 s zurückgenommen.
+
+### Große Zeichnungen
+- `vw2d_check` liest bis zu 100 000 Objekte und sagt, wenn es mehr gibt.
+- Live gemessen (10 000 Objekte): lesen 0,6 s, prüfen 2,4 s, Duplikate
+  löschen 12 s, Überlappungen wegschneiden 16 s.
+
 ## 0.4.0 – 31.10.2026
 
 Stabiler, schneller, bereit für Vectorworks 2027.

@@ -45,3 +45,38 @@ def test_named_and_children():
     assert ns["named"]("Dummy") is None and ns["named"]("Nope") is None
     # children stop at an object whose parent is not the group
     assert ns["children"](grp) == [a, b]
+
+
+def _layer_list(n):
+    """n objects in one layer list: handles with prev/next links."""
+    class H:
+        def __init__(self, i):
+            self.i, self.uid, self.t = i, "u%d" % i, 2
+
+    layer = H(-1)
+    layer.t = 31
+    hs = [H(i) for i in range(n)]
+    nxt = {hs[i]: hs[i + 1] for i in range(n - 1)}
+    prv = {hs[i + 1]: hs[i] for i in range(n - 1)}
+    return layer, hs, nxt, prv
+
+
+def test_bulk_lookup_and_stacking_map_match_the_slow_versions():
+    layer, hs, nxt, prv = _layer_list(300)
+    lookups = []
+
+    def by_uuid(u):
+        lookups.append(u)
+        return next((h for h in hs if h.uid == u), None)
+
+    ns = _ns(GetObjectUuid=lambda h: h.uid, GetObjectByUuid=by_uuid,
+             ForEachObject=lambda f, c: [f(h) for h in hs], GetParent=lambda h: layer,
+             GetTypeN=lambda h: h.t, FInGroup=lambda h: None, NextObj=lambda h: nxt.get(h),
+             PrevObj=lambda h: prv.get(h))
+    want = ["u5", "u250", "u17"] + ["u%d" % i for i in range(100, 170)]
+    got = ns["handles"](want)
+    assert [h.uid for h in got] == want and lookups == []  # one walk, no per-uuid search
+    few = ns["handles"](["u3"])
+    assert few[0].uid == "u3" and lookups == ["u3"]
+    zm = ns["_z_map"](got)
+    assert all(zm[str(h)] == ns["_z_index"](h) == h.i for h in got)

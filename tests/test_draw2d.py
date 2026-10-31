@@ -117,6 +117,22 @@ def test_check_returns_report_and_image(fake):
     assert img.data[:8] == b"\x89PNG\r\n\x1a\n"
 
 
+def test_check_reads_large_scopes_and_says_when_it_could_not_read_all(fake, monkeypatch):
+    draw2d.vw2d_draw([_wall(0, 4)], layer="EG", check=False)
+    orig = fake.__call__
+
+    def truncated(fn, timeout=None, **kw):
+        res = orig(fn, timeout=timeout, **kw)
+        if fn == "read_objects":
+            assert kw["limit"] == draw2d.CHECK_LIMIT
+            res["truncated"] = True
+        return res
+
+    monkeypatch.setattr(app, "vw2d", truncated)
+    rep = json.loads(draw2d.vw2d_check(layer="EG", image=False))
+    assert "only the first" in rep["summary"]["warning"]
+
+
 def test_fix_snap_makes_drawing_clean_and_is_revertable(fake):
     draw2d.vw2d_draw([_wall(0, 4), _wall(4.0003, 8)], layer="EG", check=False)
     text = draw2d.vw2d_fix("snap", layer="EG", image=False)

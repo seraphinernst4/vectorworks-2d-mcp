@@ -925,6 +925,67 @@ def _symbol_instances(name):
 
 # ---- snapshots (exact revert) ------------------------------------------------------
 
+BULK_LOOKUP = 64  # from this many uuids on, one walk beats GetObjectByUuid each
+
+
+def _uuid_map(uuids):
+    """{uuid: handle} for many objects in one walk over the document.
+    GetObjectByUuid searches the drawing each time (measured: quadratic for
+    thousands of objects). Missing uuids are left out (callers fall back)."""
+    want = set(u for u in uuids if u)
+    found = {}
+    if len(want) < BULK_LOOKUP:
+        return found
+
+    def visit(h):
+        u = vs.GetObjectUuid(h)
+        if u in want:
+            found[u] = h
+
+    vs.ForEachObject(visit, "(ALL)")
+    return found
+
+
+def handles(uuids):
+    """Handles for uuids (bulk when there are many); LookupError if one is missing."""
+    m = _uuid_map(uuids)
+    return [m.get(u) or handle(u) for u in uuids]
+
+
+def _get_by_uuid(u, m):
+    h = m.get(u)
+    return h if h is not None else vs.GetObjectByUuid(u)
+
+
+def _z_map(hs):
+    """Stacking index (from the back) of each handle, one walk per parent
+    list instead of one PrevObj walk per object."""
+    out, done = {}, set()
+    for h in hs:
+        par = vs.GetParent(h)
+        key = str(par)
+        if key in done:
+            continue
+        done.add(key)
+        k = vs.FInGroup(par) if (not _is_nil(par) and vs.GetTypeN(par) == 11) else None
+        if _is_nil(k):
+            # layer list: walk back from h to its first object, then forward
+            k = h
+            n = 0
+            while n < 1000000:
+                p = vs.PrevObj(k)
+                if _is_nil(p):
+                    break
+                k = p
+                n += 1
+        i = 0
+        while not _is_nil(k) and i < 1000000:
+            out[str(k)] = i
+            i += 1
+            k = vs.NextObj(k)
+    return out
+
+
 def _z_index(h):
     i, k = 0, vs.PrevObj(h)
     while not _is_nil(k) and i < 100000:
@@ -933,14 +994,14 @@ def _z_index(h):
     return i
 
 
-def snapshot(h):
+def snapshot(h, z=None):
     t = vs.GetTypeN(h)
     if t not in EDITABLE:
         raise NotEditable("%s objects can't be changed by these tools (uuid %s)"
                           % (KINDS.get(t, "type %d" % t), h_uuid(h)))
     par = vs.GetParent(h)
     nxt = vs.NextObj(h)
-    snap = {"rec": read_obj(h, True, None, False), "z": _z_index(h),
+    snap = {"rec": read_obj(h, True, None, False), "z": _z_index(h) if z is None else z,
             "parent": h_uuid(par) if (not _is_nil(par) and vs.GetTypeN(par) == 11) else None,
             "above": None if _is_nil(nxt) else h_uuid(nxt)}
     if t in SHAPE_TYPES or t in (10, 17):
@@ -950,14 +1011,28 @@ def snapshot(h):
     return snap
 
 
-def _place_below(h, above_uuid):
+def _place_below(h, above_uuid, z=None, hmap=None):
+    """Move a (new, frontmost) object down until it lies directly below
+    `above`. With its old stacking index z, an object near the back is sent
+    to the back first and moved up - fewer steps in big layers."""
     if not above_uuid:
         return
-    above = vs.GetObjectByUuid(above_uuid)
+    above = _get_by_uuid(above_uuid, hmap or {})
     if _is_nil(above) or str(vs.GetParent(above)) != str(vs.GetParent(h)):
         return
+    par = vs.GetParent(h)
+    count = vs.NumObj(par) if (not _is_nil(par) and vs.GetTypeN(par) == 31) else None
     n = 0
-    while n < 50000:
+    if z is not None and count and z < count / 2:
+        vs.HMoveBackward(h, True)
+        while n < 1000000:
+            nxt = vs.NextObj(h)
+            if _is_nil(nxt) or str(nxt) == str(above):
+                return
+            vs.HMoveForward(h, False)
+            n += 1
+        return
+    while n < 1000000:
         nxt = vs.NextObj(h)
         if _is_nil(nxt) or str(nxt) == str(above):
             return
@@ -1006,14 +1081,14 @@ def _rebuild(rec):
     return vs.LNewObj()
 
 
-def restore(snap, mapping):
+def restore(snap, mapping, hmap=None):
     """Recreate an object from its snapshot. Returns the new handle."""
     rec = snap["rec"]
     state = _begin(rec["layer"], create_layer=True)
     try:
         vs.NameClass(rec["class"])
         if rec["kind"] == "group":
-            kids = [restore(c, mapping) for c in sorted(snap.get("children", []), key=lambda s: s["z"])]
+            kids = [restore(c, mapping, hmap) for c in sorted(snap.get("children", []), key=lambda s: s["z"])]
             vs.DSelectAll()
             for k in kids:
                 vs.SetSelect(k)
@@ -1034,7 +1109,7 @@ def restore(snap, mapping):
         if not _is_nil(ph):
             vs.SetParent(h, ph)
     above = snap.get("above")
-    _place_below(h, mapping.get(above, above) if above else None)
+    _place_below(h, mapping.get(above, above) if above else None, snap.get("z"), hmap)
     if rec.get("name"):
         try:
             _set_name(h, rec["name"])
@@ -1048,26 +1123,30 @@ def revert2d(ops):
     """Undo journaled ops (newest last). Returns uuid remapping for the
     journal plus counts."""
     mapping, deleted, restored, missing, kept = {}, 0, 0, [], []
+    hmap = _uuid_map([op.get("uuid") for op in ops] + [u for op in ops for u in op.get("after", [])]
+                     + [s.get("above") for op in ops for s in op.get("before", [])])
     for op in reversed(ops):
         kind = op["op"]
         if kind == "created":
-            h = vs.GetObjectByUuid(op["uuid"])
+            h = _get_by_uuid(op["uuid"], hmap)
             if _is_nil(h):
                 missing.append(op["uuid"])
             else:
+                hmap.pop(op["uuid"], None)
                 vs.DelObject(h)
                 deleted += 1
         elif kind == "replaced":
             for u in op.get("after", []):
-                h = vs.GetObjectByUuid(u)
+                h = _get_by_uuid(u, hmap)
                 if not _is_nil(h):
+                    hmap.pop(u, None)
                     vs.DelObject(h)
                     deleted += 1
             for s in sorted(op.get("before", []), key=lambda s: -s["z"]):
-                restore(s, mapping)
+                restore(s, mapping, hmap)
                 restored += 1
         elif kind == "attrs":
-            h = vs.GetObjectByUuid(op["uuid"])
+            h = _get_by_uuid(op["uuid"], hmap)
             if _is_nil(h):
                 missing.append(op["uuid"])
             else:
@@ -1096,7 +1175,7 @@ def revert2d(ops):
                 vs.DelObject(fh)
                 deleted += 1
         elif kind == "fields":
-            h = vs.GetObjectByUuid(op["uuid"])
+            h = _get_by_uuid(op["uuid"], hmap)
             if _is_nil(h):
                 missing.append(op["uuid"])
             else:
@@ -1111,12 +1190,16 @@ def revert2d(ops):
 
 # ---- editing ---------------------------------------------------------------------
 
-def _snaps(uuids):
-    return [snapshot(handle(u)) for u in uuids]
+def _snaps(uuids, hs=None):
+    hs = handles(uuids) if hs is None else hs
+    if len(hs) < BULK_LOOKUP:
+        return [snapshot(h) for h in hs]
+    zm = _z_map(hs)
+    return [snapshot(h, zm.get(str(h))) for h in hs]
 
 
 def set_attributes(uuids, attributes, layer=None):
-    hs = [handle(u) for u in uuids]
+    hs = handles(uuids)
     ops = []
     for h in hs:
         t = vs.GetTypeN(h)
@@ -1145,6 +1228,7 @@ def organize_apply(moves):
     journal entry. moves: [{"uuids", "class", "layer", "by_class"}]. On any
     error everything done so far is undone."""
     applied = []
+    hmap = _uuid_map([u for m in moves for u in m["uuids"]])
     try:
         for m in moves:
             attrs = {}
@@ -1157,7 +1241,7 @@ def organize_apply(moves):
                 ensure_layer(m["layer"])
                 target = vs.GetLayerByName(m["layer"])
             for u in m["uuids"]:
-                h = handle(u)
+                h = hmap.get(u) or handle(u)
                 op = {"op": "attrs", "uuid": u, "class_before": _str(vs.GetClass(h)),
                       "layer_before": _layer_name(h) if target is not None else None}
                 t = vs.GetTypeN(h)
@@ -1182,9 +1266,10 @@ def organize_apply(moves):
 
 
 def delete_objects(uuids):
-    snaps = _snaps(uuids)
-    for u in uuids:
-        vs.DelObject(handle(u))
+    hs = handles(uuids)
+    snaps = _snaps(uuids, hs)
+    for h in hs:
+        vs.DelObject(h)
     return {"document": current_document(), "ops": [{"op": "replaced", "before": snaps, "after": []}]}
 
 
