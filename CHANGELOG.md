@@ -24,6 +24,13 @@ Assets und Sortieren.
   Änderungen bleiben).
 - Gespiegelte Varianten sind eigene, exakt gespiegelte Symbole
   (`vs.Mirror` auf Symbolinstanzen ist in Vectorworks 2026 kaputt).
+- Ausrichtung einfach mit `wall`: wo die Wand liegt („above“, „left“,
+  „below“, „right“) – das Objekt schaut dann in den Raum; oder `rotation`.
+- WC: `h` ist die Sitzhöhe inkl. Sitz (DIN 18040: 46–48 cm barrierefrei);
+  Urinal: `h` ist die Unterkante. Stühle stehen unter dem Tisch (der Tisch
+  liegt oben), Baumkronen halten ihren Durchmesser, runde Ovale werden
+  Kreise; zu kleine oder nicht passende Maße (z. B. Kochfeld außerhalb der
+  Küchenzeile) gibt es als klare Meldung.
 - Mehrere Instanzen in einem Aufruf; als Gruppe statt Symbol möglich.
 - Rückleseprüfung der Symboldefinition gegen den Katalog; `vw_revert_last`
   entfernt Instanzen und – wenn dieser Aufruf sie angelegt hat und nichts
@@ -32,16 +39,33 @@ Assets und Sortieren.
 
 ### Sortieren (`vw2d_organize`)
 - Regeln „wenn … dann Klasse/Ebene/nach Klasse“: Klasse, Ebene, Name,
-  Symbol (Muster wie `A-WALL*`), Objektart, Text (regulärer Ausdruck),
-  Stift-/Füllfarbe, Füllung, Schraffur, Linienart, Strichstärke, Fläche,
-  Größe, geschlossen, in Gruppe, `not`. Kurzformen `class_map`,
-  `layer_map`.
+  Symbol (Muster wie `A-WALL*`; exakte Namen auch mit `[...]`), Objektart,
+  Text (regulärer Ausdruck), Stift-/Füllfarbe, Füllung, Schraffur,
+  Linienart, Strichstärke (in Vectorworks' Einheit verglichen: 0,5 trifft
+  die gespeicherten 0,508), Fläche (aus der exakten Geometrie), Größe,
+  geschlossen, in Gruppe, `not`. Je Ziel (Klasse, Ebene, nach Klasse)
+  gewinnt die erste passende Regel – Klassen- und Ebenenregeln wirken
+  zusammen. Kurzformen `class_map`, `layer_map`.
 - Probelauf zuerst: was jede Regel ändert, was übrig bleibt (gruppiert nach
   Art/Klasse/Ebene/Stift/Strichstärke). Anwenden in **einem** Schritt,
   als Ganzes rücknehmbar; bricht etwas ab, wird alles zurückgesetzt.
 - Live: 10 000 Objekte in ~6 s sortiert, in ~3,6 s zurückgenommen.
 
+- Ebenenwechsel merken sich die Stapelreihenfolge; Rückgängig stellt sie
+  wieder her.
+
+### Stapelreihenfolge (auch in 0.4.1)
+- Wiederhergestellte und neu aufgebaute Objekte kommen an ihre alte Stelle
+  (vorher landeten sie vorne). Live geprüft: Löschen + Rückgängig,
+  Bearbeiten mit neuem Punkt, Ebenenwechsel + Rückgängig.
+
 ### Große Zeichnungen
+- Viele Objekte auf einmal: ein Durchlauf durch die Zeichnung statt einer
+  UUID-Suche je Objekt (die in Vectorworks die ganze Zeichnung durchsucht),
+  Stapelpositionen einmal je Ebene – Sortieren, Löschen und Rückgängig
+  wachsen nicht mehr quadratisch.
+- Lange Schreibaufträge (tausende Überlappungen wegschneiden) dürfen bis
+  zu 10 min dauern – sonst ginge der Rückgängig-Eintrag verloren.
 - `vw2d_check` liest bis zu 100 000 Objekte und sagt, wenn es mehr gibt.
 - Live gemessen (10 000 Objekte): lesen 0,6 s, prüfen 2,4 s, Duplikate
   löschen 12 s, Überlappungen wegschneiden 16 s.

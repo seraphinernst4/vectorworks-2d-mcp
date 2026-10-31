@@ -1347,10 +1347,12 @@ def replace_geometry(changes):
     otherwise rebuilt with identical attributes, class, name, group and
     stacking position."""
     snaps, after, out = [], [], []
+    hmap = _uuid_map([ch["uuid"] for ch in changes])
+    zm = _z_map(list(hmap.values())) if hmap else {}
     for ch in changes:
-        h = handle(ch["uuid"])
+        h = hmap.get(ch["uuid"]) or handle(ch["uuid"])
         t = vs.GetTypeN(h)
-        snaps.append(snapshot(h))
+        snaps.append(snapshot(h, zm.get(str(h))))
         holes = ch.get("holes") or []
         verts = ch["verts"]
         inplace = (t in (5, 21) and vs.GetVertNum(h) == len(verts) and not holes
@@ -1365,14 +1367,15 @@ def replace_geometry(changes):
                 vs.SetPolyClosed(h, bool(ch["closed"]))
             vs.ResetObject(h)
         else:
-            h = _replace_with_poly(h, verts, ch["closed"], holes)
+            hmap.pop(ch["uuid"], None)  # the old object goes away
+            h = _replace_with_poly(h, verts, ch["closed"], holes, hmap)
         after.append(h_uuid(h))
         out.append(read_obj(h, True, None, False))
     return {"document": current_document(), "objects": out,
             "ops": [{"op": "replaced", "before": snaps, "after": after}]}
 
 
-def _replace_with_poly(old, verts, closed, holes):
+def _replace_with_poly(old, verts, closed, holes, hmap=None):
     raw = raw_attrs(old) if vs.GetTypeN(old) in SHAPE_TYPES else None
     name = obj_name(old)
     cls = _str(vs.GetClass(old))
@@ -1390,7 +1393,7 @@ def _replace_with_poly(old, verts, closed, holes):
         restore_raw_attrs(h, raw)
     if not _is_nil(par) and vs.GetTypeN(par) == 11:
         vs.SetParent(h, par)
-    _place_below(h, above)
+    _place_below(h, above, None, hmap)
     vs.DelObject(old)
     if name:
         _set_name(h, name)
@@ -1400,11 +1403,13 @@ def _replace_with_poly(old, verts, closed, holes):
 def set_line_points(changes):
     """changes: [{uuid, p1, p2}] for line objects (edited in place)."""
     snaps, after, out = [], [], []
+    hmap = _uuid_map([ch["uuid"] for ch in changes])
+    zm = _z_map(list(hmap.values())) if hmap else {}
     for ch in changes:
-        h = handle(ch["uuid"])
+        h = hmap.get(ch["uuid"]) or handle(ch["uuid"])
         if vs.GetTypeN(h) != 2:
             raise NotEditable("%s is not a line" % ch["uuid"])
-        snaps.append(snapshot(h))
+        snaps.append(snapshot(h, zm.get(str(h))))
         vs.SetSegPt1(h, _pt(ch["p1"]))
         vs.SetSegPt2(h, _pt(ch["p2"]))
         vs.ResetObject(h)
@@ -1421,11 +1426,13 @@ def insert_vertices(inserts):
     for ins in inserts:
         by.setdefault(ins["uuid"], []).append(ins)
     snaps, after = [], []
+    hmap = _uuid_map(list(by))
+    zm = _z_map(list(hmap.values())) if hmap else {}
     for u, lst in by.items():
-        h = handle(u)
+        h = hmap.get(u) or handle(u)
         if vs.GetTypeN(h) not in (5, 21):
             raise NotEditable("vertices can only be inserted into polygons/polylines")
-        snaps.append(snapshot(h))
+        snaps.append(snapshot(h, zm.get(str(h))))
         for ins in sorted(lst, key=lambda d: -d["before"]):
             vs.InsertVertex(h, float(ins["x"]), float(ins["y"]), int(ins["before"]), 0, 0.0)
         vs.ResetObject(h)
@@ -1605,13 +1612,16 @@ def subtract_many(pairs, eps=1e-9):
     """pairs: [{target, tools, covered}] processed in order; tools stay.
     covered=True: the target lies completely inside its tools and is deleted."""
     snaps, after, fixed = [], [], 0
+    hmap = _uuid_map([pr["target"] for pr in pairs] + [u for pr in pairs for u in pr["tools"]])
+    zm = _z_map([hmap[pr["target"]] for pr in pairs if pr["target"] in hmap]) if hmap else {}
     for pr in pairs:
-        t = handle(pr["target"])
-        snaps.append(snapshot(t))
+        # a target is replaced by its clipped result: never use its old handle again
+        t = hmap.pop(pr["target"], None) or handle(pr["target"])
+        snaps.append(snapshot(t, zm.get(str(t))))
         if pr.get("covered"):
             vs.DelObject(t)
             continue
-        tools = [handle(u) for u in pr["tools"]]
+        tools = [hmap.get(u) or handle(u) for u in pr["tools"]]
         xs, ys = _coord_values([t] + tools)
         cur = [t]
         for tool in tools:
