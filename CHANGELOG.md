@@ -45,6 +45,14 @@ Assets und Sortieren.
 - `vw2d_check` liest bis zu 100 000 Objekte und sagt, wenn es mehr gibt.
 - Live gemessen (10 000 Objekte): lesen 0,6 s, prüfen 2,4 s, Duplikate
   löschen 12 s, Überlappungen wegschneiden 16 s.
+## 0.4.1 – 31.10.2026
+
+- **Stapelreihenfolge:** Wiederhergestellte (`vw_revert_last`) und neu
+  aufgebaute Objekte (Bearbeiten, Fangen, Bereinigen) kommen wieder an ihre
+  alte Stelle in der Stapelreihenfolge. Bisher landeten sie ganz vorne
+  (Vectorworks' Listen laufen von hinten nach vorne; die alte Schleife
+  brach sofort ab) – bei überlappenden Füllungen sah das Ergebnis dann
+  anders aus. Live geprüft.
 
 ## 0.4.0 – 31.10.2026
 
