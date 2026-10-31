@@ -67,3 +67,29 @@ lückenlose Flächen, klare Ebenen- und Klassenstruktur.
 - Große Bestandspläne (z. B. aus Rhino importiert): erst prüfen, dann mit
   `snap` (Toleranz ruhig 2–5 mm) und `clean` bereinigen; organische
   Bestandsformen nur vereinfachen, nicht eckig machen.
+
+## Sortieren (DWG-Import, alles in „Keine“)
+
+1. `vw2d_structure` lesen: welche Klassen/Ebenen gibt es, was ist der
+   Bürostandard?
+2. `vw2d_organize` als Probelauf (Standard): Regeln wie
+   `{"match": {"class": "A-WALL*"}, "class": "Wand-Tragend", "by_class": true}`,
+   Texte über `kind`/`text`, Bemaßungen über `kind: "dimension"`,
+   Strichstärken über `line_weight_mm`. Die Antwort zeigt, was übrig bleibt
+   (gruppiert nach Art/Klasse/Ebene/Stift/Strichstärke) – Regeln ergänzen.
+3. Dem Nutzer kurz zeigen, was sich ändert; dann `dry_run=false`. Ein
+   Schritt, als Ganzes mit `vw_revert_last` rücknehmbar.
+4. Danach `vw2d_check` und `vw2d_fix duplicates`/`snap` für Doppeltes und
+   Unsauberes.
+
+## Assets (Sanitär, Küche, Möbel, Bäume, Personen, Autos)
+
+- Nicht von Hand zeichnen: `vw2d_assets` zeigt den Katalog mit Vorschau,
+  `vw2d_place_asset` setzt exakte Symbole.
+- Ausrichtung mit `wall`: wo die Wand liegt, vom Objekt aus gesehen
+  („above“, „left“, „below“, „right“) – das Objekt schaut dann in den Raum.
+  Einsetzpunkt bei Wandobjekten: Mitte der Wandseite.
+- Maße als `params` in mm (WC barrierefrei: `h` 460–480 = Sitzhöhe,
+  Dusche barrierefrei 1200 × 1200); mehrere gleiche Objekte über
+  `placements` in einem Aufruf; linke/rechte Variante mit `mirror`.
+- Ansichten/Schnitte: `view` = `front` oder `side` (Boden bei y = 0).

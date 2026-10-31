@@ -502,6 +502,15 @@ def perf_tests(report: dict) -> None:
         return vwrun("_k = []\ndef _c(h):\n    _k.append(h)\nvs.ForEachObject(_c, \"(L='%s')\")\n"
                      "for _h in _k:\n    vs.DelObject(_h)\nresult = len(_k)" % PERF_LAYER)
 
+    def order_sig():
+        """Stacking order of the layer as (type, rounded bbox) - uuids change on restore."""
+        return vwrun("import hashlib\n_l = vs.GetLayerByName(%r)\n_k = vs.FInLayer(_l)\n_s = []\n"
+                     "while _k is not None and str(_k) != '0':\n"
+                     "    _b = vs.GetBBox(_k)\n"
+                     "    _s.append('%%d:%%.6f,%%.6f,%%.6f,%%.6f' %% (vs.GetTypeN(_k), _b[0][0], _b[0][1], _b[1][0], _b[1][1]))\n"
+                     "    _k = vs.NextObj(_k)\n"
+                     "result = [len(_s), hashlib.sha1('|'.join(_s).encode()).hexdigest()]" % PERF_LAYER)
+
     out: dict = {}
     report["perf"] = out  # partial results survive an exception
     for n in PERF_SIZES:
@@ -524,6 +533,7 @@ def perf_tests(report: dict) -> None:
                 r[name + "_error"] = str(e)[:300]
                 return None
 
+        sig0 = order_sig()
         rd = timed("read", lambda: draw2d.vw2d_read(layer=PERF_LAYER, include_geometry=False, limit=n + 10))
         r["read_count"] = len((rd or {}).get("objects", [])) if isinstance(rd, dict) else None
         timed("read_geometry", lambda: draw2d.vw2d_read(layer=PERF_LAYER, include_geometry=True, limit=n + 10))
@@ -567,6 +577,7 @@ def perf_tests(report: dict) -> None:
             rv = timed("revert_duplicates", generic.vw_revert_last)
             if isinstance(rv, dict):
                 r["revert_duplicates"] = {k: rv.get(k) for k in ("restored", "deleted", "reverted_tool")}
+        r["order_after_fix_reverts"] = order_sig() == sig0
         cmap = {"A-WALL": "Wand-Tragend", "A-DOOR": "Öffnung-Tür", "A-ANNO": "Beschriftung", "0": "Hilfslinien"}
         dr = timed("organize_dry", lambda: organize.vw2d_organize(class_map=cmap, layer=PERF_LAYER))
         if isinstance(dr, dict):
