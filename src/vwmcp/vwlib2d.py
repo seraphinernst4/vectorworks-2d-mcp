@@ -610,7 +610,7 @@ def structure():
 def _begin(layer=None, create_layer=True):
     state = (_str(vs.GetLName(vs.ActLayer())), _str(vs.ActiveClass()))
     vs.PushAttrs()
-    if layer:
+    if layer and layer != state[0]:  # switching layers costs ~13 ms in a 20 000-object layer
         if _is_nil(vs.GetLayerByName(layer)) and not create_layer:
             vs.PopAttrs()
             raise LookupError("no layer %r" % layer)
@@ -620,8 +620,16 @@ def _begin(layer=None, create_layer=True):
 
 def _end(state):
     vs.PopAttrs()
-    vs.Layer(state[0])
+    if _str(vs.GetLName(vs.ActLayer())) != state[0]:
+        vs.Layer(state[0])
     vs.NameClass(state[1])
+
+
+def _use_layer(name):
+    """Make an existing layer active if it isn't (for loops over many objects:
+    switch once, not twice per object)."""
+    if name and _str(vs.GetLName(vs.ActLayer())) != name and not _is_nil(vs.GetLayerByName(name)):
+        vs.Layer(name)
 
 
 def make_poly(verts, closed):
@@ -730,8 +738,10 @@ def draw_items(items):
     """Create items (already validated + normalized by the server). All or
     nothing: on any error everything created so far is deleted."""
     made = []
+    home = _str(vs.GetLName(vs.ActLayer()))
     try:
         for it in items:
+            _use_layer(it.get("layer"))
             state = _begin(it.get("layer"))
             try:
                 if it.get("class"):
@@ -747,7 +757,9 @@ def draw_items(items):
     except BaseException:
         for h in made:
             vs.DelObject(h)
+        _use_layer(home)
         raise
+    _use_layer(home)
     recs = [read_obj(h, True, None, False) for h in made]
     return {"document": current_document(), "objects": recs}
 
@@ -1246,6 +1258,7 @@ def revert2d(ops):
     """Undo journaled ops (newest last). Returns uuid remapping for the
     journal plus counts."""
     mapping, deleted, restored, missing, kept, restack = {}, 0, 0, [], [], []
+    home = _str(vs.GetLName(vs.ActLayer()))
     replaced = [op for op in ops if op.get("op") == "replaced"]  # ("attrs" ops keep a dict in "before")
     hmap = _uuid_map([op.get("uuid") for op in ops] + [u for op in replaced for u in op.get("after") or []]
                      + [s.get("above") for op in replaced for s in op.get("before") or []]
@@ -1271,6 +1284,7 @@ def revert2d(ops):
             if len(befores) >= BULK_RESTACK:
                 placed = []
                 for s in befores:
+                    _use_layer(s["rec"].get("layer"))
                     h = restore(s, mapping, hmap, place=False)
                     placed.append((h, s.get("above"), s.get("z")))
                     restored += 1
@@ -1320,6 +1334,7 @@ def revert2d(ops):
                 restored += 1
     # objects moved back to their layer: old stacking position, frontmost first
     # (so an object's `above` neighbour is already back in place)
+    _use_layer(home)
     if len(restack) >= BULK_RESTACK:
         _restack([(h, op.get("above"), op.get("z")) for op, h in restack], hmap)
     else:
@@ -1437,6 +1452,14 @@ def replace_geometry(changes):
     snaps, after, out = [], [], []
     hmap = _uuid_map([ch["uuid"] for ch in changes])
     zm = _z_map(list(hmap.values())) if hmap else {}
+    home = _str(vs.GetLName(vs.ActLayer()))
+    try:
+        return _replace_all(changes, hmap, zm, snaps, after, out)
+    finally:
+        _use_layer(home)
+
+
+def _replace_all(changes, hmap, zm, snaps, after, out):
     for ch in changes:
         h = hmap.get(ch["uuid"]) or handle(ch["uuid"])
         t = vs.GetTypeN(h)
@@ -1456,6 +1479,7 @@ def replace_geometry(changes):
             vs.ResetObject(h)
         else:
             hmap.pop(ch["uuid"], None)  # the old object goes away
+            _use_layer(_layer_name(h))
             h = _replace_with_poly(h, verts, ch["closed"], holes, hmap)
         after.append(h_uuid(h))
         out.append(read_obj(h, True, None, False))

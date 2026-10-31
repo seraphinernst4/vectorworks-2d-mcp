@@ -151,6 +151,8 @@ Alle Werkzeuge: `vw2d_read`, `vw2d_structure`, `vw2d_resources`, `vw2d_setup`,
   schließt. Dialog schließen, nochmal fragen.
 - **Lange Aufträge** (z. B. eine Prüfung großer Pläne): Hat Vectorworks einen
   Auftrag angenommen, wartet Claude bis zu 10 Minuten auf das Ergebnis.
+  Gemessen mit 10 000 Objekten: prüfen 2,4 s, Duplikate löschen 5 s,
+  Überlappungen wegschneiden 5 s, sortieren 1,2 s.
 - **Keine Skriptfehler-Fenster mehr durch falsche Aufrufe:** Jeder `vs.*`-Aufruf
   wird vorher gegen die Signaturen aller ~3200 Vectorworks-Funktionen geprüft
   (Anzahl und Art der Argumente, Farben als Tupel, Callbacks). Statt des

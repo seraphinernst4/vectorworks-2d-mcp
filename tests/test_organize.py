@@ -294,6 +294,14 @@ class LayeredVS:
     def GetFName(self):
         return "Test.vwx"
 
+    active = "EG"
+
+    def ActLayer(self):
+        return self.layers[self.active]
+
+    def Layer(self, name):
+        self.active = name
+
 
 def _vw(objs, fail_at=None):
     vs = LayeredVS(objs, fail_at)

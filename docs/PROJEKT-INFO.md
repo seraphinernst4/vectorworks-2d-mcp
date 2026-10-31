@@ -216,6 +216,28 @@ zusätzlich als `Git-Verlauf.bundle` (`git clone Git-Verlauf.bundle vectorworks-
   identisch; Abweichung beim Zeichnen jetzt überall **0,0 mm** (vorher bei
   Kreis/Bogen 3·10⁻¹³ mm Rechenrauschen), Kreis nach Rückgängig bitgenau.
 
+## Live-Test 31.10.2026 nachts (Version 0.5.0-Vorschau, „Ohne Titel 1“)
+
+- **Assets:** alle 43 Ansichten als Symbol gesetzt, Rücklesen exakt
+  (≤ 7·10⁻¹³ mm Rechenrauschen der Bogenpunkte), ~0,5 s je Asset; Wieder-
+  verwenden, Spiegeln, Parameter, Drehung, Gruppen, Klassen (vorhandene
+  unverändert), Rückgängig inkl. Symboldefinition – bestanden.
+- **Sortieren:** Klassen-Muster, Strichstärke 0,5 (gespeichert 0,508),
+  Fläche, Text, Ebenenwechsel; Probelauf ändert nichts; Rückgängig stellt
+  Klassen, Ebenen und Stapelreihenfolge wieder her – bestanden.
+- **Stapelreihenfolge:** Löschen + Rückgängig, Bearbeiten mit Neuaufbau –
+  Reihenfolge ABCDEF bleibt (0.4.0 legte wiederhergestellte Objekte nach
+  vorne).
+- **10 000 Objekte** (1000 Duplikate, 1849 Überlappungen): lesen 0,6 s,
+  prüfen 2,4 s, Duplikate löschen 4,8 s, Überlappungen wegschneiden 4,6 s
+  (danach 0 Fehler), Rückgängig 17 s / 12,6 s, sortieren 1,2 s,
+  Rückgängig 0,8 s.
+- **Gefunden und behoben:** `vs.Mirror` zerstört Symbolinstanzen;
+  `GetObjectByUuid` durchsucht die ganze Zeichnung (quadratisch bei vielen
+  Objekten); Stapelreihenfolge beim Wiederherstellen; Rückgängig von
+  Attributschritten in der Vorschau; `open()` ohne Kodierung ist in
+  Vectorworks ASCII.
+
 ## Bekannte Grenzen / offene Punkte
 
 - Frische Installation auf einem fremden Mac noch nie gemacht (Installer holt
