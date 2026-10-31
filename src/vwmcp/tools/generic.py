@@ -298,9 +298,17 @@ def vw_revert_last() -> dict:
     except JournalError as e:
         raise ToolError(str(e)) from e
     try:
-        result = app.vw2d("revert2d", ops=entry["ops"], timeout=120)
-    except ToolError:
-        journal.record(entry["document"], entry["tool"], entry["ops"])  # put it back
+        size = sum(1 + (len(op.get("before") or []) + len(op.get("after") or [])
+                        if op.get("op") == "replaced" else 0) for op in entry["ops"])
+        result = app.vw2d("revert2d", ops=entry["ops"], timeout=max(120.0, 0.1 * size))
+    except ToolError as e:
+        if "still working on this request" in str(e):
+            # Vectorworks has taken it and finishes it: putting the entry back
+            # would let a second revert restore the same objects twice
+            raise ToolError("The revert of %s is still running in Vectorworks (large step). Wait until "
+                            "Vectorworks is responsive again and check the drawing; this step is no longer "
+                            "in the revert journal." % entry["tool"]) from e
+        journal.record(entry["document"], entry["tool"], entry["ops"])  # never ran: put it back
         raise
     journal.remap(document, result.get("mapping") or {})
     return {"reverted_tool": entry["tool"], **result}

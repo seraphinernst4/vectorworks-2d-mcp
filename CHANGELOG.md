@@ -8,6 +8,11 @@
   (Vectorworks' Listen laufen von hinten nach vorne; die alte Schleife
   brach sofort ab) – bei überlappenden Füllungen sah das Ergebnis dann
   anders aus. Live geprüft.
+- **Große Schritte:** Schreibaufträge und Rückgängig dürfen länger dauern
+  (bis 10 min bzw. je nach Umfang), statt nach 2 min aufzugeben und den
+  Rückgängig-Eintrag zu verlieren. Läuft ein Rückgängig in Vectorworks noch,
+  wird es nicht erneut ins Journal gelegt (sonst könnte ein zweites
+  Rückgängig Objekte doppelt wiederherstellen).
 
 ## 0.4.0 – 31.10.2026
 
