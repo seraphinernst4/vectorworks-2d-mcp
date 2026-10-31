@@ -2,7 +2,7 @@
 
 Alles Wissen zum Projekt an einer Stelle: was es ist, wie es aufgebaut ist,
 wie man es installiert, baut und veröffentlicht, was getestet ist und was
-offen ist. Stand: **31.10.2026, Version 0.4.0 (Beta)**.
+offen ist. Stand: **31.10.2026, Version 0.5.0 (Beta)**.
 
 ## Auf einen Blick
 
@@ -17,7 +17,7 @@ offen ist. Stand: **31.10.2026, Version 0.4.0 (Beta)**.
 | **Installer** | `curl -LsSf https://raw.githubusercontent.com/seraphinernst4/vectorworks-2d-mcp/main/scripts/install-macos.sh \| bash` |
 | **Voraussetzungen** | macOS, Vectorworks 2026 oder 2027, Claude-Desktop-App |
 | **Getestet** | Vectorworks 2026 Update 7, deutsch (Ausbildungsversion), macOS, M2 Max |
-| **Status** | Funktional fertig für 2D, live getestet (Protokoll, Signaturprüfung, Regression). VW 2027 vorbereitet (Python 3.14, Index mit 2027-Funktionen), aber ungetestet; noch nie auf einem fremden Mac frisch installiert; englische Oberfläche ungetestet. |
+| **Status** | Funktional fertig für 2D, live getestet (Protokoll, Signaturprüfung, Regression, Assets, Sortieren, Stapelreihenfolge, 10 000/25 000 Objekte). VW 2027 vorbereitet (Python 3.14, Index mit 2027-Funktionen), aber ungetestet; noch nie auf einem fremden Mac frisch installiert; englische Oberfläche ungetestet. |
 
 ## Installation auf einem fremden Mac
 
@@ -213,7 +213,7 @@ zusätzlich als `Git-Verlauf.bundle` (`git clone Git-Verlauf.bundle vectorworks-
   identisch; Abweichung beim Zeichnen jetzt überall **0,0 mm** (vorher bei
   Kreis/Bogen 3·10⁻¹³ mm Rechenrauschen), Kreis nach Rückgängig bitgenau.
 
-## Live-Test 31.10.2026 nachts (Version 0.5.0-Vorschau, „Ohne Titel 1“)
+## Live-Test 31.10.2026 nachts (Version 0.5.0 vor den Reviews, „Ohne Titel 1“)
 
 - **Assets:** alle 43 Ansichten als Symbol gesetzt, Rücklesen exakt
   (≤ 7·10⁻¹³ mm Rechenrauschen der Bogenpunkte), ~0,5 s je Asset; Wieder-
@@ -241,7 +241,7 @@ zusätzlich als `Git-Verlauf.bundle` (`git clone Git-Verlauf.bundle vectorworks-
 
 ## Live-Test 31.10.2026 morgens (0.5.0 nach den Code-Reviews, „Ohne Titel 1“)
 
-Komplette Reihe mit dem Stand von Zweig `v0.5` (Commit ba5ccfa), direkter
+Komplette Reihe mit dem Stand von Commit ba5ccfa, direkter
 Auslöser, MCP-Rundlauf mit dem gepackten 0.5.0-Server (31 Werkzeuge):
 Protokoll (Ping 0,22 s, Abbrechen bei blockiertem Vectorworks, 18-s-Auftrag),
 Werkzeuge, Fallstricke, Regression (alles exakt, Abweichung 0), Assets (43
@@ -290,3 +290,4 @@ Testebenen, Testsymbole und Testklassen aus der Datei entfernt.
 | 0.4.0 | 31.10.2026 | Atomares Job-Protokoll, Signatur-Index + geprüfter `vs`-Proxy, API-Fallstricke, exakte Bögen beim Zurücklesen, VW 2027 vorbereitet, Bibliotheks-Cache (Details: CHANGELOG.md) |
 | – | 31.10.2026 | Installer holt uv auf frischen Macs; Projektinfo |
 | 0.4.1 | 31.10.2026 | Stapelreihenfolge beim Wiederherstellen und Neuaufbauen von Objekten |
+| 0.5.0 | 31.10.2026 | Kein Menübefehl mehr (direkter Auslöser), Asset-Katalog (28 Assets, 43 Ansichten, als Symbole), Sortieren nach Regeln (`vw2d_organize`), große Zeichnungen in Sekunden, Review-Fixes (Details: CHANGELOG.md) |

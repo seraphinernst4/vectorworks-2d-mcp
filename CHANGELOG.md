@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.5.0 – Vorschau (Zweig v0.5)
+## 0.5.0 – 31.10.2026
 
 Assets, Sortieren, große Zeichnungen – und keine Einrichtung mehr in
 Vectorworks.
