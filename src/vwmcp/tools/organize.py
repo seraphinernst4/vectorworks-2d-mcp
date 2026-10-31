@@ -35,12 +35,14 @@ def vw2d_organize(
     one step, undone together with vw_revert_last.
 
     rules: [{"match": {...}, "class": "Wand-Tragend", "layer": "EG",
-    "by_class": true}, ...] - the first matching rule wins. Match keys:
+    "by_class": true}, ...] - for each target (class, layer, by_class) the
+    first matching rule that sets it wins. Match keys:
     class / layer / name / symbol (glob, case-insensitive, e.g. "A-WALL*"),
     kind ("line", "polygon", "text", "dimension", "symbol", "group", ...),
     text (regex), pen / fill_color ("#rrggbb"), fill ("none" | "solid" |
-    "hatch"), hatch / line_style (names), line_weight_mm (number or [min,
-    max]), area_m2 / size_mm ([min, max]), closed, in_group, not {...}.
+    "hatch"), hatch / line_style (names), line_weight_mm (number - 0.5 also
+    matches Vectorworks' stored 0.508 - or [min, max]), area_m2 / size_mm
+    ([min, max], null = open end), closed, in_group, not {...}.
     by_class: also set every graphic attribute to 'by class'.
     class_map {"old*": "New"} / layer_map: shortcuts for rules that only
     match a class / layer (applied before `rules`).
@@ -58,7 +60,10 @@ def vw2d_organize(
                     cls=class_name, selection=bool(selection), geometry=O.needs_geometry(all_rules),
                     allow_temp=False, limit=READ_LIMIT, bbox=None)
     mpu = data["units"]["mm_per_unit"]
-    p = O.plan(data["objects"], all_rules, mpu, include_groups=include_groups)
+    records = data["objects"]
+    if class_name:  # the read also returns groups of other classes (as containers): leave them alone
+        records = [r for r in records if r.get("class") == class_name]
+    p = O.plan(records, all_rules, mpu, include_groups=include_groups)
     moves = p.pop("_moves")
     out: dict[str, Any] = {"document": data["document"], "dry_run": dry_run, **p}
     if data.get("truncated"):

@@ -57,8 +57,9 @@ EXACT 2D DRAWING (vw2d_* tools) - rules for architectural drawings:
   what stays unmatched, refine the rules, then apply (dry_run=false).
 - Furniture, sanitary objects, trees, people, cars: use the asset catalogue
   (vw2d_assets to find/preview, vw2d_place_asset to place exact symbols) instead
-  of drawing them by hand. Mind the insertion point and orientation of each
-  asset (wall-mounted objects reach towards -y; rotate to face into the room).
+  of drawing them by hand. Mind the insertion point of each asset; turn
+  wall-mounted objects with wall="above|left|below|right" (where the wall is,
+  seen from the object) so they face into the room.
 
 GENERAL
 - Vectorworks merges back-to-back MCP edits into one Cmd-Z step, so to undo

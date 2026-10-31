@@ -94,6 +94,8 @@ def korb_oval(cx: float, cy: float, w: float, h: float, role: str = "outline") -
     and height h built from four tangent circular arcs (exact arcs, unlike a
     sampled ellipse). Long axis along the larger of w, h."""
     a, b = w / 2.0, h / 2.0
+    if abs(a - b) <= 1e-6 * max(a, b, 1.0):  # round: a circle
+        return circle(cx, cy, a, role=role)
     swap = b > a
     if swap:
         a, b = b, a

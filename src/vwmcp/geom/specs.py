@@ -134,6 +134,8 @@ def _path(cv: Converter, spec: dict, closed_default=True):
 
 def _center_from_radius(a, b, r, ccw, large):
     chord = C.dist(a, b)
+    if chord == 0:
+        raise SpecError("arc from a point to the same point: give a center instead of a radius")
     if r <= 0 or chord > 2 * r * (1 + 1e-12):
         raise SpecError("radius %.9g is too small for a chord of %.9g" % (r, chord))
     mid = ((a[0] + b[0]) / 2.0, (a[1] + b[1]) / 2.0)

@@ -20,8 +20,9 @@ def wc_wall_plan(b=360.0, t=540.0):
     ]
 
 
-def wc_wall_front(b=360.0, t=540.0, h=400.0):
-    rim = h
+def wc_wall_front(b=360.0, h=420.0):
+    """h = seat height including the seat (DIN 18040: 460-480 barrier-free)."""
+    rim = h - 25
     return [
         poly([(-b / 2, rim), (b / 2, rim), (b / 2, rim - 30), (b * 0.3, rim - 150),
               (-b * 0.3, rim - 150), (-b / 2, rim - 30)]),             # ceramic
@@ -30,8 +31,8 @@ def wc_wall_front(b=360.0, t=540.0, h=400.0):
     ]
 
 
-def wc_wall_side(b=360.0, t=540.0, h=400.0):
-    rim = h
+def wc_wall_side(t=540.0, h=420.0):
+    rim = h - 25
     bottom = rim - 260
     return [
         path((0, bottom + 30), [("L", 0, rim + 25), ("L", t - 30, rim + 25),
@@ -53,12 +54,12 @@ def wc_floor_plan(b=380.0, t=700.0):
     ]
 
 
-def wc_floor_side(b=380.0, t=700.0, h=420.0):
+def wc_floor_side(t=700.0, h=420.0):
     return [
-        rounded_rect(0, 440, 190, 800, 20),                           # cistern
-        path((130, 0), [("L", t - 280, 0), ("L", t - 180, 220), ("L", t, h - 25),
+        rounded_rect(0, max(h + 20, 440), 190, max(h + 380, 800), 20),  # cistern
+        path((130, 0), [("L", t - 280, 0), ("L", t - 180, min(220, h * 0.5)), ("L", t, h - 25),
                         ("A", t - 25, h, t - 25, h - 25, "ccw"), ("L", 170, h),
-                        ("L", 170, 380), ("L", 210, 300)]),
+                        ("L", 170, min(380, h - 40)), ("L", 210, min(300, h - 120))]),
         line(190, h - 15, t - 30, h - 15),                             # seat joint
     ]
 
@@ -73,13 +74,15 @@ def urinal_plan(b=350.0, t=330.0):
     ]
 
 
-def urinal_front(b=350.0, t=330.0, h=650.0):
-    top = h + 400
+def urinal_front(b=350.0, h=650.0):
+    """h = height of the lowest edge (Unterkante) above the floor."""
+    r = b / 2
+    top = h + 620
     return [
-        path((-b / 2, top), [("L", b / 2, top), ("L", b / 2, h + 60),
-                             ("A", 0, h - b / 2 + 60, 0, h + 60, "cw"),
-                             ("A", -b / 2, h + 60, 0, h + 60, "cw")]),
-        korb_oval(0, h + 120, b * 0.55, 260, role="detail"),
+        path((-r, top), [("L", r, top), ("L", r, h + r),
+                         ("A", 0, h, 0, h + r, "cw"),
+                         ("A", -r, h + r, 0, h + r, "cw")]),
+        korb_oval(0, h + 300, b * 0.55, 300, role="detail"),
     ]
 
 
@@ -104,7 +107,7 @@ def basin_plan(b=600.0, t=480.0, bowls=1.0):
     return items
 
 
-def basin_front(b=600.0, t=480.0, h=850.0, mirror=0.0, bowls=1.0):
+def basin_front(b=600.0, h=850.0, mirror=0.0, bowls=1.0):
     items = [
         path((-b / 2, h), [("L", b / 2, h), ("L", b / 2, h - 40),
                            ("L", b / 2 - 60, h - 170), ("L", -b / 2 + 60, h - 170),
@@ -121,7 +124,7 @@ def basin_front(b=600.0, t=480.0, h=850.0, mirror=0.0, bowls=1.0):
     return items
 
 
-def basin_side(b=600.0, t=480.0, h=850.0):
+def basin_side(t=480.0, h=850.0):
     return [
         path((0, h - 170), [("L", 0, h), ("L", t - 25, h), ("A", t, h - 25, t - 25, h - 25, "cw"),
                             ("L", t, h - 50), ("L", t - 120, h - 170)]),
@@ -159,7 +162,7 @@ def bath_plan(b=1700.0, t=750.0):
     ]
 
 
-def bath_side(b=1700.0, t=750.0, h=600.0):
+def bath_side(b=1700.0, h=600.0):
     return [
         rect(-b / 2, 0, b / 2, h),
         path((-b / 2 + 60, h), [("L", -b / 2 + 260, 150), ("L", b / 2 - 160, 150),
@@ -172,6 +175,14 @@ def bath_side(b=1700.0, t=750.0, h=600.0):
 
 
 def sink_plan(b=800.0, t=600.0):
+    """Sink with drainer (from 700 mm; narrower: bowl only)."""
+    if b < 700:
+        return [
+            rect(-b / 2, 0, b / 2, -t),
+            rounded_rect(-b / 2 + 50, -80, b / 2 - 50, -t + 70, 40, role="detail"),
+            circle(0, (-80 - t + 70) / 2, 25, role="detail"),
+            circle(0, -45, 20, role="detail"),
+        ]
     return [
         rect(-b / 2, 0, b / 2, -t),
         rounded_rect(-b / 2 + 50, -80, 120, -t + 70, 40, role="detail"),     # bowl
@@ -182,10 +193,17 @@ def sink_plan(b=800.0, t=600.0):
 
 
 def hob_plan(b=600.0, t=600.0):
+    """Hob: four burners (two when narrower than 450 mm, e.g. a 300 mm domino)."""
     items = [rect(-b / 2, 0, b / 2, -t), rect(-b / 2 + 30, -30, b / 2 - 30, -t + 30, role="detail")]
+    if b < 450:
+        r = min(b - 60, t / 2 - 40) * 0.38
+        for y in (-t / 4 - 5, -3 * t / 4 + 5):
+            items.append(circle(0, y, r, role="detail"))
+        return items
+    k = min(b, t) / 600.0
     for x, y, r in ((-b / 4, -t / 4 - 10, 95), (b / 4, -t / 4 - 10, 75),
                     (-b / 4, -3 * t / 4 + 10, 75), (b / 4, -3 * t / 4 + 10, 95)):
-        items.append(circle(x, y, r, role="detail"))
+        items.append(circle(x, y, r * k, role="detail"))
     return items
 
 
@@ -195,7 +213,7 @@ def washer_plan(b=600.0, t=600.0):
             circle(0, -t / 2, min(b, t) * 0.3, role="detail")]
 
 
-def washer_front(b=600.0, t=600.0, h=850.0):
+def washer_front(b=600.0, h=850.0):
     return [rect(-b / 2, 0, b / 2, h), line(-b / 2, h - 110, b / 2, h - 110),
             circle(0, (h - 110) / 2, min(b, h) * 0.3), circle(0, (h - 110) / 2, min(b, h) * 0.23, role="detail"),
             rect(-b / 2 + 30, h - 85, -b / 2 + 180, h - 25, role="detail")]       # drawer
@@ -204,6 +222,12 @@ def washer_front(b=600.0, t=600.0, h=850.0):
 def kitchen_plan(l=3000.0, t=600.0, sink=600.0, hob=2100.0, sink_w=800.0, hob_w=600.0):
     """Kitchen run along the wall from its left end (insertion point: left end
     at the wall), counter towards -y; sink and hob centres measured from the left."""
+    for name, x, w in (("sink", sink, sink_w), ("hob", hob, hob_w)):
+        if w > 0 and (x - w / 2 < 0 or x + w / 2 > l):
+            raise ValueError("%s (centre %g, width %g) doesn't fit in a %g mm run; set %s or %s_w=0"
+                             % (name, x, w, l, name, name))
+    if sink_w > 0 and hob_w > 0 and abs(sink - hob) < (sink_w + hob_w) / 2:
+        raise ValueError("sink and hob overlap; move one of them (sink, hob = centres from the left)")
     items = [rect(0, 0, l, -t), line(0, -t + 20, l, -t + 20)]
     if sink_w > 0:
         items += translate([it for it in sink_plan(sink_w, t)[1:]], sink, 0)
@@ -212,7 +236,7 @@ def kitchen_plan(l=3000.0, t=600.0, sink=600.0, hob=2100.0, sink_w=800.0, hob_w=
     return items
 
 
-def kitchen_front(l=3000.0, t=600.0, sink=600.0, hob=2100.0, sink_w=800.0, hob_w=600.0, h=900.0):
+def kitchen_front(l=3000.0, sink=600.0, sink_w=800.0, h=900.0):
     """Base cabinets in elevation: counter, plinth, 600 mm fronts."""
     items = [rect(0, h - 40, l, h), rect(0, 100, l, h - 40), rect(0, 0, l, 100, role="detail")]
     n = max(1, int(round(l / 600.0)))
@@ -233,7 +257,8 @@ def fridge_plan(b=600.0, t=600.0):
 ASSETS = [
     dict(id="wc_wand", name="WC wandhängend", category="sanitary",
          views={"plan": wc_wall_plan, "front": wc_wall_front, "side": wc_wall_side},
-         params={"b": (360.0, "Breite"), "t": (540.0, "Ausladung ab Wand"), "h": (400.0, "Höhe Oberkante Keramik (barrierefrei 460)")},
+         params={"b": (360.0, "Breite"), "t": (540.0, "Ausladung ab Wand"),
+                 "h": (420.0, "Sitzhöhe inkl. Sitz (barrierefrei nach DIN 18040: 460-480)")},
          insertion="Grundriss: Mitte Wandseite, Objekt nach -y; Ansicht: Mitte am Boden",
          keywords=("toilette", "klo", "wc", "sanitär", "wand", "hänge")),
     dict(id="wc_stand", name="WC stehend mit Spülkasten", category="sanitary",
@@ -243,7 +268,7 @@ ASSETS = [
          keywords=("toilette", "klo", "wc", "stand", "spülkasten")),
     dict(id="urinal", name="Urinal", category="sanitary",
          views={"plan": urinal_plan, "front": urinal_front},
-         params={"b": (350.0, "Breite"), "t": (330.0, "Ausladung"), "h": (650.0, "Höhe Unterkante")},
+         params={"b": (350.0, "Breite"), "t": (330.0, "Ausladung"), "h": (650.0, "Höhe Unterkante (Kinder 500)")},
          insertion="Mitte Wandseite", keywords=("pissoir", "urinal", "sanitär")),
     dict(id="waschtisch", name="Waschtisch", category="sanitary",
          views={"plan": basin_plan, "front": basin_front, "side": basin_side},

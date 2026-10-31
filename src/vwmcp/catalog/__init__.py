@@ -60,6 +60,7 @@ FOLDER_PREFIX = "Keystone "
 NAME_MAX = 63  # Vectorworks object names: keep within the classic limit
 
 CATALOG: dict[str, Asset] = {}
+SIZES = {"b", "t", "h", "l", "d", "w", "trunk"}  # dimensions: must be > 0
 
 
 def register(asset: Asset) -> Asset:
@@ -96,7 +97,14 @@ def build(asset_id: str, view: str = "plan", params: dict | None = None) -> list
         if k not in a.params:
             raise KeyError("asset %r has no parameter %r (parameters: %s)"
                            % (asset_id, k, ", ".join(a.params) or "none"))
-        p[k] = float(v)
+        try:
+            p[k] = float(v)
+        except (TypeError, ValueError):
+            raise KeyError("parameter %r must be a number, got %r" % (k, v)) from None
+        if k in SIZES and not p[k] > 0:
+            raise KeyError("parameter %r (%s) must be > 0 mm" % (k, a.params[k][1]))
+        if not (p[k] == p[k] and abs(p[k]) < 1e7):
+            raise KeyError("parameter %r is out of range" % k)
     fn = a.views[view]
     accepted = inspect.signature(fn).parameters
     return fn(**{k: v for k, v in p.items() if k in accepted})
@@ -120,7 +128,7 @@ def symbol_name(asset_id: str, view: str, params: dict | None = None, mirrored: 
     diff = [(k, v) for k, v in used.items() if v != a.params[k][0]]
     name = "%s - %s" % (a.name, VIEW_DE.get(view, view))
     if diff:
-        name += " (%s)" % ", ".join("%s=%s" % (k, ("%.6f" % v).rstrip("0").rstrip(".")) for k, v in diff)
+        name += " (%s)" % ", ".join("%s=%s" % (k, "%.10g" % v) for k, v in diff)
     if mirrored:
         name += " gespiegelt"
     if len(name) > NAME_MAX:

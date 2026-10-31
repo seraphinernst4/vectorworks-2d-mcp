@@ -34,7 +34,7 @@ def chair_plan(w=450.0, d=500.0):
             rounded_rect(-w / 2, d / 2 - 70, w / 2, d / 2, 20, role="detail")]
 
 
-def chair_front(w=450.0, d=500.0, h=450.0):
+def chair_front(w=450.0, h=450.0):
     back_top = h + 420
     return [
         rect(-w / 2, h - 40, w / 2, h),                                    # seat
@@ -44,7 +44,7 @@ def chair_front(w=450.0, d=500.0, h=450.0):
     ]
 
 
-def chair_side(w=450.0, d=500.0, h=450.0):
+def chair_side(d=500.0, h=450.0):
     back_top = h + 420
     return [
         rect(0, h - 40, d, h),
@@ -55,33 +55,32 @@ def chair_side(w=450.0, d=500.0, h=450.0):
 
 
 def table_plan(b=1600.0, t=900.0, chairs=6.0, round_table=0.0):
-    """Table centred on 0, 0 with chairs around it (6 = 2 per long side + ends)."""
-    items = []
+    """Table centred on 0, 0 with chairs around it (6 = 2 per long side + ends).
+    Chairs are pushed under the table: drawn first, the table lies on top."""
+    chair_items = []
     n = max(0, int(round(chairs)))
     if round_table >= 1:
         r = b / 2
-        items.append({"type": "circle", "center": [0.0, 0.0], "radius": r, "role": "outline"})
         for i in range(n):
             ang = 360.0 * i / n
             a = math.radians(ang)
             dist = r + 150
-            items += _chair_plan_at(round(-math.sin(a) * dist, 6), round(math.cos(a) * dist, 6), ang)
-        return items
-    items.append(rect(-b / 2, -t / 2, b / 2, t / 2))
+            chair_items += _chair_plan_at(round(-math.sin(a) * dist, 6), round(math.cos(a) * dist, 6), ang)
+        return chair_items + [{"type": "circle", "center": [0.0, 0.0], "radius": r, "role": "outline"}]
     ends = 2 if n >= 6 else (1 if n % 2 == 1 and n >= 3 else 0)
     side = n - ends
     top, bottom = (side + 1) // 2, side // 2
     for count, y, ang in ((top, t / 2 + 150, 0.0), (bottom, -t / 2 - 150, 180.0)):
         for i in range(count):
-            items += _chair_plan_at(-b / 2 + b * (i + 0.5) / count, y, ang)
+            chair_items += _chair_plan_at(-b / 2 + b * (i + 0.5) / count, y, ang)
     if ends >= 1:
-        items += _chair_plan_at(-b / 2 - 150, 0, 90.0)
+        chair_items += _chair_plan_at(-b / 2 - 150, 0, 90.0)
     if ends >= 2:
-        items += _chair_plan_at(b / 2 + 150, 0, -90.0)
-    return items
+        chair_items += _chair_plan_at(b / 2 + 150, 0, -90.0)
+    return chair_items + [rect(-b / 2, -t / 2, b / 2, t / 2)]
 
 
-def table_front(b=1600.0, t=900.0, chairs=6.0, round_table=0.0, h=750.0):
+def table_front(b=1600.0, h=750.0):
     return [rect(-b / 2, h - 40, b / 2, h), rect(-b / 2 + 40, 0, -b / 2 + 100, h - 40),
             rect(b / 2 - 100, 0, b / 2 - 40, h - 40)]
 
@@ -105,12 +104,13 @@ def sofa_plan(b=2100.0, t=900.0):
     arm = 180.0
     back = 180.0
     seats = max(1, int(round((b - 2 * arm) / 600)))
+    front = -t + 40  # cushions end just inside the front edge
     items = [rounded_rect(-b / 2, 0, b / 2, -t, 40),
-             rect(-b / 2 + arm, -back, b / 2 - arm, -t, role="detail")]
+             rect(-b / 2 + arm, -back, b / 2 - arm, front, role="detail")]
     sw = (b - 2 * arm) / seats
     for i in range(1, seats):
         x = -b / 2 + arm + i * sw
-        items.append(line(x, -back, x, -t))
+        items.append(line(x, -back, x, front))
     return items
 
 
@@ -121,7 +121,7 @@ def wardrobe_plan(b=1000.0, t=600.0):
 
 
 def desk_plan(b=1600.0, t=800.0):
-    return [rect(-b / 2, 0, b / 2, -t)] + _chair_plan_at(0, -t - 150, 180.0)
+    return _chair_plan_at(0, -t - 150, 180.0) + [rect(-b / 2, 0, b / 2, -t)]
 
 
 def armchair_plan(b=800.0, t=850.0):

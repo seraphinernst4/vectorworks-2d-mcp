@@ -323,6 +323,12 @@ def asset_tests(report: dict) -> None:
         "    vs.DelObject(_f)\n"
         "result = [len(_k), _d]" % (ASSET_LAYER, ASSET_FOLDER))
     r["cleaned"] = cleaned
+    names = [catalog.symbol_name(a.id, v) for a in catalog.CATALOG.values() for v in a.views]
+    names += ["Küchenspüle mit Abtropffläche - Grundriss gespiegelt", "WC wandhängend - Ansicht (h=460)"]
+    r["cleaned_defaults"] = vwrun(
+        "_d = 0\nfor _n in %r:\n    _h = named(_n, (16,))\n"
+        "    if _h is not None and _symbol_instances(_n) == 0:\n        vs.DelObject(_h)\n        _d += 1\n"
+        "result = _d" % (names,))
     # a user class with its own look must stay untouched
     draw2d.vw2d_setup(classes=[{"name": "Ausstattung-Möbel", "attributes": {"pen": "#123456", "fill": "#fafafa",
                                                                              "line_weight": 0.25}}],
@@ -629,6 +635,62 @@ def stack_tests(report: dict) -> None:
     log(f"stack: pass={r['pass']} {r}")
 
 
+ORG_LAYER, ORG_LAYER2 = "KS-Test-Org", "KS-Test-Org2"
+
+
+def organize_tests(report: dict) -> None:
+    """vw2d_organize live: class map, line weight in mils, area, text, layer
+    move; apply, then revert - classes, layers and stacking come back."""
+    from vwmcp import app
+    from vwmcp.tools import draw2d, generic, organize
+
+    b = app.get_bridge()
+    clear = ("_k = []\ndef _c(h):\n    _k.append(h)\nvs.ForEachObject(_c, \"((L='%s') | (L='%s'))\")\n"
+             "for _h in _k:\n    vs.DelObject(_h)\nlen(_k)" % (ORG_LAYER, ORG_LAYER2))
+    b.run(clear)
+    draw2d.vw2d_setup(classes=[{"name": "A-WALL"}, {"name": "A-ANNO"}, {"name": "0"}],
+                      layers=[{"name": ORG_LAYER, "scale": 50}, {"name": ORG_LAYER2, "scale": 50}])
+    items = [
+        {"type": "rect", "corner": [0, 0], "width": 4000, "height": 3000, "class": "A-WALL", "name": "KS-Or-A"},
+        {"type": "rect", "corner": [5000, 0], "width": 200, "height": 200, "class": "A-WALL", "name": "KS-Or-B"},
+        {"type": "line", "p1": [0, 4000], "p2": [3000, 4000], "class": "0", "name": "KS-Or-C",
+         "attributes": {"line_weight": 0.5, "pen": "#ff0000"}},
+        {"type": "text", "text": "Bad 12 m²", "position": [500, 1500], "class": "A-ANNO", "name": "KS-Or-D"},
+        {"type": "rect", "corner": [0, 6000], "width": 1000, "height": 1000, "class": "0", "name": "KS-Or-E"},
+    ]
+    d = draw2d.vw2d_draw(items, unit="mm", layer=ORG_LAYER, check=False, allow_no_class=True)
+    order_code = ("_o = []\nfor _n in (%r, %r):\n    _l = vs.GetLayerByName(_n)\n    _s = []\n"
+                  "    _k = vs.FInLayer(_l)\n    while _k is not None and str(_k) != '0' and len(_s) < 50:\n"
+                  "        _s.append(vs.GetName(_k).replace('KS-Or-', ''))\n        _k = vs.NextObj(_k)\n"
+                  "    _o.append(''.join(_s))\nresult = _o" % (ORG_LAYER, ORG_LAYER2))
+    cls_code = ("result = dict((n, vs.GetClass(vs.GetObject('KS-Or-' + n))) for n in 'ABCDE')")
+    r: dict = {"start_order": b.run(order_code)["value"], "start_classes": b.run(cls_code)["value"]}
+    rules = [
+        {"match": {"kind": "text", "text": "m²"}, "class": "Beschriftung"},
+        {"match": {"line_weight_mm": 0.5, "pen": "#ff0000"}, "class": "Achsen", "layer": ORG_LAYER2},
+        {"match": {"class": "A-WALL", "area_m2": [1, None]}, "class": "Wand-Tragend"},
+        {"match": {"class": "A-WALL"}, "class": "Stütze"},
+        {"match": {"class": "0", "kind": "rect"}, "layer": ORG_LAYER2},
+    ]
+    dry = organize.vw2d_organize(rules=rules, layer=ORG_LAYER)
+    r["dry"] = {"to_change": dry["to_change"], "unmatched": dry["unmatched"], "targets": dry["targets"]}
+    r["dry_order_same"] = b.run(order_code)["value"] == r["start_order"]
+    ap = organize.vw2d_organize(rules=rules, layer=ORG_LAYER, dry_run=False)
+    r["changed"] = ap.get("changed")
+    r["after_order"] = b.run(order_code)["value"]
+    r["after_classes"] = b.run(cls_code)["value"]
+    rv = generic.vw_revert_last()
+    r["reverted_tool"] = rv.get("reverted_tool")
+    r["back_order"] = b.run(order_code)["value"]
+    r["back_classes"] = b.run(cls_code)["value"]
+    want = {"A": "Wand-Tragend", "B": "Stütze", "C": "Achsen", "D": "Beschriftung", "E": "0"}
+    r["pass"] = (dry["to_change"] == 5 and r["dry_order_same"] and r["changed"] == 5
+                 and r["after_classes"] == want and r["after_order"] == ["ABD", "CE"]
+                 and r["back_order"] == r["start_order"] and r["back_classes"] == r["start_classes"])
+    report["organize"] = r
+    log(f"organize: pass={r['pass']} {r['after_order']} -> {r['back_order']}")
+
+
 DIRECT_LAYER = "KS-Test-Direct"
 
 
@@ -753,7 +815,7 @@ def main() -> None:
     report = {"started": time.strftime("%Y-%m-%d %H:%M:%S"), "python": sys.version.split()[0]}
     log(f"live test start ({args.only})")
     sections = (("protocol", protocol_tests), ("tools", tool_tests), ("pitfalls", pitfall_tests),
-                ("regression", regression_tests), ("assets", asset_tests), ("stack", stack_tests),
+                ("regression", regression_tests), ("assets", asset_tests), ("stack", stack_tests), ("organize", organize_tests),
                 ("perf", perf_tests), ("direct", direct_tests),
                 ("mcp", lambda rep: mcp_tests(rep, args.server)))
     for name, fn in sections:

@@ -141,3 +141,20 @@ def test_place_below_restores_the_stacking_position_from_either_end():
         st.objs.append(gone)
         ns["_place_below"](gone, above, None)
         assert st.order() == names
+
+
+
+def test_read_objects_says_when_it_stopped_early():
+    class O:
+        def __init__(self, i):
+            self.i, self.t = i, 2
+
+    objs = [O(i) for i in range(12)]
+    ns = _ns(GetFName=lambda: "T.vwx", GetUnits=lambda: (0, 0, 0, 25.4, "mm", "m2"), ClassList=lambda i: "Keine",
+             GetLName=lambda h: "EG", ActLayer=lambda: None, GetTypeN=lambda h: h.t)
+    ns["collect"] = lambda *a: objs
+    ns["read_obj"] = lambda h, *a, **k: {"uuid": str(h.i), "class": "Keine"}
+    out = ns["read_objects"](layer="EG", limit=5)
+    assert len(out["objects"]) == 5 and out["truncated"] is True
+    out = ns["read_objects"](layer="EG", limit=12)
+    assert len(out["objects"]) == 12 and out["truncated"] is False

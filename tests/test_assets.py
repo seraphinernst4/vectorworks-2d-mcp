@@ -60,13 +60,30 @@ def test_every_asset_view_has_finite_tangent_paths(asset_id, view):
                 cur = s["line_to"]
 
 
+def _numbers(x):
+    if isinstance(x, dict):
+        return [v for k in sorted(x) for v in _numbers(x[k])]
+    if isinstance(x, (list, tuple)):
+        return [v for i in x for v in _numbers(i)]
+    return [x]
+
+
 def test_mirror_items_is_exact_and_involutive():
     items = catalog.build("spuele", "plan") + catalog.build("baum", "plan") + [SH.arc(10, 5, 3, 20, 70)]
-    m = SH.mirror_items(items)
-    assert SH.mirror_items(m) == [dict(it) for it in items] or all(
-        assets._shape_key(a) == assets._shape_key(b) for a, b in zip(SH.mirror_items(m), items))
+    twice = SH.mirror_items(SH.mirror_items(items))
+    for a, b in zip(items, twice):
+        na, nb = _numbers(a), _numbers(b)
+        assert len(na) == len(nb)
+        for x, y in zip(na, nb):
+            if isinstance(x, float):
+                assert abs(x - y) <= 1e-9, (a, b)
+            else:
+                assert x == y
+    once = SH.mirror_items(items)
+    assert all(abs(p[0] + q[0]) < 1e-12 and p[1] == q[1] for a, b in zip(items, once) if a["type"] == "polygon"
+               for p, q in zip(a["points"], b["points"]))
     # an arc from 20 deg sweeping 70: mirrored covers 90..160
-    arc = m[-1]
+    arc = once[-1]
     assert arc["center"] == [-10.0, 5.0] and arc["start_angle"] == 90.0 and arc["sweep"] == 70
 
 
@@ -334,6 +351,7 @@ class FakeVS:
     def EndGroup(self):
         g = self.stack.pop()
         g.parent = self.layer
+        self.layer.kids.append(g)
         self.last = g
 
     def InsertSymbolInFolder(self, f, s):
@@ -347,6 +365,10 @@ class FakeVS:
         return h.kids[0] if h.kids else None
 
     def NextObj(self, h):
+        if h.parent is None or getattr(h.parent, "t", None) == 92 and h not in h.parent.kids:
+            lib = self._library()
+            i = lib.index(h) if h in lib else len(lib)
+            return lib[i + 1] if i + 1 < len(lib) else None
         sib = h.parent.kids
         i = sib.index(h)
         return sib[i + 1] if i + 1 < len(sib) else None
@@ -385,6 +407,19 @@ class FakeVS:
 
     def HRotate(self, h, p, a):
         h.rotated = (p, a)
+
+    def FSymDef(self):
+        lib = self._library()
+        return lib[0] if lib else None
+
+    def _library(self):
+        return [o for o in self.names.values() if o.t in (16, 92) and getattr(o.parent, "t", None) != 92]
+
+    def GetSymName(self, h):
+        return h.sym
+
+    def GetName(self, h):
+        return h.name
 
     def Count(self, crit):
         name = crit[4:-2]
@@ -537,3 +572,129 @@ def test_parameter_variants_normalize(asset_id, view, params):
         S.normalize(it, 1.0, {})
     for it in SH.mirror_items(catalog.build(asset_id, view, params)):
         S.normalize({k: v for k, v in it.items() if k != "role"}, 1.0, {})
+
+
+
+def _extent(items):
+    pts = [p for it in items for p in P.item_points(it)[0]]
+    for it in items:  # circles exactly (sampling may miss their extremes)
+        if it["type"] == "circle":
+            (cx, cy), r = it["center"], it["radius"]
+            pts += [(cx - r, cy), (cx + r, cy), (cx, cy - r), (cx, cy + r)]
+    xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+    return min(xs), min(ys), max(xs), max(ys)
+
+
+@pytest.mark.parametrize("asset_id,view", [
+    ("stuhl", "front"), ("stuhl", "side"), ("tisch", "front"), ("person", "front"), ("baum", "front"),
+    ("pkw", "side"), ("waschmaschine", "front"), ("kuechenzeile", "front"), ("badewanne", "side"),
+    ("wc_stand", "side")])
+def test_standing_elevations_touch_the_floor(asset_id, view):
+    for params in (None, {"h": 1700} if asset_id == "pkw" else None, {"l": 4000} if asset_id == "pkw" else None):
+        x0, y0, x1, y1 = _extent(catalog.build(asset_id, view, params))
+        assert abs(y0) < 1e-6, (asset_id, view, params, y0)
+
+
+@pytest.mark.parametrize("asset_id", ["wc_wand", "wc_stand", "urinal", "waschtisch", "handwaschbecken", "dusche",
+                                      "badewanne", "spuele", "kochfeld", "waschmaschine", "kuehlschrank", "bett",
+                                      "sofa", "schrank", "schreibtisch", "sessel", "nachttisch", "kommode", "regal",
+                                      "kuechenzeile"])
+def test_wall_mounted_plans_stand_at_y0_towards_minus_y(asset_id):
+    x0, y0, x1, y1 = _extent(catalog.build(asset_id, "plan"))
+    assert abs(y1) < 1e-6 and y0 < 0
+
+
+def test_urinal_height_is_its_lowest_edge():
+    x0, y0, x1, y1 = _extent(catalog.build("urinal", "front", {"h": 500}))
+    assert abs(y0 - 500) < 1e-6
+
+
+def test_wc_height_is_the_seat_top():
+    x0, y0, x1, y1 = _extent(catalog.build("wc_wand", "side", {"h": 460}))
+    assert abs(y1 - 460) < 1e-6
+
+
+@pytest.mark.parametrize("d", [2000.0, 6000.0, 9000.0])
+def test_tree_crown_fits_its_diameter_and_is_centred(d):
+    for style in (0.0, 1.0, 2.0):
+        x0, y0, x1, y1 = _extent(catalog.build("baum", "plan", {"d": d, "style": style}))
+        assert max(x1 - x0, y1 - y0) <= d * 1.01 and max(x1 - x0, y1 - y0) >= d * 0.95, (d, style)
+        assert abs(x0 + x1) < d * 0.01 and abs(y0 + y1) < d * 0.01
+
+
+def test_round_ovals_become_circles():
+    it = SH.korb_oval(0, 0, 500, 500)
+    assert it["type"] == "circle" and it["radius"] == 250
+    items = catalog.build("baum", "front", {"style": 1, "d": 3400, "h": 5000})  # crown 3400 x 3400
+    assets._classed(items, "plants")
+    for it in assets._classed(items, "plants"):
+        S.normalize(it, 1.0, {})
+
+
+def test_wall_parameter_turns_the_asset_away_from_the_wall():
+    import math as _m
+
+    def facing(rot):  # where local -y points after rotating counter-clockwise
+        a = _m.radians(rot)
+        return round(_m.sin(a), 9) + 0.0, round(-_m.cos(a), 9) + 0.0
+
+    away = {"above": (0.0, -1.0), "left": (1.0, 0.0), "below": (0.0, 1.0), "right": (-1.0, 0.0)}
+    for wall, direction in away.items():
+        assert facing(assets.WALL_ROTATION[wall]) == direction, wall
+
+
+def test_place_asset_wall_and_bad_rotation(fake):
+    assets.vw2d_place_asset("wc_wand", wall="left")
+    assert fake.calls[-1][1]["placements"][0]["rotation"] == 90.0
+    assets.vw2d_place_asset("wc_wand", placements=[{"position": [0, 0], "wall": "right"}])
+    assert fake.calls[-1][1]["placements"][0]["rotation"] == 270.0
+    with pytest.raises(ToolError, match="rotation must be a number"):
+        assets.vw2d_place_asset("wc_wand", rotation="quer")
+
+
+def test_bad_parameters_are_clear_errors(fake):
+    with pytest.raises(ToolError, match="must be > 0"):
+        assets.vw2d_place_asset("bett", params={"b": 0})
+    with pytest.raises(ToolError, match="doesn't fit"):
+        assets.vw2d_place_asset("kuechenzeile", params={"l": 1800})
+    with pytest.raises(ToolError, match="must be a number"):
+        assets.vw2d_place_asset("bett", params={"b": "breit"})
+
+
+def test_unused_parameters_make_no_extra_symbols():
+    import inspect as _i
+
+    for a in catalog.CATALOG.values():
+        for v, fn in a.views.items():
+            base = catalog.build(a.id, v)
+            for p in _i.signature(fn).parameters:
+                if p not in a.params or p in ("gully", "style", "round_table", "mirror", "bowls", "sink_w",
+                                              "hob_w", "chairs"):
+                    continue
+                d = a.params[p][0]
+                assert catalog.build(a.id, v, {p: d * 1.1 + 1}) != base, (a.id, v, p)
+
+
+def test_vw_group_path_is_all_or_nothing():
+    v = FakeVS(fail_on_item=3)
+    ns = _vw_ns(v)
+    with pytest.raises(RuntimeError, match="boom"):
+        ns["place_asset"]("x", ITEMS, [{"position": [0, 0]}, {"position": [5, 0]}], as_symbol=False, cls="B")
+    assert not [k for k in v.layer.kids if k not in v.deleted]
+
+
+
+def test_vw_symdef_used_inside_another_definition_is_kept():
+    v = FakeVS()
+    ns = _vw_ns(v)
+    ns["place_asset"]("WC", ITEMS, [{"position": [0, 0]}], folder=None, cls="A")
+    inst = v.last
+    outer = Obj(16, "Outer")
+    nested = Obj(15, parent=outer)
+    nested.sym = "WC"
+    outer.kids.append(nested)
+    v.names["Outer"] = outer
+    v.objects_by_uuid = {inst.uuid: inst}
+    v.GetObjectByUuid = lambda u: v.objects_by_uuid.get(u)
+    r = ns["revert2d"]([{"op": "symdef", "name": "WC"}, {"op": "created", "uuid": inst.uuid}])
+    assert "WC" in v.names and r["kept_in_use"] == ["WC"]

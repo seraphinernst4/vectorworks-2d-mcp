@@ -537,13 +537,16 @@ def _walk(h, out, geometry, allow_temp, parent, cls, depth=0):
 def read_objects(uuids=None, layer=None, cls=None, selection=False, geometry=True,
                  allow_temp=True, limit=20000, bbox=None):
     out = []
-    for h in collect(uuids, layer, cls, selection, bbox):
+    hs = collect(uuids, layer, cls, selection, bbox)
+    stopped = False
+    for i, h in enumerate(hs):
         _walk(h, out, geometry, allow_temp, None, cls)
-        if len(out) >= limit:
+        if len(out) >= limit and i + 1 < len(hs):
+            stopped = True
             break
     return {"document": current_document(), "units": units(), "none_class": none_class(),
             "active_layer": _str(vs.GetLName(vs.ActLayer())),
-            "objects": out[:limit], "truncated": len(out) > limit}
+            "objects": out[:limit], "truncated": stopped or len(out) > limit}
 
 
 # ---- structure overview ----------------------------------------------------------
@@ -828,11 +831,18 @@ def _place_one(symbol, pl):
 
 
 def _group_one(items, pl):
+    before = vs.LNewObj()
     vs.BeginGroup()
+    ok = False
     try:
         _draw_local(items)
+        ok = True
     finally:
         vs.EndGroup()
+        if not ok:  # remove the half-built group
+            g = vs.LNewObj()
+            if not _is_nil(g) and vs.GetTypeN(g) == 11 and (_is_nil(before) or str(g) != str(before)):
+                vs.DelObject(g)
     g = vs.LNewObj()
     if _is_nil(g) or vs.GetTypeN(g) != 11:
         raise RuntimeError("Vectorworks did not create the group")
@@ -916,9 +926,44 @@ def place_asset(symbol, items, placements, folder=None, layer=None, cls=None, as
     return out
 
 
+def _contains_instance(h, name, depth=0):
+    """Does this container (symbol definition, group) hold an instance of name?"""
+    for k in children(h):
+        t = vs.GetTypeN(k)
+        if t == SYMBOL and _str(vs.GetSymName(k)) == name:
+            return True
+        if t == 11 and depth < 20 and _contains_instance(k, name, depth + 1):
+            return True
+    return False
+
+
+def _used_in_definitions(name):
+    """Is the symbol placed inside another symbol definition? Count() doesn't
+    see those (live, 2026 U7). Walks the symbol library incl. folders."""
+    stack, n = [vs.FSymDef()], 0
+    while stack and n < 100000:
+        h = stack.pop()
+        while not _is_nil(h) and n < 100000:
+            n += 1
+            t = vs.GetTypeN(h)
+            if t == SYMFOLDER:
+                stack.append(vs.FInFolder(h))
+            elif t == SYMDEF and _str(vs.GetName(h)) != name and _contains_instance(h, name):
+                return True
+            h = vs.NextObj(h)
+    return False
+
+
 def _symbol_instances(name):
+    """Instances of a symbol anywhere (layers, groups, other definitions);
+    -1 if unsure (then nothing is deleted)."""
+    if "'" in name:
+        return -1  # can't be quoted in a criterion
     try:
-        return int(vs.Count("(S='%s')" % name.replace("'", "")))
+        n = int(vs.Count("(S='%s')" % name))
+        if n == 0 and _used_in_definitions(name):
+            n = 1
+        return n
     except Exception:  # noqa: BLE001
         return -1
 
@@ -1126,9 +1171,10 @@ def restore(snap, mapping, hmap=None):
 def revert2d(ops):
     """Undo journaled ops (newest last). Returns uuid remapping for the
     journal plus counts."""
-    mapping, deleted, restored, missing, kept = {}, 0, 0, [], []
+    mapping, deleted, restored, missing, kept, restack = {}, 0, 0, [], [], []
     hmap = _uuid_map([op.get("uuid") for op in ops] + [u for op in ops for u in op.get("after", [])]
-                     + [s.get("above") for op in ops for s in op.get("before", [])])
+                     + [s.get("above") for op in ops for s in op.get("before", [])]
+                     + [op.get("above") for op in ops])
     for op in reversed(ops):
         kind = op["op"]
         if kind == "created":
@@ -1162,6 +1208,8 @@ def revert2d(ops):
                     lay = vs.GetLayerByName(op["layer_before"])
                     if not _is_nil(lay):
                         vs.SetParent(h, lay)
+                        if "above" in op:
+                            restack.append((op, h))
                 restored += 1
         elif kind == "symdef":
             # only if nothing uses it any more (the user may have placed more)
@@ -1185,6 +1233,10 @@ def revert2d(ops):
             else:
                 _write_fields(h, op["record"], op["before"])
                 restored += 1
+    # objects moved back to their layer: old stacking position, frontmost first
+    # (so an object's `above` neighbour is already back in place)
+    for op, h in sorted(restack, key=lambda x: -(x[0].get("z") or 0)):
+        _place_below(h, op.get("above"), op.get("z"), hmap)
     out = {"document": current_document(), "deleted": deleted, "restored": restored,
            "missing": missing, "mapping": mapping}
     if kept:
@@ -1229,17 +1281,20 @@ def set_attributes(uuids, attributes, layer=None):
 
 def organize_apply(moves):
     """Put objects into classes / onto layers (vw2d_organize), one job, one
-    journal entry. moves: [{"uuids", "class", "layer", "by_class"}]. On any
-    error everything done so far is undone."""
+    journal entry. moves: [{"uuids", "class", "layer", "by_class"}]. Layer
+    moves journal the old stacking position. On any error everything done so
+    far is undone."""
     applied = []
     hmap = _uuid_map([u for m in moves for u in m["uuids"]])
+    movers = [hmap.get(u) or handle(u) for m in moves if m.get("layer") for u in m["uuids"]]
+    zm = _z_map(movers) if movers else {}
+    have = set(class_names())
     try:
         for m in moves:
-            attrs = {}
-            if m.get("class"):
-                attrs["class"] = m["class"]
-            if m.get("by_class"):
-                attrs["by_class"] = True
+            cls = m.get("class")
+            if cls and cls not in have:
+                ensure_class(cls)
+                have.add(cls)
             target = None
             if m.get("layer"):
                 ensure_layer(m["layer"])
@@ -1255,16 +1310,25 @@ def organize_apply(moves):
                     par = vs.GetParent(h)
                     if not _is_nil(par) and vs.GetTypeN(par) == 11:
                         raise ValueError("object %s is inside a group; move the group instead" % u)
+                    nxt = vs.NextObj(h)
+                    op["above"] = None if _is_nil(nxt) else h_uuid(nxt)
+                    op["z"] = zm.get(str(h))
                 applied.append(op)
-                apply_attrs(h, attrs)
+                if cls:
+                    vs.SetClass(h, cls)
+                if m.get("by_class"):
+                    apply_attrs(h, {"by_class": True})
                 if target is not None:
                     vs.SetParent(h, target)
     except BaseException:
-        for op in reversed(applied):  # one by one: a failing object must not stop the rest
-            try:
-                revert2d([op])
-            except Exception:  # noqa: BLE001
-                pass
+        try:
+            revert2d(applied)
+        except Exception:  # noqa: BLE001 - then one by one, so one bad object can't stop the rest
+            for op in reversed(applied):
+                try:
+                    revert2d([op])
+                except Exception:  # noqa: BLE001
+                    pass
         raise
     return {"document": current_document(), "ops": applied, "changed": len(applied)}
 

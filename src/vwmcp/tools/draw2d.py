@@ -22,8 +22,8 @@ from vwmcp.geom import render as R
 from vwmcp.geom import specs as S
 from vwmcp.geom.shapes import units_tolerances
 
-READ_TIMEOUT = 180.0
-WRITE_TIMEOUT = 120.0
+READ_TIMEOUT = 600.0  # big drawings; the client stops early if Vectorworks quits
+WRITE_TIMEOUT = 600.0  # thousands of clips take minutes; a timeout would lose the journal entry
 
 # A starting point for classes in architecture plans (German names; the
 # user's own standard always wins). Attributes are used "nach Klasse".

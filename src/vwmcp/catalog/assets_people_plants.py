@@ -11,13 +11,26 @@ from vwmcp.catalog.shapes import circle, korb_oval, line, path, poly, rect, roun
 def _cloud(cx: float, cy: float, rx: float, ry: float, lobes: int, seed: float = 1.0,
            wobble: float = 0.07, role: str = "outline") -> dict:
     """Closed scalloped outline (tree crown): `lobes` outward arcs between
-    points on an ellipse whose radius varies a little (deterministic)."""
-    pts = []
+    points on an ellipse whose radius varies a little (deterministic).
+    Scaled and centred so the whole outline (lobes included) fits 2rx x 2ry."""
+    raw = []
     for i in range(lobes):
         th = 2 * math.pi * i / lobes + 0.37 * seed
         k = 1 + wobble * math.sin(i * 2.399 + seed) * math.cos(i * 1.3 + 0.5 * seed)
-        pts.append((cx + rx * k * math.cos(th), cy + ry * k * math.sin(th)))
-    pts = [(round(x, 6), round(y, 6)) for x, y in pts]
+        raw.append((rx * k * math.cos(th), ry * k * math.sin(th)))
+    # extent including the lobes' bulge (sagitta of each arc)
+    xs, ys = [], []
+    for i in range(lobes):
+        (x1, y1), (x2, y2) = raw[i], raw[(i + 1) % lobes]
+        c = math.hypot(x2 - x1, y2 - y1)
+        sag = 0.62 * c - math.sqrt((0.62 * c) ** 2 - (c / 2) ** 2)
+        mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+        nx, ny = (y2 - y1) / c, -(x2 - x1) / c  # outward normal (ccw order)
+        xs += [x1, mx + nx * sag]
+        ys += [y1, my + ny * sag]
+    f = min(2 * rx / (max(xs) - min(xs)), 2 * ry / (max(ys) - min(ys)))
+    ox, oy = (max(xs) + min(xs)) / 2, (max(ys) + min(ys)) / 2
+    pts = [(round(cx + (x - ox) * f, 6), round(cy + (y - oy) * f, 6)) for x, y in raw]
     segs = []
     for i in range(lobes):
         (x1, y1), (x2, y2) = pts[i], pts[(i + 1) % lobes]
@@ -124,7 +137,7 @@ def car_plan(l=4700.0, b=1850.0):
     ]
 
 
-def car_side(l=4700.0, b=1850.0, h=1480.0):
+def car_side(l=4700.0, h=1480.0):
     """Car in side elevation, front towards +x, centred on its length, on y = 0."""
     k = l / 4700.0
     kh = h / 1480.0
@@ -148,9 +161,10 @@ def car_side(l=4700.0, b=1850.0, h=1480.0):
              line(X(0), Y(1015), X(0), Y(1420)),
              line(X(-2300), Y(700), X(2330), Y(700)),                     # belt line
              ]
-    for x in (wx, -wx):
-        items.append(circle(X(x), wr * kh, wr * min(k, kh), role="outline"))
-        items.append(circle(X(x), wr * kh, wr * min(k, kh) * 0.6, role="detail"))
+    r = wr * min(k, kh)
+    for x in (wx, -wx):  # tyres stand on the ground: centre at their radius
+        items.append(circle(X(x), r, r, role="outline"))
+        items.append(circle(X(x), r, r * 0.6, role="detail"))
     return items
 
 

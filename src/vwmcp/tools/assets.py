@@ -37,6 +37,8 @@ def _items(asset_id: str, view: str, params: dict | None, mirror: bool) -> tuple
         items = catalog.build(asset_id, view, params)
     except KeyError as e:
         raise ToolError(str(e.args[0]) if e.args else str(e)) from e
+    except (ValueError, ArithmeticError) as e:
+        raise ToolError("asset %r: %s" % (asset_id, e)) from e
     if not mirror:
         return items, False
     m = SH.mirror_items(items)
@@ -133,17 +135,37 @@ def vw2d_assets(
     return out
 
 
-def _placements(position, rotation, placements) -> list[dict]:
+# Assets reach from the wall towards local -y. Rotation (counter-clockwise)
+# that turns them away from a wall on that side of the object:
+WALL_ROTATION = {"above": 0.0, "left": 90.0, "below": 180.0, "right": 270.0}
+
+
+def _rotation(value, wall, where: str) -> float:
+    if wall is not None:
+        if wall not in WALL_ROTATION:
+            raise ToolError("%s: wall must be one of %s" % (where, ", ".join(WALL_ROTATION)))
+        return WALL_ROTATION[wall]
+    try:
+        r = float(value)
+    except (TypeError, ValueError):
+        raise ToolError("%s: rotation must be a number (degrees), got %r" % (where, value)) from None
+    if not math.isfinite(r):
+        raise ToolError("%s: rotation must be a finite number" % where)
+    return r
+
+
+def _placements(position, rotation, wall, placements) -> list[dict]:
     if placements:
         if len(placements) > MAX_PLACEMENTS:
             raise ToolError("at most %d placements per call" % MAX_PLACEMENTS)
         out = []
         for i, pl in enumerate(placements):
-            if "position" not in pl:
+            if not isinstance(pl, dict) or "position" not in pl:
                 raise ToolError("placement %d needs a position [x, y]" % i)
-            out.append({"position": pl["position"], "rotation": float(pl.get("rotation", 0.0))})
+            out.append({"position": pl["position"],
+                        "rotation": _rotation(pl.get("rotation", 0.0), pl.get("wall"), "placement %d" % i)})
         return out
-    return [{"position": list(position), "rotation": float(rotation)}]
+    return [{"position": list(position), "rotation": _rotation(rotation, wall, "rotation")}]
 
 
 @mcp.tool(annotations=WRITE)
@@ -152,6 +174,7 @@ def vw2d_place_asset(
     position: list[float] = [0.0, 0.0],  # noqa: B006  (JSON default, never mutated)
     view: Literal["plan", "front", "side"] = "plan",
     rotation: float = 0.0,
+    wall: Literal["above", "left", "below", "right"] | None = None,
     mirror: bool = False,
     params: dict[str, float] | None = None,
     placements: list[dict[str, Any]] | None = None,
@@ -164,23 +187,27 @@ def vw2d_place_asset(
     """Place a catalogue asset (see vw2d_assets) exactly, as a symbol.
 
     position: insertion point in `unit` (see the asset's "insertion": e.g.
-    WC/wash basin = middle of the wall side, the object reaches towards -y;
-    rotate so it faces into the room: wall on the right of the room ->
-    rotation 90, wall above -> 180, wall on the left -> 270). rotation in
-    degrees counter-clockwise. mirror: left/right variant (a separate
+    WC/wash basin = middle of the wall side; unrotated the object reaches
+    from the wall towards -y, i.e. the wall is above it in the plan).
+    wall: where the wall is, seen from the object - "above" (rotation 0),
+    "left" (90), "below" (180), "right" (270); the object then faces away
+    from that wall into the room. Or give rotation in degrees
+    (counter-clockwise) directly. mirror: left/right variant (a separate
     mirrored symbol definition, exact; ignored for symmetric assets).
     params: dimensions in mm (e.g. {"b": 400, "h": 460}); each parameter set
     is its own symbol, named like "WC wandhängend - Grundriss (h=460)".
-    placements: [{"position": [x, y], "rotation": deg}, ...] to place
-    several instances in one call (overrides position/rotation).
+    placements: [{"position": [x, y], "rotation": deg | "wall": "left"}, ...]
+    to place several instances in one call (overrides position/rotation).
     The symbol definition is created once (folder "Keystone <Kategorie>" or
     `folder`, "" = none) and reused if it exists - if you edited it in
     Vectorworks, your version stays. Components are in the classes
     "<Klasse>" and "<Klasse>-Detail" (created with sensible attributes if
     missing; existing classes are never changed); instances go into
     class_name or the asset's class. as_symbol=False draws editable groups
-    instead. vw_revert_last removes the instances (and the definition and
-    folder if this call created them and nothing else uses them)."""
+    instead (exactness is then checked on the parts before they are moved
+    into place). A missing layer is created. vw_revert_last removes the
+    instances (and the definition and folder if this call created them and
+    nothing else uses them); classes it created stay (empty)."""
     a = catalog.CATALOG.get(asset)
     if a is None:
         raise ToolError("unknown asset %r. Known: %s" % (asset, ", ".join(catalog.CATALOG)))
@@ -194,17 +221,15 @@ def vw2d_place_asset(
     for i, it in enumerate(items):
         try:
             n, exp = S.normalize(it, mpu, {})
-        except (S.SpecError, KeyError, TypeError, ValueError) as e:
-            raise ToolError("asset item %d (%s): %s" % (i, it.get("type"), e)) from e
+        except (S.SpecError, KeyError, TypeError, ValueError, ArithmeticError) as e:
+            raise ToolError("asset item %d (%s): %s - try other dimensions" % (i, it.get("type"), e)) from e
         norm.append((n, exp))
     pls = []
-    for i, pl in enumerate(_placements(position, rotation, placements)):
+    for i, pl in enumerate(_placements(position, rotation, wall, placements)):
         try:
             loc, _ = S.normalize({"type": "locus", "point": pl["position"], "unit": unit}, mpu, {})
         except (S.SpecError, KeyError, TypeError, ValueError) as e:
             raise ToolError("placement %d: %s" % (i, e)) from e
-        if not math.isfinite(pl["rotation"]):
-            raise ToolError("placement %d: rotation must be a number" % i)
         pls.append({"position": list(loc["point"]), "rotation": pl["rotation"] % 360.0})
     base = catalog.CATEGORY_CLASS[a.category]
     new_classes = {base: catalog.CLASS_ATTRS[base],
@@ -262,7 +287,7 @@ def vw2d_place_asset(
            "symbol": res.get("symbol", {}).get("name") if as_symbol else None,
            "symbol_created": bool(res.get("symbol_created")), "mirrored": mirrored,
            "placed": len(inst_out), "instances": inst_out[:50],
-           "placement_deviation_mm": place_dev, **exact_info}
+           "placement_deviation_mm": place_dev if as_symbol else None, **exact_info}
     if len(inst_out) > 50:
         out["instances_more"] = len(inst_out) - 50
     if mirror and not mirrored:
