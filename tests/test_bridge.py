@@ -183,6 +183,7 @@ def make_vs():
     fn("ForEachObject", "vs.ForEachObject(callback, c)")
     fn("Locus3D", "vs.Locus3D(p)")
     fn("Changed", "vs.Changed(a, b, c)")  # live API disagrees with the index
+    fn("GetFName", "vs.GetFName()")
     vs.Unindexed = lambda *a: vs.calls.append(("Unindexed", a))
     vs.kConstant = 7
     return vs
@@ -196,6 +197,7 @@ INDEX = {"f": {
     "Locus3D": {"a": "p:POINT3D", "t": "Q"},
     "Changed": {"a": "a:REAL, b:REAL", "t": "RR"},
     "Missing": {"a": "a:REAL", "t": "R"},
+    "GetFName": {"a": "", "t": ""},
 }}
 
 
@@ -210,7 +212,14 @@ def checked(tmp_path):
 
 def test_check_table_follows_the_live_api(checked):
     vs, proxy, table = checked
-    assert set(table) == {"Rect", "SetFillBack", "HMove", "ForEachObject", "Locus3D"}
+    assert set(table) == {"Rect", "SetFillBack", "HMove", "ForEachObject", "Locus3D", "GetFName"}
+
+
+def test_functions_without_parameters_are_checked_too(checked):
+    vs, proxy, _ = checked
+    assert proxy.GetFName() == "GetFName"
+    with pytest.raises(bridge.VSArgumentError, match="too many"):
+        proxy.GetFName("x")
 
 
 @pytest.mark.parametrize("args", [((0, 0), (1, 1)), (0, 0, 1, 1), ((0, 0), 1, 1), ((0, 0, 0), (1, 1, 0))])

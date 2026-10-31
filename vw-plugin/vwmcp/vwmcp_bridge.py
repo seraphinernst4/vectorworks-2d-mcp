@@ -196,7 +196,7 @@ def load_check_table(vs_module, path=None):
     table = {}
     for name, entry in data.get("f", {}).items():
         codes = entry.get("t")
-        if not codes:
+        if codes is None:  # "" = no parameters, still checked
             continue
         fn = getattr(vs_module, name, None)
         if fn is None or not callable(fn):

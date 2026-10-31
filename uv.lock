@@ -1651,7 +1651,7 @@ wheels = [
 
 [[package]]
 name = "vectorworks-2d-mcp"
-version = "0.2.0"
+version = "0.3.6"
 source = { editable = "." }
 dependencies = [
     { name = "matplotlib" },
