@@ -771,16 +771,22 @@ def snapshot(h):
 
 
 def _place_below(h, above_uuid):
+    """Move a new object to its old stacking position: directly behind
+    `above` (the object that was in front of it). Lists run from the back
+    (first object) to the front (last, where new objects land);
+    HMoveBackward moves one step towards the first."""
     if not above_uuid:
         return
     above = vs.GetObjectByUuid(above_uuid)
     if _is_nil(above) or str(vs.GetParent(above)) != str(vs.GetParent(h)):
         return
     n = 0
-    while n < 50000:
+    while n < 1000000:
         nxt = vs.NextObj(h)
-        if _is_nil(nxt) or str(nxt) == str(above):
+        if not _is_nil(nxt) and str(nxt) == str(above):
             return
+        if _is_nil(vs.PrevObj(h)):
+            return  # at the back: `above` is not behind us
         vs.HMoveBackward(h, False)
         n += 1
 

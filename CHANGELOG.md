@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.1 – 31.10.2026
+
+- **Stapelreihenfolge:** Wiederhergestellte (`vw_revert_last`) und neu
+  aufgebaute Objekte (Bearbeiten, Fangen, Bereinigen) kommen wieder an ihre
+  alte Stelle in der Stapelreihenfolge. Bisher landeten sie ganz vorne
+  (Vectorworks' Listen laufen von hinten nach vorne; die alte Schleife
+  brach sofort ab) – bei überlappenden Füllungen sah das Ergebnis dann
+  anders aus. Live geprüft.
+
 ## 0.4.0 – 31.10.2026
 
 Stabiler, schneller, bereit für Vectorworks 2027.

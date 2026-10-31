@@ -1,6 +1,6 @@
 [project]
 name = "vectorworks-2d-mcp"
-version = "0.4.0"
+version = "0.4.1"
 description = "Keystone for Vectorworks: MCP server for exact, well-organised 2D drawing in Vectorworks (macOS, pure Python)"
 readme = "README.md"
 license = "MIT"

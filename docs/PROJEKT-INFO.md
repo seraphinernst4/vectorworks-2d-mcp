@@ -241,3 +241,4 @@ zusätzlich als `Git-Verlauf.bundle` (`git clone Git-Verlauf.bundle vectorworks-
 | 0.3.6 | 29.10.2026 | Offset: richtige Ebene, exakte Koordinaten |
 | 0.4.0 | 31.10.2026 | Atomares Job-Protokoll, Signatur-Index + geprüfter `vs`-Proxy, API-Fallstricke, exakte Bögen beim Zurücklesen, VW 2027 vorbereitet, Bibliotheks-Cache (Details: CHANGELOG.md) |
 | – | 31.10.2026 | Installer holt uv auf frischen Macs; Projektinfo |
+| 0.4.1 | 31.10.2026 | Stapelreihenfolge beim Wiederherstellen und Neuaufbauen von Objekten |

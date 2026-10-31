@@ -272,6 +272,48 @@ def tool_tests(report: dict) -> None:
     log(f"tools: {out['seconds']} s, ping {out['vw_ping'].get('bridge_version')}")
 
 
+STACK_LAYER = "KS-Test-Stack"
+
+
+def stack_tests(report: dict) -> None:
+    """Stacking order survives delete + revert and a rebuilding edit."""
+    from vwmcp import app
+    from vwmcp.tools import draw2d, generic
+
+    b = app.get_bridge()
+    order_code = ("_l = vs.GetLayerByName(%r)\n_o = []\n_k = vs.FInLayer(_l)\n"
+                  "while _k is not None and str(_k) != '0' and len(_o) < 100:\n"
+                  "    _o.append(vs.GetName(_k))\n    _k = vs.NextObj(_k)\n"
+                  "result = ''.join(n.replace('KS-St-', '') for n in _o)" % STACK_LAYER)
+
+    def order():
+        return b.run(order_code)["value"]
+
+    b.run("_k = []\ndef _c(h):\n    _k.append(h)\nvs.ForEachObject(_c, \"(L='%s')\")\n"
+          "for _h in _k:\n    vs.DelObject(_h)\nlen(_k)" % STACK_LAYER)
+    draw2d.vw2d_setup(layers=[{"name": STACK_LAYER, "scale": 50}])
+    items = [{"type": "rect", "corner": [i * 500, 0], "width": 800, "height": 800, "name": "KS-St-" + c}
+             for i, c in enumerate("ABCDEF")]
+    d = draw2d.vw2d_draw(items, unit="mm", layer=STACK_LAYER, class_name="KS-Test-Wand", check=False)
+    u = {c: o["uuid"] for c, o in zip("ABCDEF", d["created"])}
+    r = {"start": order()}
+    draw2d.vw2d_delete([u["B"], u["E"]])
+    r["deleted"] = order()
+    generic.vw_revert_last()
+    r["reverted"] = order()
+    # rebuild C (rect -> polygon with an extra vertex): must keep its place
+    cu = [o["uuid"] for o in draw2d.vw2d_read(layer=STACK_LAYER, include_geometry=False)["objects"]
+          if o.get("name") == "KS-St-C"][0]
+    draw2d.vw2d_edit(cu, points=[[1000, 0], [1800, 0], [1800, 800], [1400, 900], [1000, 800]], unit="mm")
+    r["edited"] = order()
+    generic.vw_revert_last()
+    r["edit_reverted"] = order()
+    r["pass"] = (r["start"] == "ABCDEF" and r["deleted"] == "ACDF" and r["reverted"] == "ABCDEF"
+                 and r["edited"] == "ABCDEF" and r["edit_reverted"] == "ABCDEF")
+    report["stack"] = r
+    log(f"stack: pass={r['pass']} {r}")
+
+
 async def _mcp_round_trip(server_dir: str) -> dict:
     """Start the packaged server like Claude Desktop does (stdio) and call tools."""
     from mcp import ClientSession
@@ -334,7 +376,8 @@ def main() -> None:
     report = {"started": time.strftime("%Y-%m-%d %H:%M:%S"), "python": sys.version.split()[0]}
     log(f"live test start ({args.only})")
     sections = (("protocol", protocol_tests), ("tools", tool_tests), ("pitfalls", pitfall_tests),
-                ("regression", regression_tests), ("mcp", lambda rep: mcp_tests(rep, args.server)))
+                ("regression", regression_tests), ("stack", stack_tests),
+                ("mcp", lambda rep: mcp_tests(rep, args.server)))
     for name, fn in sections:
         if name not in args.only.split(","):
             continue
