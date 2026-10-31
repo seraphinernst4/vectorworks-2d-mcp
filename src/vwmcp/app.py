@@ -15,9 +15,11 @@ from vwmcp import calls
 from vwmcp.client import Bridge, BridgeError
 from vwmcp.journal import Journal
 
-EXPECTED_BRIDGE_VERSION = "0.1.0"
+EXPECTED_BRIDGE_VERSION = "0.2.0"
 # Vectorworks major versions this release was tested against (31 = 2026).
 TESTED_VW_MAJORS = {31: "2026"}
+# Prepared but not yet tested live (32 = 2027: Python 3.14, same vs API + new functions).
+PREPARED_VW_MAJORS = {32: "2027"}
 
 READ = ToolAnnotations(read_only_hint=True, open_world_hint=False)
 WRITE = ToolAnnotations(read_only_hint=False, destructive_hint=False, open_world_hint=False)
@@ -113,6 +115,23 @@ def vw2d(fn: str, timeout: float | None = None, **kwargs):
         raise ToolError(f"{e}\n\n{e.traceback}".strip()) from e
     except BridgeError as e:
         raise ToolError(str(e)) from e
+
+
+def bundled_index_text() -> str | None:
+    """The vs.* signature index shipped with this server (data/vs_index.json)."""
+    try:
+        return resources.files("vwmcp").joinpath("data", "vs_index.json").read_text(encoding="utf-8")
+    except (FileNotFoundError, OSError):
+        return None
+
+
+@functools.cache
+def vs_index() -> dict:
+    """Parsed signature index: {name: {a, t, r, c, d, v?}}."""
+    import json
+
+    text = bundled_index_text()
+    return json.loads(text)["f"] if text else {}
 
 
 def bundled_bridge_source() -> str:

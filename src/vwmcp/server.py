@@ -18,22 +18,25 @@ def main() -> None:
     parser = argparse.ArgumentParser(prog="vwmcp", description=__doc__)
     sub = parser.add_subparsers(dest="cmd")
     p = sub.add_parser("install-plugin", help="copy the bridge into Vectorworks' Plug-ins folder")
-    p.add_argument("--vw-version", default="2026")
+    p.add_argument("--vw-version", default=None, help="e.g. 2027 (default: every version found)")
     p.add_argument("--target", help="explicit folder (default: user Plug-ins/vwmcp)")
     args = parser.parse_args()
 
     if args.cmd == "install-plugin":
         from pathlib import Path
 
-        target = Path(args.target) if args.target else install.plugin_dir(args.vw_version)
-        print(install.install_plugin(target))
+        if args.target:
+            print(install.install_plugin(Path(args.target)))
+        else:
+            print(install.ensure_plugin(args.vw_version) or "Bridge is up to date.")
+            print("\nIf you haven't yet, create the 'MCP Run Job' menu command once (see README).")
         return
     if os.environ.get("VWMCP_AUTO_BRIDGE"):
         # Claude Desktop extension: keep the bridge in Vectorworks up to date.
         import sys
 
         try:
-            msg = install.ensure_plugin(os.environ.get("VWMCP_VW_VERSION") or "2026")
+            msg = install.ensure_plugin(os.environ.get("VWMCP_VW_VERSION") or None)
             if msg:
                 print(msg, file=sys.stderr)
         except (Exception, SystemExit) as e:  # never block the server

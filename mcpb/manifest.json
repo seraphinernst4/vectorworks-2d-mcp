@@ -5,7 +5,7 @@
   "display_name": "Keystone for Vectorworks",
   "version": "@VERSION@",
   "description": "Lets Claude draw exact, well-organised 2D plans in your open Vectorworks drawing: no gaps, no overlaps, true arcs, every object in the right class and layer.",
-  "long_description": "Keystone for Vectorworks by Seraphin Ernst – exact 2D drawing tools for architects – inside Claude. Claude draws polygons, polylines with true arcs, rectangles, circles, lines, text and dimensions in your open Vectorworks file, reads back what Vectorworks stored (deviation: 0), checks the drawing for overlaps, gaps, near misses, duplicates, double lines and open outlines with a numbered check image, and fixes them exactly. Layers and classes are used properly: new objects get their attributes by class.\n\nRequires Vectorworks 2026 on macOS and the one-time menu command \"MCP Run Job\" (see the README). The bridge into Vectorworks is installed automatically. Everything stays on this Mac (~/.vwmcp); nothing is sent anywhere else. Based on giorgiomoroder/vectorworks-mcp (MIT).",
+  "long_description": "Keystone for Vectorworks by Seraphin Ernst – exact 2D drawing tools for architects – inside Claude. Claude draws polygons, polylines with true arcs, rectangles, circles, lines, text and dimensions in your open Vectorworks file, reads back what Vectorworks stored (deviation: 0), checks the drawing for overlaps, gaps, near misses, duplicates, double lines and open outlines with a numbered check image, and fixes them exactly. Layers and classes are used properly: new objects get their attributes by class.\n\nRequires Vectorworks 2026 or 2027 on macOS and the one-time menu command \"MCP Run Job\" (see the README). The bridge into Vectorworks is installed automatically. Everything stays on this Mac (~/.vwmcp); nothing is sent anywhere else. Based on giorgiomoroder/vectorworks-mcp (MIT).",
   "author": {
     "name": "Seraphin Ernst",
     "url": "https://www.seraphinernst.org"
@@ -33,9 +33,9 @@
     "vw_version": {
       "type": "string",
       "title": "Vectorworks-Version",
-      "description": "Jahreszahl deiner Vectorworks-Version, z. B. 2026. Getestet ist 2026.",
+      "description": "Leer lassen: Keystone nimmt das laufende Vectorworks (2026 oder 2027). Nur wenn mehrere Versionen gleichzeitig laufen, hier die Jahreszahl eintragen, z. B. 2027.",
       "required": false,
-      "default": "2026"
+      "default": ""
     }
   },
   "tools": [

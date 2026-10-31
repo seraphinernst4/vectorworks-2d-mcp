@@ -1,31 +1,31 @@
+from vwmcp.client import TriggerError
 import pytest
 
-from vwmcp.client import TriggerError
-from vwmcp.trigger import MacTrigger, parse_etime
+from vwmcp.trigger import MacTrigger, _APP_RE, parse_etime
 
 
 class FakeProc:
-    def __init__(self, done=True):
+    def __init__(self, done=False):
         self.done = done
 
     def poll(self):
         return 0 if self.done else None
 
 
-def make(root, uptime, procs=None):
+def make(root, running, app=None, procs=None, max_pending=3):
     procs = [] if procs is None else procs
 
     def spawn(args):
-        procs.append(args)
-        return FakeProc(done=False)
+        p = FakeProc()
+        procs.append((args, p))
+        return p
 
-    t = MacTrigger(root, app="Vectorworks 2026", uptime=lambda: uptime, spawn=spawn,
-                   busy_grace=0.05, poll_interval=0.001)
+    t = MacTrigger(root, app=app, apps=lambda: running, spawn=spawn, max_pending=max_pending)
     return t, procs
 
 
 def test_refuses_when_vectorworks_not_running(root):
-    t, procs = make(root, uptime=None)
+    t, procs = make(root, running=[])
     with pytest.raises(TriggerError, match="not running"):
         t()
     assert procs == []
@@ -33,29 +33,58 @@ def test_refuses_when_vectorworks_not_running(root):
 
 def test_refuses_while_vectorworks_is_still_starting(root):
     # Scripts sent during launch crash Vectorworks 2026.
-    t, procs = make(root, uptime=5)
+    t, procs = make(root, running=[("Vectorworks 2026", 5.0)])
     with pytest.raises(TriggerError, match="starting"):
         t()
     assert procs == []
 
 
 def test_sends_menu_command_via_vectorscript_file(root):
-    t, procs = make(root, uptime=600)
+    t, procs = make(root, running=[("Vectorworks 2026", 600.0)])
     t()
-    (args,) = procs
+    ((args, _),) = procs
     assert args[0] == "osascript"
-    joined = " ".join(args)
-    assert 'tell application "Vectorworks 2026" to run VectorScript' in joined
-    vss = (root / "trigger.vss").read_text()
-    assert "DoMenuTextByName('MCP Run Job', 0)" in vss
+    assert 'tell application "Vectorworks 2026" to run VectorScript' in " ".join(args)
+    assert "DoMenuTextByName('MCP Run Job', 0)" in (root / "trigger.vss").read_text()
 
 
-def test_will_not_stack_events_while_previous_is_stuck(root):
-    t, procs = make(root, uptime=600)
+def test_uses_whichever_version_runs(root):
+    t, procs = make(root, running=[("Vectorworks 2027", 300.0)])
     t()
-    with pytest.raises(TriggerError, match="dialog"):
-        t()
-    assert len(procs) == 1
+    assert 'tell application "Vectorworks 2027"' in " ".join(procs[0][0])
+    assert t.target == "Vectorworks 2027"
+
+
+def test_configured_version_is_a_preference(root):
+    both = [("Vectorworks 2027", 100.0), ("Vectorworks 2026", 900.0)]
+    t, procs = make(root, running=both, app="Vectorworks 2026")
+    t()
+    assert 'tell application "Vectorworks 2026"' in " ".join(procs[0][0])
+    # a stale setting (2026) must not block the only running version (2027)
+    t, procs = make(root, running=[("Vectorworks 2027", 100.0)], app="Vectorworks 2026")
+    t()
+    assert 'tell application "Vectorworks 2027"' in " ".join(procs[0][0])
+
+
+def test_pending_events_are_capped_not_refused(root):
+    t, procs = make(root, running=[("Vectorworks 2026", 600.0)], max_pending=2)
+    t()
+    t()
+    t()  # third: no new event, no error (the claim timeout decides)
+    assert len(procs) == 2
+    assert t.in_flight() and t.pending_for() >= 0
+    for _, p in procs:
+        p.done = True
+    assert not t.in_flight() and t.pending_for() == 0
+    t()
+    assert len(procs) == 3
+
+
+def test_app_regex():
+    m = _APP_RE.search("/Applications/Vectorworks 2027/Vectorworks 2027.app/Contents/MacOS/Vectorworks")
+    assert m and m.group(1) == "Vectorworks 2027"
+    assert _APP_RE.search("/A/Vectorworks 2026.app/Contents/MacOS/Vectorworks -NSDocumentRevisionsDebugMode")
+    assert not _APP_RE.search("/A/Vectorworks 2026.app/Contents/MacOS/Vectorworks Helper")
 
 
 @pytest.mark.parametrize(
@@ -63,23 +92,3 @@ def test_will_not_stack_events_while_previous_is_stuck(root):
 )
 def test_parse_etime(text, secs):
     assert parse_etime(text) == secs
-
-
-class SlowProc:
-    """Finishes after a few polls, like osascript returning just after the result lands."""
-
-    def __init__(self, polls_until_done=3):
-        self.left = polls_until_done
-
-    def poll(self):
-        self.left -= 1
-        return 0 if self.left <= 0 else None
-
-
-def test_waits_briefly_for_previous_event_to_finish(root):
-    procs = []
-    t = MacTrigger(root, uptime=lambda: 600, spawn=lambda a: procs.append(a) or SlowProc(),
-                   busy_grace=1.0, poll_interval=0.001)
-    t()
-    t()  # previous proc finishes within the grace period
-    assert len(procs) == 2
