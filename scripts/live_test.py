@@ -547,7 +547,7 @@ def perf_tests(report: dict) -> None:
 
         fx = as_dict(timed("fix_duplicates", lambda: draw2d.vw2d_fix("duplicates", layer=PERF_LAYER, image=False)))
         r["fix_duplicates"] = fix_info(fx)
-        if changed(fx):
+        if changed(fx) and n <= 10000:  # clipping thousands of overlaps on bigger sets: minutes
             fo = as_dict(timed("fix_overlaps", lambda: draw2d.vw2d_fix("overlaps", layer=PERF_LAYER,
                                                                        image=False)))
             r["fix_overlaps"] = fix_info(fo)
@@ -555,6 +555,7 @@ def perf_tests(report: dict) -> None:
                 rv = timed("revert_overlaps", generic.vw_revert_last)
                 if isinstance(rv, dict):
                     r["revert_overlaps"] = {k: rv.get(k) for k in ("restored", "deleted", "reverted_tool")}
+        if changed(fx):
             rv = timed("revert_duplicates", generic.vw_revert_last)
             if isinstance(rv, dict):
                 r["revert_duplicates"] = {k: rv.get(k) for k in ("restored", "deleted", "reverted_tool")}
