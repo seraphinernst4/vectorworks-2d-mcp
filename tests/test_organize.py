@@ -357,3 +357,13 @@ def test_vw_organize_big_layer_move_revert_restores_stacking_in_bulk():
     ns["revert2d"](out["ops"])
     assert [o.uid for o in vs.layers["EG"].objs] == names
     assert all(objs[n].cls == "Keine" for n in names)
+
+
+def test_vw_revert_of_attribute_ops_with_raw_attributes():
+    objs = {"a": H("a", "X", "EG")}
+    ns, vs = _vw(objs)
+    seen = []
+    ns["restore_raw_attrs"] = lambda h, r: seen.append((h.uid, r))
+    out = ns["revert2d"]([{"op": "attrs", "uuid": "a", "class_before": "Keine", "layer_before": None,
+                           "before": {"pen_fore": [0, 0, 0], "lw": 7}}])
+    assert out["restored"] == 1 and objs["a"].cls == "Keine" and seen == [("a", {"pen_fore": [0, 0, 0], "lw": 7})]

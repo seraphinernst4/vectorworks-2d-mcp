@@ -81,3 +81,33 @@ def test_exec_python_blocks_revert_unless_read_only(fake):
     generic.vw_exec_python("vs.Rect(0,0,1,1)")
     with pytest.raises(ToolError, match="vw_exec_python"):
         generic.vw_revert_last()
+
+
+def test_revert_that_times_out_in_vectorworks_is_not_put_back(fake, monkeypatch):
+    generic.vw_set_record("u1", "Notes", {"Note": "new"})
+
+    def slow(fn, timeout=None, **kw):
+        if fn == "revert2d":
+            raise ToolError("Vectorworks is still working on this request after 120s. It keeps running there")
+        return fake(fn, **kw)
+
+    monkeypatch.setattr(app, "vw2d", slow)
+    with pytest.raises(ToolError, match="still running in Vectorworks"):
+        generic.vw_revert_last()
+    with pytest.raises(ToolError):  # nothing left to revert: the entry was not put back
+        generic.vw_revert_last()
+
+
+def test_revert_that_never_ran_is_put_back(fake, monkeypatch):
+    generic.vw_set_record("u1", "Notes", {"Note": "new"})
+
+    def busy(fn, timeout=None, **kw):
+        if fn == "revert2d":
+            raise ToolError("Vectorworks did not take the request within 15s ... will not run later.")
+        return fake(fn, **kw)
+
+    monkeypatch.setattr(app, "vw2d", busy)
+    with pytest.raises(ToolError, match="did not take"):
+        generic.vw_revert_last()
+    monkeypatch.setattr(app, "vw2d", lambda fn, timeout=None, **kw: fake(fn, **kw))
+    assert generic.vw_revert_last()["reverted_tool"] == "vw_set_record"

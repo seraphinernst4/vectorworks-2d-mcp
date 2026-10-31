@@ -1246,8 +1246,9 @@ def revert2d(ops):
     """Undo journaled ops (newest last). Returns uuid remapping for the
     journal plus counts."""
     mapping, deleted, restored, missing, kept, restack = {}, 0, 0, [], [], []
-    hmap = _uuid_map([op.get("uuid") for op in ops] + [u for op in ops for u in op.get("after", [])]
-                     + [s.get("above") for op in ops for s in op.get("before", [])]
+    replaced = [op for op in ops if op.get("op") == "replaced"]  # ("attrs" ops keep a dict in "before")
+    hmap = _uuid_map([op.get("uuid") for op in ops] + [u for op in replaced for u in op.get("after") or []]
+                     + [s.get("above") for op in replaced for s in op.get("before") or []]
                      + [op.get("above") for op in ops])
     for op in reversed(ops):
         kind = op["op"]
