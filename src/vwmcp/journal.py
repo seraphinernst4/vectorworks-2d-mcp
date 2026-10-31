@@ -13,6 +13,8 @@ import time
 from pathlib import Path
 
 RAW_PYTHON = "vw_exec_python"
+MAX_ENTRIES = 200
+MAX_BYTES = 64 * 1024 * 1024  # huge steps (sorting 100 000 objects) must not slow every later call
 
 
 class JournalError(RuntimeError):
@@ -39,7 +41,13 @@ class Journal:
         """ops=None marks an unrevertable write (raw Python)."""
         entries = self._load()
         entries.append({"time": time.time(), "document": document, "tool": tool, "ops": ops})
-        self._save(entries[-200:])
+        entries = entries[-MAX_ENTRIES:]
+        sizes = [len(json.dumps(e)) for e in entries]
+        total = sum(sizes)
+        while len(entries) > 1 and total > MAX_BYTES:  # oldest first, never the newest
+            total -= sizes.pop(0)
+            entries.pop(0)
+        self._save(entries)
 
     def _last_index(self, entries: list[dict], document: str) -> int:
         for i in range(len(entries) - 1, -1, -1):

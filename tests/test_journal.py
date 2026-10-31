@@ -42,3 +42,16 @@ def test_peek_does_not_consume(j):
     j.record("P.vwx", "vw_insert_symbol", [{"op": "created", "uuid": "z"}])
     assert j.peek("P.vwx")["tool"] == "vw_insert_symbol"
     assert j.pop("P.vwx")["tool"] == "vw_insert_symbol"
+
+
+def test_journal_drops_the_oldest_entries_when_it_gets_too_big(tmp_path, monkeypatch):
+    from vwmcp import journal as J
+
+    monkeypatch.setattr(J, "MAX_BYTES", 2000)
+    j = J.Journal(tmp_path / "j.jsonl")
+    for i in range(5):
+        j.record("D.vwx", "t%d" % i, [{"op": "created", "uuid": "x" * 600}])
+    entries = j._load()
+    assert 1 <= len(entries) < 5 and entries[-1]["tool"] == "t4"
+    j.record("D.vwx", "big", [{"op": "created", "uuid": "y" * 5000}])
+    assert [e["tool"] for e in j._load()] == ["big"]  # the newest always stays
