@@ -58,9 +58,14 @@ GENERAL
   exactly one tool call use vw_revert_last (works for all typed write tools).
 - Objects are identified by UUID (stable across calls); never cache handles.
   Edits that rebuild an object return its new UUID.
-- Vectorworks embeds Python 3.9: code sent to vw_exec_python must be 3.9-
-  compatible. Use vw_vs_lookup to find vs.* functions and signatures.
+- Vectorworks embeds Python 3.9 (2026) or 3.14 (2027): code sent to
+  vw_exec_python must be 3.9-compatible. vw_vs_lookup gives exact
+  signatures instantly; wrong vs.* calls come back as VSArgumentError
+  (fix the call) instead of blocking Vectorworks with a dialog.
 - Prefer typed tools over raw Python (raw edits can't be reverted).
+- A request Vectorworks doesn't take within 15 s (dialog open, busy) is
+  cancelled and never runs later; ask the user to close the dialog and
+  retry. Long jobs that Vectorworks has started are waited for.
 """
 
 DISPLAY_NAME = "Keystone for Vectorworks"

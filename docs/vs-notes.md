@@ -1,8 +1,11 @@
 # `vs.*` notes (Vectorworks 2026, macOS, live-tested)
 
 Findings from building and using this server against Vectorworks 2026
-Update 3 (build 846827). Embedded Python is **3.9.2**. Each run of the
-menu command gets a fresh Python state (module globals don't persist).
+Update 3 (build 846827) and Update 7 (31.7.0, build 879357). Embedded
+Python is **3.9.2** (Vectorworks 2027: 3.14). **Python state persists
+between menu-command runs** (checked on Update 7: `sys` attributes and
+`sys.modules` survive), so imported modules like the bridge stay loaded
+until Vectorworks restarts or something reloads them.
 
 ## General
 
@@ -131,3 +134,28 @@ The dictionary has no usable document list (`every document` → `missing value`
   accepts a chain as h1.
 - `NameClass` / `Layer` create and *activate*; restore the previous active
   class/layer afterwards.
+
+## Findings 31.10.2026 (Update 7, live)
+
+- `vs.GetObject(name)` returns nil for unknown names here (no type-0
+  dummy), but names are one namespace: `GetObject("Keine")` returns the
+  **class** (type 94). Check `GetTypeN` (16 symbol definition, 94 class,
+  31 layer) before trusting the handle (`vwlib.named`).
+- `FInGroup` of an emptied group returns nil here; still walk groups via
+  `vwlib.children` (parent check + bound), as other versions differ.
+- `ArcByCenter(x, y, r, 0, 360)` makes a full circle (type 6) and stores
+  centre and start point bit-exactly at any layer scale; `Oval` makes an
+  oval (type 4). Arc radius from start - centre picks up float noise
+  (20.6 - 20.0 = 0.6000000000000014): read full circles as `HWidth / 2`.
+- `vs.Arc(p1, p2, start, sweep)`: the last value is the sweep
+  (`Arc(..., 30, 90)` -> `GetArc` = (30, 90)).
+- `ClassList(0)` is `""`; classes are `ClassList(1..ClassNum())`.
+- `vs.SetLayerScale` doesn't exist; use `vs.SetLScale(layer, scale)`.
+- From a process started by Vectorworks, BSD `pgrep` hides Vectorworks
+  (it skips its own ancestors); use `ps -axo pid=,etime=,command=`.
+- Round trip of one request through osascript + menu command: ~0.19 s,
+  of which ~0.1 ms runs in Vectorworks. Compiling vwlib + vwlib2d costs
+  ~10 ms per call unless cached (bridge 0.2.0 caches by sha256: 0.7 ms).
+- While Vectorworks runs a script, Apple Events queue up; a job that is
+  cancelled (renamed to .cancelled) before the queued event runs is never
+  executed (live test `busy_cancel`).

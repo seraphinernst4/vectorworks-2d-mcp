@@ -77,12 +77,26 @@ def vw_exec_python(code: str, modifies_document: bool = True) -> dict:
     """Run arbitrary Python inside Vectorworks with `vs` in scope.
 
     Returns stdout, the value of the last expression (or of a variable named
-    `result`), and the traceback if it raised. Vectorworks embeds Python 3.9.
-    Handles are only valid during the call; return UUIDs
-    (vs.GetObjectUuid) to refer to objects later. A wrong vs.* signature can
-    pop a modal "Script Errors" dialog in Vectorworks instead of raising;
-    check with vw_vs_lookup first. Set modifies_document=False for read-only
-    code; otherwise vw_revert_last can't step past this call.
+    `result`), and the traceback if it raised. Python 3.9 (Vectorworks 2026)
+    or 3.14 (2027): write 3.9-compatible code. Handles are only valid during
+    the call; return UUIDs (vs.GetObjectUuid) to refer to objects later.
+    Every vs.* call is checked against the signature index first: a wrong
+    argument count/type raises VSArgumentError with the right signature
+    instead of opening Vectorworks' modal "Script Errors" dialog. Look up
+    signatures with vw_vs_lookup (instant). Set modifies_document=False for
+    read-only code; otherwise vw_revert_last can't step past this call.
+
+    2D pitfalls: POINT = (x, y) or two numbers; colours one (r, g, b) tuple
+    0..65535. vs.Arc(p1, p2, start, SWEEP) - last value is the sweep, not
+    the end angle. Names are ONE namespace for objects, classes, layers and
+    resources (vs.GetObject(name) may return a class: check vs.GetTypeN).
+    Collect objects with vs.ForEachObject(def f(h), criteria) first, change
+    them afterwards; never create/delete/restack inside the callback.
+    Criteria quote names: "(L='EG')", "((C='Wand'))". ClassList(i) is
+    1-based. Renamed: ShowClass/HideClass, SetName (not SetLName),
+    MirrorN, LinearDim (7 args), DoMenuTextByName('Fit To Objects', 0).
+    GetBBox of rotated text is a screen box (use GetTextOrientation).
+    Import/export commands open modal dialogs: don't call them.
     """
     res = _run_raw(code)
     if modifies_document:
