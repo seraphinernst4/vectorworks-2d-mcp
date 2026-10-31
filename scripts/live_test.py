@@ -272,11 +272,60 @@ def tool_tests(report: dict) -> None:
     log(f"tools: {out['seconds']} s, ping {out['vw_ping'].get('bridge_version')}")
 
 
+async def _mcp_round_trip(server_dir: str) -> dict:
+    """Start the packaged server like Claude Desktop does (stdio) and call tools."""
+    from mcp import ClientSession
+    from mcp.client.stdio import StdioServerParameters, stdio_client
+
+    env = dict(os.environ)
+    env.pop("VWMCP_APP", None)
+    env.update({"VWMCP_AUTO_BRIDGE": "1", "PYTHONUNBUFFERED": "1"})
+    params = StdioServerParameters(command=sys.executable, args=[os.path.join(server_dir, "main.py")],
+                                   env=env, cwd=server_dir)
+    out: dict = {}
+    async with stdio_client(params) as (read, write):
+        async with ClientSession(read, write) as session:
+            t0 = time.monotonic()
+            init = await session.initialize()
+            out["server"] = f"{init.server_info.name} {init.server_info.version}"
+            tools = await session.list_tools()
+            out["tools"] = len(tools.tools)
+            out["start_s"] = round(time.monotonic() - t0, 2)
+
+            async def call(name, **kw):
+                r = await session.call_tool(name, kw)
+                text = "".join(getattr(c, "text", "") for c in r.content)
+                return {"error": bool(r.is_error), "text": text[:600]}
+
+            out["vw_ping"] = await call("vw_ping")
+            out["vw_vs_lookup"] = await call("vw_vs_lookup", query="Rect", limit=2)
+            out["vw_document_info"] = await call("vw_document_info")
+            out["vw2d_read"] = await call("vw2d_read", layer=REG_LAYER, limit=2, include_geometry=False)
+            out["exec_bad_rect"] = await call("vw_exec_python", code="vs.Rect(0, 0, 1)", modifies_document=False)
+            out["seconds"] = round(time.monotonic() - t0, 2)
+    return out
+
+
+def mcp_tests(report: dict, server_dir: str | None) -> None:
+    import asyncio
+
+    if not server_dir:
+        report["mcp"] = {"skipped": "no --server"}
+        return
+    r = asyncio.run(_mcp_round_trip(server_dir))
+    r["pass"] = (not r["vw_ping"]["error"] and "0.2.0" in r["vw_ping"]["text"]
+                 and "vs.Rect(p1: POINT, p2: POINT)" in r["vw_vs_lookup"]["text"]
+                 and "VSArgumentError" in r["exec_bad_rect"]["text"] and not r["vw2d_read"]["error"])
+    report["mcp"] = r
+    log(f"mcp: pass={r['pass']} ({r.get('server')}, {r.get('tools')} tools, start {r.get('start_s')} s)")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default=str(Path(__file__).resolve().parents[1] / "src"))
     ap.add_argument("--only", default="protocol,tools,pitfalls,regression")
     ap.add_argument("--delay", type=float, default=0.0)
+    ap.add_argument("--server", help="unpacked extension's server/ folder for the MCP round trip (--only mcp)")
     args = ap.parse_args()
     sys.path.insert(0, args.src)
     ROOT.mkdir(parents=True, exist_ok=True)
@@ -285,7 +334,7 @@ def main() -> None:
     report = {"started": time.strftime("%Y-%m-%d %H:%M:%S"), "python": sys.version.split()[0]}
     log(f"live test start ({args.only})")
     sections = (("protocol", protocol_tests), ("tools", tool_tests), ("pitfalls", pitfall_tests),
-                ("regression", regression_tests))
+                ("regression", regression_tests), ("mcp", lambda rep: mcp_tests(rep, args.server)))
     for name, fn in sections:
         if name not in args.only.split(","):
             continue

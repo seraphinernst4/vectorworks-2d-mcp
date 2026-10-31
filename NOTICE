@@ -1,0 +1,68 @@
+Keystone for Vectorworks
+Copyright (c) 2026 Seraphin Ernst
+Licensed under the MIT License (see LICENSE).
+
+This project builds on and includes material from the following projects.
+
+------------------------------------------------------------------------
+vectorworks-mcp  -  https://github.com/giorgiomoroder/vectorworks-mcp
+Copyright (c) 2026 giorgiomoroder
+MIT License
+
+The original project this one is forked from (bridge, job folder,
+macOS trigger, generic tools).
+
+------------------------------------------------------------------------
+vwx-mcp  -  https://github.com/vicquick/vwx-mcp
+Copyright (c) 2026 vicquick
+MIT License
+
+Used here:
+- the descriptions and categories in src/vwmcp/data/vs_index.json come
+  from vwx-mcp's vwx-plugin/vs_index.json;
+- tools/build_vs_index.py is based on vwx-mcp's tools/build_vs_index.py
+  (extended with parameter types and the argument check codes);
+- docs/api-pitfalls.md takes over 2D-relevant points from vwx-mcp's
+  AGENTS.md ("VW2026 API gotchas + renames").
+
+------------------------------------------------------------------------
+vwmcp  -  https://github.com/MattA-Official/vwmcp
+Copyright (c) 2026 Matt Adcock
+MIT License
+
+Used here: the atomic job protocol (claim by renaming to .working, cancel
+by renaming away so a job reported as not run never runs) follows the
+design described in vwmcp's docs/explanation/architecture.md (no code
+copied); docs/api-pitfalls.md takes over 2D-relevant points from vwmcp's
+docs/reference/api-pitfalls.md.
+
+------------------------------------------------------------------------
+Vectorworks developer-scripting  -  https://github.com/Vectorworks/developer-scripting
+
+The function signatures and parameter types in src/vwmcp/data/vs_index.json
+were derived (tools/build_vs_index.py) from the vs.py stub and the Function
+Reference published there by Vectorworks, Inc. Only interface facts
+(names, parameter names and types, return types, categories, first
+version) are included; Vectorworks' reference text is not redistributed.
+Vectorworks is a trademark of Vectorworks, Inc.
+
+------------------------------------------------------------------------
+The MIT License text of each project:
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

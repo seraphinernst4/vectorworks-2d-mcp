@@ -10,7 +10,9 @@ aneinander, Bögen sind echte Bögen, jedes Objekt liegt in der richtigen
 Klasse und Ebene. Claude prüft seine Arbeit selbst und korrigiert Fehler,
 bevor du sie siehst.
 
-> **Beta.** Getestet mit Vectorworks 2026 (Update 7, deutsch) auf macOS.
+> **Beta.** Getestet mit Vectorworks 2026 (Update 7, deutsch) auf macOS;
+> Vectorworks 2027 ist vorbereitet (Python 3.14, neue Funktionen im
+> Signatur-Index), aber noch nicht live getestet.
 > Speichere deine Datei, bevor du Claude zeichnen lässt.
 > Fork von [giorgiomoroder/vectorworks-mcp](https://github.com/giorgiomoroder/vectorworks-mcp) (MIT),
 > dessen Original-README unter [docs/README-upstream.md](docs/README-upstream.md) liegt.
@@ -35,8 +37,7 @@ So fragst du Claude zum Beispiel:
 
 ## Installation (macOS, ca. 5 Minuten)
 
-Du brauchst **Vectorworks 2026** (2027 geht vermutlich auch, siehe unten) und
-die **Claude-Desktop-App**.
+Du brauchst **Vectorworks 2026 oder 2027** und die **Claude-Desktop-App**.
 
 ### 1. Erweiterung installieren
 
@@ -45,9 +46,10 @@ die **Claude-Desktop-App**.
    Vectorworks“ – **Installieren** klicken.
 
 Das war's: Python und alle Pakete holt sich die Erweiterung selbst (mit
-[uv](https://docs.astral.sh/uv/), nach `~/.vwmcp`), die kleine Brücke in den
-Vectorworks-Plug-in-Ordner kopiert sie bei jedem Start selbst (und hält sie
-aktuell). Terminal, git oder Xcode brauchst du nicht.
+[uv](https://docs.astral.sh/uv/), nach `~/.vwmcp`), die kleine Brücke kopiert
+sie bei jedem Start in den Plug-in-Ordner **jeder** Vectorworks-Version ab
+2026 auf deinem Mac (und hält sie aktuell – ein laufendes Vectorworks lädt
+die neue Brücke selbst nach). Terminal, git oder Xcode brauchst du nicht.
 
 > Der **allererste Start** lädt Python und Pakete (1–2 Minuten). Zeigt Claude
 > danach keine Vectorworks-Werkzeuge oder einen Fehler bei der Erweiterung,
@@ -100,8 +102,12 @@ Vectorworks.“* Beim ersten Mal fragt macOS,
 ob Claude Vectorworks steuern darf – **OK** klicken.
 
 **Update:** Neue `.mcpb` herunterladen und doppelklicken. **Vectorworks 2027:**
+nichts einstellen – Keystone spricht mit dem Vectorworks, das gerade läuft.
+Nur wenn 2026 und 2027 gleichzeitig offen sind, entscheidet die Einstellung
 Claude ▸ Einstellungen ▸ Erweiterungen ▸ Keystone for Vectorworks ▸
-Konfigurieren ▸ Vectorworks-Version `2027`. Getestet ist bisher nur 2026.
+Konfigurieren ▸ Vectorworks-Version (z. B. `2027`). Den Menübefehl „MCP Run
+Job“ übernimmt Vectorworks 2027, wenn du beim ersten Start die Einstellungen
+und Plug-ins aus 2026 migrierst; sonst einmal wie oben anlegen.
 
 ## Optional: Skill für Claude
 
@@ -133,9 +139,18 @@ Alle Werkzeuge: `vw2d_read`, `vw2d_structure`, `vw2d_resources`, `vw2d_setup`,
 - **Rückgängig:** Vectorworks fasst mehrere Claude-Schritte zu einem Cmd-Z
   zusammen. Einen einzelnen Schritt von Claude machst du mit „mach das
   rückgängig“ (`vw_revert_last`) rückgängig.
-- **Dialoge blockieren:** Ist in Vectorworks ein Dialog offen, wartet Claude
-  und meldet dann einen Timeout. Dialog schließen, nochmal fragen.
-- **Gerade gestartet?** Claude wartet, bis Vectorworks ~30 Sekunden läuft.
+- **Offene Dialoge:** Nimmt Vectorworks einen Auftrag nicht innerhalb von
+  15 Sekunden an (meist, weil ein Dialog offen ist), bricht Claude ihn ab –
+  und er läuft garantiert **nicht** später nach, wenn du den Dialog
+  schließt. Dialog schließen, nochmal fragen.
+- **Lange Aufträge** (z. B. eine Prüfung großer Pläne): Hat Vectorworks einen
+  Auftrag angenommen, wartet Claude bis zu 10 Minuten auf das Ergebnis.
+- **Keine Skriptfehler-Fenster mehr durch falsche Aufrufe:** Jeder `vs.*`-Aufruf
+  wird vorher gegen die Signaturen aller ~3200 Vectorworks-Funktionen geprüft
+  (Anzahl und Art der Argumente, Farben als Tupel, Callbacks). Statt des
+  modalen Fensters „Skriptfehler“ bekommt Claude eine klare Meldung mit der
+  richtigen Signatur und korrigiert sich selbst.
+- **Gerade gestartet?** Claude wartet, bis Vectorworks ~20 Sekunden läuft.
 - **Exakt heißt:** Koordinaten werden ungerundet durchgereicht und
   zurückgelesen. Rechenrauschen von Vectorworks' Booleschen Operationen
   (z. B. 26,999999999999996 statt 27) wird automatisch auf die exakten
@@ -154,10 +169,11 @@ prüfen, ob das erlaubt ist. Die Brücke läuft komplett auf deinem Mac
 
 | Problem | Lösung |
 |---|---|
-| „did not pick up the job“ | Zeichnung öffnen, Dialoge schließen, prüfen, ob **MCP Run Job** in einem Menü liegt (Schritt 2.4). Einmal von Hand ausführen – es darf nichts passieren. |
+| „did not take the request within 15s“ | Zeichnung öffnen, Dialoge schließen, prüfen, ob **MCP Run Job** in einem Menü liegt (Schritt 2.4). Einmal von Hand ausführen – es darf nichts passieren. Der abgebrochene Auftrag läuft nicht nach. |
+| „VSArgumentError: vs.… not called“ | Kein Problem: ein falscher Aufruf wurde abgefangen, bevor er Vectorworks erreicht hat. Claude korrigiert ihn. |
 | „is not running“ / „still starting“ | Vectorworks öffnen und ein paar Sekunden warten. |
-| Fenster „Skriptfehler“ in Vectorworks | OK klicken und Claude bitten, es anders zu versuchen. |
-| `vw_ping` warnt wegen der Brücken-Version | Vectorworks neu starten (die Erweiterung hat die Brücke aktualisiert). |
+| Fenster „Skriptfehler“ in Vectorworks | Selten geworden (falsche Argumente fängt Keystone ab). OK klicken und Claude bitten, es anders zu versuchen. |
+| `vw_ping` warnt wegen der Brücken-Version | Nochmal pingen (Keystone lädt die neue Brücke selbst nach); hilft das nicht, Vectorworks neu starten. |
 | Werkzeuge doppelt („vectorworks“ und „Keystone for Vectorworks“) | Terminal-Installer einmal ausführen – er entfernt den alten Eintrag. |
 | Keine macOS-Nachfrage, nichts passiert | Systemeinstellungen ▸ Datenschutz & Sicherheit ▸ Automation: Claude darf Vectorworks steuern. |
 
@@ -168,6 +184,12 @@ uv sync
 uv run pytest -q          # Server-Logik; Code, der in Vectorworks läuft, wird live getestet
 uv run vwmcp              # Server über stdio
 scripts/build-mcpb.sh     # baut release/Keystone-for-Vectorworks.mcpb (braucht node)
+python scripts/live_test.py        # Live-Test gegen das laufende Vectorworks (Protokoll,
+                                   # Signaturprüfung, Fallstricke, Regression)
+python scripts/trigger_bench.py    # misst die AppleScript-Auslösung
+python tools/build_vs_index.py <vs.py> --vwx <vwx vs_index.json> \
+    --versions "<Functions By Version.md>" --reference "<Function Reference/Functions>"
+                                   # Signatur-Index neu bauen (neues SDK)
 ```
 
 Die Erweiterung (`mcpb/`: Manifest, Abhängigkeiten, Startdateien) ist eine
@@ -179,13 +201,22 @@ sofort aus `server/static.json`, das der Build aus dem echten Server erzeugt –
 Claude bricht Verbindungen ab, die darauf nicht in ~3 s antworten. Der
 Server-Code liegt als Quelltext bei. Version: `src/vwmcp/__init__.py`.
 
-Aufbau: `vw-plugin/` ist die Brücke in Vectorworks (unverändert vom
-Original), `src/vwmcp/vwlib2d.py` läuft *in* Vectorworks (Python 3.9!),
+Aufbau: `vw-plugin/` ist die Brücke in Vectorworks (atomares Job-Protokoll,
+geprüfter `vs`-Proxy, Bibliotheks-Cache; Python 3.9 **und** 3.14),
+`src/vwmcp/data/vs_index.json` der Signatur-Index,
+`src/vwmcp/vwlib2d.py` läuft *in* Vectorworks (Python 3.9!),
 `src/vwmcp/geom/` rechnet auf dem Server (exakte Bögen, Prüfungen,
 Korrekturen, Prüfbild), `src/vwmcp/tools/draw2d.py` sind die MCP-Werkzeuge.
-Details in [CLAUDE.md](CLAUDE.md), [docs/architecture.md](docs/architecture.md)
-und [docs/vs-notes.md](docs/vs-notes.md).
+Details in [CLAUDE.md](CLAUDE.md), [docs/architecture.md](docs/architecture.md),
+[docs/api-pitfalls.md](docs/api-pitfalls.md) und [docs/vs-notes.md](docs/vs-notes.md).
+Änderungen: [CHANGELOG.md](CHANGELOG.md).
 
 ## Lizenz
 
 MIT – © giorgiomoroder (Original) und Seraphin Ernst (2D-Werkzeuge).
+Enthält Material aus [vwx-mcp](https://github.com/vicquick/vwx-mcp) (MIT, © vicquick:
+Beschreibungen im Signatur-Index, Index-Builder, API-Fallstricke) und folgt
+dem Job-Protokoll von [vwmcp](https://github.com/MattA-Official/vwmcp)
+(MIT, © Matt Adcock; Fallstricke-Liste). Signaturen und Parametertypen aus
+Vectorworks' [developer-scripting](https://github.com/Vectorworks/developer-scripting).
+Details in [NOTICE](NOTICE).

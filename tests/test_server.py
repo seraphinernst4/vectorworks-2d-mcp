@@ -95,3 +95,9 @@ def test_ping_combines_warnings(vs, monkeypatch):
     monkeypatch.setattr(app, "EXPECTED_BRIDGE_VERSION", "9.9.9")
     out = server.vw_ping()
     assert "9.9.9" in out["warning"] and "2026" in out["warning"]
+
+
+def test_ping_notes_prepared_2027(vs):
+    vs.GetVersionEx = lambda: (32, 0, 0, 1, 900000)  # Vectorworks 2027
+    out = server.vw_ping()
+    assert "warning" not in out and "2027" in out["note"] and "not been tested live" in out["note"]

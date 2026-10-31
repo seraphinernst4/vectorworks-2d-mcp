@@ -45,7 +45,7 @@ def test_sends_menu_command_via_vectorscript_file(root):
     ((args, _),) = procs
     assert args[0] == "osascript"
     assert 'tell application "Vectorworks 2026" to run VectorScript' in " ".join(args)
-    assert "DoMenuTextByName('MCP Run Job', 0)" in (root / "trigger.vss").read_text()
+    assert "DoMenuTextByName('MCP Run Job', 0)" in " ".join(args)
 
 
 def test_uses_whichever_version_runs(root):
@@ -103,3 +103,31 @@ def test_parse_ps_finds_vectorworks_only():
 """
     assert parse_ps(out) == [("Vectorworks 2027", 12.0), ("Vectorworks 2026", 2728.0)]
     assert parse_ps("") == []
+
+
+def test_direct_mode_runs_the_bridge_without_menu_command(root):
+    t, procs = make(root, running=[("Vectorworks 2026", 600.0)])
+    t.mode, t.direct = "direct", True
+    t()
+    script = procs[0][0][2]
+    assert "PythonExecute('from vwmcp import vwmcp_bridge')" in script
+    assert "PythonExecute('vwmcp_bridge.run_pending()')" in script
+    assert "DoMenuTextByName" not in script and '"' not in script.split("run VectorScript ")[1][1:-1]
+
+
+def test_auto_mode_switches_to_direct_once(root):
+    procs = []
+
+    def spawn(args):
+        p = FakeProc(done=True)
+        procs.append(args)
+        return p
+
+    t = MacTrigger(root, apps=lambda: [("Vectorworks 2026", 600.0)], spawn=spawn, mode="auto")
+    t()
+    assert "DoMenuTextByName" in procs[-1][2]
+    assert t.on_unclaimed() is True and t.on_unclaimed() is False
+    t()
+    assert "PythonExecute" in procs[-1][2]
+    menu = MacTrigger(root, apps=lambda: [("Vectorworks 2026", 600.0)], spawn=spawn, mode="menu")
+    assert menu.on_unclaimed() is False

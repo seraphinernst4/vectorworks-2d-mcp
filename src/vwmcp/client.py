@@ -194,6 +194,10 @@ class Bridge:
                 break
             if now - last_fire >= RETRIGGER_AFTER and not self._trigger_in_flight():
                 last_fire = now
+                hook = getattr(self.trigger, "on_unclaimed", None)
+                if callable(hook) and hook():
+                    self.log("Vectorworks answered but did not run 'MCP Run Job': "
+                             "using the direct trigger (PythonExecute) from now on")
                 with contextlib.suppress(TriggerError):
                     self.trigger()
             time.sleep(self.poll_interval)

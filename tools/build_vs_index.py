@@ -26,7 +26,8 @@ Output, per function name:
         parameter, or null when the function can't be checked safely
         (variadic, ANY/ARRAY parameters, stub and VectorScript disagree)
     r   return type ("" for procedures)
-    c   category, d one-line description, v first version ("2027"), if known
+    c   category, d one-line description (only from vwx-mcp's MIT index),
+        v first version ("2027"), if known
 
 Type codes: H handle, R real, I integer/longint, B boolean, S string/char/
 criteria, P point (tuple or 2 numbers), Q 3D point (tuple or 3 numbers),
@@ -131,12 +132,11 @@ def _from_reference(md: Path) -> dict | None:
     inputs = _vs_inputs(sig) if sig else None
     checkable = all(codes) and inputs is not None and sum(WIDTH.get(c, 1) for c in codes) == inputs
     ret = re.search(r"return\s+(\w+)", text[py.end():py.end() + 200])
-    desc = re.search(r"## Description\s*\n(.+)", text)
     cat = re.search(r"## Category\s*\n\*\s*\[([^\]]+)\]", text)
     return {"a": ", ".join(f"{n}:{t or '?'}" for n, t in zip(names, types)),
             "t": "".join(codes) if checkable else None,
             "r": "" if not ret or ret.group(1) == "None" else ret.group(1),
-            "c": cat.group(1) if cat else "", "d": (desc.group(1).strip() if desc else "")[:200]}
+            "c": cat.group(1) if cat else "", "d": ""}
 
 
 def build(stub: Path, vwx: Path | None = None, versions: Path | None = None,
@@ -163,12 +163,6 @@ def build(stub: Path, vwx: Path | None = None, versions: Path | None = None,
         rm = re.search(r"return\s*\(?\s*'([^']+)'", ast.get_source_segment(src, node) or "")
         if rm:
             ret = rm.group(1)
-        summary = ""
-        for line in doc.splitlines():
-            s = line.strip()
-            if s and not s.startswith(("Python:", "VectorScript:", "Category:")):
-                summary = s
-                break
         # "in/out" parameters are passed in Python and are VAR in VectorScript
         inout = [t[len("IN/OUT "):] for _, t in params if t.startswith("IN/OUT ")]
         params = [(n, t[len("IN/OUT "):] if t.startswith("IN/OUT ") else t) for n, t in params]
@@ -186,7 +180,9 @@ def build(stub: Path, vwx: Path | None = None, versions: Path | None = None,
             "t": "".join(codes) if checkable else None,
             "r": ret,
             "c": (cat.group(1).strip() if cat else "") or x.get("cat", ""),
-            "d": (summary or x.get("doc", ""))[:200],
+            # descriptions only from vwx-mcp's MIT index: Vectorworks' own
+            # reference text is "All rights reserved" and isn't redistributed
+            "d": x.get("doc", "")[:200],
         }
         if node.name in since:
             entry["v"] = since[node.name]
@@ -214,8 +210,8 @@ def build(stub: Path, vwx: Path | None = None, versions: Path | None = None,
     return {
         "_meta": {
             "built": date.today().isoformat(),
-            "source": "Vectorworks developer-scripting vs.py stub (types, VectorScript signatures); "
-                      "descriptions/categories partly from vwx-mcp vs_index.json (MIT, (c) vicquick)",
+            "source": "signatures and parameter types: Vectorworks developer-scripting (vs.py stub, "
+                      "Function Reference); descriptions: vwx-mcp vs_index.json (MIT, (c) 2026 vicquick)",
             **stats,
         },
         "f": funcs,

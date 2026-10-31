@@ -192,3 +192,27 @@ def test_job_carries_ttl_beyond_claim_timeout(root, fake_vs):
 
     make_bridge(root, peek, claim_timeout=15).run("1")
     assert seen["ttl"] > 15 and seen["protocol"] == 2
+
+
+def test_auto_trigger_falls_back_when_menu_command_is_missing(root, fake_vs, monkeypatch):
+    import vwmcp.client as client
+
+    monkeypatch.setattr(client, "RETRIGGER_AFTER", 0.05)
+
+    class AutoTrigger:
+        direct = False
+
+        def __call__(self):
+            if self.direct:  # only the direct trigger reaches the bridge
+                vwmcp_bridge.run_pending(root, vs_module=fake_vs)
+
+        def in_flight(self):
+            return False
+
+        def on_unclaimed(self):
+            changed, self.direct = not self.direct, True
+            return changed
+
+    b = make_bridge(root, AutoTrigger())
+    assert b.run("7")["value"] == 7
+    assert "direct trigger" in (root / "vwmcp.log").read_text()

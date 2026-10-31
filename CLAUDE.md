@@ -2,9 +2,10 @@
 
 Mac-native MCP server for exact, well-organised 2D drawing in Vectorworks.
 Fork of https://github.com/giorgiomoroder/vectorworks-mcp (MIT), repo
-https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.2.0
-beta**, tested on Vectorworks 2026 Update 7 (German) on macOS. Read
-`docs/architecture.md` and `docs/vs-notes.md` before changing anything that
+https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.4.0
+beta**, tested on Vectorworks 2026 Update 7 (German) on macOS; Vectorworks
+2027 prepared (Python 3.14), not live-tested. Read `docs/architecture.md`,
+`docs/api-pitfalls.md` and `docs/vs-notes.md` before changing anything that
 touches Vectorworks.
 
 ## 2D layer (this fork)
@@ -25,15 +26,23 @@ touches Vectorworks.
 
 ## Layout
 
-- `vw-plugin/vwmcp/vwmcp_bridge.py`: in-app executor (~120 lines). Installed to
-  `~/Library/Application Support/Vectorworks/2026/Plug-ins/vwmcp/`. Run by the
-  user-created **MCP Run Job** menu command (`from vwmcp import vwmcp_bridge;
-  vwmcp_bridge.run_pending()`). Bump `BRIDGE_VERSION` and
-  `app.EXPECTED_BRIDGE_VERSION` together whenever the job/result format changes.
-- `src/vwmcp/client.py`: job folder protocol (`~/.vwmcp/jobs`, `results`), timeout + withdrawal, log.
+- `vw-plugin/vwmcp/vwmcp_bridge.py`: in-app executor (atomic claim, checked
+  `vs` proxy, lib cache, self-reload). Installed with `vs_index.json` to
+  `~/Library/Application Support/Vectorworks/<year>/Plug-ins/vwmcp/` for every
+  year >= 2026. Run by the user-created **MCP Run Job** menu command (`from
+  vwmcp import vwmcp_bridge; vwmcp_bridge.run_pending()`). Stdlib only,
+  Python 3.9 + 3.14. Bump `BRIDGE_VERSION` and `app.EXPECTED_BRIDGE_VERSION`
+  together whenever the job/result format changes.
+- `src/vwmcp/data/vs_index.json`: signature index (build with
+  `tools/build_vs_index.py`, see its docstring); used by the bridge's
+  argument check and by `vw_vs_lookup`.
+- `src/vwmcp/client.py`: job folder protocol (`~/.vwmcp/jobs`, `results`,
+  `lib`): claim timeout 15 s → `.cancelled`, result timeout 600 s,
+  re-trigger, housekeeping, timings, log.
 - `src/vwmcp/trigger.py`: macOS trigger: `osascript` → `run VectorScript` →
-  `DoMenuTextByName('MCP Run Job', 0)`. Guards: not running, launched <30 s,
-  previous Apple Event still pending after 10 s grace (= a dialog is open).
+  `DoMenuTextByName('MCP Run Job', 0)` (mode `menu`) or `PythonExecute`
+  (mode `direct`, `auto`). Finds the running Vectorworks with `ps`. Guards:
+  not running, launched <20 s, at most 3 pending Apple Events.
 - `src/vwmcp/vwlib.py`: helper library executed **inside** Vectorworks, sent with every
   typed tool call. **Must stay Python 3.9** (VW 2026 embeds 3.9.2): no `match`,
   no `X | Y`, stdlib only. `tests/test_calls.py` parses it with `feature_version=(3, 9)`.
@@ -66,7 +75,7 @@ touches Vectorworks.
 
 ```bash
 uv sync
-uv run pytest -q          # 59 tests; fake executor runs the real bridge code
+uv run pytest -q          # ~150 tests; fake executor runs the real bridge code
 uv run vwmcp              # stdio server
 uv build                  # wheel must contain vwmcp/_plugin/vwmcp_bridge.py
 ```
@@ -76,6 +85,12 @@ uv build                  # wheel must contain vwmcp/_plugin/vwmcp_bridge.py
   only encodes our assumptions); record findings in `docs/vs-notes.md`.
 - Live checks without the MCP client: `from vwmcp.client import Bridge;
   from vwmcp.calls import call; call(Bridge(timeout=30), "document_info")`.
+- Full live test: `python scripts/live_test.py` on the Mac (protocol,
+  argument check, pitfalls, regression). It can be started from inside
+  Vectorworks (`subprocess.Popen(..., start_new_session=True)`) so it
+  runs after the starting job returns; don't send other requests while
+  it runs. Bridge/lib code for Python 3.9 and 3.14:
+  `uv run --no-project --python 3.9 --with pytest python -m pytest tests/test_bridge.py`.
 - Full MCP round trip: spawn `uv run --project . vwmcp` with
   `mcp.client.stdio.stdio_client` and call tools.
 - Commits use the user's global git identity (giorgiomoroder). Don't push
@@ -122,7 +137,7 @@ Beta hardening:
 - [ ] Windows trigger (none today; user runs MCP Run Job by hand). Candidate:
       a dialog with `RegisterDialogForTimerEvents` as an explicit "listen" mode.
 - [ ] `LDevice_*` functions: find real signatures (currently avoided).
-- [ ] Clean up stale `~/.vwmcp/results/*.json` from jobs whose server timed out.
+- [x] Clean up stale `~/.vwmcp/results/*.json` from jobs whose server timed out (0.4 housekeeping).
 - [ ] Undo menu label: `vs.NameUndoEvent` has no visible effect; investigate.
 
 Distribution:

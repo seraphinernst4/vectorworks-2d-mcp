@@ -3,11 +3,15 @@
 ## Pieces
 
 - **`vw-plugin/vwmcp/vwmcp_bridge.py`**: installed in the user Plug-ins
-  folder (already on Vectorworks' `sys.path`). `run_pending()` claims the
-  oldest job in `~/.vwmcp/jobs/` by atomic rename, `exec`s it with `vs` in
-  scope, captures stdout, the last expression (or `result`), and any
-  traceback, and writes `~/.vwmcp/results/<id>.json` atomically. One job per
-  call. Version-stamped (`BRIDGE_VERSION`); `vw_ping` compares it.
+  folder of every Vectorworks version >= 2026 (already on Vectorworks'
+  `sys.path`), together with `vs_index.json`. `run_pending()` claims the
+  oldest job in `~/.vwmcp/jobs/` by atomic rename, runs it with a checked
+  `vs` proxy in scope, captures stdout, the last expression (or `result`),
+  and any traceback, and writes `~/.vwmcp/results/<id>.json` atomically.
+  One job per call. Version-stamped (`BRIDGE_VERSION`); `vw_ping` compares
+  it. Vectorworks keeps Python state between runs, so the bridge caches
+  the index and compiled helper libraries, and reloads itself when its
+  file changes. Stdlib only, Python 3.9 and 3.14.
 - **"MCP Run Job" menu command**: two lines of Python that call
   `run_pending()`. Created once by the user in the Plug-in Manager (`.vsm`
   files can't be authored as text).
@@ -21,6 +25,41 @@
     Must stay Python 3.9-compatible.
   - `journal.py`: per-call revert journal.
   - `tools/generic.py`, `tools/spotlight.py`: the MCP tools.
+
+## Job protocol (0.4)
+
+Every step is an atomic rename, so nothing runs twice or half:
+
+1. Server: write `jobs/<id>.tmp`, rename to `jobs/<id>.json`, fire the trigger.
+2. Bridge: claim the oldest job by renaming it to `jobs/<id>.working`
+   (only one rename can win), run it, write `results/<id>.json.tmp`,
+   rename to `results/<id>.json`, delete `.working`.
+3. Server: wait up to `claim_timeout` (15 s) for the claim. Not claimed:
+   rename `<id>.json` to `<id>.cancelled`. If that rename succeeds, the job
+   can never run (a trigger still queued in Vectorworks finds nothing). If
+   it fails, Vectorworks has just claimed it: keep waiting.
+4. Server: wait up to `timeout` (600 s) for the result of a claimed job.
+   Lost triggers are re-fired after 2 s if none is in flight.
+5. Housekeeping removes results nobody read, `.cancelled`, orphaned
+   `.working`/`.running` older than an hour.
+
+Helper libraries (vwlib, vwlib2d) go by reference: the server writes them
+once to `~/.vwmcp/lib/<sha256>.py`, the job lists `{"sha", "path"}`, the
+bridge compiles each once per Vectorworks session. Older bridges get the
+source inline (and are reloaded once, see `calls.maybe_reload`).
+
+## Checked `vs` proxy (0.4)
+
+`vs_index.json` maps every function to type codes per Python parameter
+(H handle, R real, I integer, B boolean, S string, P point, Q 3D point,
+V vector, C colour, F callback). Per job the bridge puts a proxy in place
+of `vs` (and in `sys.modules["vs"]` for `import vs`); each call is checked
+first and a mismatch raises `VSArgumentError` with the signature. Rules
+are conservative (never block what Vectorworks could accept): points as
+tuple or numbers, a number tuple may span consecutive number parameters,
+entries whose parameter count disagrees with Vectorworks' own docstring
+are dropped, functions not in the index pass through. A job can switch
+the check off with `"check": false`.
 
 ## Why the AppleScript → menu command hop
 
@@ -38,10 +77,20 @@ Update 3 (macOS):
 | `run VectorScript` with a write | works |
 | `run VectorScript "DoMenuTextByName('MCP Run Job', 0)"` | **works**: full document + undo context |
 
-So the server only ever sends that one VectorScript line. Guards: refuse if
-Vectorworks isn't running or launched < 30 s ago; one request in flight at
-a time; a trigger still unanswered after a grace period (usually a dialog)
-is reported instead of stacking more Apple Events.
+So the server only ever sends that one VectorScript line (inline since
+0.4; measured: as fast as a file or a compiled script, ~0.2 s to the claim,
+nearly all of it inside Vectorworks starting the menu command). Guards:
+refuse if Vectorworks isn't running or launched < 20 s ago; one request in
+flight per server; at most 3 unanswered Apple Events; the claim timeout
+decides when a request is given up (usually a dialog is open).
+
+The running Vectorworks is found with `ps` (not `pgrep`, which hides its
+own ancestors); a configured version is only a preference.
+
+Trigger modes (`VWMCP_TRIGGER`): `menu` (default), `direct` (VectorScript
+`PythonExecute` runs the bridge, no menu command needed; the pattern
+Vectorworks documents for AppleScript), `auto` (menu, switching to direct
+when Vectorworks answers but doesn't take the job).
 
 ## Undo
 

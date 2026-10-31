@@ -2,7 +2,7 @@
 
 Alles Wissen zum Projekt an einer Stelle: was es ist, wie es aufgebaut ist,
 wie man es installiert, baut und veröffentlicht, was getestet ist und was
-offen ist. Stand: **31.10.2026, Version 0.3.6 (Beta)**.
+offen ist. Stand: **31.10.2026, Version 0.4.0 (Beta)**.
 
 ## Auf einen Blick
 
@@ -15,9 +15,9 @@ offen ist. Stand: **31.10.2026, Version 0.3.6 (Beta)**.
 | **Repo** | https://github.com/seraphinernst4/vectorworks-2d-mcp (öffentlich; Umbenennen in `keystone-vectorworks` bewusst gelassen) |
 | **Erweiterung** | `release/Keystone-for-Vectorworks.mcpb` – Download: https://github.com/seraphinernst4/vectorworks-2d-mcp/raw/main/release/Keystone-for-Vectorworks.mcpb |
 | **Installer** | `curl -LsSf https://raw.githubusercontent.com/seraphinernst4/vectorworks-2d-mcp/main/scripts/install-macos.sh \| bash` |
-| **Voraussetzungen** | macOS, Vectorworks 2026, Claude-Desktop-App |
+| **Voraussetzungen** | macOS, Vectorworks 2026 oder 2027, Claude-Desktop-App |
 | **Getestet** | Vectorworks 2026 Update 7, deutsch (Ausbildungsversion), macOS, M2 Max |
-| **Status** | Funktional fertig für 2D, live getestet. Noch nie auf einem fremden Mac frisch installiert; VW 2027 / englische Oberfläche ungetestet. |
+| **Status** | Funktional fertig für 2D, live getestet (Protokoll, Signaturprüfung, Regression). VW 2027 vorbereitet (Python 3.14, Index mit 2027-Funktionen), aber ungetestet; noch nie auf einem fremden Mac frisch installiert; englische Oberfläche ungetestet. |
 
 ## Installation auf einem fremden Mac
 
@@ -43,8 +43,9 @@ offen ist. Stand: **31.10.2026, Version 0.3.6 (Beta)**.
    ob Claude Vectorworks steuern darf → **OK**.
 
 **Update:** Installer erneut ausführen (oder neue `.mcpb` doppelklicken) → in
-Claude „Aktualisieren“. **Vectorworks 2027:** Claude ▸ Einstellungen ▸
-Erweiterungen ▸ Keystone for Vectorworks ▸ Konfigurieren ▸ Version `2027`.
+Claude „Aktualisieren“. **Vectorworks 2027:** nichts einstellen – Keystone
+nimmt das laufende Vectorworks; die Versions-Einstellung entscheidet nur,
+wenn mehrere gleichzeitig laufen.
 
 ## Aufbau
 
@@ -76,13 +77,18 @@ Claude Desktop
 | `src/vwmcp/tools/generic.py` | Werkzeuge aus dem Original (ping, records, Symbole, `vw_exec_python`, `vw_revert_last`) |
 | `src/vwmcp/journal.py` | Rückgängig-Journal `~/.vwmcp/journal.jsonl` |
 | `src/vwmcp/app.py` | Server, Anweisungen an Claude (Zeichen- und Organisationsregeln), Icon |
-| `vw-plugin/vwmcp/vwmcp_bridge.py` | Brücke in Vectorworks (unverändert vom Original, Version 0.1.0) |
+| `vw-plugin/vwmcp/vwmcp_bridge.py` | Brücke in Vectorworks (0.2.0): atomares Beanspruchen (`.working`), geprüfter `vs`-Proxy, Bibliotheks-Cache, lädt sich bei Updates selbst neu; Python 3.9 + 3.14 |
+| `src/vwmcp/data/vs_index.json` | Signatur-Index aller 3192 `vs.*`-Funktionen (Typen, Rückgabe, Kategorie, Version) – für die Argumentprüfung und `vw_vs_lookup` |
+| `tools/build_vs_index.py` | Baut den Index aus Vectorworks' Stub + Funktionsreferenz (+ vwx-mcp-Beschreibungen) |
+| `scripts/live_test.py`, `scripts/trigger_bench.py` | Live-Test gegen das laufende Vectorworks; Messung der Auslösung |
 | `mcpb/` | Erweiterung: `manifest.json`, `pyproject.toml` (Abhängigkeiten), `server/index.js`, `server/main.py` |
 | `scripts/install-macos.sh` | Installer |
 | `scripts/build-mcpb.sh`, `scripts/dump_static.py` | Bauen der `.mcpb` (inkl. `static.json` aus dem echten Server) |
 | `skill/vectorworks-2d/SKILL.md` | Optionaler Skill (Arbeitsablauf, Regeln) |
 | `docs/vs-notes.md` | Geprüftes Wissen über die Vectorworks-API (`vs.*`) |
-| `tests/` | 110 Tests (Server-Logik; Code in Vectorworks wird live getestet) |
+| `tests/` | ~150 Tests (Server-Logik, Brücke mit Fake-`vs` unter 3.9/3.13/3.14; Code in Vectorworks wird live getestet) |
+| `docs/api-pitfalls.md` | Übernommene API-Fallstricke (vwx-mcp, vwmcp) mit Live-Befund |
+| `NOTICE`, `CHANGELOG.md` | Lizenzhinweise der Vorlagen; Änderungen |
 
 ## Werkzeuge (28)
 
@@ -116,19 +122,20 @@ Vectorworks wird auf die exakten Eingangswerte zurückgesetzt.
 
 | Ort | Was |
 |---|---|
-| `~/.vwmcp/jobs`, `~/.vwmcp/results` | Aufträge an Vectorworks und Antworten |
+| `~/.vwmcp/jobs`, `~/.vwmcp/results` | Aufträge an Vectorworks und Antworten (`.json` wartend, `.working` läuft, `.cancelled` abgebrochen – läuft nie) |
+| `~/.vwmcp/lib` | Hilfsbibliotheken nach Prüfsumme (einmal je VW-Sitzung kompiliert) |
 | `~/.vwmcp/journal.jsonl` | Rückgängig-Journal (`vw_revert_last`) |
 | `~/.vwmcp/extension.log` | Log des Starters und der Server-Fehlerausgabe |
 | `~/.vwmcp/vwmcp.log` | Log der Brücke in Vectorworks |
 | `~/.vwmcp/venv`, `~/.vwmcp/uv` | Python-Umgebung und uv |
-| `~/Library/Application Support/Vectorworks/2026/Plug-ins/vwmcp/` | Brücke |
+| `~/Library/Application Support/Vectorworks/<Jahr>/Plug-ins/vwmcp/` | Brücke + `vs_index.json` (jede Version ab 2026) |
 | Claude ▸ Einstellungen ▸ Erweiterungen | installierte Erweiterung |
 
 ## Entwickeln, bauen, veröffentlichen
 
 ```bash
 uv sync
-uv run pytest -q                 # 110 Tests
+uv run pytest -q                 # ~150 Tests
 scripts/build-mcpb.sh            # baut release/Keystone-for-Vectorworks.mcpb (braucht node/npx)
                                  # PYTHON=<python mit mcp> scripts/build-mcpb.sh, falls kein uv
 ```
@@ -163,6 +170,15 @@ zusätzlich als `Git-Verlauf.bundle` (`git clone Git-Verlauf.bundle vectorworks-
   internem Namen (`Fit To Objects`) sprachunabhängig.
 - Umbenennen des GitHub-Repos ist aus Claude-Sitzungen gesperrt (nur über
   GitHub-Einstellungen) – Name bleibt `vectorworks-2d-mcp`.
+- **Vectorworks behält den Python-Zustand zwischen den Läufen** (anders als
+  früher notiert): Module bleiben geladen → Caches lohnen sich, eine neue
+  Brücke muss neu geladen werden (macht sie seit 0.2.0 selbst).
+- Ein Aufruf dauert ~0,2 s, fast alles davon ist das Starten des
+  Menübefehls in Vectorworks; AppleScript selbst kostet ~45 ms.
+- Vectorworks dokumentiert, Python per AppleScript über `run VectorScript` +
+  `PythonExecute` zu senden → Grundlage für den Trigger-Modus `direct`
+  (ohne Menübefehl).
+- Vectorworks 2027 bettet Python 3.14 ein und meldet sich als Version 32.
 
 ## Live-Test 29.10.2026 (Vectorworks 2026, „Ohne Titel 3“)
 
@@ -183,11 +199,26 @@ zusätzlich als `Git-Verlauf.bundle` (`git clone Git-Verlauf.bundle vectorworks-
   gemeldet und gelöscht, alte UUIDs nach Korrekturen, falscher Aktionsname,
   Prüfbild (Löcher, Textausrichtung). Danach live nachgeprüft.
 
+## Live-Test 31.10.2026 (Version 0.4.0, „Ohne Titel 1“)
+
+- **Protokoll:** Vectorworks 25 s blockiert → zweiter Auftrag nach 10 s
+  abgebrochen (`.cancelled`), lief danach nicht nach; 18-s-Auftrag
+  abgewartet; 10 Pings im Mittel 0,19 s.
+- **Signaturprüfung:** `vs.Rect(0, 0, 1)` → `VSArgumentError` mit Signatur,
+  kein Dialog, keine Objekte; 3077 Funktionen live geprüft, 0 Widersprüche.
+- **Regression vorher (0.3.6 + Brücke 0.1.0) / nachher (0.4.0):** Zeichnen,
+  Prüfen, Verschieben/Klasse/Löschen + `vw_revert_last`, Klassen/Ebenen –
+  identisch; Abweichung beim Zeichnen jetzt überall **0,0 mm** (vorher bei
+  Kreis/Bogen 3·10⁻¹³ mm Rechenrauschen), Kreis nach Rückgängig bitgenau.
+
 ## Bekannte Grenzen / offene Punkte
 
 - Frische Installation auf einem fremden Mac noch nie gemacht (Installer holt
   seit 31.10. uv selbst – ungetestet).
-- Vectorworks 2027 und englische Oberfläche ungetestet.
+- Vectorworks 2027 und englische Oberfläche ungetestet (2027 vorbereitet).
+- Skriptfehler-Dialoge werden nicht automatisch geschlossen (bräuchte die
+  macOS-Freigabe „Bedienungshilfen“ und war nachts nicht zuverlässig
+  testbar); die Signaturprüfung verhindert die häufigste Ursache.
 - Offset von Bögen liefert Radius-Punkte (Typ 4) → nur angenähert geprüft.
 - Achsen auf Wandkanten werden als Doppellinie gemeldet → Klasse „Achsen“
   bei der Prüfung auslassen (`ignore_classes`).
@@ -195,7 +226,8 @@ zusätzlich als `Git-Verlauf.bundle` (`git clone Git-Verlauf.bundle vectorworks-
   dritten Objekt hängt (dann bleibt sie minimal schräg – Prüfung zeigt es nicht).
 - Vectorworks fasst mehrere Claude-Schritte zu einem Cmd-Z zusammen →
   `vw_revert_last` für einzelne Schritte.
-- Offene Dialoge in Vectorworks blockieren Aufträge (Timeout).
+- Offene Dialoge in Vectorworks blockieren Aufträge: nach 15 s Abbruch mit
+  Hinweis, der Auftrag läuft nicht nach.
 
 ## Versionen
 
@@ -207,4 +239,5 @@ zusätzlich als `Git-Verlauf.bundle` (`git clone Git-Verlauf.bundle vectorworks-
 | 0.3.3 | 29.10.2026 | Starter beantwortet den Verbindungsaufbau sofort (`static.json`) |
 | 0.3.5 | 29.10.2026 | Fixes aus dem Live-Test (Fangen, T-Stöße, Hinweise nach Boolean/Offset/Edit, UUIDs, Prüfbild) |
 | 0.3.6 | 29.10.2026 | Offset: richtige Ebene, exakte Koordinaten |
+| 0.4.0 | 31.10.2026 | Atomares Job-Protokoll, Signatur-Index + geprüfter `vs`-Proxy, API-Fallstricke, exakte Bögen beim Zurücklesen, VW 2027 vorbereitet, Bibliotheks-Cache (Details: CHANGELOG.md) |
 | – | 31.10.2026 | Installer holt uv auf frischen Macs; Projektinfo |

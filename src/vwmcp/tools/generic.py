@@ -61,12 +61,24 @@ def vw_ping() -> dict:
             f"{app.EXPECTED_BRIDGE_VERSION}. Run `vwmcp install-plugin` and retry."
         )
     major = int(out["vectorworks_version"].split(".")[0])
-    if major not in app.TESTED_VW_MAJORS:
+    if major in app.PREPARED_VW_MAJORS:
+        out["note"] = (
+            f"Vectorworks {app.PREPARED_VW_MAJORS[major]} is supported (Python 3.14, signature "
+            "index incl. its new functions) but has not been tested live yet; save before "
+            "larger edits and report problems."
+        )
+    elif major not in app.TESTED_VW_MAJORS:
         tested = ", ".join(f"Vectorworks {y}" for y in app.TESTED_VW_MAJORS.values())
         warnings.append(
             f"Vectorworks {out['vectorworks_version']} is untested (tested: {tested}). "
             "Field names and behavior may differ; verify results and save first."
         )
+    target = getattr(app.get_bridge().trigger, "target", None)
+    if target:
+        out["application"] = target
+    timing = app.get_bridge().last_timing
+    if timing:
+        out["round_trip_s"] = timing.get("total_s")
     if warnings:
         out["warning"] = " ".join(warnings)
     return out

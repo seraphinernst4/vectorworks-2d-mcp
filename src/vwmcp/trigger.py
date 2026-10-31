@@ -28,6 +28,15 @@ from vwmcp.client import TriggerError
 MENU_COMMAND = "MCP Run Job"
 MIN_UPTIME = float(os.environ.get("VWMCP_MIN_UPTIME", "20"))
 MAX_PENDING = 3
+# menu:   run the "MCP Run Job" menu command (needs it in the workspace)
+# direct: run the bridge through VectorScript's PythonExecute (no menu
+#         command needed; the pattern Vectorworks documents for AppleScript)
+# auto:   menu command; if Vectorworks answered but didn't take the job (no
+#         such command), switch to direct for the rest of the session
+TRIGGER_MODE = os.environ.get("VWMCP_TRIGGER", "menu")
+MENU_VSS = f"PROCEDURE T; BEGIN DoMenuTextByName('{MENU_COMMAND}', 0); END; RUN(T);"
+DIRECT_VSS = ("PROCEDURE T; BEGIN PythonBeginContext; PythonExecute('from vwmcp import vwmcp_bridge'); "
+              "PythonExecute('vwmcp_bridge.run_pending()'); PythonEndContext; END; RUN(T);")
 _APP_RE = re.compile(r"/(Vectorworks 20\d\d)\.app/Contents/MacOS/Vectorworks(?:$|\s+-)")
 
 
@@ -80,8 +89,13 @@ class MacTrigger:
         apps: Callable[[], list[tuple[str, float]]] | None = None,
         spawn: Callable[[list[str]], subprocess.Popen] | None = None,
         max_pending: int = MAX_PENDING,
+        mode: str | None = None,
     ):
         self.root = Path(root)
+        self.mode = mode or TRIGGER_MODE
+        if self.mode not in ("menu", "direct", "auto"):
+            self.mode = "menu"
+        self.direct = self.mode == "direct"
         self.app = app if app is not None else configured_app()  # None: whichever runs
         self.min_uptime = min_uptime
         self.apps = apps or running_apps
@@ -124,16 +138,19 @@ class MacTrigger:
         self._reap()
         if len(self._pending) >= self.max_pending:
             return  # enough events queued; they will run the job when Vectorworks is free
-        vss = self.root / "trigger.vss"
-        self.root.mkdir(parents=True, exist_ok=True)
-        if not vss.is_file() or MENU_COMMAND not in vss.read_text(encoding="utf-8"):
-            vss.write_text(
-                f"PROCEDURE T; BEGIN DoMenuTextByName('{MENU_COMMAND}', 0); END; RUN(T);",
-                encoding="utf-8",
-            )
-        script = f'tell application "{app}" to run VectorScript (read POSIX file "{vss}")'
+        vss_text = DIRECT_VSS if self.direct else MENU_VSS
+        script = f'tell application "{app}" to run VectorScript "{vss_text}"'
         self.target = app
         self._pending.append((self.spawn(["osascript", "-e", script]), time.monotonic()))
+
+    def on_unclaimed(self) -> bool:
+        """Vectorworks answered the trigger but didn't take the job. In auto
+        mode that means the menu command is missing: switch to direct.
+        True if the mode changed."""
+        if self.mode == "auto" and not self.direct:
+            self.direct = True
+            return True
+        return False
 
 
 def manual_trigger() -> None:
