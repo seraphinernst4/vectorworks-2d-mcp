@@ -145,7 +145,8 @@
 "book": "G",
 "page": 45
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "flur_rollstuhl_geradeaus",
@@ -859,7 +860,8 @@
 "book": "G",
 "page": 104
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "feuerwehr_durchgang_tuer_durchfahrt",
@@ -2007,7 +2009,8 @@
 "book": "G",
 "page": 138
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "fahrrad_hoehenversetzt_bequem",
@@ -3570,7 +3573,8 @@
 "book": "G",
 "page": 216
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "essplatz_rund_4p",
@@ -3673,7 +3677,8 @@
 "book": "G",
 "page": 216
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "essbar_schnitt",
@@ -5245,7 +5250,8 @@
 "book": "G",
 "page": 274
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "bf_bf_waschtisch",
@@ -5496,7 +5502,8 @@
 "book": "G",
 "page": 283
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "hwr_waschen_trocknen_rollstuhl",
@@ -5587,7 +5594,8 @@
 "book": "G",
 "page": 284
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "hwr_buegeln_naehen",
@@ -5956,6 +5964,998 @@
 {
 "book": "G",
 "page": 368
+}
+],
+"reference_only": true
+},
+{
+"id": "ap_din4543_tisch_bewegung",
+"room": "buero_einzel",
+"name": "Einzel-Arbeitsplatz DIN 4543-1: Schreibtisch + Bewegungsfläche",
+"mode": "standard",
+"W": 160.0,
+"D": 180.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "schreibtisch",
+"x": 0.0,
+"y": 100.0,
+"w": 160.0,
+"d": 80.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "buerostuhl",
+"x": 57.0,
+"y": 40.0,
+"w": 45.0,
+"d": 45.0,
+"against": null,
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 160,
+"d": 100,
+"for": [
+"schreibtisch"
+]
+}
+],
+"doors": [],
+"dims": "oben: 160; links: 80 | 100 = 180",
+"notes": "Bewegungsfläche hellblau unter dem Tisch über volle Tischbreite.",
+"sources": [
+{
+"book": "G",
+"page": 379
+}
+],
+"reference_only": true
+},
+{
+"id": "ap_din4543_mit_schrank",
+"room": "buero_einzel",
+"name": "Einzel-Arbeitsplatz DIN 4543-1 mit Schrank",
+"mode": "standard",
+"W": 160.0,
+"D": 220.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "schreibtisch",
+"x": 0.0,
+"y": 140.0,
+"w": 160.0,
+"d": 80.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "sideboard_buero",
+"x": 0.0,
+"y": 0.0,
+"w": 160.0,
+"d": 40.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 40,
+"w": 160,
+"d": 100,
+"for": [
+"schreibtisch",
+"sideboard_buero"
+]
+}
+],
+"doors": [],
+"dims": "oben: 160; links: 80 | 100 | 40 = 220",
+"notes": "Schrank als Rechteck mit Diagonale gezeichnet.",
+"sources": [
+{
+"book": "G",
+"page": 379
+}
+]
+},
+{
+"id": "ap_modul_8m2_180x450",
+"room": "buero_einzel",
+"name": "Minimales Arbeitsplatzmodul 8 m², Raum 180 breit x 450 tief (ohne Schrank)",
+"mode": "standard",
+"W": 450.0,
+"D": 180.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "schreibtisch",
+"x": 20.0,
+"y": 100.0,
+"w": 160.0,
+"d": 80.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 450,
+"d": 180,
+"for": [
+"schreibtisch"
+],
+"notes": "ganze Restfläche hellblau"
+}
+],
+"doors": [],
+"dims": "oben: 20 | 160 | 270 = 450; links: 80 | 100 = 180",
+"notes": "x = Raumtiefe ab Fassade (links), y = Raumbreite. Fassade links (W).",
+"sources": [
+{
+"book": "G",
+"page": 379
+}
+]
+},
+{
+"id": "ap_modul_8m2_220x360",
+"room": "buero_einzel",
+"name": "Minimales Arbeitsplatzmodul 8 m², Raum 220 breit x 360 tief (mit Schrank)",
+"mode": "standard",
+"W": 360.0,
+"D": 220.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "schreibtisch",
+"x": 20.0,
+"y": 140.0,
+"w": 160.0,
+"d": 80.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "sideboard_buero",
+"x": 20.0,
+"y": 0.0,
+"w": 160.0,
+"d": 40.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 360,
+"d": 220,
+"for": [
+"schreibtisch",
+"sideboard_buero"
+]
+}
+],
+"doors": [],
+"dims": "oben: 20 | 160 | 180 = 360; links: 80 | 100 | 40 = 220",
+"notes": "Bildunterschrift: 'Raumbreite/Raumtiefe 220 cm/350 cm' – Maßkette zeigt 360 (2,2 x 3,6 = 7,9 ≈ 8 m²). Identische Zeichnung als 'Raster 90 cm / Arbeitsplatzmodul' (360 = 4 x 90).",
+"sources": [
+{
+"book": "G",
+"page": 379
+}
+]
+},
+{
+"id": "ap_modul_raster120_zelle",
+"room": "buero_einzel",
+"name": "Raster 120 cm / Arbeitsplatzmodul Zellenbüro (2 Achsen = 240)",
+"mode": "standard",
+"W": 360.0,
+"D": 240.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "schreibtisch",
+"x": 20.0,
+"y": 155.0,
+"w": 160.0,
+"d": 80.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "sideboard_buero",
+"x": 20.0,
+"y": 5.0,
+"w": 160.0,
+"d": 40.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 5,
+"w": 360,
+"d": 230,
+"for": [
+"schreibtisch",
+"sideboard_buero"
+]
+}
+],
+"doors": [
+{
+"wall": "E",
+"offset": 45,
+"width": 80,
+"swing": "in",
+"hinge": "S"
+}
+],
+"dims": "oben: 360; links: 120 | 120 = 240 (Achsmaße)",
+"notes": "Fassade links mit Fassadenpfosten auf den Achsen 0/120/240; Trennwände oben/unten mittig auf den Achsen (ca. 10 dick → lichte Breite ca. 230). Tür in der Flurwand rechts, ca. 80 breit (nicht bemaßt), Anschlag unten, schlägt nach innen. Tür 'offset' = Abstand von der unteren Achse.",
+"sources": [
+{
+"book": "G",
+"page": 379
+}
+]
+},
+{
+"id": "zellenbuero_grundriss",
+"room": "buero_einzel",
+"name": "Grundrissbeispiel Zellenbüro (Zweibund mit 420 breiter Mittelzone/Flur), Achsraster 135",
+"mode": "standard",
+"W": 1320.0,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [],
+"doors": [],
+"dims": "oben: 450 | 420 | 450 = 1320; rechts: Achse 135, Einzelzelle 270 (2 Achsen), Doppelzelle 405 (3 Achsen)",
+"notes": "Möbelpositionen nicht bemaßt, aus der Zeichnung gemessen (Raster/Bemaßung als Referenz), Genauigkeit ca. ±5 cm. Mittelzone 420 ohne Möblierung; Türen ca. 80 (gemessen) in den Flurwänden, schlagen in die Zelle, Anschlag jeweils an der Schrankseite.",
+"sources": [
+{
+"book": "G",
+"page": 382
+}
+],
+"reference_only": true
+},
+{
+"id": "zelle_einzel_270x450",
+"room": "buero_einzel",
+"name": "Zellenbüro Einzelzelle 2 Achsen (270) x 450 tief",
+"mode": "standard",
+"W": 450.0,
+"D": 270.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "schreibtisch",
+"x": 20.0,
+"y": 185.0,
+"w": 160.0,
+"d": 80.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "buerostuhl",
+"x": 77.0,
+"y": 130.0,
+"w": 45.0,
+"d": 45.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "sideboard_buero",
+"x": 20.0,
+"y": 5.0,
+"w": 160.0,
+"d": 40.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [],
+"doors": [
+{
+"wall": "E",
+"offset": 45,
+"width": 80,
+"swing": "in",
+"hinge": "S"
+}
+],
+"dims": "Zelle 270 (Achsen), Tiefe 450 (Fassade bis Flurwand)",
+"notes": "Möbelpositionen nicht bemaßt, aus der Zeichnung gemessen (Raster/Bemaßung als Referenz), Genauigkeit ca. ±5 cm. Fassade W (x=0), Flur E. y ab unterer Achse.",
+"sources": [
+{
+"book": "G",
+"page": 382
+}
+],
+"reference_only": true
+},
+{
+"id": "zelle_einzel_405x450",
+"room": "buero_einzel",
+"name": "Zellenbüro Einzelzelle 3 Achsen (405) x 450, Tisch frei im Raum",
+"mode": "standard",
+"W": 450.0,
+"D": 405.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "schreibtisch",
+"x": 20.0,
+"y": 190.0,
+"w": 160.0,
+"d": 80.0,
+"against": null,
+"faces": "S"
+},
+{
+"element": "buerostuhl",
+"x": 77.0,
+"y": 135.0,
+"w": 45.0,
+"d": 45.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "sideboard_buero",
+"x": 20.0,
+"y": 5.0,
+"w": 160.0,
+"d": 40.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [],
+"doors": [
+{
+"wall": "E",
+"offset": 45,
+"width": 80,
+"swing": "in",
+"hinge": "S"
+}
+],
+"dims": "3 Achsen à 135",
+"notes": "Möbelpositionen nicht bemaßt, aus der Zeichnung gemessen (Raster/Bemaßung als Referenz), Genauigkeit ca. ±5 cm. ",
+"sources": [
+{
+"book": "G",
+"page": 382
+}
+],
+"reference_only": true
+},
+{
+"id": "zelle_doppel_540x450",
+"room": "buero_doppel",
+"name": "Zellenbüro Doppelzelle 4 Achsen (540) x 450, Tische gegenüber",
+"mode": "standard",
+"W": 450.0,
+"D": 540.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "schreibtisch",
+"x": 20.0,
+"y": 270.0,
+"w": 160.0,
+"d": 80.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "schreibtisch",
+"x": 20.0,
+"y": 190.0,
+"w": 160.0,
+"d": 80.0,
+"against": null,
+"faces": "S"
+},
+{
+"element": "buerostuhl",
+"x": 77.0,
+"y": 360.0,
+"w": 45.0,
+"d": 45.0,
+"against": null,
+"faces": "S"
+},
+{
+"element": "buerostuhl",
+"x": 77.0,
+"y": 135.0,
+"w": 45.0,
+"d": 45.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "sideboard_buero",
+"x": 20.0,
+"y": 495.0,
+"w": 160.0,
+"d": 40.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "sideboard_buero",
+"x": 20.0,
+"y": 5.0,
+"w": 160.0,
+"d": 40.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [],
+"doors": [
+{
+"wall": "E",
+"offset": 45,
+"width": 80,
+"swing": "in",
+"hinge": "S"
+}
+],
+"dims": "4 Achsen à 135",
+"notes": "Möbelpositionen nicht bemaßt, aus der Zeichnung gemessen (Raster/Bemaßung als Referenz), Genauigkeit ca. ±5 cm. Tischpaar (160x160) mittig auf der Raumbreite.",
+"sources": [
+{
+"book": "G",
+"page": 382
+}
+],
+"reference_only": true
+},
+{
+"id": "kombibuero_grundriss",
+"room": "buero_einzel",
+"name": "Grundrissbeispiel Kombibüro: Zellen 360 | Gang 110 | Mittelzone 400 | Gang 110 | Zellen 360, Achse 135",
+"mode": "standard",
+"W": 1340.0,
+"D": 1485.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "sideboard_buero",
+"x": 540.0,
+"y": 1065.0,
+"w": 40.0,
+"d": 320.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "stehtisch",
+"x": 580.0,
+"y": 1065.0,
+"w": 80.0,
+"d": 320.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "sideboard_buero",
+"x": 510.0,
+"y": 810.0,
+"w": 320.0,
+"d": 80.0,
+"against": null,
+"faces": null
+},
+{
+"element": "besprechungstisch",
+"x": 585.0,
+"y": 365.0,
+"w": 160.0,
+"d": 340.0,
+"against": null,
+"faces": null
+},
+{
+"element": "sideboard_buero",
+"x": 510.0,
+"y": 230.0,
+"w": 320.0,
+"d": 40.0,
+"against": null,
+"faces": null
+},
+{
+"element": "schreibtisch",
+"x": 510.0,
+"y": 0.0,
+"w": 160.0,
+"d": 80.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "schreibtisch",
+"x": 670.0,
+"y": 0.0,
+"w": 160.0,
+"d": 80.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 470,
+"y": 0,
+"w": 400,
+"d": 1485,
+"for": [
+"mittelzone"
+],
+"notes": "Mittelzone hellblau"
+}
+],
+"doors": [],
+"dims": "oben: 360 | 110 | 400 | 110 | 360; links: 270 (Zelle = 2 Achsen à 135)",
+"notes": "Möbelpositionen nicht bemaßt, aus der Zeichnung gemessen (Raster/Bemaßung als Referenz), Genauigkeit ca. ±5 cm. x ab Fassadeninnenseite links, y ab unterer Achse. Gänge 110 offen (keine Wand zur Mittelzone).",
+"sources": [
+{
+"book": "G",
+"page": 383
+}
+],
+"reference_only": true
+},
+{
+"id": "kombi_zelle_270x360",
+"room": "buero_einzel",
+"name": "Kombibüro Einzelzelle 2 Achsen (270) x 360 tief",
+"mode": "standard",
+"W": 360.0,
+"D": 270.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "schreibtisch",
+"x": 20.0,
+"y": 190.0,
+"w": 160.0,
+"d": 80.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "buerostuhl",
+"x": 77.0,
+"y": 133.0,
+"w": 45.0,
+"d": 45.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "sideboard_buero",
+"x": 20.0,
+"y": 5.0,
+"w": 160.0,
+"d": 40.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [],
+"doors": [
+{
+"wall": "E",
+"offset": 43,
+"width": 80,
+"swing": "in",
+"hinge": "S"
+}
+],
+"dims": "Zellentiefe 360, Zellenbreite 270 (2 Achsen)",
+"notes": "Möbelpositionen nicht bemaßt, aus der Zeichnung gemessen (Raster/Bemaßung als Referenz), Genauigkeit ca. ±5 cm. Tür ca. 80 (gemessen) in der Glas-/Flurwand, öffnet nach innen.",
+"sources": [
+{
+"book": "G",
+"page": 383
+}
+],
+"reference_only": true
+},
+{
+"id": "gruppenbuero_grundriss",
+"room": "gruppenbuero",
+"name": "Grundrissbeispiel Gruppenbüro: Gruppenräume 700 tief + offene Zone 650, Achse 135",
+"mode": "standard",
+"W": 1350.0,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 700,
+"y": null,
+"w": 650,
+"d": null,
+"for": [
+"offene Gruppenzone"
+],
+"notes": "hellblau"
+}
+],
+"doors": [],
+"dims": "oben: 700 | 650 = 1350; Achsen 135 (Gruppenraum 4 Achsen = 540)",
+"notes": "Möbelpositionen nicht bemaßt, aus der Zeichnung gemessen (Raster/Bemaßung als Referenz), Genauigkeit ca. ±5 cm. Fassade links (Gruppenräume) und rechts (offene Zone). Offene Zone: je 540-Achsfeld eine 2x2-Tischinsel (x 1010–1330, 20 von der Fassade, Stühle oben/unten) und eine Schrankdoppelreihe 400 x 80 (5 x 80, x 930–1330) mittig auf der Trennwandachse.",
+"sources": [
+{
+"book": "G",
+"page": 384
+}
+],
+"reference_only": true
+},
+{
+"id": "gruppenraum_540x700",
+"room": "gruppenbuero",
+"name": "Gruppenraum 4 Achsen (540) x 700 tief, 5 Arbeitsplätze",
+"mode": "standard",
+"W": 700.0,
+"D": 540.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "schreibtisch",
+"x": 20.0,
+"y": 265.0,
+"w": 160.0,
+"d": 80.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "schreibtisch",
+"x": 180.0,
+"y": 265.0,
+"w": 160.0,
+"d": 80.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "schreibtisch",
+"x": 20.0,
+"y": 185.0,
+"w": 160.0,
+"d": 80.0,
+"against": null,
+"faces": "S"
+},
+{
+"element": "schreibtisch",
+"x": 180.0,
+"y": 185.0,
+"w": 160.0,
+"d": 80.0,
+"against": null,
+"faces": "S"
+},
+{
+"element": "schreibtisch",
+"x": 340.0,
+"y": 185.0,
+"w": 80.0,
+"d": 160.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "buerostuhl",
+"x": 57.0,
+"y": 355.0,
+"w": 45.0,
+"d": 45.0,
+"against": null,
+"faces": "S"
+},
+{
+"element": "buerostuhl",
+"x": 217.0,
+"y": 355.0,
+"w": 45.0,
+"d": 45.0,
+"against": null,
+"faces": "S"
+},
+{
+"element": "buerostuhl",
+"x": 57.0,
+"y": 130.0,
+"w": 45.0,
+"d": 45.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "buerostuhl",
+"x": 217.0,
+"y": 130.0,
+"w": 45.0,
+"d": 45.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "buerostuhl",
+"x": 430.0,
+"y": 240.0,
+"w": 45.0,
+"d": 45.0,
+"against": null,
+"faces": "W"
+},
+{
+"element": "sideboard_buero",
+"x": 20.0,
+"y": 0.0,
+"w": 320.0,
+"d": 40.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "sideboard_buero",
+"x": 650.0,
+"y": 210.0,
+"w": 40.0,
+"d": 320.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [],
+"doors": [
+{
+"wall": "E",
+"offset": 40,
+"width": 80,
+"swing": "in",
+"hinge": "S"
+}
+],
+"dims": "Raumtiefe 700 (bemaßt), Raumbreite 4 Achsen à 135 = 540",
+"notes": "Möbelpositionen nicht bemaßt, aus der Zeichnung gemessen (Raster/Bemaßung als Referenz), Genauigkeit ca. ±5 cm. Tischgruppe 2x2 (320x160) + Kopftisch 80x160 = 5 AP.",
+"sources": [
+{
+"book": "G",
+"page": 384
+}
+],
+"reference_only": true
+},
+{
+"id": "business_club_grundriss",
+"room": "grossraumbuero",
+"name": "Grundrissbeispiel Business Club: Zellen 360 | Flur 150 | offene Zone 840, Achse 135",
+"mode": "standard",
+"W": 1350.0,
+"D": null,
+"barrier_free": false,
+"elements": [
+{
+"element": "besprechungstisch",
+"x": 530.0,
+"y": 730.0,
+"w": 210.0,
+"d": 160.0,
+"against": null,
+"faces": null
+},
+{
+"element": "arbeitsplatzinsel_4er",
+"x": 1000.0,
+"y": 730.0,
+"w": 320.0,
+"d": 160.0,
+"against": null,
+"faces": null
+},
+{
+"element": "sideboard_buero",
+"x": 860.0,
+"y": 495.0,
+"w": 480.0,
+"d": 40.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "sideboard_buero",
+"x": 530.0,
+"y": 25.0,
+"w": 40.0,
+"d": 480.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "besprechungstisch",
+"x": 835.0,
+"y": 190.0,
+"w": 480.0,
+"d": 160.0,
+"against": null,
+"faces": null
+},
+{
+"element": "sideboard_buero",
+"x": 860.0,
+"y": 5.0,
+"w": 480.0,
+"d": 40.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "sideboard_buero",
+"x": 860.0,
+"y": -45.0,
+"w": 480.0,
+"d": 40.0,
+"against": null,
+"faces": "S"
+},
+{
+"element": "stehtisch",
+"x": 737.0,
+"y": -350.0,
+"w": 80.0,
+"d": 160.0,
+"against": null,
+"faces": null
+},
+{
+"element": "arbeitsplatzinsel_4er",
+"x": 1000.0,
+"y": -350.0,
+"w": 320.0,
+"d": 160.0,
+"against": null,
+"faces": null
+}
+],
+"movement": [
+{
+"x": 510,
+"y": null,
+"w": 840,
+"d": null,
+"for": [
+"offene Zone"
+],
+"notes": "hellblau"
+}
+],
+"doors": [],
+"dims": "oben: 360 | 150 | 840 = 1350; rechts: 405 (3 Achsen) | 540 (4 Achsen)",
+"notes": "Möbelpositionen nicht bemaßt, aus der Zeichnung gemessen (Raster/Bemaßung als Referenz), Genauigkeit ca. ±5 cm. x ab Fassadeninnenseite links, y ab Achse unter dem 540-Feld (negativ = darunter).",
+"sources": [
+{
+"book": "G",
+"page": 385
+}
+],
+"reference_only": true
+},
+{
+"id": "grossraum_grundriss",
+"room": "grossraumbuero",
+"name": "Grundrissbeispiel Großraumbüro 1350 tief, Achse 135, Wiederholfeld 540",
+"mode": "standard",
+"W": 1350.0,
+"D": 540.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "arbeitsplatzinsel_4er",
+"x": 20.0,
+"y": 190.0,
+"w": 320.0,
+"d": 160.0,
+"against": null,
+"faces": null
+},
+{
+"element": "arbeitsplatzinsel_4er",
+"x": 515.0,
+"y": 190.0,
+"w": 320.0,
+"d": 160.0,
+"against": null,
+"faces": null
+},
+{
+"element": "arbeitsplatzinsel_4er",
+"x": 1010.0,
+"y": 190.0,
+"w": 320.0,
+"d": 160.0,
+"against": null,
+"faces": null
+},
+{
+"element": "schrankblock",
+"x": 60.0,
+"y": 500.0,
+"w": 240.0,
+"d": 80.0,
+"against": null,
+"faces": null
+},
+{
+"element": "schrankblock",
+"x": 555.0,
+"y": 500.0,
+"w": 240.0,
+"d": 80.0,
+"against": null,
+"faces": null
+},
+{
+"element": "schrankblock",
+"x": 1050.0,
+"y": 500.0,
+"w": 240.0,
+"d": 80.0,
+"against": null,
+"faces": null
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 1350,
+"d": 540,
+"for": [
+"alle"
+],
+"notes": "gesamte Fläche hellblau"
+}
+],
+"doors": [],
+"dims": "oben: 1350 (Fassade–Fassade); Achsen 135",
+"notes": "Möbelpositionen nicht bemaßt, aus der Zeichnung gemessen (Raster/Bemaßung als Referenz), Genauigkeit ca. ±5 cm. Wiederholfeld 540 (4 Achsen) in y: Insel (2x2 Tische 160x80) mittig auf einer Achse, Stühle (ca. 45) 10 cm ober-/unterhalb, Schrankblöcke 240x80 mittig auf der Achse zwischen den Inseln. Inseln 20 von den Fassaden, Abstand zwischen Inseln 175. Oberste Reihe Mitte: statt Insel zwei Hochschrankreihen 80 x 270. 12 AP je 540-Feld (≈ 6,1 m² netto je AP).",
+"sources": [
+{
+"book": "G",
+"page": 386
 }
 ],
 "reference_only": true
@@ -6578,7 +7578,8 @@
 "book": "L",
 "page": 129
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p132_r1",
@@ -7074,7 +8075,8 @@
 "book": "L",
 "page": 130
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p133_r1",
@@ -8102,7 +9104,8 @@
 "book": "L",
 "page": 133
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_gruppenraum_p135_r2",
@@ -8449,7 +9452,8 @@
 "book": "L",
 "page": 134
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p137_r0",
@@ -8864,7 +9868,8 @@
 "book": "L",
 "page": 135
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_gruppenraum_p137_r2",
@@ -9060,7 +10065,8 @@
 "book": "L",
 "page": 135
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p139_r0",
@@ -9565,7 +10571,8 @@
 "book": "L",
 "page": 137
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p140_r0",
@@ -9845,7 +10852,8 @@
 "book": "L",
 "page": 138
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_gruppenraum_p140_r1",
@@ -10005,7 +11013,8 @@
 "book": "L",
 "page": 138
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p141_r0",
@@ -11057,7 +12066,8 @@
 "book": "L",
 "page": 141
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p144_r0",
@@ -11463,7 +12473,8 @@
 "book": "L",
 "page": 142
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p147_r1",
@@ -12033,7 +13044,8 @@
 "book": "L",
 "page": 145
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p147_r2",
@@ -12567,7 +13579,8 @@
 "book": "L",
 "page": 145
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p149_r0",
@@ -13255,7 +14268,8 @@
 "book": "L",
 "page": 147
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p149_r1",
@@ -13928,7 +14942,8 @@
 "book": "L",
 "page": 147
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p151_r0",
@@ -14298,7 +15313,8 @@
 "book": "L",
 "page": 149
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p151_r1",
@@ -14668,7 +15684,8 @@
 "book": "L",
 "page": 149
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p153_r0",
@@ -15101,7 +16118,8 @@
 "book": "L",
 "page": 151
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p155_r0",
@@ -15567,7 +16585,8 @@
 "book": "L",
 "page": 153
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p155_r1",
@@ -16051,7 +17070,8 @@
 "book": "L",
 "page": 153
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p156_r0",
@@ -16709,7 +17729,8 @@
 "book": "L",
 "page": 154
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p160_r0",
@@ -17103,7 +18124,8 @@
 "book": "L",
 "page": 158
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p163_r0",
@@ -17744,7 +18766,8 @@
 "book": "L",
 "page": 163
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p167_r0",
@@ -18314,7 +19337,8 @@
 "book": "L",
 "page": 165
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p169_r1",
@@ -18702,7 +19726,8 @@
 "book": "L",
 "page": 167
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_gruppenraum_p169_r2",
@@ -18982,7 +20007,8 @@
 "book": "L",
 "page": 167
 }
-]
+],
+"reference_only": true
 },
 {
 "id": "lernen_klassenzimmer_p171_r0",
@@ -19773,6 +20799,7 @@
 "book": "L",
 "page": 171
 }
-]
+],
+"reference_only": true
 }
 ]

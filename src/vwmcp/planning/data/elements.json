@@ -3618,6 +3618,255 @@
 ]
 },
 {
+"id": "schreibtisch",
+"name": "Schreibtisch Büroarbeitsplatz",
+"full_name": "Schreibtisch Büroarbeitsplatz (Mindestgröße nach DIN 4543-1)",
+"category": "arbeiten",
+"context": [
+"arbeiten"
+],
+"kind": "desk",
+"w": 160.0,
+"d": 80.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 100.0,
+"w": 160.0,
+"note": "Benutzerfläche vor dem Tisch mind. 100 tief über die Tischbreite"
+}
+],
+"variants": [
+{
+"id": "160x90",
+"label": "Tischtiefe 90 (bei Raster 1,35 möglich, S. 396)",
+"w": 160.0,
+"d": 90.0
+}
+],
+"heights": {
+"top": [
+65,
+72
+],
+"notes": "Tischhöhe 65–72 (Empfang S. 373/374); weitere Höhen siehe Ergonomie-Kapitel (nicht in diesem Bereich)"
+},
+"notes": "Tisch + Bewegungsfläche + Sideboard 40 = 220 cm Mindest-Raumbreite; Nettofläche ca. 4 m².",
+"sources": [
+{
+"book": "G",
+"page": 379
+},
+{
+"book": "G",
+"page": 393
+}
+]
+},
+{
+"id": "sideboard_buero",
+"name": "Sideboard / Büroschrank",
+"full_name": "Sideboard / Büroschrank (Arbeitsplatz)",
+"category": "aufbewahren",
+"context": [
+"arbeiten"
+],
+"kind": "shelf",
+"w": 160.0,
+"d": 40.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 100.0,
+"note": "teilt sich die 100-cm-Benutzerfläche mit dem Schreibtisch (Tisch – 100 – Schrank)"
+}
+],
+"variants": [
+{
+"id": "80x40",
+"label": "Schrankelement in Grundrissbeispielen 80 breit",
+"w": 80.0,
+"d": 40.0
+}
+],
+"notes": "DIN 4543: Sideboardtiefe 40.",
+"sources": [
+{
+"book": "G",
+"page": 379
+},
+{
+"book": "G",
+"page": 393
+}
+]
+},
+{
+"id": "buerostuhl",
+"name": "Bürodrehstuhl",
+"full_name": "Bürodrehstuhl (Symbol in Grundrissen)",
+"category": "arbeiten",
+"context": [
+"arbeiten"
+],
+"kind": "chair",
+"w": 45.0,
+"d": 45.0,
+"wall": false,
+"heights": {
+"seat": [
+42,
+53
+],
+"notes": "Sitzhöhe 42–53 (S. 374)"
+},
+"notes": "In den Organisations-Grundrissen als Quadrat ca. 45–50 cm, ca. 5–10 cm vor der Tischkante gezeichnet.",
+"sources": [
+{
+"book": "G",
+"page": 373
+},
+{
+"book": "G",
+"page": 382
+},
+{
+"book": "G",
+"page": 386
+}
+]
+},
+{
+"id": "arbeitsplatzinsel_4er",
+"name": "Arbeitsplatzinsel 2x2 Schreibtische",
+"full_name": "Arbeitsplatzinsel 2x2 Schreibtische (Gruppe/Großraum)",
+"category": "arbeiten",
+"context": [
+"arbeiten"
+],
+"kind": "generic",
+"w": 320.0,
+"d": 160.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 100.0,
+"w": 320.0,
+"note": "Stühle beidseitig"
+}
+],
+"notes": "4 Tische 160x80, je 2 gegenüber; in Grundrissen nicht bemaßt.",
+"sources": [
+{
+"book": "G",
+"page": 384
+},
+{
+"book": "G",
+"page": 386
+},
+{
+"book": "G",
+"page": 395
+},
+{
+"book": "G",
+"page": 399
+}
+]
+},
+{
+"id": "schrankblock",
+"name": "Schrankblock Doppelreihe",
+"full_name": "Schrankblock Doppelreihe (Großraum)",
+"category": "aufbewahren",
+"context": [
+"arbeiten"
+],
+"kind": "wardrobe",
+"w": 240.0,
+"d": 80.0,
+"wall": true,
+"variants": [
+{
+"id": "320x80",
+"label": "4 x 80 Elemente (Kombi)",
+"w": 320.0,
+"d": 80.0
+},
+{
+"id": "400x80",
+"label": "5 x 80 Elemente (Gruppe)",
+"w": 400.0,
+"d": 80.0
+},
+{
+"id": "480x80",
+"label": "3 x 160 Elemente (Raster 1,50)",
+"w": 480.0,
+"d": 80.0
+}
+],
+"notes": "aus Zeichnungen gemessen",
+"sources": [
+{
+"book": "G",
+"page": 383
+},
+{
+"book": "G",
+"page": 384
+},
+{
+"book": "G",
+"page": 386
+},
+{
+"book": "G",
+"page": 395
+},
+{
+"book": "G",
+"page": 399
+}
+]
+},
+{
+"id": "stehtisch",
+"name": "Steh-/Thekentisch",
+"full_name": "Steh-/Thekentisch (Kombi-Mittelzone, Business Club)",
+"category": "arbeiten",
+"context": [
+"arbeiten"
+],
+"kind": "table",
+"w": 80.0,
+"d": 320.0,
+"wall": false,
+"variants": [
+{
+"id": "80x160",
+"label": "Business Club",
+"w": 80.0,
+"d": 160.0
+}
+],
+"notes": "nicht bemaßt, gemessen",
+"sources": [
+{
+"book": "G",
+"page": 383
+},
+{
+"book": "G",
+"page": 385
+}
+]
+},
+{
 "id": "linienbus_12m",
 "name": "Linienbus",
 "full_name": "Linienbus (Standardbus)",
@@ -4076,21 +4325,21 @@
 "notes": "nur aus einem Standardgrundriss bekannt (empfang_theke_angrenzender_arbeitsplatz)"
 },
 {
-"id": "schreibtisch",
-"name": "Schreibtisch",
+"id": "besprechungstisch",
+"name": "Besprechungstisch",
 "category": "sonstiges",
-"kind": "desk",
-"w": 60.0,
-"d": 120.0,
-"wall": true,
+"kind": "table",
+"w": 160.0,
+"d": 340.0,
+"wall": false,
 "derived": true,
 "sources": [
 {
 "book": "G",
-"page": 373
+"page": 383
 }
 ],
-"notes": "nur aus einem Standardgrundriss bekannt (empfang_theke_angrenzender_arbeitsplatz)"
+"notes": "nur aus einem Standardgrundriss bekannt (kombibuero_grundriss)"
 },
 {
 "id": "lehrertisch_120x60",

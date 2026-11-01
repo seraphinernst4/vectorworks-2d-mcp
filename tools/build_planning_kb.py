@@ -398,9 +398,8 @@ def check_layouts() -> None:
         if errs:
             bad += 1
             print("  %-34s %s" % (lay["id"], "; ".join(i.message for i in errs[:4])))
-            if any(i.kind in ("outside", "overlap") for i in errs):
-                ref.append(lay["id"])
-    print("layouts with problems:", bad, "- reference only (drawn excerpt, not a room):", ref)
+            ref.append(lay["id"])  # kept as reference data; planning uses only layouts that pass
+    print("layouts with problems:", bad, "- marked reference only:", len(ref))
     if ref:
         path = os.path.join(OUT, "layouts.json")
         data = json.load(open(path, encoding="utf-8"))

@@ -12274,6 +12274,462 @@ null,
 "norm": "ASR"
 },
 {
+"id": "g5.schreibtisch_mindestgroesse",
+"topic": "arbeitsplatz",
+"title": "Mindestgröße Schreibtisch 160 x 80 cm",
+"sources": [
+{
+"book": "G",
+"page": 379
+}
+],
+"values": {
+"w": 160,
+"d": 80,
+"unit": "cm"
+},
+"norm": "DIN 4543"
+},
+{
+"id": "g5.benutzerflaeche_vor_tisch",
+"topic": "arbeitsplatz",
+"title": "Nutzfläche (Benutzer-/Bewegungsfläche) vor dem Schreibtisch mindestens 100 cm tief",
+"sources": [
+{
+"book": "G",
+"page": 379
+}
+],
+"values": {
+"min": 100,
+"unit": "cm"
+},
+"norm": "DIN 4543-1"
+},
+{
+"id": "g5.sideboard_tiefe",
+"topic": "arbeitsplatz",
+"title": "Sideboard/Schrank am Arbeitsplatz mit 40 cm Tiefe ansetzen",
+"sources": [
+{
+"book": "G",
+"page": 379
+}
+],
+"values": {
+"typ": 40,
+"unit": "cm"
+},
+"norm": "DIN 4543"
+},
+{
+"id": "g5.nettoflaeche_arbeitsplatz",
+"topic": "arbeitsplatz",
+"title": "Nettofläche Einzelarbeitsplatz (Tisch + Bewegungsfläche + Sideboard) ca. 4 m²",
+"sources": [
+{
+"book": "G",
+"page": 379
+}
+],
+"values": {
+"typ": 4,
+"unit": "m²"
+},
+"norm": "DIN 4543"
+},
+{
+"id": "g5.arbeitsplatzmodul_min_8m2",
+"topic": "arbeitsplatz",
+"title": "Minimales Arbeitsplatzmodul (Raum) 8 m²; Varianten: 180 x 450 cm (Tisch + 100 Bewegungsfläche, ohne Schrank) oder 220 x 360 cm (mit Schrank; Bildunterschrift nennt 350)",
+"sources": [
+{
+"book": "G",
+"page": 379
+}
+],
+"values": {
+"min": 8,
+"unit": "m²"
+},
+"norm": "DIN 4543-1"
+},
+{
+"id": "g5.raumbreite_min_220",
+"topic": "arbeitsplatz",
+"title": "Aus Tisch 80 + Bewegungsfläche 100 + Schrank 40 ergibt sich die minimale lichte Raumbreite 220 cm; mit 10 cm Trennwand minimales Raumachsmaß 230 cm. Daraus Ausbau-/Fassadenraster 120–150 cm.",
+"sources": [
+{
+"book": "G",
+"page": 379
+},
+{
+"book": "G",
+"page": 393
+}
+],
+"values": {
+"min": 220,
+"unit": "cm",
+"achsmass_min": 230
+},
+"norm": "DIN 4543"
+},
+{
+"id": "g5.standardraumgeometrie_min",
+"topic": "arbeitsplatz",
+"title": "Standardraumgeometrie Büro: minimale Breite 2,20 m, minimale Tiefe 3,40 m",
+"sources": [
+{
+"book": "G",
+"page": 390
+}
+],
+"values": {
+"w_min": 220,
+"d_min": 340,
+"unit": "cm"
+}
+},
+{
+"id": "g5.abstand_tisch_fassade",
+"topic": "arbeitsplatz",
+"title": "In allen Arbeitsplatzmodulen und Grundrissbeispielen steht der Schreibtisch mit 20 cm Abstand zur Fassade (Innenseite), Tischlängsseite senkrecht zur Fassade (Seitenlicht).",
+"sources": [
+{
+"book": "G",
+"page": 379
+},
+{
+"book": "G",
+"page": 393
+}
+],
+"values": {
+"typ": 20,
+"unit": "cm"
+},
+"condition": "gezeichnetes Maß (Kette 20 | 160 | ...)"
+},
+{
+"id": "g5.lichte_raumhoehe_arbstaettv",
+"topic": "raumhoehe",
+"title": "Lichte Raumhöhe nach Grundfläche (Orientierungswerte nach früherer Arbeitsstättenverordnung)",
+"sources": [
+{
+"book": "G",
+"page": 380
+}
+],
+"values": {
+"unit": "cm"
+},
+"table": [
+{
+"grundflaeche": "≤ 50 m²",
+"lichte_hoehe_min": 250
+},
+{
+"grundflaeche": "50–100 m²",
+"lichte_hoehe_min": 275
+},
+{
+"grundflaeche": "100–2000 m²",
+"lichte_hoehe_min": 300
+},
+{
+"grundflaeche": "≥ 2000 m²",
+"lichte_hoehe_min": 325
+}
+],
+"norm": "ArbStättV (alt)"
+},
+{
+"id": "g5.buerotypen_strukturen",
+"topic": "buero",
+"title": "Kleinräumige (Zelle), großräumige (Großraum, ≥ 5 Personen je Nutzungseinheit) und flexible Strukturen; Zellenbüro als Ein- oder Zweibund, mit mittiger Kommunikationszone Dreibund; Kombibüro = Zellen an der Fassade + offene Mittelzone.",
+"sources": [
+{
+"book": "G",
+"page": 380
+}
+]
+},
+{
+"id": "g5.grundrisstiefe_flexibel",
+"topic": "buero",
+"title": "Für Nutzungsflexibilität ca. 13,50 m Grundrisstiefe (zwei- und dreibündige Zellenanordnung möglich)",
+"sources": [
+{
+"book": "G",
+"page": 380
+}
+],
+"values": {
+"typ": 1350,
+"unit": "cm"
+}
+},
+{
+"id": "g5.raumtiefe_natuerlich_belichtet",
+"topic": "belichtung",
+"title": "Bei 3 m Raumhöhe natürliche Belichtung und Belüftung bis ca. 7,50 m Raumtiefe ab Fassade",
+"sources": [
+{
+"book": "G",
+"page": 380
+}
+],
+"values": {
+"max": 750,
+"unit": "cm"
+},
+"condition": "lichte Raumhöhe 3 m"
+},
+{
+"id": "g5.entwurfsprinzip_buerotyp",
+"topic": "buero",
+"title": "Entwurfsprinzip Bürotyp/Erschließungssystem (Spalten: Gebäudetiefe, Erschließung, AP-Flächenmodul, Raumtiefe, Raumbreite Einzel-AP 2 Achsen, Doppel-AP 3 Achsen, lichte Raumhöhe)",
+"sources": [
+{
+"book": "G",
+"page": 381
+}
+],
+"table": [
+{
+"typ": "Zelle Einbund",
+"gebaeudetiefe_m": [
+7,
+10
+],
+"erschliessung": "Flur",
+"ap_modul_m2": [
+10,
+14
+],
+"raumtiefe_m": [
+3.5,
+5.5
+],
+"einzel_ap_2achsen_m": [
+2.4,
+3.0
+],
+"doppel_ap_3achsen_m": [
+3.6,
+4.5
+],
+"lichte_hoehe_m": ">= 2,50"
+},
+{
+"typ": "Zelle Zweibund",
+"gebaeudetiefe_m": [
+12,
+14
+],
+"erschliessung": "Flur",
+"ap_modul_m2": [
+10,
+14
+],
+"raumtiefe_m": [
+3.5,
+5.5
+],
+"einzel_ap_2achsen_m": [
+2.4,
+3.0
+],
+"doppel_ap_3achsen_m": [
+3.6,
+4.5
+],
+"lichte_hoehe_m": ">= 2,50"
+},
+{
+"typ": "Kombi (Dreibund)",
+"gebaeudetiefe_m": [
+14,
+20
+],
+"erschliessung": "Flurzone",
+"ap_modul_m2": [
+8,
+12
+],
+"raumtiefe_m": [
+3.5,
+4.5
+],
+"einzel_ap_2achsen_m": [
+2.3,
+3.0
+],
+"doppel_ap_3achsen_m": [
+3.6,
+4.5
+],
+"lichte_hoehe_m": "2,75–3"
+},
+{
+"typ": "Gruppe",
+"gebaeudetiefe_m": [
+12,
+24
+],
+"erschliessung": "Flurzone",
+"ap_modul_m2": [
+12,
+15
+],
+"raumtiefe_m": [
+5,
+15
+],
+"einzel_ap_2achsen_m": null,
+"doppel_ap_3achsen_m": null,
+"lichte_hoehe_m": "3,50–4"
+},
+{
+"typ": "reversibel",
+"gebaeudetiefe_m": [
+14,
+16
+],
+"erschliessung": null,
+"ap_modul_m2": [
+8,
+15
+],
+"raumtiefe_m": [
+3.5,
+7.5
+],
+"einzel_ap_2achsen_m": [
+2.3,
+3.0
+],
+"doppel_ap_3achsen_m": [
+3.5,
+4.5
+],
+"lichte_hoehe_m": ">= 3"
+}
+]
+},
+{
+"id": "g5.zellenbuero",
+"topic": "buero",
+"title": "Zellenbüro: Einzel- und Mehrpersonenräume (1 bzw. 2–5 MA, Standardbelegung gleichwertiges Mischverhältnis) entlang der Fassade, Erschließung über notwendigen Flur (Rettungsweg); Standardgröße 10–14 m²; Fassadenraster fixiert Trennwandpositionen; Standardzellen (feste) vs. Komfortzellen (verschiebbare Trennwände).",
+"sources": [
+{
+"book": "G",
+"page": 382
+}
+],
+"values": {
+"min": 10,
+"max": 14,
+"unit": "m² je Zelle"
+}
+},
+{
+"id": "g5.kombibuero",
+"topic": "buero",
+"title": "Kombibüro: Dreibund, Einzelzellen an der Fassade mit reduzierter Raumtiefe, offene Mittelzone (Gemeinschaft, Funktionen); empfohlene Gebäudetiefe mind. 13,50 m; natürliche Belichtung/Belüftung der Einzelarbeitsplätze 80–90 %; Mittelzone braucht Unterstützung (Licht/Lüftung).",
+"sources": [
+{
+"book": "G",
+"page": 383
+}
+],
+"values": {
+"min": 1350,
+"unit": "cm Gebäudetiefe"
+}
+},
+{
+"id": "g5.gruppenbuero",
+"topic": "buero",
+"title": "Gruppenbüro: max. ca. 25 Mitarbeiter je Einheit, Raumtiefen bis 7,50 m (natürliche Belichtung/Lüftung), flurloser Allraum oder 1- bis 3-bündig mit großen Mehrpersonenzellen; bei flächendeckendem Hohlraumboden Geschosshöhe ca. 3,50–4 m; ca. 21 m² je Arbeitsplatz (Bruttowert).",
+"sources": [
+{
+"book": "G",
+"page": 384
+}
+],
+"values": {
+"max_persons": 25,
+"max_depth": 750,
+"m2_per_workplace": 21,
+"storey_height": [
+350,
+400
+],
+"unit": "cm/m²"
+}
+},
+{
+"id": "g5.business_club",
+"topic": "buero",
+"title": "Business Club: Weiterentwicklung des Kombibüros, teils non-territorial (Desk-Sharing), Einzelarbeitsplatzfläche auf 8 m² minimiert zugunsten 'Sonderzone' (Gruppen-, Steharbeitsplätze, Besprechung, Lounge, Lesen); Erschließungsfläche zählt als Nutzfläche; Fläche oft > 100 m² → lichte Raumhöhe mind. 3 m; 'Überbelegung' möglich.",
+"sources": [
+{
+"book": "G",
+"page": 385
+}
+],
+"values": {
+"m2_per_workplace": 8,
+"clear_height_min": 300,
+"unit": "m²/cm"
+}
+},
+{
+"id": "g5.grossraumbuero",
+"topic": "buero",
+"title": "Großraumbüro: großer, weitgehend stützenfreier Raum, flurlos erschlossen von festen Kernen (Treppen/Aufzug, Teeküchen, WC, Garderoben); Arbeitsplatzbedarf ca. 12–15 m² je Mitarbeiter; Fläche je Mitarbeiter unter 21 m² (brutto) möglich; Unterteilung mit mobilen Stellwänden/Raum-in-Raum.",
+"sources": [
+{
+"book": "G",
+"page": 386
+}
+],
+"values": {
+"min": 12,
+"max": 15,
+"unit": "m² je Mitarbeiter"
+}
+},
+{
+"id": "g5.buerotypen_vor_nachteile",
+"topic": "buero",
+"title": "Vor-/Nachteile: Zelle – Individualität, störungsfrei, individuelle Klimaregelung / wenig Kommunikation, hoher Flächenverbrauch. Kombi – Konzentration+Kommunikation / Durchgangsbereiche, störende Transparenz. Gruppe – Teamarbeit, kurze Wege / gegenseitige Störung, hoher Fassadenanteil. Business Club – flächeneffizient, flexibel / wenig Vertraulichkeit, geringe Akzeptanz. Großraum – Kommunikation, variable Flächen / Lärm, keine Rückzugsorte, hohe Investitionskosten.",
+"sources": [
+{
+"book": "G",
+"page": 382
+},
+{
+"book": "G",
+"page": 383
+},
+{
+"book": "G",
+"page": 384
+},
+{
+"book": "G",
+"page": 385
+},
+{
+"book": "G",
+"page": 386
+}
+]
+},
+{
 "id": "g5.abstand.sessel_wartebereich_couchtisch_wartebereich",
 "topic": "abstand",
 "title": "Abstand sessel_wartebereich – couchtisch_wartebereich (front)",
@@ -12304,6 +12760,99 @@ null,
 {
 "book": "G",
 "page": 373
+}
+]
+},
+{
+"id": "g5.abstand.schreibtisch_fassade",
+"topic": "abstand",
+"title": "Abstand schreibtisch – fassade (wall)",
+"values": {
+"min": 20.0,
+"unit": "cm"
+},
+"condition": "Tisch-Stirnseite zur Fassadeninnenseite, alle Module",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 379
+},
+{
+"book": "G",
+"page": 393
+}
+]
+},
+{
+"id": "g5.abstand.schreibtisch_sideboard_buero",
+"topic": "abstand",
+"title": "Abstand schreibtisch – sideboard_buero (opposite)",
+"values": {
+"min": 100.0,
+"unit": "cm"
+},
+"condition": "Benutzerfläche zwischen Tischvorderkante und Schrank, Mindestmodul",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 379
+}
+]
+},
+{
+"id": "g5.abstand.schreibtisch_buerostuhl",
+"topic": "abstand",
+"title": "Abstand schreibtisch – buerostuhl (front)",
+"values": {
+"min": 5.0,
+"unit": "cm"
+},
+"condition": "gezeichneter Abstand Stuhlsymbol zu Tischkante ca. 5–10 cm (nicht bemaßt)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 382
+},
+{
+"book": "G",
+"page": 386
+}
+]
+},
+{
+"id": "g5.abstand.arbeitsplatzinsel_4er_arbeitsplatzinsel_4er",
+"topic": "abstand",
+"title": "Abstand arbeitsplatzinsel_4er – arbeitsplatzinsel_4er (between)",
+"values": {
+"min": 175.0,
+"unit": "cm"
+},
+"condition": "Großraum-Beispiel 1350 tief: seitlicher Abstand zwischen 2x2-Tischinseln (gemessen)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 386
+}
+]
+},
+{
+"id": "g5.abstand.arbeitsplatzinsel_4er_schrankblock",
+"topic": "abstand",
+"title": "Abstand arbeitsplatzinsel_4er – schrankblock (opposite)",
+"values": {
+"min": 148.0,
+"unit": "cm"
+},
+"condition": "Großraum-Beispiel: Tischkante bis Schrankblock (gemessen; Stuhl liegt dazwischen, ab Stuhlrücken ca. 93)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 386
 }
 ]
 },

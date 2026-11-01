@@ -167,6 +167,21 @@ def test_core_elements_have_the_book_values():
     assert kb.element("duschplatz_150")["walkable"]
 
 
+CORE_LAYOUTS = ["wc_raum_a", "wc_raum_b", "wc_raum_c", "duschbad_a", "duschbad_wc_a", "duschbad_wc_b",
+                "wannenbad_wc_a", "wannenbad_wc_b", "wannenbad_wc_c", "vollbad_a", "barrierefrei_bad_beispiel",
+                "rollstuhl_bad_beispiel", "rf_bf_waschtisch", "rf_bf_wc", "bf_bf_wc", "bf_bf_dusche",
+                "kueche_einzeilig", "kueche_zweizeilig", "kueche_l", "kueche_u", "kueche_arbeitsinsel",
+                "kueche_l_essplatz", "kueche_einzeilig_rollstuhl", "kueche_u_barrierefrei"]
+
+
+def test_the_core_standard_situations_are_usable():
+    """Bathrooms, WC rooms and kitchens from Raumpilot Grundlagen S. 203-276
+    pass their own rules (otherwise they would only be reference data)."""
+    for lid in CORE_LAYOUTS:
+        assert lid in kb.layouts(), lid
+        assert not kb.layouts()[lid].get("reference_only"), lid
+
+
 def test_every_book_layout_passes_its_own_rules():
     """The Raumpilot standard situations are the reference: transcribed
     correctly and checked with the same rules, they have no problems."""

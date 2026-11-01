@@ -1191,7 +1191,10 @@
 "d": null,
 "area": null
 },
-"requires": [],
+"requires": [
+"schreibtisch",
+"buerostuhl"
+],
 "rules": [
 "Eingangsbereich gesamt 0,2–0,6 m² je Büroarbeitsplatz",
 "Theke 40 tief/100 hoch, Personalgang 75–125 bzw. 100 hinter integriertem Tisch"
@@ -1211,9 +1214,7 @@
 }
 ],
 "requires_text": [
-"empfangstheke",
-"schreibtisch",
-"buerostuhl"
+"empfangstheke"
 ]
 },
 {
@@ -1277,6 +1278,181 @@
 {
 "book": "G",
 "page": 368
+}
+]
+},
+{
+"id": "buero_einzel",
+"name": "Einzelbüro / Arbeitsplatzmodul",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": 220,
+"d": 340,
+"area": 8,
+"clear_height": 250
+},
+"typical": {
+"w": [
+240,
+300
+],
+"d": [
+350,
+550
+],
+"area": [
+10,
+14
+]
+},
+"requires": [
+"schreibtisch",
+"buerostuhl",
+"sideboard_buero"
+],
+"rules": [
+"Mindestbreite 220 (80 Tisch + 100 + 40 Schrank), Achsmaß ≥ 230",
+"Mindestmodul 8 m² (180x450 ohne Schrank, 220x360 mit Schrank)",
+"2 Achsen bei Raster 1,20–1,50",
+"Zellenbüro-Standard 10–14 m²"
+],
+"sources": [
+{
+"book": "G",
+"page": 379
+},
+{
+"book": "G",
+"page": 381
+},
+{
+"book": "G",
+"page": 382
+},
+{
+"book": "G",
+"page": 390
+}
+]
+},
+{
+"id": "buero_doppel",
+"name": "Doppelbüro (2 Arbeitsplätze)",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": 350,
+"d": null,
+"area": null,
+"clear_height": 250
+},
+"typical": {
+"w": [
+360,
+450
+],
+"d": [
+350,
+550
+],
+"area": 17.5
+},
+"requires": [
+"schreibtisch",
+"buerostuhl",
+"sideboard_buero"
+],
+"rules": [
+"3 Achsen (3,60–4,50 m); bei Raster 1,20/1,25 vier Achsen nötig",
+"Doppelarbeitsplatzmodul 17,50 m² (S. 398)"
+],
+"sources": [
+{
+"book": "G",
+"page": 381
+},
+{
+"book": "G",
+"page": 398
+}
+]
+},
+{
+"id": "gruppenbuero",
+"name": "Gruppenbüro",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": 350
+},
+"typical": {
+"w": null,
+"d": [
+500,
+750
+],
+"area": null
+},
+"requires": [
+"schreibtisch",
+"buerostuhl"
+],
+"rules": [
+"max. 25 MA",
+"ca. 21 m²/AP (brutto)",
+"AP-Modul 12–15 m²"
+],
+"sources": [
+{
+"book": "G",
+"page": 381
+},
+{
+"book": "G",
+"page": 384
+}
+]
+},
+{
+"id": "grossraumbuero",
+"name": "Großraumbüro",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": 300
+},
+"typical": {
+"w": null,
+"d": 1350,
+"area": null
+},
+"requires": [
+"schreibtisch",
+"buerostuhl"
+],
+"rules": [
+"12–15 m² je MA",
+"lichte Höhe ≥ 3,00 m bei 100–2000 m², ≥ 3,25 m ab 2000 m²"
+],
+"sources": [
+{
+"book": "G",
+"page": 380
+},
+{
+"book": "G",
+"page": 386
 }
 ]
 },
