@@ -92,7 +92,10 @@ lückenlose Flächen, klare Ebenen- und Klassenstruktur.
   Stellplatz, Rettungsweg, Büro, Schule …) – immer mit Buchseite. Werte so
   nennen, nicht schätzen.
 - Raum planen: `vw2d_plan_room(width, depth, room=…, door={wall, offset,
-  width, swing, hinge}, mode=standard|barrierefrei|rollstuhlgerecht)` – erst
+  width, swing, hinge}, mode=standard|barrierefrei|rollstuhlgerecht)` –
+  `offset` wie im Plan abgelesen: von der linken unteren Innenecke bis zur
+  Öffnung (an Nord-/Südwand in x, an West-/Ostwand in y); `hinge` von innen
+  gesehen (nach innen aufgehende Tür = DIN links/rechts). Erst
   ohne `draw`, Vorschau und Probleme zeigen, Variante wählen lassen, dann
   `draw=true, variant=n, origin=[x, y]` (linke untere Innenecke). Eine
   bestimmte Buchlösung: `layout=…` (vw2d_knowledge room=… listet sie).

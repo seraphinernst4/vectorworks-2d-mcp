@@ -284,35 +284,6 @@ def fit(lay: dict, W: float, D: float, turn: int = 0, mirror: bool = False, mode
                     p.spec.corner_ok, p.spec.name, p.spec.walkable, p.spec.group, p.spec.movable)
         bx, by = E.rot(0.0, ld / 2, rot)
         placed.append(E.Placed(sp, (x1 + x2) / 2 + bx, (y1 + y2) / 2 + by, rot, wall, p.tag))
-    doors = []  # the book's doors are only sketched; the user gives the real door
-    out = E.Layout(W, D, placed, [d for d in doors if d is not None], source=source_text(lay.get("sources")),
-                   name=lay["name"])
+    # the book's doors are only sketched; the user gives the real door
+    out = E.Layout(W, D, placed, [], source=source_text(lay.get("sources")), name=lay["name"])
     return out
-
-
-def _turn_door(dr: dict, W0: float, D0: float, turn: int, mirror: bool, dW: float, dD: float) -> E.Door | None:
-    try:
-        if dr.get("wall") not in ("N", "E", "S", "W"):
-            return None
-        d = E.Door(dr["wall"], float(dr["offset"]), float(dr.get("width") or 80), dr.get("swing"),
-                   dr.get("hinge") or "left")
-    except (KeyError, TypeError, ValueError):
-        return None
-    span = d.span(W0, D0)
-    pts = [E.transform_point(x, y, W0, D0, turn, mirror) for x, y in ((span.x1, span.y1), (span.x2, span.y2))]
-    wall = E.turn_wall(d.wall, turn, mirror)
-    Wt, Dt = E.turned_size(W0, D0, turn)
-    xs = sorted(p[0] for p in pts)
-    ys = sorted(p[1] for p in pts)
-    if wall in ("N", "S"):
-        a, b = xs
-        shift = dW if (a + b) / 2 > Wt / 2 else 0.0
-        a, b = a + shift, b + shift
-        offset = a if wall == "N" else (Wt + dW) - b
-    else:
-        a, b = ys
-        shift = dD if (a + b) / 2 > Dt / 2 else 0.0
-        a, b = a + shift, b + shift
-        offset = a if wall == "W" else (Dt + dD) - b
-    hinge = d.hinge if not mirror else {"left": "right", "right": "left"}.get(d.hinge, d.hinge)
-    return E.Door(wall, offset, d.width, d.swing, hinge)

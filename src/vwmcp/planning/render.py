@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import io
 import math
+import textwrap
 
 from vwmcp.catalog.preview import item_points
 from vwmcp.planning import engine as E
@@ -131,7 +132,8 @@ def render(panels: list[dict], st: dict, cols: int = 3, size: float = 3.4) -> by
             ax.text(W / 2, -0.06 * max(W, D), "%g" % W, ha="center", va="top", fontsize=7)
             ax.text(-0.06 * max(W, D), D / 2, "%g" % D, ha="right", va="center", fontsize=7, rotation=90)
         elif panel.get("caption"):
-            ax.text(W / 2, -0.04 * max(W, D), panel["caption"], ha="center", va="top", fontsize=7)
+            ax.text(W / 2, -0.04 * max(W, D), textwrap.fill(panel["caption"], 52), ha="center", va="top",
+                    fontsize=7)
         n_err = sum(1 for i in lay.issues if i.severity == "error")
         title = panel.get("title") or lay.name
         if len(title) > 48:

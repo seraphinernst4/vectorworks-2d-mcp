@@ -423,7 +423,9 @@ def vw2d_style(
 
 # ---- placing elements ----------------------------------------------------------------------
 
-WALL_DE = {"above": "N", "left": "W", "below": "S", "right": "E", "N": "N", "W": "W", "S": "S", "E": "E"}
+WALL_DE = {"above": "N", "left": "W", "below": "S", "right": "E", "N": "N", "W": "W", "S": "S", "E": "E",
+           "oben": "N", "links": "W", "unten": "S", "rechts": "E", "nord": "N", "west": "W", "süd": "S",
+           "sued": "S", "ost": "E", "O": "E"}
 
 
 def _deg(rotation, wall, where: str) -> float:
@@ -536,7 +538,8 @@ def _door_arg(door: dict | None, f: float) -> list[E.Door]:
         return [E.Door(wall, float(door["offset"]) * f, float(door.get("width", 80.0 / f)) * f,
                        door.get("swing", "in"), door.get("hinge", "left"))]
     except (KeyError, TypeError, ValueError) as ex:
-        raise ToolError("door: {'wall': 'S', 'offset': distance from the wall's left corner seen from inside, "
+        raise ToolError("door: {'wall': 'S', 'offset': in plan from the room's bottom-left corner (x on N/S, y on "
+                        "W/E walls), "
                         "'width', 'swing': 'in'|'out'|null, 'hinge': 'left'|'right'} (%s)" % ex) from None
 
 
@@ -691,8 +694,10 @@ def vw2d_plan_room(
     lists them) - exactly that one, at its own size or fitted to
     width x depth.
     door: {"wall": "S"|"N"|"E"|"W" (or below/above/right/left), "offset":
-    from the wall's left corner seen from inside the room, "width",
-    "swing": "in"|"out"|null, "hinge": "left"|"right"} in `unit`.
+    in plan from the room's bottom-left interior corner to the opening (x
+    on the N/S walls, y on the W/E walls), "width", "swing":
+    "in"|"out"|null, "hinge": "left"|"right" seen from inside the room
+    (inward door: DIN links/rechts)} in `unit`.
     Returns the variants (positions in cm from the room's bottom-left
     corner, problems) and a preview. draw=True draws variant `variant` with
     the room's bottom-left interior corner at `origin`: movement areas,

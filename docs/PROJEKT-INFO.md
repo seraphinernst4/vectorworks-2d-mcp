@@ -2,7 +2,7 @@
 
 Alles Wissen zum Projekt an einer Stelle: was es ist, wie es aufgebaut ist,
 wie man es installiert, baut und veröffentlicht, was getestet ist und was
-offen ist. Stand: **01.11.2026, Version 0.6.1 (Beta, Zweig `v0.6`; auf `main` liegt 0.5.0)**.
+offen ist. Stand: **01.11.2026, Version 0.6.2 (Beta, Zweig `v0.6`; auf `main` liegt 0.5.0)**.
 
 ## Auf einen Blick
 
@@ -330,3 +330,4 @@ Start 0,7 s, Ping, Signaturprüfung, Lesen, Wissen, Raum planen bestanden.
 | 0.5.0 | 31.10.2026 | Kein Menübefehl mehr (direkter Auslöser), Asset-Katalog (28 Assets, 43 Ansichten, als Symbole), Sortieren nach Regeln (`vw2d_organize`), große Zeichnungen in Sekunden, Review-Fixes (Details: CHANGELOG.md) |
 | 0.6.0 | 01.11.2026 (Zweig `v0.6`) | Planen mit dem Raumpilot-Wissen (389 Elemente, 1227 Regeln, 108 Raumtypen, 335 Buchlösungen), Raumpilot-Stil als erste Ebene + eigene Stile, 5 neue Werkzeuge, Begrenzungen in jeder Ansicht (Details: CHANGELOG.md) |
 | 0.6.1 | 01.11.2026 (Zweig `v0.6`) | Vorschaubilder in Claude Desktop (pydantic 2.14.2 konnte die Bilder nicht verpacken) |
+| 0.6.2 | 01.11.2026 (Zweig `v0.6`) | Tür-Abstand wie im Plan abgelesen (von der linken unteren Innenecke), deutsche Wandnamen, umbrochene Bildunterschriften |

@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.6.1 – Vorschau (Zweig v0.6)
+## 0.6.2 – Vorschau (Zweig v0.6)
 
 Neue Taktik: statt eines festen Asset-Katalogs (den jedes Büro anders
 haben will) kennt Keystone jetzt das **Planungswissen** der vier
@@ -51,6 +51,14 @@ Raumpilot-Bände und zeichnet es in einem Stil, den du bestimmst.
   Symbolbeschreibung erkannt, eure eigenen Symbole über den Stil.
 
 ### Behoben
+- Tür: `offset` wird jetzt so gemessen, wie man ihn im Plan abliest – von
+  der linken unteren Innenecke des Raums bis zur Öffnung (an Nord- und
+  Südwand in x, an West- und Ostwand in y). Vorher zählte er an Süd- und
+  Ostwand von der anderen Ecke (von innen gesehen) – „70 von links“ landete
+  so rechts. Anschlag `hinge` weiter von innen gesehen (nach innen
+  aufgehende Tür = DIN links/rechts). Wände auch deutsch (oben, unten,
+  links, rechts).
+- Lange Bildunterschriften in der Vorschau werden umbrochen.
 - Vorschaubilder (`vw2d_assets`, `vw2d_knowledge`, `vw2d_plan_room`,
   `vw2d_check_room`) brachen mit pydantic 2.14.2 ab („Error executing
   tool“): diese Werkzeuge liefern jetzt Text + Bild ohne strukturierte

@@ -235,11 +235,22 @@ def wall_length(wall: str, W: float, D: float) -> float:
 
 @dataclass
 class Door:
+    """A door in a wall of the room. offset: in plan, from the room's
+    bottom-left interior corner to the opening - along x on the N and S
+    walls, along y on the W and E walls (as read off the plan). hinge:
+    left | right seen from inside the room (an inward door: DIN links /
+    rechts)."""
     wall: str
-    offset: float      # from the wall's left corner seen from inside (as at_wall)
+    offset: float
     width: float = 80.0
     swing: str | None = "in"   # in | out | None (sliding)
-    hinge: str = "left"        # left | right seen from inside
+    hinge: str = "left"
+
+    def inside_offset(self, W: float, D: float) -> float:
+        """The offset as at_wall counts it: from the wall's left corner seen from inside."""
+        if self.wall in ("N", "W"):
+            return self.offset
+        return (W if self.wall == "S" else D) - self.offset - self.width
 
     def span(self, W: float, D: float) -> Rect:
         """The opening as a thin rect in the wall plane."""
@@ -247,20 +258,20 @@ class Door:
         if self.wall == "N":
             return Rect(a, D, b, D)
         if self.wall == "S":
-            return Rect(W - b, 0.0, W - a, 0.0)
+            return Rect(a, 0.0, b, 0.0)
         if self.wall == "W":
             return Rect(0.0, a, 0.0, b)
-        return Rect(W, D - b, W, D - a)
+        return Rect(W, a, W, b)
 
     def swing_rect(self, W: float, D: float) -> Rect | None:
         """Bounding square of the inward door swing (None if not inward)."""
         if self.swing != "in":
             return None
-        p = at_wall(Spec("door", self.width, self.width), self.wall, self.offset, W, D)
+        p = at_wall(Spec("door", self.width, self.width), self.wall, self.inside_offset(W, D), W, D)
         return p.rect
 
     def front_rect(self, W: float, D: float, depth: float) -> Rect:
-        return at_wall(Spec("door", self.width, depth), self.wall, self.offset, W, D).rect
+        return at_wall(Spec("door", self.width, depth), self.wall, self.inside_offset(W, D), W, D).rect
 
 
 # ---- side distances --------------------------------------------------------------

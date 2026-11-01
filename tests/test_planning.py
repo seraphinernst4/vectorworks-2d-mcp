@@ -483,3 +483,23 @@ def test_tools_with_pictures_have_no_structured_output():
             t.fn_metadata.convert_result(pic)  # must not raise
             checked.append(t.name)
     assert {"vw2d_knowledge", "vw2d_plan_room", "vw2d_check_room", "vw2d_assets"} <= set(checked)
+
+
+def test_door_offset_is_read_off_the_plan():
+    """offset runs in plan from the room's bottom-left corner (x on N/S, y on
+    W/E); the hinge is seen from inside (inward door: DIN links/rechts)."""
+    W, D = 160.0, 165.0
+    s = E.Door("S", 70.0, 80.0, "in", "left")
+    assert s.span(W, D).as_list() == [70.0, 0.0, 150.0, 0.0]
+    assert s.swing_rect(W, D).as_list() == [70.0, 0.0, 150.0, 80.0]
+    assert E.Door("E", 20.0, 80.0).span(W, D).as_list() == [160.0, 20.0, 160.0, 100.0]
+    assert E.Door("N", 20.0, 80.0).span(W, D).as_list() == [20.0, 165.0, 100.0, 165.0]
+    assert E.Door("W", 20.0, 80.0).swing_rect(W, D).as_list() == [0.0, 20.0, 80.0, 100.0]
+    # left hinge of an inward door in the south wall, seen from inside = the east jamb
+    lay = E.Layout(W, D, [], [s])
+    _, over = T._room_overlay(lay, style.resolve("raumpilot"), (0.0, 0.0), outline=False, dims=False)
+    leaf = [o for o in over if o["type"] == "line"][0]
+    assert leaf["p1"] == [1500.0, 0.0] and leaf["p2"] == [1500.0, 800.0]
+    # the tool takes it in the room's unit
+    d = T._door_arg({"wall": "unten", "offset": 0.7, "width": 0.8}, 100.0)[0]
+    assert (d.wall, d.offset, d.width) == ("S", 70.0, 80.0)
