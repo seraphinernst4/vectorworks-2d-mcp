@@ -89,9 +89,100 @@ def _arc_radius(h, c, p0, sweep):
     return clean / mmpu if abs(r_mm - clean) <= noise else r
 
 
-def _bbox(h):
+def _plan_view():
+    """Is the document seen from the top? vs.GetBBox is the projection of an
+    object on the screen plane: in an elevation or 3D view (e.g. "Vorne") it
+    collapses or skews (live, 2026 U7). Cached per job."""
+    v = _JOB_CACHE.get("plan_view")
+    if v is None:
+        try:
+            ang = vs.GetView()
+            v = all(abs(float(a)) < 1e-9 for a in ang[:3])
+        except Exception:  # noqa: BLE001
+            v = True
+        _JOB_CACHE["plan_view"] = v
+    return v
+
+
+def _pts_bbox(pts):
+    xs = [float(p[0]) for p in pts]
+    ys = [float(p[1]) for p in pts]
+    return [min(xs), min(ys), max(xs), max(ys)]
+
+
+def _arc_bbox(c, r, start, sweep):
+    pts = []
+    for a in (start, start + sweep):
+        pts.append((c[0] + r * math.cos(math.radians(a)), c[1] + r * math.sin(math.radians(a))))
+    lo, hi = min(start, start + sweep), max(start, start + sweep)
+    k = math.ceil(lo / 90.0)
+    while k * 90.0 <= hi:
+        a = math.radians(k * 90.0)
+        pts.append((c[0] + r * math.cos(a), c[1] + r * math.sin(a)))
+        k += 1
+    return _pts_bbox(pts)
+
+
+def _union(boxes):
+    boxes = [b for b in boxes if b]
+    if not boxes:
+        return None
+    return [min(b[0] for b in boxes), min(b[1] for b in boxes), max(b[2] for b in boxes), max(b[3] for b in boxes)]
+
+
+def _geom_bbox(h, depth=0):
+    """Plan bounding box from the object's own geometry (view independent);
+    None for types it can't compute. Polyline arcs: their control points
+    enclose the curve (a little larger than tight)."""
+    t = vs.GetTypeN(h)
+    if t in (5, 21):
+        return _pts_bbox([v[:2] for v in _verts(h)])
+    if t in (2, 63):
+        return _pts_bbox([vs.GetSegPt1(h), vs.GetSegPt2(h)])
+    if t == 3:
+        return _pts_bbox([vs.Get2DPt(h, i) for i in range(1, 5)])
+    if t == 4:
+        cx, cy = vs.HCenter(h)
+        w, hh, ang = vs.HWidth(h) / 2.0, vs.HHeight(h) / 2.0, math.radians(vs.HAngle(h) or 0.0)
+        ex = math.hypot(w * math.cos(ang), hh * math.sin(ang))
+        ey = math.hypot(w * math.sin(ang), hh * math.cos(ang))
+        return [cx - ex, cy - ey, cx + ex, cy + ey]
+    if t == 6:
+        c, p0 = vs.Get2DPt(h, 1), vs.Get2DPt(h, 2)
+        start, sweep = vs.GetArc(h)
+        return _arc_bbox(c, math.hypot(p0[0] - c[0], p0[1] - c[1]), float(start), float(sweep))
+    if t == 11 and depth < 20:
+        return _union([_geom_bbox(k, depth + 1) or _screen_bbox(k) for k in children(h)])
+    if t == 15 and depth < 20:
+        sd = named(_str(vs.GetSymName(h)), (SYMDEF,))
+        if sd is None:
+            return None
+        inner = _union([_geom_bbox(k, depth + 1) or _screen_bbox(k) for k in children(sd)])
+        if inner is None:
+            return None
+        loc = vs.GetSymLoc(h)
+        a = math.radians(float(vs.GetSymRot(h) or 0.0))
+        corners = [(x, y) for x in (inner[0], inner[2]) for y in (inner[1], inner[3])]
+        return _pts_bbox([(loc[0] + x * math.cos(a) - y * math.sin(a), loc[1] + x * math.sin(a) + y * math.cos(a))
+                          for x, y in corners])
+    return None
+
+
+def _screen_bbox(h):
     (x1, y1), (x2, y2) = vs.GetBBox(h)
     return [min(x1, x2), min(y1, y2), max(x1, x2), max(y1, y2)]
+
+
+def _bbox(h):
+    """Plan bounding box [x1, y1, x2, y2]. From the top (the normal case)
+    Vectorworks' own (tight) box; in other views from the geometry."""
+    if _plan_view():
+        return _screen_bbox(h)
+    try:
+        b = _geom_bbox(h)
+    except Exception:  # noqa: BLE001
+        b = None
+    return b if b is not None else _screen_bbox(h)
 
 
 # ---- resources, classes, layers ------------------------------------------------

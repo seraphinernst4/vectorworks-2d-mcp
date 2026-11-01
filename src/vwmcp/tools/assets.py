@@ -84,10 +84,12 @@ def vw2d_assets(
     params: dict[str, float] | None = None,
     preview: bool = True,
 ) -> list[Any]:
-    """The Keystone asset catalogue: exact 2D symbols for architecture plans
-    (WC, urinal, wash basin, shower, bath, kitchen sink/hob/fridge, chair,
-    table with chairs, bed, sofa, wardrobe, desk, tree, shrub, person, car)
-    in plan ("Grundriss") and, where available, front and side elevation.
+    """Detailed 2D symbols mainly for elevations and sections (WC, urinal,
+    wash basin, shower, bath, kitchen, chair, table, bed, sofa, wardrobe,
+    desk, tree, shrub, person, car) in front and side view, and plan. For
+    floor plans with movement areas, the Raumpilot planning rules and the
+    user's drawing style use vw2d_knowledge / vw2d_place_element /
+    vw2d_plan_room instead.
 
     query: words to search (German or English, e.g. "toilette", "baum",
     "tisch"); category filters. asset: one asset id for its full description

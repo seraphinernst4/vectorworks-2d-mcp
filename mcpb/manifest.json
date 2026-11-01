@@ -5,7 +5,7 @@
   "display_name": "Keystone for Vectorworks",
   "version": "@VERSION@",
   "description": "Lets Claude draw exact, well-organised 2D plans in your open Vectorworks drawing: no gaps, no overlaps, true arcs, every object in the right class and layer.",
-  "long_description": "Keystone for Vectorworks by Seraphin Ernst – exact 2D drawing tools for architects – inside Claude. Claude draws polygons, polylines with true arcs, rectangles, circles, lines, text and dimensions in your open Vectorworks file, reads back what Vectorworks stored (deviation: 0), checks the drawing for overlaps, gaps, near misses, duplicates, double lines and open outlines with a numbered check image, and fixes them exactly. Layers and classes are used properly: new objects get their attributes by class.\n\nRequires Vectorworks 2026 or 2027 on macOS. Nothing to set up in Vectorworks: the bridge is installed automatically and started directly. Also: a catalogue of exact symbols (sanitary, kitchen, furniture, trees, people, cars) and rule-based sorting onto classes and layers. Everything stays on this Mac (~/.vwmcp); nothing is sent anywhere else. Based on giorgiomoroder/vectorworks-mcp (MIT).",
+  "long_description": "Keystone for Vectorworks by Seraphin Ernst – exact 2D drawing tools for architects – inside Claude. Claude draws polygons, polylines with true arcs, rectangles, circles, lines, text and dimensions in your open Vectorworks file, reads back what Vectorworks stored (deviation: 0), checks the drawing for overlaps, gaps, near misses, duplicates, double lines and open outlines with a numbered check image, and fixes them exactly. Layers and classes are used properly: new objects get their attributes by class.\n\nRequires Vectorworks 2026 or 2027 on macOS. Nothing to set up in Vectorworks: the bridge is installed automatically and started directly. Also: a catalogue of exact symbols (sanitary, kitchen, furniture, trees, people, cars) and rule-based sorting onto classes and layers. Everything stays on this Mac (~/.vwmcp); nothing is sent anywhere else. Based on giorgiomoroder/vectorworks-mcp (MIT). New in 0.6: the planning knowledge of the four Raumpilot books (Wüstenrot Stiftung) - space needs and movement areas of every element, VDI 6000 distances, barrier-free values, room sizes and over 700 rules with their source pages; rooms are planned from the book's standard situations, checked and drawn in the Raumpilot look or in your office's own style and symbols.",
   "author": {
     "name": "Seraphin Ernst",
     "url": "https://www.seraphinernst.org"
@@ -65,8 +65,13 @@
     { "name": "vw2d_resources", "description": "Hatches and line types of the drawing and the Vectorworks library." },
     { "name": "vw2d_select", "description": "Selects and zooms to objects in Vectorworks." },
     { "name": "vw2d_organize", "description": "Sorts objects onto classes and layers by rules (dry run first, one revertable step)." },
-    { "name": "vw2d_assets", "description": "Catalogue of exact 2D symbols (sanitary, kitchen, furniture, trees, people, cars) with previews." },
-    { "name": "vw2d_place_asset", "description": "Places catalogue assets as exact symbols, oriented to the wall." },
+    { "name": "vw2d_knowledge", "description": "Planning knowledge of the Raumpilot books: space needs, movement areas, distances, room sizes, standard layouts and rules with sources." },
+    { "name": "vw2d_plan_room", "description": "Plans a room (bath, WC, kitchen, dining ...) from the book's standard situations and the rules, checks the variants, draws the chosen one." },
+    { "name": "vw2d_place_element", "description": "Places planning elements with their movement areas in the active drawing style." },
+    { "name": "vw2d_check_room", "description": "Checks a drawn room against the planning rules (movement areas, distances, door)." },
+    { "name": "vw2d_style", "description": "The drawing style: Raumpilot look as first layer, your office's classes, colours and own symbols on top." },
+    { "name": "vw2d_assets", "description": "Detailed symbols for elevations and sections (sanitary, furniture, trees, people, cars)." },
+    { "name": "vw2d_place_asset", "description": "Places those symbols exactly, oriented to the wall." },
     { "name": "vw_revert_last", "description": "Undoes exactly Claude's last step." },
     { "name": "vw_ping", "description": "Checks the connection to Vectorworks." }
   ],

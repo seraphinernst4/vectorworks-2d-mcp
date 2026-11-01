@@ -298,3 +298,29 @@ def test_place_new_puts_rebuilt_neighbours_back_in_order():
         st.freeze()
         ns["_place_new"](entries, {}, mapping, new_by_uuid)
         assert [o.name for o in st.objs] == names, n_total
+
+
+def test_bbox_is_plan_coordinates_in_any_view():
+    """vs.GetBBox is the projection on the screen plane: in the front view
+    ("Vorne") it collapses to y = 0 (live, 2026 U7). _bbox then uses the
+    geometry."""
+    import math
+
+    objs = {
+        "poly": types.SimpleNamespace(t=5, verts=[((0, 0), 0, 0), ((3, 0), 0, 0), ((3, 2), 0, 0), ((0, 2), 0, 0)]),
+        "rect": types.SimpleNamespace(t=3, corners=[(1, 5), (4, 5), (4, 1), (1, 1)]),
+        "arc": types.SimpleNamespace(t=6, c=(10, 10), p0=(12, 10), arc=(0.0, 90.0)),
+    }
+    view = [(-90.0, 0.0, 0.0, (0, 0, 0))]
+    ns = _ns(GetTypeN=lambda h: h.t, GetBBox=lambda h: ((0.0, 0.0), (9.0, 0.0)), GetView=lambda: view[0],
+             GetVertNum=lambda h: len(h.verts), GetPolylineVertex=lambda h, i: h.verts[i - 1],
+             Get2DPt=lambda h, i: (h.corners[i - 1] if h.t == 3 else (h.c, h.p0)[i - 1]),
+             GetArc=lambda h: h.arc)
+    assert ns["_bbox"](objs["poly"]) == [0, 0, 3, 2]
+    assert ns["_bbox"](objs["rect"]) == [1, 1, 4, 5]
+    b = ns["_bbox"](objs["arc"])
+    assert [round(v, 9) for v in b] == [10, 10, 12, 12] and math.isfinite(b[0])
+    # from the top: Vectorworks' own box
+    ns["_JOB_CACHE"].clear()
+    view[0] = (0.0, 0.0, 0.0, (0, 0, 0))
+    assert ns["_bbox"](objs["poly"]) == [0.0, 0.0, 9.0, 0.0]

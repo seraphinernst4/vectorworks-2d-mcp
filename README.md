@@ -27,7 +27,9 @@ bevor du sie siehst.
 | **Bearbeiten** | Umriss exakt ersetzen, verschieben (auch Punkt auf Punkt), drehen, spiegeln, skalieren, vereinigen, abziehen, schneiden, teilen, versetzen, Attribute/Klasse/Ebene setzen, löschen. |
 | **Organisieren** | Ebenen und Klassen anzeigen und prüfen, Klassen mit Attributen anlegen (optional mit einer Architektur-Vorlage), Ebenen mit Maßstab anlegen. Neue Objekte bekommen ihre Attribute **nach Klasse**. Schraffuren und Linienarten aus dem Vectorworks-Zubehör werden automatisch importiert. |
 | **Sortieren** | Ganze Zeichnungen auf Klassen und Ebenen verteilen – nach Regeln (Klasse/Ebene als Muster wie `A-WALL*`, Objektart, Text, Stiftfarbe, Strichstärke, Fläche, Größe …), z. B. nach einem DWG-Import. Erst eine Probe („was würde sich ändern, was bleibt übrig?“), dann alles in **einem** Schritt, der sich als Ganzes zurücknehmen lässt. |
-| **Assets** | Exakt gezeichnete Symbole für Pläne: WC (wandhängend/stehend), Urinal, Waschtisch (auch doppelt), Handwaschbecken, Dusche, Badewanne, Waschmaschine, Küchenzeile, Spüle, Kochfeld, Kühlschrank, Stuhl, Esstisch mit Stühlen (eckig/rund), Bett, Sofa, Sessel, Couchtisch, Nachttisch, Kommode, Regal, Schrank, Schreibtisch, Laub- und Nadelbaum, Strauch, Person, PKW, Fahrrad – im **Grundriss** und, wo sinnvoll, in **Ansicht** und **Seitenansicht/Schnitt**. Maße änderbar (z. B. WC-Höhe 460 für barrierefrei), gespiegelt, gedreht, mehrfach in einem Aufruf. Jede Variante wird **ein** Vectorworks-Symbol (Ordner „Keystone …“ im Zubehör-Manager), Linien in Klasse und Detail-Klasse, alles nach Klasse. |
+| **Planen (Raumpilot)** | Das Planungswissen der vier Raumpilot-Bände (Grundlagen, Wohnen, Arbeiten, Lernen; Wüstenrot Stiftung): Stell- und Bewegungsflächen jedes Einrichtungsgegenstands, Abstände (VDI 6000), Höhen, barrierefreie und rollstuhlgerechte Werte (DIN 18040), Raumgrößen und über 700 Regeln zu Treppen, Türen, Fluren, Aufzügen, Stellplätzen, Rettungswegen, Arbeitsplätzen, Schulen – jeweils mit Buchseite. Räume planen: Claude passt die Standardsituationen des Buchs (WC-Räume, Duschbäder, Bäder, Küchenformen, Essplätze …) an deine Raummaße und Tür an, erzeugt weitere Varianten nach denselben Regeln, prüft alles und zeichnet die gewählte Variante. Gezeichnete Räume prüfen. |
+| **Stil** | Gezeichnet wird zuerst im Raumpilot-Stil (schlichte Umrisse, Bewegungsflächen hellblau). Das ist nur die erste Ebene: Du legst deinen Bürostil fest (Klassen, Farben, Bewegungsflächen an/aus) und ordnest jedem Element **eure eigenen Symbole** zu – auch aus einer Bibliotheksdatei. |
+| **Ansichten** | Detaillierte Symbole für Ansichten und Schnitte (Sanitär, Möbel, Bäume, Personen, Fahrzeuge). |
 | **Rückgängig** | `vw_revert_last` macht genau den letzten Schritt von Claude rückgängig (Geometrie, Attribute, Klasse, Name, Stapelreihenfolge). |
 
 So fragst du Claude zum Beispiel:
@@ -37,7 +39,10 @@ So fragst du Claude zum Beispiel:
 > - „Prüf die Ebene Grundriss und behebe alle Fehler.“
 > - „Räum die Klassen auf: alles, was in ‚Keine‘ liegt, in passende Klassen.“
 > - „Sortier den DWG-Import: A-WALL* nach Wand-Tragend, Texte nach Beschriftung, Bemaßungen nach Bemaßung.“
-> - „Setz in das Bad ein wandhängendes WC (barrierefrei, 46 cm), einen Waschtisch 80 cm und eine bodengleiche Dusche 120 × 120.“
+> - „Plan mir ein Duschbad mit WC, 1,60 × 1,65 m, Tür unten links, zeig mir die Varianten.“
+> - „Wie viel Platz braucht ein rollstuhlgerechtes WC? Mit Quelle.“
+> - „Prüf das Bad auf Ebene EG – stimmen die Bewegungsflächen?“
+> - „Nimm statt der Keystone-Symbole unsere Bürosymbole aus Bibliothek.vwx: WC = ‚WC Geberit‘, Waschtisch = ‚WT 60‘.“
 > - „Zeichne vor die Fassade drei Bäume und zwei Personen in der Ansicht.“
 
 ## Installation (macOS, ca. 2 Minuten)

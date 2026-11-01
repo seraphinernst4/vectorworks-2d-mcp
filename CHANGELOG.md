@@ -1,5 +1,53 @@
 # Changelog
 
+## 0.6.0 – Vorschau (Zweig v0.6)
+
+Neue Taktik: statt eines festen Asset-Katalogs (den jedes Büro anders
+haben will) kennt Keystone jetzt das **Planungswissen** der vier
+Raumpilot-Bände und zeichnet es in einem Stil, den du bestimmst.
+
+### Wissen aus dem Raumpilot (`vw2d_knowledge`)
+- Alle vier Bände (Grundlagen, Wohnen, Arbeiten, Lernen; Wüstenrot
+  Stiftung 2012) Seite für Seite ausgewertet: Stell- und Bewegungsflächen
+  jedes Einrichtungsgegenstands (Sanitär, Küche, Essen, Wohnen, Schlafen,
+  Arbeiten, Schule, Wirtschaften …), größere Tiefe bei gegenüberliegender
+  Anordnung, seitliche Abstände (VDI 6000 Blatt 1 als vollständige Matrix),
+  Höhen, barrierefreie (120 × 120) und rollstuhlgerechte (150 × 150) Werte,
+  Raumgrößen und über 700 Regeln: Anthropometrie, Türen, Flure, Treppen,
+  Rampen, Aufzüge (DIN 15306/15309), Rettungswege und Feuerwehr,
+  Stellplätze und Fahrgassen, Fahrräder, Wohnungstypen, Flächenberechnung,
+  Arbeitsplätze, Büroformen, Schulprogramme, Klassenzimmer, Toilettenzahlen …
+- Jeder Wert mit Buchseite (z. B. „Raumpilot Grundlagen S. 266, VDI 6000
+  Blatt 1“). Nur Fakten in eigenen Worten, keine Buchtexte oder -bilder.
+
+### Räume planen (`vw2d_plan_room`, `vw2d_check_room`)
+- Die Standardsituationen des Buchs (WC-Räume, Duschbäder, Wannenbäder,
+  Vollbad, barrierefreie und rollstuhlgerechte Bäder, einzeilige,
+  zweizeilige, L-, U-Küche, Küche mit Insel und Essplatz, Essplätze …)
+  werden gedreht/gespiegelt an deine Raummaße und deine Tür angepasst;
+  dazu erzeugt Keystone weitere Varianten nach denselben Regeln.
+- Jede Variante wird geprüft: Objekte im Raum und ohne Überschneidung,
+  Bewegungsflächen frei, seitliche Abstände, Gegenüber-Tiefe, Abstand zur
+  Türlaibung, Türaufschlag; Wanne, Dusche und barrierefreie Flächen dürfen
+  sich vor dem Objekt verschieben, bodengleiche Duschplätze sind selbst
+  Bewegungsfläche, Küchenzeilen dürfen sich in der Ecke treffen.
+- Alle Standardgrundrisse des Buchs bestehen ihre eigenen Regeln (Test) –
+  Kontrolle für Daten und Regeln zugleich.
+- Zeichnen in einem Schritt (rücknehmbar): Bewegungsflächen, Raumumriss,
+  Tür mit Aufschlag, Elemente, Maßketten, Beschriftung.
+- Gezeichnete Räume prüfen: Keystone-Elemente werden an ihrer
+  Symbolbeschreibung erkannt, eure eigenen Symbole über den Stil.
+
+### Stil (`vw2d_style`, `vw2d_place_element`)
+- Erste Ebene ist der Raumpilot-Stil: schlichte Umrisse mit runden Ecken,
+  weiß gefüllt; Bewegungsflächen hellblau von der Wand bis zur Mindesttiefe,
+  die Zusatztiefe bei Gegenüber heller; Maße in cm.
+- Darüber dein Bürostil (gespeichert auf dem Mac, für alle Dateien):
+  Klassennamen und -farben, Bewegungsflächen an/aus, nur Umriss – und
+  **eure eigenen Symbole** je Element, auch aus einer Bibliotheksdatei, mit
+  Versatz und Drehung zum Einsetzpunkt.
+- Die bisherigen Asset-Symbole bleiben für Ansichten und Schnitte.
+
 ## 0.5.0 – 31.10.2026
 
 Assets, Sortieren, große Zeichnungen – und keine Einrichtung mehr in

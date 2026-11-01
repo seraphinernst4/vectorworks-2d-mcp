@@ -713,10 +713,9 @@ def _layer_objs(name):
     vs.ForEachObject(_k.append, "(L='%s')" % name)
     out = []
     for h in _k:
-        b = vs.GetBBox(h)
         out.append({"t": vs.GetTypeN(h), "class": _str(vs.GetClass(h)),
                     "sym": _str(vs.GetSymName(h)) if vs.GetTypeN(h) == 15 else None,
-                    "bbox": [b[0][0], b[1][1], b[1][0], b[0][1]]})
+                    "bbox": _bbox(h), "view": list(vs.GetView()[:3])})
     return out
 
 
@@ -752,14 +751,16 @@ def planning_tests(report: dict) -> None:
     # 1) one element with its movement area (wall above, at 0/0, mm)
     p1 = planning.vw2d_place_element("wc_wandeinbau", position=[0, 0], wall="above", unit="mm", layer=PLAN_LAYER)
     o1 = objs()
-    areas = [o for o in o1 if o["class"].startswith("Bewegungsfläche")]
+    areas = sorted([o for o in o1 if o["class"] == "Bewegungsfläche"], key=lambda o: o["bbox"][1])
     inst = [o for o in o1 if o["t"] == 15]
     mpu = draw2d._units()["mm_per_unit"]
     bb = [round(v * mpu, 3) for v in areas[0]["bbox"]] if areas else None
     r["element"] = {"objects": len(o1), "areas": len(areas), "instances": len(inst), "area_bbox_mm": bb,
                     "symbol": p1["symbols"][0]["symbol"], "created": p1.get("symbols_created"),
                     "movement_fill": vwrun("result = _class_fill('Bewegungsfläche')"),
-                    "pass": len(inst) == 1 and len(areas) == 2 and bb is not None}
+                    "view": o1[0].get("view") if o1 else None,
+                    "pass": len(inst) == 1 and len([o for o in o1 if o["class"].startswith("Bewegungsfläche")]) == 2
+                    and bb == [-400.0, -1200.0, 400.0, 0.0]}
     generic.vw_revert_last()
     r["element"]["after_revert"] = len(objs())
     r["element"]["pass"] = r["element"]["pass"] and r["element"]["after_revert"] == 0
