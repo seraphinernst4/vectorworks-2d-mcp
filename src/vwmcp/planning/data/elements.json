@@ -1,0 +1,3422 @@
+[
+{
+"id": "person_stehend",
+"name": "Person stehend",
+"full_name": "Person stehend (ca. P50)",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "person",
+"w": 62.5,
+"d": 37.5,
+"wall": false,
+"h": 175.0,
+"notes": "Breite aus Vorderansicht (Arme hängend), Tiefe aus Seitenansicht",
+"sources": [
+{
+"book": "G",
+"page": 22
+}
+]
+},
+{
+"id": "person_umhaengetasche",
+"name": "Person mit Umhängetasche",
+"full_name": "Person mit Umhängetasche",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "person",
+"w": 62.5,
+"d": 49.0,
+"wall": false,
+"h": 175.0,
+"notes": "Tiefe aus Seitenansicht",
+"sources": [
+{
+"book": "G",
+"page": 22
+}
+]
+},
+{
+"id": "person_rucksack",
+"name": "Person mit Tagesrucksack",
+"full_name": "Person mit Tagesrucksack",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "person",
+"w": 62.5,
+"d": 60.0,
+"wall": false,
+"h": 175.0,
+"notes": "Tiefe aus Seitenansicht",
+"sources": [
+{
+"book": "G",
+"page": 22
+}
+]
+},
+{
+"id": "person_trekkingrucksack",
+"name": "Person mit großem Rucksack",
+"full_name": "Person mit großem Rucksack",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "person",
+"w": 62.5,
+"d": 67.0,
+"wall": false,
+"h": 175.0,
+"notes": "Tiefe aus Seitenansicht",
+"sources": [
+{
+"book": "G",
+"page": 22
+}
+]
+},
+{
+"id": "person_liegend",
+"name": "Person liegend",
+"full_name": "Person liegend",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "person",
+"w": 30.0,
+"d": 176.0,
+"wall": false,
+"h": 30.0,
+"notes": "Länge 176, Höhe 30",
+"sources": [
+{
+"book": "G",
+"page": 23
+}
+]
+},
+{
+"id": "rollator",
+"name": "Rollator",
+"full_name": "Rollator",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "person",
+"w": 65.0,
+"d": 85.0,
+"wall": false,
+"h": 100.0,
+"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. Text S. 42: Rollatoren meist 60-65 cm breit; Handhabung braucht deutlich mehr Platz (keine Normwerte)",
+"sources": [
+{
+"book": "G",
+"page": 38
+}
+]
+},
+{
+"id": "rollstuhl_sport",
+"name": "Sportrollstuhl",
+"full_name": "Sportrollstuhl",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "chair",
+"w": 100.0,
+"d": 100.0,
+"wall": false,
+"h": 75.0,
+"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. Breite bei schräg gestellten Rädern",
+"sources": [
+{
+"book": "G",
+"page": 38
+}
+]
+},
+{
+"id": "rollstuhl_falt",
+"name": "Faltrollstuhl",
+"full_name": "Faltrollstuhl (Standard-Greifreifenrollstuhl)",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "chair",
+"w": 72.0,
+"d": 120.0,
+"wall": false,
+"h": 102.0,
+"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. zusammengefaltet 25-32 cm breit",
+"sources": [
+{
+"book": "G",
+"page": 38
+}
+]
+},
+{
+"id": "rollstuhl_elektro",
+"name": "Elektrorollstuhl",
+"full_name": "Elektrorollstuhl",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "chair",
+"w": 77.0,
+"d": 132.0,
+"wall": false,
+"h": 127.0,
+"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. ",
+"sources": [
+{
+"book": "G",
+"page": 39
+}
+]
+},
+{
+"id": "kinderwagen",
+"name": "Kinderwagen / Kombiwagen",
+"full_name": "Kinderwagen / Kombiwagen",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "person",
+"w": 65.0,
+"d": 140.0,
+"wall": false,
+"h": 110.0,
+"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. ",
+"sources": [
+{
+"book": "G",
+"page": 39
+}
+]
+},
+{
+"id": "buggy",
+"name": "Buggy / Sportwagen",
+"full_name": "Buggy / Sportwagen",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "person",
+"w": 60.0,
+"d": 135.0,
+"wall": false,
+"h": 110.0,
+"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. ",
+"sources": [
+{
+"book": "G",
+"page": 39
+}
+]
+},
+{
+"id": "rollstuhl_bemessung",
+"name": "Bemessungs-Rollstuhl für rollstuhlgerechte Planu",
+"full_name": "Bemessungs-Rollstuhl für rollstuhlgerechte Planung (Elektrorollstuhl)",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "chair",
+"w": 85.0,
+"d": 120.0,
+"wall": false,
+"notes": "Planungsmaße der Normen sind auf Elektrorollstuhl 85 cm breit, 120 cm lang ausgelegt; reale Rollstühle selten breiter als 70 cm.",
+"sources": [
+{
+"book": "G",
+"page": 41
+}
+]
+},
+{
+"id": "rollstuhlfahrer",
+"name": "Rollstuhlfahrer",
+"full_name": "Rollstuhlfahrer (Person im Greifreifenrollstuhl)",
+"category": "person",
+"context": [
+"allgemein"
+],
+"kind": "chair",
+"w": 85.0,
+"d": 125.0,
+"wall": false,
+"heights": {
+"eye": 122,
+"notes": "Augenhöhe sitzend ca. 122 (stehend ca. 167)"
+},
+"sources": [
+{
+"book": "G",
+"page": 35
+},
+{
+"book": "G",
+"page": 37
+}
+]
+},
+{
+"id": "krankentrage",
+"name": "Krankentrage mit klappbaren Holmen",
+"full_name": "Krankentrage mit klappbaren Holmen",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "person",
+"w": 55.6,
+"d": 230.2,
+"wall": false,
+"h": 13.7,
+"notes": "DIN 13024-2 (April 1997); Transport durch 2 Träger an den Enden",
+"sources": [
+{
+"book": "G",
+"page": 63
+}
+]
+},
+{
+"id": "aufzug_15306_wohngebaeude_320kg",
+"name": "Personenaufzug Wohngebäude 320 kg",
+"full_name": "Personenaufzug Wohngebäude 320 kg (DIN 15306)",
+"category": "verkehr",
+"context": [
+"wohnen"
+],
+"kind": "generic",
+"w": 150.0,
+"d": 150.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 150.0,
+"w": 150.0,
+"note": "Vorraum nach DIN 15306 (S. 88): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": false
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"sources": [
+{
+"book": "G",
+"page": 84
+}
+]
+},
+{
+"id": "aufzug_15306_wohngebaeude_450kg",
+"name": "Personenaufzug Wohngebäude 450 kg",
+"full_name": "Personenaufzug Wohngebäude 450 kg (DIN 15306)",
+"category": "verkehr",
+"context": [
+"wohnen"
+],
+"kind": "generic",
+"w": 160.0,
+"d": 170.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 150.0,
+"w": 160.0,
+"note": "Vorraum nach DIN 15306 (S. 88): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": false
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"sources": [
+{
+"book": "G",
+"page": 84
+}
+]
+},
+{
+"id": "aufzug_15306_wohngebaeude_630kg",
+"name": "Personenaufzug Wohngebäude 630 kg",
+"full_name": "Personenaufzug Wohngebäude 630 kg (DIN 15306)",
+"category": "verkehr",
+"context": [
+"wohnen"
+],
+"kind": "generic",
+"w": 170.0,
+"d": 190.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 150.0,
+"w": 170.0,
+"note": "Vorraum nach DIN 15306 (S. 88): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"sources": [
+{
+"book": "G",
+"page": 84
+}
+]
+},
+{
+"id": "aufzug_15306_wohngebaeude_1000kg",
+"name": "Personenaufzug Wohngebäude 1000 kg",
+"full_name": "Personenaufzug Wohngebäude 1000 kg (DIN 15306)",
+"category": "verkehr",
+"context": [
+"wohnen"
+],
+"kind": "generic",
+"w": 170.0,
+"d": 260.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 210.0,
+"w": 170.0,
+"note": "Vorraum nach DIN 15306 (S. 88): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"sources": [
+{
+"book": "G",
+"page": 84
+}
+]
+},
+{
+"id": "aufzug_15309_normal_630kg",
+"name": "Personenaufzug andere als Wohngebäude, normale N",
+"full_name": "Personenaufzug andere als Wohngebäude, normale Nutzung 630 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "generic",
+"w": 200.0,
+"d": 210.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 210.0,
+"w": 200.0,
+"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"sources": [
+{
+"book": "G",
+"page": 84
+}
+]
+},
+{
+"id": "aufzug_15309_normal_800kg",
+"name": "Personenaufzug andere als Wohngebäude, normale N",
+"full_name": "Personenaufzug andere als Wohngebäude, normale Nutzung 800 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "generic",
+"w": 200.0,
+"d": 220.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 210.0,
+"w": 200.0,
+"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"sources": [
+{
+"book": "G",
+"page": 84
+}
+]
+},
+{
+"id": "aufzug_15309_normal_1000kg_schmal_tief",
+"name": "Personenaufzug andere als Wohngebäude, normale N",
+"full_name": "Personenaufzug andere als Wohngebäude, normale Nutzung 1000 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "generic",
+"w": 160.0,
+"d": 260.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 315.0,
+"w": 160.0,
+"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=315.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": false,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99); ACHTUNG: gedruckte Tür 80 cm < 90 cm trotz Piktogramm"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"sources": [
+{
+"book": "G",
+"page": 84
+}
+]
+},
+{
+"id": "aufzug_15309_normal_1000kg_breit_tuer90",
+"name": "Personenaufzug andere als Wohngebäude, normale N",
+"full_name": "Personenaufzug andere als Wohngebäude, normale Nutzung 1000 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "generic",
+"w": 220.0,
+"d": 220.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 210.0,
+"w": 220.0,
+"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"sources": [
+{
+"book": "G",
+"page": 84
+}
+]
+},
+{
+"id": "aufzug_15309_normal_1000kg_breit_tuer110",
+"name": "Personenaufzug andere als Wohngebäude, normale N",
+"full_name": "Personenaufzug andere als Wohngebäude, normale Nutzung 1000 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "generic",
+"w": 240.0,
+"d": 220.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 210.0,
+"w": 240.0,
+"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"sources": [
+{
+"book": "G",
+"page": 84
+}
+]
+},
+{
+"id": "aufzug_15309_normal_1275kg",
+"name": "Personenaufzug andere als Wohngebäude, normale N",
+"full_name": "Personenaufzug andere als Wohngebäude, normale Nutzung 1275 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "generic",
+"w": 250.0,
+"d": 220.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 210.0,
+"w": 250.0,
+"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"sources": [
+{
+"book": "G",
+"page": 84
+}
+]
+},
+{
+"id": "aufzug_15309_intensiv_1275kg",
+"name": "Personenaufzug andere als Wohngebäude, intensive",
+"full_name": "Personenaufzug andere als Wohngebäude, intensive Nutzung 1275 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "generic",
+"w": 260.0,
+"d": 230.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 210.0,
+"w": 260.0,
+"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"sources": [
+{
+"book": "G",
+"page": 85
+}
+]
+},
+{
+"id": "aufzug_15309_intensiv_1600kg",
+"name": "Personenaufzug andere als Wohngebäude, intensive",
+"full_name": "Personenaufzug andere als Wohngebäude, intensive Nutzung 1600 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "generic",
+"w": 270.0,
+"d": 250.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 240.0,
+"w": 270.0,
+"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=240.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"sources": [
+{
+"book": "G",
+"page": 85
+}
+]
+},
+{
+"id": "aufzug_15309_intensiv_1800kg",
+"name": "Personenaufzug andere als Wohngebäude, intensive",
+"full_name": "Personenaufzug andere als Wohngebäude, intensive Nutzung 1800 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "generic",
+"w": 300.0,
+"d": 250.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 240.0,
+"w": 300.0,
+"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=240.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"sources": [
+{
+"book": "G",
+"page": 85
+}
+]
+},
+{
+"id": "aufzug_15309_intensiv_2000kg",
+"name": "Personenaufzug andere als Wohngebäude, intensive",
+"full_name": "Personenaufzug andere als Wohngebäude, intensive Nutzung 2000 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "generic",
+"w": 300.0,
+"d": 260.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 255.0,
+"w": 300.0,
+"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=255.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"sources": [
+{
+"book": "G",
+"page": 85
+}
+]
+},
+{
+"id": "aufzug_15309_betten_1275kg",
+"name": "Bettenaufzug",
+"full_name": "Bettenaufzug (andere als Wohngebäude) 1275 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "bed",
+"w": 210.0,
+"d": 290.0,
+"wall": false,
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 90 x 200 (S. 87)",
+"sources": [
+{
+"book": "G",
+"page": 85
+}
+]
+},
+{
+"id": "aufzug_15309_betten_1600kg",
+"name": "Bettenaufzug",
+"full_name": "Bettenaufzug (andere als Wohngebäude) 1600 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "bed",
+"w": 240.0,
+"d": 300.0,
+"wall": false,
+"variants": [
+{
+"id": "260x300",
+"label": "Schachtbreite alternativ (Klammerwert)",
+"w": 260.0,
+"d": 300.0
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 90 x 200 (S. 87); Schachtbreite gedruckt als '240 (260)'",
+"sources": [
+{
+"book": "G",
+"page": 85
+}
+]
+},
+{
+"id": "aufzug_15309_betten_2000kg",
+"name": "Bettenaufzug",
+"full_name": "Bettenaufzug (andere als Wohngebäude) 2000 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "bed",
+"w": 240.0,
+"d": 330.0,
+"wall": false,
+"variants": [
+{
+"id": "260x330",
+"label": "Schachtbreite alternativ (Klammerwert)",
+"w": 260.0,
+"d": 330.0
+}
+],
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 100 x 230 (S. 87); Schachtbreite gedruckt als '240 (260)'",
+"sources": [
+{
+"book": "G",
+"page": 85
+}
+]
+},
+{
+"id": "aufzug_15309_betten_2500kg",
+"name": "Bettenaufzug",
+"full_name": "Bettenaufzug (andere als Wohngebäude) 2500 kg (DIN 15309)",
+"category": "verkehr",
+"context": [
+"arbeiten",
+"allgemein"
+],
+"kind": "bed",
+"w": 270.0,
+"d": 330.0,
+"wall": false,
+"barrier_free": {
+"rollstuhl_symbol": true,
+"erfuellt_110x140_tuer90": true,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+},
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 100 x 230 (S. 87); Buch zeigt zwei 2500-kg-Bettenaufzüge mit identischen Maßen ('bei beiden 2500 kg'); Unterschied in der Zeichnung nicht erkennbar",
+"sources": [
+{
+"book": "G",
+"page": 85
+}
+]
+},
+{
+"id": "krankentrage_feuerwehr",
+"name": "Belegte Krankentrage",
+"full_name": "Belegte Krankentrage (Bemessung Feuerwehraufzug-Vorraum)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "person",
+"w": 60.0,
+"d": 226.0,
+"wall": false,
+"notes": "Breite 60, Transportlänge 226",
+"sources": [
+{
+"book": "G",
+"page": 95
+}
+]
+},
+{
+"id": "pkw_mini",
+"name": "Pkw Mini",
+"full_name": "Pkw Mini (Beispiel Smart 2009)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 155.0,
+"d": 270.0,
+"wall": false,
+"h": 155.0,
+"notes": "w = Breite, d = Länge (Draufsicht/Seitenansicht M 1:200).",
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "pkw_kompaktklasse",
+"name": "Pkw Kompaktklasse",
+"full_name": "Pkw Kompaktklasse (Beispiel Golf 2009)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 180.0,
+"d": 420.0,
+"wall": false,
+"h": 150.0,
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "pkw_mittelklasse",
+"name": "Pkw Mittelklasse",
+"full_name": "Pkw Mittelklasse (Beispiel Audi A4 2009)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 185.0,
+"d": 470.0,
+"wall": false,
+"h": 145.0,
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "pkw_oberklasse",
+"name": "Pkw Oberklasse",
+"full_name": "Pkw Oberklasse (Beispiel Mercedes S-Klasse 2009)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 190.0,
+"d": 510.0,
+"wall": false,
+"h": 150.0,
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "transporter_beispiel",
+"name": "Transporter",
+"full_name": "Transporter (Beispiel Mercedes 2009)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 240.0,
+"d": 700.0,
+"wall": false,
+"h": 270.0,
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "muellfahrzeug_beispiel",
+"name": "Nutzfahrzeug/Müllfahrzeug 2-achsig",
+"full_name": "Nutzfahrzeug/Müllfahrzeug 2-achsig (Beispiel)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 250.0,
+"d": 790.0,
+"wall": false,
+"h": 355.0,
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "reisebus_beispiel",
+"name": "Reisebus",
+"full_name": "Reisebus (Beispiel Mercedes 2008)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 255.0,
+"d": 1220.0,
+"wall": false,
+"h": 390.0,
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "bemessungsfahrzeug_fahrrad",
+"name": "Bemessungsfahrzeug EAR 05: Fahrrad",
+"full_name": "Bemessungsfahrzeug EAR 05: Fahrrad",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 60.0,
+"d": 190.0,
+"wall": false,
+"h": 100.0,
+"notes": "w = Breite ohne Außenspiegel, d = Länge; turning_radius_outer = Wendekreisradius außen (cm).",
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "bemessungsfahrzeug_moped",
+"name": "Bemessungsfahrzeug EAR 05: Moped",
+"full_name": "Bemessungsfahrzeug EAR 05: Moped",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 60.0,
+"d": 180.0,
+"wall": false,
+"h": 100.0,
+"notes": "w = Breite ohne Außenspiegel, d = Länge; turning_radius_outer = Wendekreisradius außen (cm).",
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "bemessungsfahrzeug_kraftrad",
+"name": "Bemessungsfahrzeug EAR 05: Kraftrad",
+"full_name": "Bemessungsfahrzeug EAR 05: Kraftrad",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 70.0,
+"d": 220.0,
+"wall": false,
+"h": 100.0,
+"notes": "w = Breite ohne Außenspiegel, d = Länge; turning_radius_outer = Wendekreisradius außen (cm).",
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "bemessungsfahrzeug_pkw",
+"name": "Bemessungsfahrzeug EAR 05: Pkw",
+"full_name": "Bemessungsfahrzeug EAR 05: Pkw",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 176.0,
+"d": 474.0,
+"wall": false,
+"h": 151.0,
+"notes": "w = Breite ohne Außenspiegel, d = Länge; turning_radius_outer = Wendekreisradius außen (cm).",
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "bemessungsfahrzeug_transporter",
+"name": "Bemessungsfahrzeug EAR 05: Transporter",
+"full_name": "Bemessungsfahrzeug EAR 05: Transporter",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 217.0,
+"d": 689.0,
+"wall": false,
+"h": 270.0,
+"notes": "w = Breite ohne Außenspiegel, d = Länge; turning_radius_outer = Wendekreisradius außen (cm).",
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "bemessungsfahrzeug_lkw_klein_2achsig",
+"name": "Bemessungsfahrzeug EAR 05: Kleiner Lkw",
+"full_name": "Bemessungsfahrzeug EAR 05: Kleiner Lkw (2-achsig)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 229.0,
+"d": 946.0,
+"wall": false,
+"h": 380.0,
+"notes": "w = Breite ohne Außenspiegel, d = Länge; turning_radius_outer = Wendekreisradius außen (cm).",
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "bemessungsfahrzeug_lkw_gross_3achsig",
+"name": "Bemessungsfahrzeug EAR 05: Großer Lkw",
+"full_name": "Bemessungsfahrzeug EAR 05: Großer Lkw (3-achsig)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 255.0,
+"d": 1010.0,
+"wall": false,
+"h": 380.0,
+"notes": "w = Breite ohne Außenspiegel, d = Länge; turning_radius_outer = Wendekreisradius außen (cm).",
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "bemessungsfahrzeug_bus",
+"name": "Bemessungsfahrzeug EAR 05: Bus",
+"full_name": "Bemessungsfahrzeug EAR 05: Bus",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 255.0,
+"d": 1200.0,
+"wall": false,
+"h": 370.0,
+"notes": "w = Breite ohne Außenspiegel, d = Länge; turning_radius_outer = Wendekreisradius außen (cm).",
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "bemessungsfahrzeug_muellfahrzeug_2achsig",
+"name": "Bemessungsfahrzeug EAR 05: Müllfahrzeug",
+"full_name": "Bemessungsfahrzeug EAR 05: Müllfahrzeug (2-achsig)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "car",
+"w": 255.0,
+"d": 903.0,
+"wall": false,
+"h": 355.0,
+"notes": "w = Breite ohne Außenspiegel, d = Länge; turning_radius_outer = Wendekreisradius außen (cm).",
+"sources": [
+{
+"book": "G",
+"page": 119
+}
+]
+},
+{
+"id": "fahrrad",
+"name": "Fahrrad",
+"full_name": "Fahrrad",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "bicycle",
+"w": 60.0,
+"d": 200.0,
+"wall": false,
+"h": 100.0,
+"variants": [
+{
+"id": "90x330",
+"label": "Fahrrad mit Kinderanhänger (Gesamtlänge)",
+"w": 90.0,
+"d": 330.0
+},
+{
+"id": "60x190",
+"label": "Bemessungsfahrrad EAR 05 (Tabelle)",
+"w": 60.0,
+"d": 190.0
+}
+],
+"heights": {
+"top": 100,
+"notes": "Lenkerhöhe ca. 100; Verkehrsraumhöhe Radfahrer 225"
+},
+"notes": "Seitenansicht 200 lang, Lenker ~100 hoch; Draufsicht 60 breit (Lenker). M 1:50.",
+"sources": [
+{
+"book": "G",
+"page": 136
+},
+{
+"book": "G",
+"page": 137
+}
+]
+},
+{
+"id": "pkw_stellplatz_gavo",
+"name": "Pkw-Einstellplatz Garage",
+"full_name": "Pkw-Einstellplatz Garage (GaVO BW 1997)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "parking",
+"w": 230.0,
+"d": 500.0,
+"wall": false,
+"variants": [
+{
+"id": "240x500",
+"label": "eine Längsseite begrenzt (Wand/Stütze im Abstand bis 10 cm)",
+"w": 240.0,
+"d": 500.0
+},
+{
+"id": "250x500",
+"label": "beide Längsseiten begrenzt",
+"w": 250.0,
+"d": 500.0
+},
+{
+"id": "230x600",
+"label": "Längsaufstellung (parallel zur Fahrgasse)",
+"w": 230.0,
+"d": 600.0
+},
+{
+"id": "350x500",
+"label": "Rollstuhlbenutzer senkrecht (150 Bewegungsfläche + 200)",
+"w": 350.0,
+"d": 500.0
+},
+{
+"id": "550x500",
+"label": "2 Rollstuhlstellplätze mit gemeinsamer Bewegungsfläche (200+150+200)",
+"w": 550.0,
+"d": 500.0
+},
+{
+"id": "350x750",
+"label": "Rollstuhlbenutzer Längsaufstellung (Bewegungsfläche hinter dem Fahrzeug)",
+"w": 350.0,
+"d": 750.0
+}
+],
+"notes": "Mindestmaße der GaVO beruhen auf Pkw der 1970er; ab gehobener Mittelklasse deutlich überschreiten.",
+"sources": [
+{
+"book": "G",
+"page": 120
+}
+]
+},
+{
+"id": "pkw_parkstand_ear",
+"name": "Pkw-Parkstand",
+"full_name": "Pkw-Parkstand (EAR 2005)",
+"category": "verkehr",
+"context": [
+"allgemein"
+],
+"kind": "parking",
+"w": 250.0,
+"d": 500.0,
+"wall": false,
+"variants": [
+{
+"id": "285x500",
+"label": "eine Längsseite durch Bauwerksteile/Absperrungen begrenzt",
+"w": 285.0,
+"d": 500.0
+},
+{
+"id": "290x500",
+"label": "beide Längsseiten begrenzt (auch Stützen auf halber Parkstandlänge)",
+"w": 290.0,
+"d": 500.0
+},
+{
+"id": "225x500",
+"label": "Randparkstand, eine Längsseite durch Bordstein begrenzt",
+"w": 225.0,
+"d": 500.0
+},
+{
+"id": "250x430",
+"label": "Senkrecht, aufgeteilt in 430 Parkstand + 70 Überhangstreifen",
+"w": 250.0,
+"d": 430.0
+},
+{
+"id": "250x415",
+"label": "Schräg 45°, Tiefe senkrecht zur Fahrgasse 415 + 70 Überhang",
+"w": 250.0,
+"d": 415.0
+},
+{
+"id": "200x570",
+"label": "Längsaufstellung rückwärts einparken",
+"w": 200.0,
+"d": 570.0
+},
+{
+"id": "200x670",
+"label": "Längsaufstellung nur vorwärts einparken",
+"w": 200.0,
+"d": 670.0
+},
+{
+"id": "350x500",
+"label": "Rollstuhlfahrer (inkl. Bewegungsfläche an Längsseite)",
+"w": 350.0,
+"d": 500.0
+},
+{
+"id": "390x500",
+"label": "Rollstuhlfahrer neben festen Einbauten",
+"w": 390.0,
+"d": 500.0
+},
+{
+"id": "600x500",
+"label": "Doppelparkstand Rollstuhl mit überlagerter Bewegungsfläche",
+"w": 600.0,
+"d": 500.0
+}
+],
+"heights": {
+"notes": "lichte Durchfahrtshöhe Parkbauten ≥210"
+},
+"notes": "Markierte Längsparkstände ≥570 lang (rückwärts), 670 bei nur Vorwärtseinparken.",
+"sources": [
+{
+"book": "G",
+"page": 122
+},
+{
+"book": "G",
+"page": 123
+}
+]
+},
+{
+"id": "kueche_unterschrank",
+"name": "Küchen-Unterschrank",
+"full_name": "Küchen-Unterschrank",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "counter",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "120 vor Küchenzeile (nicht rollstuhlgerecht, eine Person); 150 deutlich besser und rollstuhlgeeignet"
+}
+],
+"variants": [
+{
+"id": "30x60",
+"label": "Koordinationsbreiten DIN EN 1116",
+"w": 30.0,
+"d": 60.0
+},
+{
+"id": "40x60",
+"label": "Koordinationsbreiten DIN EN 1116",
+"w": 40.0,
+"d": 60.0
+},
+{
+"id": "90x60",
+"label": "Koordinationsbreiten DIN EN 1116",
+"w": 90.0,
+"d": 60.0
+},
+{
+"id": "120x60",
+"label": "Koordinationsbreiten DIN EN 1116",
+"w": 120.0,
+"d": 60.0
+},
+{
+"id": "150x60",
+"label": "Koordinationsbreiten DIN EN 1116",
+"w": 150.0,
+"d": 60.0
+},
+{
+"id": "45x60",
+"label": "Sonderbreite (häufig erhältlich)",
+"w": 45.0,
+"d": 60.0
+}
+],
+"heights": {
+"top": null,
+"coordination_heights": [
+77,
+82,
+87,
+92
+],
+"sockel_h": "10-15",
+"sockel_ruecksprung": "5-7",
+"notes": "Unterschrank-/Unterbaugeräte-Höhen DIN EN 1116: 770/820/870/920 mm; Sockel meist verblendet, 5-7 cm einrücken für bequemes Stehen; verstellbare Füße"
+},
+"barrier_free": {
+"standard": "DIN 18025-1/-2, DIN 18040-2 (Entwurf)",
+"notes": "rollstuhlgerecht: unterfahrbare Bereiche ≥90 breit, Arbeitsplatte 75-90 hoch, UK ≥67; Unterschränke mit unterster Greifhöhe ≥40 über Boden, Sockel/Fußraum ≥15 zurückgesetzt, Schrankkörper ≤45 tief (p210)"
+},
+"side_clearance": {
+"wall": 3,
+"laibung": 10
+},
+"notes": "Breitenspanne laut Tabelle 30-150 cm, Tiefe 60 cm",
+"sources": [
+{
+"book": "G",
+"page": 198
+},
+{
+"book": "G",
+"page": 199
+},
+{
+"book": "G",
+"page": 200
+},
+{
+"book": "G",
+"page": 201
+},
+{
+"book": "G",
+"page": 210
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "kueche_oberschrank",
+"name": "Küchen-Oberschrank",
+"full_name": "Küchen-Oberschrank (Hängeschrank)",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "box",
+"w": 60.0,
+"d": 40.0,
+"wall": true,
+"h": 65.0,
+"variants": [
+{
+"id": "30x40",
+"label": "Breite 30-150, Tiefe max. 40",
+"w": 30.0,
+"d": 40.0
+},
+{
+"id": "40x40",
+"label": "Breite 30-150, Tiefe max. 40",
+"w": 40.0,
+"d": 40.0
+},
+{
+"id": "90x40",
+"label": "Breite 30-150, Tiefe max. 40",
+"w": 90.0,
+"d": 40.0
+},
+{
+"id": "120x40",
+"label": "Breite 30-150, Tiefe max. 40",
+"w": 120.0,
+"d": 40.0
+},
+{
+"id": "150x40",
+"label": "Breite 30-150, Tiefe max. 40",
+"w": 150.0,
+"d": 40.0
+}
+],
+"heights": {
+"underside_above_worktop_min": 50,
+"underside_above_herd_spuele": 65,
+"cabinet_h_drawn": 65,
+"greifhoehe_max_standing": 180,
+"notes": "UK ≥50 über Arbeitsplatte, über Herd und Spüle ca. 65; im Schnitt p201 Oberschrank 65 hoch mit 65 Abstand; Oberschränke bis unter die Decke schaffen Stauraum. Barrierefrei/rollstuhlgerecht: UK 30-40 über Arbeitsplatte, Greifhöhe max. 140 (p210/211)"
+},
+"sources": [
+{
+"book": "G",
+"page": 198
+},
+{
+"book": "G",
+"page": 199
+},
+{
+"book": "G",
+"page": 200
+},
+{
+"book": "G",
+"page": 208
+},
+{
+"book": "G",
+"page": 209
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "kueche_hochschrank",
+"name": "Küchen-Hochschrank",
+"full_name": "Küchen-Hochschrank (Vorrats-/Geschirr-/Geräteschrank)",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "tall",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"notes": "Einbau von Backofen, Mikrowelle, Dampfgarer, Geschirrspüler in Sicht- und Griffhöhe im Hochschrank empfohlen",
+"sources": [
+{
+"book": "G",
+"page": 198
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "kuehl_gefrierkombination",
+"name": "Kühl- und Gefrierkombination",
+"full_name": "Kühl- und Gefrierkombination",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "fridge",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"notes": "Kühlgerät 120-140 l für 1-2 Personen, je weitere Person ca. +60 l plus Gefrierfach; Symbol im Plan: Stern/Schneeflocke (8 Strahlen) in der 60er-Zelle",
+"sources": [
+{
+"book": "G",
+"page": 198
+},
+{
+"book": "G",
+"page": 200
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "kuehlschrank",
+"name": "Kühlschrank",
+"full_name": "Kühlschrank (Einbau, 60er Modul)",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "fridge",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"notes": "in den Küchenformen als 60x60-Zelle mit Sternsymbol; in zweizeiliger Küche in der Schrankzeile gegenüber Herd/Spüle (Arbeitsdreieck)",
+"sources": [
+{
+"book": "G",
+"page": 203
+},
+{
+"book": "G",
+"page": 205
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "gefrierschrank",
+"name": "Gefrierschrank",
+"full_name": "Gefrierschrank",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "fridge",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"notes": "ergänzend auch außerhalb der Küche (Lagerraum) möglich",
+"sources": [
+{
+"book": "G",
+"page": 198
+},
+{
+"book": "G",
+"page": 200
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "arbeitsflaeche_klein",
+"name": "Arbeitsfläche klein",
+"full_name": "Arbeitsfläche klein",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "counter",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"notes": "≥60 breit",
+"sources": [
+{
+"book": "G",
+"page": 198
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "arbeitsflaeche_gross",
+"name": "Arbeitsfläche groß",
+"full_name": "Arbeitsfläche groß",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "counter",
+"w": 120.0,
+"d": 60.0,
+"wall": true,
+"notes": "≥120 breit; zwischen Herd und Spüle mind. 60, besser 100 Arbeitsfläche",
+"sources": [
+{
+"book": "G",
+"page": 197
+},
+{
+"book": "G",
+"page": 198
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "geraetestellflaeche",
+"name": "Fläche für Kleingeräte",
+"full_name": "Fläche für Kleingeräte (Gerätestellfläche)",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "counter",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"notes": "mind. 60x60 (z.B. Kaffeemaschine); Steckdosen auf 115 cm Höhe",
+"sources": [
+{
+"book": "G",
+"page": 198
+},
+{
+"book": "G",
+"page": 200
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "abstellflaeche_herd_spuele",
+"name": "Abstellfläche neben Herd/Spüle",
+"full_name": "Abstellfläche neben Herd/Spüle",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "sink",
+"w": 30.0,
+"d": 30.0,
+"wall": true,
+"params": {
+"bowls": 1
+},
+"notes": "Tabelle: Breite ≥30, Tiefe 30 (sic; in den Küchenplänen als 30 breite Zelle in voller Zeilentiefe 60 gezeichnet)",
+"sources": [
+{
+"book": "G",
+"page": 198
+},
+{
+"book": "G",
+"page": 203
+},
+{
+"book": "G",
+"page": 205
+}
+],
+"group": "kuechenzeile",
+"overlap_ok": [
+"arbeitsinsel",
+"kueche_unterschrank",
+"arbeitsflaeche_klein",
+"arbeitsflaeche_gross"
+]
+},
+{
+"id": "abtropfflaeche_spuele",
+"name": "Abstell-/Abtropffläche neben Spüle",
+"full_name": "Abstell-/Abtropffläche neben Spüle",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "sink",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"params": {
+"bowls": 1
+},
+"notes": "≥60 breit; Geschirrspüler darunter, links neben dem Spülbecken (Randnotiz p198)",
+"sources": [
+{
+"book": "G",
+"page": 196
+},
+{
+"book": "G",
+"page": 198
+}
+],
+"group": "kuechenzeile",
+"overlap_ok": [
+"arbeitsinsel",
+"kueche_unterschrank",
+"arbeitsflaeche_klein",
+"arbeitsflaeche_gross"
+]
+},
+{
+"id": "herd_backofen",
+"name": "Herd/Backofen",
+"full_name": "Herd/Backofen (Glaskeramikkochfeld)",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "hob",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"variants": [
+{
+"id": "90x60",
+"label": "breit",
+"w": 90.0,
+"d": 60.0
+}
+],
+"notes": "60 (≤90) breit; Starkstromanschluss (380 V); Kochbereich eher tiefer als normale Arbeitshöhe; Dunstabzug-UK über Augenhöhe",
+"sources": [
+{
+"book": "G",
+"page": 198
+},
+{
+"book": "G",
+"page": 200
+}
+],
+"group": "kuechenzeile",
+"overlap_ok": [
+"arbeitsinsel",
+"kueche_unterschrank",
+"arbeitsflaeche_klein",
+"arbeitsflaeche_gross"
+]
+},
+{
+"id": "kochfeld",
+"name": "Kochfeld",
+"full_name": "Kochfeld (Planzeichen 4 Kochstellen)",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "hob",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"notes": "im Plan 2x2 Kreise (Ø ca. 20) in einer 60x60-Zelle; auch auf Arbeitsinsel",
+"sources": [
+{
+"book": "G",
+"page": 205
+},
+{
+"book": "G",
+"page": 206
+},
+{
+"book": "G",
+"page": 207
+}
+],
+"group": "kuechenzeile",
+"overlap_ok": [
+"arbeitsinsel",
+"kueche_unterschrank",
+"arbeitsflaeche_klein",
+"arbeitsflaeche_gross"
+]
+},
+{
+"id": "einbaubackofen_schrank",
+"name": "Einbaubackofen mit Schrank",
+"full_name": "Einbaubackofen mit Schrank",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "tall",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"sources": [
+{
+"book": "G",
+"page": 198
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "mikrowelle_schrank",
+"name": "Mikrowellenherd mit Schrank",
+"full_name": "Mikrowellenherd mit Schrank",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "box",
+"w": 60.0,
+"d": 40.0,
+"wall": true,
+"notes": "Tiefe ≥40",
+"sources": [
+{
+"book": "G",
+"page": 198
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "einbeckenspuele_abtropf",
+"name": "Einbeckenspüle mit Abtropffläche",
+"full_name": "Einbeckenspüle mit Abtropffläche",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "sink",
+"w": 90.0,
+"d": 60.0,
+"wall": true,
+"params": {
+"bowls": 1
+},
+"notes": "≥90 breit; im Plan p207: Abtropfrillen links, rundes Becken rechts in 90er Zelle",
+"sources": [
+{
+"book": "G",
+"page": 198
+},
+{
+"book": "G",
+"page": 205
+}
+],
+"group": "kuechenzeile",
+"overlap_ok": [
+"arbeitsinsel",
+"kueche_unterschrank",
+"arbeitsflaeche_klein",
+"arbeitsflaeche_gross"
+]
+},
+{
+"id": "doppelbeckenspuele_abtropf",
+"name": "Doppelbeckenspüle mit Abtropffläche",
+"full_name": "Doppelbeckenspüle mit Abtropffläche",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "sink",
+"w": 120.0,
+"d": 60.0,
+"wall": true,
+"params": {
+"bowls": 2
+},
+"notes": "Tabelle ≥120; in den Küchenformen p207-209 gezeichnet als 60er Abtropf-Zelle + 90er Zelle mit zwei runden Becken (=150)",
+"sources": [
+{
+"book": "G",
+"page": 198
+},
+{
+"book": "G",
+"page": 205
+},
+{
+"book": "G",
+"page": 206
+},
+{
+"book": "G",
+"page": 207
+}
+],
+"group": "kuechenzeile",
+"overlap_ok": [
+"arbeitsinsel",
+"kueche_unterschrank",
+"arbeitsflaeche_klein",
+"arbeitsflaeche_gross"
+]
+},
+{
+"id": "geschirrspueler",
+"name": "Geschirrspülmaschine",
+"full_name": "Geschirrspülmaschine",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "sink",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"params": {
+"bowls": 1
+},
+"variants": [
+{
+"id": "45x60",
+"label": "schmal",
+"w": 45.0,
+"d": 60.0
+}
+],
+"notes": "Anschluss auf 30 cm Höhe",
+"sources": [
+{
+"book": "G",
+"page": 198
+},
+{
+"book": "G",
+"page": 200
+}
+],
+"group": "kuechenzeile",
+"overlap_ok": [
+"arbeitsinsel",
+"kueche_unterschrank",
+"arbeitsflaeche_klein",
+"arbeitsflaeche_gross"
+]
+},
+{
+"id": "spuelzentrum",
+"name": "Spülzentrum",
+"full_name": "Spülzentrum (Einbeckenspüle mit Abtropffläche, Unterschrank und Geschirrspüler)",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "sink",
+"w": 90.0,
+"d": 60.0,
+"wall": true,
+"params": {
+"bowls": 1
+},
+"notes": "≥90",
+"sources": [
+{
+"book": "G",
+"page": 198
+}
+],
+"group": "kuechenzeile",
+"overlap_ok": [
+"arbeitsinsel",
+"kueche_unterschrank",
+"arbeitsflaeche_klein",
+"arbeitsflaeche_gross"
+]
+},
+{
+"id": "schrankkueche",
+"name": "Schrankküche",
+"full_name": "Schrankküche (minimierte Küche im Schrank)",
+"category": "kueche",
+"context": [
+"wohnen",
+"arbeiten"
+],
+"kind": "wardrobe",
+"w": 140.0,
+"d": 70.0,
+"wall": true,
+"h": 210.0,
+"notes": "Minimallösung (temporär, Ferienwohnung, Büro); Türen seitlich aufklappbar; nicht ausreichend für größere Haushalte",
+"sources": [
+{
+"book": "G",
+"page": 202
+}
+]
+},
+{
+"id": "kofferkueche",
+"name": "Mobile Kofferküche",
+"full_name": "Mobile Kofferküche",
+"category": "kueche",
+"context": [
+"wohnen",
+"arbeiten"
+],
+"kind": "generic",
+"w": 104.0,
+"d": 66.0,
+"wall": true,
+"h": 127.0,
+"heights": {
+"top": 100,
+"open_with_shelf": 178,
+"closed": 127,
+"notes": "Arbeitshöhe 100, aufgeklappt mit Regalaufsatz 178, geschlossen 127; auf Rollen"
+},
+"sources": [
+{
+"book": "G",
+"page": 202
+}
+]
+},
+{
+"id": "gedeck",
+"name": "Gedeck",
+"full_name": "Gedeck (Platzbedarf pro Person am Tisch)",
+"category": "essen",
+"context": [
+"wohnen"
+],
+"kind": "box",
+"w": 60.0,
+"d": 40.0,
+"wall": true,
+"notes": "ca. 60x40 je Person; Tisch-Ansitzbreite 65-70 je Person empfohlen",
+"sources": [
+{
+"book": "G",
+"page": 215
+}
+]
+},
+{
+"id": "esstisch_rechteckig",
+"name": "Esstisch rechteckig",
+"full_name": "Esstisch rechteckig",
+"category": "essen",
+"context": [
+"wohnen"
+],
+"kind": "table",
+"w": 130.0,
+"d": 80.0,
+"wall": false,
+"h": 75.0,
+"heights": {
+"top": "70-75",
+"notes": "Tischhöhe 70-75; Leuchten-UK ca. 60 über Tischplatte, über Augenhöhe Sitzender (blendfrei)"
+},
+"barrier_free": {
+"standard": "DIN 18025-1/-2, DIN 18040-2 (Entwurf)",
+"notes": "rollstuhlgerecht: ≥150 vor Rollstuhlplatz, Wendefläche 150x150, ≥120 Durchgang; barrierefrei: 90 seitlich, ≥90 Durchgang"
+},
+"sources": [
+{
+"book": "G",
+"page": 215
+},
+{
+"book": "G",
+"page": 216
+}
+]
+},
+{
+"id": "esstisch_rund",
+"name": "Esstisch rund",
+"full_name": "Esstisch rund",
+"category": "essen",
+"context": [
+"wohnen"
+],
+"kind": "table",
+"w": 90.0,
+"d": 90.0,
+"wall": false,
+"h": 75.0,
+"params": {
+"round": true
+},
+"variants": [
+{
+"id": "120x120",
+"label": "Ø 120 (max, 4 Personen; auch rollstuhl-/barrierefrei)",
+"w": 120.0,
+"d": 120.0
+}
+],
+"heights": {
+"top": "70-75"
+},
+"sources": [
+{
+"book": "G",
+"page": 216
+}
+]
+},
+{
+"id": "essstuhl",
+"name": "Essstuhl",
+"full_name": "Essstuhl",
+"category": "essen",
+"context": [
+"wohnen"
+],
+"kind": "chair",
+"w": 45.0,
+"d": 50.0,
+"wall": false,
+"variants": [
+{
+"id": "40x50",
+"label": "Stuhlbreite im Grundriss p218 (40-45)",
+"w": 40.0,
+"d": 50.0
+}
+],
+"heights": {
+"seat": "42-47",
+"notes": "Sitzfläche bis Tischunterkante 31-34; auf Tischhöhe abstimmen"
+},
+"sources": [
+{
+"book": "G",
+"page": 215
+},
+{
+"book": "G",
+"page": 216
+}
+]
+},
+{
+"id": "barhocker",
+"name": "Barhocker / Hocker",
+"full_name": "Barhocker / Hocker",
+"category": "essen",
+"context": [
+"wohnen"
+],
+"kind": "chair",
+"w": 40.0,
+"d": 40.0,
+"wall": false,
+"heights": {
+"seat": "80-85"
+},
+"notes": "Grundriss: Kreis Ø ca. 40, Achsabstand 60 (p207); Schnitt Hocker-Tiefe 30-40 (p219)",
+"sources": [
+{
+"book": "G",
+"page": 205
+},
+{
+"book": "G",
+"page": 217
+}
+]
+},
+{
+"id": "sitzbank",
+"name": "Sitzbank",
+"full_name": "Sitzbank (Eck-, U-, Doppelbank)",
+"category": "essen",
+"context": [
+"wohnen"
+],
+"kind": "box",
+"w": 130.0,
+"d": 55.0,
+"wall": true,
+"side_clearance": {
+"tisch": 5
+},
+"notes": "Sitztiefe 55, Abstand 5 zur Tischkante; Lehne als Doppellinie an der Rückseite gezeichnet",
+"sources": [
+{
+"book": "G",
+"page": 217
+}
+]
+},
+{
+"id": "einzelwaschtisch",
+"name": "Einzelwaschtisch / Waschbecken",
+"full_name": "Einzelwaschtisch / Waschbecken",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "basin",
+"w": 60.0,
+"d": 55.0,
+"wall": true,
+"short": "WB",
+"areas": [
+{
+"side": "front",
+"d": 55.0,
+"w": 90.0,
+"d_extra": 75.0,
+"note": "drawn 90 wide centred on the 60 basin (15 each side) and running from the wall; 55 in front of the basin, 75 when objects are opposite (light-blue extension). Text p268 recommends 75 in front of all o"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"w": 120.0,
+"d": 120.0,
+"note": "knee clearance (Beinfreiraum) under basin; Unterputz/Flachaufputzsiphon (DIN 18025-2)",
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"w": 150.0,
+"d": 150.0,
+"note": "height adjustable to user; flat 15-18 cm; unterfahrbar; Unterputz- or Flachaufputzsiphon; single-lever mixer with temperature limiter and swivel spout; example elevation p278 shows top edge scaled ~80",
+"align": "any"
+}
+],
+"heights": {
+"top": null,
+"notes": "Oberkante Waschtisch 85-105 (section p274/p275); Tiefe 55-60 in section p274"
+},
+"barrier_free": {
+"standard": "DIN 18025-1 / DIN 18040-2 (Entwurf)",
+"rollstuhlgerecht": {
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"side_wall_min": 20,
+"notes": "height adjustable to user; flat 15-18 cm; unterfahrbar; Unterputz- or Flachaufputzsiphon; single-lever mixer with temperature limiter and swivel spout; example elevation p278 shows top edge scaled ~80 (not dimensioned)"
+},
+"barrierefrei": {
+"bewegungsflaeche": {
+"w": 120,
+"d": 120
+},
+"side_wall_min": 20,
+"notes": "knee clearance (Beinfreiraum) under basin; Unterputz/Flachaufputzsiphon (DIN 18025-2)"
+}
+},
+"notes": "Stellflaeche from VDI 6000 Blatt 1 table p270 (>=60 x >=55).",
+"sources": [
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 269
+},
+{
+"book": "G",
+"page": 272
+},
+{
+"book": "G",
+"page": 274
+},
+{
+"book": "G",
+"page": 275
+}
+]
+},
+{
+"id": "doppelwaschtisch",
+"name": "Doppelwaschtisch",
+"full_name": "Doppelwaschtisch",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "basin",
+"w": 120.0,
+"d": 55.0,
+"wall": true,
+"short": "DWB",
+"params": {
+"bowls": 2
+},
+"areas": [
+{
+"side": "front",
+"d": 55.0,
+"w": 150.0,
+"d_extra": 75.0,
+"note": "150 wide centred (15 each side)"
+}
+],
+"heights": {
+"top": null,
+"notes": "as WB 85-105"
+},
+"notes": "text p267: in multi-person households a second washplace with extra shower elsewhere is better than a second basin in the bath",
+"sources": [
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 269
+}
+]
+},
+{
+"id": "einbauwaschtisch_1",
+"name": "Einbauwaschtisch mit 1 Becken und Schrank",
+"full_name": "Einbauwaschtisch mit 1 Becken und Schrank",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "basin",
+"w": 70.0,
+"d": 60.0,
+"wall": true,
+"short": "EWT",
+"notes": "minimum (>=) per VDI 6000-1; no movement area drawn",
+"sources": [
+{
+"book": "G",
+"page": 268
+}
+],
+"corner_ok": true
+},
+{
+"id": "einbauwaschtisch_2",
+"name": "Einbauwaschtisch mit 2 Becken und Schrank",
+"full_name": "Einbauwaschtisch mit 2 Becken und Schrank",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "basin",
+"w": 140.0,
+"d": 60.0,
+"wall": true,
+"short": "EDWT",
+"params": {
+"bowls": 2
+},
+"notes": "minimum (>=) per VDI 6000-1",
+"sources": [
+{
+"book": "G",
+"page": 268
+}
+],
+"corner_ok": true
+},
+{
+"id": "handwaschbecken",
+"name": "Handwaschbecken",
+"full_name": "Handwaschbecken",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "basin",
+"w": 45.0,
+"d": 30.0,
+"wall": true,
+"short": "HWB",
+"areas": [
+{
+"side": "front",
+"d": 45.0,
+"w": 70.0,
+"d_extra": 75.0,
+"note": "70 wide centred on 45 basin (12.5 each side), from wall; 45 in front of basin (75 opposite)"
+}
+],
+"variants": [
+{
+"id": "45x35",
+"label": "as drawn p271/p272",
+"w": 45.0,
+"d": 35.0
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 269
+}
+]
+},
+{
+"id": "bidet",
+"name": "Sitzwaschbecken",
+"full_name": "Sitzwaschbecken (Bidet)",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "bidet",
+"w": 40.0,
+"d": 60.0,
+"wall": true,
+"short": "SW",
+"areas": [
+{
+"side": "front",
+"d": 60.0,
+"w": 80.0,
+"d_extra": 75.0,
+"note": "80 wide centred (20 each side)"
+}
+],
+"side_clearance": {
+"wall": 25,
+"other_objects": 25
+},
+"sources": [
+{
+"book": "G",
+"page": 266
+},
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 269
+}
+]
+},
+{
+"id": "wc_vorwand",
+"name": "WC mit Vorwand-Spuelkasten",
+"full_name": "WC mit Vorwand-Spuelkasten (Spuelung vor der Wand)",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "wc",
+"w": 40.0,
+"d": 75.0,
+"wall": true,
+"short": "WC",
+"params": {
+"wall_hung": false
+},
+"areas": [
+{
+"side": "front",
+"d": 60.0,
+"w": 80.0,
+"d_extra": 75.0,
+"note": "BF drawn only for the 40x60 WC; assumed same 80 x 60 (75)"
+}
+],
+"side_clearance": {
+"wall": 20
+},
+"sources": [
+{
+"book": "G",
+"page": 266
+},
+{
+"book": "G",
+"page": 268
+}
+]
+},
+{
+"id": "wc_wandeinbau",
+"name": "WC mit Wandeinbau-Spuelkasten",
+"full_name": "WC mit Wandeinbau-Spuelkasten (Unterputz)",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "wc",
+"w": 40.0,
+"d": 60.0,
+"wall": true,
+"short": "WC",
+"areas": [
+{
+"side": "front",
+"d": 60.0,
+"w": 80.0,
+"d_extra": 75.0,
+"note": "80 wide centred (20 each side)"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"w": 120.0,
+"d": 120.0,
+"note": "",
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"w": 150.0,
+"d": 150.0,
+"note": "height adjustment must be possible; walls must carry grab rails",
+"align": "any"
+}
+],
+"heights": {
+"seat": 40,
+"notes": "seat 40 in section p275 (non-barrier-free)"
+},
+"barrier_free": {
+"standard": "DIN 18025-1 / DIN 18040-2 (Entwurf)",
+"rollstuhlgerecht": {
+"bewegungsflaeche": {
+"w": 150,
+"d": 150,
+"position": "front"
+},
+"side_transfer_area": {
+"w": 95,
+"w_din18040": 90,
+"d": 70,
+"notes": "on one side (left or right depending on disability)"
+},
+"other_side_wall_min": 30,
+"depth_wc": 70,
+"backrest_behind_front_edge": 55,
+"seat_height": 48,
+"seat_height_din18040": [
+46,
+48
+],
+"grab_rails": {
+"type": "Stuetzklappgriffe both sides",
+"spacing": 70,
+"spacing_din18040": [
+65,
+70
+],
+"height_above_floor": 85,
+"height_above_seat_din18040": 28,
+"projection_beyond_wc_front": 15
+},
+"notes": "height adjustment must be possible; walls must carry grab rails"
+},
+"barrierefrei": {
+"bewegungsflaeche": {
+"w": 120,
+"d": 120
+},
+"side_wall_min": 20
+}
+},
+"side_clearance": {
+"wall": 20
+},
+"notes": "wall-hung WCs preferred for hygiene; cisterns preferred over pressure flush (water, noise) p269",
+"sources": [
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 269
+},
+{
+"book": "G",
+"page": 273
+},
+{
+"book": "G",
+"page": 274
+},
+{
+"book": "G",
+"page": 275
+},
+{
+"book": "G",
+"page": 276
+}
+]
+},
+{
+"id": "urinal",
+"name": "Urinalbecken",
+"full_name": "Urinalbecken",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "urinal",
+"w": 40.0,
+"d": 40.0,
+"wall": true,
+"short": "UR",
+"areas": [
+{
+"side": "front",
+"d": 60.0,
+"w": 60.0,
+"d_extra": 75.0,
+"note": "60 wide centred (10 each side)"
+}
+],
+"notes": "matrix row label UR",
+"sources": [
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 269
+}
+]
+},
+{
+"id": "duschwanne",
+"name": "Duschwanne",
+"full_name": "Duschwanne",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "shower",
+"w": 80.0,
+"d": 80.0,
+"wall": true,
+"short": "DU",
+"areas": [
+{
+"side": "front",
+"w": 90.0,
+"d": 75.0,
+"align": "any",
+"note": "Bewegungsraum vor der Dusche mind. 75 × 90 cm, Einstieg ≥ 70 cm"
+}
+],
+"variants": [
+{
+"id": "90x75",
+"label": "Standard 90x75",
+"w": 90.0,
+"d": 75.0
+}
+],
+"heights": {
+"top": null,
+"notes": "tray height standard 6-26; flat trays 1-2 for near floor-level; section p274 shows 0-30"
+},
+"barrier_free": {
+"standard": "DIN 18025-1/-2, DIN 18040-2 (Entwurf)",
+"rollstuhlgerecht": {
+"duschplatz": {
+"w": 150,
+"d": 150
+},
+"notes": "stufenlos, rollstuhlbefahrbar; later installation of a lifter-accessible tub in the shower area must be possible"
+},
+"barrierefrei": {
+"duschplatz": {
+"w": 120,
+"d": 120
+},
+"notes": "stufenlos begehbar; later tub in shower area should be possible"
+}
+},
+"sources": [
+{
+"book": "G",
+"page": 266
+},
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 269
+},
+{
+"book": "G",
+"page": 272
+},
+{
+"book": "G",
+"page": 274
+},
+{
+"book": "G",
+"page": 275
+}
+],
+"corner_ok": true
+},
+{
+"id": "badewanne",
+"name": "Badewanne",
+"full_name": "Badewanne",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "bath",
+"w": 170.0,
+"d": 75.0,
+"wall": true,
+"short": "BW",
+"areas": [
+{
+"side": "front",
+"d": 75.0,
+"w": 90.0,
+"note": "90 wide centred on the long side (40 from each end) x 75 deep",
+"align": "any"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"w": 170.0,
+"d": 120.0,
+"note": "",
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"w": 170.0,
+"d": 150.0,
+"note": "",
+"align": "any"
+}
+],
+"heights": {
+"top": null,
+"notes": "rim height 40-60 (section p274)"
+},
+"barrier_free": {
+"standard": "DIN 18025-1/-2",
+"rollstuhlgerecht": {
+"bewegungsflaeche": {
+"w": 150,
+"d": 170,
+"notes": "150 deep along the full tub length (drawn 150 x 170)"
+}
+},
+"barrierefrei": {
+"bewegungsflaeche": {
+"w": 120,
+"d": 170,
+"notes": "120 deep along the tub length"
+}
+}
+},
+"notes": "special forms (round, corner tubs) available",
+"sources": [
+{
+"book": "G",
+"page": 267
+},
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 269
+},
+{
+"book": "G",
+"page": 272
+},
+{
+"book": "G",
+"page": 274
+},
+{
+"book": "G",
+"page": 275
+}
+],
+"corner_ok": true
+},
+{
+"id": "waschmaschine_bad",
+"name": "Waschmaschine",
+"full_name": "Waschmaschine (im Bad)",
+"category": "wirtschaften",
+"context": [
+"wohnen"
+],
+"kind": "drum",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"short": "WM/TR",
+"areas": [
+{
+"side": "front",
+"d": 90.0,
+"note": "90 must be kept free on the operating side; opposite Stellflaechen of WM/TR >= 90"
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 265
+},
+{
+"book": "G",
+"page": 266
+},
+{
+"book": "G",
+"page": 268
+}
+]
+},
+{
+"id": "waeschetrockner_bad",
+"name": "Waeschetrockner",
+"full_name": "Waeschetrockner (im Bad)",
+"category": "wirtschaften",
+"context": [
+"wohnen"
+],
+"kind": "drum",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"short": "WM/TR",
+"areas": [
+{
+"side": "front",
+"d": 90.0
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 265
+},
+{
+"book": "G",
+"page": 266
+},
+{
+"book": "G",
+"page": 268
+}
+]
+},
+{
+"id": "hochschrank_bad",
+"name": "Badmoebel Hochschrank",
+"full_name": "Badmoebel Hochschrank (Unter-/Oberschrank)",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "tall",
+"w": 30.0,
+"d": 40.0,
+"wall": true,
+"notes": "minimum (>=)",
+"sources": [
+{
+"book": "G",
+"page": 268
+}
+]
+},
+{
+"id": "duschplatz_150",
+"name": "Duschplatz rollstuhlgerecht",
+"full_name": "Duschplatz rollstuhlgerecht (bodengleich)",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "shower",
+"w": 150.0,
+"d": 150.0,
+"wall": true,
+"h": 0.0,
+"params": {
+"drain": "center",
+"floor": true
+},
+"notes": "DIN 18025-1; stufenlos; drawn as light-blue square with drain circle near corner",
+"sources": [
+{
+"book": "G",
+"page": 274
+}
+],
+"corner_ok": true,
+"walkable": true
+},
+{
+"id": "duschplatz_120",
+"name": "Duschplatz barrierefrei",
+"full_name": "Duschplatz barrierefrei (bodengleich)",
+"category": "sanitaer",
+"context": [
+"wohnen"
+],
+"kind": "shower",
+"w": 120.0,
+"d": 120.0,
+"wall": true,
+"h": 0.0,
+"params": {
+"drain": "center",
+"floor": true
+},
+"notes": "DIN 18025-2; stufenlos begehbar",
+"sources": [
+{
+"book": "G",
+"page": 275
+}
+],
+"corner_ok": true,
+"walkable": true
+},
+{
+"id": "sessel_wartebereich",
+"name": "Sessel Wartebereich",
+"full_name": "Sessel Wartebereich",
+"category": "wohnen",
+"context": [
+"arbeiten"
+],
+"kind": "armchair",
+"w": 75.0,
+"d": 85.0,
+"wall": false,
+"areas": [
+{
+"side": "front",
+"d": 40.0,
+"note": "Abstand Sessel–Couchtisch 40"
+}
+],
+"notes": "Maße 'ca.'",
+"sources": [
+{
+"book": "G",
+"page": 374
+}
+]
+},
+{
+"id": "couchtisch_wartebereich",
+"name": "Couchtisch Wartebereich",
+"full_name": "Couchtisch Wartebereich (für 2 Sessel je Seite)",
+"category": "wohnen",
+"context": [
+"arbeiten"
+],
+"kind": "table",
+"w": 160.0,
+"d": 40.0,
+"wall": false,
+"notes": "Breite/Tiefe nicht bemaßt, aus Zeichnung (M 1:50 geschätzt): Breite = 2 Sessel 75 + 10 Fuge = 160, Tiefe ca. 40.",
+"sources": [
+{
+"book": "G",
+"page": 374
+}
+]
+},
+{
+"id": "linienbus_12m",
+"name": "Linienbus",
+"full_name": "Linienbus (Standardbus)",
+"category": "verkehr",
+"context": [
+"lernen",
+"allgemein"
+],
+"kind": "car",
+"w": 1200.0,
+"d": 255.0,
+"wall": false,
+"h": 295.0,
+"heights": {
+"top": 295,
+"notes": "Fahrzeughöhe"
+},
+"notes": "Längskette 350 (Überhang vorn) | 600 (Radstand) | 250 (Überhang hinten) = 1200, Breite 255, Höhe 295; M 1:1000",
+"sources": [
+{
+"book": "G",
+"page": 479
+}
+]
+},
+{
+"id": "gelenkbus_18m",
+"name": "Gelenkbus",
+"full_name": "Gelenkbus",
+"category": "verkehr",
+"context": [
+"lernen",
+"allgemein"
+],
+"kind": "car",
+"w": 1875.0,
+"d": 255.0,
+"wall": false,
+"h": 295.0,
+"heights": {
+"top": 295,
+"notes": "Fahrzeughöhe"
+},
+"notes": "Längskette 350 | 625 | 650 | 250 = 1875 (Achsabstände), Breite 255, Höhe 295; M 1:1000",
+"sources": [
+{
+"book": "G",
+"page": 479
+}
+]
+},
+{
+"id": "fahrkorb",
+"name": "Fahrkorb",
+"category": "sonstiges",
+"kind": "generic",
+"w": 110.0,
+"d": 140.0,
+"wall": true,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 45
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (aufzug_vorflaeche_rollstuhl)"
+},
+{
+"id": "rampenlauf_1",
+"name": "Rampenlauf 1",
+"category": "sonstiges",
+"kind": "generic",
+"w": 600.0,
+"d": 120.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 73
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (rampe_rollstuhlgerecht)"
+},
+{
+"id": "rampenlauf_2",
+"name": "Rampenlauf 2",
+"category": "sonstiges",
+"kind": "generic",
+"w": 600.0,
+"d": 120.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 73
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (rampe_rollstuhlgerecht)"
+},
+{
+"id": "arbeitsinsel",
+"name": "Arbeitsinsel",
+"category": "kueche",
+"kind": "generic",
+"w": 190.0,
+"d": 100.0,
+"wall": true,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 205
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (kueche_arbeitsinsel)"
+},
+{
+"id": "imbisstheke",
+"name": "Imbisstheke",
+"category": "kueche",
+"kind": "counter",
+"w": 60.0,
+"d": 240.0,
+"wall": true,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 205
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (kueche_l_essplatz)"
+},
+{
+"id": "hocker",
+"name": "Hocker",
+"category": "kueche",
+"kind": "chair",
+"w": 40.0,
+"d": 40.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 205
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (kueche_l_essplatz)"
+},
+{
+"id": "kuechenzeile",
+"name": "Kuechenzeile",
+"category": "kueche",
+"kind": "generic",
+"w": 360.0,
+"d": 60.0,
+"wall": true,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 208
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (kueche_einzeilig_rollstuhl)"
+},
+{
+"id": "moebel_sideboard",
+"name": "Moebel sideboard",
+"category": "sonstiges",
+"kind": "shelf",
+"w": 210.0,
+"d": 40.0,
+"wall": true,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 216
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (essplatz_eckig_4p)"
+},
+{
+"id": "empfangstheke",
+"name": "Empfangstheke",
+"category": "sonstiges",
+"kind": "counter",
+"w": 40.0,
+"d": 290.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 373
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (empfang_theke_angrenzender_arbeitsplatz)"
+},
+{
+"id": "schreibtisch",
+"name": "Schreibtisch",
+"category": "sonstiges",
+"kind": "desk",
+"w": 60.0,
+"d": 120.0,
+"wall": true,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 373
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (empfang_theke_angrenzender_arbeitsplatz)"
+}
+]

@@ -1,0 +1,1501 @@
+[
+{
+"id": "besprechungsraum",
+"name": "Besprechungsraum (Besprechen)",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"besprechungstisch",
+"stuehle"
+],
+"rules": [
+"3,0 m² je Person (8 P. → 24 m²)",
+"getrennt, abgeschlossen",
+"Piktogramm: quadratischer Tisch"
+],
+"sources": [
+{
+"book": "A",
+"page": 180
+},
+{
+"book": "A",
+"page": 181
+}
+]
+},
+{
+"id": "konferenzraum",
+"name": "Konferenzraum (Konferieren, Führungskräfte)",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"konferenztisch",
+"stuehle"
+],
+"rules": [
+"3,0 m² je Person (20 P. → 60 m²)",
+"getrennt, abgeschlossen",
+"Piktogramm: langer Tisch"
+],
+"sources": [
+{
+"book": "A",
+"page": 180
+},
+{
+"book": "A",
+"page": 181
+}
+]
+},
+{
+"id": "tagungsraum",
+"name": "Tagungsraum/Saal (Tagen, Präsentation)",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"stuhlreihen"
+],
+"rules": [
+"0,9 m² je Person (Reihenbestuhlung)",
+"getrennt, abgeschlossen"
+],
+"sources": [
+{
+"book": "A",
+"page": 180
+},
+{
+"book": "A",
+"page": 181
+}
+]
+},
+{
+"id": "workshopraum",
+"name": "Workshopraum",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"3,5 m² je Person",
+"Gestaltung nach Moderationsmethode (Pinnwände, Flipchart)"
+],
+"sources": [
+{
+"book": "A",
+"page": 180
+},
+{
+"book": "A",
+"page": 181
+}
+]
+},
+{
+"id": "projektraum",
+"name": "Projektraum (Projektarbeit)",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"8-10 m² je Person (Teamraum mit Arbeitsplätzen)",
+"getrennt, abgeschlossen"
+],
+"sources": [
+{
+"book": "A",
+"page": 180
+},
+{
+"book": "A",
+"page": 181
+}
+]
+},
+{
+"id": "schulungsraum",
+"name": "Schulungsraum",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"2,5 m² je Person (30 P. → 75 m²)",
+"getrennt, abgeschlossen",
+"Piktogramm: U-Form mit Referententisch"
+],
+"sources": [
+{
+"book": "A",
+"page": 180
+},
+{
+"book": "A",
+"page": 181
+}
+]
+},
+{
+"id": "seminarraum",
+"name": "Seminarraum",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"3,8 m² je Person",
+"getrennt, abgeschlossen, Aktionszonen",
+"Piktogramm: Tischreihen"
+],
+"sources": [
+{
+"book": "A",
+"page": 180
+},
+{
+"book": "A",
+"page": 181
+}
+]
+},
+{
+"id": "trainingsraum",
+"name": "Trainingsraum",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"5,0 m² je Person",
+"getrennt, abgeschlossen, große Aktionszone"
+],
+"sources": [
+{
+"book": "A",
+"page": 180
+},
+{
+"book": "A",
+"page": 181
+}
+]
+},
+{
+"id": "cafeteria_buero",
+"name": "Cafeteria",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"2,5 m² je Person",
+"offen, Freizeitcharakter, für Pausen und kurzfristige Treffen"
+],
+"sources": [
+{
+"book": "A",
+"page": 181
+}
+]
+},
+{
+"id": "businesslounge",
+"name": "Businesslounge",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"4,0 m² je Person",
+"offen, Repräsentation, Arbeitsnischen für temporäres Arbeiten"
+],
+"sources": [
+{
+"book": "A",
+"page": 181
+}
+]
+},
+{
+"id": "koordinationszone",
+"name": "Koordinationszone (Kurzbesprechung)",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"integriert, offen im Arbeitsbereich",
+"Flächenbedarf nach Arbeitsstättenrichtlinien (ASR)"
+],
+"sources": [
+{
+"book": "A",
+"page": 181
+}
+]
+},
+{
+"id": "achsenarbeitsplatz",
+"name": "Standard-Achsenarbeitsplatz (Zellenbüro je Arbeitsplatz)",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": 250,
+"d": 385,
+"area": 9.6
+},
+"requires": [],
+"rules": [
+"Beispielmaß 2,5 m Achsbreite × 3,85 m Raumtiefe ('millionenfach gebaut')",
+"für sich optimiert, aber ungeeignet für stufenlose innere Ver-/Entdichtung – ergänzend unterschiedlich belegbare offene Zonen vorsehen",
+"Flachbildschirm verkleinert die Büroachse um ca. 30 cm"
+],
+"sources": [
+{
+"book": "A",
+"page": 60
+},
+{
+"book": "A",
+"page": 61
+},
+{
+"book": "A",
+"page": 86
+}
+]
+},
+{
+"id": "bueroflaeche_je_beschaeftigtem",
+"name": "Bürofläche je Beschäftigtem (Kennwerte)",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"Reine Büroarbeitsfläche (früher HNF) ca. 12-14 m² je Beschäftigtem",
+"Gesamte belegte Bürofläche ca. 30-33 m² je Beschäftigtem in DE, knapp 40 m² in CH",
+"Spannweite Fläche/Person im Diagramm ca. 5-60 m²; großes Chefbüro ca. 5 × kleinster AP"
+],
+"sources": [
+{
+"book": "A",
+"page": 20
+},
+{
+"book": "A",
+"page": 21
+},
+{
+"book": "A",
+"page": 55
+},
+{
+"book": "A",
+"page": 57
+}
+]
+},
+{
+"id": "aufzug_vorraum",
+"name": "Wartezone/Vorraum vor Aufzügen",
+"context": [
+"allgemein"
+],
+"min": {
+"w": 150,
+"d": 150,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"aufzug"
+],
+"rules": [
+"DIN 15306 Wohngebäude: Tiefe = FKT, mind. 150; Fläche FKT x SBR, mind. 150 x 150; Reihe: tiefster Fahrkorb, Breite über äußerste Schachtwände",
+"DIN 15309: Einzelaufzug Tiefe >= 1,5 FKT; Reihe >= 1,5 FKT und >= 240; gegenüberliegend FKT1 + FKT2, max. 450; nicht für Bettenaufzüge",
+"Feuerwehraufzug-Vorraum: Krankentrage 60 x 226 einbringbar; Krankenhaus mind. 200 x 250"
+],
+"sources": [
+{
+"book": "G",
+"page": 86
+},
+{
+"book": "G",
+"page": 87
+},
+{
+"book": "G",
+"page": 95
+},
+{
+"book": "G",
+"page": 97
+}
+],
+"barrier_free": {
+"w": 150,
+"d": 150,
+"notes": "DIN 18040-1: nicht mit Verkehrswegen/anderen Bewegungsflächen überlagern; seitlich am Ruftableau >= 50 frei"
+}
+},
+{
+"id": "feuerwehraufzug_vorraum",
+"name": "Brandgeschützter Vorraum Feuerwehraufzug",
+"context": [
+"allgemein"
+],
+"min": {
+"w": 200,
+"d": 250,
+"area": 5.0,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"feuerwehraufzug"
+],
+"rules": [
+"Mindestmaß 200 x 250 gilt für Krankenhäuser u. ä.; allgemein: belegte Krankentrage 60 breit, 226 Transportlänge muss ungehindert einbringbar sein",
+"kann bei Aufzugsgruppe als gemeinsame Wartezone ausgebildet werden"
+],
+"sources": [
+{
+"book": "G",
+"page": 95
+}
+]
+},
+{
+"id": "kueche",
+"name": "Küche / Kochnische",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": 240
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"kuehlschrank",
+"spuele",
+"herd_backofen",
+"arbeitsflaeche_klein"
+],
+"rules": [
+"MBO §48: jede Wohnung braucht Küche oder Kochnische; fensterlos zulässig bei wirksamer Lüftung",
+"abgeschlossene Küche = Aufenthaltsraum: lichte Höhe ≥240 (MBO §47); LBO BW: 230, bzw. 220 über mind. halber Fläche bei Dachräumen, Raumteile ≤150 hoch zählen nicht",
+"Bauordnung nennt keine Mindestfläche; Orientierungswerte nach Bayerischen Wohnbauförderbestimmungen",
+"Lauflänge (entlang frei zugänglicher Vorderkanten): ≥330 für 1-2-Personen-Haushalt, ≥540 ab 2 Personen / Mehrpersonenhaushalt",
+"reine Funktionsküche Nordost/Nordwest-orientiert (kein Aufheizen); mit Essplatz Besonnung erwünscht",
+"Lage nahe Wohnungseingang günstig; Küche und Bad an gemeinsamen Installationsschacht (Kosten, Schall)",
+"zusätzlicher Essplatz in der Küche: mind. 4 m² mehr"
+],
+"sources": [
+{
+"book": "G",
+"page": 194
+},
+{
+"book": "G",
+"page": 195
+},
+{
+"book": "G",
+"page": 196
+},
+{
+"book": "G",
+"page": 203
+}
+]
+},
+{
+"id": "kueche_typen",
+"name": "Kombinationstypen Kochen/Essen/Wohnen",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": null,
+"requires": [],
+"rules": [
+"1 Funktionsküche (nur Kochen)",
+"2 Essküche (Kochbereich mit Essplatz)",
+"3 Wohnküche (Kochen, Essen, Wohnen in einem Raumbereich, z.B. Loft)",
+"4 flexible Anordnung mit Schiebe-/Faltwänden"
+],
+"sources": [
+{
+"book": "G",
+"page": 194
+}
+]
+},
+{
+"id": "essplatz",
+"name": "Essplatz / Essbereich",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 4,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"esstisch_rechteckig",
+"essstuhl"
+],
+"rules": [
+"Essplatz für 4-6 Personen in der Küche: überschlägig ca. 4 m² zusätzlich",
+"Küchenzeile ohne Oberschränke zum Essplatz hin ermöglicht Blickkontakt",
+"auch in 1-2-Personen-Haushalten Essplatz für größere Gruppen erweiterbar",
+"Schiebe-/Faltwände zur flexiblen Kopplung/Trennung",
+"Platzbedarf 4 Pers. eckig: Stellfläche 180-190 x 180-185, mit Abständen 280-290 x 210-215",
+"Platzbedarf 4 Pers. rund: Stellfläche Ø 190-230, mit Abständen 290-330",
+"rollstuhlgerecht: eckig ≥310 (Tisch 80) x ≥250 (Tisch 130 + ≥120); rund ≥350 x ≥370",
+"barrierefrei: eckig 260 x ≥220; rund 300 x ≥350"
+],
+"sources": [
+{
+"book": "G",
+"page": 214
+},
+{
+"book": "G",
+"page": 215
+},
+{
+"book": "G",
+"page": 216
+},
+{
+"book": "G",
+"page": 218
+},
+{
+"book": "G",
+"page": 219
+}
+]
+},
+{
+"id": "wc_raum",
+"name": "Toilettenraum (WC + Handwaschbecken)",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 90,
+"d": 190,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"wc_wandeinbau",
+"handwaschbecken"
+],
+"rules": [
+"text min approx 190 x 90 or 165 x 115",
+"drawn variants: 90 x 170, 145 x 120 (+15 opposite), 115 x 145",
+"a second WC (Gaeste-WC) recommended even with one shared bath",
+"LBO BW 36: each unit >=1 WC with sufficient ventilation",
+"windowless WC: motorised extract ventilation preferred over shaft ventilation"
+],
+"sources": [
+{
+"book": "G",
+"page": 263
+},
+{
+"book": "G",
+"page": 265
+},
+{
+"book": "G",
+"page": 267
+},
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 270
+}
+]
+},
+{
+"id": "duschbad",
+"name": "Duschbad (Dusche + Waschtisch)",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 110,
+"d": 170,
+"area": null,
+"clear_height": null
+},
+"typical": null,
+"requires": [
+"duschwanne",
+"einzelwaschtisch"
+],
+"rules": [
+"often added to a full bath in larger households",
+"text min approx 110 x 170; drawn variant 125 x 165"
+],
+"sources": [
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 270
+}
+]
+},
+{
+"id": "duschbad_wc",
+"name": "Duschbad mit Toilette",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 185,
+"d": 195,
+"area": null,
+"clear_height": null
+},
+"typical": null,
+"requires": [
+"duschwanne",
+"einzelwaschtisch",
+"wc_wandeinbau"
+],
+"rules": [
+"text min approx 185 x 195 or 165 x 200",
+"drawn variants 145 x 215, 160 x 165"
+],
+"sources": [
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 270
+}
+]
+},
+{
+"id": "wannenbad_wc",
+"name": "Wannenbad mit Toilette",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": null,
+"requires": [
+"badewanne",
+"einzelwaschtisch",
+"wc_wandeinbau"
+],
+"rules": [
+"drawn variants 210 x 170, 270 x 155, 205 x 175"
+],
+"sources": [
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 271
+}
+]
+},
+{
+"id": "vollbad",
+"name": "Vollbad mit Toilette",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": null,
+"requires": [
+"einzelwaschtisch",
+"wc_wandeinbau",
+"badewanne",
+"duschwanne"
+],
+"rules": [
+"drawn variant ~310 x 230 with WC, bidet, WT, WM, tub and shower"
+],
+"sources": [
+{
+"book": "G",
+"page": 268
+},
+{
+"book": "G",
+"page": 271
+}
+]
+},
+{
+"id": "bad_allgemein",
+"name": "Bad (allgemeine Anforderungen)",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": null,
+"requires": [
+"badewanne|duschwanne",
+"wc"
+],
+"rules": [
+"MBO 48: every dwelling needs a bath with tub or shower and a WC",
+"MBO 43: windowless baths only with effective ventilation; internal baths mechanically ventilated per DIN 18017",
+"baths may face north",
+"if no Hausarbeitsraum: Stellflaechen + connections for WM, TR and laundry basket in the bath",
+"lockable medicine cabinet, storage for towels and cleaning agents",
+"group installation shafts of wet rooms; stack baths/kitchens vertically",
+"Vorwandinstallation approx 20 deep (horizontal pipes, VDI: from 17) / 25 deep (vertical pipes) measured raw wall to front of boarding without tiles",
+"DIN VDE 0100-701 protection zones",
+"slip-resistant floor per DIN 51130 (R9 low ... R13 highest)",
+"pipes on walls to other wet rooms/kitchens, not on walls to living/sleeping rooms (DIN 4109)",
+"consider heating, lighting, hot water and tile plan"
+],
+"sources": [
+{
+"book": "G",
+"page": 263
+},
+{
+"book": "G",
+"page": 265
+},
+{
+"book": "G",
+"page": 267
+},
+{
+"book": "G",
+"page": 269
+}
+]
+},
+{
+"id": "bad_rollstuhlgerecht",
+"name": "Sanitaerraum rollstuhlgerecht",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 245,
+"d": 295,
+"area": null,
+"clear_height": null
+},
+"typical": null,
+"requires": [
+"einzelwaschtisch",
+"wc_wandeinbau",
+"duschplatz_150"
+],
+"rules": [
+"BF 150 x 150 in front of WT, WC, shower, tub (may overlap)",
+"Duschplatz rollstuhlbefahrbar stufenlos 150 x 150; later lifter-accessible tub must fit in shower area (tub + BF: >=225 x >=170)",
+"dwellings > 3 persons: additional sanitary room with WC and WB (DIN 18025-1 6.2)",
+"mechanical ventilation DIN 18017-3",
+"walls/ceilings load-bearing for grab/support/lift devices",
+"single-lever mixers with temperature limiter and swivel spout",
+"example room >=245 (>=240) x >=295, door >=90 opening outwards"
+],
+"sources": [
+{
+"book": "G",
+"page": 274
+},
+{
+"book": "G",
+"page": 276
+}
+],
+"barrier_free": {
+"standard": "DIN 18025-1 / DIN 18040-2 (Entwurf)",
+"w_din18040": 240,
+"door_clear_width": 90,
+"door_swing": "out"
+}
+},
+{
+"id": "bad_barrierefrei",
+"name": "Sanitaerraum barrierefrei",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 200,
+"d": 180,
+"area": null,
+"clear_height": null
+},
+"typical": null,
+"requires": [
+"einzelwaschtisch",
+"wc_wandeinbau",
+"duschplatz_120"
+],
+"rules": [
+"BF 120 x 120 in front of WT, WC, shower, tub (may overlap)",
+"Duschplatz stufenlos 120 x 120, later tub possible",
+"WT and WC >=20 from side wall",
+"knee clearance under WT",
+"example room >=200 x >=180, door >=80 opening outwards"
+],
+"sources": [
+{
+"book": "G",
+"page": 275
+}
+],
+"barrier_free": {
+"standard": "DIN 18025-2 / DIN 18040-2 (Entwurf)",
+"door_clear_width": 80,
+"door_swing": "out"
+}
+},
+{
+"id": "empfang",
+"name": "Empfang/Rezeption",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"empfangstheke",
+"schreibtisch",
+"buerostuhl"
+],
+"rules": [
+"Eingangsbereich gesamt 0,2–0,6 m² je Büroarbeitsplatz",
+"Theke 40 tief/100 hoch, Personalgang 75–125 bzw. 100 hinter integriertem Tisch"
+],
+"sources": [
+{
+"book": "G",
+"page": 367
+},
+{
+"book": "G",
+"page": 373
+},
+{
+"book": "G",
+"page": 374
+}
+]
+},
+{
+"id": "wartebereich",
+"name": "Wartebereich",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"sessel_wartebereich",
+"couchtisch_wartebereich",
+"besucherstuhl"
+],
+"rules": [
+"nur bei starkem Publikumsverkehr",
+"in Fluchtwegen Sitzmöbel Brandklasse A"
+],
+"sources": [
+{
+"book": "G",
+"page": 374
+}
+]
+},
+{
+"id": "windfang",
+"name": "Windfang",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": 200,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"innere Tür muss schließen, bevor äußere öffnet",
+"Türen in Rettungswegen nach außen aufschlagend"
+],
+"sources": [
+{
+"book": "G",
+"page": 368
+}
+]
+},
+{
+"id": "klassenraum_gross_schbaufr",
+"name": "Großer Klassenraum (SchBauFR BW Gymnasium)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 66,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 66
+},
+"requires": [],
+"rules": [
+"Programmfläche 66 m²"
+],
+"sources": [
+{
+"book": "G",
+"page": 472
+}
+]
+},
+{
+"id": "klassenraum_mittel_schbaufr",
+"name": "Mittlerer Klassenraum (SchBauFR BW Gymnasium)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 60,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 60
+},
+"requires": [],
+"rules": [
+"Programmfläche 60 m²"
+],
+"sources": [
+{
+"book": "G",
+"page": 472
+}
+]
+},
+{
+"id": "klassenraum_klein_schbaufr",
+"name": "Kleiner Klassenraum (SchBauFR BW Gymnasium)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 54,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 54
+},
+"requires": [],
+"rules": [
+"Programmfläche 54 m²"
+],
+"sources": [
+{
+"book": "G",
+"page": 472
+}
+]
+},
+{
+"id": "lehruebungsraum_nawi",
+"name": "Lehrübungsraum Physik/Chemie/Biologie",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 84,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 90
+},
+"requires": [],
+"rules": [
+"84-90 m²; Standard 90 m² für 32 Schüler; multifunktional nutzbar; alternativ ansteigender Lehrsaal"
+],
+"sources": [
+{
+"book": "G",
+"page": 472
+},
+{
+"book": "G",
+"page": 473
+}
+]
+},
+{
+"id": "musiksaal_schbaufr",
+"name": "Musiksaal",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 72,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 72
+},
+"requires": [],
+"rules": [
+"72 m²; Nebenraum Musik 12-24 m² je nach Zügigkeit; Übungszellen je 6 m²"
+],
+"sources": [
+{
+"book": "G",
+"page": 473
+}
+]
+},
+{
+"id": "kunstraum_schbaufr",
+"name": "Fachraum Bildende Kunst",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 66,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 78
+},
+"requires": [],
+"rules": [
+"66-78 m²; Nebenraum 18-24 m²"
+],
+"sources": [
+{
+"book": "G",
+"page": 473
+}
+]
+},
+{
+"id": "computerraum_schbaufr",
+"name": "Computerraum (einschl. Nebenraum)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 66,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 72
+},
+"requires": [],
+"rules": [
+"66-72 m²; Serverraum 6-12 m² als Restfläche"
+],
+"sources": [
+{
+"book": "G",
+"page": 473
+}
+]
+},
+{
+"id": "lehrerzimmer_schbaufr",
+"name": "Lehrerbereich / Lehrerzimmer mit Garderobe",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 132,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"2-zügig 132, 3-zügig 174, 4-zügig 216, 5-zügig 258 m² (Gymnasium BW)"
+],
+"sources": [
+{
+"book": "G",
+"page": 473
+}
+]
+},
+{
+"id": "schulleiter_schbaufr",
+"name": "Schulleiter",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 24,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 24
+},
+"requires": [],
+"rules": [
+"24 m² (alle Zügigkeiten), Stellvertreter 18 m²"
+],
+"sources": [
+{
+"book": "G",
+"page": 473
+}
+]
+},
+{
+"id": "sekretariat_schbaufr",
+"name": "Sekretariat und Registratur",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 30,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"2z 30, 3z 36, 4z 42, 5z 48 m²"
+],
+"sources": [
+{
+"book": "G",
+"page": 473
+}
+]
+},
+{
+"id": "schulbibliothek_schbaufr",
+"name": "Schulbibliothek",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 96,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"2z 96, 3z 126, 4z 156, 5z 186 m²"
+],
+"sources": [
+{
+"book": "G",
+"page": 473
+}
+]
+},
+{
+"id": "flur_notwendig_schule",
+"name": "Notwendiger Flur in Schulen",
+"context": [
+"lernen"
+],
+"min": {
+"w": 125,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"nutzbare Breite ≥ 1,25 m (sonstige notwendige Flure)",
+"≥ 2,00 m wenn mehr als 180 Benutzer darauf angewiesen sind",
+"Faustregel 1 m je 150 darauf angewiesene Nutzer",
+"Stichflure max. 10 m lang",
+"Rauchabschnitte max. 30 m",
+"keine Treppen < 3 Stufen",
+"Breite nicht durch offene Türen, Einbauten, Einrichtungen einengen",
+"in den Flur aufschlagende Türen ragen in Endstellung inkl. Griff max. 20 cm hinein"
+],
+"sources": [
+{
+"book": "G",
+"page": 483
+},
+{
+"book": "G",
+"page": 484
+},
+{
+"book": "G",
+"page": 485
+}
+]
+},
+{
+"id": "treppenraum_notwendig_schule",
+"name": "Notwendiger Treppenraum in Schulen",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"eigener durchgehender Treppenraum je notwendiger Treppe (Ausnahme Außentreppe)",
+"Laufbreite ≥ 1,25 m (< 180 Nutzer) bzw. ≥ 2,00 m (> 180 Nutzer), max. 2,50 m bzw. max. 2,50 m zwischen Handläufen",
+"gerade Läufe",
+"Ausgang in den Treppenraum nicht breiter als die folgende Treppe",
+"zwischen Tür (in Treppenrichtung aufschlagend) und erster Stufe Podest mindestens so tief wie die Türbreite"
+],
+"sources": [
+{
+"book": "G",
+"page": 488
+},
+{
+"book": "G",
+"page": 489
+}
+]
+},
+{
+"id": "aula_schule",
+"name": "Aula / Veranstaltungsbereich der Schule",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"garderobe",
+"toiletten"
+],
+"rules": [
+"in größeren Schulen eigener Raum (Aula), bei außerschulischer Nutzung Bühne sinnvoll",
+"Nebenbereiche: Garderoben, Toiletten, ggf. Stuhllager, Requisitenlager",
+"kleinere Schulen: erweiterte Verkehrsflächen im Eingangsbereich, ggf. mit flexiblen, möglichst schalldichten Wänden; Musikraum per flexibler Wand mit anderen Räumen/Eingangshalle zusammenschaltbar (SchulBauFR BW 2006)",
+"ggf. Mitnutzung einer Mehrzweck-Sporthalle",
+"Anordnung (Schemata M 1:2500): eigener geschlossener/abgegrenzter Raum; eigenständiger Baukörper angebunden; eigenständiger Baukörper nicht direkt angebunden; Erweiterung der Verkehrsflächen (Mehrfachnutzung)"
+],
+"sources": [
+{
+"book": "G",
+"page": 493
+},
+{
+"book": "G",
+"page": 494
+}
+]
+}
+]

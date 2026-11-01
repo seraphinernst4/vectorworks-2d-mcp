@@ -1,0 +1,5479 @@
+[
+{
+"id": "tuer_drehfluegel_rollstuhl",
+"room": "tuer",
+"name": "Bewegungsflächen vor Drehflügeltür, rollstuhlgerecht",
+"mode": "rollstuhlgerecht",
+"W": 150.0,
+"D": 290.0,
+"barrier_free": true,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 150,
+"d": 150,
+"for": [
+"tuer_aufschlagseite"
+],
+"notes": "Aufschlagseite (Tür schlägt in diese Fläche)"
+},
+{
+"x": 0,
+"y": 170,
+"w": 150,
+"d": 120,
+"for": [
+"tuer_gegenseite"
+],
+"notes": "Gegenseite"
+}
+],
+"doors": [
+{
+"wall": "horizontal wall between y=150 and y=170",
+"offset": 50,
+"width": 90,
+"swing": "into lower area (y<150)",
+"hinge": "right (east jamb)"
+}
+],
+"dims": "oben/unten: ≥150 Gesamtbreite; auf beiden Seiten ≥50 (links, Drückerseite) und ≥90 Türöffnung; rechts: ≥120 (Gegenseite), ≥150 (Aufschlagseite)",
+"notes": "Wand als Band zwischen den Flächen gezeichnet, Dicke nicht bemaßt (gezeichnet ca. 20 cm, hier y 150-170 angenommen). Drückerseite links (W), Bänder rechts (E); Türblatt in geöffneter Stellung senkrecht in der Aufschlagseite am rechten Rand. Rest auf Bandseite 150-50-90 = 10 cm. In der Zeichnung beginnt die Öffnung ca. 7 cm links von der 50er-Maßlinie (Maßlinien überlappen) – nach Norm gilt: 50 cm frei neben der Öffnung auf der Drückerseite.",
+"sources": [
+{
+"book": "G",
+"page": 45
+}
+],
+"reference_only": true
+},
+{
+"id": "tuer_schiebe_rollstuhl",
+"room": "tuer",
+"name": "Bewegungsflächen vor Schiebetür, rollstuhlgerecht",
+"mode": "rollstuhlgerecht",
+"W": 190.0,
+"D": 260.0,
+"barrier_free": true,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 190,
+"d": 120,
+"for": [
+"schiebetuer_seite_1"
+],
+"notes": "Seite, auf der das Türblatt läuft"
+},
+{
+"x": 0,
+"y": 140,
+"w": 190,
+"d": 120,
+"for": [
+"schiebetuer_seite_2"
+]
+}
+],
+"doors": [
+{
+"wall": "horizontal wall between y=120 and y=140",
+"offset": 50,
+"width": 90,
+"swing": "sliding, leaf runs to the right (east) in front of the wall on lower side",
+"hinge": null
+}
+],
+"dims": "oben und unten: ≥190; je Seite ≥50 | ≥90 | ≥50 (= 190); rechts ≥120 / ≥120",
+"notes": "Wanddicke nicht bemaßt (gezeichnet ca. 20, hier y 120-140 angenommen). Türblatt als dünnes Rechteck vor der Wand, läuft nach rechts über den Flächenrand hinaus; geschlossene Stellung gestrichelt.",
+"sources": [
+{
+"book": "G",
+"page": 45
+}
+],
+"reference_only": true
+},
+{
+"id": "aufzug_vorflaeche_rollstuhl",
+"room": "aufzug",
+"name": "Bewegungsfläche vor Aufzugstür, rollstuhlgerecht",
+"mode": "rollstuhlgerecht",
+"W": 150.0,
+"D": 330.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "fahrkorb",
+"x": 50.0,
+"y": 170.0,
+"w": 110.0,
+"d": 140.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 150,
+"d": 150,
+"for": [
+"aufzugstuer"
+],
+"notes": "Vorfläche ≥150 × 150"
+}
+],
+"doors": [
+{
+"wall": "shaft front wall between y=150 and y=170",
+"offset": 60,
+"width": 90,
+"swing": "sliding (Teleskop/Mittel nicht spezifiziert)",
+"hinge": null
+}
+],
+"dims": "unten ≥150 (Vorfläche); links ≥50 vom Flächenrand bis Bedientableau (Ruftaster) an der Wand neben der Tür; Tür ≥90; Fahrkorb ≥110 breit, ≥140 tief; Vorfläche ≥150 tief",
+"notes": "Gemessen in der Zeichnung: Türöffnung bündig mit dem rechten Rand der Vorfläche (x 60-150), Ruftaster bei x≈50, d. h. die Vorfläche ragt links 60 cm über die Türöffnung hinaus. Schachtwände dick dunkelblau, Schachtinnenmaß nicht bemaßt; Wanddicke vorn hier 20 angenommen.",
+"sources": [
+{
+"book": "G",
+"page": 45
+}
+],
+"reference_only": true
+},
+{
+"id": "flur_rollstuhl_geradeaus",
+"room": "flur",
+"name": "Flur Rollstuhl ohne Richtungsänderung",
+"mode": "rollstuhlgerecht",
+"W": 120.0,
+"D": null,
+"barrier_free": true,
+"elements": [],
+"movement": [],
+"doors": [],
+"dims": "Flurbreite ≥120; Rollstuhl mittig; Wände als dunkelblaue Bänder",
+"notes": "M 1:50, DIN 18024/18025/18040 (Entwurf)",
+"sources": [
+{
+"book": "G",
+"page": 46
+}
+],
+"reference_only": true
+},
+{
+"id": "flur_rollstuhl_wenden",
+"room": "flur",
+"name": "Flur Rollstuhl mit Richtungsänderung (Wendefläche)",
+"mode": "rollstuhlgerecht",
+"W": 150.0,
+"D": 150.0,
+"barrier_free": true,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 150,
+"d": 150,
+"for": [
+"rollstuhl_bemessung"
+]
+}
+],
+"doors": [],
+"dims": "≥150 × ≥150 als gestricheltes Quadrat, Drehpfeil",
+"notes": "M 1:50, DIN 18024/18025/18040 (Entwurf)",
+"sources": [
+{
+"book": "G",
+"page": 46
+}
+],
+"reference_only": true
+},
+{
+"id": "flur_rollstuhl_begegnung",
+"room": "flur",
+"name": "Flur Begegnung zweier Rollstühle",
+"mode": "rollstuhlgerecht",
+"W": 180.0,
+"D": 180.0,
+"barrier_free": true,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 180,
+"d": 180,
+"for": [
+"rollstuhl_bemessung"
+]
+}
+],
+"doors": [],
+"dims": "≥180 × ≥180 gestricheltes Quadrat",
+"notes": "M 1:50, DIN 18024/18025/18040 (Entwurf)",
+"sources": [
+{
+"book": "G",
+"page": 46
+}
+],
+"reference_only": true
+},
+{
+"id": "treppe_halbgewendelt_gehbereich_80",
+"room": "treppe",
+"name": "Halbgewendelte (U-förmige) Treppe, Laufbreite 80, Gehbereich",
+"mode": "standard",
+"W": null,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [],
+"doors": [],
+"dims": "unten je Lauf: 32 | 16 | 32 = 80 (beide Läufe); rechts oben im Wendelbereich: 36 | 18 | 36 = 90; Radien Gehbereich R30 (außen) und R32 (innen)",
+"notes": "Schematische Darstellung, Treppenauge und Lauflängen nicht bemaßt. Gehbereich (20 %) mittig, dunkler hellblau hinterlegt.",
+"sources": [
+{
+"book": "G",
+"page": 60
+}
+],
+"reference_only": true
+},
+{
+"id": "treppe_viertelgewendelt_gehbereich_100",
+"room": "treppe",
+"name": "Viertelgewendelte Treppe, Laufbreite 100, Gehbereich",
+"mode": "standard",
+"W": 100.0,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [],
+"doors": [],
+"dims": "unten: 40 | 20 | 40 = 100; Gehbereichsgrenzen im Wendelbereich R40 (innen) und R60 (außen), Zentrum an der inneren Ecke",
+"notes": "Inneres Eck mit Ausrundung; Laufbreite ≤ 100 → Gehbereich 20 % mittig.",
+"sources": [
+{
+"book": "G",
+"page": 60
+}
+],
+"reference_only": true
+},
+{
+"id": "treppe_viertelgewendelt_gehbereich_110",
+"room": "treppe",
+"name": "Viertelgewendelte Treppe, Laufbreite 110, Gehbereich",
+"mode": "standard",
+"W": 110.0,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [],
+"doors": [],
+"dims": "unten: 40 (innen, schmale Stufenenden) | 20 (Gehbereich) | 50 (außen) = 110; R40 / R60",
+"notes": "Laufbreite > 100 → Gehbereich 20 breit, 40 von innerer Begrenzung.",
+"sources": [
+{
+"book": "G",
+"page": 60
+}
+],
+"reference_only": true
+},
+{
+"id": "treppe_krankentrage_offenes_auge",
+"room": "treppenraum",
+"name": "Krankentransport im Podestbereich, offenes Treppenauge",
+"mode": "standard",
+"W": 250.0,
+"D": 125.0,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 250,
+"d": 125,
+"for": [
+"krankentrage"
+],
+"notes": "Podest; Treppenläufe liegen unterhalb y=0 (Länge nicht bemaßt)"
+}
+],
+"doors": [],
+"dims": "unten: 100 | 50 | 100 = 250 (Treppenhaus lichte Breite); oben: 250; rechts: Podesttiefe 125",
+"notes": "Treppenauge offen (Geländer). Koordinaten: y=0 an der Podestkante (oberste Stufenvorderkante), Podest bis Wand bei y=125. Tragen-Drehbewegung als gestrichelte Rechtecke (Stellungen) dargestellt. Wände hellblau/mittelblau gefüllt.",
+"sources": [
+{
+"book": "G",
+"page": 63
+}
+],
+"reference_only": true
+},
+{
+"id": "treppe_krankentrage_geschlossenes_auge",
+"room": "treppenraum",
+"name": "Krankentransport im Podestbereich, geschlossenes Treppenauge",
+"mode": "standard",
+"W": 250.0,
+"D": 140.0,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 250,
+"d": 140,
+"for": [
+"krankentrage"
+],
+"notes": "Podest; Treppenläufe liegen unterhalb y=0 (Länge nicht bemaßt)"
+}
+],
+"doors": [],
+"dims": "unten: 100 | 50 | 100 = 250 (Treppenhaus lichte Breite); oben: 250; rechts: Podesttiefe 140",
+"notes": "Treppenauge geschlossen (Wandscheibe 50). Koordinaten: y=0 an der Podestkante (oberste Stufenvorderkante), Podest bis Wand bei y=140. Tragen-Drehbewegung als gestrichelte Rechtecke (Stellungen) dargestellt. Wände hellblau/mittelblau gefüllt.",
+"sources": [
+{
+"book": "G",
+"page": 63
+}
+],
+"reference_only": true
+},
+{
+"id": "treppe_barrierefrei_zweilaeufig",
+"room": "treppenraum",
+"name": "Barrierefreie zweiläufige gegenläufige Treppe (Grundriss + Schnitt)",
+"mode": "barrierefrei",
+"W": null,
+"D": null,
+"barrier_free": true,
+"elements": [],
+"movement": [
+{
+"x": null,
+"y": null,
+"w": null,
+"d": 150,
+"for": [
+"rollstuhl_bemessung"
+],
+"notes": "≥150 vor der Treppe (ab Austrittsstufe), am oberen Austritt"
+}
+],
+"doors": [],
+"dims": "Grundriss rechts: ≥30 (Handlaufverlängerung oben), ≥30 (unten), ≥150 (Bewegungsfläche vor Treppe); Schnitt: Handlauf 85 (-90), Umwehrung 90-110, Handlauf-Ø 3-4,5",
+"notes": "M 1:50; Lauflängen, Laufbreite, Augenbreite nicht bemaßt.",
+"sources": [
+{
+"book": "G",
+"page": 72
+}
+],
+"reference_only": true
+},
+{
+"id": "rampe_rollstuhlgerecht",
+"room": "rampe",
+"name": "Rollstuhlgerechte Rampe mit Zwischenpodest (Grundriss + Schnitt)",
+"mode": "rollstuhlgerecht",
+"W": 1710.0,
+"D": 150.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "rampenlauf_1",
+"x": 180.0,
+"y": 15.0,
+"w": 600.0,
+"d": 120.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "rampenlauf_2",
+"x": 930.0,
+"y": 15.0,
+"w": 600.0,
+"d": 120.0,
+"against": null,
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 150,
+"d": 150,
+"for": [
+"rollstuhl_bemessung"
+],
+"notes": "Bewegungsfläche Anfang"
+},
+{
+"x": 780,
+"y": 0,
+"w": 150,
+"d": 150,
+"for": [
+"rollstuhl_bemessung"
+],
+"notes": "Zwischenpodest"
+},
+{
+"x": 1560,
+"y": 0,
+"w": 150,
+"d": 150,
+"for": [
+"rollstuhl_bemessung"
+],
+"notes": "Bewegungsfläche Ende"
+}
+],
+"doors": [],
+"dims": "unten: ≥150 | 30 | ≤600 | ≥150 | ≤600 | 30 | ≥150 (= 1710); darunter je '≥150 *)' über 150+30 (nach DIN 18040-E reicht 150 inkl. Handlaufüberstand, wenn Handläufe unterfahrbar); links: ≥150 Gesamtbreite, 120 nutzbare Rampenbreite; Schnitt: Höhe 72 = 2 × 600 × 6 %, Handlauf 85; Querschnitt: 120 zwischen Radabweisern 10 hoch, Handlauf 85, Abstand > 5",
+"notes": "M 1:100. Lage der 120 breiten Rampe innerhalb der 150 breiten Gesamtfläche angenommen mittig (y 15-135); in der Zeichnung nicht genau bemaßt. 30er Felder sind die Handlaufverlängerungen am Rampenanfang/-ende.",
+"sources": [
+{
+"book": "G",
+"page": 73
+}
+],
+"reference_only": true
+},
+{
+"id": "aufzug_vorraum_din15306_einzel",
+"room": "aufzug_vorraum",
+"name": "Raumzone vor Einzelaufzug, Wohngebäude (DIN 15306), parametrisch",
+"mode": "standard",
+"W": null,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": "max(SBR,150)",
+"d": "Dv = max(FKT,150)",
+"for": [
+"aufzug"
+]
+}
+],
+"doors": [
+{
+"wall": "Schachtvorderwand (S)",
+"offset": null,
+"width": "Türbreite lt. Tabelle",
+"swing": null,
+"hinge": null
+}
+],
+"dims": "oben: Schachtbreite (SBR); rechts: Fahrkorbtiefe (FKT); Fläche beschriftet 'FKT x SBR, min. 150 x 150'",
+"notes": "Schema ohne Zahlenmaße; Vorraum gestrichelt hellblau, gleiche Breite wie Schacht",
+"sources": [
+{
+"book": "G",
+"page": 86
+}
+],
+"reference_only": true
+},
+{
+"id": "aufzug_vorraum_din15306_reihe",
+"room": "aufzug_vorraum",
+"name": "Raumzone vor zwei nebeneinanderliegenden Aufzügen, Wohngebäude (DIN 15306), parametrisch",
+"mode": "standard",
+"W": null,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": "Breite zwischen äußersten Schachtwänden",
+"d": "Dv = max(FKT_max,150)",
+"for": [
+"aufzug"
+]
+}
+],
+"doors": [],
+"dims": "oben: Schachtbreite (SBR) über beide Schächte; rechts FKT; Fläche 'FKT (min. 150) x SBR'",
+"notes": "zwei Schächte mit gemeinsamer Trennwand; Rollstuhl-Piktogramm in der Vorfläche",
+"sources": [
+{
+"book": "G",
+"page": 86
+}
+],
+"reference_only": true
+},
+{
+"id": "aufzug_vorraum_din15309_einzel",
+"room": "aufzug_vorraum",
+"name": "Raumzone vor Einzelaufzug, andere als Wohngebäude (DIN 15309), parametrisch",
+"mode": "standard",
+"W": null,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": "SBR",
+"d": "Dv = 1.5*FKT",
+"for": [
+"aufzug"
+]
+}
+],
+"doors": [],
+"dims": "Fläche beschriftet '1,5 FKT x SBR'",
+"notes": "nicht für Bettenaufzüge",
+"sources": [
+{
+"book": "G",
+"page": 87
+}
+],
+"reference_only": true
+},
+{
+"id": "aufzug_vorraum_din15309_reihe",
+"room": "aufzug_vorraum",
+"name": "Raumzone vor 2 bzw. 3 nebeneinanderliegenden Aufzügen (DIN 15309), parametrisch",
+"mode": "standard",
+"W": null,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": "Breite zwischen äußersten Schachtwänden",
+"d": "Dv = max(1.5*FKT_max, 240)",
+"for": [
+"aufzug"
+]
+}
+],
+"doors": [],
+"dims": "Fläche '1,5 FKT (min. 240) x SBR (tiefste FKT maßgeblich)'",
+"notes": "Schachtvorderwände fluchten; tieferer Schacht ragt nach hinten",
+"sources": [
+{
+"book": "G",
+"page": 87
+}
+],
+"reference_only": true
+},
+{
+"id": "aufzug_stauraum_din15309_gegenueber",
+"room": "aufzug_vorraum",
+"name": "Stauraum zwischen gegenüberliegenden Aufzugsreihen (DIN 15309), parametrisch",
+"mode": "standard",
+"W": null,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": "Breite der Reihe",
+"d": "Dv = min(FKT_oben + FKT_unten, 450)",
+"for": [
+"aufzug"
+]
+}
+],
+"doors": [],
+"dims": "rechts: FKT | FKT + FKT (max. 450) | FKT",
+"notes": "",
+"sources": [
+{
+"book": "G",
+"page": 87
+}
+],
+"reference_only": true
+},
+{
+"id": "aufzug_barrierefrei_fahrkorb_vorflaeche",
+"room": "aufzug",
+"name": "Barrierefreier Aufzug: Fahrkorb mit Tableau/Spiegel und Bewegungsfläche vor der Tür (Grundriss)",
+"mode": "barrierefrei",
+"W": 150.0,
+"D": null,
+"barrier_free": true,
+"elements": [
+{
+"element": "fahrkorb",
+"x": 0.0,
+"y": 150.0,
+"w": 110.0,
+"d": 140.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 150,
+"d": 150,
+"for": [
+"aufzug"
+],
+"notes": "gestrichelt, mit Rollstuhl-Piktogramm, beschriftet '150 / 150'"
+}
+],
+"doors": [
+{
+"wall": "N (Schachtvorderwand bei y=150)",
+"offset": 0,
+"width": 90,
+"swing": "Schiebetür (Teleskop, einseitig öffnend nach rechts gezeichnet)",
+"hinge": null
+}
+],
+"dims": "unten: 90 (Tür) | 50 (Ruftaster bis rechter Rand); links: >= 140 (Fahrkorbtiefe); innen links: 50 | Tableau | 50; Fläche 150/150",
+"notes": "x-Lagen aus Zeichnung geschätzt (Tür beginnt ca. 5 cm rechts vom linken Flächenrand; Kette 90+~10+50 = 150). Ansicht daneben: Fahrkorbbreite >= 110, Tableauhöhe 85, Ausladung <= 10",
+"sources": [
+{
+"book": "G",
+"page": 96
+}
+],
+"reference_only": true
+},
+{
+"id": "aufzug_vorflaeche_im_flur",
+"room": "aufzug_vorraum",
+"name": "Barrierefreie Wartezone: 150x150 vor der Aufzugstür liegt im Flur (Flur >= 150 breit)",
+"mode": "barrierefrei",
+"W": 150.0,
+"D": 150.0,
+"barrier_free": true,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 150,
+"d": 150,
+"for": [
+"aufzug"
+],
+"notes": "Flurtiefe = 150"
+}
+],
+"doors": [],
+"dims": "unten >= 150; rechts >= 150 (= Flurbreite)",
+"notes": "zulässig nach DIN 18024/18025/18040-2; Flurwände gezeichnet als Linien links/rechts",
+"sources": [
+{
+"book": "G",
+"page": 97
+}
+],
+"reference_only": true
+},
+{
+"id": "aufzug_vorflaeche_getrennt_verkehrsweg",
+"room": "aufzug_vorraum",
+"name": "Barrierefreie Wartezone öffentlich (DIN 18040-1): 150x150 vor dem Aufzug plus getrennter Verkehrsweg >= 150",
+"mode": "barrierefrei",
+"W": 150.0,
+"D": 300.0,
+"barrier_free": true,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 150,
+"w": 150,
+"d": 150,
+"for": [
+"aufzug"
+],
+"notes": "Wartefläche, Nische zwischen Wandvorsprüngen"
+},
+{
+"x": 0,
+"y": 0,
+"w": null,
+"d": 150,
+"for": [
+"verkehrsweg"
+],
+"notes": "Flur >= 150, darf sich nicht mit Wartefläche überlagern"
+}
+],
+"doors": [],
+"dims": "rechts: >= 150 (Wartefläche) | >= 150 (Flur); unten >= 150",
+"notes": "äußeres Bedientableau seitlich mit >= 50 Abstand zur Wand (Punkt am Wandvorsprung gezeichnet)",
+"sources": [
+{
+"book": "G",
+"page": 97
+}
+],
+"reference_only": true
+},
+{
+"id": "gavo_senkrecht_b230",
+"room": "parkierungsanlage",
+"name": "GaVO Senkrechtaufstellung, Doppelreihe, Stellplatzbreite 230",
+"mode": "standard",
+"W": 230.0,
+"D": 1650.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 0.0,
+"w": 230.0,
+"d": 500.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 1150.0,
+"w": 230.0,
+"d": 500.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 500,
+"w": 230,
+"d": 650,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "quer: 500|650|500 = 1650; Stellplatz 230; Ø 18.9 m²/Pkw",
+"notes": "Modul = eine Stellplatzbreite quer durch die Doppelreihe; beliebig in x wiederholen. M 1:1000.",
+"sources": [
+{
+"book": "G",
+"page": 121
+}
+]
+},
+{
+"id": "gavo_senkrecht_b240",
+"room": "parkierungsanlage",
+"name": "GaVO Senkrechtaufstellung, Doppelreihe, Stellplatzbreite 240",
+"mode": "standard",
+"W": 240.0,
+"D": 1600.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 0.0,
+"w": 240.0,
+"d": 500.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 1100.0,
+"w": 240.0,
+"d": 500.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 500,
+"w": 240,
+"d": 600,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "quer: 500|600|500 = 1600; Stellplatz 240; Ø 19.2 m²/Pkw",
+"notes": "Modul = eine Stellplatzbreite quer durch die Doppelreihe; beliebig in x wiederholen. M 1:1000.",
+"sources": [
+{
+"book": "G",
+"page": 121
+}
+]
+},
+{
+"id": "gavo_senkrecht_b250",
+"room": "parkierungsanlage",
+"name": "GaVO Senkrechtaufstellung, Doppelreihe, Stellplatzbreite 250",
+"mode": "standard",
+"W": 250.0,
+"D": 1550.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 0.0,
+"w": 250.0,
+"d": 500.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 1050.0,
+"w": 250.0,
+"d": 500.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 500,
+"w": 250,
+"d": 550,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "quer: 500|550|500 = 1550; Stellplatz 250; Ø 19.4 m²/Pkw",
+"notes": "Modul = eine Stellplatzbreite quer durch die Doppelreihe; beliebig in x wiederholen. M 1:1000.",
+"sources": [
+{
+"book": "G",
+"page": 121
+}
+]
+},
+{
+"id": "gavo_schraeg45_b230",
+"room": "parkierungsanlage",
+"name": "GaVO Schrägaufstellung 45°, Doppelreihe (Fischgrät), Stellplatz 230 × 500",
+"mode": "standard",
+"W": 325.0,
+"D": 1385.0,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 517.5,
+"w": 325,
+"d": 350,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "Fahrgasse 350; Gesamttiefe 1385; Stellplatz 230×500 unter 45°; Ø 19.8 m²/Pkw",
+"notes": "Tiefe der Stellreihe senkrecht zur Gasse rechnerisch ≈ 516 (500·sin45 + 230·cos45); 2×516+350 = 1382 vs. gedruckt 1385. W = Stellplatzbreite entlang der Gasse = b/sin45 (berechnet). Einrichtungsverkehr.",
+"sources": [
+{
+"book": "G",
+"page": 121
+}
+],
+"reference_only": true
+},
+{
+"id": "gavo_schraeg45_b240",
+"room": "parkierungsanlage",
+"name": "GaVO Schrägaufstellung 45°, Doppelreihe (Fischgrät), Stellplatz 240 × 500",
+"mode": "standard",
+"W": 339.0,
+"D": 1350.0,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 525.0,
+"w": 339,
+"d": 300,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "Fahrgasse 300; Gesamttiefe 1350; Stellplatz 240×500 unter 45°; Ø 19.9 m²/Pkw",
+"notes": "Tiefe der Stellreihe senkrecht zur Gasse rechnerisch ≈ 523 (500·sin45 + 240·cos45); 2×523+300 = 1346 vs. gedruckt 1350. W = Stellplatzbreite entlang der Gasse = b/sin45 (berechnet). Einrichtungsverkehr.",
+"sources": [
+{
+"book": "G",
+"page": 121
+}
+],
+"reference_only": true
+},
+{
+"id": "gavo_schraeg45_b250",
+"room": "parkierungsanlage",
+"name": "GaVO Schrägaufstellung 45°, Doppelreihe (Fischgrät), Stellplatz 250 × 500",
+"mode": "standard",
+"W": 354.0,
+"D": 1360.0,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 530.0,
+"w": 354,
+"d": 300,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "Fahrgasse 300; Gesamttiefe 1360; Stellplatz 250×500 unter 45°; Ø 20.9 m²/Pkw",
+"notes": "Tiefe der Stellreihe senkrecht zur Gasse rechnerisch ≈ 530 (500·sin45 + 250·cos45); 2×530+300 = 1360 vs. gedruckt 1360. W = Stellplatzbreite entlang der Gasse = b/sin45 (berechnet). Einrichtungsverkehr.",
+"sources": [
+{
+"book": "G",
+"page": 121
+}
+],
+"reference_only": true
+},
+{
+"id": "gavo_laengs_b230",
+"room": "parkierungsanlage",
+"name": "GaVO Längsaufstellung beidseitig, Stellplatz 230 × 600",
+"mode": "standard",
+"W": 600.0,
+"D": 760.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 0.0,
+"w": 600.0,
+"d": 230.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 530.0,
+"w": 600.0,
+"d": 230.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 230,
+"w": 600,
+"d": 300,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "quer: 230|300|230 = 760; Länge 600; Ø 22.8 m²/Pkw",
+"notes": "",
+"sources": [
+{
+"book": "G",
+"page": 121
+}
+]
+},
+{
+"id": "gavo_laengs_b240",
+"room": "parkierungsanlage",
+"name": "GaVO Längsaufstellung beidseitig, Stellplatz 240 × 600",
+"mode": "standard",
+"W": 600.0,
+"D": 780.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 0.0,
+"w": 600.0,
+"d": 240.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 540.0,
+"w": 600.0,
+"d": 240.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 240,
+"w": 600,
+"d": 300,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "quer: 240|300|240 = 780; Länge 600; Ø 23.4 m²/Pkw",
+"notes": "",
+"sources": [
+{
+"book": "G",
+"page": 121
+}
+]
+},
+{
+"id": "gavo_laengs_b250",
+"room": "parkierungsanlage",
+"name": "GaVO Längsaufstellung beidseitig, Stellplatz 250 × 600",
+"mode": "standard",
+"W": 600.0,
+"D": 800.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 0.0,
+"w": 600.0,
+"d": 250.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "pkw_stellplatz_gavo",
+"x": 0.0,
+"y": 550.0,
+"w": 600.0,
+"d": 250.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 250,
+"w": 600,
+"d": 300,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "quer: 250|300|250 = 800; Länge 600; Ø 24.0 m²/Pkw",
+"notes": "",
+"sources": [
+{
+"book": "G",
+"page": 121
+}
+]
+},
+{
+"id": "ear_senkrecht_vorwaerts",
+"room": "parkierungsanlage",
+"name": "EAR 2005 Senkrechtaufstellung, Doppelreihe, vorwaerts einparken, Parkstand 250",
+"mode": "standard",
+"W": 250.0,
+"D": 1600.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "pkw_parkstand_ear",
+"x": 0.0,
+"y": 70.0,
+"w": 250.0,
+"d": 430.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "pkw_parkstand_ear",
+"x": 0.0,
+"y": 1100.0,
+"w": 250.0,
+"d": 430.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 500,
+"w": 250,
+"d": 600,
+"for": [
+"fahrgasse"
+]
+},
+{
+"x": 0,
+"y": 0,
+"w": 250,
+"d": 70,
+"for": [
+"ueberhangstreifen"
+]
+},
+{
+"x": 0,
+"y": 1530,
+"w": 250,
+"d": 70,
+"for": [
+"ueberhangstreifen"
+]
+}
+],
+"doors": [],
+"dims": "quer: 70|430|600|430|70 = 1600; Ø 18.2 m²/Pkw",
+"notes": "70 = Überhangstreifen (Fahrzeugüberhang über Bordstein/Grünstreifen).",
+"sources": [
+{
+"book": "G",
+"page": 123
+}
+]
+},
+{
+"id": "ear_senkrecht_rueckwaerts",
+"room": "parkierungsanlage",
+"name": "EAR 2005 Senkrechtaufstellung, Doppelreihe, rueckwaerts einparken, Parkstand 250",
+"mode": "standard",
+"W": 250.0,
+"D": 1450.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "pkw_parkstand_ear",
+"x": 0.0,
+"y": 70.0,
+"w": 250.0,
+"d": 430.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "pkw_parkstand_ear",
+"x": 0.0,
+"y": 950.0,
+"w": 250.0,
+"d": 430.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 500,
+"w": 250,
+"d": 450,
+"for": [
+"fahrgasse"
+]
+},
+{
+"x": 0,
+"y": 0,
+"w": 250,
+"d": 70,
+"for": [
+"ueberhangstreifen"
+]
+},
+{
+"x": 0,
+"y": 1380,
+"w": 250,
+"d": 70,
+"for": [
+"ueberhangstreifen"
+]
+}
+],
+"doors": [],
+"dims": "quer: 70|430|450|430|70 = 1450; Ø 16.4 m²/Pkw",
+"notes": "70 = Überhangstreifen (Fahrzeugüberhang über Bordstein/Grünstreifen).",
+"sources": [
+{
+"book": "G",
+"page": 123
+}
+]
+},
+{
+"id": "ear_schraeg45",
+"room": "parkierungsanlage",
+"name": "EAR 2005 Schrägaufstellung 45°, Doppelreihe, Parkstandbreite 250",
+"mode": "standard",
+"W": 354.0,
+"D": 1270.0,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 485,
+"w": 354,
+"d": 300,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "quer: 70|415|300|415|70 = 1270; Ø 20,00 m²/Pkw",
+"notes": "W = 250/sin45 ≈ 354 (berechnet). 415 = Parkstandtiefe senkrecht zur Gasse ohne Überhang.",
+"sources": [
+{
+"book": "G",
+"page": 123
+}
+],
+"reference_only": true
+},
+{
+"id": "ear_laengs_vorwaerts",
+"room": "parkierungsanlage",
+"name": "EAR 2005 Längsaufstellung beidseitig, vorwaerts einparken",
+"mode": "standard",
+"W": 670.0,
+"D": 725.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "pkw_parkstand_ear",
+"x": 0.0,
+"y": 0.0,
+"w": 670.0,
+"d": 200.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "pkw_parkstand_ear",
+"x": 0.0,
+"y": 525.0,
+"w": 670.0,
+"d": 200.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 200,
+"w": 670,
+"d": 325,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "quer: 200|325|200 = 725; Parkstandlänge 670; Ø 24.3 m²/Pkw",
+"notes": "",
+"sources": [
+{
+"book": "G",
+"page": 123
+}
+]
+},
+{
+"id": "ear_laengs_rueckwaerts",
+"room": "parkierungsanlage",
+"name": "EAR 2005 Längsaufstellung beidseitig, rueckwaerts einparken",
+"mode": "standard",
+"W": 570.0,
+"D": 750.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "pkw_parkstand_ear",
+"x": 0.0,
+"y": 0.0,
+"w": 570.0,
+"d": 200.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "pkw_parkstand_ear",
+"x": 0.0,
+"y": 550.0,
+"w": 570.0,
+"d": 200.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 200,
+"w": 570,
+"d": 350,
+"for": [
+"fahrgasse"
+]
+}
+],
+"doors": [],
+"dims": "quer: 200|350|200 = 750; Parkstandlänge 570; Ø 21.4 m²/Pkw",
+"notes": "",
+"sources": [
+{
+"book": "G",
+"page": 123
+}
+]
+},
+{
+"id": "ear_rollstuhl_parkstaende",
+"room": "parkierungsanlage",
+"name": "EAR 2005 Parkstände für Rollstuhlfahrer: Doppelparkstand 600, Einzel 350, Einzel neben Wand 390",
+"mode": "rollstuhlgerecht",
+"W": 1340.0,
+"D": 500.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "pkw_parkstand_ear",
+"x": 0.0,
+"y": 0.0,
+"w": 250.0,
+"d": 500.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "pkw_parkstand_ear",
+"x": 350.0,
+"y": 0.0,
+"w": 250.0,
+"d": 500.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "pkw_parkstand_ear",
+"x": 600.0,
+"y": 0.0,
+"w": 350.0,
+"d": 500.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "pkw_parkstand_ear",
+"x": 950.0,
+"y": 0.0,
+"w": 390.0,
+"d": 500.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 212.5,
+"y": 150,
+"w": 175,
+"d": 150,
+"for": [
+"rollstuhl"
+],
+"notes": "überlagerte Bewegungsfläche zwischen den Fahrzeugen (Kette 175|175|175)"
+},
+{
+"x": 1200,
+"y": 200,
+"w": 140,
+"d": 150,
+"for": [
+"rollstuhl"
+]
+}
+],
+"doors": [],
+"dims": "unten: 175|175|175|175|175|75|175 (Fahrzeuge 175 breit); 250|100|250 … 250|140; 600|350|390; Tiefe ≥500",
+"notes": "Wand rechts (dunkelblau) und hinten. Fahrzeuge 175 breit mittig im 250er Stand (37,5 Rand). Rollstuhlsymbol in gestricheltem Feld ~150 × 150 (y-Lage geschätzt).",
+"sources": [
+{
+"book": "G",
+"page": 122
+}
+]
+},
+{
+"id": "ear_parkstaende_begrenzung",
+"room": "parkierungsanlage",
+"name": "EAR 2005 Parkstandbreiten je seitlicher Begrenzung (225 Bordstein, 250 frei, 285 einseitig, 290 beidseitig)",
+"mode": "standard",
+"W": null,
+"D": 500.0,
+"barrier_free": false,
+"elements": [],
+"movement": [],
+"doors": [],
+"dims": "links: 225|250 (Randparkstand an Bordstein, dann frei); rechts: 285|285|250|250 und 290 (75|175|40 zwischen zwei Wänden); Fahrzeuge 175 + Türzone 75; Stütze ≤75 vom Fahrgassenrand, ≤60 vom hinteren Ende (≤20)",
+"notes": "Gruppe aus Einzelbeispielen, keine zusammenhängende Raumkoordinate.",
+"sources": [
+{
+"book": "G",
+"page": 122
+}
+],
+"reference_only": true
+},
+{
+"id": "gavo_rollstuhl_parkstaende",
+"room": "parkierungsanlage",
+"name": "GaVO Rollstuhlstellplätze senkrecht: Einzel 350 (≥150 + 200), Doppel 550 (200+≥150+200)",
+"mode": "rollstuhlgerecht",
+"W": 900.0,
+"D": 500.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "pkw_stellplatz_gavo",
+"x": 150.0,
+"y": 0.0,
+"w": 200.0,
+"d": 500.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "pkw_stellplatz_gavo",
+"x": 350.0,
+"y": 0.0,
+"w": 200.0,
+"d": 500.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "pkw_stellplatz_gavo",
+"x": 700.0,
+"y": 0.0,
+"w": 200.0,
+"d": 500.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 150,
+"d": 500,
+"for": [
+"rollstuhl"
+]
+},
+{
+"x": 550,
+"y": 0,
+"w": 150,
+"d": 500,
+"for": [
+"rollstuhl"
+]
+}
+],
+"doors": [],
+"dims": "≥150|200|200|≥150|200; 350|550; Tiefe 500",
+"notes": "Mittleres Fahrzeug steht entgegengesetzt (rückwärts eingeparkt) und teilt die Bewegungsfläche mit dem rechten.",
+"sources": [
+{
+"book": "G",
+"page": 120
+}
+]
+},
+{
+"id": "fahrrad_hoehengleich_beengt",
+"room": "fahrradabstellanlage",
+"name": "Fahrradabstellanlage senkrecht, hoehengleich beengt, beidseitig an Gasse",
+"mode": "standard",
+"W": 80.0,
+"D": 580.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "fahrrad",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 200.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "fahrrad",
+"x": 0.0,
+"y": 380.0,
+"w": 60.0,
+"d": 200.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 200,
+"w": 80,
+"d": 180,
+"for": [
+"fahrrad"
+]
+}
+],
+"doors": [],
+"dims": "quer: 200|180|200 = 580; Achsabstand 80; Ø 2.3 m²/Rad",
+"notes": "Fahrräder senkrecht zur Gasse (Länge 200 in y). Modul in x wiederholen. M 1:100.",
+"sources": [
+{
+"book": "G",
+"page": 138
+}
+]
+},
+{
+"id": "fahrrad_hoehengleich_bequem",
+"room": "fahrradabstellanlage",
+"name": "Fahrradabstellanlage senkrecht, hoehengleich bequem, beidseitig an Gasse",
+"mode": "standard",
+"W": 120.0,
+"D": 580.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "fahrrad",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 200.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "fahrrad",
+"x": 0.0,
+"y": 380.0,
+"w": 60.0,
+"d": 200.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 200,
+"w": 120,
+"d": 180,
+"for": [
+"fahrrad"
+]
+}
+],
+"doors": [],
+"dims": "quer: 200|180|200 = 580; Achsabstand 120; Ø 3.5 m²/Rad",
+"notes": "Fahrräder senkrecht zur Gasse (Länge 200 in y). Modul in x wiederholen. M 1:100.",
+"sources": [
+{
+"book": "G",
+"page": 138
+}
+]
+},
+{
+"id": "fahrrad_hoehenversetzt_beengt",
+"room": "fahrradabstellanlage",
+"name": "Fahrradabstellanlage senkrecht, hoehenversetzt beengt, beidseitig an Gasse",
+"mode": "standard",
+"W": 50.0,
+"D": 580.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "fahrrad",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 200.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "fahrrad",
+"x": 0.0,
+"y": 380.0,
+"w": 60.0,
+"d": 200.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 200,
+"w": 50,
+"d": 180,
+"for": [
+"fahrrad"
+]
+}
+],
+"doors": [],
+"dims": "quer: 200|180|200 = 580; Achsabstand 50 (Zeichnung: 100 bzw. 120 je Paar hoch/tief); Ø 1.45 m²/Rad",
+"notes": "Fahrräder senkrecht zur Gasse (Länge 200 in y). Modul in x wiederholen. M 1:100.",
+"sources": [
+{
+"book": "G",
+"page": 138
+}
+],
+"reference_only": true
+},
+{
+"id": "fahrrad_hoehenversetzt_bequem",
+"room": "fahrradabstellanlage",
+"name": "Fahrradabstellanlage senkrecht, hoehenversetzt bequem, beidseitig an Gasse",
+"mode": "standard",
+"W": 60.0,
+"D": 580.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "fahrrad",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 200.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "fahrrad",
+"x": 0.0,
+"y": 380.0,
+"w": 60.0,
+"d": 200.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 200,
+"w": 60,
+"d": 180,
+"for": [
+"fahrrad"
+]
+}
+],
+"doors": [],
+"dims": "quer: 200|180|200 = 580; Achsabstand 60 (Zeichnung: 100 bzw. 120 je Paar hoch/tief); Ø 1.75 m²/Rad",
+"notes": "Fahrräder senkrecht zur Gasse (Länge 200 in y). Modul in x wiederholen. M 1:100.",
+"sources": [
+{
+"book": "G",
+"page": 138
+}
+]
+},
+{
+"id": "fahrrad_schraeg_hoehenversetzt",
+"room": "fahrradabstellanlage",
+"name": "Fahrradabstellanlage Schrägaufstellung höhenversetzt",
+"mode": "standard",
+"W": null,
+"D": 480.0,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 150,
+"w": null,
+"d": 180,
+"for": [
+"fahrrad"
+]
+}
+],
+"doors": [],
+"dims": "quer: 150|180|150 = 480; Abstände 60/40; Ø 1,20 m²/Rad",
+"notes": "Räder ca. 45° geneigt.",
+"sources": [
+{
+"book": "G",
+"page": 139
+}
+],
+"reference_only": true
+},
+{
+"id": "fahrrad_schraeg_hoehengleich",
+"room": "fahrradabstellanlage",
+"name": "Fahrradabstellanlage Schrägaufstellung höhengleich",
+"mode": "standard",
+"W": null,
+"D": 480.0,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 150,
+"w": null,
+"d": 180,
+"for": [
+"fahrrad"
+]
+}
+],
+"doors": [],
+"dims": "quer: 150|180|150 = 480; Maße 85 und 60 an der Reihe; Ø 1,75 m²/Rad",
+"notes": "Bedeutung 85/60 unklar (Achsabstand?); Flächenwert ergibt rechnerisch ~73 Achsabstand.",
+"sources": [
+{
+"book": "G",
+"page": 139
+}
+],
+"reference_only": true
+},
+{
+"id": "fahrrad_doppelaufstellung",
+"room": "fahrradabstellanlage",
+"name": "Höhengleiche Doppelaufstellung mit Vorderradüberlappung",
+"mode": "standard",
+"W": 80.0,
+"D": 1240.0,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 80,
+"d": 180,
+"for": [
+"fahrrad"
+]
+},
+{
+"x": 0,
+"y": 530,
+"w": 80,
+"d": 180,
+"for": [
+"fahrrad"
+]
+},
+{
+"x": 0,
+"y": 1060,
+"w": 80,
+"d": 180,
+"for": [
+"fahrrad"
+]
+}
+],
+"doors": [],
+"dims": "180|350|180|350|180 = 1240; Achsabstand 80; Ø 2,10 m²/Rad",
+"notes": "Doppelreihe 350: zwei gegenläufige Räder mit überlappenden Vorderrädern, je Gasse 180.",
+"sources": [
+{
+"book": "G",
+"page": 139
+}
+],
+"reference_only": true
+},
+{
+"id": "kueche_einzeilig",
+"room": "kueche",
+"name": "Einzeilige Küche",
+"mode": "standard",
+"W": 330.0,
+"D": 180.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "abstellflaeche_herd_spuele",
+"x": 0.0,
+"y": 120.0,
+"w": 30.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kuehlschrank",
+"x": 30.0,
+"y": 120.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "einbeckenspuele_abtropf",
+"x": 90.0,
+"y": 120.0,
+"w": 90.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "arbeitsflaeche_klein",
+"x": 180.0,
+"y": 120.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kochfeld",
+"x": 240.0,
+"y": 120.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "abstellflaeche_herd_spuele",
+"x": 300.0,
+"y": 120.0,
+"w": 30.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 330,
+"d": 120,
+"for": [
+"kuechenzeile"
+]
+}
+],
+"doors": [],
+"dims": "top: 30|60|90|60|60|30 = 330; right: 60|120 = 180",
+"notes": "Reihenfolge von rechts nach links für Rechtshänder: Abstellfläche, Herd, Arbeitsfläche, Spüle, Abstellfläche (Kühlschrank am linken Ende). Untere Kante der Bewegungsfläche gestrichelt (offen). Zeilentrennungen gestrichelt.",
+"sources": [
+{
+"book": "G",
+"page": 203
+}
+]
+},
+{
+"id": "kueche_zweizeilig",
+"room": "kueche",
+"name": "Zweizeilige Küche (Installationszeile + Schrankzeile)",
+"mode": "standard",
+"W": 330.0,
+"D": 240.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "abstellflaeche_herd_spuele",
+"x": 0.0,
+"y": 180.0,
+"w": 30.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "abtropfflaeche_spuele",
+"x": 30.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "doppelbeckenspuele_abtropf",
+"x": 90.0,
+"y": 180.0,
+"w": 90.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "arbeitsflaeche_klein",
+"x": 180.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kochfeld",
+"x": 240.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "abstellflaeche_herd_spuele",
+"x": 300.0,
+"y": 180.0,
+"w": 30.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kueche_unterschrank",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "kueche_unterschrank",
+"x": 60.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "kueche_unterschrank",
+"x": 120.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "kuehlschrank",
+"x": 180.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "kueche_unterschrank",
+"x": 240.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "kueche_unterschrank",
+"x": 300.0,
+"y": 0.0,
+"w": 30.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 60,
+"w": 330,
+"d": 120,
+"for": [
+"installationszeile",
+"schrankzeile"
+],
+"notes": "Bewegungsflächen beider Zeilen überdecken sich"
+}
+],
+"doors": [],
+"dims": "top: 30|60|90|60|60|30 = 330; right: 60|120|60 = 240",
+"notes": "Schrankzeile in 60er Modulen (gestrichelte Teilung bei 60/120/180/240/300) gemessen; Kühlschrank in Schrankzeile zur Optimierung des Arbeitsdreiecks (Herd, Spüle, Kühlschrank).",
+"sources": [
+{
+"book": "G",
+"page": 203
+}
+]
+},
+{
+"id": "kueche_l",
+"room": "kueche",
+"name": "L-Küche",
+"mode": "standard",
+"W": 360.0,
+"D": 240.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "kueche_unterschrank",
+"x": 0.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "abtropfflaeche_spuele",
+"x": 60.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "doppelbeckenspuele_abtropf",
+"x": 120.0,
+"y": 180.0,
+"w": 90.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "arbeitsflaeche_klein",
+"x": 210.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kochfeld",
+"x": 270.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "abstellflaeche_herd_spuele",
+"x": 330.0,
+"y": 180.0,
+"w": 30.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kueche_unterschrank",
+"x": 0.0,
+"y": 120.0,
+"w": 60.0,
+"d": 60.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "kuehlschrank",
+"x": 0.0,
+"y": 60.0,
+"w": 60.0,
+"d": 60.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "kueche_unterschrank",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 0,
+"w": 300,
+"d": 180,
+"for": [
+"kuechenzeile_N",
+"kuechenzeile_W"
+]
+}
+],
+"doors": [],
+"dims": "top: 60|60|90|60|60|30 = 360; right: 60|180 = 240",
+"notes": "Schenkel W in 60er Modulen gemessen; zwei Personen gezeichnet.",
+"sources": [
+{
+"book": "G",
+"page": 204
+}
+]
+},
+{
+"id": "kueche_u",
+"room": "kueche",
+"name": "U-Küche",
+"mode": "standard",
+"W": 360.0,
+"D": 240.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "kueche_unterschrank",
+"x": 0.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "abtropfflaeche_spuele",
+"x": 60.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "doppelbeckenspuele_abtropf",
+"x": 120.0,
+"y": 180.0,
+"w": 90.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "arbeitsflaeche_klein",
+"x": 210.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kochfeld",
+"x": 270.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "abstellflaeche_herd_spuele",
+"x": 330.0,
+"y": 180.0,
+"w": 30.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kueche_unterschrank",
+"x": 0.0,
+"y": 120.0,
+"w": 60.0,
+"d": 60.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "kueche_unterschrank",
+"x": 0.0,
+"y": 60.0,
+"w": 60.0,
+"d": 60.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "kueche_unterschrank",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "kueche_unterschrank",
+"x": 60.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "kueche_unterschrank",
+"x": 120.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "kuehlschrank",
+"x": 180.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "kueche_unterschrank",
+"x": 240.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "kueche_unterschrank",
+"x": 300.0,
+"y": 0.0,
+"w": 60.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 60,
+"w": 300,
+"d": 120,
+"for": [
+"alle Zeilen"
+]
+}
+],
+"doors": [],
+"dims": "top: 60|60|90|60|60|30 = 360; right: 60|120|60 = 240",
+"notes": "U offen nach Osten; Herd und Spüle an einer Seite (N). Module der W- und S-Schenkel gemessen.",
+"sources": [
+{
+"book": "G",
+"page": 204
+}
+]
+},
+{
+"id": "kueche_arbeitsinsel",
+"room": "kueche",
+"name": "Küche mit Arbeitsinsel (Kochinsel)",
+"mode": "standard",
+"W": 370.0,
+"D": 280.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "kueche_unterschrank",
+"x": 0.0,
+"y": 220.0,
+"w": 40.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kueche_unterschrank",
+"x": 40.0,
+"y": 220.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kueche_unterschrank",
+"x": 100.0,
+"y": 220.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "abtropfflaeche_spuele",
+"x": 160.0,
+"y": 220.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "doppelbeckenspuele_abtropf",
+"x": 220.0,
+"y": 220.0,
+"w": 90.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kueche_unterschrank",
+"x": 310.0,
+"y": 220.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kueche_unterschrank",
+"x": 310.0,
+"y": 160.0,
+"w": 60.0,
+"d": 60.0,
+"against": "E",
+"faces": "W"
+},
+{
+"element": "kuehlschrank",
+"x": 310.0,
+"y": 100.0,
+"w": 60.0,
+"d": 60.0,
+"against": "E",
+"faces": "W"
+},
+{
+"element": "kueche_unterschrank",
+"x": 310.0,
+"y": 40.0,
+"w": 60.0,
+"d": 60.0,
+"against": "E",
+"faces": "W"
+},
+{
+"element": "kueche_unterschrank",
+"x": 310.0,
+"y": 0.0,
+"w": 60.0,
+"d": 40.0,
+"against": "E",
+"faces": "W"
+},
+{
+"element": "arbeitsinsel",
+"x": 0.0,
+"y": 0.0,
+"w": 190.0,
+"d": 100.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "kochfeld",
+"x": 100.0,
+"y": 40.0,
+"w": 60.0,
+"d": 60.0,
+"against": null,
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 100,
+"w": 310,
+"d": 120,
+"for": [
+"zeile_N",
+"insel"
+]
+},
+{
+"x": 190,
+"y": 0,
+"w": 120,
+"d": 100,
+"for": [
+"zeile_E",
+"insel"
+]
+}
+],
+"doors": [],
+"dims": "top: 40|60|60|60|90|60 = 370; right: 60|60|60|60|40 = 280",
+"notes": "Bewegungsflächen 120 vor allen Arbeitsseiten der Insel; Inselmaß aus Zeichnung gemessen (370-60-120=190; 280-60-120=100).",
+"sources": [
+{
+"book": "G",
+"page": 205
+}
+]
+},
+{
+"id": "kueche_l_essplatz",
+"room": "kueche",
+"name": "L-Küche mit Essplatz (Imbisstheke mit 4 Hockern)",
+"mode": "standard",
+"W": 360.0,
+"D": 300.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "kueche_unterschrank",
+"x": 0.0,
+"y": 240.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "abtropfflaeche_spuele",
+"x": 60.0,
+"y": 240.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "doppelbeckenspuele_abtropf",
+"x": 120.0,
+"y": 240.0,
+"w": 90.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "arbeitsflaeche_klein",
+"x": 210.0,
+"y": 240.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kochfeld",
+"x": 270.0,
+"y": 240.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "abstellflaeche_herd_spuele",
+"x": 330.0,
+"y": 240.0,
+"w": 30.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kueche_unterschrank",
+"x": 0.0,
+"y": 180.0,
+"w": 60.0,
+"d": 60.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "kuehlschrank",
+"x": 0.0,
+"y": 120.0,
+"w": 60.0,
+"d": 60.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "imbisstheke",
+"x": 0.0,
+"y": 60.0,
+"w": 240.0,
+"d": 60.0,
+"against": "W",
+"faces": "S"
+},
+{
+"element": "hocker",
+"x": 10.0,
+"y": 10.0,
+"w": 40.0,
+"d": 40.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "hocker",
+"x": 70.0,
+"y": 10.0,
+"w": 40.0,
+"d": 40.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "hocker",
+"x": 130.0,
+"y": 10.0,
+"w": 40.0,
+"d": 40.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "hocker",
+"x": 190.0,
+"y": 10.0,
+"w": 40.0,
+"d": 40.0,
+"against": null,
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 120,
+"w": 300,
+"d": 120,
+"for": [
+"zeile_N",
+"zeile_W",
+"theke"
+]
+},
+{
+"x": 240,
+"y": 0,
+"w": 120,
+"d": 120,
+"for": [
+"zugang"
+]
+},
+{
+"x": 0,
+"y": 0,
+"w": 240,
+"d": 60,
+"for": [
+"hocker"
+],
+"notes": "Sitzstreifen 60"
+}
+],
+"doors": [],
+"dims": "top: 360 gesamt; zweite Kette 60|60|60|60 = 240 (Theke/Sitzplätze); right: 60|120|60|60 = 300",
+"notes": "Zeilenteilung oben gemessen (60/120/210/270/330). Hocker-Durchmesser gemessen ca. 40.",
+"sources": [
+{
+"book": "G",
+"page": 205
+}
+]
+},
+{
+"id": "kueche_einzeilig_rollstuhl",
+"room": "kueche",
+"name": "Einzeilige Küche rollstuhlgerecht",
+"mode": "rollstuhlgerecht",
+"W": 210.0,
+"D": 360.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 360.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 0,
+"w": 150,
+"d": 360,
+"for": [
+"kuechenzeile"
+]
+}
+],
+"doors": [],
+"dims": "bottom: ≥150 (Bewegungsfläche), ≥210 gesamt",
+"notes": "Mindest-Bewegungsfläche rollstuhlgerecht nach DIN 18025-1 / DIN 18040-2 (Entwurf); Zeilenlänge nicht bemaßt (gemessen ca. 360, M1:100). Oben je ein Schnitt mit Person.",
+"sources": [
+{
+"book": "G",
+"page": 208
+}
+]
+},
+{
+"id": "kueche_zweizeilig_rollstuhl",
+"room": "kueche",
+"name": "Zweizeilige Küche rollstuhlgerecht",
+"mode": "rollstuhlgerecht",
+"W": 270.0,
+"D": 360.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 360.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "kuechenzeile",
+"x": 210.0,
+"y": 0.0,
+"w": 60.0,
+"d": 360.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 0,
+"w": 150,
+"d": 360,
+"for": [
+"beide Zeilen"
+]
+}
+],
+"doors": [],
+"dims": "bottom: ≥150; ≥270 gesamt",
+"notes": "DIN 18025-1 / DIN 18040-2 (Entwurf)",
+"sources": [
+{
+"book": "G",
+"page": 208
+}
+]
+},
+{
+"id": "kueche_l_rollstuhl",
+"room": "kueche",
+"name": "L-förmige Küche rollstuhlgerecht",
+"mode": "rollstuhlgerecht",
+"W": 270.0,
+"D": 360.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 300.0,
+"w": 270.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 300.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 150,
+"w": 210,
+"d": 150,
+"for": [
+"zeile_N"
+]
+},
+{
+"x": 60,
+"y": 0,
+"w": 150,
+"d": 300,
+"for": [
+"zeile_W"
+]
+}
+],
+"doors": [],
+"dims": "bottom: ≥150 | ≥210; right: ≥150 (Bewegungsfläche vor N-Zeile), ≥210 (inkl. Zeile)",
+"notes": "innere Arbeitsplatten-Ecke 60x60 diagonal abgeschrägt (von (60,240) nach (120,300)), ursprüngliche Ecke gestrichelt; N-Zeile reicht 60 über die Bewegungsfläche hinaus (gemessen 270); DIN 18025-1 / DIN 18040-2 (Entwurf)",
+"sources": [
+{
+"book": "G",
+"page": 208
+}
+]
+},
+{
+"id": "kueche_u_rollstuhl",
+"room": "kueche",
+"name": "U-förmige Küche rollstuhlgerecht",
+"mode": "rollstuhlgerecht",
+"W": 270.0,
+"D": 360.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 300.0,
+"w": 270.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 300.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "kuechenzeile",
+"x": 210.0,
+"y": 0.0,
+"w": 60.0,
+"d": 300.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 0,
+"w": 150,
+"d": 300,
+"for": [
+"alle Zeilen"
+]
+}
+],
+"doors": [],
+"dims": "bottom: ≥150; ≥270 gesamt",
+"notes": "DIN 18025-1 / DIN 18040-2 (Entwurf)",
+"sources": [
+{
+"book": "G",
+"page": 208
+}
+]
+},
+{
+"id": "kueche_einzeilig_barrierefrei",
+"room": "kueche",
+"name": "Einzeilige Küche barrierefrei",
+"mode": "barrierefrei",
+"W": 180.0,
+"D": 360.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 360.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 0,
+"w": 120,
+"d": 360,
+"for": [
+"kuechenzeile"
+]
+}
+],
+"doors": [],
+"dims": "bottom: ≥120 (Bewegungsfläche), ≥180 gesamt",
+"notes": "Mindest-Bewegungsfläche barrierefrei nach DIN 18025-2 / DIN 18040-2 (Entwurf); Zeilenlänge nicht bemaßt (gemessen ca. 360, M1:100). Oben je ein Schnitt mit Person.",
+"sources": [
+{
+"book": "G",
+"page": 209
+}
+]
+},
+{
+"id": "kueche_zweizeilig_barrierefrei",
+"room": "kueche",
+"name": "Zweizeilige Küche barrierefrei",
+"mode": "barrierefrei",
+"W": 240.0,
+"D": 360.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 360.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "kuechenzeile",
+"x": 180.0,
+"y": 0.0,
+"w": 60.0,
+"d": 360.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 0,
+"w": 120,
+"d": 360,
+"for": [
+"beide Zeilen"
+]
+}
+],
+"doors": [],
+"dims": "bottom: ≥120; ≥240 gesamt",
+"notes": "DIN 18025-2 / DIN 18040-2 (Entwurf)",
+"sources": [
+{
+"book": "G",
+"page": 209
+}
+]
+},
+{
+"id": "kueche_l_barrierefrei",
+"room": "kueche",
+"name": "L-förmige Küche barrierefrei",
+"mode": "barrierefrei",
+"W": 240.0,
+"D": 360.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 300.0,
+"w": 240.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 300.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 180,
+"w": 180,
+"d": 120,
+"for": [
+"zeile_N"
+]
+},
+{
+"x": 60,
+"y": 0,
+"w": 120,
+"d": 300,
+"for": [
+"zeile_W"
+]
+}
+],
+"doors": [],
+"dims": "bottom: ≥120 | ≥180; right: ≥120 (Bewegungsfläche vor N-Zeile), ≥180 (inkl. Zeile)",
+"notes": "N-Zeile reicht 60 über die Bewegungsfläche hinaus (gemessen 240); DIN 18025-2 / DIN 18040-2 (Entwurf)",
+"sources": [
+{
+"book": "G",
+"page": 209
+}
+]
+},
+{
+"id": "kueche_u_barrierefrei",
+"room": "kueche",
+"name": "U-förmige Küche barrierefrei",
+"mode": "barrierefrei",
+"W": 240.0,
+"D": 360.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 300.0,
+"w": 240.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "kuechenzeile",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 300.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "kuechenzeile",
+"x": 180.0,
+"y": 0.0,
+"w": 60.0,
+"d": 300.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 0,
+"w": 120,
+"d": 300,
+"for": [
+"alle Zeilen"
+]
+}
+],
+"doors": [],
+"dims": "bottom: ≥120; ≥240 gesamt",
+"notes": "DIN 18025-2 / DIN 18040-2 (Entwurf)",
+"sources": [
+{
+"book": "G",
+"page": 209
+}
+]
+},
+{
+"id": "gedecke_4",
+"room": "essplatz",
+"name": "Platzbedarf 4 Gedecke an einem Tisch",
+"mode": "standard",
+"W": 130.0,
+"D": 80.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "gedeck",
+"x": 0.0,
+"y": 40.0,
+"w": 60.0,
+"d": 40.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "gedeck",
+"x": 70.0,
+"y": 40.0,
+"w": 60.0,
+"d": 40.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "gedeck",
+"x": 0.0,
+"y": 0.0,
+"w": 60.0,
+"d": 40.0,
+"against": null,
+"faces": "S"
+},
+{
+"element": "gedeck",
+"x": 70.0,
+"y": 0.0,
+"w": 60.0,
+"d": 40.0,
+"against": null,
+"faces": "S"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: 60 | 60, gesamt ca. 130; right: 40 | 40 = ≥80",
+"notes": "Lücke zwischen den 60er Gedecken ca. 10 (aus 130-120). Gedeck: Teller (zwei konzentrische Kreise), Messer/Gabel seitlich, Glas als kleiner Kreis, Löffel oben.",
+"sources": [
+{
+"book": "G",
+"page": 215
+}
+]
+},
+{
+"id": "essplatz_eckig_4p",
+"room": "essplatz",
+"name": "Essplatz eckig, 4 Personen (+ optional 1 Stirnplatz)",
+"mode": "standard",
+"W": 280.0,
+"D": 210.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "moebel_sideboard",
+"x": -40.0,
+"y": 0.0,
+"w": 40.0,
+"d": 210.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "esstisch_rechteckig",
+"x": 120.0,
+"y": 0.0,
+"w": 80.0,
+"d": 130.0,
+"against": null,
+"faces": "none"
+},
+{
+"element": "essstuhl",
+"x": 70.0,
+"y": 10.0,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "essstuhl",
+"x": 70.0,
+"y": 75.0,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "essstuhl",
+"x": 200.0,
+"y": 10.0,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "W"
+},
+{
+"element": "essstuhl",
+"x": 200.0,
+"y": 75.0,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "W"
+},
+{
+"element": "essstuhl",
+"x": 137.5,
+"y": 130.0,
+"w": 45.0,
+"d": 50.0,
+"against": null,
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 70,
+"y": 0,
+"w": 180,
+"d": 180,
+"for": [
+"Stellfläche Tisch+Stühle (dunkler)"
+]
+},
+{
+"x": 0,
+"y": 0,
+"w": 70,
+"d": 210,
+"for": [
+"Abstand zum Möbel 70"
+]
+},
+{
+"x": 250,
+"y": 0,
+"w": 30,
+"d": 210,
+"for": [
+"Abstand zur Wand 30"
+]
+},
+{
+"x": 70,
+"y": 180,
+"w": 180,
+"d": 30,
+"for": [
+"Abstand zur Wand 30"
+]
+}
+],
+"doors": [],
+"dims": "bottom: 70 | 50-55 | ≥80 | 50-55 | 30; Stellfläche 180-190; gesamt 280-290. right: 10|40-45|20|40-45|10 (=Tisch, 65|65) | 50-55 | 30; Stellfläche 180-185; gesamt 210-215",
+"notes": "Koordinaten mit Minimalwerten (Stuhlzone 50, Tisch 80x130, Stühle 45 breit). Stellfläche hellblau dunkler (#CCDFEA), Abstandsflächen 30/70 heller (#E6EFF4); 30er-Linie zur Wand gestrichelt im 70er Streifen eingetragen (bei Wand statt Möbel genügen 30). Unterkante: Tischende bündig mit Zeichnungsrand. Schnitt: Tisch 70-75, Sitz 42-47.",
+"sources": [
+{
+"book": "G",
+"page": 216
+}
+],
+"reference_only": true
+},
+{
+"id": "essplatz_rund_4p",
+"room": "essplatz",
+"name": "Essplatz rund, 4 Personen",
+"mode": "standard",
+"W": 290.0,
+"D": 250.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "moebel_sideboard",
+"x": -40.0,
+"y": 0.0,
+"w": 40.0,
+"d": 250.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "esstisch_rund",
+"x": 120.0,
+"y": 80.0,
+"w": 90.0,
+"d": 90.0,
+"against": null,
+"faces": "none"
+},
+{
+"element": "essstuhl",
+"x": 70.0,
+"y": 102.5,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "essstuhl",
+"x": 210.0,
+"y": 102.5,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "W"
+},
+{
+"element": "essstuhl",
+"x": 142.5,
+"y": 30.0,
+"w": 45.0,
+"d": 50.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "essstuhl",
+"x": 142.5,
+"y": 170.0,
+"w": 45.0,
+"d": 50.0,
+"against": null,
+"faces": "S"
+}
+],
+"movement": [
+{
+"shape": "circle",
+"cx": 165,
+"cy": 125,
+"r": 95,
+"for": [
+"Stellfläche Tisch+Stühle Ø190-230"
+]
+},
+{
+"shape": "circle",
+"cx": 165,
+"cy": 125,
+"r": 125,
+"for": [
+"Abstandsring 30"
+]
+},
+{
+"x": 0,
+"y": 0,
+"w": 70,
+"d": 250,
+"for": [
+"Abstand zum Möbel 70"
+]
+}
+],
+"doors": [],
+"dims": "bottom: 70 | 50-55 | 90-120 | 50-55 | 30; Stellfläche 190-230; gesamt 290-330",
+"notes": "Koordinaten mit Tisch Ø90/Stuhlzone 50; D nicht bemaßt (= Ø Außenkreis). Gezeichnet: Tisch Ø120, Stellflächenkreis Ø220, Außenkreis Ø250 (Ring 30 um Stellfläche, hellblau).",
+"sources": [
+{
+"book": "G",
+"page": 216
+}
+],
+"reference_only": true
+},
+{
+"id": "essbar_schnitt",
+"room": "essplatz",
+"name": "Imbissplatz Essbar (Schnitt)",
+"mode": "standard",
+"W": 155.0,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 115,
+"y": 0,
+"w": 30,
+"d": null,
+"for": [
+"hinter Hocker"
+]
+}
+],
+"doors": [],
+"dims": "60 | 25 | 30-40 | 30 und 45 | 40 | 60-70; Höhen 80-85 (Sitz), 110-115 (Bar)",
+"notes": "Schnitt, nur horizontale Kette (x); Summe 145-155.",
+"sources": [
+{
+"book": "G",
+"page": 217
+}
+],
+"reference_only": true
+},
+{
+"id": "ausziehtisch_schnitt",
+"room": "essplatz",
+"name": "Imbissplatz Ausziehtisch (Schnitt)",
+"mode": "standard",
+"W": 180.0,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 150,
+"y": 0,
+"w": 30,
+"d": null,
+"for": [
+"hinter Stuhl"
+]
+}
+],
+"doors": [],
+"dims": "60 | 40 | 50 | 30 = 180; Tisch 70-75, AP 85-92",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 217
+}
+],
+"reference_only": true
+},
+{
+"id": "ansatztisch_schnitt",
+"room": "essplatz",
+"name": "Imbissplatz Ansatztisch (Schnitt)",
+"mode": "standard",
+"W": 110.0,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [],
+"doors": [],
+"dims": "60 | 50-110; Tisch 70-75, AP 85-92",
+"notes": "Stuhl an der Tischstirn",
+"sources": [
+{
+"book": "G",
+"page": 217
+}
+],
+"reference_only": true
+},
+{
+"id": "eckbank",
+"room": "essplatz",
+"name": "Eckbank, 3 Personen",
+"mode": "standard",
+"W": 140.0,
+"D": 190.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "esstisch_rechteckig",
+"x": 0.0,
+"y": 0.0,
+"w": 80.0,
+"d": 130.0,
+"against": null,
+"faces": "none"
+},
+{
+"element": "sitzbank",
+"x": 0.0,
+"y": 135.0,
+"w": 140.0,
+"d": 55.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "sitzbank",
+"x": 85.0,
+"y": 0.0,
+"w": 55.0,
+"d": 135.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: 80 | 5 | 55 = 140; right: 130 | 5 | 55 = 190",
+"notes": "platzsparend; 1 Person an Tischstirn (oben), 2 auf rechter Bank; links/unten keine Plätze gezeichnet.",
+"sources": [
+{
+"book": "G",
+"page": 217
+}
+]
+},
+{
+"id": "u_bank",
+"room": "essplatz",
+"name": "U-Bank, 5 Personen",
+"mode": "standard",
+"W": 200.0,
+"D": 190.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "esstisch_rechteckig",
+"x": 60.0,
+"y": 0.0,
+"w": 80.0,
+"d": 130.0,
+"against": null,
+"faces": "none"
+},
+{
+"element": "sitzbank",
+"x": 0.0,
+"y": 135.0,
+"w": 200.0,
+"d": 55.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "sitzbank",
+"x": 0.0,
+"y": 0.0,
+"w": 55.0,
+"d": 135.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "sitzbank",
+"x": 145.0,
+"y": 0.0,
+"w": 55.0,
+"d": 135.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: 55 | 5 | 80 | 5 | 55 = 200; right: 130 | 5 | 55 = 190",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 217
+}
+]
+},
+{
+"id": "doppelbank",
+"room": "essplatz",
+"name": "Doppelbank, 4 Personen",
+"mode": "standard",
+"W": 200.0,
+"D": 130.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "esstisch_rechteckig",
+"x": 60.0,
+"y": 0.0,
+"w": 80.0,
+"d": 130.0,
+"against": null,
+"faces": "none"
+},
+{
+"element": "sitzbank",
+"x": 0.0,
+"y": 0.0,
+"w": 55.0,
+"d": 130.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "sitzbank",
+"x": 145.0,
+"y": 0.0,
+"w": 55.0,
+"d": 130.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: 55 | 5 | 80 | 5 | 55 = 200; right: 130",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 217
+}
+]
+},
+{
+"id": "essplatz_eckig_rollstuhl",
+"room": "essplatz",
+"name": "Essplatz eckig rollstuhlgerecht",
+"mode": "rollstuhlgerecht",
+"W": 310.0,
+"D": 250.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "esstisch_rechteckig",
+"x": 150.0,
+"y": 120.0,
+"w": 80.0,
+"d": 130.0,
+"against": null,
+"faces": "none"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 310,
+"d": 120,
+"for": [
+"Durchgang ≥120"
+]
+},
+{
+"x": 0,
+"y": 45,
+"w": 150,
+"d": 150,
+"for": [
+"Wendefläche 150/150 (gestrichelt)"
+]
+},
+{
+"x": 100,
+"y": 120,
+"w": 180,
+"d": 130,
+"for": [
+"Stellfläche Tisch+Stühle (dunkler)"
+]
+},
+{
+"x": 280,
+"y": 120,
+"w": 30,
+"d": 130,
+"for": [
+"Abstand 30"
+]
+},
+{
+"x": 70,
+"y": 120,
+"w": 30,
+"d": 130,
+"for": [
+"Abstand 30"
+]
+}
+],
+"doors": [],
+"dims": "bottom: ≥150 | 80 | 50 | 30 = ≥310; right: 130 | ≥120",
+"notes": "DIN 18025-1 / DIN 18040-2 (Entwurf). Wendefläche-Lage y und Stuhlpositionen gemessen. Schnitt: Tisch 70-75 (unterfahrbar).",
+"sources": [
+{
+"book": "G",
+"page": 218
+}
+],
+"reference_only": true
+},
+{
+"id": "essplatz_rund_rollstuhl",
+"room": "essplatz",
+"name": "Essplatz rund rollstuhlgerecht",
+"mode": "rollstuhlgerecht",
+"W": 350.0,
+"D": 370.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "esstisch_rund",
+"x": 150.0,
+"y": 170.0,
+"w": 120.0,
+"d": 120.0,
+"against": null,
+"faces": "none"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 350,
+"d": 120,
+"for": [
+"Durchgang ≥120"
+]
+},
+{
+"x": 0,
+"y": 120,
+"w": 150,
+"d": 150,
+"for": [
+"Wendefläche 150/150"
+]
+},
+{
+"shape": "circle",
+"cx": 210,
+"cy": 230,
+"r": 110,
+"for": [
+"Stellfläche Ø220"
+]
+},
+{
+"shape": "circle",
+"cx": 210,
+"cy": 230,
+"r": 140,
+"for": [
+"Abstandsring 30"
+]
+}
+],
+"doors": [],
+"dims": "bottom: ≥150 | 120 | 50 | 30 = ≥350; right: ≥120 | 50 | 120 | 50 | 30 = ≥370",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 218
+}
+],
+"reference_only": true
+},
+{
+"id": "essplatz_eckig_barrierefrei",
+"room": "essplatz",
+"name": "Essplatz eckig barrierefrei",
+"mode": "barrierefrei",
+"W": 260.0,
+"D": 220.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "esstisch_rechteckig",
+"x": 90.0,
+"y": 90.0,
+"w": 80.0,
+"d": 130.0,
+"against": null,
+"faces": "none"
+},
+{
+"element": "essstuhl",
+"x": 40.0,
+"y": 172.0,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "essstuhl",
+"x": 40.0,
+"y": 105.0,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "essstuhl",
+"x": 170.0,
+"y": 172.0,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "W"
+},
+{
+"element": "essstuhl",
+"x": 170.0,
+"y": 105.0,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "W"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 260,
+"d": 90,
+"for": [
+"Durchgang ≥90"
+]
+},
+{
+"x": 40,
+"y": 90,
+"w": 180,
+"d": 130,
+"for": [
+"Stellfläche (dunkler)"
+]
+},
+{
+"x": 0,
+"y": 90,
+"w": 40,
+"d": 130,
+"for": [
+"Abstand"
+]
+},
+{
+"x": 220,
+"y": 90,
+"w": 40,
+"d": 130,
+"for": [
+"Abstand"
+]
+}
+],
+"doors": [],
+"dims": "bottom: 90 | 80 | 90 = 260; right: 130 | ≥90 = ≥220",
+"notes": "DIN 18025-2 / DIN 18040-2 (Entwurf). Achtung: Zeichnung misst die seitlichen '90' nur als 80 (Gesamt 240 statt 260); Koordinaten nach Beschriftung, Stuhlzone 50 angenommen. Person mit Gehstock.",
+"sources": [
+{
+"book": "G",
+"page": 219
+}
+]
+},
+{
+"id": "essplatz_rund_barrierefrei",
+"room": "essplatz",
+"name": "Essplatz rund barrierefrei",
+"mode": "barrierefrei",
+"W": 300.0,
+"D": 350.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "esstisch_rund",
+"x": 90.0,
+"y": 140.0,
+"w": 120.0,
+"d": 120.0,
+"against": null,
+"faces": "none"
+},
+{
+"element": "essstuhl",
+"x": 40.0,
+"y": 177.5,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "essstuhl",
+"x": 210.0,
+"y": 177.5,
+"w": 50.0,
+"d": 45.0,
+"against": null,
+"faces": "W"
+},
+{
+"element": "essstuhl",
+"x": 127.5,
+"y": 90.0,
+"w": 45.0,
+"d": 50.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "essstuhl",
+"x": 127.5,
+"y": 260.0,
+"w": 45.0,
+"d": 50.0,
+"against": null,
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 300,
+"d": 90,
+"for": [
+"Durchgang ≥90"
+]
+},
+{
+"shape": "circle",
+"cx": 150,
+"cy": 200,
+"r": 110,
+"for": [
+"Stellfläche Ø220"
+]
+},
+{
+"shape": "circle",
+"cx": 150,
+"cy": 200,
+"r": 140,
+"for": [
+"äußerer Ring"
+]
+}
+],
+"doors": [],
+"dims": "bottom: 90 | 120 | 90 = 300; right: ≥90 | 50 | 120 | 90 = ≥350",
+"notes": "Zeichnung misst seitliche/obere '90' als 80 (Kreise Ø220/280); Koordinaten nach Beschriftung.",
+"sources": [
+{
+"book": "G",
+"page": 219
+}
+]
+},
+{
+"id": "wc_raum_a",
+"room": "wc_raum",
+"name": "WC-Raum, WC und HWB gegenueber (laengs)",
+"mode": "standard",
+"W": 90.0,
+"D": 170.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "wc_wandeinbau",
+"x": 25.0,
+"y": 110.0,
+"w": 40.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "handwaschbecken",
+"x": 22.5,
+"y": 0.0,
+"w": 45.0,
+"d": 35.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 35,
+"w": 90,
+"d": 75,
+"for": [
+"wc_wandeinbau",
+"handwaschbecken"
+],
+"notes": "whole room drawn blue"
+}
+],
+"doors": [],
+"dims": "top: 25|40|25 = 90; right: 60|75|35 = 170; bottom: >=20|45|>=20, total 90 (-> 22.5 each)",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). No door drawn. Opposite arrangement: 75 between WC front and HWB front.",
+"sources": [
+{
+"book": "G",
+"page": 270
+}
+]
+},
+{
+"id": "wc_raum_b",
+"room": "wc_raum",
+"name": "WC-Raum, WC und HWB nebeneinander",
+"mode": "standard",
+"W": 145.0,
+"D": 120.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "wc_wandeinbau",
+"x": 20.0,
+"y": 60.0,
+"w": 40.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "handwaschbecken",
+"x": 80.0,
+"y": 85.0,
+"w": 45.0,
+"d": 35.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 145,
+"d": 60,
+"for": [
+"wc_wandeinbau",
+"handwaschbecken"
+]
+}
+],
+"doors": [],
+"dims": "top: 20|40|20|45|20 = 145; left: 60|60 = 120, (75) for opposite arrangement -> 135; bottom 145",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). Light-blue band of 15 below the BF = extension to 75 when objects are opposite (room depth 135, all y +15). HWB depth not dimensioned (scaled 35).",
+"sources": [
+{
+"book": "G",
+"page": 270
+}
+]
+},
+{
+"id": "wc_raum_c",
+"room": "wc_raum",
+"name": "WC-Raum, WC an Stirnwand, HWB an Seitenwand",
+"mode": "standard",
+"W": 115.0,
+"D": 145.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "wc_wandeinbau",
+"x": 20.0,
+"y": 85.0,
+"w": 40.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "handwaschbecken",
+"x": 80.0,
+"y": 20.0,
+"w": 35.0,
+"d": 45.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 115,
+"d": 145,
+"for": [
+"wc_wandeinbau",
+"handwaschbecken"
+],
+"notes": "whole free floor blue"
+}
+],
+"doors": [],
+"dims": "top: 20|40|20|35 = 115; right: 60|20|45|20 = 145",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall).",
+"sources": [
+{
+"book": "G",
+"page": 270
+}
+]
+},
+{
+"id": "duschbad_wc_a",
+"room": "duschbad_wc",
+"name": "Duschbad mit WC, Dusche in Ecke, WC+HWB gegenueber",
+"mode": "standard",
+"W": 145.0,
+"D": 215.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "duschwanne",
+"x": 65.0,
+"y": 135.0,
+"w": 80.0,
+"d": 80.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "handwaschbecken",
+"x": 20.0,
+"y": 0.0,
+"w": 45.0,
+"d": 35.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "wc_wandeinbau",
+"x": 85.0,
+"y": 0.0,
+"w": 40.0,
+"d": 60.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 60,
+"w": 145,
+"d": 75,
+"for": [
+"duschwanne",
+"wc_wandeinbau",
+"handwaschbecken"
+],
+"notes": "all free floor blue"
+}
+],
+"doors": [],
+"dims": "top: 65|80 = 145; bottom: 20|45|20|40|20 = 145; right: 80|75|60 = 215",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). Washbasin drawn 45 wide (HWB size), depth not dimensioned (scaled 35).",
+"sources": [
+{
+"book": "G",
+"page": 270
+}
+]
+},
+{
+"id": "duschbad_wc_b",
+"room": "duschbad_wc",
+"name": "Duschbad mit WC, Dusche und WC an einer Wand, WB seitlich",
+"mode": "standard",
+"W": 160.0,
+"D": 165.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "duschwanne",
+"x": 0.0,
+"y": 85.0,
+"w": 80.0,
+"d": 80.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "wc_wandeinbau",
+"x": 100.0,
+"y": 105.0,
+"w": 40.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "handwaschbecken",
+"x": 0.0,
+"y": 20.0,
+"w": 35.0,
+"d": 45.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 35,
+"y": 0,
+"w": 125,
+"d": 105,
+"for": [
+"duschwanne",
+"wc_wandeinbau",
+"handwaschbecken"
+],
+"notes": "all free floor blue"
+}
+],
+"doors": [],
+"dims": "top: 80|20|40|20 = 160; left: 80|20|45|20 = 165; bottom: 35|125 = 160",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall).",
+"sources": [
+{
+"book": "G",
+"page": 270
+}
+]
+},
+{
+"id": "duschbad_a",
+"room": "duschbad",
+"name": "Duschbad ohne WC",
+"mode": "standard",
+"W": 125.0,
+"D": 165.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "duschwanne",
+"x": 45.0,
+"y": 85.0,
+"w": 80.0,
+"d": 80.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "handwaschbecken",
+"x": 0.0,
+"y": 20.0,
+"w": 35.0,
+"d": 45.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 35,
+"y": 0,
+"w": 90,
+"d": 85,
+"for": [
+"duschwanne",
+"handwaschbecken"
+],
+"notes": "all free floor blue"
+}
+],
+"doors": [],
+"dims": "top: 45|80 = 125; right: 80|20|45|20 = 165; bottom: 35|90 = 125",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall).",
+"sources": [
+{
+"book": "G",
+"page": 270
+}
+]
+},
+{
+"id": "wannenbad_wc_a",
+"room": "wannenbad_wc",
+"name": "Wannenbad mit WC, Wanne laengs an Seitenwand",
+"mode": "standard",
+"W": 210.0,
+"D": 170.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "badewanne",
+"x": 0.0,
+"y": 0.0,
+"w": 75.0,
+"d": 170.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "wc_wandeinbau",
+"x": 150.0,
+"y": 110.0,
+"w": 60.0,
+"d": 40.0,
+"against": "E",
+"faces": "W"
+},
+{
+"element": "einzelwaschtisch",
+"x": 155.0,
+"y": 20.0,
+"w": 55.0,
+"d": 60.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [
+{
+"x": 75,
+"y": 0,
+"w": 75,
+"d": 170,
+"for": [
+"badewanne",
+"wc_wandeinbau",
+"einzelwaschtisch"
+]
+}
+],
+"doors": [],
+"dims": "top: 75|75|60 = 210; bottom: 155|55 = 210; right: 20|40|>=20|60|20 = 170 (>=20 resolves to 30)",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall).",
+"sources": [
+{
+"book": "G",
+"page": 271
+}
+]
+},
+{
+"id": "wannenbad_wc_b",
+"room": "wannenbad_wc",
+"name": "Wannenbad mit WC, WT und Wanne an Laengswand",
+"mode": "standard",
+"W": 270.0,
+"D": 155.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "einzelwaschtisch",
+"x": 20.0,
+"y": 100.0,
+"w": 60.0,
+"d": 55.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "badewanne",
+"x": 100.0,
+"y": 80.0,
+"w": 170.0,
+"d": 75.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "wc_wandeinbau",
+"x": 210.0,
+"y": 20.0,
+"w": 60.0,
+"d": 40.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 210,
+"d": 80,
+"for": [
+"badewanne",
+"einzelwaschtisch",
+"wc_wandeinbau"
+],
+"notes": "all free floor blue"
+}
+],
+"doors": [],
+"dims": "top: 20|60|20|170 = 270; bottom: 210|60 = 270; right: 75|20|40|20 = 155",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). WT depth not dimensioned (scaled 55).",
+"sources": [
+{
+"book": "G",
+"page": 271
+}
+]
+},
+{
+"id": "wannenbad_wc_c",
+"room": "wannenbad_wc",
+"name": "Wannenbad mit WC, Wanne an Stirnwand, WC und WT an Seitenwaenden",
+"mode": "standard",
+"W": 205.0,
+"D": 175.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "badewanne",
+"x": 35.0,
+"y": 100.0,
+"w": 170.0,
+"d": 75.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "einzelwaschtisch",
+"x": 150.0,
+"y": 20.0,
+"w": 55.0,
+"d": 60.0,
+"against": "E",
+"faces": "W"
+},
+{
+"element": "wc_wandeinbau",
+"x": 0.0,
+"y": 20.0,
+"w": 60.0,
+"d": 40.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 60,
+"y": 0,
+"w": 90,
+"d": 100,
+"for": [
+"badewanne",
+"einzelwaschtisch",
+"wc_wandeinbau"
+],
+"notes": "all free floor blue"
+}
+],
+"doors": [],
+"dims": "top: 35|170 = 205; bottom: 60|90|55 = 205; right: 75|20|60|20 = 175",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). WC y-position not dimensioned (scaled ~20-22 from S wall).",
+"sources": [
+{
+"book": "G",
+"page": 271
+}
+]
+},
+{
+"id": "vollbad_a",
+"room": "vollbad",
+"name": "Vollbad: WC, Bidet, WT, WM an einer Wand; Wanne und Dusche gegenueber",
+"mode": "standard",
+"W": 310.0,
+"D": 230.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "wc_wandeinbau",
+"x": 20.0,
+"y": 170.0,
+"w": 40.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "bidet",
+"x": 85.0,
+"y": 170.0,
+"w": 40.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "einzelwaschtisch",
+"x": 150.0,
+"y": 175.0,
+"w": 60.0,
+"d": 55.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "waschmaschine_bad",
+"x": 230.0,
+"y": 170.0,
+"w": 60.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "badewanne",
+"x": 0.0,
+"y": 0.0,
+"w": 170.0,
+"d": 75.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "duschwanne",
+"x": 230.0,
+"y": 0.0,
+"w": 80.0,
+"d": 80.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 80,
+"w": 310,
+"d": 90,
+"for": [
+"all"
+],
+"notes": "all free floor blue; 90 between WM and shower = opposite WM rule"
+}
+],
+"doors": [],
+"dims": "top: 20|40|>=20|40|>=20|60|20|60|20 (>=20 scaled 25 each -> 310); right: 60|90|80 = 230; left: 60 ... 75; bottom: 170 ... 80",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). Overall width not dimensioned; 310 derived by scaling (25 = bidet distance in VDI matrix). Gap tub-shower 60. 4th object (60x60 square with inner square and round drum) interpreted as washing machine. WT depth scaled 55.",
+"sources": [
+{
+"book": "G",
+"page": 271
+}
+]
+},
+{
+"id": "rollstuhl_bad_beispiel",
+"room": "bad_rollstuhlgerecht",
+"name": "Rollstuhlgerechter Sanitaerraum, Ueberlagerung der Bewegungsflaechen (DIN 18025-1 / 18040-2 E)",
+"mode": "rollstuhlgerecht",
+"W": 245.0,
+"D": 295.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "einzelwaschtisch",
+"x": 20.0,
+"y": 240.0,
+"w": 60.0,
+"d": 55.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "wc_wandeinbau",
+"x": 175.0,
+"y": 225.0,
+"w": 40.0,
+"d": 70.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "stuetzklappgriff",
+"x": 229.0,
+"y": 210.0,
+"w": 4.0,
+"d": 85.0,
+"against": "N",
+"faces": "W"
+},
+{
+"element": "badewanne",
+"x": 75.0,
+"y": 0.0,
+"w": 170.0,
+"d": 75.0,
+"against": "S",
+"faces": "N"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 90,
+"w": 150,
+"d": 150,
+"for": [
+"einzelwaschtisch"
+]
+},
+{
+"x": 95,
+"y": 75,
+"w": 150,
+"d": 150,
+"for": [
+"wc_wandeinbau"
+]
+},
+{
+"x": 80,
+"y": 225,
+"w": 95,
+"d": 70,
+"for": [
+"wc_wandeinbau"
+],
+"notes": "side transfer area >=95 (>=90) x 70"
+},
+{
+"x": 95,
+"y": 0,
+"w": 150,
+"d": 150,
+"for": [
+"duschplatz",
+"badewanne"
+],
+"notes": "Duschplatz 150x150 (dashed)"
+}
+],
+"doors": [
+{
+"wall": "W",
+"offset": 135,
+"width": 90,
+"swing": "out",
+"hinge": "N end (y=225)"
+}
+],
+"dims": "top: >=20|60|>=95 (>=90)|40|>=30 = >=245 (>=240); right: >=70 (WC) | >=150 (WC BF) | 75 tub = 295; also 55|15 at WC (backrest/rail), >=150 shower, >=295 total; left door >=90; bottom >=150 (WT BF), >=150 (shower)",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). Room background very light blue. Door offset = from S wall to opening (scaled). A second chain '>=70 / >=150' from WT front down is drawn without a middle tick (see open questions).",
+"sources": [
+{
+"book": "G",
+"page": 274
+}
+]
+},
+{
+"id": "barrierefrei_bad_beispiel",
+"room": "bad_barrierefrei",
+"name": "Barrierefreier Sanitaerraum, Ueberlagerung der Bewegungsflaechen (DIN 18025-2 / 18040 E)",
+"mode": "barrierefrei",
+"W": 200.0,
+"D": 180.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "einzelwaschtisch",
+"x": 20.0,
+"y": 125.0,
+"w": 60.0,
+"d": 55.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "wc_wandeinbau",
+"x": 130.0,
+"y": 20.0,
+"w": 70.0,
+"d": 40.0,
+"against": "E",
+"faces": "W"
+},
+{
+"element": "duschplatz_120",
+"x": 80.0,
+"y": 60.0,
+"w": 120.0,
+"d": 120.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 5,
+"w": 120,
+"d": 120,
+"for": [
+"einzelwaschtisch"
+],
+"notes": "drawn dashed, inset ~2 cm"
+},
+{
+"x": 10,
+"y": 0,
+"w": 120,
+"d": 120,
+"for": [
+"wc_wandeinbau"
+],
+"notes": "dashed"
+}
+],
+"doors": [
+{
+"wall": "W",
+"offset": 10,
+"width": 80,
+"swing": "out",
+"hinge": "S end"
+}
+],
+"dims": "top: >=20 | 60 (WT) | ... | >=120 (shower) = >=200; right: >=120 | 40 (WC) | >=20 = 180; >=120 (WC BF), >=120 (WT BF), >=180; bottom: >=120, >=120; left door >=80",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). Door offset scaled (~10). WT depth scaled 55.",
+"sources": [
+{
+"book": "G",
+"page": 275
+}
+]
+},
+{
+"id": "rf_bf_waschtisch",
+"room": "bad_rollstuhlgerecht",
+"name": "Rollstuhlgerecht: BF vor Waschtisch (DIN 18025-1)",
+"mode": "rollstuhlgerecht",
+"W": 205.0,
+"D": 170.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "einzelwaschtisch",
+"x": 0.0,
+"y": 90.0,
+"w": 55.0,
+"d": 60.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 55,
+"y": 20,
+"w": 150,
+"d": 150,
+"for": [
+"einzelwaschtisch"
+]
+}
+],
+"doors": [],
+"dims": ">=150 x >=150; WT >=20 from side wall",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). Group extent; side wall at top (N, y=170), WT 20 below it; M 1:100.",
+"sources": [
+{
+"book": "G",
+"page": 274
+}
+]
+},
+{
+"id": "rf_bf_wc",
+"room": "bad_rollstuhlgerecht",
+"name": "Rollstuhlgerecht: BF vor und neben WC (DIN 18025-1 / 18040-2 E)",
+"mode": "rollstuhlgerecht",
+"W": 220.0,
+"D": 165.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "wc_wandeinbau",
+"x": 0.0,
+"y": 95.0,
+"w": 70.0,
+"d": 40.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 70,
+"y": 0,
+"w": 150,
+"d": 150,
+"for": [
+"wc_wandeinbau"
+]
+},
+{
+"x": 0,
+"y": 0,
+"w": 70,
+"d": 95,
+"for": [
+"wc_wandeinbau"
+],
+"notes": "side area >=95 (DIN 18040 E >=90) x >=70"
+}
+],
+"doors": [],
+"dims": "left: >=30 | WC 40 | >=95 (>=90); bottom: >=70 | >=150; right >=150",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). Side wall at y=165 (30 above WC).",
+"sources": [
+{
+"book": "G",
+"page": 274
+}
+]
+},
+{
+"id": "rf_bf_dusche",
+"room": "bad_rollstuhlgerecht",
+"name": "Rollstuhlgerecht: Duschplatz",
+"mode": "rollstuhlgerecht",
+"W": 150.0,
+"D": 150.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "duschplatz_150",
+"x": 0.0,
+"y": 0.0,
+"w": 150.0,
+"d": 150.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 150,
+"d": 150,
+"for": [
+"duschplatz_150"
+]
+}
+],
+"doors": [],
+"dims": ">=150 x >=150",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall).",
+"sources": [
+{
+"book": "G",
+"page": 274
+}
+]
+},
+{
+"id": "rf_bf_wanne",
+"room": "bad_rollstuhlgerecht",
+"name": "Rollstuhlgerecht: BF neben Badewanne",
+"mode": "rollstuhlgerecht",
+"W": 225.0,
+"D": 170.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "badewanne",
+"x": 0.0,
+"y": 0.0,
+"w": 75.0,
+"d": 170.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 75,
+"y": 0,
+"w": 150,
+"d": 170,
+"for": [
+"badewanne"
+]
+}
+],
+"doors": [],
+"dims": "bottom >=150",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall).",
+"sources": [
+{
+"book": "G",
+"page": 274
+}
+]
+},
+{
+"id": "rf_duschplatz_mit_wanne",
+"room": "bad_rollstuhlgerecht",
+"name": "Rollstuhlgerecht: Duschplatz mit nachtraeglich aufgestellter Wanne",
+"mode": "rollstuhlgerecht",
+"W": 225.0,
+"D": 170.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "badewanne",
+"x": 0.0,
+"y": 0.0,
+"w": 75.0,
+"d": 170.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "duschplatz_150",
+"x": 0.0,
+"y": 20.0,
+"w": 150.0,
+"d": 150.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 75,
+"y": 0,
+"w": 150,
+"d": 170,
+"for": [
+"badewanne"
+]
+}
+],
+"doors": [],
+"dims": "top >=150 (shower); left >=150; right >=170; bottom >=150 (BF) ; total >=225",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall).",
+"sources": [
+{
+"book": "G",
+"page": 274
+}
+],
+"reference_only": true
+},
+{
+"id": "bf_bf_waschtisch",
+"room": "bad_barrierefrei",
+"name": "Barrierefrei: BF vor Waschtisch (DIN 18025-2)",
+"mode": "barrierefrei",
+"W": 175.0,
+"D": 140.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "einzelwaschtisch",
+"x": 0.0,
+"y": 60.0,
+"w": 55.0,
+"d": 60.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 55,
+"y": 0,
+"w": 120,
+"d": 120,
+"for": [
+"einzelwaschtisch"
+]
+}
+],
+"doors": [],
+"dims": ">=120 x >=120; >=20 side wall",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). side wall at y=140; WT size scaled; BF top aligned ~at WT top.",
+"sources": [
+{
+"book": "G",
+"page": 275
+}
+]
+},
+{
+"id": "bf_bf_wc",
+"room": "bad_barrierefrei",
+"name": "Barrierefrei: BF vor WC (DIN 18025-2)",
+"mode": "barrierefrei",
+"W": 190.0,
+"D": 140.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "wc_wandeinbau",
+"x": 0.0,
+"y": 80.0,
+"w": 70.0,
+"d": 40.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 70,
+"y": 0,
+"w": 120,
+"d": 120,
+"for": [
+"wc_wandeinbau"
+]
+}
+],
+"doors": [],
+"dims": ">=120 x >=120; >=20 side wall",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall). side wall at y=140; WC drawn ~70 deep (scaled).",
+"sources": [
+{
+"book": "G",
+"page": 275
+}
+]
+},
+{
+"id": "bf_bf_dusche",
+"room": "bad_barrierefrei",
+"name": "Barrierefrei: Duschplatz",
+"mode": "barrierefrei",
+"W": 120.0,
+"D": 120.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "duschplatz_120",
+"x": 0.0,
+"y": 0.0,
+"w": 120.0,
+"d": 120.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 0,
+"y": 0,
+"w": 120,
+"d": 120,
+"for": [
+"duschplatz_120"
+]
+}
+],
+"doors": [],
+"dims": ">=120 x >=120",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall).",
+"sources": [
+{
+"book": "G",
+"page": 275
+}
+]
+},
+{
+"id": "bf_bf_wanne",
+"room": "bad_barrierefrei",
+"name": "Barrierefrei: BF neben Badewanne",
+"mode": "barrierefrei",
+"W": 195.0,
+"D": 170.0,
+"barrier_free": true,
+"elements": [
+{
+"element": "badewanne",
+"x": 0.0,
+"y": 0.0,
+"w": 75.0,
+"d": 170.0,
+"against": "W",
+"faces": "E"
+}
+],
+"movement": [
+{
+"x": 75,
+"y": 0,
+"w": 120,
+"d": 170,
+"for": [
+"badewanne"
+]
+}
+],
+"doors": [],
+"dims": "bottom >=120",
+"notes": "coords: origin bottom-left of room interior, x right, y up; element x/y = lower-left corner of the bbox, w/d = bbox extent in x/y (not along-wall).",
+"sources": [
+{
+"book": "G",
+"page": 275
+}
+]
+},
+{
+"id": "empfang_theke_angrenzender_arbeitsplatz",
+"room": "empfang",
+"name": "Kundentheke mit angrenzendem Arbeitsplatz (zwei gegenüberliegende Schreibtische), M 1:50",
+"mode": "standard",
+"W": null,
+"D": null,
+"barrier_free": false,
+"elements": [
+{
+"element": "empfangstheke",
+"x": 0.0,
+"y": 0.0,
+"w": 40.0,
+"d": 290.0,
+"against": null,
+"faces": "W"
+},
+{
+"element": "schreibtisch",
+"x": 115.0,
+"y": 85.0,
+"w": 120.0,
+"d": 60.0,
+"against": "E",
+"faces": "N"
+},
+{
+"element": "schreibtisch",
+"x": 115.0,
+"y": 145.0,
+"w": 120.0,
+"d": 60.0,
+"against": "E",
+"faces": "S"
+}
+],
+"movement": [
+{
+"x": 40,
+"y": 0,
+"w": "195–285",
+"d": "290–370",
+"for": [
+"empfangstheke",
+"schreibtisch"
+],
+"notes": "gesamter Bereich hinter der Theke hellblau"
+}
+],
+"doors": [],
+"dims": "unten: 40 | 75–125 | 120–160; rechts (von oben): 85 | 60–100 | 60–100 | 85",
+"notes": "Theke 40 tief, 100 hoch; Tisch 65–72 hoch. Tische rechtsbündig an der rechten Begrenzung. Stuhlmaß 40–48 breit, 38–44 tief. Koordinaten in Bereichen, da Maße als Spannen angegeben.",
+"sources": [
+{
+"book": "G",
+"page": 373
+}
+],
+"reference_only": true
+},
+{
+"id": "empfang_theke_integrierter_schreibtisch",
+"room": "empfang",
+"name": "Kundentheke mit integriertem Schreibtisch, M 1:50",
+"mode": "standard",
+"W": 170.0,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": 70,
+"y": 0,
+"w": 100,
+"d": "170–210",
+"for": [
+"schreibtisch"
+]
+}
+],
+"doors": [],
+"dims": "unten: 30 | 40 | 100; Tisch 60–80; rechts: 120–160 (Tisch) | ≥ 50 (frei daneben)",
+"notes": "Schnitte: Theke 100 hoch, Aufsatz 28 über Tisch 65–72, Sitz 42–53; Variante Theke 110 mit Podest 32–40 (Arbeitsplatz erhöht). Bewegungsfläche 100 hinter dem Tisch (hellblau).",
+"sources": [
+{
+"book": "G",
+"page": 374
+}
+],
+"reference_only": true
+},
+{
+"id": "wartebereich_sesselgruppe",
+"room": "wartebereich",
+"name": "Wartebereich: 6 Sessel um Couchtisch",
+"mode": "standard",
+"W": null,
+"D": null,
+"barrier_free": false,
+"elements": [
+{
+"element": "couchtisch_wartebereich",
+"x": 125.0,
+"y": 125.0,
+"w": 160.0,
+"d": 40.0,
+"against": null,
+"faces": null
+},
+{
+"element": "sessel_wartebereich",
+"x": 125.0,
+"y": 205.0,
+"w": 75.0,
+"d": 85.0,
+"against": null,
+"faces": "S"
+},
+{
+"element": "sessel_wartebereich",
+"x": 210.0,
+"y": 205.0,
+"w": 75.0,
+"d": 85.0,
+"against": null,
+"faces": "S"
+},
+{
+"element": "sessel_wartebereich",
+"x": 125.0,
+"y": 0.0,
+"w": 75.0,
+"d": 85.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "sessel_wartebereich",
+"x": 210.0,
+"y": 0.0,
+"w": 75.0,
+"d": 85.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "sessel_wartebereich",
+"x": 0.0,
+"y": 107.0,
+"w": 85.0,
+"d": 75.0,
+"against": null,
+"faces": "E"
+},
+{
+"element": "sessel_wartebereich",
+"x": 325.0,
+"y": 107.0,
+"w": 85.0,
+"d": 75.0,
+"against": null,
+"faces": "W"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "Sessel ca. 75 x ca. 85; Abstand Sessel–Tisch 40 (nur oben bemaßt)",
+"notes": "Nur ca.75, ca.85 und 40 bemaßt; übrige Lage aus Zeichnung geschätzt (Fuge zwischen Sesseln ca. 10; seitliche Sessel ca. 40 vom Tisch; untere Sessel in der Zeichnung eher ca. 30 vom Tisch, hier symmetrisch 40 angesetzt).",
+"sources": [
+{
+"book": "G",
+"page": 374
+}
+],
+"reference_only": true
+},
+{
+"id": "windfang_buero",
+"room": "windfang",
+"name": "Windfang mit zweiflügeligen Türen innen und außen",
+"mode": "standard",
+"W": null,
+"D": 200.0,
+"barrier_free": false,
+"elements": [],
+"movement": [],
+"doors": [
+{
+"wall": "N",
+"offset": null,
+"width": null,
+"swing": "in (zum beheizten Raum hin, gestrichelt)",
+"hinge": "beidseitig (2-flügelig)"
+},
+{
+"wall": "S",
+"offset": null,
+"width": null,
+"swing": "in (in den Windfang)",
+"hinge": "beidseitig (2-flügelig)"
+}
+],
+"dims": "Abstand der Türebenen ≥ 200; Lauflänge auf Schmutzfangmatte min. 2 m",
+"notes": "Schema: innen beheizter Aufenthaltsraum, Windfang als Wärmepuffer, außen Schmutzfang. Breite nicht bemaßt.",
+"sources": [
+{
+"book": "G",
+"page": 368
+}
+],
+"reference_only": true
+},
+{
+"id": "bushaltebucht",
+"room": "bushaltestelle",
+"name": "Bushaltebucht am Straßenrand",
+"mode": "standard",
+"W": null,
+"D": 300.0,
+"barrier_free": false,
+"elements": [],
+"movement": [],
+"doors": [],
+"dims": "Länge entlang Fahrbahn: 480 | 2500 (Einfahrtsverziehung) | je nach Buslänge variabel (Haltebereich) | 1500 (Ausfahrtsverziehung) | 400; Buchttiefe 300",
+"notes": "Bucht trapezförmig: schräge Einfahrt über 2500, gerade Haltekante (Buslänge), schräge Ausfahrt über 1500; die 480 und 400 am Anfang/Ende sind Strecken entlang der Bordkante vor/nach der Verziehung (Bedeutung im Bild nicht beschriftet).",
+"sources": [
+{
+"book": "G",
+"page": 479
+}
+],
+"reference_only": true
+},
+{
+"id": "bus_wende_180",
+"room": "bushaltestelle",
+"name": "Platzbedarf eines Busses bei einer 180°-Wende",
+"mode": "standard",
+"W": 3000.0,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [],
+"doors": [],
+"dims": "äußere Hüllkurve (Leitlinie) als Halbkreis, Gesamtbreite 3000; senkrechte Maßlinie 2500 vom Kreismittelpunkt (gestrichelte Linie) bis zum Busende in der Gegenrichtung",
+"notes": "M 1:1000; Hüllkurve als blaues Kreisbogenband gezeichnet.",
+"sources": [
+{
+"book": "G",
+"page": 479
+}
+],
+"reference_only": true
+},
+{
+"id": "flur_tuer_nach_innen",
+"room": "flur_notwendig_schule",
+"name": "Notwendiger Flur mit Tür eines Klassenraums < 40 Personen (Tür schlägt nach innen auf)",
+"mode": "standard",
+"W": null,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": null,
+"y": null,
+"w": 125,
+"d": null,
+"for": [
+"flur"
+],
+"notes": "Flurbreite ≥ 125 frei"
+}
+],
+"doors": [
+{
+"wall": "E",
+"offset": null,
+"width": null,
+"swing": "in",
+"hinge": null
+}
+],
+"dims": "Flurbreite ≥ 125",
+"notes": "Grundriss M 1:50: links Klassenraum (dunklere Blaufläche), rechts Flur (helle Blaufläche); Tür schlägt in den Klassenraum, Flur bleibt voll ≥ 125 frei.",
+"sources": [
+{
+"book": "G",
+"page": 483
+}
+],
+"reference_only": true
+},
+{
+"id": "flur_tuer_nach_aussen_nische",
+"room": "flur_notwendig_schule",
+"name": "Notwendiger Flur mit Tür eines Klassenraums > 40 Personen bzw. Chemie-/Werkraum (Tür schlägt in Fluchtrichtung in den Flur auf)",
+"mode": "standard",
+"W": null,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [
+{
+"x": null,
+"y": null,
+"w": 125,
+"d": null,
+"for": [
+"flur"
+],
+"notes": "≥ 125 freie Flurbreite neben dem max. 20 cm hineinragenden Türflügel"
+}
+],
+"doors": [
+{
+"wall": "E",
+"offset": null,
+"width": null,
+"swing": "out",
+"hinge": null
+}
+],
+"dims": "20 | ≥ 125 (Türflügel in Endstellung ragt 20 in den Flur, daneben ≥ 125 freie Flurbreite)",
+"notes": "Tür sitzt in einer Wandnische zwischen Einbauschränken (Garderobe) auf der Flurseite; geöffnet ragt der Flügel einschl. Griff max. 20 cm über die Nische hinaus in den Flur, die notwendige Breite bleibt unberührt. M 1:50.",
+"sources": [
+{
+"book": "G",
+"page": 483
+}
+],
+"reference_only": true
+},
+{
+"id": "treppenraum_notwendig_zweilaeufig",
+"room": "treppenraum_notwendig_schule",
+"name": "Notwendiger Treppenraum, zweiläufige gegenläufige Treppe mit Podesten",
+"mode": "standard",
+"W": null,
+"D": null,
+"barrier_free": false,
+"elements": [],
+"movement": [],
+"doors": [
+{
+"wall": "N",
+"offset": null,
+"width": null,
+"swing": "in",
+"hinge": null
+}
+],
+"dims": "unten: ≥ 125 | (Treppenauge) | ≥ 125 (Laufbreiten); rechts: Podesttiefe ≥ 125 oben und unten",
+"notes": "M 1:100; Laufbreiten je ≥ 125, Podeste ≥ 125 tief, schmales Treppenauge mit Brüstung in der Mitte; Tür schlägt auf das obere Podest auf ohne die Laufbreite einzuengen; hellblaue abgerundete Fläche (Stadionform) markiert die Verkehrsfläche über Läufe und Podeste.",
+"sources": [
+{
+"book": "G",
+"page": 488
+}
+],
+"reference_only": true
+}
+]

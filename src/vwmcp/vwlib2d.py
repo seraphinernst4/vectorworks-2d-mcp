@@ -938,6 +938,143 @@ def place_asset(symbol, items, placements, folder=None, layer=None, cls=None, as
     return out
 
 
+def _import_symbol(name, library):
+    """Bring symbol `name` into the document from a library file (.vwx).
+    Returns the definition handle (None if the library doesn't have it)."""
+    lid, n = vs.BuildResourceListN(SYMDEF, library)
+    for i in range(1, int(n) + 1):
+        if _str(vs.GetActualNameFromResourceList(lid, i)) == name or _str(vs.GetNameFromResourceList(lid, i)) == name:
+            h = vs.ImportResourceToCurrentFile(lid, i)
+            return None if _is_nil(h) else named(name, (SYMDEF,))
+    return None
+
+
+def place_elements(underlay, groups, overlay=None, layer=None, new_classes=None):
+    """Planning elements in one undo step, all or nothing.
+
+    underlay: normalized items drawn first (movement areas, room outline,
+    doors). groups: [{symbol, items, folder, cls, description, placements,
+    library}] - each group's symbol definition (created from items if
+    missing; items empty = an existing or library symbol) and its instances
+    on top. overlay: items drawn last (dimensions, labels)."""
+    created_classes = []
+    for name, attrs in (new_classes or {}).items():
+        if name not in class_names():
+            ensure_class(name, attrs)
+            created_classes.append(name)
+    out = {"classes_created": created_classes, "folders_created": [], "symbols_created": [],
+           "symbols_imported": [], "groups": []}
+    made = []
+    new_defs, new_folders = [], []
+    home = _str(vs.GetLName(vs.ActLayer()))
+    state = _begin(layer)
+    try:
+        for it in underlay or []:
+            if it.get("class"):
+                ensure_class(it["class"])
+                vs.NameClass(it["class"])
+            h = _make_one(it)
+            if _is_nil(h):
+                raise RuntimeError("Vectorworks did not create item %r" % it.get("kind"))
+            apply_attrs(h, it.get("attributes"))
+            made.append(h)
+        under = list(made)
+        for g in groups:
+            symbol = g["symbol"]
+            sd = named(symbol, (SYMDEF,))
+            if sd is None and g.get("library"):
+                sd = _import_symbol(symbol, g["library"])
+                if sd is not None:
+                    new_defs.append(symbol)
+                    out["symbols_imported"].append(symbol)
+            if sd is None:
+                if not g.get("items"):
+                    raise LookupError("symbol %r is neither in the document%s" % (
+                        symbol, " nor in %s" % g["library"] if g.get("library") else ""))
+                if named(symbol) is not None:
+                    raise ValueError("the name %r is already used by another object, class or layer" % symbol)
+                fh = None
+                if g.get("folder"):
+                    fh, fc = _symbol_folder(g["folder"])
+                    if fc:
+                        new_folders.append(g["folder"])
+                sd = _define_symbol(symbol, g["items"], g.get("cls"), g.get("description"))
+                new_defs.append(symbol)
+                out["symbols_created"].append(symbol)
+                if fh is not None:
+                    vs.InsertSymbolInFolder(fh, sd)
+            cls = g.get("cls")
+            if cls:
+                if cls not in class_names():
+                    ensure_class(cls)
+                    created_classes.append(cls)
+                vs.NameClass(cls)
+            inst = []
+            for pl in g["placements"]:
+                h = _place_one(symbol, pl)
+                made.append(h)
+                inst.append(h)
+                if cls:
+                    vs.SetClass(h, cls)
+            out["groups"].append({"symbol": symbol, "uuid": h_uuid(sd),
+                                  "definition": [read_obj(k, True, None, False) for k in children(sd)],
+                                  "instances": [read_obj(h, True, None, False) for h in inst]})
+        over = []
+        for it in overlay or []:
+            if it.get("class"):
+                ensure_class(it["class"])
+                vs.NameClass(it["class"])
+            h = _make_one(it)
+            if _is_nil(h):
+                raise RuntimeError("Vectorworks did not create item %r" % it.get("kind"))
+            apply_attrs(h, it.get("attributes"))
+            made.append(h)
+            over.append(h)
+    except BaseException:
+        for h in made:
+            vs.DelObject(h)
+        for name in new_defs:
+            sd = named(name, (SYMDEF,))
+            if sd is not None:
+                vs.DelObject(sd)
+        for name in new_folders:
+            fh = named(name, (SYMFOLDER,))
+            if fh is not None and _is_nil(vs.FInFolder(fh)):
+                vs.DelObject(fh)
+        raise
+    finally:
+        _end(state)
+        _use_layer(home)
+    out["folders_created"] = new_folders
+    out["underlay"] = [read_obj(h, True, None, False) for h in under]
+    out["overlay"] = [read_obj(h, True, None, False) for h in over]
+    out["document"] = current_document()
+    return out
+
+
+def element_instances(layer=None, uuids=None):
+    """Symbol instances with their definition's description (planning check):
+    [{uuid, symbol, description, location, rotation, mirrored, layer}]."""
+    hs = handles(uuids) if uuids else collect(layer=layer or None)
+    out = []
+    for h in hs:
+        if vs.GetTypeN(h) != SYMBOL:
+            continue
+        name = _str(vs.GetSymName(h))
+        sd = named(name, (SYMDEF,))
+        desc = ""
+        if sd is not None:
+            try:
+                desc = _str(vs.GetDescriptionText(sd))
+            except Exception:  # noqa: BLE001
+                desc = ""
+        loc = vs.GetSymLoc(h)
+        out.append({"uuid": h_uuid(h), "symbol": name, "description": desc,
+                    "location": [float(loc[0]), float(loc[1])], "rotation": float(vs.GetSymRot(h)),
+                    "layer": _layer_name(h)})
+    return out
+
+
 def _contains_instance(h, name, depth=0):
     """Does this container (symbol definition, group) hold an instance of name?"""
     for k in children(h):
