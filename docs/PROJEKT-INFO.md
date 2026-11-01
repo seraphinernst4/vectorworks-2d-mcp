@@ -277,6 +277,15 @@ behoben: `GetBBox` liefert die Bildschirmprojektion – in der Vorderansicht
 fiel die Raumprüfung leer aus; jetzt rechnet Keystone die Begrenzung aus
 der Geometrie, wenn nicht von oben geschaut wird.
 
+Großer Lauf danach (0.6.0 mit allen Daten): 45 Standardsituationen
+(Bäder, WC-Räume, Küchen, Essplätze, Schlafzimmer, Kinderzimmer,
+nutzungsneutrale Räume, Hauswirtschaft, Balkone, Arbeitsplätze,
+Zellenbüros, Klassenräume, Sitzgruppen, Flügel, Kicker) auf der Ebene
+„Keystone Raumpilot-Übersicht“ gezeichnet (50 s) und jede aus der Zeichnung
+zurückgelesen und geprüft: alle Elemente erkannt, keine Probleme.
+Gepackter Server 0.6.0 wie in Claude Desktop gestartet: 36 Werkzeuge,
+Start 0,7 s, Ping, Signaturprüfung, Lesen, Wissen, Raum planen bestanden.
+
 ## Bekannte Grenzen / offene Punkte
 
 - Frische Installation auf einem fremden Mac noch nie gemacht (Installer holt
