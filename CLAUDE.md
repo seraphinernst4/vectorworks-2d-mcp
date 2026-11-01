@@ -2,7 +2,7 @@
 
 Mac-native MCP server for exact, well-organised 2D drawing in Vectorworks.
 Fork of https://github.com/giorgiomoroder/vectorworks-mcp (MIT), repo
-https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.6.0
+https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.6.1
 beta** (branch `v0.6`; `main` is 0.5.0), tested on Vectorworks 2026 Update 7 (German) on macOS; Vectorworks
 2027 prepared (Python 3.14), not live-tested. Read `docs/architecture.md`,
 `docs/api-pitfalls.md` and `docs/vs-notes.md` before changing anything that
