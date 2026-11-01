@@ -826,6 +826,9 @@ SHOWCASE = [
     # offices and schools
     "zelle_einzel_270x450", "zelle_doppel_540x450", "ap_modul_8m2_220x360", "kopierbereich_zweizeilig",
     "klassenraum_frontal_reihen_3x5", "klassenraum_72m2_36_schueler",
+    # living
+    "sitzgruppe_sofa_2sessel", "sitzgruppe_2sofas_uebereck", "konzertfluegel_mit_bank",
+    "tischfussball_spielsituation",
 ]
 
 
@@ -842,7 +845,8 @@ def showcase(report: dict) -> None:
         "_k = []\nvs.ForEachObject(_k.append, \"(L='%s')\")\nfor _h in _k:\n    vs.DelObject(_h)\nresult = len(_k)"
         % SHOW_LAYER, timeout=120))
     draw2d.vw2d_setup(layers=[{"name": SHOW_LAYER, "scale": 50}])
-    x, y, row_h, n, done = 0.0, 0.0, 0.0, 0, []
+    x, y, row_h, n, done, checks = 0.0, 0.0, 0.0, 0, [], {}
+    mpu = draw2d._units()["mm_per_unit"]
     names = list(SHOWCASE)
     for lid in names:
         lay = kb.layouts().get(lid)
@@ -856,13 +860,26 @@ def showcase(report: dict) -> None:
                                     label="%s (%g × %g) – %s" % (lay["name"], lay["W"], lay["D"],
                                                                 kb.source_text(lay.get("sources"))))
             done.append(lid)
+            # read it back from the drawing: every element recognised, no problems
+            mode = lay.get("mode") or "standard"
+            want = len(kb.placed_from_layout(lay, mode))
+            bb = [x / mpu, y / mpu, (x + lay["W"] * 10) / mpu, (y + lay["D"] * 10) / mpu]
+            chk = json.loads(planning.vw2d_check_room(bbox=bb, layer=SHOW_LAYER, mode=mode, preview=False)[0])
+            got = len(chk["elements"])
+            errs = [i["message"] for i in chk["issues"] if i.get("severity") == "error"]
+            checks[lid] = {"elements": got, "expected": want, "errors": errs[:4],
+                           "unknown": chk.get("not_recognised", [])}
         except Exception as e:  # noqa: BLE001
             report.setdefault("showcase_errors", []).append("%s: %r" % (lid, e))
         x += lay["W"] * 10 + 1500.0
         row_h = max(row_h, lay["D"] * 10)
         n += 1
-    report["showcase"] = {"drawn": done, "count": len(done)}
-    log(f"showcase: {len(done)} standard situations on '{SHOW_LAYER}'")
+    bad = {k: v for k, v in checks.items() if v["errors"] or v["elements"] != v["expected"] or v["unknown"]}
+    report["showcase"] = {"drawn": done, "count": len(done), "checked": len(checks), "problems": bad,
+                          "pass": len(done) == len([i for i in names if kb.layouts().get(i)
+                                                    and not kb.layouts()[i].get("reference_only")])
+                          and not bad and not report.get("showcase_errors")}
+    log(f"showcase: {len(done)} standard situations on '{SHOW_LAYER}', {len(bad)} with problems")
 
 
 def direct_tests(report: dict) -> None:
@@ -954,6 +971,9 @@ async def _mcp_round_trip(server_dir: str) -> dict:
             out["vw_document_info"] = await call("vw_document_info")
             out["vw2d_read"] = await call("vw2d_read", layer=REG_LAYER, limit=2, include_geometry=False)
             out["exec_bad_rect"] = await call("vw_exec_python", code="vs.Rect(0, 0, 1)", modifies_document=False)
+            out["vw2d_knowledge"] = await call("vw2d_knowledge", element="wc_wandeinbau", preview=False)
+            out["vw2d_plan_room"] = await call("vw2d_plan_room", room="duschbad_wc", width=160, depth=165,
+                                               door={"wall": "S", "offset": 70}, preview=False)
             out["seconds"] = round(time.monotonic() - t0, 2)
     return out
 
@@ -967,7 +987,9 @@ def mcp_tests(report: dict, server_dir: str | None) -> None:
     r = asyncio.run(_mcp_round_trip(server_dir))
     r["pass"] = (not r["vw_ping"]["error"] and "0.2.1" in r["vw_ping"]["text"]
                  and "vs.Rect(p1: POINT, p2: POINT)" in r["vw_vs_lookup"]["text"]
-                 and "VSArgumentError" in r["exec_bad_rect"]["text"] and not r["vw2d_read"]["error"])
+                 and "VSArgumentError" in r["exec_bad_rect"]["text"] and not r["vw2d_read"]["error"]
+                 and not r["vw2d_knowledge"]["error"] and "Raumpilot" in r["vw2d_knowledge"]["text"]
+                 and not r["vw2d_plan_room"]["error"] and "variants" in r["vw2d_plan_room"]["text"])
     report["mcp"] = r
     log(f"mcp: pass={r['pass']} ({r.get('server')}, {r.get('tools')} tools, start {r.get('start_s')} s)")
 
