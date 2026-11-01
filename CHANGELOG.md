@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.6.2 – Vorschau (Zweig v0.6)
+## 0.6.2 – 01.11.2026
 
 Neue Taktik: statt eines festen Asset-Katalogs (den jedes Büro anders
 haben will) kennt Keystone jetzt das **Planungswissen** der vier
