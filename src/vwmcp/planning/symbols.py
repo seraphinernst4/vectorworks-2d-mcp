@@ -225,6 +225,27 @@ def table(w: float, d: float, round_: bool = False, **_):
     return [rect(-W / 2, 0.0, W / 2, -D, role="outline")]
 
 
+def dining(w: float, d: float, persons: int = 4, table_d: float = 80.0, chair: float = 45.0, **_):
+    """Dining place (Essplatz): table in the middle of the depth, chairs on
+    both long sides (more on the front side if the number is odd)."""
+    W, D = _mm(w), _mm(d)
+    zone = (D - _mm(table_d)) / 2
+    items = [rect(-W / 2, -zone, W / 2, -zone - _mm(table_d), role="outline")]
+    n_front = (int(persons) + 1) // 2
+    n_back = int(persons) // 2
+    cw = _mm(chair)
+    cd = min(zone * 0.9, _mm(45))
+    for n, y_table, sign in ((n_front, -zone - _mm(table_d), -1), (n_back, -zone, 1)):
+        for k in range(n):
+            cx = -W / 2 + W * (k + 0.5) / n
+            y1 = y_table + sign * _mm(5)
+            y2 = y1 + sign * cd
+            items.append(rounded_rect(cx - cw / 2, min(y1, y2), cx + cw / 2, max(y1, y2), _mm(3), role="detail"))
+            yb = y2 - sign * _mm(6)  # back rest line
+            items.append(line(cx - cw / 2 + _mm(3), yb, cx + cw / 2 - _mm(3), yb, role="detail"))
+    return items
+
+
 def bed(w: float, d: float, persons: int = 1, **_):
     """Bed (head at the wall): frame, pillow(s), blanket fold."""
     W, D = _mm(w), _mm(d)
@@ -354,7 +375,7 @@ KINDS = {
     "drum": drum, "counter": counter, "sink": sink, "hob": hob, "fridge": fridge, "tall": tall,
     "wardrobe": wardrobe, "box": box, "shelf": shelf, "chair": chair, "table": table, "bed": bed,
     "sofa": sofa, "armchair": armchair, "desk": desk, "piano": piano, "wheelchair": wheelchair,
-    "car": car, "parking": parking, "bicycle": bicycle, "person": person, "generic": generic,
+    "dining": dining, "car": car, "parking": parking, "bicycle": bicycle, "person": person, "generic": generic,
 }
 
 

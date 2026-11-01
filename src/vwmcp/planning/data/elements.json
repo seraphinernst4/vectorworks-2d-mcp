@@ -3151,6 +3151,426 @@
 "walkable": true
 },
 {
+"id": "waschmaschine",
+"name": "Waschmaschine",
+"full_name": "Waschmaschine (Hausarbeitsbereich)",
+"category": "wirtschaften",
+"context": [
+"wohnen"
+],
+"kind": "drum",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"h": 85.0,
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "im Hausarbeitsbereich gleiche Bewegungsmasse wie in der Kueche: 120 vor der Geraetezeile (p284, Zeichnung p285)"
+}
+],
+"heights": {
+"top": 85,
+"notes": "Hoehe 85 aus Aufbewahren-Uebersicht p291 (Frontansicht 60 breit x 85 hoch)"
+},
+"barrier_free": {
+"standard": "rollstuhlgerecht (DIN 18025-1 / DIN 18040-2 Entwurf)",
+"bewegungsflaeche": {
+"w": null,
+"d": 150
+},
+"notes": "150 vor der Zeile (p284, p286)"
+},
+"notes": "Grundflaeche 60x60 (Tabelle p284). Gleiche Stellflaeche wie g4 'waschmaschine_bad' (dort Bewegungsflaeche 90 im Bad). Plan-Symbol p285: Quadrat ca. 30x30 mit Kreis ca. Ø25 (Bullauge), symbolisch, nicht massstaeblich, mittig im 60x60-Feld.",
+"sources": [
+{
+"book": "G",
+"page": 282
+},
+{
+"book": "G",
+"page": 283
+},
+{
+"book": "G",
+"page": 284
+},
+{
+"book": "G",
+"page": 289
+}
+]
+},
+{
+"id": "waeschetrockner",
+"name": "Waeschetrockner",
+"full_name": "Waeschetrockner (Hausarbeitsbereich)",
+"category": "wirtschaften",
+"context": [
+"wohnen"
+],
+"kind": "drum",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "wie Kueche: 120"
+}
+],
+"barrier_free": {
+"standard": "rollstuhlgerecht",
+"bewegungsflaeche": {
+"w": null,
+"d": 150
+}
+},
+"notes": "Grundflaeche 60x60 (p284). Abluft nach aussen guenstig (verschiedene Be-/Entlueftungssysteme). Gleiche Stellflaeche wie g4 'waeschetrockner_bad'.",
+"sources": [
+{
+"book": "G",
+"page": 282
+},
+{
+"book": "G",
+"page": 283
+},
+{
+"book": "G",
+"page": 284
+}
+]
+},
+{
+"id": "arbeitsflaeche_waesche",
+"name": "Arbeitsflaeche zum Legen/Sortieren der Waesche",
+"full_name": "Arbeitsflaeche zum Legen/Sortieren der Waesche",
+"category": "wirtschaften",
+"context": [
+"wohnen"
+],
+"kind": "counter",
+"w": 120.0,
+"d": 60.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 120.0
+}
+],
+"barrier_free": {
+"standard": "rollstuhlgerecht",
+"bewegungsflaeche": {
+"w": null,
+"d": 150
+}
+},
+"notes": "direkt neben der Waschmaschine guenstig (Sortieren, Vorbehandeln); dort auch Schmutzwaeschebehaelter unterbringen (p284).",
+"sources": [
+{
+"book": "G",
+"page": 282
+},
+{
+"book": "G",
+"page": 283
+}
+]
+},
+{
+"id": "waschbecken_unterschrank_hwr",
+"name": "Unterschrank mit Waschbecken",
+"full_name": "Unterschrank mit Waschbecken (Hausarbeitsraum)",
+"category": "wirtschaften",
+"context": [
+"wohnen"
+],
+"kind": "basin",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 120.0
+}
+],
+"notes": "Tabelle p284.",
+"sources": [
+{
+"book": "G",
+"page": 282
+},
+{
+"book": "G",
+"page": 283
+}
+]
+},
+{
+"id": "schmutzwaeschebehaelter",
+"name": "Platz fuer Schmutzwaeschebehaelter",
+"full_name": "Platz fuer Schmutzwaeschebehaelter",
+"category": "wirtschaften",
+"context": [
+"wohnen"
+],
+"kind": "generic",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 120.0
+}
+],
+"notes": "Tabelle p284.",
+"sources": [
+{
+"book": "G",
+"page": 282
+},
+{
+"book": "G",
+"page": 283
+}
+]
+},
+{
+"id": "schrank_kleingeraete",
+"name": "Schrankraum fuer Kleingeraete",
+"full_name": "Schrankraum fuer Kleingeraete (Hausarbeitsraum)",
+"category": "wirtschaften",
+"context": [
+"wohnen"
+],
+"kind": "wardrobe",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 120.0
+}
+],
+"notes": "Tabelle p284; im Plan p285 als 60x60-Feld mit gestricheltem Diagonalkreuz (X) gezeichnet.",
+"sources": [
+{
+"book": "G",
+"page": 282
+},
+{
+"book": "G",
+"page": 283
+}
+]
+},
+{
+"id": "buegelbrett",
+"name": "Buegelbrett",
+"full_name": "Buegelbrett",
+"category": "wirtschaften",
+"context": [
+"wohnen"
+],
+"kind": "generic",
+"w": 140.0,
+"d": 45.0,
+"wall": true,
+"h": 85.0,
+"areas": [
+{
+"side": "front",
+"d": 100.0,
+"note": "Schnitt p285: 100 von der Brettkante bis hinter die stehende Person; im Plan steht das Brett in der 180 tiefen Bewegungszone links der Arbeitszeile"
+}
+],
+"variants": [
+{
+"id": "170x45",
+"label": "Tabelle p284 max",
+"w": 170.0,
+"d": 45.0
+},
+{
+"id": "140x40",
+"label": "Plan p285 gezeichnet (Brett-Kontur)",
+"w": 140.0,
+"d": 40.0
+}
+],
+"heights": {
+"top": 85,
+"notes": "Arbeitshoehe Buegelbrett 85 (Schnitt p285)"
+},
+"barrier_free": {
+"standard": "rollstuhlgerecht",
+"notes": "Plan p286: gleiche Anordnung, Bewegungsflaeche vor der Zeile >=150, Gesamttiefe 210"
+},
+"sources": [
+{
+"book": "G",
+"page": 282
+},
+{
+"book": "G",
+"page": 283
+},
+{
+"book": "G",
+"page": 284
+},
+{
+"book": "G",
+"page": 289
+}
+]
+},
+{
+"id": "naehmaschine",
+"name": "Naehmaschine",
+"full_name": "Naehmaschine (Stellflaeche)",
+"category": "wirtschaften",
+"context": [
+"wohnen"
+],
+"kind": "generic",
+"w": 70.0,
+"d": 45.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 120.0
+}
+],
+"variants": [
+{
+"id": "70x60",
+"label": "im Plan p285 als 70 breites Feld einer 60 tiefen Arbeitszeile",
+"w": 70.0,
+"d": 60.0
+}
+],
+"barrier_free": {
+"standard": "rollstuhlgerecht",
+"bewegungsflaeche": {
+"w": null,
+"d": 150
+}
+},
+"notes": "Symbol Naehmaschine ca. 40x28 auf der Zeile.",
+"sources": [
+{
+"book": "G",
+"page": 282
+},
+{
+"book": "G",
+"page": 283
+},
+{
+"book": "G",
+"page": 284
+}
+]
+},
+{
+"id": "arbeitsflaeche_buegeln_naehen",
+"name": "Arbeitsflaeche Buegeln/Naehen",
+"full_name": "Arbeitsflaeche Buegeln/Naehen",
+"category": "wirtschaften",
+"context": [
+"wohnen"
+],
+"kind": "counter",
+"w": 120.0,
+"d": 60.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 120.0
+}
+],
+"notes": "Arbeitsflaeche 120 empfohlen (p284).",
+"sources": [
+{
+"book": "G",
+"page": 282
+},
+{
+"book": "G",
+"page": 283
+}
+]
+},
+{
+"id": "einbauschrank_reinigungsgeraete",
+"name": "Einbauschrank fuer Reinigungsgeraete / Buegelbre",
+"full_name": "Einbauschrank fuer Reinigungsgeraete / Buegelbrett",
+"category": "aufbewahren",
+"context": [
+"wohnen"
+],
+"kind": "wardrobe",
+"w": 120.0,
+"d": 60.0,
+"wall": true,
+"variants": [
+{
+"id": "60x60",
+"label": "einzelnes Schrankelement (p290)",
+"w": 60.0,
+"d": 60.0
+}
+],
+"heights": {
+"notes": "unteres Fach lichte Hoehe 160 (Besen, Staubsauger, Buegelbrett stehend), oberes Fach 35 (Eimer) - p285 Schnitt, p290"
+},
+"notes": "Schnitt Buegeln p285: 2 x 60 breit; darin Besen (40 Platzbedarf) und Buegelbrett (40) nebeneinander. Masse lt. p290 nur Orientierungswerte.",
+"sources": [
+{
+"book": "G",
+"page": 283
+},
+{
+"book": "G",
+"page": 288
+}
+]
+},
+{
+"id": "schrank_120_tuervarianten",
+"name": "Schrank 120x60 mit Tuervarianten",
+"full_name": "Schrank 120x60 mit Tuervarianten (Falttueren, Drehtueren, Schiebetueren)",
+"category": "aufbewahren",
+"context": [
+"wohnen"
+],
+"kind": "wardrobe",
+"w": 120.0,
+"d": 60.0,
+"wall": true,
+"barrier_free": {
+"standard": "rollstuhlgerecht",
+"notes": "Varianten zeigen Anfahrbarkeit mit Rollstuhl; Schiebe- und Falttueren benoetigen weniger Bewegungsflaeche als Drehtueren"
+},
+"notes": "Plan M 1:50, nur Schrankmasse 120 x 60 bemasst; Tuerfluegelmasse aus der Zeichnung abgeleitet (nicht bemasst).",
+"sources": [
+{
+"book": "G",
+"page": 291
+}
+]
+},
+{
 "id": "sessel_wartebereich",
 "name": "Sessel Wartebereich",
 "full_name": "Sessel Wartebereich",
@@ -3250,6 +3670,191 @@
 ]
 },
 {
+"id": "essplatz_4p",
+"name": "Essplatz 4 Personen",
+"category": "essen",
+"context": [
+"wohnen"
+],
+"kind": "dining",
+"w": 130.0,
+"d": 180.0,
+"wall": false,
+"params": {
+"persons": 4,
+"table_d": 80.0
+},
+"areas": [
+{
+"side": "front",
+"d": 30.0,
+"d_extra": 70.0,
+"note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"
+},
+{
+"side": "back",
+"d": 30.0,
+"d_extra": 70.0,
+"note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"
+}
+],
+"notes": "Tisch 80 tief, Stuhlzone je Seite 50 (Stell- und Bewegungsfläche der Stühle); Gedeck 60 × 40, Ansitzbreite 65-70 je Person; Tischhöhe 70-75, Sitzhöhe 42-47",
+"sources": [
+{
+"book": "G",
+"page": 215
+}
+]
+},
+{
+"id": "essplatz_5p",
+"name": "Essplatz 5 Personen",
+"category": "essen",
+"context": [
+"wohnen"
+],
+"kind": "dining",
+"w": 180.0,
+"d": 180.0,
+"wall": false,
+"params": {
+"persons": 5,
+"table_d": 80.0
+},
+"areas": [
+{
+"side": "front",
+"d": 30.0,
+"d_extra": 70.0,
+"note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"
+},
+{
+"side": "back",
+"d": 30.0,
+"d_extra": 70.0,
+"note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"
+}
+],
+"notes": "Tisch 80 tief, Stuhlzone je Seite 50 (Stell- und Bewegungsfläche der Stühle); Gedeck 60 × 40, Ansitzbreite 65-70 je Person; Tischhöhe 70-75, Sitzhöhe 42-47",
+"sources": [
+{
+"book": "G",
+"page": 215
+}
+]
+},
+{
+"id": "essplatz_6p",
+"name": "Essplatz 6 Personen",
+"category": "essen",
+"context": [
+"wohnen"
+],
+"kind": "dining",
+"w": 180.0,
+"d": 180.0,
+"wall": false,
+"params": {
+"persons": 6,
+"table_d": 80.0
+},
+"areas": [
+{
+"side": "front",
+"d": 30.0,
+"d_extra": 70.0,
+"note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"
+},
+{
+"side": "back",
+"d": 30.0,
+"d_extra": 70.0,
+"note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"
+}
+],
+"notes": "Tisch 80 tief, Stuhlzone je Seite 50 (Stell- und Bewegungsfläche der Stühle); Gedeck 60 × 40, Ansitzbreite 65-70 je Person; Tischhöhe 70-75, Sitzhöhe 42-47",
+"sources": [
+{
+"book": "G",
+"page": 215
+}
+]
+},
+{
+"id": "essplatz_7p",
+"name": "Essplatz 7 Personen",
+"category": "essen",
+"context": [
+"wohnen"
+],
+"kind": "dining",
+"w": 230.0,
+"d": 180.0,
+"wall": false,
+"params": {
+"persons": 7,
+"table_d": 80.0
+},
+"areas": [
+{
+"side": "front",
+"d": 30.0,
+"d_extra": 70.0,
+"note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"
+},
+{
+"side": "back",
+"d": 30.0,
+"d_extra": 70.0,
+"note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"
+}
+],
+"notes": "Tisch 80 tief, Stuhlzone je Seite 50 (Stell- und Bewegungsfläche der Stühle); Gedeck 60 × 40, Ansitzbreite 65-70 je Person; Tischhöhe 70-75, Sitzhöhe 42-47",
+"sources": [
+{
+"book": "G",
+"page": 215
+}
+]
+},
+{
+"id": "essplatz_8p",
+"name": "Essplatz 8 Personen",
+"category": "essen",
+"context": [
+"wohnen"
+],
+"kind": "dining",
+"w": 240.0,
+"d": 180.0,
+"wall": false,
+"params": {
+"persons": 8,
+"table_d": 80.0
+},
+"areas": [
+{
+"side": "front",
+"d": 30.0,
+"d_extra": 70.0,
+"note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"
+},
+{
+"side": "back",
+"d": 30.0,
+"d_extra": 70.0,
+"note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"
+}
+],
+"notes": "Tisch 80 tief, Stuhlzone je Seite 50 (Stell- und Bewegungsfläche der Stühle); Gedeck 60 × 40, Ansitzbreite 65-70 je Person; Tischhöhe 70-75, Sitzhöhe 42-47",
+"sources": [
+{
+"book": "G",
+"page": 215
+}
+]
+},
+{
 "id": "fahrkorb",
 "name": "Fahrkorb",
 "category": "sonstiges",
@@ -3299,6 +3904,74 @@
 }
 ],
 "notes": "nur aus einem Standardgrundriss bekannt (rampe_rollstuhlgerecht)"
+},
+{
+"id": "fensteroeffnung_licht",
+"name": "Fensteroeffnung licht",
+"category": "sonstiges",
+"kind": "generic",
+"w": 90.0,
+"d": 90.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 104
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (notwendiges_fenster_ansicht)"
+},
+{
+"id": "durchgang",
+"name": "Durchgang",
+"category": "sonstiges",
+"kind": "generic",
+"w": 125.0,
+"d": 220.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 105
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (feuerwehr_durchgang_tuer_durchfahrt)"
+},
+{
+"id": "aufstellflaeche",
+"name": "Aufstellflaeche",
+"category": "sonstiges",
+"kind": "generic",
+"w": 1100.0,
+"d": 500.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 107
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (aufstellflaeche_parallel_layout)"
+},
+{
+"id": "zufahrt",
+"name": "Zufahrt",
+"category": "sonstiges",
+"kind": "generic",
+"w": 2000.0,
+"d": 300.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "G",
+"page": 108
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (bewegungsflaeche_an_zufahrt_layout)"
 },
 {
 "id": "arbeitsinsel",
@@ -3418,5 +4091,1348 @@
 }
 ],
 "notes": "nur aus einem Standardgrundriss bekannt (empfang_theke_angrenzender_arbeitsplatz)"
+},
+{
+"id": "lehrertisch_120x60",
+"name": "Lehrertisch 120x60",
+"category": "sonstiges",
+"kind": "desk",
+"w": 60.0,
+"d": 120.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 129
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p131_r1)"
+},
+{
+"id": "schulstuhl_symbol",
+"name": "Schulstuhl symbol",
+"category": "sonstiges",
+"kind": "chair",
+"w": 20.0,
+"d": 40.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 129
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p131_r1)"
+},
+{
+"id": "tafel",
+"name": "Tafel",
+"category": "sonstiges",
+"kind": "generic",
+"w": 303.0,
+"d": 10.0,
+"wall": true,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 129
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p131_r1)"
+},
+{
+"id": "schultisch_120x60",
+"name": "Schultisch 120x60",
+"category": "sonstiges",
+"kind": "table",
+"w": 60.0,
+"d": 120.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 129
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p131_r1)"
+},
+{
+"id": "schultisch_122x60",
+"name": "Schultisch 122x60",
+"category": "sonstiges",
+"kind": "table",
+"w": 122.0,
+"d": 60.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 130
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p132_r1)"
+},
+{
+"id": "moebel_45x45",
+"name": "Moebel 45x45",
+"category": "sonstiges",
+"kind": "generic",
+"w": 45.0,
+"d": 45.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 130
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p132_r1)"
+},
+{
+"id": "moebel_345x33",
+"name": "Moebel 345x33",
+"category": "sonstiges",
+"kind": "generic",
+"w": 345.0,
+"d": 33.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 133
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p135_r0)"
+},
+{
+"id": "lehrertisch_115x58",
+"name": "Lehrertisch 115x58",
+"category": "sonstiges",
+"kind": "desk",
+"w": 115.0,
+"d": 58.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 133
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p135_r0)"
+},
+{
+"id": "schultisch_einzel_58x58",
+"name": "Schultisch einzel 58x58",
+"category": "sonstiges",
+"kind": "table",
+"w": 58.0,
+"d": 58.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 133
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p135_r0)"
+},
+{
+"id": "schultisch_einzel_58x57",
+"name": "Schultisch einzel 58x57",
+"category": "sonstiges",
+"kind": "table",
+"w": 58.0,
+"d": 57.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 133
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p135_r0)"
+},
+{
+"id": "schultisch_einzel_57x57",
+"name": "Schultisch einzel 57x57",
+"category": "sonstiges",
+"kind": "table",
+"w": 57.0,
+"d": 57.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 133
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p135_r0)"
+},
+{
+"id": "stuhl_48x38",
+"name": "Stuhl 48x38",
+"category": "sonstiges",
+"kind": "chair",
+"w": 48.0,
+"d": 38.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 133
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p135_r0)"
+},
+{
+"id": "schultisch_114x58",
+"name": "Schultisch 114x58",
+"category": "sonstiges",
+"kind": "table",
+"w": 58.0,
+"d": 114.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 133
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p135_r2)"
+},
+{
+"id": "schultisch_114x57",
+"name": "Schultisch 114x57",
+"category": "sonstiges",
+"kind": "table",
+"w": 114.0,
+"d": 57.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 133
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p135_r2)"
+},
+{
+"id": "moebel_86x86",
+"name": "Moebel 86x86",
+"category": "sonstiges",
+"kind": "generic",
+"w": 86.0,
+"d": 86.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 134
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p136_r0)"
+},
+{
+"id": "moebel_87x87",
+"name": "Moebel 87x87",
+"category": "sonstiges",
+"kind": "generic",
+"w": 87.0,
+"d": 87.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 134
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p136_r0)"
+},
+{
+"id": "moebel_73x73",
+"name": "Moebel 73x73",
+"category": "sonstiges",
+"kind": "generic",
+"w": 73.0,
+"d": 73.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 135
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p137_r0)"
+},
+{
+"id": "schultisch_einzel_60x60",
+"name": "Schultisch einzel 60x60",
+"category": "sonstiges",
+"kind": "table",
+"w": 60.0,
+"d": 60.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 135
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p137_r0)"
+},
+{
+"id": "moebel_465x200",
+"name": "Moebel 465x200",
+"category": "sonstiges",
+"kind": "generic",
+"w": 200.0,
+"d": 465.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 135
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p137_r2)"
+},
+{
+"id": "moebel_233x180",
+"name": "Moebel 233x180",
+"category": "sonstiges",
+"kind": "generic",
+"w": 180.0,
+"d": 233.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 135
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p137_r2)"
+},
+{
+"id": "moebel_465x202",
+"name": "Moebel 465x202",
+"category": "sonstiges",
+"kind": "generic",
+"w": 202.0,
+"d": 465.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 135
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p137_r2)"
+},
+{
+"id": "moebel_50x40",
+"name": "Moebel 50x40",
+"category": "sonstiges",
+"kind": "generic",
+"w": 40.0,
+"d": 50.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 135
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p137_r2)"
+},
+{
+"id": "moebel_91x90",
+"name": "Moebel 91x90",
+"category": "sonstiges",
+"kind": "generic",
+"w": 90.0,
+"d": 91.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 137
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p139_r0)"
+},
+{
+"id": "moebel_90x90",
+"name": "Moebel 90x90",
+"category": "sonstiges",
+"kind": "generic",
+"w": 90.0,
+"d": 90.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 137
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p139_r0)"
+},
+{
+"id": "schultisch_121x60",
+"name": "Schultisch 121x60",
+"category": "sonstiges",
+"kind": "table",
+"w": 60.0,
+"d": 121.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 137
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p139_r0)"
+},
+{
+"id": "schultisch_120x59",
+"name": "Schultisch 120x59",
+"category": "sonstiges",
+"kind": "table",
+"w": 59.0,
+"d": 120.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 137
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p139_r0)"
+},
+{
+"id": "schultisch_121x59",
+"name": "Schultisch 121x59",
+"category": "sonstiges",
+"kind": "table",
+"w": 59.0,
+"d": 121.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 137
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p139_r0)"
+},
+{
+"id": "lehrertisch_121x60",
+"name": "Lehrertisch 121x60",
+"category": "sonstiges",
+"kind": "desk",
+"w": 60.0,
+"d": 121.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 137
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p139_r0)"
+},
+{
+"id": "moebel_93x92",
+"name": "Moebel 93x92",
+"category": "sonstiges",
+"kind": "generic",
+"w": 92.0,
+"d": 93.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 138
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p140_r0)"
+},
+{
+"id": "schultisch_einzel_64x64",
+"name": "Schultisch einzel 64x64",
+"category": "sonstiges",
+"kind": "table",
+"w": 64.0,
+"d": 64.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 138
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p140_r0)"
+},
+{
+"id": "schultisch_einzel_65x64",
+"name": "Schultisch einzel 65x64",
+"category": "sonstiges",
+"kind": "table",
+"w": 64.0,
+"d": 65.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 138
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p140_r0)"
+},
+{
+"id": "schultisch_einzel_65x65",
+"name": "Schultisch einzel 65x65",
+"category": "sonstiges",
+"kind": "table",
+"w": 65.0,
+"d": 65.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 138
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p140_r0)"
+},
+{
+"id": "lehrertisch_129x65",
+"name": "Lehrertisch 129x65",
+"category": "sonstiges",
+"kind": "desk",
+"w": 65.0,
+"d": 129.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 138
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p140_r0)"
+},
+{
+"id": "schultisch_130x64",
+"name": "Schultisch 130x64",
+"category": "sonstiges",
+"kind": "table",
+"w": 64.0,
+"d": 130.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 138
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p140_r1)"
+},
+{
+"id": "schultisch_130x65",
+"name": "Schultisch 130x65",
+"category": "sonstiges",
+"kind": "table",
+"w": 65.0,
+"d": 130.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 138
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p140_r1)"
+},
+{
+"id": "schultisch_129x64",
+"name": "Schultisch 129x64",
+"category": "sonstiges",
+"kind": "table",
+"w": 64.0,
+"d": 129.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 138
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p140_r1)"
+},
+{
+"id": "schultisch_129x65",
+"name": "Schultisch 129x65",
+"category": "sonstiges",
+"kind": "table",
+"w": 65.0,
+"d": 129.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 138
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p140_r1)"
+},
+{
+"id": "moebel_121x121",
+"name": "Moebel 121x121",
+"category": "sonstiges",
+"kind": "generic",
+"w": 121.0,
+"d": 121.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 141
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p143_r0)"
+},
+{
+"id": "moebel_121x119",
+"name": "Moebel 121x119",
+"category": "sonstiges",
+"kind": "generic",
+"w": 121.0,
+"d": 119.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 141
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p143_r0)"
+},
+{
+"id": "moebel_119x119",
+"name": "Moebel 119x119",
+"category": "sonstiges",
+"kind": "generic",
+"w": 119.0,
+"d": 119.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 141
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p143_r0)"
+},
+{
+"id": "moebel_90x89",
+"name": "Moebel 90x89",
+"category": "sonstiges",
+"kind": "generic",
+"w": 90.0,
+"d": 89.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 141
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p143_r0)"
+},
+{
+"id": "moebel_89x89",
+"name": "Moebel 89x89",
+"category": "sonstiges",
+"kind": "generic",
+"w": 89.0,
+"d": 89.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 141
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p143_r0)"
+},
+{
+"id": "moebel_48x29",
+"name": "Moebel 48x29",
+"category": "sonstiges",
+"kind": "generic",
+"w": 48.0,
+"d": 29.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 141
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p143_r0)"
+},
+{
+"id": "moebel_170x44",
+"name": "Moebel 170x44",
+"category": "sonstiges",
+"kind": "generic",
+"w": 170.0,
+"d": 44.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 141
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p143_r0)"
+},
+{
+"id": "moebel_41x29",
+"name": "Moebel 41x29",
+"category": "sonstiges",
+"kind": "generic",
+"w": 41.0,
+"d": 29.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 141
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p143_r0)"
+},
+{
+"id": "schultisch_136x67",
+"name": "Schultisch 136x67",
+"category": "sonstiges",
+"kind": "table",
+"w": 136.0,
+"d": 67.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 141
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p143_r0)"
+},
+{
+"id": "schultisch_136x69",
+"name": "Schultisch 136x69",
+"category": "sonstiges",
+"kind": "table",
+"w": 69.0,
+"d": 136.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 141
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p143_r0)"
+},
+{
+"id": "moebel_136x136",
+"name": "Moebel 136x136",
+"category": "sonstiges",
+"kind": "generic",
+"w": 136.0,
+"d": 136.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 141
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p143_r0)"
+},
+{
+"id": "moebel_85x85",
+"name": "Moebel 85x85",
+"category": "sonstiges",
+"kind": "generic",
+"w": 85.0,
+"d": 85.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 142
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p144_r0)"
+},
+{
+"id": "moebel_200x60",
+"name": "Moebel 200x60",
+"category": "sonstiges",
+"kind": "generic",
+"w": 200.0,
+"d": 60.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 145
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p147_r1)"
+},
+{
+"id": "moebel_450x30",
+"name": "Moebel 450x30",
+"category": "sonstiges",
+"kind": "generic",
+"w": 30.0,
+"d": 450.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 147
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p149_r0)"
+},
+{
+"id": "schultisch_110x45",
+"name": "Schultisch 110x45",
+"category": "sonstiges",
+"kind": "table",
+"w": 110.0,
+"d": 45.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 147
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p149_r0)"
+},
+{
+"id": "schultisch_109x45",
+"name": "Schultisch 109x45",
+"category": "sonstiges",
+"kind": "table",
+"w": 109.0,
+"d": 45.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 147
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p149_r0)"
+},
+{
+"id": "moebel_55x55",
+"name": "Moebel 55x55",
+"category": "sonstiges",
+"kind": "generic",
+"w": 55.0,
+"d": 55.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 149
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p151_r0)"
+},
+{
+"id": "schultisch_121x61",
+"name": "Schultisch 121x61",
+"category": "sonstiges",
+"kind": "table",
+"w": 121.0,
+"d": 61.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 149
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p151_r0)"
+},
+{
+"id": "moebel_78x38",
+"name": "Moebel 78x38",
+"category": "sonstiges",
+"kind": "generic",
+"w": 38.0,
+"d": 78.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 149
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p151_r0)"
+},
+{
+"id": "moebel_66x25",
+"name": "Moebel 66x25",
+"category": "sonstiges",
+"kind": "generic",
+"w": 25.0,
+"d": 66.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 149
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p151_r0)"
+},
+{
+"id": "moebel_106x32",
+"name": "Moebel 106x32",
+"category": "sonstiges",
+"kind": "generic",
+"w": 106.0,
+"d": 32.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 149
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p151_r0)"
+},
+{
+"id": "schultisch_119x59",
+"name": "Schultisch 119x59",
+"category": "sonstiges",
+"kind": "table",
+"w": 119.0,
+"d": 59.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 149
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p151_r1)"
+},
+{
+"id": "moebel_120x40",
+"name": "Moebel 120x40",
+"category": "sonstiges",
+"kind": "generic",
+"w": 120.0,
+"d": 40.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 153
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p155_r0)"
+},
+{
+"id": "moebel_121x40",
+"name": "Moebel 121x40",
+"category": "sonstiges",
+"kind": "generic",
+"w": 121.0,
+"d": 40.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 153
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p155_r0)"
+},
+{
+"id": "moebel_120x99",
+"name": "Moebel 120x99",
+"category": "sonstiges",
+"kind": "generic",
+"w": 99.0,
+"d": 120.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 153
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p155_r0)"
+},
+{
+"id": "moebel_258x200",
+"name": "Moebel 258x200",
+"category": "sonstiges",
+"kind": "generic",
+"w": 258.0,
+"d": 200.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 153
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p155_r1)"
+},
+{
+"id": "stuhl_46x40",
+"name": "Stuhl 46x40",
+"category": "sonstiges",
+"kind": "chair",
+"w": 40.0,
+"d": 46.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 153
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p155_r1)"
+},
+{
+"id": "stuhl_46x39",
+"name": "Stuhl 46x39",
+"category": "sonstiges",
+"kind": "chair",
+"w": 46.0,
+"d": 39.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 153
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p155_r1)"
+},
+{
+"id": "stuhl_47x40",
+"name": "Stuhl 47x40",
+"category": "sonstiges",
+"kind": "chair",
+"w": 40.0,
+"d": 47.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 153
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p155_r1)"
+},
+{
+"id": "stuhl_42x42",
+"name": "Stuhl 42x42",
+"category": "sonstiges",
+"kind": "chair",
+"w": 42.0,
+"d": 42.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 154
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p156_r0)"
+},
+{
+"id": "moebel_127x127",
+"name": "Moebel 127x127",
+"category": "sonstiges",
+"kind": "generic",
+"w": 127.0,
+"d": 127.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 154
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p156_r0)"
+},
+{
+"id": "moebel_100x100",
+"name": "Moebel 100x100",
+"category": "sonstiges",
+"kind": "generic",
+"w": 100.0,
+"d": 100.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 154
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p156_r0)"
+},
+{
+"id": "moebel_77x77",
+"name": "Moebel 77x77",
+"category": "sonstiges",
+"kind": "generic",
+"w": 77.0,
+"d": 77.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 158
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p160_r0)"
+},
+{
+"id": "moebel_105x105",
+"name": "Moebel 105x105",
+"category": "sonstiges",
+"kind": "generic",
+"w": 105.0,
+"d": 105.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 161
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p163_r0)"
+},
+{
+"id": "moebel_86x85",
+"name": "Moebel 86x85",
+"category": "sonstiges",
+"kind": "generic",
+"w": 85.0,
+"d": 86.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 163
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p165_r2)"
+},
+{
+"id": "stuhl_41x41",
+"name": "Stuhl 41x41",
+"category": "sonstiges",
+"kind": "chair",
+"w": 41.0,
+"d": 41.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 167
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p169_r1)"
+},
+{
+"id": "schultisch_einzel_60x58",
+"name": "Schultisch einzel 60x58",
+"category": "sonstiges",
+"kind": "table",
+"w": 58.0,
+"d": 60.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 167
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p169_r1)"
+},
+{
+"id": "schultisch_einzel_60x59",
+"name": "Schultisch einzel 60x59",
+"category": "sonstiges",
+"kind": "table",
+"w": 59.0,
+"d": 60.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 167
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p169_r1)"
+},
+{
+"id": "schultisch_einzel_59x58",
+"name": "Schultisch einzel 59x58",
+"category": "sonstiges",
+"kind": "table",
+"w": 58.0,
+"d": 59.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 167
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p169_r1)"
+},
+{
+"id": "schultisch_einzel_59x59",
+"name": "Schultisch einzel 59x59",
+"category": "sonstiges",
+"kind": "table",
+"w": 59.0,
+"d": 59.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 167
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p169_r1)"
+},
+{
+"id": "schultisch_119x58",
+"name": "Schultisch 119x58",
+"category": "sonstiges",
+"kind": "table",
+"w": 119.0,
+"d": 58.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 167
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p169_r1)"
+},
+{
+"id": "moebel_451x410",
+"name": "Moebel 451x410",
+"category": "sonstiges",
+"kind": "generic",
+"w": 410.0,
+"d": 451.0,
+"wall": false,
+"derived": true,
+"sources": [
+{
+"book": "L",
+"page": 171
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p173_r0)"
 }
 ]

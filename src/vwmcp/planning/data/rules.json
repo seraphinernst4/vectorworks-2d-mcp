@@ -6403,6 +6403,775 @@
 "norm": "LBO"
 },
 {
+"id": "g1b.treppe_normen_liste",
+"topic": "treppe",
+"title": "Für Treppen maßgebliche Regelwerke (Liste S. 76): DIN 18065 (01/2000 und Entwurf 09/2009), DIN EN 1865 und DIN 13024-1/-2 (Krankentragen), DIN 18024-1/-2, DIN 18025-1/-2, DIN 18040-1/-2 (Entwürfe 02/2009), ArbStättV mit ASR 7/3, 12/1-3, 17/1,2; MBO §§ 14, 33, 34, 35, 38; LBO BW § 28 und LBOAVO §§ 4, 10, 11; Hochhaus-, Versammlungsstätten-, Verkaufsstätten-, Krankenhausbau-, Garagenverordnungen, Schulbau- und Kindergartenrichtlinien, GUV-Vorschriften",
+"sources": [
+{
+"book": "G",
+"page": 74
+},
+{
+"book": "G",
+"page": 75
+}
+],
+"condition": "keine Maßangaben auf S. 76-78"
+},
+{
+"id": "g1b.rettungsweg_gebaeudehoehen",
+"topic": "rettungsweg",
+"title": "Rettungswegsysteme nach Gebäudehöhe (OK Fußboden Aufenthaltsraum): bis 7 m (Gebäudeklasse 3) – 1. Rettungsweg Treppe, 2. über tragbare Leiter der Feuerwehr; bis 22 m (Gebäudeklasse 5) – 2. Rettungsweg über Hubrettungsfahrzeug (Drehleiter); Hochhaus bis 60 m – ein Sicherheitstreppenhaus (1. + 2. Rettungsweg); über 60 m – zwei Treppenhäuser, davon eines Sicherheitstreppenhaus",
+"sources": [
+{
+"book": "G",
+"page": 101
+}
+],
+"values": {
+"table": [
+{
+"hoehe_max_m": 7,
+"klasse": "GK 3",
+"zweiter_rettungsweg": "tragbare Leiter"
+},
+{
+"hoehe_max_m": 22,
+"klasse": "GK 5",
+"zweiter_rettungsweg": "Hubrettungsfahrzeug"
+},
+{
+"hoehe_max_m": 60,
+"klasse": "Hochhaus",
+"treppenhaeuser": "1 Sicherheitstreppenhaus"
+},
+{
+"hoehe_min_m": 60,
+"klasse": "Hochhaus",
+"treppenhaeuser": "2, davon 1 Sicherheitstreppenhaus"
+}
+]
+},
+"condition": "Gebäudeklassen nach MBO § 2 bzw. LBO; Hochhäuser zusätzlich MHHR",
+"norm": "MBO § 2, MHHR"
+},
+{
+"id": "g1b.zwei_rettungswege_lbo_bw",
+"topic": "rettungsweg",
+"title": "Jede Nutzungseinheit mit Aufenthaltsräumen braucht in jedem Geschoss mind. zwei unabhängige Rettungswege; der erste bei nicht ebenerdigen Nutzungseinheiten über eine notwendige Treppe, der zweite über eine weitere notwendige Treppe oder eine mit Rettungsgeräten der Feuerwehr erreichbare Stelle (notwendiges Fenster); entfällt bei Sicherheitstreppenraum",
+"sources": [
+{
+"book": "G",
+"page": 102
+}
+],
+"norm": "LBO BW § 15 (3)",
+"notes": "Schemata A (zwei notwendige Treppen an den Flurenden), B (eine Treppe + notwendiges Fenster für Feuerwehrleiter), C (Sicherheitstreppenraum mit vorgelagerter Sicherheitsschleuse); Laufweg jeweils <= 40 m"
+},
+{
+"id": "g1b.rettungsweglaenge_treppe",
+"topic": "rettungsweg",
+"title": "Von jeder Stelle eines Aufenthaltsraums notwendige Treppe oder Ausgang ins Freie in höchstens 40 m (LBOAVO BW § 10) bzw. 35 m (MBO, ASR); tatsächliche Weglänge (nicht Luftlinie), gemessen bis zum Beginn des Treppenraums; abweichende Werte je Nutzung (Tabelle S. 105 = wie S. 54: Hochhäuser, Gast-/Beherbergungsstätten, Verkaufsstätten 25 m; Garagen, Versammlungsstätten (vom Ausgang), Krankenhäuser 30 m; Schulen, Nicht-Sonderbauten 35 m)",
+"sources": [
+{
+"book": "G",
+"page": 102
+},
+{
+"book": "G",
+"page": 103
+},
+{
+"book": "G",
+"page": 104
+}
+],
+"values": {
+"max_lbo_bw": 4000,
+"max_mbo": 3500,
+"max_asr": 3500,
+"unit": "cm"
+},
+"table": [
+{
+"gebaeudeart": "Hochhäuser",
+"max_m": 25
+},
+{
+"gebaeudeart": "Gast- und Beherbergungsstätten",
+"max_m": 25
+},
+{
+"gebaeudeart": "Verkaufsstätten",
+"max_m": 25
+},
+{
+"gebaeudeart": "geschlossene und unterirdische Garagen",
+"max_m": 30
+},
+{
+"gebaeudeart": "Versammlungsstätten (vom Ausgang zum Treppenraum)",
+"max_m": 30
+},
+{
+"gebaeudeart": "Krankenhäuser",
+"max_m": 30
+},
+{
+"gebaeudeart": "Schulen",
+"max_m": 35
+},
+{
+"gebaeudeart": "Gebäude, die keine Sonderbauten nach LBO sind",
+"max_m": 35
+}
+],
+"condition": "Laufweglänge",
+"norm": "LBOAVO BW § 10, MBO, ASR",
+"notes": "Tabelle identisch mit g1-Regel max_entfernung_treppenraum_nach_gebaeudeart (S. 54)"
+},
+{
+"id": "g1b.notwendige_treppe_laufbreite_1m",
+"topic": "treppe",
+"title": "Laufbreite notwendiger Treppen in den meisten Nutzungen mind. 1 m; Einschubtreppen und Rolltreppen als notwendige Treppen unzulässig",
+"sources": [
+{
+"book": "G",
+"page": 103
+}
+],
+"values": {
+"min": 100,
+"unit": "cm"
+},
+"condition": "notwendige Treppe",
+"norm": "LBOAVO BW § 10"
+},
+{
+"id": "g1b.treppenraum_max_nutzungseinheiten",
+"topic": "treppe",
+"title": "An einen notwendigen Treppenraum dürfen je Geschoss höchstens sechs Nutzungseinheiten vergleichbarer Größe unmittelbar angeschlossen sein; Treppenraum nur für die Treppe, durch Wände und Türen abgetrennt",
+"sources": [
+{
+"book": "G",
+"page": 103
+}
+],
+"values": {
+"max": 6,
+"unit": "Nutzungseinheiten je Geschoss"
+},
+"norm": "LBOAVO BW § 11"
+},
+{
+"id": "g1b.treppenraum_ausgang_breite",
+"topic": "treppe",
+"title": "Ausgang des notwendigen Treppenraums in der Regel mind. so breit wie die zugehörigen notwendigen Treppen",
+"sources": [
+{
+"book": "G",
+"page": 103
+}
+],
+"values": {
+"min": "Laufbreite der Treppe"
+},
+"norm": "LBOAVO BW"
+},
+{
+"id": "g1b.treppenraum_fenster",
+"topic": "treppe",
+"title": "Notwendige Treppen an der Außenwand mit öffenbaren Fenstern in jedem oberirdischen Geschoss; andere Ausführung zulässig, wenn Lüftung, Beleuchtung und Rauchabführung anders sichergestellt",
+"sources": [
+{
+"book": "G",
+"page": 103
+}
+],
+"norm": "LBOAVO BW"
+},
+{
+"id": "g1b.treppenraum_rauchabzug",
+"topic": "treppe",
+"title": "Notwendige Treppenräume in Gebäuden mit mehr als 5 Geschossen und innenliegende notwendige Treppenräume: an oberster Stelle Rauchabzug mit freiem Querschnitt mind. 1 m², zu öffnen vom Eingangsgeschoss und vom obersten Podest",
+"sources": [
+{
+"book": "G",
+"page": 103
+}
+],
+"values": {
+"min": 1.0,
+"unit": "m2"
+},
+"condition": "> 5 Geschosse oder innenliegend",
+"norm": "LBOAVO BW § 11"
+},
+{
+"id": "g1b.notwendiger_flur_definition",
+"topic": "flur",
+"title": "Notwendige Flure führen Rettungswege von Aufenthaltsräumen zu notwendigen Treppenräumen oder Ausgängen ins Freie; keine notwendigen Flure sind Flure in Nutzungseinheiten mit Büro-/Verwaltungsnutzung bis 400 m² Nutzfläche je Geschoss (Nutzfläche = alle über den Flur erschlossenen Flächen inkl. Teeküche, Abstell-, Sanitärräume und Flurfläche)",
+"sources": [
+{
+"book": "G",
+"page": 103
+}
+],
+"values": {
+"nutzungseinheit_max": 400,
+"unit": "m2"
+},
+"condition": "Büro/Verwaltung",
+"norm": "LBOAVO BW § 12"
+},
+{
+"id": "g1b.notwendiger_flur_breite_buero",
+"topic": "flur",
+"title": "Notwendiger Flur in Bürogebäuden mind. 1,25 m breit; darüber hinaus ausreichend für den größten zu erwartenden Verkehr; bei Sonderbauten im Einzelfall breiter (LBO BW § 38 (1) Nr. 6)",
+"sources": [
+{
+"book": "G",
+"page": 104
+}
+],
+"values": {
+"min": 125,
+"unit": "cm"
+},
+"condition": "Bürogebäude (Beispiel)",
+"norm": "LBO BW"
+},
+{
+"id": "g1b.notwendiger_flur_laenge",
+"topic": "flur",
+"title": "Länge des notwendigen Flurs ergibt sich aus der max. Laufweglänge bis zur notwendigen Treppe: LBO BW 40 m, MBO 35 m, ASR 35 m; Stichflur (nur eine Fluchtrichtung) nach MBO max. 15 m",
+"sources": [
+{
+"book": "G",
+"page": 104
+}
+],
+"values": {
+"laufweg_max_lbo_bw": 4000,
+"laufweg_max_mbo": 3500,
+"laufweg_max_asr": 3500,
+"stichflur_max_mbo": 1500,
+"unit": "cm"
+},
+"norm": "LBO BW, MBO, ASR"
+},
+{
+"id": "g1b.notwendiger_flur_stufen_rampen",
+"topic": "flur",
+"title": "In notwendigen Fluren keine Stufenfolge mit weniger als 3 Stufen; Rampen bis max. 6 % Neigung zulässig",
+"sources": [
+{
+"book": "G",
+"page": 104
+}
+],
+"values": {
+"stufen_min": 3,
+"rampe_max_pct": 6
+},
+"condition": "notwendiger Flur",
+"norm": "LBOAVO BW"
+},
+{
+"id": "g1b.notwendiger_flur_rauchabschnitte",
+"topic": "flur",
+"title": "Flure länger als 30 m sind durch Rauchschutztüren in Abschnitte zu unterteilen",
+"sources": [
+{
+"book": "G",
+"page": 104
+}
+],
+"values": {
+"max": 3000,
+"unit": "cm"
+},
+"condition": "notwendiger Flur",
+"norm": "LBOAVO BW"
+},
+{
+"id": "g1b.notwendiges_fenster",
+"topic": "rettungsweg",
+"title": "Notwendiges Fenster (2. Rettungsweg über Feuerwehrleiter): zu öffentlichen Verkehrsflächen oder Feuerwehrflächen orientiert, lichte Öffnung mind. 90 x 90, Unterkante der lichten Öffnung max. 120 über OK Fußboden; mind. eines je Nutzungseinheit",
+"sources": [
+{
+"book": "G",
+"page": 104
+}
+],
+"values": {
+"w_min": 90,
+"h_min": 90,
+"bruestung_max": 120,
+"unit": "cm"
+},
+"condition": "LBO BW",
+"norm": "LBOAVO BW § 14 (5)"
+},
+{
+"id": "g1b.sicherheitstreppenraum",
+"topic": "rettungsweg",
+"title": "Sicherheitstreppenraum an der Außenwand oder vom Gebäude abgesetzt, nur über offenen Gang erreichbar; innenliegend nur mit Sicherheitsschleuse in jedem Geschoss: Schleuse mind. 3 m lang, gleiche Feuerwiderstandsklasse wie Treppenraum, selbstschließende, mind. feuerhemmende Türen; eigene Überdruck-Lüftungsanlage für Treppenraum und Schleusen, unabhängig von allgemeiner Stromversorgung",
+"sources": [
+{
+"book": "G",
+"page": 105
+}
+],
+"values": {
+"schleuse_laenge_min": 300,
+"unit": "cm"
+},
+"condition": "ersetzt den 2. Rettungsweg",
+"norm": "LBOAVO BW §§ 11 (6), 12"
+},
+{
+"id": "g1b.rettungsgeraete_feuerwehr",
+"topic": "rettungsweg",
+"title": "2. Rettungsweg über Rettungsgeräte der Feuerwehr nur zulässig, wenn eine erreichbare Stelle vorhanden ist, und nur für eine begrenzte Personenzahl geeignet",
+"sources": [
+{
+"book": "G",
+"page": 105
+}
+],
+"norm": "LBO BW"
+},
+{
+"id": "g1b.feuerwehr_zugang_durchgang",
+"topic": "feuerwehr",
+"title": "Bei niedrigen Gebäuden (OK Fußboden oberster Aufenthaltsraum max. 7 m) genügt Zu- oder Durchgang (tragbares Rettungsgerät). Zugänge geradlinig, ebenerdig, mind. 1,25 m breit; Türöffnungen und geringfügige Einengungen mind. 1 m licht; Durchgänge lichte Höhe überall mind. 2,20 m, Türöffnungen mind. 2 m",
+"sources": [
+{
+"book": "G",
+"page": 105
+}
+],
+"values": {
+"breite_min": 125,
+"tuer_breite_min": 100,
+"hoehe_min": 220,
+"tuer_hoehe_min": 200,
+"unit": "cm"
+},
+"condition": "Gebäude <= 7 m",
+"norm": "DIN 14090 Abschnitt 4.1"
+},
+{
+"id": "g1b.feuerwehr_zufahrt",
+"topic": "feuerwehr",
+"title": "Feuerwehrzu- oder -durchfahrt (für Drehleiter, Einsatz bis Hochhausgrenze) als befestigte Fläche, direkt an öffentliche Verkehrsfläche angebunden; nur nötig, wenn Anleitern von der öffentlichen Fläche nicht ausreicht. Breite mind. 3 m, bei Durchfahrt durch Gebäudetiefe > 12 m mind. 3,50 m; lichte Höhe mind. 3,50 m; Steigung max. 10 %",
+"sources": [
+{
+"book": "G",
+"page": 105
+},
+{
+"book": "G",
+"page": 106
+}
+],
+"values": {
+"breite_min": 300,
+"breite_min_tiefe_gt_12m": 350,
+"hoehe_min": 350,
+"steigung_max_pct": 10,
+"unit": "cm"
+},
+"norm": "DIN 14090",
+"notes": "Ansicht 'Durchfahrt' M 1:100: Breite >= 300 (350), Höhe >= 350"
+},
+{
+"id": "g1b.feuerwehr_zufahrt_kurven",
+"topic": "feuerwehr",
+"title": "Nicht geradlinige Zufahrten: Breite im Kurvenbereich nach Kurvenradius; vor und hinter Kurven Übergangsbereiche mind. 11 m lang; Einbiegen von der öffentlichen Verkehrsfläche: Außenradius mind. 10,50 m je Anfahrtrichtung",
+"sources": [
+{
+"book": "G",
+"page": 106
+}
+],
+"values": {
+"uebergang_min": 1100,
+"einbiege_aussenradius_min": 1050,
+"unit": "cm"
+},
+"table": [
+{
+"r_m": "bis 10,50",
+"b_m": null,
+"hinweis": "unzulässig"
+},
+{
+"r_m": "10,50-12",
+"b_m": 5.0
+},
+{
+"r_m": "über 12-15",
+"b_m": 4.5
+},
+{
+"r_m": "über 15-20",
+"b_m": 4.0
+},
+{
+"r_m": "über 20-70",
+"b_m": 3.5
+},
+{
+"r_m": "über 70",
+"b_m": 3.0
+}
+],
+"norm": "DIN 14090 Abschnitt 4.2"
+},
+{
+"id": "g1b.aufstellflaeche",
+"topic": "feuerwehr",
+"title": "Aufstellflächen für Hubrettungsfahrzeuge: nicht überbaut, befestigt, ständig frei, mind. 5 x 11 m, so dass alle Anleiterstellen erreichbar sind; eben, Neigung in keiner Richtung > 5 %",
+"sources": [
+{
+"book": "G",
+"page": 107
+}
+],
+"values": {
+"w_min": 500,
+"l_min": 1100,
+"neigung_max_pct": 5,
+"unit": "cm"
+},
+"norm": "DIN 14090 Abschnitt 4.3"
+},
+{
+"id": "g1b.aufstellflaeche_parallel",
+"topic": "feuerwehr",
+"title": "Aufstellfläche parallel zur Außenwand: Abstand a der wandzugewandten Seite zur Außenwand mind. 3 m und höchstens 9 m (Brüstungshöhe 8-18 m) bzw. höchstens 6 m (Brüstungshöhe > 18 m)",
+"sources": [
+{
+"book": "G",
+"page": 107
+}
+],
+"values": {
+"table": [
+{
+"bruestung_m": ">= 8 bis <= 18",
+"a_min": 300,
+"a_max": 900
+},
+{
+"bruestung_m": "> 18",
+"a_min": 300,
+"a_max": 600
+}
+],
+"unit": "cm"
+},
+"norm": "DIN 14090"
+},
+{
+"id": "g1b.aufstellflaeche_rechtwinklig",
+"topic": "feuerwehr",
+"title": "Aufstellfläche rechtwinklig zur Außenwand: Abstand zur Außenwand max. 1 m; Abstand a von der Außenseite der Aufstellfläche bis zur entferntesten seitlichen Begrenzung der Anleiterstelle max. 9 m (Brüstung 8-18 m) bzw. max. 6 m (Brüstung > 18 m)",
+"sources": [
+{
+"book": "G",
+"page": 107
+}
+],
+"values": {
+"wandabstand_max": 100,
+"table": [
+{
+"bruestung_m": ">= 8 bis <= 18",
+"a_max": 900
+},
+{
+"bruestung_m": "> 18",
+"a_max": 600
+}
+],
+"unit": "cm"
+},
+"norm": "DIN 14090",
+"notes": "Isometrie beschriftet den Wandabstand mit '>= 1,0' – Text und DIN sagen höchstens 1 m"
+},
+{
+"id": "g1b.bewegungsflaeche_feuerwehr",
+"topic": "feuerwehr",
+"title": "Bewegungsfläche je Feuerwehrfahrzeug in der Regel mind. 7 x 12 m; Zufahrten nicht gleichzeitig Bewegungsfläche; ständig frei; an weiterführenden Zufahrten davor und dahinter Übergangsbereiche mind. 4 m; eben, Neigung <= 5 %; darf zugleich Aufstellfläche sein; Kennzeichnung 'Flächen für die Feuerwehr' (DIN 4066)",
+"sources": [
+{
+"book": "G",
+"page": 108
+}
+],
+"values": {
+"w_min": 700,
+"l_min": 1200,
+"uebergang_min": 400,
+"neigung_max_pct": 5,
+"unit": "cm"
+},
+"norm": "DIN 14090 Abschnitt 4.4, DIN 4066"
+},
+{
+"id": "g1b.rettung_sondervorschriften",
+"topic": "rettungsweg",
+"title": "Für notwendige Treppen je Nutzung weitere Vorschriften beachten (Versammlungsstätten-, Krankenhausbau-, Geschäfts-/Warenhausverordnung, Schulbau-, Kindergarten-, Hochhausrichtlinien); Abweichungen der einzelnen LBO beachten",
+"sources": [
+{
+"book": "G",
+"page": 103
+}
+]
+},
+{
+"id": "g1b.abstand.aufzug_schachttuerwand_gegenueberliegende_wand",
+"topic": "abstand",
+"title": "Abstand aufzug_schachttuerwand – gegenueberliegende_wand (opposite)",
+"values": {
+"min": 150.0,
+"unit": "cm"
+},
+"condition": "Wohngebäude, Einzelaufzug und Aufzugsreihe (tiefster Fahrkorb maßgeblich)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 86
+}
+]
+},
+{
+"id": "g1b.abstand.aufzug_schachttuerwand_gegenueberliegende_wand",
+"topic": "abstand",
+"title": "Abstand aufzug_schachttuerwand – gegenueberliegende_wand (opposite)",
+"values": null,
+"condition": "andere als Wohngebäude, Einzelaufzug; nicht für Bettenaufzüge",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 86
+}
+]
+},
+{
+"id": "g1b.abstand.aufzug_schachttuerwand_gegenueberliegende_wand",
+"topic": "abstand",
+"title": "Abstand aufzug_schachttuerwand – gegenueberliegende_wand (opposite)",
+"values": {
+"min": 240.0,
+"unit": "cm"
+},
+"condition": "andere als Wohngebäude, nebeneinanderliegende Aufzüge; nicht für Bettenaufzüge",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 86
+}
+]
+},
+{
+"id": "g1b.abstand.aufzug_schachtvorderwand_aufzug_schachtvorderwand_gegenueber",
+"topic": "abstand",
+"title": "Abstand aufzug_schachtvorderwand – aufzug_schachtvorderwand_gegenueber (opposite)",
+"values": {
+"min": 450.0,
+"unit": "cm"
+},
+"condition": "gegenüberliegende Aufzüge (Stauraum); nicht für Bettenaufzüge",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 86
+}
+]
+},
+{
+"id": "g1b.abstand.aufzugstuer_bewegungsflaeche_150x150",
+"topic": "abstand",
+"title": "Abstand aufzugstuer – bewegungsflaeche_150x150 (front)",
+"values": {
+"min": 150.0,
+"unit": "cm"
+},
+"condition": "barrierefrei; Fläche 150 x 150 vor der Tür, öffentlich nicht mit Verkehrswegen überlagert",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 97
+}
+]
+},
+{
+"id": "g1b.abstand.ruftableau_aussen_wand_oder_hindernis",
+"topic": "abstand",
+"title": "Abstand ruftableau_aussen – wand_oder_hindernis (side)",
+"values": {
+"min": 50.0,
+"unit": "cm"
+},
+"condition": "barrierefrei, seitlich neben dem äußeren Bedientableau mind. 50 frei",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 97
+}
+]
+},
+{
+"id": "g1b.abstand.innentableau_fahrkorbecke",
+"topic": "abstand",
+"title": "Abstand innentableau – fahrkorbecke (side)",
+"values": {
+"min": 50.0,
+"unit": "cm"
+},
+"condition": "barrierefrei, wie gezeichnet (je >= 50 zur vorderen und hinteren Ecke)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 96
+}
+]
+},
+{
+"id": "g1b.abstand.aufenthaltsraum_jede_stelle_feuerwehraufzug",
+"topic": "abstand",
+"title": "Abstand aufenthaltsraum_jede_stelle – feuerwehraufzug (other)",
+"values": {
+"min": 5000.0,
+"unit": "cm"
+},
+"condition": "max. Entfernung, Hochhaus",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 94
+}
+]
+},
+{
+"id": "g1b.abstand.aufstellflaeche_parallel_aussenwand",
+"topic": "abstand",
+"title": "Abstand aufstellflaeche_parallel – aussenwand (wall)",
+"values": {
+"min": 300.0,
+"unit": "cm"
+},
+"condition": "Brüstungshöhe 8-18 m; bei > 18 m max. 600",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 107
+}
+]
+},
+{
+"id": "g1b.abstand.aufstellflaeche_parallel_aussenwand",
+"topic": "abstand",
+"title": "Abstand aufstellflaeche_parallel – aussenwand (wall)",
+"values": {
+"min": 300.0,
+"unit": "cm"
+},
+"condition": "Brüstungshöhe > 18 m",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 107
+}
+]
+},
+{
+"id": "g1b.abstand.aufstellflaeche_rechtwinklig_aussenwand",
+"topic": "abstand",
+"title": "Abstand aufstellflaeche_rechtwinklig – aussenwand (wall)",
+"values": {
+"min": 100.0,
+"unit": "cm"
+},
+"condition": "Abstand Stirnseite zur Wand",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 107
+}
+]
+},
+{
+"id": "g1b.abstand.aufstellflaeche_rechtwinklig_aussenseite_anleiterstelle_entfernteste_seitliche_be",
+"topic": "abstand",
+"title": "Abstand aufstellflaeche_rechtwinklig_aussenseite – anleiterstelle_entfernteste_seitliche_begrenzung (other)",
+"values": {
+"min": 900.0,
+"unit": "cm"
+},
+"condition": "Brüstung 8-18 m; > 18 m max. 600",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 107
+}
+]
+},
+{
+"id": "g1b.abstand.aufenthaltsraum_jede_stelle_notwendige_treppe_oder_ausgang",
+"topic": "abstand",
+"title": "Abstand aufenthaltsraum_jede_stelle – notwendige_treppe_oder_ausgang (other)",
+"values": {
+"min": 4000.0,
+"unit": "cm"
+},
+"condition": "LBO BW (LBOAVO § 10); MBO/ASR 3500; tatsächliche Weglänge bis Beginn Treppenraum",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 102
+},
+{
+"book": "G",
+"page": 104
+}
+]
+},
+{
+"id": "g1b.abstand.stichflur_ende_notwendige_treppe",
+"topic": "abstand",
+"title": "Abstand stichflur_ende – notwendige_treppe (other)",
+"values": {
+"min": 1500.0,
+"unit": "cm"
+},
+"condition": "Stichflurlänge",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 104
+}
+]
+},
+{
 "id": "g2.ear05_bemessungsfahrzeug_fahrrad",
 "topic": "stellplatz",
 "title": "Bemessungsfahrzeug Fahrrad: Länge/Breite (ohne Spiegel)/Höhe/Wendekreisradius außen",
@@ -10314,6 +11083,528 @@
 "page": 276
 }
 ]
+},
+{
+"id": "g4b.hwr_mindestflaeche",
+"topic": "wirtschaften",
+"title": "Mindestflaeche Hausarbeitsraum",
+"sources": [
+{
+"book": "G",
+"page": 281
+}
+],
+"values": {
+"min": 7,
+"max": 9,
+"unit": "m2"
+},
+"condition": "eigener Hausarbeitsraum"
+},
+{
+"id": "g4b.hwr_stellflaeche_lauflaenge",
+"topic": "wirtschaften",
+"title": "Mindest-Stellflaeche (Lauflaenge der Zeilen) im Hausarbeitsraum empfohlen",
+"sources": [
+{
+"book": "G",
+"page": 281
+}
+],
+"values": {
+"min": 360,
+"unit": "cm"
+}
+},
+{
+"id": "g4b.hwr_bewegungsflaeche",
+"topic": "wirtschaften",
+"title": "Bewegungsflaeche vor Einrichtungen im Hausarbeitsbereich (wie Kueche)",
+"sources": [
+{
+"book": "G",
+"page": 282
+},
+{
+"book": "G",
+"page": 283
+},
+{
+"book": "G",
+"page": 284
+}
+],
+"values": {
+"min": 120,
+"unit": "cm"
+},
+"condition": "nicht barrierefrei; rollstuhlgerecht 150"
+},
+{
+"id": "g4b.hwr_einrichtungsmasse",
+"topic": "wirtschaften",
+"title": "Einrichtungsmasse Hausarbeitsbereich (Stellflaechenbreite x -tiefe)",
+"sources": [
+{
+"book": "G",
+"page": 282
+}
+],
+"table": [
+[
+"Waschmaschine",
+60,
+60
+],
+[
+"Waeschetrockner",
+60,
+60
+],
+[
+"Arbeitsflaeche zum Legen der Waesche",
+120,
+60
+],
+[
+"Unterschrank mit Waschbecken",
+60,
+60
+],
+[
+"Platz fuer Schmutzwaeschebehaelter",
+60,
+60
+],
+[
+"Schrankraum fuer Kleingeraete",
+60,
+60
+],
+[
+"Stellflaeche Buegelbrett",
+"140-170",
+45
+],
+[
+"Stellflaeche Naehmaschine",
+70,
+45
+]
+]
+},
+{
+"id": "g4b.buegeln_arbeitsflaeche",
+"topic": "wirtschaften",
+"title": "Arbeitsflaeche fuer Buegeln/Naehen empfohlen",
+"sources": [
+{
+"book": "G",
+"page": 282
+}
+],
+"values": {
+"min": 120,
+"unit": "cm"
+}
+},
+{
+"id": "g4b.buegelbrett_hoehe",
+"topic": "wirtschaften",
+"title": "Arbeitshoehe Buegelbrett (stehend) und Platzbedarf Person dahinter",
+"sources": [
+{
+"book": "G",
+"page": 283
+}
+],
+"values": {
+"typ": 85,
+"unit": "cm"
+},
+"condition": "Schnitt; Standflaeche Person 100 ab Brettkante"
+},
+{
+"id": "g4b.abstellflaeche_je_wohnung",
+"topic": "aufbewahren",
+"title": "Abstellflaeche je Wohnung (Orientierungswert): 6 m2 gesamt, davon >=1 m2 in der Wohnung und 5 m2 im Keller o. ae.",
+"sources": [
+{
+"book": "G",
+"page": 287
+}
+],
+"values": {
+"min": 6,
+"unit": "m2"
+},
+"condition": "MBO 1997 § 45 (frueher)",
+"norm": "MBO 1997"
+},
+{
+"id": "g4b.abstellflaeche_in_wohnung",
+"topic": "aufbewahren",
+"title": "Anteil Abstellflaeche innerhalb der Wohnung",
+"sources": [
+{
+"book": "G",
+"page": 287
+}
+],
+"values": {
+"min": 1,
+"unit": "m2"
+},
+"condition": "MBO 1997",
+"norm": "MBO 1997"
+},
+{
+"id": "g4b.mbo2002_abstellraeume",
+"topic": "aufbewahren",
+"title": "GK 3-5: leicht erreichbare, zugaengliche Abstellraeume fuer Kinderwagen und Fahrraeder sowie je Wohnung ausreichend grosser Abstellraum",
+"sources": [
+{
+"book": "G",
+"page": 287
+}
+],
+"condition": "Gebaeudeklassen 3 bis 5",
+"norm": "MBO 2002 § 48 (2)"
+},
+{
+"id": "g4b.lbo_bw_abstellraum",
+"topic": "aufbewahren",
+"title": "Fuer jede Wohnung ein Abstellraum (LBO BW 2007 § 35 (5)); Entwurf 2009: nur bei Wohngebaeuden mit >=20 Wohnungen",
+"sources": [
+{
+"book": "G",
+"page": 287
+}
+],
+"values": {
+"min": 20,
+"unit": "Wohnungen (Entwurf 2009)"
+},
+"condition": "Baden-Wuerttemberg",
+"norm": "LBO BW"
+},
+{
+"id": "g4b.greifbereich_aufbewahren",
+"topic": "barrierefrei",
+"title": "Bedien-/Greifbereich fuer Aufbewahrung (Rollstuhl und eingeschraenkt bewegliche Personen)",
+"sources": [
+{
+"book": "G",
+"page": 290
+},
+{
+"book": "G",
+"page": 291
+}
+],
+"values": {
+"min": 40,
+"max": 140,
+"unit": "cm Hoehe"
+},
+"condition": "barrierefrei/rollstuhlgerecht",
+"norm": "DIN 18025 / DIN 18040-2 (Entwurf)"
+},
+{
+"id": "g4b.abstellraum_gang_rollstuhl",
+"topic": "barrierefrei",
+"title": "Bewegungsflaeche (Gangbreite) im Abstellraum zwischen Regalen, rollstuhlgerecht",
+"sources": [
+{
+"book": "G",
+"page": 290
+}
+],
+"values": {
+"min": 150,
+"unit": "cm"
+},
+"condition": "DIN 18025-1 / DIN 18040-2 (Entwurf); Klammerwert 120 ohne Erlaeuterung",
+"norm": "DIN 18025-1, DIN 18040-2 (Entwurf)",
+"notes": "gedruckt '>= 150 (120)'"
+},
+{
+"id": "g4b.abstellraum_gang_barrierefrei",
+"topic": "barrierefrei",
+"title": "Bewegungsflaeche (Gangbreite) im Abstellraum, barrierefrei nicht rollstuhlgerecht",
+"sources": [
+{
+"book": "G",
+"page": 290
+}
+],
+"values": {
+"min": 90,
+"unit": "cm"
+},
+"condition": "DIN 18025-2 / DIN 18040-2 (Entwurf)",
+"norm": "DIN 18025-2, DIN 18040-2 (Entwurf)"
+},
+{
+"id": "g4b.paternoster_schrank",
+"topic": "barrierefrei",
+"title": "Paternoster-Schrank: Entnahmehoehe 75-90, Bewegungsflaeche davor >=150",
+"sources": [
+{
+"book": "G",
+"page": 291
+}
+],
+"values": {
+"min": 75,
+"max": 90,
+"unit": "cm Hoehe"
+},
+"condition": "rollstuhlgerecht"
+},
+{
+"id": "g4b.schrank_schublade_gesamttiefe",
+"topic": "aufbewahren",
+"title": "Schrank 60 tief + ausgezogene Schublade 60 = 120 Platzbedarf in der Tiefe",
+"sources": [
+{
+"book": "G",
+"page": 288
+}
+],
+"values": {
+"typ": 120,
+"unit": "cm"
+},
+"condition": "Orientierungswert"
+},
+{
+"id": "g4b.aufbewahrungsgegenstaende",
+"topic": "aufbewahren",
+"title": "Masse typischer aufzubewahrender Gegenstaende (Orientierungswerte, Breite/Durchmesser x Hoehe bzw. Laenge)",
+"sources": [
+{
+"book": "G",
+"page": 289
+}
+],
+"table": [
+[
+"Weinglas",
+11,
+null,
+"17-27"
+],
+[
+"Flasche",
+7,
+null,
+"22-32"
+],
+[
+"CD-Huelle",
+14,
+1,
+13
+],
+[
+"Aktenordner",
+29,
+8,
+32
+],
+[
+"Schuhe (Paar)",
+"18-24",
+null,
+"28-33 (Laenge)"
+],
+[
+"Eimer",
+"20-30",
+null,
+null
+],
+[
+"Kleiderbuegel",
+55,
+null,
+null
+],
+[
+"Staubsauger (Seitenansicht)",
+80,
+null,
+110
+],
+[
+"Ski",
+null,
+null,
+"150-190"
+],
+[
+"Kinderwagen/Buggy (Seitenansicht)",
+87,
+null,
+112
+],
+[
+"Buegelbrett (zusammengeklappt)",
+40,
+null,
+"140-150"
+],
+[
+"Waschmaschine",
+60,
+null,
+85
+],
+[
+"Autoreifen (Stapel 4)",
+60,
+null,
+76
+],
+[
+"Leiter (Trittleiter)",
+60,
+null,
+"140-180"
+],
+[
+"Besen",
+40,
+null,
+140
+]
+],
+"condition": "M 1:50 Darstellung p291"
+},
+{
+"id": "g4b.aufbewahrungsmoebel_masse",
+"topic": "aufbewahren",
+"title": "Orientierungswerte Aufbewahrungsmoebel (Schnitte p290)",
+"sources": [
+{
+"book": "G",
+"page": 288
+}
+],
+"table": [
+[
+"Einbauschrank Reinigungsgeraete",
+60,
+"unteres Fach 160, oberes Fach 35"
+],
+[
+"Kleiderschrank mit Schubladen",
+60,
+"Schublade 19; mit Auszug 120 Gesamttiefe"
+],
+[
+"Regal",
+35,
+"Faecher 20 / 26 / 39"
+],
+[
+"Schuhkipp-Schrank",
+30,
+"Kippfach 41"
+],
+[
+"Sitztruhe",
+null,
+"Sitzhoehe 41"
+]
+],
+"condition": "Masse nur Orientierungswerte"
+},
+{
+"id": "g4b.rf_waschtisch_hoehe",
+"topic": "bad",
+"title": "Waschtisch-Oberkante rollstuhlgerecht",
+"sources": [
+{
+"book": "G",
+"page": 277
+}
+],
+"values": {
+"min": 82,
+"max": 85,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht; Klammerwert (<=80) vermutlich nach DIN 18040-2 (Entwurf)",
+"norm": "DIN 18025-1 / DIN 18040-2 (Entwurf)",
+"notes": "gedruckt '82 - 85 (<= 80)'"
+},
+{
+"id": "g4b.rf_waschtisch_unterfahrbarkeit",
+"topic": "bad",
+"title": "Unterfahrbarkeit Waschtisch: Kniefreiraum Hoehe >=67 ueber Tiefe (>=30) ab Vorderkante; Fussfreiraum Hoehe >=35; Gesamttiefe unterfahrbar >=55 ab Wand; (<=10) Wandzone, (<=40) Klammermass",
+"sources": [
+{
+"book": "G",
+"page": 277
+}
+],
+"values": {
+"min": 55,
+"unit": "cm Tiefe"
+},
+"condition": "rollstuhlgerecht, Schnitt",
+"norm": "DIN 18025-1 / DIN 18040-2 (Entwurf)",
+"notes": "Zahlen: >=67 (Knie-Hoehe), >=35 (Fuss-Hoehe), >=55 (Tiefe ab Wand), (>=30) Tiefe der Kniezone ab Vorderkante, (<=40) und (<=10) Klammermasse - genaue Bedeutung der Klammerwerte nicht erlaeutert"
+},
+{
+"id": "g4b.rf_bad_laenge_schnitt",
+"topic": "bad",
+"title": "Laenge rollstuhlgerechtes Bad im Schnitt (Waschtisch bis Duschwand)",
+"sources": [
+{
+"book": "G",
+"page": 277
+}
+],
+"values": {
+"min": 295,
+"unit": "cm"
+},
+"condition": "Beispiel-Schnitt rollstuhlgerecht"
+},
+{
+"id": "g4b.rf_dusche_haltegriff_hoehe",
+"topic": "bad",
+"title": "Waagerechter Haltegriff an der Dusche (Hoehe)",
+"sources": [
+{
+"book": "G",
+"page": 277
+}
+],
+"values": {
+"typ": 85,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht"
+},
+{
+"id": "g4b.rf_duschklappsitz",
+"topic": "bad",
+"title": "Duschklappsitz: Mass >=50 von der Wand bis vor die Sitzvorderkante (Sitz ca. 45 tief, Sitzhoehe ca. 46 gezeichnet, nicht bemasst)",
+"sources": [
+{
+"book": "G",
+"page": 277
+}
+],
+"values": {
+"min": 50,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht"
 },
 {
 "id": "g5.gebaeudetiefe_einbund",

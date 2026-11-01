@@ -315,6 +315,38 @@ def build(src: str) -> dict:
             layouts[lay["id"]] = lo
         for s in d.get("style", []):
             style_notes.append({"agent": agent, "note": s})
+    # room requirements -> element ids (the notes use short names)
+    def match(name: str):
+        n = slug(name)
+        if n in elements:
+            return n
+        cands = [i for i in elements if i.startswith(n) or n in i]
+        return sorted(cands, key=len)[0] if cands else None
+    for r in rooms.values():
+        req, unknown = [], []
+        for x in r.get("requires") or []:
+            m = match(str(x))
+            (req if m else unknown).append(m or x)
+        r["requires"] = req
+        if unknown:
+            r["requires_text"] = unknown
+    # dining places (Raumpilot Grundlagen S. 215): table + chairs as one element per number of persons
+    src_e = next((e for _, d in notes for e in d.get("elements", []) if e["id"] == "essplatz_stellflaeche_tabelle"), None)
+    if src_e:
+        for v in src_e.get("stellflaeche_variants", []):
+            n = int(re.match(r"(\d+)", v["label"]).group(1))
+            eid = "essplatz_%dp" % n
+            elements[eid] = {
+                "id": eid, "name": "Essplatz %d Personen" % n, "category": "essen", "context": ["wohnen"],
+                "kind": "dining", "w": float(v["w"]), "d": float(v["d"]), "wall": False,
+                "params": {"persons": n, "table_d": 80.0},
+                "areas": [{"side": "front", "d": 30.0, "d_extra": 70.0,
+                           "note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"},
+                          {"side": "back", "d": 30.0, "d_extra": 70.0,
+                           "note": "hinter der Stuhlzone 30 cm zur Wand, 70 cm zu Möbeln"}],
+                "notes": "Tisch 80 tief, Stuhlzone je Seite 50 (Stell- und Bewegungsfläche der Stühle); "
+                         "Gedeck 60 × 40, Ansitzbreite 65-70 je Person; Tischhöhe 70-75, Sitzhöhe 42-47",
+                "sources": sources("G", src_e.get("page"))}
     # elements only known from layouts (island, sideboard, lift car ...): minimal entries
     for lay in layouts.values():
         for x in lay["elements"]:

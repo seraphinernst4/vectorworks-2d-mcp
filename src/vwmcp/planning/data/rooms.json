@@ -16,10 +16,7 @@
 "d": null,
 "area": null
 },
-"requires": [
-"besprechungstisch",
-"stuehle"
-],
+"requires": [],
 "rules": [
 "3,0 m² je Person (8 P. → 24 m²)",
 "getrennt, abgeschlossen",
@@ -34,6 +31,10 @@
 "book": "A",
 "page": 181
 }
+],
+"requires_text": [
+"besprechungstisch",
+"stuehle"
 ]
 },
 {
@@ -53,10 +54,7 @@
 "d": null,
 "area": null
 },
-"requires": [
-"konferenztisch",
-"stuehle"
-],
+"requires": [],
 "rules": [
 "3,0 m² je Person (20 P. → 60 m²)",
 "getrennt, abgeschlossen",
@@ -71,6 +69,10 @@
 "book": "A",
 "page": 181
 }
+],
+"requires_text": [
+"konferenztisch",
+"stuehle"
 ]
 },
 {
@@ -90,9 +92,7 @@
 "d": null,
 "area": null
 },
-"requires": [
-"stuhlreihen"
-],
+"requires": [],
 "rules": [
 "0,9 m² je Person (Reihenbestuhlung)",
 "getrennt, abgeschlossen"
@@ -106,6 +106,9 @@
 "book": "A",
 "page": 181
 }
+],
+"requires_text": [
+"stuhlreihen"
 ]
 },
 {
@@ -460,7 +463,7 @@
 "area": null
 },
 "requires": [
-"aufzug"
+"aufzug_15309_normal_630kg"
 ],
 "rules": [
 "DIN 15306 Wohngebäude: Tiefe = FKT, mind. 150; Fläche FKT x SBR, mind. 150 x 150; Reihe: tiefster Fahrkorb, Breite über äußerste Schachtwände",
@@ -508,9 +511,7 @@
 "d": null,
 "area": null
 },
-"requires": [
-"feuerwehraufzug"
-],
+"requires": [],
 "rules": [
 "Mindestmaß 200 x 250 gilt für Krankenhäuser u. ä.; allgemein: belegte Krankentrage 60 breit, 226 Transportlänge muss ungehindert einbringbar sein",
 "kann bei Aufzugsgruppe als gemeinsame Wartezone ausgebildet werden"
@@ -520,6 +521,114 @@
 "book": "G",
 "page": 95
 }
+],
+"requires_text": [
+"feuerwehraufzug"
+]
+},
+{
+"id": "notwendiger_flur",
+"name": "Notwendiger Flur",
+"context": [
+"allgemein",
+"arbeiten"
+],
+"min": {
+"w": 125,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"Breite >= 125 (Bürogebäude, Beispiel)",
+"Laufweg bis notwendige Treppe <= 40 m (LBO BW) / 35 m (MBO, ASR)",
+"Stichflur <= 15 m (MBO)",
+"> 30 m Länge: Rauchschutztüren",
+"keine Stufenfolge < 3 Stufen; Rampe <= 6 %",
+"kein notwendiger Flur in Büro-NE <= 400 m² je Geschoss"
+],
+"sources": [
+{
+"book": "G",
+"page": 103
+},
+{
+"book": "G",
+"page": 104
+}
+]
+},
+{
+"id": "sicherheitsschleuse",
+"name": "Sicherheitsschleuse vor innenliegendem Sicherheitstreppenraum",
+"context": [
+"allgemein"
+],
+"min": {
+"w": null,
+"d": 300,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"Länge >= 3 m",
+"Feuerwiderstand wie Treppenraum",
+"selbstschließende, mind. feuerhemmende Türen",
+"Überdrucklüftung, netzunabhängig"
+],
+"sources": [
+{
+"book": "G",
+"page": 105
+}
+]
+},
+{
+"id": "notwendiger_treppenraum",
+"name": "Notwendiger Treppenraum",
+"context": [
+"allgemein"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"eigener durchgehender Raum nur für die Treppe",
+"<= 6 Nutzungseinheiten je Geschoss angeschlossen",
+"an Außenwand mit öffenbaren Fenstern je Geschoss (sonst technische Lüftung/Entrauchung)",
+"Rauchabzug >= 1 m² oben bei > 5 Geschossen oder innenliegend",
+"Ausgang >= Laufbreite",
+"Laufbreite >= 100 (meiste Nutzungen)"
+],
+"sources": [
+{
+"book": "G",
+"page": 103
+}
+],
+"requires_text": [
+"notwendige_treppe"
 ]
 },
 {
@@ -541,7 +650,7 @@
 },
 "requires": [
 "kuehlschrank",
-"spuele",
+"geschirrspueler",
 "herd_backofen",
 "arbeitsflaeche_klein"
 ],
@@ -849,8 +958,7 @@
 },
 "typical": null,
 "requires": [
-"badewanne|duschwanne",
-"wc"
+"wc_vorwand"
 ],
 "rules": [
 "MBO 48: every dwelling needs a bath with tub or shower and a WC",
@@ -882,6 +990,9 @@
 "book": "G",
 "page": 269
 }
+],
+"requires_text": [
+"badewanne|duschwanne"
 ]
 },
 {
@@ -966,6 +1077,104 @@
 }
 },
 {
+"id": "hausarbeitsraum",
+"name": "Hausarbeitsraum / Hausarbeitsbereich (Wirtschaften)",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 7,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 9
+},
+"requires": [
+"waschmaschine",
+"waeschetrockner",
+"arbeitsflaeche_waesche",
+"waschbecken_unterschrank_hwr",
+"schmutzwaeschebehaelter",
+"schrank_kleingeraete",
+"buegelbrett"
+],
+"rules": [
+"Mindestflaeche ca. 7-9 m2 (p283)",
+"Mindest-Stellflaeche 3,60 m Lauflaenge empfohlen (p283)",
+"Bewegungsflaeche wie Kueche: 120, rollstuhlgerecht 150 (p284)",
+"Aufteilung in 'nasse' (Waschen, Trocknen, Schleudern) und 'trockene' Hausarbeiten (Buegeln, Naehen, Reinigen, Aufbewahren)",
+"Verbindung zu Kueche oder Bad sinnvoll (Organisation, Installation); direkter Ausgang ins Freie guenstig",
+"moeglichst natuerlich belichtet und belueftet; ausreichend beheizter/beluefteter Kellerraum auch moeglich",
+"im Geschosswohnungsbau eigener Raum unueblich, meist in Kueche/Bad integriert; gemeinschaftliche Waschraeume moeglich"
+],
+"sources": [
+{
+"book": "G",
+"page": 281
+},
+{
+"book": "G",
+"page": 282
+}
+],
+"barrier_free": {
+"bewegungsflaeche_d": 150,
+"notes": "rollstuhlgerecht 150 vor den Zeilen (p284/286)"
+}
+},
+{
+"id": "abstellraum",
+"name": "Abstellraum / Abstellflaeche je Wohnung",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 6,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 6
+},
+"requires": [],
+"rules": [
+"Orientierungswert 6 m2 Abstellflaeche je Wohnung, davon mind. 1 m2 innerhalb der Wohnung, 5 m2 im Keller o. ae. (MBO 1997 § 45; p289)",
+"MBO 2002 § 48 (2): GK 3-5: leicht erreichbare Abstellraeume fuer Kinderwagen und Fahrraeder sowie fuer jede Wohnung ein ausreichend grosser Abstellraum",
+"LBO BW 2007 § 35 (5): fuer jede Wohnung ein Abstellraum; Novellierungsentwurf 2009: nur noch bei Wohngebaeuden mit mind. 20 Wohnungen",
+"Beispiel Kellerabstellraum 5 m2 mit 500 langer Wand (p290)"
+],
+"sources": [
+{
+"book": "G",
+"page": 287
+},
+{
+"book": "G",
+"page": 288
+},
+{
+"book": "G",
+"page": 290
+}
+],
+"barrier_free": {
+"gangbreite_rollstuhlgerecht": 150,
+"gangbreite_alt": 120,
+"gangbreite_barrierefrei": 90,
+"greifbereich_h": [
+40,
+140
+]
+}
+},
+{
 "id": "empfang",
 "name": "Empfang/Rezeption",
 "context": [
@@ -982,11 +1191,7 @@
 "d": null,
 "area": null
 },
-"requires": [
-"empfangstheke",
-"schreibtisch",
-"buerostuhl"
-],
+"requires": [],
 "rules": [
 "Eingangsbereich gesamt 0,2–0,6 m² je Büroarbeitsplatz",
 "Theke 40 tief/100 hoch, Personalgang 75–125 bzw. 100 hinter integriertem Tisch"
@@ -1004,6 +1209,11 @@
 "book": "G",
 "page": 374
 }
+],
+"requires_text": [
+"empfangstheke",
+"schreibtisch",
+"buerostuhl"
 ]
 },
 {
@@ -1025,8 +1235,7 @@
 },
 "requires": [
 "sessel_wartebereich",
-"couchtisch_wartebereich",
-"besucherstuhl"
+"couchtisch_wartebereich"
 ],
 "rules": [
 "nur bei starkem Publikumsverkehr",
@@ -1037,6 +1246,9 @@
 "book": "G",
 "page": 374
 }
+],
+"requires_text": [
+"besucherstuhl"
 ]
 },
 {
@@ -1476,10 +1688,7 @@
 "d": null,
 "area": null
 },
-"requires": [
-"garderobe",
-"toiletten"
-],
+"requires": [],
 "rules": [
 "in größeren Schulen eigener Raum (Aula), bei außerschulischer Nutzung Bühne sinnvoll",
 "Nebenbereiche: Garderoben, Toiletten, ggf. Stuhllager, Requisitenlager",
@@ -1496,6 +1705,10 @@
 "book": "G",
 "page": 494
 }
+],
+"requires_text": [
+"garderobe",
+"toiletten"
 ]
 }
 ]

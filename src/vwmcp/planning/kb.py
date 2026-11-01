@@ -155,7 +155,7 @@ def topics() -> dict[str, int]:
 def element(eid: str) -> dict:
     e = elements().get(eid)
     if e is None:
-        raise KeyError("unknown element %r (see vw2d_elements)" % eid)
+        raise KeyError("unknown element %r (vw2d_knowledge lists them)" % eid)
     return e
 
 

@@ -521,8 +521,8 @@ def _elements_arg(elements, room: dict | None) -> list[dict]:
             out.append(x)
     if not out:
         raise ToolError("which elements? give elements=[...] or a room with requirements")
-    if len(out) > 8:
-        raise ToolError("at most 8 elements per generated room (for bigger rooms place groups with vw2d_place_element)")
+    if len(out) > 12:
+        raise ToolError("at most 12 elements per room (for bigger rooms place groups with vw2d_place_element)")
     return out
 
 
@@ -577,8 +577,12 @@ def plan_variants(elements: list[dict], W: float, D: float, mode: str, doors: li
             raise ToolError(str(ex.args[0])) from ex
     wall_specs = [s for s in specs if s.wall]
     free = [s for s in specs if not s.wall]
-    gen = E.generate(wall_specs, W, D, doors, sides, limit=max(limit * 3, 12), door_reveal=kb.door_reveal()) \
-        if wall_specs else [E.Layout(W, D, [], list(doors))]
+    if len(wall_specs) > 6:
+        # too many for free combination (kitchen rows ...): the book's situations only
+        gen = []
+    else:
+        gen = E.generate(wall_specs, W, D, doors, sides, limit=max(limit * 3, 12), door_reveal=kb.door_reveal()) \
+            if wall_specs else [E.Layout(W, D, [], list(doors), name="Variante")]
     for g in gen:
         for s in free:  # free-standing: in the middle of the free floor
             g.placed.append(E.Placed(s, W / 2, D / 2 + s.d / 2, 0.0, None, s.name))
@@ -652,10 +656,11 @@ def _room_overlay(lay: E.Layout, st: dict, origin_mm, outline: bool, dims: bool)
 
 @mcp.tool(annotations=WRITE)
 def vw2d_plan_room(
-    width: float,
-    depth: float,
+    width: float | None = None,
+    depth: float | None = None,
     room: str | None = None,
     elements: list[Any] | None = None,
+    layout: str | None = None,
     unit: Literal["cm", "mm", "m", "document"] = "cm",
     mode: Literal["standard", "barrierefrei", "rollstuhlgerecht"] = "standard",
     door: dict[str, Any] | None = None,
@@ -667,6 +672,7 @@ def vw2d_plan_room(
     layer: str | None = None,
     outline: bool | None = None,
     dimensions: bool | None = None,
+    label: str | None = None,
     style_name: str | None = None,
     preview: bool = True,
 ) -> list[Any]:
@@ -681,6 +687,9 @@ def vw2d_plan_room(
     room: a room type (vw2d_knowledge lists them, e.g. wc_raum, duschbad,
     bad) - its required elements are used unless `elements` is given.
     elements: ids or {"element", "variant", "width", "depth", "count"}.
+    layout: one of the book's standard layouts (vw2d_knowledge room=...
+    lists them) - exactly that one, at its own size or fitted to
+    width x depth.
     door: {"wall": "S"|"N"|"E"|"W" (or below/above/right/left), "offset":
     from the wall's left corner seen from inside the room, "width",
     "swing": "in"|"out"|null, "hinge": "left"|"right"} in `unit`.
@@ -688,14 +697,22 @@ def vw2d_plan_room(
     corner, problems) and a preview. draw=True draws variant `variant` with
     the room's bottom-left interior corner at `origin`: movement areas,
     elements (style symbols), and - per style or the outline/dimensions
-    flags - the room outline, the door and dimension chains. One undo step."""
+    flags - the room outline, the door and dimension chains; label: a text
+    under the room (e.g. its name and size). One undo step."""
     st = _st(style_name)
     units = _units() if unit == "document" or draw else None
     f = _cm_factor(unit, units)
+    book = None
+    if layout:
+        book = kb.layouts().get(layout)
+        if book is None or book.get("reference_only"):
+            raise ToolError("unknown layout %r (vw2d_knowledge room=... lists the standard layouts)" % layout)
+        if width is None or depth is None:
+            width, depth, f = book["W"], book["D"], 1.0
     try:
         W, D = float(width) * f, float(depth) * f
     except (TypeError, ValueError):
-        raise ToolError("width and depth must be numbers") from None
+        raise ToolError("width and depth must be numbers (or give a layout)") from None
     if not (30 <= W <= 5000 and 30 <= D <= 5000):
         raise ToolError("room size must be between 0.3 m and 50 m")
     r = None
@@ -703,10 +720,32 @@ def vw2d_plan_room(
         r = kb.rooms().get(room)
         if r is None:
             raise ToolError("unknown room %r (rooms: %s)" % (room, ", ".join(kb.rooms())))
-    els = _elements_arg(elements, r)
     doors = _door_arg(door, f)
     n = max(1, min(int(variants), MAX_VARIANTS))
-    lays = plan_variants(els, W, D, mode, doors, room if not elements else None, n)
+    if book is not None:
+        mode = book.get("mode") or mode
+        lays = []
+        for turn in range(4):
+            for mirror in (False, True):
+                fl = kb.fit(book, W, D, turn, mirror, mode)
+                if fl is None:
+                    continue
+                if doors:
+                    fl.doors = list(doors)
+                fl.issues = E.check(fl.placed, W, D, fl.doors, kb.sides(mode), kb.door_reveal())
+                fl.score = E._score(fl) + (turn + mirror) * 0.1  # as drawn in the book first
+                fl.name = "%s (Raumpilot)" % book["name"]
+                fl.source = kb.source_text(book.get("sources"))
+                lays.append(fl)
+        if not lays:
+            raise ToolError("layout %r (%g × %g cm) doesn't fit into %g × %g cm" % (layout, book["W"], book["D"], W, D))
+        lays.sort(key=lambda x: x.score)
+        lays = lays[:n]
+        room = room or book.get("room")
+        r = kb.rooms().get(room) if room else None
+    else:
+        els = _elements_arg(elements, r)
+        lays = plan_variants(els, W, D, mode, doors, room if not elements else None, n)
     info: dict[str, Any] = {"room": room, "size_cm": [W, D], "mode": mode, "variants": []}
     for lay in lays:
         d = lay.to_dict()
@@ -728,6 +767,10 @@ def vw2d_plan_room(
         show = st.get("show") or {}
         under, over = _room_overlay(lay, st, o, show.get("room", True) if outline is None else outline,
                                     show.get("dimensions", False) if dimensions is None else dimensions)
+        if label:
+            lab, _ = style.class_for(st, "label")
+            over.append({"type": "text", "text": str(label)[:200], "position": [o[0], o[1] - 250.0],
+                         "size": float(st.get("text_size_pt", 7.0)), "valign": "top", "class": lab, "unit": "mm"})
         res = _draw(lay.placed, st, mode, o, layer, "vw2d_plan_room", extra_under=under, overlay=over,
                     room=E.Rect(0.0, 0.0, lay.W, lay.D))
         info["drawn"] = {"variant": variant, **res}

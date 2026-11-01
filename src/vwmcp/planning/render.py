@@ -40,15 +40,22 @@ def drawn_areas(p: E.Placed, room: E.Rect | None = None) -> list[tuple[E.Rect, s
     s = p.spec
     for i, a in enumerate(s.areas):
         sh = p.shifts.get(i, 0.0)
-        if a.side == "front":
+        if a.side == "front" and p.wall:
             lx1, _, lx2, _ = a.local(s.w, s.d, None, sh)
             out.append((E.local_rect_to_world(lx1, -(s.d + a.d), lx2, 0.0, p.ix, p.iy, p.deg), "movement"))
             if a.d_extra and a.d_extra > a.d:
                 out.append((E.local_rect_to_world(lx1, -(s.d + a.d_extra), lx2, -(s.d + a.d), p.ix, p.iy, p.deg),
                             "movement_extra"))
-        else:
+        else:  # free-standing elements and side areas: the area itself, extra depth lighter
             lx1, ly1, lx2, ly2 = a.local(s.w, s.d, None, sh)
             out.append((E.local_rect_to_world(lx1, ly1, lx2, ly2, p.ix, p.iy, p.deg), "movement"))
+            if a.d_extra and a.d_extra > a.d and a.side in ("front", "back"):
+                ex1, ey1, ex2, ey2 = a.local(s.w, s.d, a.d_extra, sh)
+                if a.side == "front":
+                    ey2 = ly1
+                else:
+                    ey1 = ly2
+                out.append((E.local_rect_to_world(ex1, ey1, ex2, ey2, p.ix, p.iy, p.deg), "movement_extra"))
     return out
 
 
@@ -126,6 +133,8 @@ def render(panels: list[dict], st: dict, cols: int = 3, size: float = 3.4) -> by
             ax.text(W / 2, -0.04 * max(W, D), panel["caption"], ha="center", va="top", fontsize=7)
         n_err = sum(1 for i in lay.issues if i.severity == "error")
         title = panel.get("title") or lay.name
+        if len(title) > 48:
+            title = title[:46] + "…"
         ax.set_title("%s%s" % (title, "" if not n_err else "  (%d Probleme)" % n_err), fontsize=8,
                      color="#b01010" if n_err else "black")
         ax.set_aspect("equal")

@@ -705,6 +705,155 @@ def organize_tests(report: dict) -> None:
 DIRECT_LAYER = "KS-Test-Direct"
 
 
+PLAN_LAYER = "KS-Test-Plan"
+SHOW_LAYER = "Keystone Raumpilot-Übersicht"
+PLAN_PROBE = """
+def _layer_objs(name):
+    _k = []
+    vs.ForEachObject(_k.append, "(L='%s')" % name)
+    out = []
+    for h in _k:
+        b = vs.GetBBox(h)
+        out.append({"t": vs.GetTypeN(h), "class": _str(vs.GetClass(h)),
+                    "sym": _str(vs.GetSymName(h)) if vs.GetTypeN(h) == 15 else None,
+                    "bbox": [b[0][0], b[1][1], b[1][0], b[0][1]]})
+    return out
+
+
+def _class_fill(name):
+    c = _class_attrs(name)
+    return c.get("fill") if c else None
+"""
+
+
+def planning_tests(report: dict) -> None:
+    """Raumpilot planning: element with movement areas, a whole room from a
+    standard layout (drawn, checked, reverted), the office's own symbol via
+    a style, and the knowledge base offline."""
+    from vwmcp import app, calls
+    from vwmcp.planning import style as STY
+    from vwmcp.tools import draw2d, generic, planning
+
+    b = app.get_bridge()
+
+    def vwrun(body: str):
+        res = calls._run_with_libs(b, [("vwlib", calls.VWLIB_SOURCE), ("vwlib2d", calls.VWLIB2D_SOURCE)],
+                                   PLAN_PROBE + body, timeout=120)
+        return calls.raise_for_result(res)["value"]
+
+    def objs():
+        return vwrun("result = _layer_objs(%r)" % PLAN_LAYER)
+
+    r: dict = {}
+    t0 = time.monotonic()
+    vwrun("_k = []\nvs.ForEachObject(_k.append, \"(L='%s')\")\nfor _h in _k:\n    vs.DelObject(_h)\nresult = len(_k)"
+          % PLAN_LAYER)
+    draw2d.vw2d_setup(layers=[{"name": PLAN_LAYER, "scale": 50}])
+    # 1) one element with its movement area (wall above, at 0/0, mm)
+    p1 = planning.vw2d_place_element("wc_wandeinbau", position=[0, 0], wall="above", unit="mm", layer=PLAN_LAYER)
+    o1 = objs()
+    areas = [o for o in o1 if o["class"].startswith("Bewegungsfläche")]
+    inst = [o for o in o1 if o["t"] == 15]
+    mpu = draw2d._units()["mm_per_unit"]
+    bb = [round(v * mpu, 3) for v in areas[0]["bbox"]] if areas else None
+    r["element"] = {"objects": len(o1), "areas": len(areas), "instances": len(inst), "area_bbox_mm": bb,
+                    "symbol": p1["symbols"][0]["symbol"], "created": p1.get("symbols_created"),
+                    "movement_fill": vwrun("result = _class_fill('Bewegungsfläche')"),
+                    "pass": len(inst) == 1 and len(areas) == 2 and bb is not None}
+    generic.vw_revert_last()
+    r["element"]["after_revert"] = len(objs())
+    r["element"]["pass"] = r["element"]["pass"] and r["element"]["after_revert"] == 0
+    # 2) a whole room: the book's Duschbad with WC, door, dimensions; check it; revert
+    p2 = planning.vw2d_plan_room(room="duschbad_wc", width=160, depth=165, door={"wall": "S", "offset": 70},
+                                 draw=True, origin=[3000, 0], origin_unit="mm", layer=PLAN_LAYER, dimensions=True,
+                                 label="Duschbad mit WC 160 × 165", preview=False)
+    i2 = json.loads(p2[0])
+    o2 = objs()
+    outline = [o for o in o2 if o["class"] == "Raumbegrenzung"]
+    ruid = [x for x in draw2d.vw2d_read(layer=PLAN_LAYER, include_geometry=False)["objects"]
+            if x.get("class") == "Raumbegrenzung"][0]["uuid"]
+    chk = json.loads(planning.vw2d_check_room(room_uuid=ruid, door={"wall": "S", "offset": 70}, preview=False)[0])
+    r["room"] = {"variant": i2["variants"][0]["name"], "objects": len(o2), "outline": len(outline),
+                 "classes": sorted({o["class"] for o in o2}),
+                 "check_ok": chk["ok"], "check_elements": [e["element"] for e in chk["elements"]],
+                 "check_issues": [x["message"] for x in chk["issues"]]}
+    generic.vw_revert_last()
+    r["room"]["after_revert"] = len(objs())
+    r["room"]["pass"] = (len(outline) == 1 and chk["ok"] and len(chk["elements"]) == 3
+                         and r["room"]["after_revert"] == 0)
+    # 3) the office's own symbol: map the WC to another symbol through a style
+    planning.vw2d_place_element("einzelwaschtisch", position=[0, 3000], unit="mm", layer=PLAN_LAYER, movement=False)
+    wt = [o["sym"] for o in objs() if o["t"] == 15][0]
+    STY.save("KS-Test-Stil", {"symbols": {"wc_wandeinbau": {"symbol": wt, "dy": 0}}, "show": {"movement": False}},
+             activate=False)
+    p3 = planning.vw2d_place_element("wc_wandeinbau", position=[1500, 3000], unit="mm", layer=PLAN_LAYER,
+                                     style_name="KS-Test-Stil")
+    o3 = objs()
+    r["own_symbol"] = {"own": p3["symbols"][0]["own_symbol"], "symbol": p3["symbols"][0]["symbol"],
+                       "instances_of_it": sum(1 for o in o3 if o["sym"] == wt),
+                       "created": p3.get("symbols_created")}
+    generic.vw_revert_last()
+    generic.vw_revert_last()
+    STY.delete("KS-Test-Stil")
+    r["own_symbol"]["after_revert"] = len(objs())
+    r["own_symbol"]["pass"] = (r["own_symbol"]["own"] and r["own_symbol"]["instances_of_it"] == 2
+                               and not r["own_symbol"]["created"] and r["own_symbol"]["after_revert"] == 0)
+    # 4) knowledge offline
+    k = json.loads(planning.vw2d_knowledge(query="dusche", preview=False)[0])
+    r["knowledge"] = {"elements": [e["id"] for e in k["elements"]], "rules": len(k["rules"]),
+                      "pass": "duschwanne" in [e["id"] for e in k["elements"]]}
+    r["seconds"] = round(time.monotonic() - t0, 2)
+    r["pass"] = all(r[x]["pass"] for x in ("element", "room", "own_symbol", "knowledge"))
+    report["planning"] = r
+    log(f"planning: pass={r['pass']} in {r['seconds']} s")
+
+
+SHOWCASE = [
+    "wc_raum_a", "wc_raum_b", "wc_raum_c", "duschbad_a", "duschbad_wc_a", "duschbad_wc_b",
+    "wannenbad_wc_a", "wannenbad_wc_b", "wannenbad_wc_c", "vollbad_a", "barrierefrei_bad_beispiel",
+    "rollstuhl_bad_beispiel", "kueche_einzeilig", "kueche_zweizeilig", "kueche_l", "kueche_u",
+    "kueche_arbeitsinsel", "kueche_l_essplatz",
+]
+
+
+def showcase(report: dict) -> None:
+    """Standard situations from the book on a layer of the open document, to
+    look at (not reverted): one row per group, labelled."""
+    from vwmcp import app, calls
+    from vwmcp.planning import kb
+    from vwmcp.tools import draw2d, planning
+
+    b = app.get_bridge()
+    calls.raise_for_result(calls._run_with_libs(
+        b, [("vwlib", calls.VWLIB_SOURCE), ("vwlib2d", calls.VWLIB2D_SOURCE)],
+        "_k = []\nvs.ForEachObject(_k.append, \"(L='%s')\")\nfor _h in _k:\n    vs.DelObject(_h)\nresult = len(_k)"
+        % SHOW_LAYER, timeout=120))
+    draw2d.vw2d_setup(layers=[{"name": SHOW_LAYER, "scale": 50}])
+    x, y, row_h, n, done = 0.0, 0.0, 0.0, 0, []
+    names = list(SHOWCASE) + [i for i in kb.layouts() if i.startswith(("essplatz", "schlaf", "bett", "kinder",
+                                                                         "arbeitsplatz", "home"))
+                              and not kb.layouts()[i].get("reference_only")]
+    for lid in names:
+        lay = kb.layouts().get(lid)
+        if not lay or lay.get("reference_only"):
+            continue
+        if n and n % 6 == 0:
+            x, y, row_h = 0.0, y - row_h - 1500.0, 0.0
+        try:
+            planning.vw2d_plan_room(layout=lid, draw=True, origin=[x, y], origin_unit="mm", layer=SHOW_LAYER,
+                                    dimensions=True, preview=False,
+                                    label="%s (%g × %g) – %s" % (lay["name"], lay["W"], lay["D"],
+                                                                kb.source_text(lay.get("sources"))))
+            done.append(lid)
+        except Exception as e:  # noqa: BLE001
+            report.setdefault("showcase_errors", []).append("%s: %r" % (lid, e))
+        x += lay["W"] * 10 + 1500.0
+        row_h = max(row_h, lay["D"] * 10)
+        n += 1
+    report["showcase"] = {"drawn": done, "count": len(done)}
+    log(f"showcase: {len(done)} standard situations on '{SHOW_LAYER}'")
+
+
 def direct_tests(report: dict) -> None:
     """The direct trigger (VectorScript PythonExecute through AppleScript, no
     menu command): read first, then writes, symbols and revert - stops at the
@@ -827,7 +976,8 @@ def main() -> None:
     log(f"live test start ({args.only})")
     sections = (("protocol", protocol_tests), ("tools", tool_tests), ("pitfalls", pitfall_tests),
                 ("regression", regression_tests), ("assets", asset_tests), ("stack", stack_tests), ("organize", organize_tests),
-                ("perf", perf_tests), ("direct", direct_tests),
+                ("perf", perf_tests), ("direct", direct_tests), ("planning", planning_tests),
+                ("showcase", showcase),
                 ("mcp", lambda rep: mcp_tests(rep, args.server)))
     for name, fn in sections:
         if name not in args.only.split(","):
