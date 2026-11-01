@@ -117,7 +117,7 @@
 "d": 85.0,
 "wall": false,
 "h": 100.0,
-"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. Text S. 42: Rollatoren meist 60-65 cm breit; Handhabung braucht deutlich mehr Platz (keine Normwerte)",
+"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. Text S. 40: Rollatoren meist 60-65 cm breit; Handhabung braucht deutlich mehr Platz (keine Normwerte)",
 "sources": [
 {
 "book": "G",
@@ -269,11 +269,11 @@
 "sources": [
 {
 "book": "G",
-"page": 35
+"page": 37
 },
 {
 "book": "G",
-"page": 37
+"page": 39
 }
 ]
 },
@@ -315,7 +315,7 @@
 "side": "front",
 "d": 150.0,
 "w": 150.0,
-"note": "Vorraum nach DIN 15306 (S. 88): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
+"note": "Vorraum nach DIN 15306 (S. 86): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
 }
 ],
 "barrier_free": {
@@ -346,7 +346,7 @@
 "side": "front",
 "d": 150.0,
 "w": 160.0,
-"note": "Vorraum nach DIN 15306 (S. 88): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
+"note": "Vorraum nach DIN 15306 (S. 86): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
 }
 ],
 "barrier_free": {
@@ -377,7 +377,7 @@
 "side": "front",
 "d": 150.0,
 "w": 170.0,
-"note": "Vorraum nach DIN 15306 (S. 88): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
+"note": "Vorraum nach DIN 15306 (S. 86): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
 }
 ],
 "barrier_free": {
@@ -387,9 +387,9 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -414,7 +414,7 @@
 "side": "front",
 "d": 210.0,
 "w": 170.0,
-"note": "Vorraum nach DIN 15306 (S. 88): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
+"note": "Vorraum nach DIN 15306 (S. 86): Tiefe = FKT, mind. 150; Fläche >= FKT x SBR, mind. 150 x 150 (hier berechnet)"
 }
 ],
 "barrier_free": {
@@ -424,9 +424,9 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -452,7 +452,7 @@
 "side": "front",
 "d": 210.0,
 "w": 200.0,
-"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+"note": "Vorraum nach DIN 15309 (S. 86) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
 }
 ],
 "barrier_free": {
@@ -462,9 +462,9 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -490,7 +490,7 @@
 "side": "front",
 "d": 210.0,
 "w": 200.0,
-"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+"note": "Vorraum nach DIN 15309 (S. 86) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
 }
 ],
 "barrier_free": {
@@ -500,7 +500,7 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
 "notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
@@ -528,7 +528,7 @@
 "side": "front",
 "d": 315.0,
 "w": 160.0,
-"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=315.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+"note": "Vorraum nach DIN 15309 (S. 86) Einzelaufzug: Tiefe >= 1,5 x FKT (=315.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
 }
 ],
 "barrier_free": {
@@ -538,9 +538,9 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99); ACHTUNG: gedruckte Tür 80 cm < 90 cm trotz Piktogramm"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97); ACHTUNG: gedruckte Tür 80 cm < 90 cm trotz Piktogramm"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -566,7 +566,7 @@
 "side": "front",
 "d": 210.0,
 "w": 220.0,
-"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+"note": "Vorraum nach DIN 15309 (S. 86) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
 }
 ],
 "barrier_free": {
@@ -576,9 +576,9 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -604,7 +604,7 @@
 "side": "front",
 "d": 210.0,
 "w": 240.0,
-"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+"note": "Vorraum nach DIN 15309 (S. 86) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
 }
 ],
 "barrier_free": {
@@ -614,9 +614,9 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 92 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -642,7 +642,7 @@
 "side": "front",
 "d": 210.0,
 "w": 250.0,
-"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+"note": "Vorraum nach DIN 15309 (S. 86) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
 }
 ],
 "barrier_free": {
@@ -652,7 +652,7 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
 "notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
@@ -680,7 +680,7 @@
 "side": "front",
 "d": 210.0,
 "w": 260.0,
-"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+"note": "Vorraum nach DIN 15309 (S. 86) Einzelaufzug: Tiefe >= 1,5 x FKT (=210.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
 }
 ],
 "barrier_free": {
@@ -690,7 +690,7 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
 "notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
@@ -718,7 +718,7 @@
 "side": "front",
 "d": 240.0,
 "w": 270.0,
-"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=240.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+"note": "Vorraum nach DIN 15309 (S. 86) Einzelaufzug: Tiefe >= 1,5 x FKT (=240.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
 }
 ],
 "barrier_free": {
@@ -728,7 +728,7 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
 "notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
@@ -756,7 +756,7 @@
 "side": "front",
 "d": 240.0,
 "w": 300.0,
-"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=240.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+"note": "Vorraum nach DIN 15309 (S. 86) Einzelaufzug: Tiefe >= 1,5 x FKT (=240.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
 }
 ],
 "barrier_free": {
@@ -766,7 +766,7 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
 "notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
@@ -794,7 +794,7 @@
 "side": "front",
 "d": 255.0,
 "w": 300.0,
-"note": "Vorraum nach DIN 15309 (S. 88) Einzelaufzug: Tiefe >= 1,5 x FKT (=255.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
+"note": "Vorraum nach DIN 15309 (S. 86) Einzelaufzug: Tiefe >= 1,5 x FKT (=255.0), Fläche 1,5 FKT x SBR; in Aufzugsreihe mind. 240 tief (hier berechnet, auf 5 cm aufgerundet)"
 }
 ],
 "barrier_free": {
@@ -804,7 +804,7 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
 "notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
@@ -834,9 +834,9 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 90 x 200 (S. 87)",
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 90 x 200 (S. 85)",
 "sources": [
 {
 "book": "G",
@@ -872,9 +872,9 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 90 x 200 (S. 87); Schachtbreite gedruckt als '240 (260)'",
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 90 x 200 (S. 85); Schachtbreite gedruckt als '240 (260)'",
 "sources": [
 {
 "book": "G",
@@ -910,9 +910,9 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 100 x 230 (S. 87); Schachtbreite gedruckt als '240 (260)'",
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 100 x 230 (S. 85); Schachtbreite gedruckt als '240 (260)'",
 "sources": [
 {
 "book": "G",
@@ -940,9 +940,9 @@
 "w": 150,
 "d": 150
 },
-"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 86, 98, 99)"
+"notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 100 x 230 (S. 87); Buch zeigt zwei 2500-kg-Bettenaufzüge mit identischen Maßen ('bei beiden 2500 kg'); Unterschied in der Zeichnung nicht erkennbar",
+"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 100 x 230 (S. 85); Buch zeigt zwei 2500-kg-Bettenaufzüge mit identischen Maßen ('bei beiden 2500 kg'); Unterschied in der Zeichnung nicht erkennbar",
 "sources": [
 {
 "book": "G",
@@ -1596,7 +1596,7 @@
 },
 {
 "id": "150x190",
-"label": "Zeichnung S. 191: Abstellplatz neben Wechselfläche",
+"label": "Zeichnung S. 189: Abstellplatz neben Wechselfläche",
 "w": 150.0,
 "d": 190.0
 }
@@ -1637,12 +1637,12 @@
 "variants": [
 {
 "id": "215x45",
-"label": "Windfang S. 190 (Länge über ganze Tiefe)",
+"label": "Windfang S. 188 (Länge über ganze Tiefe)",
 "w": 215.0,
 "d": 45.0
 }
 ],
-"notes": "nicht bemaßt; Kleiderstange mit Bügeln gezeichnet, Tiefe ca. 40–45 abgegriffen; S. 191: Garderobenzone = ≥ 290 − 190 = ca. 100 lang",
+"notes": "nicht bemaßt; Kleiderstange mit Bügeln gezeichnet, Tiefe ca. 40–45 abgegriffen; S. 189: Garderobenzone = ≥ 290 − 190 = ca. 100 lang",
 "sources": [
 {
 "book": "G",
@@ -1756,14 +1756,6 @@
 "sources": [
 {
 "book": "G",
-"page": 198
-},
-{
-"book": "G",
-"page": 199
-},
-{
-"book": "G",
 "page": 200
 },
 {
@@ -1772,7 +1764,15 @@
 },
 {
 "book": "G",
-"page": 210
+"page": 202
+},
+{
+"book": "G",
+"page": 203
+},
+{
+"book": "G",
+"page": 212
 }
 ],
 "group": "kuechenzeile"
@@ -1832,23 +1832,23 @@
 "sources": [
 {
 "book": "G",
-"page": 198
-},
-{
-"book": "G",
-"page": 199
-},
-{
-"book": "G",
 "page": 200
 },
 {
 "book": "G",
-"page": 208
+"page": 201
 },
 {
 "book": "G",
-"page": 209
+"page": 202
+},
+{
+"book": "G",
+"page": 210
+},
+{
+"book": "G",
+"page": 211
 }
 ],
 "group": "kuechenzeile"
@@ -1869,7 +1869,7 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 }
 ],
 "group": "kuechenzeile"
@@ -1890,11 +1890,11 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 },
 {
 "book": "G",
-"page": 200
+"page": 202
 }
 ],
 "group": "kuechenzeile"
@@ -1915,11 +1915,11 @@
 "sources": [
 {
 "book": "G",
-"page": 203
+"page": 205
 },
 {
 "book": "G",
-"page": 205
+"page": 207
 }
 ],
 "group": "kuechenzeile"
@@ -1940,11 +1940,11 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 },
 {
 "book": "G",
-"page": 200
+"page": 202
 }
 ],
 "group": "kuechenzeile"
@@ -1965,7 +1965,7 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 }
 ],
 "group": "kuechenzeile"
@@ -1986,11 +1986,11 @@
 "sources": [
 {
 "book": "G",
-"page": 197
+"page": 199
 },
 {
 "book": "G",
-"page": 198
+"page": 200
 }
 ],
 "group": "kuechenzeile"
@@ -2011,11 +2011,11 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 },
 {
 "book": "G",
-"page": 200
+"page": 202
 }
 ],
 "group": "kuechenzeile"
@@ -2039,15 +2039,15 @@
 "sources": [
 {
 "book": "G",
-"page": 198
-},
-{
-"book": "G",
-"page": 203
+"page": 200
 },
 {
 "book": "G",
 "page": 205
+},
+{
+"book": "G",
+"page": 207
 }
 ],
 "group": "kuechenzeile",
@@ -2077,11 +2077,11 @@
 "sources": [
 {
 "book": "G",
-"page": 196
+"page": 198
 },
 {
 "book": "G",
-"page": 198
+"page": 200
 }
 ],
 "group": "kuechenzeile",
@@ -2116,11 +2116,11 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 },
 {
 "book": "G",
-"page": 200
+"page": 202
 }
 ],
 "group": "kuechenzeile",
@@ -2147,15 +2147,15 @@
 "sources": [
 {
 "book": "G",
-"page": 205
-},
-{
-"book": "G",
-"page": 206
-},
-{
-"book": "G",
 "page": 207
+},
+{
+"book": "G",
+"page": 208
+},
+{
+"book": "G",
+"page": 209
 }
 ],
 "group": "kuechenzeile",
@@ -2181,7 +2181,7 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 }
 ],
 "group": "kuechenzeile"
@@ -2202,7 +2202,7 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 }
 ],
 "group": "kuechenzeile"
@@ -2226,11 +2226,11 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 },
 {
 "book": "G",
-"page": 205
+"page": 207
 }
 ],
 "group": "kuechenzeile",
@@ -2260,19 +2260,19 @@
 "sources": [
 {
 "book": "G",
-"page": 198
-},
-{
-"book": "G",
-"page": 205
-},
-{
-"book": "G",
-"page": 206
+"page": 200
 },
 {
 "book": "G",
 "page": 207
+},
+{
+"book": "G",
+"page": 208
+},
+{
+"book": "G",
+"page": 209
 }
 ],
 "group": "kuechenzeile",
@@ -2310,11 +2310,11 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 },
 {
 "book": "G",
-"page": 200
+"page": 202
 }
 ],
 "group": "kuechenzeile",
@@ -2344,7 +2344,7 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 }
 ],
 "group": "kuechenzeile",
@@ -2373,7 +2373,7 @@
 "sources": [
 {
 "book": "G",
-"page": 202
+"page": 204
 }
 ]
 },
@@ -2400,7 +2400,7 @@
 "sources": [
 {
 "book": "G",
-"page": 202
+"page": 204
 }
 ],
 "group": "kuechenzeile"
@@ -2421,7 +2421,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ]
 },
@@ -2449,11 +2449,11 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 },
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ]
 },
@@ -2487,7 +2487,7 @@
 "sources": [
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ]
 },
@@ -2518,11 +2518,11 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 },
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ]
 },
@@ -2545,11 +2545,11 @@
 "sources": [
 {
 "book": "G",
-"page": 205
+"page": 207
 },
 {
 "book": "G",
-"page": 217
+"page": 219
 }
 ]
 },
@@ -2572,7 +2572,7 @@
 "sources": [
 {
 "book": "G",
-"page": 217
+"page": 219
 }
 ]
 },
@@ -2718,7 +2718,7 @@
 "w": 210.0,
 "d": 70.0,
 "wall": true,
-"notes": "nur gemessen (p232, ca. M1:100, nicht bemaßt): Rücken ca. 15, Armlehnen ca. 15; Sitzfläche durch 2 Striche in 3 Plätze geteilt. Andere Sofa-Maße evtl. auf p222-230 (dort nicht von g3/g3b erfasst).",
+"notes": "nur gemessen (p230, ca. M1:100, nicht bemaßt): Rücken ca. 15, Armlehnen ca. 15; Sitzfläche durch 2 Striche in 3 Plätze geteilt. Andere Sofa-Maße evtl. auf p220-228 (dort nicht von g3/g3b erfasst).",
 "sources": [
 {
 "book": "G",
@@ -2729,25 +2729,73 @@
 {
 "id": "sessel",
 "name": "Sessel",
-"full_name": "Sessel",
+"full_name": "Sessel (Polstersessel, Standardgröße)",
 "category": "wohnen",
 "context": [
 "wohnen"
 ],
 "kind": "armchair",
-"w": 60.0,
-"d": 60.0,
+"w": 90.0,
+"d": 85.0,
 "wall": false,
 "variants": [
 {
+"id": "60x85",
+"label": "Standardbereich Breite laut Bemaßung p226 (ca.)",
+"w": 60.0,
+"d": 85.0
+},
+{
+"id": "77.5x85",
+"label": "gezeichnet p226/p227 (M 1:50)",
+"w": 77.5,
+"d": 85.0
+},
+{
+"id": "76x84",
+"label": "gezeichnet p228 (gedreht)",
+"w": 76.0,
+"d": 84.0
+},
+{
+"id": "70x80",
+"label": "Sitzgruppe p227 unten: Sesseltiefe laut Bemaßung (ca.)",
+"w": 70.0,
+"d": 80.0
+},
+{
+"id": "60x60",
+"label": "Sessel",
+"w": 60.0,
+"d": 60.0
+},
+{
 "id": "80x70",
-"label": "Sitzgruppe p232, gemessen",
+"label": "Sitzgruppe p230, gemessen",
 "w": 80.0,
+"d": 70.0
+},
+{
+"id": "70x70",
+"label": "Sessel",
+"w": 70.0,
 "d": 70.0
 }
 ],
-"notes": "Tabelle p236: Sessel ≥60 x ≥60. p232: Sessel ca. 80 breit (Rücken) x 70 tief, Lehnen als Rahmen um quadratischen Sitz.",
+"notes": "Symbol: Armlehnen je ca. 11, Sitz ca. 55 x 55, Rücken ca. 28 (11 + 17). Gleiche id wie g3b (p234 Mindestmaß 60x60; p230 gemessen 80x70) – Varianten zusammenführen.",
 "sources": [
+{
+"book": "G",
+"page": 226
+},
+{
+"book": "G",
+"page": 227
+},
+{
+"book": "G",
+"page": 228
+},
 {
 "book": "G",
 "page": 230
@@ -2786,11 +2834,23 @@
 "w": 150.0,
 "d": 80.0,
 "wall": false,
-"notes": "nur gemessen (p232, nicht bemaßt), mittig vor Sofa",
+"notes": "nur gemessen (p230, nicht bemaßt), mittig vor Sofa",
 "sources": [
 {
 "book": "G",
 "page": 230
+},
+{
+"book": "G",
+"page": 227
+}
+],
+"variants": [
+{
+"id": "160x170",
+"label": "Couchtisch / Mittelfläche einer Sitzgruppe",
+"w": 160.0,
+"d": 170.0
 }
 ]
 },
@@ -2809,7 +2869,7 @@
 "variants": [
 {
 "id": "130x60",
-"label": "p232 barrierefrei, gemessen",
+"label": "p230 barrierefrei, gemessen",
 "w": 130.0,
 "d": 60.0
 }
@@ -2826,6 +2886,27 @@
 {
 "book": "G",
 "page": 230
+}
+],
+"areas": [
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 90.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
 }
 ]
 },
@@ -2872,11 +2953,17 @@
 "label": "Kinderzimmer empfohlen",
 "w": 100.0,
 "d": 205.0
+},
+{
+"id": "100x210",
+"label": "Einzelbett (Kinder-/Gaestezimmer)",
+"w": 100.0,
+"d": 210.0
 }
 ],
 "heights": {
 "top": 35,
-"notes": "Oberkante Matratze ca. 35 (Ansicht p238)"
+"notes": "Oberkante Matratze ca. 35 (Ansicht p236)"
 },
 "barrier_free": {
 "standard": "DIN 18025-2 / DIN 18040-2 (Entwurf)",
@@ -2888,13 +2975,13 @@
 "long_side_1": 120,
 "long_side_2": 90
 },
-"notes": "Regeln p240/241 für Bett allgemein (gezeichnet am Doppelbett)"
+"notes": "Regeln p238/239 für Bett allgemein (gezeichnet am Doppelbett)"
 },
 "side_clearance": {
 "wall": 3,
-"notes": "Kinderbetten 3 cm von Wänden (p248); Erwachsenen-Betten 5 cm vom Kopfende (p237)"
+"notes": "Kinderbetten 3 cm von Wänden (p246); Erwachsenen-Betten 5 cm vom Kopfende (p235)"
 },
-"notes": "w = Breite (Kopfende an Wand), d = Länge. Bezeichnung ab p236 nur 'Einzelbett'.",
+"notes": "w = Breite (Kopfende an Wand), d = Länge. Bezeichnung ab p234 nur 'Einzelbett'.",
 "sources": [
 {
 "book": "G",
@@ -2943,6 +3030,11 @@
 {
 "side": "either",
 "d": 120.0
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -2982,6 +3074,18 @@
 "label": "Orientierungswert Mindest-Einrichtungsmaß",
 "w": 160.0,
 "d": 205.0
+},
+{
+"id": "200x210",
+"label": "Doppelbett (Elternschlafzimmer)",
+"w": 200.0,
+"d": 210.0
+},
+{
+"id": "210x210",
+"label": "lt. Masskette 200-210 x 200-210",
+"w": 210.0,
+"d": 210.0
 }
 ],
 "heights": {
@@ -3015,7 +3119,7 @@
 "nachttisch": 5,
 "notes": "Kopfende 5 cm vor Wand; Nachttisch 5 cm neben Bett"
 },
-"notes": "Zeichnungen: Rahmen 200x200, 2 Matratzen/Decken; p237 Plan-Bemaßung Breite '200-210' obwohl Tabelle 160-220.",
+"notes": "Zeichnungen: Rahmen 200x200, 2 Matratzen/Decken; p235 Plan-Bemaßung Breite '200-210' obwohl Tabelle 160-220.",
 "sources": [
 {
 "book": "G",
@@ -3086,6 +3190,11 @@
 "side": "either",
 "d": 120.0,
 "note": "eine Längsseite 120, die andere 90"
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -3156,6 +3265,11 @@
 "side": "either",
 "d": 120.0,
 "note": "eine Längsseite 120, die andere 90"
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -3188,7 +3302,7 @@
 ],
 "heights": {
 "top": 35,
-"notes": "in Ansicht p238 gleiche Höhe wie Matratze (gemessen)"
+"notes": "in Ansicht p236 gleiche Höhe wie Matratze (gemessen)"
 },
 "side_clearance": {
 "bett": 5,
@@ -3233,8 +3347,8 @@
 "areas": [
 {
 "side": "front",
-"d": 90.0,
-"note": "in Schlafzimmer-Beispielen p237 90 frei vor Schrank; Ankleideraum: ca. 140 zwischen gegenüberliegenden Schränken"
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
 }
 ],
 "variants": [
@@ -3258,13 +3372,13 @@
 },
 {
 "id": "370x60",
-"label": "Schrankwand in Plänen p237/240/241",
+"label": "Schrankwand in Plänen p235/238/239",
 "w": 370.0,
 "d": 60.0
 }
 ],
 "heights": {
-"notes": "Ankleideraum-Schnitt p237: Schrank ca. 240 hoch, Raum ca. 250 (gemessen, nicht bemaßt)"
+"notes": "Ankleideraum-Schnitt p235: Schrank ca. 240 hoch, Raum ca. 250 (gemessen, nicht bemaßt)"
 },
 "barrier_free": {
 "standard": "DIN 18025-2 / DIN 18040-2 (Entwurf)",
@@ -3304,6 +3418,20 @@
 "book": "G",
 "page": 247
 }
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 90.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
 ]
 },
 {
@@ -3326,7 +3454,7 @@
 "d": 100.0
 }
 ],
-"notes": "siehe auch kinderbett_0_1 / kinderbett_1_4 (p248)",
+"notes": "siehe auch kinderbett_0_1 / kinderbett_1_4 (p246)",
 "sources": [
 {
 "book": "G",
@@ -3359,6 +3487,11 @@
 {
 "side": "either",
 "d": 120.0
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -3388,6 +3521,27 @@
 "book": "G",
 "page": 234
 }
+],
+"areas": [
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 90.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
 ]
 },
 {
@@ -3411,13 +3565,13 @@
 },
 {
 "id": "100x50",
-"label": "Schlafzimmer-Beispiel p237 links (gemessen)",
+"label": "Schlafzimmer-Beispiel p235 links (gemessen)",
 "w": 100.0,
 "d": 50.0
 },
 {
 "id": "140x50",
-"label": "Schlafzimmer-Beispiel p237 rechts (gemessen)",
+"label": "Schlafzimmer-Beispiel p235 rechts (gemessen)",
 "w": 140.0,
 "d": 50.0
 }
@@ -3461,7 +3615,7 @@
 },
 {
 "id": "30x30",
-"label": "Planssymbol M1:100 (p237)",
+"label": "Planssymbol M1:100 (p235)",
 "w": 30.0,
 "d": 30.0
 }
@@ -3530,6 +3684,11 @@
 {
 "side": "either",
 "d": 120.0
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -3584,6 +3743,11 @@
 {
 "side": "either",
 "d": 120.0
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -3637,6 +3801,11 @@
 {
 "side": "either",
 "d": 120.0
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -3694,6 +3863,11 @@
 {
 "side": "either",
 "d": 120.0
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -3774,6 +3948,11 @@
 "side": "either",
 "d": 120.0,
 "note": "eine Längsseite 120, die andere 90"
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -4007,6 +4186,11 @@
 {
 "side": "either",
 "d": 120.0
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -4057,6 +4241,11 @@
 {
 "side": "either",
 "d": 120.0
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -4107,6 +4296,11 @@
 {
 "side": "either",
 "d": 120.0
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -4157,6 +4351,11 @@
 {
 "side": "either",
 "d": 120.0
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -4295,7 +4494,8 @@
 "book": "G",
 "page": 393
 }
-]
+],
+"notes": "gezeichnet, nicht bemasst (M 1:100)."
 },
 {
 "id": "regal_buero",
@@ -4320,13 +4520,13 @@
 "variants": [
 {
 "id": "80x45",
-"label": "p260, 2 Elemente je ca. 80 (gemessen)",
+"label": "p258, 2 Elemente je ca. 80 (gemessen)",
 "w": 80.0,
 "d": 45.0
 }
 ],
 "heights": {
-"notes": "Regal im Schnitt p259 ca. 185 hoch (gemessen); rollstuhlgerecht Greifhöhen ≥40 bis ≤140 (p261)"
+"notes": "Regal im Schnitt p257 ca. 185 hoch (gemessen); rollstuhlgerecht Greifhöhen ≥40 bis ≤140 (p259)"
 },
 "barrier_free": {
 "rollstuhlgerecht": {
@@ -4356,6 +4556,318 @@
 ]
 },
 {
+"id": "sofa_3sitzer",
+"name": "Sofa, 3-Sitzer",
+"full_name": "Sofa, 3-Sitzer (Standardgröße)",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "sofa",
+"w": 240.0,
+"d": 85.0,
+"wall": true,
+"variants": [
+{
+"id": "180x85",
+"label": "Standardbereich laut Bemaßung p226 (ca.)",
+"w": 180.0,
+"d": 85.0
+},
+{
+"id": "232x85",
+"label": "gezeichnet p226/p227 (M 1:50, vektor-gemessen)",
+"w": 232.0,
+"d": 85.0
+},
+{
+"id": "224x84",
+"label": "gezeichnet p228 TV-Beispiel",
+"w": 224.0,
+"d": 84.0
+}
+],
+"heights": {
+"seat": null,
+"top": null,
+"notes": "keine Höhen angegeben"
+},
+"notes": "Tiefe 'ca. 85' nur am 3-Sitzer bemaßt, gilt zeichnerisch für alle Sofas/Sessel. Gezeichnet: Armlehnen je ca. 11 breit, Rücken ca. 28 (Außenstreifen 11 + Rückenkissen 17), Sitzkissen ca. 55 tief, Sitzbreite je Platz ca. 69 (3 Kissen). Vgl. g3b 'sofa_sitzgruppe' (p230, gemessen 210x70).",
+"sources": [
+{
+"book": "G",
+"page": 226
+},
+{
+"book": "G",
+"page": 227
+},
+{
+"book": "G",
+"page": 228
+}
+]
+},
+{
+"id": "sofa_2sitzer",
+"name": "Sofa, 2-Sitzer",
+"full_name": "Sofa, 2-Sitzer (Standardgröße)",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "sofa",
+"w": 200.0,
+"d": 85.0,
+"wall": true,
+"variants": [
+{
+"id": "160x85",
+"label": "Standardbereich laut Bemaßung p226 (ca.)",
+"w": 160.0,
+"d": 85.0
+},
+{
+"id": "190x85",
+"label": "gezeichnet p226 (M 1:50)",
+"w": 190.0,
+"d": 85.0
+}
+],
+"notes": "Gezeichnet mit 2 Sitzkissen je ca. 80 breit, Armlehnen je ca. 11; Tiefe wie 3-Sitzer (ca. 85).",
+"sources": [
+{
+"book": "G",
+"page": 226
+}
+]
+},
+{
+"id": "fernseher",
+"name": "Fernseher / Bildschirm",
+"full_name": "Fernseher / Bildschirm",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "box",
+"w": 124.0,
+"d": 5.0,
+"wall": true,
+"notes": "Nur gemessen (M 1:50): Bildschirm ca. 124 breit, ca. 5 tief + schmaler Fuß, auf Lowboard. Unter dem Gerät steht 'Bildschirmdiagonale' – die Gerätebreite steht zeichnerisch für die Diagonale; Abstandslinie gezeichnet 349 ≈ 3 x 116.",
+"sources": [
+{
+"book": "G",
+"page": 228
+}
+]
+},
+{
+"id": "lowboard_tv",
+"name": "TV-Möbel / Lowboard",
+"full_name": "TV-Möbel / Lowboard",
+"category": "aufbewahren",
+"context": [
+"wohnen"
+],
+"kind": "box",
+"w": 225.0,
+"d": 45.0,
+"wall": true,
+"notes": "nur gemessen, unbeschriftet (M 1:50)",
+"sources": [
+{
+"book": "G",
+"page": 228
+}
+]
+},
+{
+"id": "klavierbank",
+"name": "Klavier-/Flügelbank",
+"full_name": "Klavier-/Flügelbank",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "box",
+"w": 72.0,
+"d": 36.0,
+"wall": true,
+"variants": [
+{
+"id": "73x36",
+"label": "Stutzflügel p229 gemessen",
+"w": 73.0,
+"d": 36.0
+},
+{
+"id": "72.5x36",
+"label": "Salon-/Konzertflügel p229 gemessen",
+"w": 72.5,
+"d": 36.0
+}
+],
+"side_clearance": {
+"keyboard_gap": 10
+},
+"notes": "Nur gemessen: Bank mittig vor der Tastatur, ca. 10 Abstand zur Tastaturvorderkante. Beim Klavier keine Bank gezeichnet.",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
+"id": "sessel_coconut_chair",
+"name": "Coconut Chair",
+"full_name": "Coconut Chair (Sessel, Designklassiker)",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "armchair",
+"w": 104.0,
+"d": 83.0,
+"wall": false,
+"h": 84.0,
+"heights": {
+"seat": 48,
+"top": 84,
+"notes": "48 an der Vorderansicht bemaßt = Höhe Sitzschalen-Vorderkante (Interpretation)"
+},
+"notes": "Ansichten M 1:50; Buch nennt als Entwerfer 'Charles Nelson'.",
+"sources": [
+{
+"book": "G",
+"page": 226
+}
+]
+},
+{
+"id": "ottomane_coconut_chair",
+"name": "Ottomane zum Coconut Chair",
+"full_name": "Ottomane zum Coconut Chair",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "box",
+"w": 60.0,
+"d": 47.5,
+"wall": true,
+"h": 40.0,
+"notes": "Vorderansicht 60, Seitenansicht 47,5, Höhe 40",
+"sources": [
+{
+"book": "G",
+"page": 226
+}
+]
+},
+{
+"id": "stuhl_panton",
+"name": "Panton Chair",
+"full_name": "Panton Chair",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "chair",
+"w": 50.0,
+"d": 61.0,
+"wall": false,
+"h": 83.0,
+"heights": {
+"seat": 41,
+"top": 83,
+"notes": "41 an der Seitenansicht bemaßt (Sitzhöhe); Zeichnung misst ca. 47"
+},
+"sources": [
+{
+"book": "G",
+"page": 226
+}
+]
+},
+{
+"id": "sessel_lounge_chair_eames",
+"name": "Lounge Chair",
+"full_name": "Lounge Chair (Eames)",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "armchair",
+"w": 84.0,
+"d": 90.0,
+"wall": false,
+"h": 84.0,
+"variants": [
+{
+"id": "65x68",
+"label": "Fußkreuz",
+"w": 65.0,
+"d": 68.0
+}
+],
+"heights": {
+"seat": 38,
+"top": 84,
+"notes": "Vorderansicht Höhe 84, Seitenansicht Höhe 80 (Widerspruch im Buch); 38 an Seitenansicht = vermutl. Sitzhöhe vorn"
+},
+"notes": "Zeichnung nicht maßstäblich (65→72, 84→77, 68→74, 90→99, 80→100, 38→32 gemessen).",
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+]
+},
+{
+"id": "sessel_lc3",
+"name": "Sessel LC 3",
+"full_name": "Sessel LC 3 (Le Corbusier)",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "armchair",
+"w": 99.0,
+"d": 73.0,
+"wall": false,
+"h": 62.0,
+"notes": "Seitenansicht 73, Vorderansicht 99, Höhe 62",
+"sources": [
+{
+"book": "G",
+"page": 228
+}
+]
+},
+{
+"id": "sessel_lc2",
+"name": "Sessel LC 2",
+"full_name": "Sessel LC 2 (Le Corbusier)",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "armchair",
+"w": 76.0,
+"d": 70.0,
+"wall": false,
+"h": 67.0,
+"notes": "Seitenansicht 70, Vorderansicht 76, Höhe 67",
+"sources": [
+{
+"book": "G",
+"page": 228
+}
+]
+},
+{
 "id": "einzelwaschtisch",
 "name": "Einzelwaschtisch / Waschbecken",
 "full_name": "Einzelwaschtisch / Waschbecken",
@@ -4374,7 +4886,7 @@
 "d": 55.0,
 "w": 90.0,
 "d_extra": 75.0,
-"note": "drawn 90 wide centred on the 60 basin (15 each side) and running from the wall; 55 in front of the basin, 75 when objects are opposite (light-blue extension). Text p268 recommends 75 in front of all o"
+"note": "drawn 90 wide centred on the 60 basin (15 each side) and running from the wall; 55 in front of the basin, 75 when objects are opposite (light-blue extension). Text p266 recommends 75 in front of all o"
 }
 ],
 "areas_bf": [
@@ -4391,13 +4903,13 @@
 "side": "front",
 "w": 150.0,
 "d": 150.0,
-"note": "height adjustable to user; flat 15-18 cm; unterfahrbar; Unterputz- or Flachaufputzsiphon; single-lever mixer with temperature limiter and swivel spout; example elevation p278 shows top edge scaled ~80",
+"note": "height adjustable to user; flat 15-18 cm; unterfahrbar; Unterputz- or Flachaufputzsiphon; single-lever mixer with temperature limiter and swivel spout; example elevation p276 shows top edge scaled ~80",
 "align": "any"
 }
 ],
 "heights": {
 "top": null,
-"notes": "Oberkante Waschtisch 85-105 (section p274/p275); Tiefe 55-60 in section p274"
+"notes": "Oberkante Waschtisch 85-105 (section p272/p273); Tiefe 55-60 in section p272"
 },
 "barrier_free": {
 "standard": "DIN 18025-1 / DIN 18040-2 (Entwurf)",
@@ -4407,7 +4919,7 @@
 "d": 150
 },
 "side_wall_min": 20,
-"notes": "height adjustable to user; flat 15-18 cm; unterfahrbar; Unterputz- or Flachaufputzsiphon; single-lever mixer with temperature limiter and swivel spout; example elevation p278 shows top edge scaled ~80 (not dimensioned)"
+"notes": "height adjustable to user; flat 15-18 cm; unterfahrbar; Unterputz- or Flachaufputzsiphon; single-lever mixer with temperature limiter and swivel spout; example elevation p276 shows top edge scaled ~80 (not dimensioned)"
 },
 "barrierefrei": {
 "bewegungsflaeche": {
@@ -4418,7 +4930,7 @@
 "notes": "knee clearance (Beinfreiraum) under basin; Unterputz/Flachaufputzsiphon (DIN 18025-2)"
 }
 },
-"notes": "Stellflaeche from VDI 6000 Blatt 1 table p270 (>=60 x >=55).",
+"notes": "Stellflaeche from VDI 6000 Blatt 1 table p268 (>=60 x >=55).",
 "sources": [
 {
 "book": "G",
@@ -4471,7 +4983,7 @@
 "top": null,
 "notes": "as WB 85-105"
 },
-"notes": "text p267: in multi-person households a second washplace with extra shower elsewhere is better than a second basin in the bath",
+"notes": "text p265: in multi-person households a second washplace with extra shower elsewhere is better than a second basin in the bath",
 "sources": [
 {
 "book": "G",
@@ -4555,7 +5067,7 @@
 "variants": [
 {
 "id": "45x35",
-"label": "as drawn p271/p272",
+"label": "as drawn p269/p270",
 "w": 45.0,
 "d": 35.0
 }
@@ -4689,11 +5201,18 @@
 "d": 150.0,
 "note": "height adjustment must be possible; walls must carry grab rails",
 "align": "any"
+},
+{
+"side": "either",
+"w": 70.0,
+"d": 95.0,
+"align": "end",
+"note": "Übersetzfläche neben dem WC ≥ 95 × 70 (Entwurf DIN 18040: 90), andere Seite ≥ 30 zur Wand"
 }
 ],
 "heights": {
 "seat": 40,
-"notes": "seat 40 in section p275 (non-barrier-free)"
+"notes": "seat 40 in section p273 (non-barrier-free)"
 },
 "barrier_free": {
 "standard": "DIN 18025-1 / DIN 18040-2 (Entwurf)",
@@ -4741,7 +5260,7 @@
 "side_clearance": {
 "wall": 20
 },
-"notes": "wall-hung WCs preferred for hygiene; cisterns preferred over pressure flush (water, noise) p269",
+"notes": "wall-hung WCs preferred for hygiene; cisterns preferred over pressure flush (water, noise) p267",
 "sources": [
 {
 "book": "G",
@@ -4805,7 +5324,19 @@
 "book": "G",
 "page": 548
 }
-]
+],
+"variants": [
+{
+"id": "30x32.5",
+"label": "Urinal (Schule)",
+"w": 30.0,
+"d": 32.5
+}
+],
+"side_clearance": {
+"axis_spacing": 60,
+"wall": 45
+}
 },
 {
 "id": "duschwanne",
@@ -4839,7 +5370,7 @@
 ],
 "heights": {
 "top": null,
-"notes": "tray height standard 6-26; flat trays 1-2 for near floor-level; section p274 shows 0-30"
+"notes": "tray height standard 6-26; flat trays 1-2 for near floor-level; section p272 shows 0-30"
 },
 "barrier_free": {
 "standard": "DIN 18025-1/-2, DIN 18040-2 (Entwurf)",
@@ -4928,7 +5459,7 @@
 ],
 "heights": {
 "top": null,
-"notes": "rim height 40-60 (section p274)"
+"notes": "rim height 40-60 (section p272)"
 },
 "barrier_free": {
 "standard": "DIN 18025-1/-2",
@@ -5136,12 +5667,12 @@
 {
 "side": "front",
 "d": 120.0,
-"note": "im Hausarbeitsbereich gleiche Bewegungsmasse wie in der Kueche: 120 vor der Geraetezeile (p284, Zeichnung p285)"
+"note": "im Hausarbeitsbereich gleiche Bewegungsmasse wie in der Kueche: 120 vor der Geraetezeile (p282, Zeichnung p283)"
 }
 ],
 "heights": {
 "top": 85,
-"notes": "Hoehe 85 aus Aufbewahren-Uebersicht p291 (Frontansicht 60 breit x 85 hoch)"
+"notes": "Hoehe 85 aus Aufbewahren-Uebersicht p289 (Frontansicht 60 breit x 85 hoch)"
 },
 "barrier_free": {
 "standard": "rollstuhlgerecht (DIN 18025-1 / DIN 18040-2 Entwurf)",
@@ -5149,9 +5680,9 @@
 "w": null,
 "d": 150
 },
-"notes": "150 vor der Zeile (p284, p286)"
+"notes": "150 vor der Zeile (p282, p284)"
 },
-"notes": "Grundflaeche 60x60 (Tabelle p284). Gleiche Stellflaeche wie g4 'waschmaschine_bad' (dort Bewegungsflaeche 90 im Bad). Plan-Symbol p285: Quadrat ca. 30x30 mit Kreis ca. Ø25 (Bullauge), symbolisch, nicht massstaeblich, mittig im 60x60-Feld.",
+"notes": "Grundflaeche 60x60 (Tabelle p282). Gleiche Stellflaeche wie g4 'waschmaschine_bad' (dort Bewegungsflaeche 90 im Bad). Plan-Symbol p283: Quadrat ca. 30x30 mit Kreis ca. Ø25 (Bullauge), symbolisch, nicht massstaeblich, mittig im 60x60-Feld.",
 "sources": [
 {
 "book": "G",
@@ -5197,7 +5728,7 @@
 "d": 150
 }
 },
-"notes": "Grundflaeche 60x60 (p284). Abluft nach aussen guenstig (verschiedene Be-/Entlueftungssysteme). Gleiche Stellflaeche wie g4 'waeschetrockner_bad'.",
+"notes": "Grundflaeche 60x60 (p282). Abluft nach aussen guenstig (verschiedene Be-/Entlueftungssysteme). Gleiche Stellflaeche wie g4 'waeschetrockner_bad'.",
 "sources": [
 {
 "book": "G",
@@ -5238,7 +5769,7 @@
 "d": 150
 }
 },
-"notes": "direkt neben der Waschmaschine guenstig (Sortieren, Vorbehandeln); dort auch Schmutzwaeschebehaelter unterbringen (p284).",
+"notes": "direkt neben der Waschmaschine guenstig (Sortieren, Vorbehandeln); dort auch Schmutzwaeschebehaelter unterbringen (p282).",
 "sources": [
 {
 "book": "G",
@@ -5268,7 +5799,7 @@
 "d": 120.0
 }
 ],
-"notes": "Tabelle p284.",
+"notes": "Tabelle p282.",
 "sources": [
 {
 "book": "G",
@@ -5298,7 +5829,7 @@
 "d": 120.0
 }
 ],
-"notes": "Tabelle p284.",
+"notes": "Tabelle p282.",
 "sources": [
 {
 "book": "G",
@@ -5328,7 +5859,7 @@
 "d": 120.0
 }
 ],
-"notes": "Tabelle p284; im Plan p285 als 60x60-Feld mit gestricheltem Diagonalkreuz (X) gezeichnet.",
+"notes": "Tabelle p282; im Plan p283 als 60x60-Feld mit gestricheltem Diagonalkreuz (X) gezeichnet.",
 "sources": [
 {
 "book": "G",
@@ -5357,30 +5888,30 @@
 {
 "side": "front",
 "d": 100.0,
-"note": "Schnitt p285: 100 von der Brettkante bis hinter die stehende Person; im Plan steht das Brett in der 180 tiefen Bewegungszone links der Arbeitszeile"
+"note": "Schnitt p283: 100 von der Brettkante bis hinter die stehende Person; im Plan steht das Brett in der 180 tiefen Bewegungszone links der Arbeitszeile"
 }
 ],
 "variants": [
 {
 "id": "170x45",
-"label": "Tabelle p284 max",
+"label": "Tabelle p282 max",
 "w": 170.0,
 "d": 45.0
 },
 {
 "id": "140x40",
-"label": "Plan p285 gezeichnet (Brett-Kontur)",
+"label": "Plan p283 gezeichnet (Brett-Kontur)",
 "w": 140.0,
 "d": 40.0
 }
 ],
 "heights": {
 "top": 85,
-"notes": "Arbeitshoehe Buegelbrett 85 (Schnitt p285)"
+"notes": "Arbeitshoehe Buegelbrett 85 (Schnitt p283)"
 },
 "barrier_free": {
 "standard": "rollstuhlgerecht",
-"notes": "Plan p286: gleiche Anordnung, Bewegungsflaeche vor der Zeile >=150, Gesamttiefe 210"
+"notes": "Plan p284: gleiche Anordnung, Bewegungsflaeche vor der Zeile >=150, Gesamttiefe 210"
 },
 "sources": [
 {
@@ -5422,7 +5953,7 @@
 "variants": [
 {
 "id": "70x60",
-"label": "im Plan p285 als 70 breites Feld einer 60 tiefen Arbeitszeile",
+"label": "im Plan p283 als 70 breites Feld einer 60 tiefen Arbeitszeile",
 "w": 70.0,
 "d": 60.0
 }
@@ -5468,7 +5999,7 @@
 "d": 120.0
 }
 ],
-"notes": "Arbeitsflaeche 120 empfohlen (p284).",
+"notes": "Arbeitsflaeche 120 empfohlen (p282).",
 "sources": [
 {
 "book": "G",
@@ -5495,15 +6026,15 @@
 "variants": [
 {
 "id": "60x60",
-"label": "einzelnes Schrankelement (p290)",
+"label": "einzelnes Schrankelement (p288)",
 "w": 60.0,
 "d": 60.0
 }
 ],
 "heights": {
-"notes": "unteres Fach lichte Hoehe 160 (Besen, Staubsauger, Buegelbrett stehend), oberes Fach 35 (Eimer) - p285 Schnitt, p290"
+"notes": "unteres Fach lichte Hoehe 160 (Besen, Staubsauger, Buegelbrett stehend), oberes Fach 35 (Eimer) - p283 Schnitt, p288"
 },
-"notes": "Schnitt Buegeln p285: 2 x 60 breit; darin Besen (40 Platzbedarf) und Buegelbrett (40) nebeneinander. Masse lt. p290 nur Orientierungswerte.",
+"notes": "Schnitt Buegeln p283: 2 x 60 breit; darin Besen (40 Platzbedarf) und Buegelbrett (40) nebeneinander. Masse lt. p288 nur Orientierungswerte.",
 "sources": [
 {
 "book": "G",
@@ -5557,7 +6088,7 @@
 {
 "side": "front",
 "d": 120.0,
-"note": "vor Behaelterreihen mind. 120 (p299); im Beispiel p302: 70-90 Mindestzone, >=120 empfohlen"
+"note": "vor Behaelterreihen mind. 120 (p297); im Beispiel p300: 70-90 Mindestzone, >=120 empfohlen"
 }
 ],
 "variants": [
@@ -5593,10 +6124,10 @@
 }
 ],
 "heights": {
-"notes": "w = Breite b (Vorderseite), d = Laenge l (Tiefe inkl. Griff), h = Hoehe bei geschlossenem Deckel; Deckel-Aufklappen erfordert lichte Hoehe h + l (p300)"
+"notes": "w = Breite b (Vorderseite), d = Laenge l (Tiefe inkl. Griff), h = Hoehe bei geschlossenem Deckel; Deckel-Aufklappen erfordert lichte Hoehe h + l (p298)"
 },
 "barrier_free": {
-"standard": "rollstuhlgerecht (p304)",
+"standard": "rollstuhlgerecht (p302)",
 "bewegungsflaeche": {
 "w": 150,
 "d": 150
@@ -5637,7 +6168,7 @@
 {
 "side": "front",
 "d": 120.0,
-"note": "Bewegungsflaeche vor Behaelterreihen >=120; Wegbreite fuer Grossmuellbehaelter 150 (p299)"
+"note": "Bewegungsflaeche vor Behaelterreihen >=120; Wegbreite fuer Grossmuellbehaelter 150 (p297)"
 }
 ],
 "variants": [
@@ -5661,10 +6192,10 @@
 }
 ],
 "heights": {
-"notes": "Flachdeckel klappt nach hinten auf: lichte Hoehe h + l noetig (p301)"
+"notes": "Flachdeckel klappt nach hinten auf: lichte Hoehe h + l noetig (p299)"
 },
 "barrier_free": {
-"standard": "rollstuhlgerecht (p304)",
+"standard": "rollstuhlgerecht (p302)",
 "bewegungsflaeche": {
 "w": 150,
 "d": 150
@@ -5719,7 +6250,7 @@
 "d": 110.0
 }
 ],
-"notes": "DIN EN 840-3; laut Normenliste p343 Behaelter mit 4 Raedern bis 1300 l 'mit Schiebedeckel(n)'; Zeichnung zeigt gewoelbten Deckel mit Einwurfklappe.",
+"notes": "DIN EN 840-3; laut Normenliste p341 Behaelter mit 4 Raedern bis 1300 l 'mit Schiebedeckel(n)'; Zeichnung zeigt gewoelbten Deckel mit Einwurfklappe.",
 "sources": [
 {
 "book": "G",
@@ -6130,7 +6661,7 @@
 42,
 53
 ],
-"notes": "Sitzhöhe 42–53 (S. 374)"
+"notes": "Sitzhöhe 42–53 (S. 372)"
 },
 "notes": "In den Organisations-Grundrissen als Quadrat ca. 45–50 cm, ca. 5–10 cm vor der Tischkante gezeichnet.",
 "sources": [
@@ -6420,7 +6951,7 @@
 ],
 "heights": {
 "top": 85,
-"notes": "Höhe Waschtischoberkante 85 (Schnitt S. 413)"
+"notes": "Höhe Waschtischoberkante 85 (Schnitt S. 411)"
 },
 "side_clearance": {
 "each_side": 20
@@ -6530,6 +7061,18 @@
 "label": "Tür nach innen aufschlagend",
 "w": 85.0,
 "d": 150.0
+},
+{
+"id": "85x174",
+"label": "Kabine mit Tür an der Längsseite (Jungen S. 548)",
+"w": 85.0,
+"d": 174.0
+},
+{
+"id": "158x85",
+"label": "Querkabine Lehrer",
+"w": 158.0,
+"d": 85.0
 }
 ],
 "heights": {
@@ -6552,6 +7095,14 @@
 {
 "book": "G",
 "page": 548
+}
+],
+"areas": [
+{
+"side": "front",
+"d": 125.0,
+"w": 85.0,
+"note": "Gang zwischen zwei Kabinenreihen 125, vor einer Reihe 165"
 }
 ]
 },
@@ -6691,6 +7242,11 @@
 "side": "either",
 "d": 120.0,
 "note": "eine Längsseite 120, die andere 90"
+},
+{
+"side": "front",
+"d": 90.0,
+"note": "vor Möbeln und Betten mind. 90"
 }
 ]
 },
@@ -7039,7 +7595,7 @@
 "seat": null,
 "notes": "Sitzhöhe je Größenklasse = h der Varianten; Sitzneigung EN 1729: -5° bis +5°, DIN ISO 5970: 0° bis 4° (Gr. 1-6); Maßtoleranz EN ±1 cm"
 },
-"notes": "Maße = Sitzfläche (w quer, d Sitztiefe in Blickrichtung). In der Draufsicht steht der Stuhl rechts neben dem Tisch, Abstand ca. 3 cm. Stellfläche (Default) = Sitzfläche Gr. 6 + Lehne; die Möblierungsbeispiele S. 513 verwenden Stühle 40 x 35, S. 512 34 x 38 bzw. 40 x 40, S. 520/521 29 x 33.",
+"notes": "Maße = Sitzfläche (w quer, d Sitztiefe in Blickrichtung). In der Draufsicht steht der Stuhl rechts neben dem Tisch, Abstand ca. 3 cm. Stellfläche (Default) = Sitzfläche Gr. 6 + Lehne; die Möblierungsbeispiele S. 511 verwenden Stühle 40 x 35, S. 510 34 x 38 bzw. 40 x 40, S. 518/519 29 x 33.",
 "sources": [
 {
 "book": "G",
@@ -7189,6 +7745,26 @@
 "book": "L",
 "page": 171
 }
+],
+"variants": [
+{
+"id": "120x60",
+"label": "Lehrertisch",
+"w": 120.0,
+"d": 60.0
+},
+{
+"id": "130x65",
+"label": "130x65 (Mummelsoll [47])",
+"w": 130.0,
+"d": 65.0
+},
+{
+"id": "115x58",
+"label": "115x58 (Linden [52])",
+"w": 115.0,
+"d": 58.0
+}
 ]
 },
 {
@@ -7206,19 +7782,19 @@
 "variants": [
 {
 "id": "34x38",
-"label": "S. 512 Unterrichtsraum",
+"label": "S. 510 Unterrichtsraum",
 "w": 34.0,
 "d": 38.0
 },
 {
 "id": "40x40",
-"label": "S. 512 Werkraum",
+"label": "S. 510 Werkraum",
 "w": 40.0,
 "d": 40.0
 },
 {
 "id": "29x33",
-"label": "S. 520/521 (M 1:100)",
+"label": "S. 518/519 (M 1:100)",
 "w": 29.0,
 "d": 33.0
 }
@@ -7689,7 +8265,7 @@
 "w": 40.0,
 "d": 50.0,
 "wall": true,
-"notes": "Kreis ø 40 auf 50 tiefer Ablage; Achsabstand in den Vorräumen 77,7 (S. 550 oben) bzw. 93,4 (große Anlagen)",
+"notes": "Kreis ø 40 auf 50 tiefer Ablage; Achsabstand in den Vorräumen 77,7 (S. 548 oben) bzw. 93,4 (große Anlagen)",
 "sources": [
 {
 "book": "G",
@@ -7720,7 +8296,7 @@
 "variants": [
 {
 "id": "70x50",
-"label": "WB-Rechteck in Schul-WC barrierefrei S. 550",
+"label": "WB-Rechteck in Schul-WC barrierefrei S. 548",
 "w": 70.0,
 "d": 50.0
 }
@@ -8397,7 +8973,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ]
 },
@@ -8434,7 +9010,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ]
 },
@@ -8471,7 +9047,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ]
 },
@@ -8508,7 +9084,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ]
 },
@@ -8545,7 +9121,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ]
 },
@@ -8832,7 +9408,7 @@
 "sources": [
 {
 "book": "G",
-"page": 205
+"page": 207
 }
 ],
 "notes": "nur aus einem Standardgrundriss bekannt (kueche_arbeitsinsel)"
@@ -8850,7 +9426,7 @@
 "sources": [
 {
 "book": "G",
-"page": 205
+"page": 207
 }
 ],
 "notes": "nur aus einem Standardgrundriss bekannt (kueche_l_essplatz)"
@@ -8868,10 +9444,28 @@
 "sources": [
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ],
 "notes": "nur aus einem Standardgrundriss bekannt (essplatz_eckig_4p)"
+},
+{
+"id": "person",
+"name": "Person",
+"category": "sonstiges",
+"kind": "person",
+"w": 74.0,
+"d": 56.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (billard_spielsituation)"
 },
 {
 "id": "regal_wohnraum",

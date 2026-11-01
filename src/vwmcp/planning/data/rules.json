@@ -712,7 +712,7 @@
 ],
 "unit": "Jahre"
 },
-"notes": "Abweichung zu S. 86 (PDF 88): dort Sekundärsystem 15-50 Jahre, Tertiär 5-15 Jahre"
+"notes": "Abweichung zu S. 84 (PDF 88): dort Sekundärsystem 15-50 Jahre, Tertiär 5-15 Jahre"
 },
 {
 "id": "a.nachhaltig_entwerfen_kriterien",
@@ -2561,7 +2561,7 @@
 }
 ],
 "condition": "Durchschnittliche Körpermaße (ca. P50), M 1:50; Höhe 175 cm wo nicht anders angegeben",
-"notes": "Werte für 2/3/4 Personen nebeneinander sind Mindestwerte (≥). Zeile 2 von S. 25 ohne Höhenangabe (vermutlich wie S. 24 = 175)."
+"notes": "Werte für 2/3/4 Personen nebeneinander sind Mindestwerte (≥). Zeile 2 von S. 23 ohne Höhenangabe (vermutlich wie S. 22 = 175)."
 },
 {
 "id": "g1.personendichte_aufzug",
@@ -3120,7 +3120,7 @@
 ],
 "condition": "Medianwerte, approx.",
 "norm": "DIN 33402-2:1986",
-"notes": "Werte für 3 und 6 Jahre stimmen mit S. 24/25 überein. 'Greifhöhe sitzend' und 'Körperhöhe' liegen im Diagramm fast übereinander."
+"notes": "Werte für 3 und 6 Jahre stimmen mit S. 22/23 überein. 'Greifhöhe sitzend' und 'Körperhöhe' liegen im Diagramm fast übereinander."
 },
 {
 "id": "g1.greifraum_rollstuhl_grundriss",
@@ -3255,7 +3255,7 @@
 "sources": [
 {
 "book": "G",
-"page": 35
+"page": 37
 }
 ],
 "values": {
@@ -3270,7 +3270,7 @@
 "sources": [
 {
 "book": "G",
-"page": 35
+"page": 37
 }
 ],
 "values": {
@@ -3285,7 +3285,7 @@
 "sources": [
 {
 "book": "G",
-"page": 33
+"page": 35
 }
 ],
 "values": {
@@ -3774,7 +3774,7 @@
 "sources": [
 {
 "book": "G",
-"page": 33
+"page": 35
 }
 ]
 },
@@ -4086,7 +4086,7 @@
 "neigung_grad_max": 6
 }
 ],
-"notes": "Buch gibt hier Rampenneigungen in Grad an (6°/10°), auf S. 75 aber in Prozent (Flachrampe ≤ 6 %, Belagrampe 6-10 %, Steilrampe 10-24 %) – siehe open_questions"
+"notes": "Buch gibt hier Rampenneigungen in Grad an (6°/10°), auf S. 73 aber in Prozent (Flachrampe ≤ 6 %, Belagrampe 6-10 %, Steilrampe 10-24 %) – siehe open_questions"
 },
 {
 "id": "g1.steigung_nach_gebaeudeart",
@@ -6405,7 +6405,7 @@
 {
 "id": "g1b.treppe_normen_liste",
 "topic": "treppe",
-"title": "Für Treppen maßgebliche Regelwerke (Liste S. 76): DIN 18065 (01/2000 und Entwurf 09/2009), DIN EN 1865 und DIN 13024-1/-2 (Krankentragen), DIN 18024-1/-2, DIN 18025-1/-2, DIN 18040-1/-2 (Entwürfe 02/2009), ArbStättV mit ASR 7/3, 12/1-3, 17/1,2; MBO §§ 14, 33, 34, 35, 38; LBO BW § 28 und LBOAVO §§ 4, 10, 11; Hochhaus-, Versammlungsstätten-, Verkaufsstätten-, Krankenhausbau-, Garagenverordnungen, Schulbau- und Kindergartenrichtlinien, GUV-Vorschriften",
+"title": "Für Treppen maßgebliche Regelwerke (Liste S. 74): DIN 18065 (01/2000 und Entwurf 09/2009), DIN EN 1865 und DIN 13024-1/-2 (Krankentragen), DIN 18024-1/-2, DIN 18025-1/-2, DIN 18040-1/-2 (Entwürfe 02/2009), ArbStättV mit ASR 7/3, 12/1-3, 17/1,2; MBO §§ 14, 33, 34, 35, 38; LBO BW § 28 und LBOAVO §§ 4, 10, 11; Hochhaus-, Versammlungsstätten-, Verkaufsstätten-, Krankenhausbau-, Garagenverordnungen, Schulbau- und Kindergartenrichtlinien, GUV-Vorschriften",
 "sources": [
 {
 "book": "G",
@@ -6416,7 +6416,7 @@
 "page": 75
 }
 ],
-"condition": "keine Maßangaben auf S. 76-78"
+"condition": "keine Maßangaben auf S. 74-76"
 },
 {
 "id": "g1b.rettungsweg_gebaeudehoehen",
@@ -6471,7 +6471,7 @@
 {
 "id": "g1b.rettungsweglaenge_treppe",
 "topic": "rettungsweg",
-"title": "Von jeder Stelle eines Aufenthaltsraums notwendige Treppe oder Ausgang ins Freie in höchstens 40 m (LBOAVO BW § 10) bzw. 35 m (MBO, ASR); tatsächliche Weglänge (nicht Luftlinie), gemessen bis zum Beginn des Treppenraums; abweichende Werte je Nutzung (Tabelle S. 105 = wie S. 54: Hochhäuser, Gast-/Beherbergungsstätten, Verkaufsstätten 25 m; Garagen, Versammlungsstätten (vom Ausgang), Krankenhäuser 30 m; Schulen, Nicht-Sonderbauten 35 m)",
+"title": "Von jeder Stelle eines Aufenthaltsraums notwendige Treppe oder Ausgang ins Freie in höchstens 40 m (LBOAVO BW § 10) bzw. 35 m (MBO, ASR); tatsächliche Weglänge (nicht Luftlinie), gemessen bis zum Beginn des Treppenraums; abweichende Werte je Nutzung (Tabelle S. 103 = wie S. 52: Hochhäuser, Gast-/Beherbergungsstätten, Verkaufsstätten 25 m; Garagen, Versammlungsstätten (vom Ausgang), Krankenhäuser 30 m; Schulen, Nicht-Sonderbauten 35 m)",
 "sources": [
 {
 "book": "G",
@@ -6528,7 +6528,7 @@
 ],
 "condition": "Laufweglänge",
 "norm": "LBOAVO BW § 10, MBO, ASR",
-"notes": "Tabelle identisch mit g1-Regel max_entfernung_treppenraum_nach_gebaeudeart (S. 54)"
+"notes": "Tabelle identisch mit g1-Regel max_entfernung_treppenraum_nach_gebaeudeart (S. 52)"
 },
 {
 "id": "g1b.notwendige_treppe_laufbreite_1m",
@@ -9575,7 +9575,7 @@
 "page": 171
 }
 ],
-"condition": "keine Kernmaße angegeben; Maße für Treppenhäuser siehe S. 193"
+"condition": "keine Kernmaße angegeben; Maße für Treppenhäuser siehe S. 191"
 },
 {
 "id": "g2b.spaenner_brandschutz",
@@ -10189,7 +10189,7 @@
 "min": 50.0,
 "unit": "cm"
 },
-"condition": "Deutung des Maßes 50 in Zeichnung S. 191",
+"condition": "Deutung des Maßes 50 in Zeichnung S. 189",
 "notes": null,
 "sources": [
 {
@@ -10205,7 +10205,7 @@
 "sources": [
 {
 "book": "G",
-"page": 194
+"page": 196
 }
 ],
 "values": {
@@ -10220,7 +10220,7 @@
 "sources": [
 {
 "book": "G",
-"page": 196
+"page": 198
 }
 ],
 "values": {
@@ -10236,11 +10236,11 @@
 "sources": [
 {
 "book": "G",
-"page": 195
+"page": 197
 },
 {
 "book": "G",
-"page": 203
+"page": 205
 }
 ],
 "values": {
@@ -10256,7 +10256,7 @@
 "sources": [
 {
 "book": "G",
-"page": 195
+"page": 197
 }
 ],
 "table": [
@@ -10285,15 +10285,15 @@
 "sources": [
 {
 "book": "G",
-"page": 194
+"page": 196
 },
 {
 "book": "G",
-"page": 214
+"page": 216
 },
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ],
 "values": {
@@ -10308,7 +10308,7 @@
 "sources": [
 {
 "book": "G",
-"page": 196
+"page": 198
 }
 ],
 "values": {
@@ -10332,7 +10332,7 @@
 "sources": [
 {
 "book": "G",
-"page": 197
+"page": 199
 }
 ],
 "values": {
@@ -10353,7 +10353,7 @@
 "sources": [
 {
 "book": "G",
-"page": 197
+"page": 199
 }
 ],
 "values": {
@@ -10375,11 +10375,11 @@
 "sources": [
 {
 "book": "G",
-"page": 196
+"page": 198
 },
 {
 "book": "G",
-"page": 197
+"page": 199
 }
 ],
 "values": {
@@ -10395,11 +10395,11 @@
 "sources": [
 {
 "book": "G",
-"page": 196
+"page": 198
 },
 {
 "book": "G",
-"page": 197
+"page": 199
 }
 ],
 "table": [
@@ -10461,11 +10461,11 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 },
 {
 "book": "G",
-"page": 199
+"page": 201
 }
 ],
 "values": {
@@ -10481,11 +10481,11 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 },
 {
 "book": "G",
-"page": 199
+"page": 201
 }
 ],
 "values": {
@@ -10501,7 +10501,7 @@
 "sources": [
 {
 "book": "G",
-"page": 199
+"page": 201
 }
 ],
 "values": {
@@ -10516,7 +10516,7 @@
 "sources": [
 {
 "book": "G",
-"page": 197
+"page": 199
 }
 ],
 "values": {
@@ -10532,7 +10532,7 @@
 "sources": [
 {
 "book": "G",
-"page": 197
+"page": 199
 }
 ]
 },
@@ -10543,7 +10543,7 @@
 "sources": [
 {
 "book": "G",
-"page": 200
+"page": 202
 }
 ],
 "values": {
@@ -10563,7 +10563,7 @@
 "sources": [
 {
 "book": "G",
-"page": 200
+"page": 202
 }
 ],
 "values": {
@@ -10579,7 +10579,7 @@
 "sources": [
 {
 "book": "G",
-"page": 200
+"page": 202
 }
 ]
 },
@@ -10590,7 +10590,7 @@
 "sources": [
 {
 "book": "G",
-"page": 201
+"page": 203
 }
 ]
 },
@@ -10601,7 +10601,7 @@
 "sources": [
 {
 "book": "G",
-"page": 201
+"page": 203
 }
 ]
 },
@@ -10612,11 +10612,11 @@
 "sources": [
 {
 "book": "G",
-"page": 201
+"page": 203
 },
 {
 "book": "G",
-"page": 202
+"page": 204
 }
 ]
 },
@@ -10627,7 +10627,7 @@
 "sources": [
 {
 "book": "G",
-"page": 205
+"page": 207
 }
 ],
 "values": {
@@ -10642,7 +10642,7 @@
 "sources": [
 {
 "book": "G",
-"page": 206
+"page": 208
 }
 ],
 "values": {
@@ -10658,11 +10658,11 @@
 "sources": [
 {
 "book": "G",
-"page": 206
+"page": 208
 },
 {
 "book": "G",
-"page": 208
+"page": 210
 }
 ],
 "values": {
@@ -10677,7 +10677,7 @@
 "sources": [
 {
 "book": "G",
-"page": 207
+"page": 209
 }
 ],
 "values": {
@@ -10693,7 +10693,7 @@
 "sources": [
 {
 "book": "G",
-"page": 208
+"page": 210
 }
 ],
 "values": {
@@ -10708,7 +10708,7 @@
 "sources": [
 {
 "book": "G",
-"page": 209
+"page": 211
 }
 ],
 "values": {
@@ -10723,7 +10723,7 @@
 "sources": [
 {
 "book": "G",
-"page": 210
+"page": 212
 }
 ]
 },
@@ -10734,7 +10734,7 @@
 "sources": [
 {
 "book": "G",
-"page": 194
+"page": 196
 }
 ]
 },
@@ -10745,7 +10745,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ],
 "values": {
@@ -10760,7 +10760,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ],
 "values": {
@@ -10776,7 +10776,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ],
 "values": {
@@ -10792,11 +10792,11 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 },
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ],
 "values": {
@@ -10812,7 +10812,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ],
 "table": [
@@ -10855,7 +10855,7 @@
 "sources": [
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ],
 "values": {
@@ -10870,7 +10870,7 @@
 "sources": [
 {
 "book": "G",
-"page": 217
+"page": 219
 }
 ],
 "values": {
@@ -10886,7 +10886,7 @@
 "sources": [
 {
 "book": "G",
-"page": 217
+"page": 219
 }
 ],
 "values": {
@@ -10901,7 +10901,7 @@
 "sources": [
 {
 "book": "G",
-"page": 214
+"page": 216
 }
 ]
 },
@@ -10912,7 +10912,7 @@
 "sources": [
 {
 "book": "G",
-"page": 218
+"page": 220
 }
 ],
 "values": {
@@ -10928,7 +10928,7 @@
 "sources": [
 {
 "book": "G",
-"page": 219
+"page": 221
 }
 ],
 "values": {
@@ -10950,7 +10950,7 @@
 "sources": [
 {
 "book": "G",
-"page": 194
+"page": 196
 }
 ]
 },
@@ -10967,7 +10967,7 @@
 "sources": [
 {
 "book": "G",
-"page": 194
+"page": 196
 }
 ]
 },
@@ -10984,15 +10984,15 @@
 "sources": [
 {
 "book": "G",
-"page": 194
+"page": 196
 },
 {
 "book": "G",
-"page": 208
+"page": 210
 },
 {
 "book": "G",
-"page": 209
+"page": 211
 }
 ]
 },
@@ -11009,7 +11009,7 @@
 "sources": [
 {
 "book": "G",
-"page": 194
+"page": 196
 }
 ]
 },
@@ -11026,7 +11026,7 @@
 "sources": [
 {
 "book": "G",
-"page": 196
+"page": 198
 }
 ]
 },
@@ -11043,11 +11043,11 @@
 "sources": [
 {
 "book": "G",
-"page": 206
+"page": 208
 },
 {
 "book": "G",
-"page": 208
+"page": 210
 }
 ]
 },
@@ -11064,11 +11064,11 @@
 "sources": [
 {
 "book": "G",
-"page": 207
+"page": 209
 },
 {
 "book": "G",
-"page": 209
+"page": 211
 }
 ]
 },
@@ -11085,7 +11085,7 @@
 "sources": [
 {
 "book": "G",
-"page": 197
+"page": 199
 }
 ]
 },
@@ -11102,7 +11102,7 @@
 "sources": [
 {
 "book": "G",
-"page": 197
+"page": 199
 }
 ]
 },
@@ -11119,7 +11119,7 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 }
 ]
 },
@@ -11136,11 +11136,11 @@
 "sources": [
 {
 "book": "G",
-"page": 198
+"page": 200
 },
 {
 "book": "G",
-"page": 199
+"page": 201
 }
 ]
 },
@@ -11157,11 +11157,11 @@
 "sources": [
 {
 "book": "G",
-"page": 208
+"page": 210
 },
 {
 "book": "G",
-"page": 209
+"page": 211
 }
 ]
 },
@@ -11178,11 +11178,11 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 },
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ]
 },
@@ -11199,11 +11199,11 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 },
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ]
 },
@@ -11220,7 +11220,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ]
 },
@@ -11237,7 +11237,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ]
 },
@@ -11254,7 +11254,7 @@
 "sources": [
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ]
 },
@@ -11271,7 +11271,7 @@
 "sources": [
 {
 "book": "G",
-"page": 217
+"page": 219
 }
 ]
 },
@@ -11288,7 +11288,7 @@
 "sources": [
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ]
 },
@@ -11305,7 +11305,7 @@
 "sources": [
 {
 "book": "G",
-"page": 218
+"page": 220
 }
 ]
 },
@@ -11322,7 +11322,7 @@
 "sources": [
 {
 "book": "G",
-"page": 218
+"page": 220
 }
 ]
 },
@@ -11339,7 +11339,7 @@
 "sources": [
 {
 "book": "G",
-"page": 219
+"page": 221
 }
 ]
 },
@@ -11356,7 +11356,7 @@
 "sources": [
 {
 "book": "G",
-"page": 219
+"page": 221
 }
 ]
 },
@@ -11543,7 +11543,7 @@
 "min": 240,
 "unit": "cm"
 },
-"norm": "MBO § 44 (laut p236; p249 nennt MBO 2002 § 47), LBO BW § 34"
+"norm": "MBO § 44 (laut p234; p247 nennt MBO 2002 § 47), LBO BW § 34"
 },
 {
 "id": "g3b.fensterflaeche_aufenthaltsraum",
@@ -12414,7 +12414,7 @@
 "min": 90.0,
 "unit": "cm"
 },
-"condition": "Raumbeispiel p237 links (gemessen)",
+"condition": "Raumbeispiel p235 links (gemessen)",
 "notes": null,
 "sources": [
 {
@@ -12643,7 +12643,7 @@
 "min": 70.0,
 "unit": "cm"
 },
-"condition": "Mindestbewegungsfläche an freier Längs- und Stirnseite (gilt für alle Kinderbetten p248)",
+"condition": "Mindestbewegungsfläche an freier Längs- und Stirnseite (gilt für alle Kinderbetten p246)",
 "notes": null,
 "sources": [
 {
@@ -12691,6 +12691,379 @@
 {
 "book": "G",
 "page": 259
+}
+]
+},
+{
+"id": "g3c.wohnzimmer_mindestflaechen",
+"topic": "wohnzimmer",
+"title": "Orientierungs-/Mindestflächen Wohnzimmer (Angaben der zurückgezogenen DIN 18011)",
+"sources": [
+{
+"book": "G",
+"page": 226
+}
+],
+"values": {
+"min": 16,
+"unit": "m²"
+},
+"table": [
+[
+"ohne Essplatz, 1 Person",
+"≥16 m²"
+],
+[
+"ohne Essplatz, 1–2 Personen",
+"≥18 m²"
+],
+[
+"mit Essplatz, 4 Personen",
+"≥20 m²"
+],
+[
+"mit Essplatz, 5 Personen",
+"≥22 m²"
+],
+[
+"mit Essplatz, 6 Personen",
+"≥24 m²"
+],
+[
+"je weitere Person",
+"+≥2 m²"
+]
+],
+"norm": "DIN 18011 (zurückgezogen)"
+},
+{
+"id": "g3c.sofa_standardgroessen",
+"topic": "wohnzimmer",
+"title": "Standard-Polstermöbel (Breite x Tiefe, ca.)",
+"sources": [
+{
+"book": "G",
+"page": 226
+}
+],
+"table": [
+[
+"3-Sitzer",
+"180–240",
+"85"
+],
+[
+"2-Sitzer",
+"160–200",
+"85 (gezeichnet)"
+],
+[
+"Sessel",
+"60–90",
+"85 (gezeichnet)"
+]
+]
+},
+{
+"id": "g3c.sitzgruppe_sofa_2sessel_platzbedarf",
+"topic": "wohnzimmer",
+"title": "Sofa gegenüber zwei Sesseln: Gesamtbreite (Rücken bis Rücken) ca. 300–350, Gesamttiefe ca. 200–300",
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+],
+"values": {
+"min": 300,
+"max": 350,
+"unit": "cm"
+}
+},
+{
+"id": "g3c.sitzgruppe_2sessel_platzbedarf",
+"topic": "wohnzimmer",
+"title": "Zwei Sessel gegenüber: je ca. 80–100 tief, gesamt ca. 270–300, Breite ca. 70–100",
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+],
+"values": {
+"min": 270,
+"max": 300,
+"unit": "cm"
+}
+},
+{
+"id": "g3c.sitzgruppe_uebereck_platzbedarf",
+"topic": "wohnzimmer",
+"title": "Zwei Sofas über Eck um Mittelfläche: ca. 350–400 x ca. 350–400",
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+],
+"values": {
+"min": 350,
+"max": 400,
+"unit": "cm"
+}
+},
+{
+"id": "g3c.tv_augenabstand",
+"topic": "wohnzimmer",
+"title": "Abstand Augen–Bildschirm mindestens 3- bis 4-fache Bildschirmdiagonale",
+"sources": [
+{
+"book": "G",
+"page": 228
+}
+],
+"values": {
+"min_factor": 3,
+"max_factor": 4,
+"unit": "x Bildschirmdiagonale"
+},
+"condition": "Tabelle 'table_derived' ist aus der Regel berechnet (nicht im Buch); Diagonale in cm gerundet (1 Zoll = 2,54 cm)"
+},
+{
+"id": "g3c.tv_sichtwinkel",
+"topic": "wohnzimmer",
+"title": "Sitzplätze innerhalb eines Sektors um die Bildschirmachse: 60° (±30°) und 90° (±45°) eingezeichnet",
+"sources": [
+{
+"book": "G",
+"page": 228
+}
+],
+"values": {
+"typ": 60,
+"max": 90,
+"unit": "Grad"
+},
+"condition": "Bedeutung (60° bevorzugt, 90° Grenze) aus der Zeichnung abgeleitet, nicht textlich erläutert"
+},
+{
+"id": "g3c.fluegelbank_abstand",
+"topic": "freizeit",
+"title": "Flügelbank (ca. 72 x 36) mittig ca. 10 vor der Tastatur gezeichnet (unbemaßt)",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+],
+"values": {
+"typ": 10,
+"unit": "cm"
+}
+},
+{
+"id": "g3c.entspannen_kommunizieren_bezuege",
+"topic": "funktionszusammenhang",
+"title": "Funktionsdiagramm: 'Entspannen und kommunizieren' überlagert sich mit Essen, Kochen, Ankommen, Schlafen, Arbeiten und privaten Freibereichen; WC nur am Rand (berührt Kochen/Ankommen)",
+"sources": [
+{
+"book": "G",
+"page": 225
+}
+]
+},
+{
+"id": "g3c.einzelbausteine",
+"topic": "wohnzimmer",
+"title": "Ausstattungselemente für Entspannen/Kommunizieren werden als frei kombinierbare Einzelbausteine (eigene Stellflächen) behandelt, da die Funktionen nicht mehr einem Raum zugeordnet sind",
+"sources": [
+{
+"book": "G",
+"page": 225
+}
+]
+},
+{
+"id": "g3c.abstand.sofa_3sitzer_sessel",
+"topic": "abstand",
+"title": "Abstand sofa_3sitzer – sessel (opposite)",
+"values": {
+"min": 128.0,
+"unit": "cm"
+},
+"condition": "Sofa und 2 Sessel gegenüber (p227 oben links): Abstand Sofa-Vorderkante bis Sessel-Vorderkante, gezeichnet M 1:50, unbemaßt; aus Gesamtmaß ca. 300–350 minus Sofa- und Sesseltiefe (je ca. 85) ergeben sich ca. 130–180",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+]
+},
+{
+"id": "g3c.abstand.sessel_sessel",
+"topic": "abstand",
+"title": "Abstand sessel – sessel (side)",
+"values": {
+"min": 77.0,
+"unit": "cm"
+},
+"condition": "zwei Sessel nebeneinander gegenüber dem Sofa (p227 oben links), lichter Abstand gezeichnet, unbemaßt",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+]
+},
+{
+"id": "g3c.abstand.sessel_sessel",
+"topic": "abstand",
+"title": "Abstand sessel – sessel (opposite)",
+"values": {
+"min": 121.0,
+"unit": "cm"
+},
+"condition": "zwei Sessel gegenüber (p227 unten links): Vorderkante–Vorderkante, gezeichnet (290 − 2 x 85); laut Kette ca. 270–300 gesamt bei Sesseltiefe ca. 80–100 → ca. 70–140",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+]
+},
+{
+"id": "g3c.abstand.sofa_3sitzer_couchtisch",
+"topic": "abstand",
+"title": "Abstand sofa_3sitzer – couchtisch (front)",
+"values": {
+"min": 53.0,
+"unit": "cm"
+},
+"condition": "Übereck-Sitzgruppe p227 rechts, seitliches Sofa bis gestrichelte Mittelfläche, gemessen",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+]
+},
+{
+"id": "g3c.abstand.sofa_3sitzer_couchtisch",
+"topic": "abstand",
+"title": "Abstand sofa_3sitzer – couchtisch (front)",
+"values": {
+"min": 47.0,
+"unit": "cm"
+},
+"condition": "Übereck-Sitzgruppe p227 rechts, hinteres Sofa bis gestrichelte Mittelfläche, gemessen",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+]
+},
+{
+"id": "g3c.abstand.sofa_3sitzer_sofa_3sitzer",
+"topic": "abstand",
+"title": "Abstand sofa_3sitzer – sofa_3sitzer (between)",
+"values": {
+"min": 12.0,
+"unit": "cm"
+},
+"condition": "Übereck-Sitzgruppe p227: Stirnseite des seitlichen Sofas bis Vorderkante des hinteren Sofas (Ecklücke), gemessen; seitlicher Versatz Sofaende zu Sofa-Vorderkante ca. 23",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+]
+},
+{
+"id": "g3c.abstand.fernseher_augen_sitzende_person",
+"topic": "abstand",
+"title": "Abstand fernseher – augen_sitzende_person (front)",
+"values": null,
+"condition": "mindestens 3- bis 4-fache Bildschirmdiagonale (Regel, p228); im Beispiel gezeichnet 349–354",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 228
+}
+]
+},
+{
+"id": "g3c.abstand.fernseher_sofa_3sitzer",
+"topic": "abstand",
+"title": "Abstand fernseher – sofa_3sitzer (front)",
+"values": {
+"min": 280.0,
+"unit": "cm"
+},
+"condition": "TV-Beispiel p228: Bildschirmvorderseite bis Sofa-Vorderkante gezeichnet ca. 278–283 (Sofarücken ca. 368); unbemaßt",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 228
+}
+]
+},
+{
+"id": "g3c.abstand.klavierbank_fluegel",
+"topic": "abstand",
+"title": "Abstand klavierbank – fluegel (front)",
+"values": {
+"min": 10.0,
+"unit": "cm"
+},
+"condition": "Bank vor Tastatur-Vorderkante, alle 3 Flügel gemessen 9–10, unbemaßt",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
+"id": "g3c.abstand.person_billardtisch",
+"topic": "abstand",
+"title": "Abstand person – billardtisch (other)",
+"values": {
+"min": 61.0,
+"unit": "cm"
+},
+"condition": "gezeichneter Spieler an der Längsseite ragt ca. 61 über die Tischkante hinaus (Stoßhaltung, über die Bande gebeugt); an der Schmalseite ca. 38 – nur Illustration, Buch fordert nur 'großen Bewegungsraum'",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
+"id": "g3c.abstand.person_sessel",
+"topic": "abstand",
+"title": "Abstand person – sessel (front)",
+"values": {
+"min": 30.0,
+"unit": "cm"
+},
+"condition": "Beinraum: gezeichnete sitzende Person streckt die Beine ca. 29–32 über die Sesselvorderkante (p227, gemessen)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 227
 }
 ]
 },
@@ -13862,12 +14235,12 @@ null,
 140
 ]
 ],
-"condition": "M 1:50 Darstellung p291"
+"condition": "M 1:50 Darstellung p289"
 },
 {
 "id": "g4b.aufbewahrungsmoebel_masse",
 "topic": "aufbewahren",
-"title": "Orientierungswerte Aufbewahrungsmoebel (Schnitte p290)",
+"title": "Orientierungswerte Aufbewahrungsmoebel (Schnitte p288)",
 "sources": [
 {
 "book": "G",
@@ -14418,7 +14791,7 @@ null,
 "typ": 200,
 "unit": "cm"
 },
-"condition": "Schnitte p302"
+"condition": "Schnitte p300"
 },
 {
 "id": "g4b.abfall_rollstuhl_bewegungsflaeche",
@@ -14480,7 +14853,7 @@ null,
 "typ": 90,
 "unit": "cm"
 },
-"condition": "nicht barrierefrei; Empfehlung WBS Schweiz (BWO 2000, S. 22 f.)",
+"condition": "nicht barrierefrei; Empfehlung WBS Schweiz (BWO 2000, S. 20 f.)",
 "norm": "WBS 2000"
 },
 {
@@ -14529,7 +14902,7 @@ null,
 "min": 420,
 "unit": "cm x 470 cm"
 },
-"condition": "Ketten >=410-420 x >=470-480; >= ca. 20 m2; Bett-Laengsseite 150, andere Seite 120, vor Schraenken 150, Tuer >=90",
+"condition": "Ketten >=410-420 x >=470-480; >= ca. 20 m2; Bett-Laengsseite 150, andere Seite 118, vor Schraenken 150, Tuer >=90",
 "norm": "DIN 18025-1, DIN 18040-2 (Entwurf)"
 },
 {
@@ -15681,13 +16054,13 @@ null
 46
 ],
 [
-"je Seite 1,5 OSB",
+"je Seite 1,3 OSB",
 6.0,
 9.0,
 33
 ],
 [
-"je Seite 1,5 OSB",
+"je Seite 1,3 OSB",
 14.0,
 17.0,
 36
@@ -16613,7 +16986,7 @@ null
 "unit": "cm"
 },
 "condition": "Anliegerstraße",
-"norm": "EAE 85/95 S. 43"
+"norm": "EAE 85/95 S. 41"
 },
 {
 "id": "g5.stellplatz_buero",
@@ -16773,8 +17146,8 @@ null
 "baurichtmass": false
 }
 ],
-"condition": "soweit keine Sondervorschriften; Personenzahl aus Betriebsart, Verkehrsspitzen (Schichtwechsel) beachten; gilt auch für innere Erschließungswege (S. 376)",
-"norm": "ASR 10/1 Abschn. 2.4.2 (S. 376: ASR 17/1,2)"
+"condition": "soweit keine Sondervorschriften; Personenzahl aus Betriebsart, Verkehrsspitzen (Schichtwechsel) beachten; gilt auch für innere Erschließungswege (S. 374)",
+"norm": "ASR 10/1 Abschn. 2.4.2 (S. 374: ASR 17/1,2)"
 },
 {
 "id": "g5.eingang_brandschutz",
@@ -16961,7 +17334,7 @@ null
 {
 "id": "g5.buero_flur_rampe",
 "topic": "flur",
-"title": "Höhenunterschiede im Flur nicht mit Stufen (barrierefrei); Rampen höchstens 6 % Neigung. Breiten der Erschließungswege wie Tabelle Gehverkehr (S. 366). Knotenpunkte für Teeküchen, Meeting-Points, Pausenräume nutzen; Leitsystem ab Eingang.",
+"title": "Höhenunterschiede im Flur nicht mit Stufen (barrierefrei); Rampen höchstens 6 % Neigung. Breiten der Erschließungswege wie Tabelle Gehverkehr (S. 364). Knotenpunkte für Teeküchen, Meeting-Points, Pausenräume nutzen; Leitsystem ab Eingang.",
 "sources": [
 {
 "book": "G",
@@ -17662,7 +18035,7 @@ null
 "min": 60,
 "unit": "cm"
 },
-"condition": "Doppelarbeitsplatzmodule S. 393"
+"condition": "Doppelarbeitsplatzmodule S. 391"
 },
 {
 "id": "g5.raster_120_kennwerte",
@@ -19603,7 +19976,7 @@ null
 ],
 "condition": "Gymnasium Baden-Württemberg, SchBauFR; seit 2006 zusätzlich Ganztagsflächen förderfähig",
 "norm": "SchBauFR BW",
-"notes": "Treemap-Werte weichen leicht von der Tabelle S. 474/475 ab (dort NUB 4-zügig 1002-1044, MTB 516-558, Aufenthalt 120-156); Treemap nennt 1023/537/138 (vermutlich Mittelwerte)."
+"notes": "Treemap-Werte weichen leicht von der Tabelle S. 472/473 ab (dort NUB 4-zügig 1002-1044, MTB 516-558, Aufenthalt 120-156); Treemap nennt 1023/537/138 (vermutlich Mittelwerte)."
 },
 {
 "id": "g6.raumprogramm_gymnasium_bw_tabelle",
@@ -21586,7 +21959,7 @@ null
 "page": 505
 }
 ],
-"norm": "GUV-SI 8011 S. 4; ASE BW"
+"norm": "GUV-SI 8011 S. 2; ASE BW"
 },
 {
 "id": "g6b.schulmoebel_anpassung",
@@ -21743,7 +22116,7 @@ null
 }
 ],
 "norm": "OFD BW",
-"notes": "Beispiele S. 513: rechteckig 7,10 x 9,30 m = 66 m², quadratisch 8,10 x 8,10 m = 65,5 m², je 32 Sitzplätze"
+"notes": "Beispiele S. 511: rechteckig 7,10 x 9,30 m = 66 m², quadratisch 8,10 x 8,10 m = 65,5 m², je 32 Sitzplätze"
 },
 {
 "id": "g6b.ase_grundflaeche_je_schueler",
@@ -22123,7 +22496,7 @@ null
 "typ": 60,
 "unit": "cm"
 },
-"notes": "Schnitt S. 529: Verbindungstür 260 hoch"
+"notes": "Schnitt S. 527: Verbindungstür 260 hoch"
 },
 {
 "id": "g6b.chemikalienraum_groesse",
@@ -22480,7 +22853,7 @@ null
 "page": 547
 }
 ],
-"notes": "Beispielpläne S. 550 zeigen deutlich weniger Becken (2-5 je Vorraum)"
+"notes": "Beispielpläne S. 548 zeigen deutlich weniger Becken (2-5 je Vorraum)"
 },
 {
 "id": "g6b.schule_wc_trennwand_hoehe",
@@ -22787,7 +23160,7 @@ null
 "min": 5,
 "unit": "lx"
 },
-"norm": "DIN 5035-2 (S. 559) bzw. DIN 5032-2 (S. 567); DIN 58125 § 14"
+"norm": "DIN 5035-2 (S. 557) bzw. DIN 5032-2 (S. 565); DIN 58125 § 14"
 },
 {
 "id": "g6b.zufahrt_feuerwehr_schule",
@@ -23637,7 +24010,7 @@ null
 "klassenstandard": 32,
 "unit": "Schüler"
 },
-"condition": "Seydel-Essay; Raumbedarf je Sozialform siehe Tabelle Seite 26"
+"condition": "Seydel-Essay; Raumbedarf je Sozialform siehe Tabelle Seite 24"
 },
 {
 "id": "l.raumbedarf_sozial_lernform",

@@ -810,10 +810,22 @@ def planning_tests(report: dict) -> None:
 
 
 SHOWCASE = [
+    # bathrooms and WC rooms
     "wc_raum_a", "wc_raum_b", "wc_raum_c", "duschbad_a", "duschbad_wc_a", "duschbad_wc_b",
     "wannenbad_wc_a", "wannenbad_wc_b", "wannenbad_wc_c", "vollbad_a", "barrierefrei_bad_beispiel",
-    "rollstuhl_bad_beispiel", "kueche_einzeilig", "kueche_zweizeilig", "kueche_l", "kueche_u",
-    "kueche_arbeitsinsel", "kueche_l_essplatz",
+    "rollstuhl_bad_beispiel",
+    # kitchens and dining
+    "kueche_einzeilig", "kueche_zweizeilig", "kueche_l", "kueche_u", "kueche_arbeitsinsel", "kueche_l_essplatz",
+    "kueche_u_rollstuhl", "eckbank", "u_bank", "essplatz_eckig_barrierefrei",
+    # sleeping, children, neutral rooms
+    "doppelbett_bewegungsflaechen", "schlafzimmer_rollstuhlgerecht", "schlafzimmer_barrierefrei",
+    "kinderbett_5_8_bewegungsflaeche", "nn_quadratisch_min", "nn_rechteckig_min", "nn_rollstuhl_min",
+    # utility, balconies, home office
+    "hwr_buegeln_naehen", "putzraum_mindest", "balkon_4_personen", "balkon_6_personen",
+    "schreibtischarbeitsplatz", "arbeitsplatz_rollstuhlgerecht",
+    # offices and schools
+    "zelle_einzel_270x450", "zelle_doppel_540x450", "ap_modul_8m2_220x360", "kopierbereich_zweizeilig",
+    "klassenraum_frontal_reihen_3x5", "klassenraum_72m2_36_schueler",
 ]
 
 
@@ -831,9 +843,7 @@ def showcase(report: dict) -> None:
         % SHOW_LAYER, timeout=120))
     draw2d.vw2d_setup(layers=[{"name": SHOW_LAYER, "scale": 50}])
     x, y, row_h, n, done = 0.0, 0.0, 0.0, 0, []
-    names = list(SHOWCASE) + [i for i in kb.layouts() if i.startswith(("essplatz", "schlaf", "bett", "kinder",
-                                                                         "arbeitsplatz", "home"))
-                              and not kb.layouts()[i].get("reference_only")]
+    names = list(SHOWCASE)
     for lid in names:
         lay = kb.layouts().get(lid)
         if not lay or lay.get("reference_only"):

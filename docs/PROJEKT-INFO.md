@@ -2,13 +2,13 @@
 
 Alles Wissen zum Projekt an einer Stelle: was es ist, wie es aufgebaut ist,
 wie man es installiert, baut und veröffentlicht, was getestet ist und was
-offen ist. Stand: **31.10.2026, Version 0.5.0 (Beta)**.
+offen ist. Stand: **01.11.2026, Version 0.6.0 (Beta, Zweig `v0.6`; auf `main` liegt 0.5.0)**.
 
 ## Auf einen Blick
 
 | | |
 |---|---|
-| **Was** | Claude-Desktop-Erweiterung: Claude zeichnet exakte, sauber organisierte 2D-Architekturpläne in der offenen Vectorworks-Datei – lückenlos, ohne Überlappung, echte Bögen, jedes Objekt in Klasse und Ebene. Claude prüft und korrigiert selbst. |
+| **Was** | Claude-Desktop-Erweiterung: Claude zeichnet exakte, sauber organisierte 2D-Architekturpläne in der offenen Vectorworks-Datei – lückenlos, ohne Überlappung, echte Bögen, jedes Objekt in Klasse und Ebene. Claude prüft und korrigiert selbst. Ab 0.6 plant Claude Standardräume (Bad, Küche, Schlafen, Büro, Klassenraum …) mit dem Maßwissen der vier Raumpilot-Bände und prüft gezeichnete Räume. |
 | **Name in Claude** | „Keystone for Vectorworks“ (gleiches Icon wie Keystone for Rhino) |
 | **Autor** | Seraphin Ernst – Fork von [giorgiomoroder/vectorworks-mcp](https://github.com/giorgiomoroder/vectorworks-mcp) |
 | **Lizenz** | MIT (beide Urheber in `LICENSE`) |
@@ -52,9 +52,10 @@ Claude Desktop
                          und die erste tools/list SOFORT aus server/static.json,
                          reicht alles andere an Python weiter, findet/lädt uv
        └─ uv run server/main.py   (Python + Pakete in ~/.vwmcp/venv)
-            └─ vwmcp (src/vwmcp)  MCP-Server, 28 Werkzeuge
+            └─ vwmcp (src/vwmcp)  MCP-Server, 36 Werkzeuge
                  ├─ geom/          rechnet auf dem Server: exakte Bögen, Prüfungen,
                  │                 Korrekturen, Prüfbild (shapely, matplotlib)
+                 ├─ planning/      Raumpilot-Wissen, Raumplanung, Prüfung, Stil
                  └─ Job-Ordner ~/.vwmcp/jobs → AppleScript → VectorScript
                     PythonExecute (oder Menübefehl „MCP Run Job“)
                     → vwmcp_bridge.py (in Vectorworks, Python 3.9)
@@ -73,6 +74,10 @@ Claude Desktop
 | `src/vwmcp/tools/draw2d.py` | Die vw2d-Werkzeuge |
 | `src/vwmcp/catalog/` | Asset-Katalog: Bausteine in mm mit echten Bögen (`shapes.py`), Assets (`assets_*.py`), Vorschaubilder (`preview.py`), Namen/Klassen (`__init__.py`) |
 | `src/vwmcp/tools/assets.py` | `vw2d_assets`, `vw2d_place_asset` (Symbol je Variante, Rückleseprüfung, Journal) |
+| `src/vwmcp/planning/` | Planen (0.6): `kb.py` Wissensbasis, `engine.py` Bewegungsflächen, Abstände, Prüfungen, Varianten, `symbols.py` Symbole im Raumpilot-Stil, `render.py` Vorschau, `style.py` Stile (Raumpilot als Grundlage, eigene in `~/.vwmcp/styles.json`) |
+| `src/vwmcp/planning/data/` | Erzeugte Wissensbasis (nicht von Hand ändern): Elemente, Abstände inkl. VDI-6000-Matrix, Räume, Buchlösungen, Regeln – jeweils mit Band und Seite |
+| `tools/build_planning_kb.py` | Baut die Wissensbasis aus den Auswertungsnotizen (je Buchabschnitt eine JSON-Datei, nur Fakten in eigenen Worten) |
+| `src/vwmcp/tools/planning.py` | `vw2d_knowledge`, `vw2d_plan_room`, `vw2d_check_room`, `vw2d_place_element`, `vw2d_style` |
 | `src/vwmcp/organize.py`, `src/vwmcp/tools/organize.py` | Regeln zum Sortieren auf Klassen/Ebenen (`vw2d_organize`, Probelauf + ein Schritt) |
 | `src/vwmcp/tools/generic.py` | Werkzeuge aus dem Original (ping, records, Symbole, `vw_exec_python`, `vw_revert_last`) |
 | `src/vwmcp/journal.py` | Rückgängig-Journal `~/.vwmcp/journal.jsonl` |
@@ -86,11 +91,11 @@ Claude Desktop
 | `scripts/build-mcpb.sh`, `scripts/dump_static.py` | Bauen der `.mcpb` (inkl. `static.json` aus dem echten Server) |
 | `skill/vectorworks-2d/SKILL.md` | Optionaler Skill (Arbeitsablauf, Regeln) |
 | `docs/vs-notes.md` | Geprüftes Wissen über die Vectorworks-API (`vs.*`) |
-| `tests/` | ~385 Tests (Server-Logik, Brücke mit Fake-`vs` unter 3.9/3.13/3.14; Code in Vectorworks wird live getestet) |
+| `tests/` | ~800 Tests (Server-Logik, Brücke mit Fake-`vs` unter 3.9/3.13/3.14; Code in Vectorworks wird live getestet) |
 | `docs/api-pitfalls.md` | Übernommene API-Fallstricke (vwx-mcp, vwmcp) mit Live-Befund |
 | `NOTICE`, `CHANGELOG.md` | Lizenzhinweise der Vorlagen; Änderungen |
 
-## Werkzeuge (31)
+## Werkzeuge (36)
 
 **2D:** `vw2d_structure` (Ebenen/Klassen + Organisationsprobleme), `vw2d_read`,
 `vw2d_resources` (Schraffuren, Linienarten, Klassen, Ebenen), `vw2d_setup`
@@ -103,7 +108,14 @@ Prüfung), `vw2d_edit`, `vw2d_transform` (auch Punkt auf Punkt), `vw2d_boolean`
 close, clean, duplicates, overlaps, merge, by_class), `vw2d_select` (markieren +
 zoomen), `vw2d_organize` (nach Regeln auf Klassen/Ebenen sortieren),
 `vw2d_assets` / `vw2d_place_asset` (Asset-Katalog: Sanitär, Küche, Möbel,
-Bäume, Personen, Fahrzeuge als exakte Symbole).
+Bäume, Personen, Fahrzeuge als exakte Symbole – ab 0.6 für Ansichten/Schnitte).
+**Planen (0.6):** `vw2d_knowledge` (Stell-/Bewegungsflächen, Abstände,
+Höhen, barrierefrei/rollstuhlgerecht, Raumgrößen, Regeln – mit Buchseite),
+`vw2d_plan_room` (Raum mit Tür planen: Buchlösungen in allen Lagen plus
+erzeugte Varianten, Vorschau, Prüfung, dann zeichnen), `vw2d_check_room`
+(gezeichneten Raum prüfen), `vw2d_place_element` (Element mit
+Bewegungsfläche), `vw2d_style` (Darstellung: Raumpilot als erste Ebene,
+eigener Bürostil mit eigenen Symbolen, Klassen, Farben).
 **Aus dem Original:** `vw_ping`, `vw_document_info`, `vw_list_layers`,
 `vw_list_classes`, `vw_get_selection`, `vw_find_objects`, `vw_get_record`,
 `vw_set_record`, `vw_list_symbols`, `vw_insert_symbol`, `vw_revert_last`,
@@ -253,11 +265,27 @@ Rückgängig 0,9/0,8 s, sortieren 1,1 s, Rückgängig 0,6 s; 25 000: prüfen
 0,8 s), Stapelreihenfolge nach jedem Rückgängig identisch. Danach die
 Testebenen, Testsymbole und Testklassen aus der Datei entfernt.
 
+## Live-Test 01.11.2026 (0.6.0 Vorschau, „Ohne Titel 1“)
+
+Planen: Element mit Bewegungsfläche exakt (Begrenzung −400/−1200 bis
+400/0 mm), Duschbad mit WC 160 × 165 mit Tür geplant, gezeichnet (14
+Objekte in den Klassen Ausstattung-Sanitär, Bewegungsfläche,
+Bewegungsfläche-Zusatz, Raumbegrenzung, Öffnung-Tür, Bemaßung, Beschriftung)
+und wieder erkannt und geprüft (keine Probleme), Rückgängig sauber, eigenes
+Symbol über einen Stil, Übersicht mit 20 Standardsituationen. Gefunden und
+behoben: `GetBBox` liefert die Bildschirmprojektion – in der Vorderansicht
+fiel die Raumprüfung leer aus; jetzt rechnet Keystone die Begrenzung aus
+der Geometrie, wenn nicht von oben geschaut wird.
+
 ## Bekannte Grenzen / offene Punkte
 
 - Frische Installation auf einem fremden Mac noch nie gemacht (Installer holt
   seit 31.10. uv selbst – ungetestet). Direkter Auslöser (0.5) nur auf
   diesem Mac mit Vectorworks 2026 U7 getestet; Rückfall: Auslöser `menu`.
+- Raumpilot-Lücken: Für manche Elemente nennen die Bücher keine
+  Bewegungsfläche (Billard, Klavier, Flügel); einige Zeichnungen weichen von
+  ihrer Bemaßung ab (barrierefreie Essplätze, Übereck-Sitzgruppe). Keystone
+  erfindet nichts: solche Buchlösungen sind „nur zur Information“.
 - Assets: Komponenten liegen in festen Klassen „Ausstattung-…“/„Staffage-…“
   (+ „-Detail“); ein eigener Klassenstandard für die Symbol-Innereien ist
   noch nicht einstellbar (Instanzen können in jede Klasse).
@@ -291,3 +319,4 @@ Testebenen, Testsymbole und Testklassen aus der Datei entfernt.
 | – | 31.10.2026 | Installer holt uv auf frischen Macs; Projektinfo |
 | 0.4.1 | 31.10.2026 | Stapelreihenfolge beim Wiederherstellen und Neuaufbauen von Objekten |
 | 0.5.0 | 31.10.2026 | Kein Menübefehl mehr (direkter Auslöser), Asset-Katalog (28 Assets, 43 Ansichten, als Symbole), Sortieren nach Regeln (`vw2d_organize`), große Zeichnungen in Sekunden, Review-Fixes (Details: CHANGELOG.md) |
+| 0.6.0 | 01.11.2026 (Zweig `v0.6`) | Planen mit dem Raumpilot-Wissen (389 Elemente, 1227 Regeln, 108 Raumtypen, 335 Buchlösungen), Raumpilot-Stil als erste Ebene + eigene Stile, 5 neue Werkzeuge, Begrenzungen in jeder Ansicht (Details: CHANGELOG.md) |

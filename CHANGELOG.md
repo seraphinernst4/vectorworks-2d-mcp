@@ -17,8 +17,20 @@ Raumpilot-Bände und zeichnet es in einem Stil, den du bestimmst.
   Rampen, Aufzüge (DIN 15306/15309), Rettungswege und Feuerwehr,
   Stellplätze und Fahrgassen, Fahrräder, Wohnungstypen, Flächenberechnung,
   Arbeitsplätze, Büroformen, Schulprogramme, Klassenzimmer, Toilettenzahlen …
-- Jeder Wert mit Buchseite (z. B. „Raumpilot Grundlagen S. 266, VDI 6000
-  Blatt 1“). Nur Fakten in eigenen Worten, keine Buchtexte oder -bilder.
+- Umfang: 389 Elemente (235 direkt platzierbar), 1227 Regeln, 108
+  Raumtypen, 335 Buchlösungen (132 direkt als Grundriss nutzbar, die
+  übrigen nur zur Information, weil die Zeichnung im Buch nicht zur eigenen
+  Bemaßung passt oder Werte fehlen) – auch Wohnzimmer-Mindestflächen,
+  Sitzgruppen, Fernseh-Augenabstand, Klavier, Flügel, Billard, Kicker.
+- Jeder Wert mit Buchseite (gedruckte Seitenzahl, z. B. „Raumpilot
+  Grundlagen S. 266, VDI 6000 Blatt 1“). Nur Fakten in eigenen Worten,
+  keine Buchtexte oder -bilder.
+- Unabhängig gegengeprüft: 131 Stichproben (alle 89 Felder der
+  VDI-6000-Matrix, Elemente, Regeln, Grundrisse) gegen die Bücher – keine
+  falschen Maße; ergänzt wurden die Übersetzfläche neben dem
+  rollstuhlgerechten WC (≥ 95 × 70), 90 cm vor Betten und Schränken
+  (barrierefrei), 150 cm vor Schränken (rollstuhlgerecht), korrigiert
+  einige Seitenangaben.
 
 ### Räume planen (`vw2d_plan_room`, `vw2d_check_room`)
 - Die Standardsituationen des Buchs (WC-Räume, Duschbäder, Wannenbäder,

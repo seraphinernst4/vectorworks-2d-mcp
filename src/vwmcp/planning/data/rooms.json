@@ -802,19 +802,19 @@
 "sources": [
 {
 "book": "G",
-"page": 194
-},
-{
-"book": "G",
-"page": 195
-},
-{
-"book": "G",
 "page": 196
 },
 {
 "book": "G",
-"page": 203
+"page": 197
+},
+{
+"book": "G",
+"page": 198
+},
+{
+"book": "G",
+"page": 205
 }
 ]
 },
@@ -841,7 +841,7 @@
 "sources": [
 {
 "book": "G",
-"page": 194
+"page": 196
 }
 ]
 },
@@ -879,15 +879,11 @@
 "sources": [
 {
 "book": "G",
-"page": 214
-},
-{
-"book": "G",
-"page": 215
-},
-{
-"book": "G",
 "page": 216
+},
+{
+"book": "G",
+"page": 217
 },
 {
 "book": "G",
@@ -895,7 +891,11 @@
 },
 {
 "book": "G",
-"page": 219
+"page": 220
+},
+{
+"book": "G",
+"page": 221
 }
 ]
 },
@@ -923,12 +923,23 @@
 ],
 "rules": [
 "Sitzgruppe rollstuhlgerecht: Streifen ≥150 vor Schränken, Wendefläche 150x150, Durchgang ≥120",
-"barrierefrei: ≥90 statt 150/120"
+"barrierefrei: ≥90 statt 150/120",
+"Werte nur zur Information: Mindestflächen aus der zurückgezogenen DIN 18011",
+"Wohnzimmer mit Essplatz: 20 m² für 4 P., +2 m² je weitere Person",
+"Funktionen Unterhaltung/Erholung/Entspannung/Kommunikation sind heute nicht mehr an einen Raum gebunden; Möbel werden als frei kombinierbare Einzelbausteine behandelt"
 ],
 "sources": [
 {
 "book": "G",
 "page": 230
+},
+{
+"book": "G",
+"page": 225
+},
+{
+"book": "G",
+"page": 226
 }
 ],
 "barrier_free": {
@@ -1499,9 +1510,9 @@
 "buegelbrett"
 ],
 "rules": [
-"Mindestflaeche ca. 7-9 m2 (p283)",
-"Mindest-Stellflaeche 3,60 m Lauflaenge empfohlen (p283)",
-"Bewegungsflaeche wie Kueche: 120, rollstuhlgerecht 150 (p284)",
+"Mindestflaeche ca. 7-9 m2 (p281)",
+"Mindest-Stellflaeche 3,60 m Lauflaenge empfohlen (p281)",
+"Bewegungsflaeche wie Kueche: 120, rollstuhlgerecht 150 (p282)",
 "Aufteilung in 'nasse' (Waschen, Trocknen, Schleudern) und 'trockene' Hausarbeiten (Buegeln, Naehen, Reinigen, Aufbewahren)",
 "Verbindung zu Kueche oder Bad sinnvoll (Organisation, Installation); direkter Ausgang ins Freie guenstig",
 "moeglichst natuerlich belichtet und belueftet; ausreichend beheizter/beluefteter Kellerraum auch moeglich",
@@ -1519,7 +1530,7 @@
 ],
 "barrier_free": {
 "bewegungsflaeche_d": 150,
-"notes": "rollstuhlgerecht 150 vor den Zeilen (p284/286)"
+"notes": "rollstuhlgerecht 150 vor den Zeilen (p282/284)"
 }
 },
 {
@@ -1541,10 +1552,10 @@
 },
 "requires": [],
 "rules": [
-"Orientierungswert 6 m2 Abstellflaeche je Wohnung, davon mind. 1 m2 innerhalb der Wohnung, 5 m2 im Keller o. ae. (MBO 1997 § 45; p289)",
+"Orientierungswert 6 m2 Abstellflaeche je Wohnung, davon mind. 1 m2 innerhalb der Wohnung, 5 m2 im Keller o. ae. (MBO 1997 § 45; p287)",
 "MBO 2002 § 48 (2): GK 3-5: leicht erreichbare Abstellraeume fuer Kinderwagen und Fahrraeder sowie fuer jede Wohnung ein ausreichend grosser Abstellraum",
 "LBO BW 2007 § 35 (5): fuer jede Wohnung ein Abstellraum; Novellierungsentwurf 2009: nur noch bei Wohngebaeuden mit mind. 20 Wohnungen",
-"Beispiel Kellerabstellraum 5 m2 mit 500 langer Wand (p290)"
+"Beispiel Kellerabstellraum 5 m2 mit 500 langer Wand (p288)"
 ],
 "sources": [
 {
@@ -1671,7 +1682,7 @@
 70,
 85
 ],
-"notes": "p304"
+"notes": "p302"
 }
 },
 {
@@ -2073,7 +2084,7 @@
 ],
 "rules": [
 "3 Achsen (3,60–4,50 m); bei Raster 1,20/1,25 vier Achsen nötig",
-"Doppelarbeitsplatzmodul 17,50 m² (S. 398)"
+"Doppelarbeitsplatzmodul 17,50 m² (S. 396)"
 ],
 "sources": [
 {
@@ -3246,7 +3257,7 @@
 "rules": [
 "Beispiel 16 Schüler: 66 m² + 30 m² Restfläche (Hauptschule)",
 "Lage so, dass Arbeitslärm andere Räume nicht stört; gut zugängliche Erdgeschosslage (Materialandienung); mit Kunst zusammenfassen",
-"Mindestabstände zwischen Arbeitstischen wie Sitzplatzanordnung Werkraum (S. 512); Verkehrsflächen nicht enthalten; Durchgang zwischen zwei Arbeitstischen zusätzlich ≥ 60 cm",
+"Mindestabstände zwischen Arbeitstischen wie Sitzplatzanordnung Werkraum (S. 510); Verkehrsflächen nicht enthalten; Durchgang zwischen zwei Arbeitstischen zusätzlich ≥ 60 cm",
 "Material- und Maschinenraum unmittelbar vom Werkraum erreichbar; Maschinenraum baulich getrennt, mit Sichtverbindung (Sichtfenster ca. 3,00 x 1,00 m)",
 "mindestens zwei möglichst weit auseinanderliegende Ausgänge; einer darf durch den Maschinenraum führen (DIN 58125 § 21 f.)",
 "sachgerechte Beleuchtung und Lüftung; Holzstaub-Absaugung; Brennöfen in Schülerbereichen mit Entlüftung ins Freie (DIN 58125 § 26)",
@@ -3591,7 +3602,7 @@
 ],
 "rules": [
 "Bemessung ASE BW: je 40-50 Schüler 1 Sitz + 2 Stände; je 20-25 Schülerinnen 1 Sitz; je 10 Lehrer 1 Sitz + 1 Stand; je 5 Lehrerinnen 1 Sitz; plus rollstuhlgerechtes WC",
-"je 1 Sitz Jungen bzw. 2 Sitze Mädchen ein Handwaschbecken (Text S. 549)",
+"je 1 Sitz Jungen bzw. 2 Sitze Mädchen ein Handwaschbecken (Text S. 547)",
 "nach Geschlechtern getrennt, mit Vorräumen (Seifenspender, hygienische Trockenmöglichkeit, Spiegel, Handwaschbecken)",
 "Sitze durch mindestens 2 m hohe abwaschbare Wände abtrennen",
 "Sammelanlagen geschossweise oder bereichsbezogen; große Anlagen im Pausen-/Aulabereich auch außerschulisch nutzbar; kleinere Anlagen nahe den Unterrichtsräumen; je Geschoss mindestens ein barrierefreies WC",
@@ -3771,7 +3782,7 @@
 "handwaschbecken"
 ],
 "rules": [
-"eigener Raum nicht erforderlich; ruhiger (Kurs-)Raum mit angeschlossenem Raum zum Auskleiden; Handwaschbecken, gute Beleuchtung und Lüftung (ASE 1983 S. 619)"
+"eigener Raum nicht erforderlich; ruhiger (Kurs-)Raum mit angeschlossenem Raum zum Auskleiden; Handwaschbecken, gute Beleuchtung und Lüftung (ASE 1983 S. 617)"
 ],
 "sources": [
 {
@@ -3884,7 +3895,7 @@
 "requires": [],
 "rules": [
 "Stauraum für Reinigungsgeräte mit Wasseranschluss, fugenfreier Hartbelag empfohlen",
-"Beispiele S. 550: 222 x 122 bzw. 222 x 210 in den Toilettenanlagen"
+"Beispiele S. 548: 222 x 122 bzw. 222 x 210 in den Toilettenanlagen"
 ],
 "sources": [
 {

@@ -167,6 +167,39 @@ def test_core_elements_have_the_book_values():
     assert kb.element("duschplatz_150")["walkable"]
 
 
+def test_barrier_free_areas_from_the_independent_check():
+    """Raumpilot Grundlagen S. 274 (transfer area beside the wheelchair WC),
+    S. 306/309 (in front of furniture and beds), S. 238/308 (wheelchair)."""
+    wcu = kb.element("wc_wandeinbau")
+    tr = [a for a in wcu["areas_rg"] if a["side"] == "either"]
+    assert tr and (tr[0]["d"], tr[0]["w"]) == (95, 70)
+    bed = kb.element("doppelbett")
+    assert {"side": "front", "d": 90.0} == {k: bed["areas_bf"][-1][k] for k in ("side", "d")}
+    assert any(a["side"] == "front" and a["d"] == 90 for a in kb.element("einzelbett")["areas_bf"])
+    ks = kb.element("kleiderschrank")
+    assert ks["areas"][0]["d"] == 70 and ks["areas_bf"][0]["d"] == 90 and ks["areas_rg"][0]["d"] == 150
+    # armchair: the living-room chapter's standard size, the others as variants
+    sessel = kb.element("sessel")
+    assert (sessel["w"], sessel["d"]) == (90, 85) and any(v["id"] == "60x60" for v in sessel["variants"])
+
+
+def test_sources_are_printed_pages():
+    """Sources and page refs inside texts use the printed page (PDF - 2)."""
+    assert kb.layouts()["kueche_l"]["sources"] == [{"book": "G", "page": 206}]
+    assert {"book": "G", "page": 217} in kb.element("essplatz_6p")["sources"]
+    rule = next(r for r in kb.rules() if r["id"] == "g3.leuchte")
+    assert rule["sources"] == [{"book": "G", "page": 218}]
+    import importlib.util
+    import pathlib
+    spec = importlib.util.spec_from_file_location(
+        "build_planning_kb", pathlib.Path(__file__).parent.parent / "tools" / "build_planning_kb.py")
+    b = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(b)
+    assert b.printed_refs("Tabelle S. 105 = wie S. 54") == "Tabelle S. 103 = wie S. 52"
+    assert b.printed_refs("p232, Seiten 84-86") == "p230, Seiten 82-84"
+    assert b.printed_refs("VDI 6000 Blatt 1, M 1:50") == "VDI 6000 Blatt 1, M 1:50"
+
+
 CORE_LAYOUTS = ["wc_raum_a", "wc_raum_b", "wc_raum_c", "duschbad_a", "duschbad_wc_a", "duschbad_wc_b",
                 "wannenbad_wc_a", "wannenbad_wc_b", "wannenbad_wc_c", "vollbad_a", "barrierefrei_bad_beispiel",
                 "rollstuhl_bad_beispiel", "rf_bf_waschtisch", "rf_bf_wc", "bf_bf_wc", "bf_bf_dusche",

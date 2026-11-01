@@ -160,14 +160,59 @@ def bf_areas(barrier_free, key) -> list[dict] | None:
     return [{"side": "front", "w": w, "d": d, "note": str(b.get("notes", ""))[:200]}]
 
 
+# elements described in several parts: the part whose chapter is about them gives the default size
+PREFER = {"sessel": "g3c"}  # Grundlagen S. 226 standard armchair (S. 234 only gives the minimum 60 x 60)
+
+
+def merge_element(first: dict, el: dict) -> dict:
+    first["sources"] += [x for x in el["sources"] if x not in first["sources"]]
+    vs = first.setdefault("variants", [])
+    for v in [{"id": "%gx%g" % (el["w"], el["d"]), "label": el["full_name"][:80], "w": el["w"], "d": el["d"]}] \
+            + el.get("variants", []):
+        if (v["w"], v["d"]) != (first["w"], first["d"]) and not any(x["id"] == v["id"] for x in vs):
+            vs.append(v)
+    if not vs:
+        first.pop("variants")
+    for k in ("h", "heights", "notes", "barrier_free", "side_clearance", "areas", "params"):
+        if k in el and k not in first:
+            first[k] = el[k]
+    return first
+
+
+# page refs written inside texts ("S. 268", "p232", "Seiten 84-86") are PDF pages in the notes -
+# shown to the user as printed pages like the sources; agent g3 already wrote printed numbers
+PAGE_REF = re.compile(r"(?<![A-Za-z0-9])(S\.|Seiten?|pp?\.|p)(\s?)(\d{1,3})((?:\s?(?:[-–/,]|und|bis)\s?\d{1,3})*)")
+TEXT_PRINTED = {"g3"}
+
+
+def printed_refs(text: str) -> str:
+    def one(m):
+        rest = re.sub(r"\d{1,3}", lambda n: str(int(n.group()) - OFFSET) if int(n.group()) > OFFSET else n.group(),
+                      m.group(4))
+        n = int(m.group(3))
+        return m.group(1) + m.group(2) + (str(n - OFFSET) if n > OFFSET else m.group(3)) + rest
+    return PAGE_REF.sub(one, text)
+
+
+def _texts_printed(x, key=None):
+    if isinstance(x, dict):
+        return {k: (v if k in ("page", "pages", "pdf_pages") else _texts_printed(v, k)) for k, v in x.items()}
+    if isinstance(x, list):
+        return [_texts_printed(v, key) for v in x]
+    if isinstance(x, str) and key not in ("id",):
+        return printed_refs(x)
+    return x
+
+
 def load_notes(src: str) -> list[tuple[str, dict]]:
     out = []
     for f in sorted(glob.glob(os.path.join(src, "*.json"))):
         name = os.path.basename(f)[:-5]
-        if not re.fullmatch(r"[a-z]+\d*b?", name):
+        if not re.fullmatch(r"[a-z]+\d*[a-z]?", name):
             continue
         try:
-            out.append((name, json.load(open(f, encoding="utf-8"))))
+            d = json.load(open(f, encoding="utf-8"))
+            out.append((name, d if name in TEXT_PRINTED else _texts_printed(d)))
         except ValueError as e:
             print("skipping invalid", f, e)
     return out
@@ -261,6 +306,20 @@ def build(src: str) -> dict:
                     el["areas"] = [{"side": "either", "d": 70.0, "note": note}, {"side": "front", "d": 70.0, "note": note}]
                     el["areas_rg"] = [{"side": "either", "d": 150.0}]
                     el["areas_bf"] = [{"side": "either", "d": 120.0}]
+                # S. 309: barrier-free also at least 90 in front of beds (the foot end)
+                el["areas_bf"].append({"side": "front", "d": 90.0, "note": "vor Möbeln und Betten mind. 90"})
+            if eid in ("kleiderschrank", "kommode_regal", "schrankelement_wohnen"):
+                # S. 306: in front of furniture at least 70, recommended 90; S. 239/309 barrier-free 90;
+                # S. 238/308 wheelchair 150 in front of cupboards
+                el["areas"] = [{"side": "front", "d": 70.0, "note": "mind. 70, empfohlen 90"}]
+                el["areas_bf"] = [{"side": "front", "d": 90.0, "align": "any"}]
+                el["areas_rg"] = [{"side": "front", "d": 150.0, "align": "any"}]
+            if eid.startswith("wc_") and el.get("areas_rg") and kind == "wc":
+                # S. 274: wheelchair WC needs a transfer area beside it, >= 95 wide (draft DIN 18040: 90)
+                # and >= 70 deep from the front edge; >= 30 to the wall on the other side
+                el["areas_rg"].append({"side": "either", "w": 70.0, "d": 95.0, "align": "end",
+                                       "note": "Übersetzfläche neben dem WC ≥ 95 × 70 (Entwurf DIN 18040: 90), "
+                                               "andere Seite ≥ 30 zur Wand"})
             if kind in ("hob", "sink"):
                 el["overlap_ok"] = ["arbeitsinsel", "kueche_unterschrank", "arbeitsflaeche_klein",
                                     "arbeitsflaeche_gross"]
@@ -269,8 +328,12 @@ def build(src: str) -> dict:
                 el["areas"] = [{"side": "front", "w": 90.0, "d": 75.0, "align": "any",
                                 "note": "Bewegungsraum vor der Dusche mind. 75 × 90 cm, Einstieg ≥ 70 cm"}]
             if eid in elements:
-                # keep the first, merge sources
-                elements[eid]["sources"] += el["sources"]
+                # keep the first (or the part that treats the element in its own chapter), merge
+                # sources and the other part's sizes as variants
+                if PREFER.get(eid) == agent:
+                    elements[eid] = merge_element(el, elements[eid])
+                else:
+                    merge_element(elements[eid], el)
             else:
                 elements[eid] = el
         for c in d.get("clearances", []):

@@ -82,14 +82,35 @@ lückenlose Flächen, klare Ebenen- und Klassenstruktur.
 4. Danach `vw2d_check` und `vw2d_fix duplicates`/`snap` für Doppeltes und
    Unsauberes.
 
-## Assets (Sanitär, Küche, Möbel, Bäume, Personen, Autos)
+## Planen mit dem Raumpilot-Wissen
 
-- Nicht von Hand zeichnen: `vw2d_assets` zeigt den Katalog mit Vorschau,
-  `vw2d_place_asset` setzt exakte Symbole.
+- Erst wissen, dann zeichnen: `vw2d_knowledge` (element=…, room=…,
+  query=„dusche bewegungsfläche“, topic=…) liefert Stellflächen,
+  Bewegungsflächen (Tiefe, größere Tiefe bei Gegenüber), seitliche Abstände
+  (VDI 6000), Höhen, barrierefreie (120 × 120) und rollstuhlgerechte
+  (150 × 150) Werte, Raumgrößen und Regeln (Treppe, Tür, Flur, Aufzug,
+  Stellplatz, Rettungsweg, Büro, Schule …) – immer mit Buchseite. Werte so
+  nennen, nicht schätzen.
+- Raum planen: `vw2d_plan_room(width, depth, room=…, door={wall, offset,
+  width, swing, hinge}, mode=standard|barrierefrei|rollstuhlgerecht)` – erst
+  ohne `draw`, Vorschau und Probleme zeigen, Variante wählen lassen, dann
+  `draw=true, variant=n, origin=[x, y]` (linke untere Innenecke). Eine
+  bestimmte Buchlösung: `layout=…` (vw2d_knowledge room=… listet sie).
+- Gezeichneten Raum prüfen: `vw2d_check_room(room_uuid=…)`.
+- Einzelne Elemente: `vw2d_place_element(element, position, wall=…)` mit
+  Bewegungsfläche (abschaltbar mit `movement=false`).
+- Darstellung gehört dem Nutzer: `vw2d_style` zeigt den Stil. Der
+  Raumpilot-Look ist nur die erste Ebene. Wünscht der Nutzer seinen
+  Bürostil: Stil speichern (Klassen, Farben, Bewegungsflächen an/aus) und
+  Elemente eigenen Symbolen zuordnen (`symbols`: {element: {symbol,
+  library, dx, dy, rotation}}). Nie ungefragt ändern.
+
+## Ansichten und Schnitte (Sanitär, Küche, Möbel, Bäume, Personen, Autos)
+
+- `vw2d_assets` / `vw2d_place_asset` mit `view` = `front` oder `side`
+  (Boden bei y = 0); im Grundriss besser die Planungswerkzeuge oben.
 - Ausrichtung mit `wall`: wo die Wand liegt, vom Objekt aus gesehen
   („above“, „left“, „below“, „right“) – das Objekt schaut dann in den Raum.
   Einsetzpunkt bei Wandobjekten: Mitte der Wandseite.
-- Maße als `params` in mm (WC barrierefrei: `h` 460–480 = Sitzhöhe,
-  Dusche barrierefrei 1200 × 1200); mehrere gleiche Objekte über
-  `placements` in einem Aufruf; linke/rechte Variante mit `mirror`.
-- Ansichten/Schnitte: `view` = `front` oder `side` (Boden bei y = 0).
+- Maße als `params` in mm; mehrere gleiche Objekte über `placements`;
+  linke/rechte Variante mit `mirror`.

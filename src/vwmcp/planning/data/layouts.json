@@ -2952,7 +2952,7 @@
 "sources": [
 {
 "book": "G",
-"page": 203
+"page": 205
 }
 ]
 },
@@ -3093,7 +3093,7 @@
 "sources": [
 {
 "book": "G",
-"page": 203
+"page": 205
 }
 ]
 },
@@ -3206,7 +3206,7 @@
 "sources": [
 {
 "book": "G",
-"page": 204
+"page": 206
 }
 ]
 },
@@ -3363,7 +3363,7 @@
 "sources": [
 {
 "book": "G",
-"page": 204
+"page": 206
 }
 ]
 },
@@ -3513,7 +3513,7 @@
 "sources": [
 {
 "book": "G",
-"page": 205
+"page": 207
 }
 ]
 },
@@ -3682,7 +3682,7 @@
 "sources": [
 {
 "book": "G",
-"page": 205
+"page": 207
 }
 ]
 },
@@ -4149,7 +4149,7 @@
 "sources": [
 {
 "book": "G",
-"page": 215
+"page": 217
 }
 ]
 },
@@ -4270,7 +4270,7 @@
 "sources": [
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ],
 "reference_only": true
@@ -4374,7 +4374,7 @@
 "sources": [
 {
 "book": "G",
-"page": 216
+"page": 218
 }
 ],
 "reference_only": true
@@ -4405,7 +4405,7 @@
 "sources": [
 {
 "book": "G",
-"page": 217
+"page": 219
 }
 ],
 "reference_only": true
@@ -4436,7 +4436,7 @@
 "sources": [
 {
 "book": "G",
-"page": 217
+"page": 219
 }
 ],
 "reference_only": true
@@ -4457,7 +4457,7 @@
 "sources": [
 {
 "book": "G",
-"page": 217
+"page": 219
 }
 ],
 "reference_only": true
@@ -4506,7 +4506,7 @@
 "sources": [
 {
 "book": "G",
-"page": 217
+"page": 219
 }
 ]
 },
@@ -4563,7 +4563,7 @@
 "sources": [
 {
 "book": "G",
-"page": 217
+"page": 219
 }
 ]
 },
@@ -4611,7 +4611,7 @@
 "sources": [
 {
 "book": "G",
-"page": 217
+"page": 219
 }
 ]
 },
@@ -4687,7 +4687,7 @@
 "sources": [
 {
 "book": "G",
-"page": 218
+"page": 220
 }
 ],
 "reference_only": true
@@ -4755,7 +4755,7 @@
 "sources": [
 {
 "book": "G",
-"page": 218
+"page": 220
 }
 ],
 "reference_only": true
@@ -4859,7 +4859,7 @@
 "sources": [
 {
 "book": "G",
-"page": 219
+"page": 221
 }
 ]
 },
@@ -4953,7 +4953,7 @@
 "sources": [
 {
 "book": "G",
-"page": 219
+"page": 221
 }
 ]
 },
@@ -6214,6 +6214,450 @@
 "reference_only": true
 },
 {
+"id": "sitzgruppe_sofa_2sessel",
+"room": "wohnzimmer",
+"name": "Sitzgruppe: Sofa (3-Sitzer) gegenüber zwei Sesseln",
+"mode": "standard",
+"W": 300.0,
+"D": 231.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "sofa_3sitzer",
+"x": 0.0,
+"y": 0.0,
+"w": 85.0,
+"d": 231.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "sessel",
+"x": 213.0,
+"y": 154.0,
+"w": 85.0,
+"d": 77.0,
+"against": null,
+"faces": "W"
+},
+{
+"element": "sessel",
+"x": 215.0,
+"y": 0.0,
+"w": 85.0,
+"d": 77.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: ca. 300 - 350 (Sofa-Rücken bis Sessel-Rücken; gezeichnet 300); right: ca. 200 - 300 (Gruppentiefe; gezeichnet 232)",
+"notes": "M 1:50, Koordinaten vektor-gemessen (±1). Freier Streifen zwischen Sofa- und Sesselfronten x 85–213 (128). Keine Bewegungsflächen eingezeichnet.",
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+]
+},
+{
+"id": "sitzgruppe_2sessel_gegenueber",
+"room": "wohnzimmer",
+"name": "Sitzgruppe: zwei Sessel einander gegenüber",
+"mode": "standard",
+"W": 290.0,
+"D": 77.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "sessel",
+"x": 0.0,
+"y": 0.0,
+"w": 85.0,
+"d": 77.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "sessel",
+"x": 205.0,
+"y": 0.0,
+"w": 85.0,
+"d": 77.0,
+"against": "E",
+"faces": "W"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: ca. 80 - 100 | (unbemaßt, gezeichnet 121) | ca. 80 - 100 = ca. 270 - 300 (gezeichnet 85 | 121 | 85 = 290); right: ca. 70 - 100 (Sesselbreite, gezeichnet 78)",
+"notes": "Die Teilmaße 'ca. 80-100' bezeichnen die Sesseltiefe inkl. Rücken.",
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+]
+},
+{
+"id": "sitzgruppe_2sofas_uebereck",
+"room": "wohnzimmer",
+"name": "Sitzgruppe: zwei 3-Sitzer-Sofas über Eck um Mittelfläche (Tisch/Teppich)",
+"mode": "standard",
+"W": 339.0,
+"D": 328.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "sofa_3sitzer",
+"x": 0.0,
+"y": 0.0,
+"w": 85.0,
+"d": 232.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "sofa_3sitzer",
+"x": 107.0,
+"y": 243.0,
+"w": 232.0,
+"d": 85.0,
+"against": "N",
+"faces": "S"
+},
+{
+"element": "couchtisch",
+"x": 138.0,
+"y": 26.5,
+"w": 160.0,
+"d": 170.0,
+"against": null,
+"faces": "none"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: ca. 350 - 400 (gezeichnet 339); right: ca. 350 - 400 (gezeichnet 329)",
+"notes": "Gezeichnete Gesamtmaße liegen unter dem Bemaßungsbereich (Zeichnung zeigt eher Mindestvariante). Ecklücke zwischen den Sofas ca. 12 (y) bzw. 23 (x).",
+"sources": [
+{
+"book": "G",
+"page": 227
+}
+]
+},
+{
+"id": "tv_augenabstand_sitzgruppe",
+"room": "wohnzimmer",
+"name": "Empfohlener Augenabstand zum Bildschirm mit Sofa und Sessel",
+"mode": "standard",
+"W": 494.0,
+"D": 395.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "lowboard_tv",
+"x": 133.0,
+"y": 0.0,
+"w": 225.0,
+"d": 45.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "fernseher",
+"x": 185.0,
+"y": 22.5,
+"w": 124.0,
+"d": 5.0,
+"against": null,
+"faces": "N"
+},
+{
+"element": "sofa_3sitzer",
+"x": 135.0,
+"y": 311.0,
+"w": 224.0,
+"d": 84.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [
+{
+"shape": "sector",
+"cx": 247,
+"cy": 27.3,
+"r": 349,
+"angle_deg": 90,
+"axis": "N",
+"for": [
+"Sichtbereich 90° (±45°)"
+],
+"notes": "hellblau gefüllt, gestrichelte Begrenzung"
+},
+{
+"shape": "sector",
+"cx": 247,
+"cy": 27.3,
+"r": 349,
+"angle_deg": 60,
+"axis": "N",
+"for": [
+"Sichtbereich 60° (±30°)"
+],
+"notes": "nur gestrichelte Schenkel"
+}
+],
+"doors": [],
+"dims": "Abstandslinie Bildschirmmitte → Bogen (Augenhöhe Sitzplatz): 'mindestens 3 - 4 fache Bildschirmdiagonale' (gezeichnet 349); Winkel 60° und 90°",
+"notes": "M 1:50, alles vektor-gemessen, nur Abstandsregel und Winkel beschriftet. Radius 349 ≈ 3 x gezeichnete Gerätebreite (≈116–124). Bildschirm–Sofavorderkante ca. 280.",
+"sources": [
+{
+"book": "G",
+"page": 228
+}
+],
+"reference_only": true
+},
+{
+"id": "billard_spielsituation",
+"room": "wohnzimmer",
+"name": "Billardtisch mit zwei Spielern (Draufsicht)",
+"mode": "standard",
+"W": 311.0,
+"D": 212.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "billardtisch",
+"x": 38.0,
+"y": 0.0,
+"w": 272.5,
+"d": 151.0,
+"against": null,
+"faces": "none"
+},
+{
+"element": "person",
+"x": 0.0,
+"y": 36.5,
+"w": 56.0,
+"d": 74.0,
+"against": "W",
+"faces": "E"
+},
+{
+"element": "person",
+"x": 122.0,
+"y": 131.0,
+"w": 91.0,
+"d": 81.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: ca. 190 - 310 (Tischlänge, gezeichnet 271); right: ca. 120 - 167,5 (Tischbreite, gezeichnet 148)",
+"notes": "Ergänzt g3b (Elemente dort). Keine Bewegungsfläche bemaßt; Text fordert nur 'großen Bewegungsraum'.",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+],
+"reference_only": true
+},
+{
+"id": "tischfussball_spielsituation",
+"room": "wohnzimmer",
+"name": "Tischfußball mit Spieler (Draufsicht)",
+"mode": "standard",
+"W": 143.0,
+"D": 142.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "tischfussball",
+"x": 0.0,
+"y": 16.0,
+"w": 143.0,
+"d": 74.0,
+"against": null,
+"faces": "none"
+},
+{
+"element": "person",
+"x": 45.0,
+"y": 103.0,
+"w": 68.0,
+"d": 39.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: ca. 143 (Teilung mittig); right: ca. 74",
+"notes": "Zeichnung nicht M 1:50 (Kasten misst 176 x 94); Koordinaten auf Beschriftung skaliert (Faktor ca. 0,81 bzw. 0,79). Stangen mit Griffen ragen beidseitig ca. 11–20 über den Kasten (unterschiedlich weit ausgezogen); Spieler steht direkt an den Griffen (Körper ca. 14 vom Kasten).",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
+"id": "klavier_draufsicht",
+"room": "wohnzimmer",
+"name": "Klavier (Draufsicht)",
+"mode": "standard",
+"W": 150.0,
+"D": 60.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "klavier",
+"x": 0.0,
+"y": 0.0,
+"w": 150.0,
+"d": 60.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: 140-160; right: 60",
+"notes": "Keine Bank und kein Spielerplatz gezeichnet.",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
+"id": "stutzfluegel_mit_bank",
+"room": "wohnzimmer",
+"name": "Stutzflügel mit Bank",
+"mode": "standard",
+"W": 126.0,
+"D": 200.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "klavierbank",
+"x": 26.0,
+"y": 0.0,
+"w": 73.0,
+"d": 36.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "fluegel",
+"x": 0.0,
+"y": 46.0,
+"w": 126.0,
+"d": 154.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: 114 (gezeichnet 126!); right: 155 (Korpus inkl. Tastatur)",
+"notes": "Bank 10 vor Tastatur; Gesamttiefe inkl. Bank gezeichnet 200.",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
+"id": "salonfluegel_mit_bank",
+"room": "wohnzimmer",
+"name": "Salonflügel mit Bank",
+"mode": "standard",
+"W": 151.0,
+"D": 243.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "klavierbank",
+"x": 39.0,
+"y": 0.0,
+"w": 72.0,
+"d": 36.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "fluegel",
+"x": 0.0,
+"y": 45.0,
+"w": 151.0,
+"d": 198.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: 150; right: 200",
+"notes": "Bank 9 vor Tastatur; Gesamttiefe inkl. Bank 243.",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
+"id": "konzertfluegel_mit_bank",
+"room": "wohnzimmer",
+"name": "Konzertflügel mit Bank",
+"mode": "standard",
+"W": 166.0,
+"D": 298.0,
+"barrier_free": false,
+"elements": [
+{
+"element": "klavierbank",
+"x": 47.0,
+"y": 0.0,
+"w": 72.5,
+"d": 36.0,
+"against": "S",
+"faces": "N"
+},
+{
+"element": "fluegel",
+"x": 0.0,
+"y": 46.0,
+"w": 166.0,
+"d": 252.0,
+"against": "N",
+"faces": "S"
+}
+],
+"movement": [],
+"doors": [],
+"dims": "bottom: 160 (gezeichnet 166); right: 275 (gezeichnet 252)",
+"notes": "Bank 10 vor Tastatur; Gesamttiefe gezeichnet 298 (mit Sollmaß 275: ca. 321).",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
 "id": "wc_raum_a",
 "room": "wc_raum",
 "name": "WC-Raum, WC und HWB gegenueber (laengs)",
@@ -7451,7 +7895,7 @@
 ],
 "doors": [],
 "dims": "top: 60|60|60|60|120 = 360; right: 60|120 = 180",
-"notes": "coords: origin bottom-left of drawing extent, x right, y up; element x/y = lower-left of bbox; w = extent in x, d = extent in y. Values from vector data of the PDF (M 1:50), rounded to 0.5 cm. Felder der Zeile durch gestrichelte Linien getrennt, Zeile ist ein durchgehendes 360x60 Rechteck. Die Symbole sind nicht beschriftet; Zuordnung WM/Waschbecken/Behaelter/Trockner ist eine Interpretation (Tabelle p284 nennt 6 Elemente a 60x60 bzw. 120x60). Person (Draufsicht) steht vor WM/Becken.",
+"notes": "coords: origin bottom-left of drawing extent, x right, y up; element x/y = lower-left of bbox; w = extent in x, d = extent in y. Values from vector data of the PDF (M 1:50), rounded to 0.5 cm. Felder der Zeile durch gestrichelte Linien getrennt, Zeile ist ein durchgehendes 360x60 Rechteck. Die Symbole sind nicht beschriftet; Zuordnung WM/Waschbecken/Behaelter/Trockner ist eine Interpretation (Tabelle p282 nennt 6 Elemente a 60x60 bzw. 120x60). Person (Draufsicht) steht vor WM/Becken.",
 "sources": [
 {
 "book": "G",
@@ -7543,7 +7987,7 @@
 ],
 "doors": [],
 "dims": "top: 60|60|60|60|120 = 360; right: 60|>=150 = 210",
-"notes": "coords: origin bottom-left of drawing extent, x right, y up; element x/y = lower-left of bbox; w = extent in x, d = extent in y. Values from vector data of the PDF (M 1:50), rounded to 0.5 cm. Felder der Zeile durch gestrichelte Linien getrennt, Zeile ist ein durchgehendes 360x60 Rechteck. Die Symbole sind nicht beschriftet; Zuordnung WM/Waschbecken/Behaelter/Trockner ist eine Interpretation (Tabelle p284 nennt 6 Elemente a 60x60 bzw. 120x60). Person (Draufsicht) steht vor WM/Becken.",
+"notes": "coords: origin bottom-left of drawing extent, x right, y up; element x/y = lower-left of bbox; w = extent in x, d = extent in y. Values from vector data of the PDF (M 1:50), rounded to 0.5 cm. Felder der Zeile durch gestrichelte Linien getrennt, Zeile ist ein durchgehendes 360x60 Rechteck. Die Symbole sind nicht beschriftet; Zuordnung WM/Waschbecken/Behaelter/Trockner ist eine Interpretation (Tabelle p282 nennt 6 Elemente a 60x60 bzw. 120x60). Person (Draufsicht) steht vor WM/Becken.",
 "sources": [
 {
 "book": "G",
@@ -7940,7 +8384,7 @@
 ],
 "doors": [],
 "dims": "Plan: >=150 (unter der Bewegungsflaeche); Schnitt: 25 (Podest ueber Tonnenstandflaeche), 70-85 (Behaelterrand ueber Podest), >=150",
-"notes": "Masse nach Vektordaten (M 1:50), nur >=150 bemasst. Bildunterschrift p304 nennt links 660 l mit Ummauerung, rechts 240 l offen - die Zeichnung zeigt links 240 l (2 Raeder) und rechts 660 l (4 Raeder) im Schrank; hier nach Zeichnung.",
+"notes": "Masse nach Vektordaten (M 1:50), nur >=150 bemasst. Bildunterschrift p302 nennt links 660 l mit Ummauerung, rechts 240 l offen - die Zeichnung zeigt links 240 l (2 Raeder) und rechts 660 l (4 Raeder) im Schrank; hier nach Zeichnung.",
 "sources": [
 {
 "book": "G",

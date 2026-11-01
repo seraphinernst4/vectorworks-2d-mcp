@@ -2,8 +2,8 @@
 
 Mac-native MCP server for exact, well-organised 2D drawing in Vectorworks.
 Fork of https://github.com/giorgiomoroder/vectorworks-mcp (MIT), repo
-https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.5.0
-beta**, tested on Vectorworks 2026 Update 7 (German) on macOS; Vectorworks
+https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.6.0
+beta** (branch `v0.6`; `main` is 0.5.0), tested on Vectorworks 2026 Update 7 (German) on macOS; Vectorworks
 2027 prepared (Python 3.14), not live-tested. Read `docs/architecture.md`,
 `docs/api-pitfalls.md` and `docs/vs-notes.md` before changing anything that
 touches Vectorworks.
@@ -23,6 +23,26 @@ touches Vectorworks.
   vwlib + vwlib2d with each call; results come back as a JSON string.
 - Live-test VW-side changes on a throwaway document (the tests only cover
   server-side logic plus a fake for the tool flow).
+
+## Planning (0.6, Raumpilot knowledge)
+
+- `src/vwmcp/planning/`: `kb.py` (loads `data/*.json`: elements, clearances
+  incl. the VDI 6000 side-distance matrix, rooms, layouts, rules), `engine.py`
+  (rooms in cm, element frame = insertion at the middle of the wall side,
+  object toward -y; movement areas, checks, layout generator), `symbols.py`
+  (Raumpilot-style symbol geometry per element kind, mm), `render.py`
+  (preview PNGs), `style.py` (Raumpilot style as base layer, user styles and
+  own symbols in `~/.vwmcp/styles.json`).
+- `src/vwmcp/tools/planning.py`: `vw2d_knowledge`, `vw2d_plan_room`,
+  `vw2d_check_room`, `vw2d_place_element`, `vw2d_style`. Drawing goes through
+  `vwlib2d.place_elements` (one undo step, all-or-nothing).
+- `planning/data/*.json` is **generated**: `python tools/build_planning_kb.py
+  <notes dir>` from per-section notes (JSON, see the script docstring). Book
+  layouts that fail their own checks are marked `reference_only`. Don't edit
+  the data by hand; fix the notes or the curated overrides in the script.
+- **Copyright:** the Raumpilot books are the user's reference copies. Store
+  only facts (dimensions, rules) in own words with book + printed page
+  (= PDF page - 2); never verbatim text, tables or drawings.
 
 ## Layout
 
