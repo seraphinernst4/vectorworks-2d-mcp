@@ -845,15 +845,23 @@ def showcase(report: dict) -> None:
         "_k = []\nvs.ForEachObject(_k.append, \"(L='%s')\")\nfor _h in _k:\n    vs.DelObject(_h)\nresult = len(_k)"
         % SHOW_LAYER, timeout=120))
     draw2d.vw2d_setup(layers=[{"name": SHOW_LAYER, "scale": 50}])
-    x, y, row_h, n, done, checks = 0.0, 0.0, 0.0, 0, [], {}
+    done, checks = [], {}
     mpu = draw2d._units()["mm_per_unit"]
     names = list(SHOWCASE)
-    for lid in names:
-        lay = kb.layouts().get(lid)
-        if not lay or lay.get("reference_only"):
-            continue
-        if n and n % 6 == 0:
-            x, y, row_h = 0.0, y - row_h - 1500.0, 0.0
+    usable = [i for i in names if kb.layouts().get(i) and not kb.layouts()[i].get("reference_only")]
+    rows = [usable[i:i + 6] for i in range(0, len(usable), 6)]
+    # each row hangs below the previous one: its tallest room's top 1.5 m under the row above
+    places, top = {}, 0.0
+    for row in rows:
+        h = max(kb.layouts()[i]["D"] * 10 for i in row)
+        x = 0.0
+        for i in row:
+            places[i] = (x, top - h)
+            x += kb.layouts()[i]["W"] * 10 + 1500.0
+        top -= h + 1500.0
+    for lid in usable:
+        lay = kb.layouts()[lid]
+        x, y = places[lid]
         try:
             planning.vw2d_plan_room(layout=lid, draw=True, origin=[x, y], origin_unit="mm", layer=SHOW_LAYER,
                                     dimensions=True, preview=False,
@@ -871,14 +879,9 @@ def showcase(report: dict) -> None:
                            "unknown": chk.get("not_recognised", [])}
         except Exception as e:  # noqa: BLE001
             report.setdefault("showcase_errors", []).append("%s: %r" % (lid, e))
-        x += lay["W"] * 10 + 1500.0
-        row_h = max(row_h, lay["D"] * 10)
-        n += 1
     bad = {k: v for k, v in checks.items() if v["errors"] or v["elements"] != v["expected"] or v["unknown"]}
     report["showcase"] = {"drawn": done, "count": len(done), "checked": len(checks), "problems": bad,
-                          "pass": len(done) == len([i for i in names if kb.layouts().get(i)
-                                                    and not kb.layouts()[i].get("reference_only")])
-                          and not bad and not report.get("showcase_errors")}
+                          "pass": len(done) == len(usable) and not bad and not report.get("showcase_errors")}
     log(f"showcase: {len(done)} standard situations on '{SHOW_LAYER}', {len(bad)} with problems")
 
 
@@ -964,12 +967,12 @@ async def _mcp_round_trip(server_dir: str) -> dict:
             async def call(name, **kw):
                 r = await session.call_tool(name, kw)
                 text = "".join(getattr(c, "text", "") for c in r.content)
-                return {"error": bool(r.is_error), "text": text[:600]}
+                return {"error": bool(r.is_error), "text": text[:600], "full": text}
 
             out["vw_ping"] = await call("vw_ping")
             out["vw_vs_lookup"] = await call("vw_vs_lookup", query="Rect", limit=2)
             out["vw_document_info"] = await call("vw_document_info")
-            out["vw2d_read"] = await call("vw2d_read", layer=REG_LAYER, limit=2, include_geometry=False)
+            out["vw2d_read"] = await call("vw2d_read", layer=SHOW_LAYER, limit=2, include_geometry=False)
             out["exec_bad_rect"] = await call("vw_exec_python", code="vs.Rect(0, 0, 1)", modifies_document=False)
             out["vw2d_knowledge"] = await call("vw2d_knowledge", element="wc_wandeinbau", preview=False)
             out["vw2d_plan_room"] = await call("vw2d_plan_room", room="duschbad_wc", width=160, depth=165,
@@ -985,11 +988,17 @@ def mcp_tests(report: dict, server_dir: str | None) -> None:
         report["mcp"] = {"skipped": "no --server"}
         return
     r = asyncio.run(_mcp_round_trip(server_dir))
-    r["pass"] = (not r["vw_ping"]["error"] and "0.2.1" in r["vw_ping"]["text"]
-                 and "vs.Rect(p1: POINT, p2: POINT)" in r["vw_vs_lookup"]["text"]
-                 and "VSArgumentError" in r["exec_bad_rect"]["text"] and not r["vw2d_read"]["error"]
-                 and not r["vw2d_knowledge"]["error"] and "Raumpilot" in r["vw2d_knowledge"]["text"]
-                 and not r["vw2d_plan_room"]["error"] and "variants" in r["vw2d_plan_room"]["text"])
+    checks = {"ping": not r["vw_ping"]["error"] and "0.2.1" in r["vw_ping"]["full"],
+              "lookup": "vs.Rect(p1: POINT, p2: POINT)" in r["vw_vs_lookup"]["full"],
+              "exec_checked": "VSArgumentError" in r["exec_bad_rect"]["full"],
+              "read": not r["vw2d_read"]["error"],
+              "knowledge": not r["vw2d_knowledge"]["error"] and "Raumpilot" in r["vw2d_knowledge"]["full"],
+              "plan_room": not r["vw2d_plan_room"]["error"] and "variants" in r["vw2d_plan_room"]["full"]}
+    for v in r.values():
+        if isinstance(v, dict):
+            v.pop("full", None)
+    r["checks"] = checks
+    r["pass"] = all(checks.values())
     report["mcp"] = r
     log(f"mcp: pass={r['pass']} ({r.get('server')}, {r.get('tools')} tools, start {r.get('start_s')} s)")
 
