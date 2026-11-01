@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.3 – 01.11.2026
+
+- Namen und Texte der Wissensbasis mit echten Umlauten (Symbol „WC mit
+  Wandeinbau-Spülkasten“ statt „…Spuelkasten“); Kennungen unverändert.
+- `vw2d_check_room` meldet, wenn im Raum nichts gefunden wurde (statt
+  stillem „ok“) und wenn der Raum unplausibel groß ist – meist ist die
+  bbox nicht in Dokument-Einheiten angegeben.
+
 ## 0.6.2 – 01.11.2026
 
 Neue Taktik: statt eines festen Asset-Katalogs (den jedes Büro anders

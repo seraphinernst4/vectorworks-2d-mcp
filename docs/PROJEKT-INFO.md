@@ -2,7 +2,7 @@
 
 Alles Wissen zum Projekt an einer Stelle: was es ist, wie es aufgebaut ist,
 wie man es installiert, baut und veröffentlicht, was getestet ist und was
-offen ist. Stand: **01.11.2026, Version 0.6.2 (Beta)**.
+offen ist. Stand: **01.11.2026, Version 0.6.3 (Beta)**.
 
 ## Auf einen Blick
 
@@ -331,3 +331,4 @@ Start 0,7 s, Ping, Signaturprüfung, Lesen, Wissen, Raum planen bestanden.
 | 0.6.0 | 01.11.2026 | Planen mit dem Raumpilot-Wissen (389 Elemente, 1227 Regeln, 108 Raumtypen, 335 Buchlösungen), Raumpilot-Stil als erste Ebene + eigene Stile, 5 neue Werkzeuge, Begrenzungen in jeder Ansicht (Details: CHANGELOG.md) |
 | 0.6.1 | 01.11.2026 | Vorschaubilder in Claude Desktop (pydantic 2.14.2 konnte die Bilder nicht verpacken) |
 | 0.6.2 | 01.11.2026 | Tür-Abstand wie im Plan abgelesen (von der linken unteren Innenecke), deutsche Wandnamen, umbrochene Bildunterschriften |
+| 0.6.3 | 01.11.2026 | Echte Umlaute in Namen/Texten, Raumprüfung warnt bei leerem/unplausiblem Raum; live in Claude Desktop geprüft (Vorschau, Tür, Zeichnen, Prüfen, Rückgängig) |

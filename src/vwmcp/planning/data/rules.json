@@ -1709,7 +1709,7 @@
 {
 "id": "g1.koerpermass_frau_koerperhoehe",
 "topic": "anthropometrie",
-"title": "Körpermaß Frau (18-65 J.): koerperhoehe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Frau (18-65 J.): koerperhöhe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -1728,7 +1728,7 @@
 {
 "id": "g1.koerpermass_frau_aughoehe",
 "topic": "anthropometrie",
-"title": "Körpermaß Frau (18-65 J.): aughoehe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Frau (18-65 J.): aughöhe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -1785,7 +1785,7 @@
 {
 "id": "g1.koerpermass_frau_sitzflaechenhoehe",
 "topic": "anthropometrie",
-"title": "Körpermaß Frau (18-65 J.): sitzflaechenhoehe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Frau (18-65 J.): sitzflächenhöhe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -1804,7 +1804,7 @@
 {
 "id": "g1.koerpermass_frau_kniehoehe",
 "topic": "anthropometrie",
-"title": "Körpermaß Frau (18-65 J.): kniehoehe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Frau (18-65 J.): kniehöhe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -1823,7 +1823,7 @@
 {
 "id": "g1.koerpermass_frau_aughoehe_sitzend",
 "topic": "anthropometrie",
-"title": "Körpermaß Frau (18-65 J.): aughoehe sitzend; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Frau (18-65 J.): aughöhe sitzend; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -1842,7 +1842,7 @@
 {
 "id": "g1.koerpermass_frau_koerperhoehe_sitzend",
 "topic": "anthropometrie",
-"title": "Körpermaß Frau (18-65 J.): koerperhoehe sitzend; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Frau (18-65 J.): koerperhöhe sitzend; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -1899,7 +1899,7 @@
 {
 "id": "g1.koerpermass_frau_gesaess_knielaenge",
 "topic": "anthropometrie",
-"title": "Körpermaß Frau (18-65 J.): gesaess knielaenge; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Frau (18-65 J.): gesaess knielänge; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -1917,7 +1917,7 @@
 {
 "id": "g1.koerpermass_mann_koerperhoehe",
 "topic": "anthropometrie",
-"title": "Körpermaß Mann (18-65 J.): koerperhoehe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Mann (18-65 J.): koerperhöhe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -1936,7 +1936,7 @@
 {
 "id": "g1.koerpermass_mann_aughoehe",
 "topic": "anthropometrie",
-"title": "Körpermaß Mann (18-65 J.): aughoehe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Mann (18-65 J.): aughöhe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -1993,7 +1993,7 @@
 {
 "id": "g1.koerpermass_mann_sitzflaechenhoehe",
 "topic": "anthropometrie",
-"title": "Körpermaß Mann (18-65 J.): sitzflaechenhoehe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Mann (18-65 J.): sitzflächenhöhe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -2012,7 +2012,7 @@
 {
 "id": "g1.koerpermass_mann_kniehoehe",
 "topic": "anthropometrie",
-"title": "Körpermaß Mann (18-65 J.): kniehoehe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Mann (18-65 J.): kniehöhe; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -2031,7 +2031,7 @@
 {
 "id": "g1.koerpermass_mann_aughoehe_sitzend",
 "topic": "anthropometrie",
-"title": "Körpermaß Mann (18-65 J.): aughoehe sitzend; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Mann (18-65 J.): aughöhe sitzend; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -2050,7 +2050,7 @@
 {
 "id": "g1.koerpermass_mann_koerperhoehe_sitzend",
 "topic": "anthropometrie",
-"title": "Körpermaß Mann (18-65 J.): koerperhoehe sitzend; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Mann (18-65 J.): koerperhöhe sitzend; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -2107,7 +2107,7 @@
 {
 "id": "g1.koerpermass_mann_gesaess_knielaenge",
 "topic": "anthropometrie",
-"title": "Körpermaß Mann (18-65 J.): gesaess knielaenge; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
+"title": "Körpermaß Mann (18-65 J.): gesaess knielänge; min=5. Perzentil, max=95. Perzentil, median=50. Perzentil",
 "sources": [
 {
 "book": "G",
@@ -2615,7 +2615,7 @@
 {
 "id": "g1.koerpermass_kind_3j_koerperhoehe",
 "topic": "anthropometrie",
-"title": "Kind 3 Jahre: koerperhoehe (5.-95. Perzentil, median = P50)",
+"title": "Kind 3 Jahre: koerperhöhe (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2634,7 +2634,7 @@
 {
 "id": "g1.koerpermass_kind_3j_aughoehe",
 "topic": "anthropometrie",
-"title": "Kind 3 Jahre: aughoehe (5.-95. Perzentil, median = P50)",
+"title": "Kind 3 Jahre: aughöhe (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2691,7 +2691,7 @@
 {
 "id": "g1.koerpermass_kind_3j_sitzflaechenhoehe",
 "topic": "anthropometrie",
-"title": "Kind 3 Jahre: sitzflaechenhoehe (5.-95. Perzentil, median = P50)",
+"title": "Kind 3 Jahre: sitzflächenhöhe (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2710,7 +2710,7 @@
 {
 "id": "g1.koerpermass_kind_3j_kniehoehe",
 "topic": "anthropometrie",
-"title": "Kind 3 Jahre: kniehoehe (5.-95. Perzentil, median = P50)",
+"title": "Kind 3 Jahre: kniehöhe (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2728,7 +2728,7 @@
 {
 "id": "g1.koerpermass_kind_3j_aughoehe_sitzend",
 "topic": "anthropometrie",
-"title": "Kind 3 Jahre: aughoehe sitzend (5.-95. Perzentil, median = P50)",
+"title": "Kind 3 Jahre: aughöhe sitzend (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2747,7 +2747,7 @@
 {
 "id": "g1.koerpermass_kind_3j_koerperhoehe_sitzend",
 "topic": "anthropometrie",
-"title": "Kind 3 Jahre: koerperhoehe sitzend (5.-95. Perzentil, median = P50)",
+"title": "Kind 3 Jahre: koerperhöhe sitzend (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2785,7 +2785,7 @@
 {
 "id": "g1.koerpermass_kind_3j_gesaess_knielaenge",
 "topic": "anthropometrie",
-"title": "Kind 3 Jahre: gesaess knielaenge (5.-95. Perzentil, median = P50)",
+"title": "Kind 3 Jahre: gesaess knielänge (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2804,7 +2804,7 @@
 {
 "id": "g1.koerpermass_kind_6j_koerperhoehe",
 "topic": "anthropometrie",
-"title": "Kind 6 Jahre: koerperhoehe (5.-95. Perzentil, median = P50)",
+"title": "Kind 6 Jahre: koerperhöhe (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2823,7 +2823,7 @@
 {
 "id": "g1.koerpermass_kind_6j_aughoehe",
 "topic": "anthropometrie",
-"title": "Kind 6 Jahre: aughoehe (5.-95. Perzentil, median = P50)",
+"title": "Kind 6 Jahre: aughöhe (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2881,7 +2881,7 @@
 {
 "id": "g1.koerpermass_kind_6j_sitzflaechenhoehe",
 "topic": "anthropometrie",
-"title": "Kind 6 Jahre: sitzflaechenhoehe (5.-95. Perzentil, median = P50)",
+"title": "Kind 6 Jahre: sitzflächenhöhe (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2900,7 +2900,7 @@
 {
 "id": "g1.koerpermass_kind_6j_kniehoehe",
 "topic": "anthropometrie",
-"title": "Kind 6 Jahre: kniehoehe (5.-95. Perzentil, median = P50)",
+"title": "Kind 6 Jahre: kniehöhe (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2919,7 +2919,7 @@
 {
 "id": "g1.koerpermass_kind_6j_aughoehe_sitzend",
 "topic": "anthropometrie",
-"title": "Kind 6 Jahre: aughoehe sitzend (5.-95. Perzentil, median = P50)",
+"title": "Kind 6 Jahre: aughöhe sitzend (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2938,7 +2938,7 @@
 {
 "id": "g1.koerpermass_kind_6j_koerperhoehe_sitzend",
 "topic": "anthropometrie",
-"title": "Kind 6 Jahre: koerperhoehe sitzend (5.-95. Perzentil, median = P50)",
+"title": "Kind 6 Jahre: koerperhöhe sitzend (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -2976,7 +2976,7 @@
 {
 "id": "g1.koerpermass_kind_6j_gesaess_knielaenge",
 "topic": "anthropometrie",
-"title": "Kind 6 Jahre: gesaess knielaenge (5.-95. Perzentil, median = P50)",
+"title": "Kind 6 Jahre: gesaess knielänge (5.-95. Perzentil, median = P50)",
 "sources": [
 {
 "book": "G",
@@ -5206,7 +5206,7 @@
 {
 "id": "g1.abstand.tuer_oeffnung_drueckerseite_wand_oder_hindernis",
 "topic": "abstand",
-"title": "Abstand tuer_oeffnung_drueckerseite – wand_oder_hindernis (door)",
+"title": "Abstand tür_öffnung_drückerseite – wand_oder_hindernis (door)",
 "values": {
 "min": 50.0,
 "unit": "cm"
@@ -5223,7 +5223,7 @@
 {
 "id": "g1.abstand.aufzugstuer_gegenueberliegende_wand",
 "topic": "abstand",
-"title": "Abstand aufzugstuer – gegenueberliegende_wand (front)",
+"title": "Abstand aufzugstür – gegenüberliegende_wand (front)",
 "values": {
 "min": 150.0,
 "unit": "cm"
@@ -6935,7 +6935,7 @@
 {
 "id": "g1b.abstand.aufzug_schachttuerwand_gegenueberliegende_wand",
 "topic": "abstand",
-"title": "Abstand aufzug_schachttuerwand – gegenueberliegende_wand (opposite)",
+"title": "Abstand aufzug_schachttürwand – gegenüberliegende_wand (opposite)",
 "values": {
 "min": 150.0,
 "unit": "cm"
@@ -6952,7 +6952,7 @@
 {
 "id": "g1b.abstand.aufzug_schachttuerwand_gegenueberliegende_wand",
 "topic": "abstand",
-"title": "Abstand aufzug_schachttuerwand – gegenueberliegende_wand (opposite)",
+"title": "Abstand aufzug_schachttürwand – gegenüberliegende_wand (opposite)",
 "values": null,
 "condition": "andere als Wohngebäude, Einzelaufzug; nicht für Bettenaufzüge",
 "notes": null,
@@ -6966,7 +6966,7 @@
 {
 "id": "g1b.abstand.aufzug_schachttuerwand_gegenueberliegende_wand",
 "topic": "abstand",
-"title": "Abstand aufzug_schachttuerwand – gegenueberliegende_wand (opposite)",
+"title": "Abstand aufzug_schachttürwand – gegenüberliegende_wand (opposite)",
 "values": {
 "min": 240.0,
 "unit": "cm"
@@ -6983,7 +6983,7 @@
 {
 "id": "g1b.abstand.aufzug_schachtvorderwand_aufzug_schachtvorderwand_gegenueber",
 "topic": "abstand",
-"title": "Abstand aufzug_schachtvorderwand – aufzug_schachtvorderwand_gegenueber (opposite)",
+"title": "Abstand aufzug_schachtvorderwand – aufzug_schachtvorderwand_gegenüber (opposite)",
 "values": {
 "min": 450.0,
 "unit": "cm"
@@ -7000,7 +7000,7 @@
 {
 "id": "g1b.abstand.aufzugstuer_bewegungsflaeche_150x150",
 "topic": "abstand",
-"title": "Abstand aufzugstuer – bewegungsflaeche_150x150 (front)",
+"title": "Abstand aufzugstür – bewegungsfläche_150x150 (front)",
 "values": {
 "min": 150.0,
 "unit": "cm"
@@ -7068,7 +7068,7 @@
 {
 "id": "g1b.abstand.aufstellflaeche_parallel_aussenwand",
 "topic": "abstand",
-"title": "Abstand aufstellflaeche_parallel – aussenwand (wall)",
+"title": "Abstand aufstellfläche_parallel – aussenwand (wall)",
 "values": {
 "min": 300.0,
 "unit": "cm"
@@ -7085,7 +7085,7 @@
 {
 "id": "g1b.abstand.aufstellflaeche_parallel_aussenwand",
 "topic": "abstand",
-"title": "Abstand aufstellflaeche_parallel – aussenwand (wall)",
+"title": "Abstand aufstellfläche_parallel – aussenwand (wall)",
 "values": {
 "min": 300.0,
 "unit": "cm"
@@ -7102,7 +7102,7 @@
 {
 "id": "g1b.abstand.aufstellflaeche_rechtwinklig_aussenwand",
 "topic": "abstand",
-"title": "Abstand aufstellflaeche_rechtwinklig – aussenwand (wall)",
+"title": "Abstand aufstellfläche_rechtwinklig – aussenwand (wall)",
 "values": {
 "min": 100.0,
 "unit": "cm"
@@ -7119,7 +7119,7 @@
 {
 "id": "g1b.abstand.aufstellflaeche_rechtwinklig_aussenseite_anleiterstelle_entfernteste_seitliche_be",
 "topic": "abstand",
-"title": "Abstand aufstellflaeche_rechtwinklig_aussenseite – anleiterstelle_entfernteste_seitliche_begrenzung (other)",
+"title": "Abstand aufstellfläche_rechtwinklig_aussenseite – anleiterstelle_entfernteste_seitliche_begrenzung (other)",
 "values": {
 "min": 900.0,
 "unit": "cm"
@@ -10940,7 +10940,7 @@
 {
 "id": "g3.abstand.kueche_stellflaeche_kueche_stellflaeche_gegenueber",
 "topic": "abstand",
-"title": "Abstand kueche_stellflaeche – kueche_stellflaeche_gegenueber (opposite)",
+"title": "Abstand küche_stellfläche – küche_stellfläche_gegenüber (opposite)",
 "values": {
 "min": 120.0,
 "unit": "cm"
@@ -10957,7 +10957,7 @@
 {
 "id": "g3.abstand.kueche_stellflaeche_wand_gegenueber",
 "topic": "abstand",
-"title": "Abstand kueche_stellflaeche – wand_gegenueber (opposite)",
+"title": "Abstand küche_stellfläche – wand_gegenüber (opposite)",
 "values": {
 "min": 120.0,
 "unit": "cm"
@@ -10974,7 +10974,7 @@
 {
 "id": "g3.abstand.kueche_stellflaeche_wand_anliegend",
 "topic": "abstand",
-"title": "Abstand kueche_stellflaeche – wand_anliegend (wall)",
+"title": "Abstand küche_stellfläche – wand_anliegend (wall)",
 "values": {
 "min": 3.0,
 "unit": "cm"
@@ -10999,7 +10999,7 @@
 {
 "id": "g3.abstand.kueche_stellflaeche_tuer_fensterlaibung",
 "topic": "abstand",
-"title": "Abstand kueche_stellflaeche – tuer_fensterlaibung (door)",
+"title": "Abstand küche_stellfläche – tür_fensterlaibung (door)",
 "values": {
 "min": 10.0,
 "unit": "cm"
@@ -11016,7 +11016,7 @@
 {
 "id": "g3.abstand.kuechenzeile_bewegungsflaeche_tiefe",
 "topic": "abstand",
-"title": "Abstand kuechenzeile – bewegungsflaeche_tiefe (front)",
+"title": "Abstand küchenzeile – bewegungsfläche_tiefe (front)",
 "values": {
 "min": 120.0,
 "unit": "cm"
@@ -11033,7 +11033,7 @@
 {
 "id": "g3.abstand.kuechenzeile_bewegungsflaeche_tiefe",
 "topic": "abstand",
-"title": "Abstand kuechenzeile – bewegungsflaeche_tiefe (front)",
+"title": "Abstand küchenzeile – bewegungsfläche_tiefe (front)",
 "values": {
 "min": 150.0,
 "unit": "cm"
@@ -11054,7 +11054,7 @@
 {
 "id": "g3.abstand.kuechenzeile_bewegungsflaeche_tiefe",
 "topic": "abstand",
-"title": "Abstand kuechenzeile – bewegungsflaeche_tiefe (front)",
+"title": "Abstand küchenzeile – bewegungsfläche_tiefe (front)",
 "values": {
 "min": 120.0,
 "unit": "cm"
@@ -11075,7 +11075,7 @@
 {
 "id": "g3.abstand.herd_spuele",
 "topic": "abstand",
-"title": "Abstand herd – spuele (between)",
+"title": "Abstand herd – spüle (between)",
 "values": {
 "min": 60.0,
 "unit": "cm"
@@ -11092,7 +11092,7 @@
 {
 "id": "g3.abstand.herd_spuele",
 "topic": "abstand",
-"title": "Abstand herd – spuele (between)",
+"title": "Abstand herd – spüle (between)",
 "values": {
 "min": 100.0,
 "unit": "cm"
@@ -11126,7 +11126,7 @@
 {
 "id": "g3.abstand.arbeitsplatte_herd_spuele_oberschrank_unterkante",
 "topic": "abstand",
-"title": "Abstand arbeitsplatte_herd_spuele – oberschrank_unterkante (other)",
+"title": "Abstand arbeitsplatte_herd_spüle – oberschrank_unterkante (other)",
 "values": {
 "min": 65.0,
 "unit": "cm"
@@ -11189,7 +11189,7 @@
 {
 "id": "g3.abstand.essstuhl_zone_moebel",
 "topic": "abstand",
-"title": "Abstand essstuhl_zone – moebel (other)",
+"title": "Abstand essstuhl_zone – möbel (other)",
 "values": {
 "min": 70.0,
 "unit": "cm"
@@ -11227,7 +11227,7 @@
 {
 "id": "g3.abstand.sitzflaeche_tischunterkante",
 "topic": "abstand",
-"title": "Abstand sitzflaeche – tischunterkante (other)",
+"title": "Abstand sitzfläche – tischunterkante (other)",
 "values": {
 "min": 31.0,
 "unit": "cm"
@@ -12358,7 +12358,7 @@
 {
 "id": "g3b.abstand.doppelbett_wand_oder_moebel",
 "topic": "abstand",
-"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"title": "Abstand doppelbett – wand_oder_möbel (side)",
 "values": {
 "min": 70.0,
 "unit": "cm"
@@ -12375,7 +12375,7 @@
 {
 "id": "g3b.abstand.doppelbett_wand_oder_moebel",
 "topic": "abstand",
-"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"title": "Abstand doppelbett – wand_oder_möbel (side)",
 "values": {
 "min": 90.0,
 "unit": "cm"
@@ -12468,7 +12468,7 @@
 {
 "id": "g3b.abstand.doppelbett_wand_oder_moebel",
 "topic": "abstand",
-"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"title": "Abstand doppelbett – wand_oder_möbel (side)",
 "values": {
 "min": 150.0,
 "unit": "cm"
@@ -12485,7 +12485,7 @@
 {
 "id": "g3b.abstand.doppelbett_wand_oder_moebel",
 "topic": "abstand",
-"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"title": "Abstand doppelbett – wand_oder_möbel (side)",
 "values": {
 "min": 120.0,
 "unit": "cm"
@@ -12519,7 +12519,7 @@
 {
 "id": "g3b.abstand.doppelbett_wand_oder_moebel",
 "topic": "abstand",
-"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"title": "Abstand doppelbett – wand_oder_möbel (side)",
 "values": {
 "min": 120.0,
 "unit": "cm"
@@ -12536,7 +12536,7 @@
 {
 "id": "g3b.abstand.doppelbett_wand_oder_moebel",
 "topic": "abstand",
-"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"title": "Abstand doppelbett – wand_oder_möbel (side)",
 "values": {
 "min": 90.0,
 "unit": "cm"
@@ -12638,7 +12638,7 @@
 {
 "id": "g3b.abstand.kinderbett_0_1_wand_oder_moebel",
 "topic": "abstand",
-"title": "Abstand kinderbett_0_1 – wand_oder_moebel (side)",
+"title": "Abstand kinderbett_0_1 – wand_oder_möbel (side)",
 "values": {
 "min": 70.0,
 "unit": "cm"
@@ -12655,7 +12655,7 @@
 {
 "id": "g3b.abstand.schreibtisch_regal_buero",
 "topic": "abstand",
-"title": "Abstand schreibtisch – regal_buero (opposite)",
+"title": "Abstand schreibtisch – regal_büro (opposite)",
 "values": {
 "min": 100.0,
 "unit": "cm"
@@ -12676,7 +12676,7 @@
 {
 "id": "g3b.abstand.schreibtisch_regal_buero",
 "topic": "abstand",
-"title": "Abstand schreibtisch – regal_buero (opposite)",
+"title": "Abstand schreibtisch – regal_büro (opposite)",
 "values": {
 "min": 150.0,
 "unit": "cm"
@@ -13070,7 +13070,7 @@
 {
 "id": "g4.mbo_bad_wc",
 "topic": "bad",
-"title": "Jede Wohnung: Bad mit Badewanne oder Dusche und eine Toilette (MBO 48); fensterlose Baeder nur mit wirksamer Lueftung (MBO 43)",
+"title": "Jede Wohnung: Bad mit Badewanne oder Dusche und eine Toilette (MBO 48); fensterlose Bäder nur mit wirksamer Lueftung (MBO 43)",
 "sources": [
 {
 "book": "G",
@@ -13099,7 +13099,7 @@
 {
 "id": "g4.normenlage",
 "topic": "bad",
-"title": "DIN 18022 2007 zurueckgezogen; Mindestmasse jetzt VDI 6000 Blatt 1 (Feb 2008); moeglichst barrierefreie Bewegungsmasse (DIN 18025 / DIN 18040) zugrunde legen",
+"title": "DIN 18022 2007 zurückgezogen; Mindestmasse jetzt VDI 6000 Blatt 1 (Feb 2008); moeglichst barrierefreie Bewegungsmasse (DIN 18025 / DIN 18040) zugrunde legen",
 "sources": [
 {
 "book": "G",
@@ -13111,7 +13111,7 @@
 {
 "id": "g4.abstand_gegenueber",
 "topic": "bad",
-"title": "Abstand zwischen gegenueberliegenden Stellflaechen bzw. Stellflaeche-Wand",
+"title": "Abstand zwischen gegenüberliegenden Stellflächen bzw. Stellfläche-Wand",
 "sources": [
 {
 "book": "G",
@@ -13127,7 +13127,7 @@
 {
 "id": "g4.abstand_gegenueber_wm",
 "topic": "bad",
-"title": "Abstand gegenueberliegender Stellflaechen von Waschmaschine/-trockner",
+"title": "Abstand gegenüberliegender Stellflächen von Waschmaschine/-trockner",
 "sources": [
 {
 "book": "G",
@@ -13143,7 +13143,7 @@
 {
 "id": "g4.abstand_bewegliche_wand",
 "topic": "bad",
-"title": "Abstand Stellflaechen beweglicher Einrichtungen zu anliegenden Waenden",
+"title": "Abstand Stellflächen beweglicher Einrichtungen zu anliegenden Wänden",
 "sources": [
 {
 "book": "G",
@@ -13159,7 +13159,7 @@
 {
 "id": "g4.abstand_tuerlaibung",
 "topic": "bad",
-"title": "Abstand Stellflaechen zu Tueroeffnungen/Tuerlaibungen",
+"title": "Abstand Stellflächen zu Türöffnungen/Türlaibungen",
 "sources": [
 {
 "book": "G",
@@ -13179,7 +13179,7 @@
 {
 "id": "g4.bf_vor_objekten",
 "topic": "bad",
-"title": "Mindestbewegungsflaeche vor Sanitaerobjekten (Tiefe); Bewegungsflaechen duerfen sich seitlich und gegenueberliegend ueberdecken",
+"title": "Mindestbewegungsfläche vor Sanitärobjekten (Tiefe); Bewegungsflächen duerfen sich seitlich und gegenüberliegend ueberdecken",
 "sources": [
 {
 "book": "G",
@@ -13213,7 +13213,7 @@
 {
 "id": "g4.duschwannen_hoehe",
 "topic": "bad",
-"title": "Wannenhoehe Standardduschwannen 6-26; Flachwannen 1-2 fuer annaehernd bodengleiche Dusche",
+"title": "Wannenhöhe Standardduschwannen 6-26; Flachwannen 1-2 für annähernd bodengleiche Dusche",
 "sources": [
 {
 "book": "G",
@@ -13286,7 +13286,7 @@
 {
 "id": "g4.innenliegende_baeder",
 "topic": "luft",
-"title": "Innenliegende Baeder/WC nur mechanisch (Ventilatoren) zuverlaessig lueftbar; hochwertig: Einzelanlagen mit eigener Abluftleitung; fensterlose WC motorische Sauglueftung",
+"title": "Innenliegende Bäder/WC nur mechanisch (Ventilatoren) zuverlaessig lueftbar; hochwertig: Einzelanlagen mit eigener Abluftleitung; fensterlose WC motorische Sauglueftung",
 "sources": [
 {
 "book": "G",
@@ -13310,7 +13310,7 @@
 {
 "id": "g4.leitungen_bad",
 "topic": "schall",
-"title": "Installationsleitungen an Waenden zu Sanitaer-/Kuechenraeumen fuehren, nicht an Waenden zu Wohn-/Schlafraeumen",
+"title": "Installationsleitungen an Wänden zu Sanitär-/Küchenraeumen fuehren, nicht an Wänden zu Wohn-/Schlafraeumen",
 "sources": [
 {
 "book": "G",
@@ -13322,7 +13322,7 @@
 {
 "id": "g4.sanitaerraum_hoehen",
 "topic": "bad",
-"title": "Hoehen im Schnitt: Waschtisch-OK 85-105, WT-Tiefe 55-60, Wannenrand 40-60, Wannenlaenge 160-180, Dusche Breite 80-100, Duschwanne 0-30, WC-Sitz 40",
+"title": "Höhen im Schnitt: Waschtisch-OK 85-105, WT-Tiefe 55-60, Wannenrand 40-60, Wannenlänge 160-180, Dusche Breite 80-100, Duschwanne 0-30, WC-Sitz 40",
 "sources": [
 {
 "book": "G",
@@ -13350,7 +13350,7 @@
 {
 "id": "g4.rf_bf_sanitaer",
 "topic": "barrierefrei",
-"title": "Bewegungsflaeche 150 x 150 vor WT, WC, Dusche, Wanne (rollstuhlgerecht); duerfen sich ueberlagern",
+"title": "Bewegungsfläche 150 x 150 vor WT, WC, Dusche, Wanne (rollstuhlgerecht); duerfen sich ueberlagern",
 "sources": [
 {
 "book": "G",
@@ -13367,7 +13367,7 @@
 {
 "id": "g4.rf_wc_seitlich",
 "topic": "barrierefrei",
-"title": "WC: eine Seite freie Flaeche >=95 breit x 70 tief (DIN 18040-2 E: >=90), andere Seite >=30 zur Wand",
+"title": "WC: eine Seite freie Fläche >=95 breit x 70 tief (DIN 18040-2 E: >=90), andere Seite >=30 zur Wand",
 "sources": [
 {
 "book": "G",
@@ -13387,7 +13387,7 @@
 {
 "id": "g4.rf_wc_sitzhoehe",
 "topic": "barrierefrei",
-"title": "WC-Sitzhoehe inkl. Sitz 48 ueber OFF (DIN 18040 E: 46-48), Hoehenanpassung bei Bedarf",
+"title": "WC-Sitzhöhe inkl. Sitz 48 ueber OFF (DIN 18040 E: 46-48), Höhenanpassung bei Bedarf",
 "sources": [
 {
 "book": "G",
@@ -13410,7 +13410,7 @@
 {
 "id": "g4.rf_wc_tiefe",
 "topic": "barrierefrei",
-"title": "WC-Tiefe (Wand bis Vorderkante) >=70; Rueckenstuetze 55 hinter Vorderkante; Stuetzklappgriffe ragen 15 ueber Vorderkante",
+"title": "WC-Tiefe (Wand bis Vorderkante) >=70; Rückenstuetze 55 hinter Vorderkante; Stuetzklappgriffe ragen 15 ueber Vorderkante",
 "sources": [
 {
 "book": "G",
@@ -13429,7 +13429,7 @@
 {
 "id": "g4.rf_stuetzklappgriffe",
 "topic": "barrierefrei",
-"title": "Stuetzklappgriffe beidseitig, Achsabstand 70 (DIN 18040 E 65-70), Hoehe 85 ueber OFF (DIN 18040 E: 28 ueber Sitzhoehe)",
+"title": "Stuetzklappgriffe beidseitig, Achsabstand 70 (DIN 18040 E 65-70), Höhe 85 ueber OFF (DIN 18040 E: 28 ueber Sitzhöhe)",
 "sources": [
 {
 "book": "G",
@@ -13450,7 +13450,7 @@
 {
 "id": "g4.rf_waschtisch",
 "topic": "barrierefrei",
-"title": "WT hoehenanpassbar, flach 15-18, unterfahrbar, Unterputz- oder Flachaufputzsiphon; >=20 zur Seitenwand",
+"title": "WT höhenanpassbar, flach 15-18, unterfahrbar, Unterputz- oder Flachaufputzsiphon; >=20 zur Seitenwand",
 "sources": [
 {
 "book": "G",
@@ -13469,7 +13469,7 @@
 {
 "id": "g4.rf_duschplatz",
 "topic": "barrierefrei",
-"title": "rollstuhlbefahrbarer stufenloser Duschplatz 150 x 150; nachtraegliche (mit Lifter unterfahrbare) Wanne im Duschbereich muss moeglich sein; Wanne+BF zusammen >=225 x >=170",
+"title": "rollstuhlbefahrbarer stufenloser Duschplatz 150 x 150; nachträgliche (mit Lifter unterfahrbare) Wanne im Duschbereich muss moeglich sein; Wanne+BF zusammen >=225 x >=170",
 "sources": [
 {
 "book": "G",
@@ -13486,7 +13486,7 @@
 {
 "id": "g4.rf_zusatz_sanitaer",
 "topic": "barrierefrei",
-"title": "Wohnungen fuer mehr als 3 Personen: zusaetzlicher Sanitaerraum mit WC und Waschbecken",
+"title": "Wohnungen für mehr als 3 Personen: zusaetzlicher Sanitärraum mit WC und Waschbecken",
 "sources": [
 {
 "book": "G",
@@ -13503,7 +13503,7 @@
 {
 "id": "g4.rf_lueftung_bad",
 "topic": "barrierefrei",
-"title": "mechanische Lueftung des Sanitaerraums",
+"title": "mechanische Lueftung des Sanitärraums",
 "sources": [
 {
 "book": "G",
@@ -13516,7 +13516,7 @@
 {
 "id": "g4.rf_waende_tragfaehig",
 "topic": "barrierefrei",
-"title": "Waende und Decken tragfaehig fuer Halte-, Stuetz- und Hebevorrichtungen",
+"title": "Wände und Decken tragfaehig für Halte-, Stuetz- und Hebevorrichtungen",
 "sources": [
 {
 "book": "G",
@@ -13542,7 +13542,7 @@
 {
 "id": "g4.rf_bad_groesse",
 "topic": "barrierefrei",
-"title": "Beispiel rollstuhlgerechter Sanitaerraum >=245 (DIN 18040 E >=240) x >=295, Tuer >=90 nach aussen aufschlagend",
+"title": "Beispiel rollstuhlgerechter Sanitärraum >=245 (DIN 18040 E >=240) x >=295, Tür >=90 nach aussen aufschlagend",
 "sources": [
 {
 "book": "G",
@@ -13565,7 +13565,7 @@
 {
 "id": "g4.bf_bf_sanitaer",
 "topic": "barrierefrei",
-"title": "Bewegungsflaeche 120 x 120 vor WT, WC, Dusche, Wanne (barrierefrei); WT/WC >=20 zur Seitenwand",
+"title": "Bewegungsfläche 120 x 120 vor WT, WC, Dusche, Wanne (barrierefrei); WT/WC >=20 zur Seitenwand",
 "sources": [
 {
 "book": "G",
@@ -13583,7 +13583,7 @@
 {
 "id": "g4.bf_duschplatz",
 "topic": "barrierefrei",
-"title": "stufenlos begehbarer Duschplatz 120 x 120; nachtraegliche Wanne im Duschbereich sollte moeglich sein",
+"title": "stufenlos begehbarer Duschplatz 120 x 120; nachträgliche Wanne im Duschbereich sollte moeglich sein",
 "sources": [
 {
 "book": "G",
@@ -13613,7 +13613,7 @@
 {
 "id": "g4.bf_bad_groesse",
 "topic": "barrierefrei",
-"title": "Beispiel barrierefreier Sanitaerraum >=200 x >=180, Tuer >=80 nach aussen",
+"title": "Beispiel barrierefreier Sanitärraum >=200 x >=180, Tür >=80 nach aussen",
 "sources": [
 {
 "book": "G",
@@ -13632,7 +13632,7 @@
 {
 "id": "g4.zuordnung",
 "topic": "bad",
-"title": "Bad funktional an Individualraeume gekoppelt; bei eigenen Nasszellen je Individualraum oder je zwei Individualraeumen zusaetzlich WC fuer Gemeinschaftsbereich; auch bei gemeinsamem Bad zweites WC (Gaeste-WC) empfohlen",
+"title": "Bad funktional an Individualraeume gekoppelt; bei eigenen Nasszellen je Individualraum oder je zwei Individualraeumen zusaetzlich WC für Gemeinschaftsbereich; auch bei gemeinsamem Bad zweites WC (Gaeste-WC) empfohlen",
 "sources": [
 {
 "book": "G",
@@ -13647,12 +13647,12 @@
 {
 "id": "g4.abstand.stellflaeche_stellflaeche_gegenueber",
 "topic": "abstand",
-"title": "Abstand Stellflaeche – Stellflaeche (gegenueber) (opposite)",
+"title": "Abstand Stellfläche – Stellfläche (gegenüber) (opposite)",
 "values": {
 "min": 75.0,
 "unit": "cm"
 },
-"condition": "VDI 6000-1 min, gegenueberliegende Stellflaechen (oder Wand)",
+"condition": "VDI 6000-1 min, gegenüberliegende Stellflächen (oder Wand)",
 "notes": null,
 "sources": [
 {
@@ -13664,12 +13664,12 @@
 {
 "id": "g4.abstand.wm_tr_stellflaeche_gegenueber",
 "topic": "abstand",
-"title": "Abstand WM/TR – Stellflaeche (gegenueber) (opposite)",
+"title": "Abstand WM/TR – Stellfläche (gegenüber) (opposite)",
 "values": {
 "min": 90.0,
 "unit": "cm"
 },
-"condition": "gegenueberliegende Stellflaechen von Waschmaschine/-trockner",
+"condition": "gegenüberliegende Stellflächen von Waschmaschine/-trockner",
 "notes": null,
 "sources": [
 {
@@ -13686,7 +13686,7 @@
 "min": 3.0,
 "unit": "cm"
 },
-"condition": "Stellflaechen fuer bewegliche Einrichtungen zu anliegenden Waenden",
+"condition": "Stellflächen für bewegliche Einrichtungen zu anliegenden Wänden",
 "notes": null,
 "sources": [
 {
@@ -13698,12 +13698,12 @@
 {
 "id": "g4.abstand.stellflaeche_tuerlaibung",
 "topic": "abstand",
-"title": "Abstand Stellflaeche – Tuerlaibung (door)",
+"title": "Abstand Stellfläche – Türlaibung (door)",
 "values": {
 "min": 10.0,
 "unit": "cm"
 },
-"condition": "Abstand zu Tueroeffnungen/Tuerlaibungen >=10 (VDI 6000-1)",
+"condition": "Abstand zu Türöffnungen/Türlaibungen >=10 (VDI 6000-1)",
 "notes": null,
 "sources": [
 {
@@ -13719,12 +13719,12 @@
 {
 "id": "g4.abstand.sanitaerobjekt_bewegungsflaeche_vorn",
 "topic": "abstand",
-"title": "Abstand Sanitaerobjekt – Bewegungsflaeche vorn (front)",
+"title": "Abstand Sanitärobjekt – Bewegungsfläche vorn (front)",
 "values": {
 "min": 75.0,
 "unit": "cm"
 },
-"condition": "empfohlene Mindestbewegungsflaeche vor Sanitaerobjekten, nicht barrierefrei (VDI teilweise darunter)",
+"condition": "empfohlene Mindestbewegungsfläche vor Sanitärobjekten, nicht barrierefrei (VDI teilweise darunter)",
 "notes": null,
 "sources": [
 {
@@ -13741,7 +13741,7 @@
 "min": 90.0,
 "unit": "cm"
 },
-"condition": "freie Flaeche auf der Bedienseite",
+"condition": "freie Fläche auf der Bedienseite",
 "notes": null,
 "sources": [
 {
@@ -13753,7 +13753,7 @@
 {
 "id": "g4.abstand.wc_wand_seite_ohne_bewegungsflaeche",
 "topic": "abstand",
-"title": "Abstand WC – Wand (Seite ohne Bewegungsflaeche) (wall)",
+"title": "Abstand WC – Wand (Seite ohne Bewegungsfläche) (wall)",
 "values": {
 "min": 30.0,
 "unit": "cm"
@@ -13770,7 +13770,7 @@
 {
 "id": "g4.abstand.wc_seitliche_bewegungsflaeche",
 "topic": "abstand",
-"title": "Abstand WC – seitliche Bewegungsflaeche (side)",
+"title": "Abstand WC – seitliche Bewegungsfläche (side)",
 "values": {
 "min": 95.0,
 "unit": "cm"
@@ -13842,7 +13842,7 @@
 {
 "id": "g4b.hwr_mindestflaeche",
 "topic": "wirtschaften",
-"title": "Mindestflaeche Hausarbeitsraum",
+"title": "Mindestfläche Hausarbeitsraum",
 "sources": [
 {
 "book": "G",
@@ -13859,7 +13859,7 @@
 {
 "id": "g4b.hwr_stellflaeche_lauflaenge",
 "topic": "wirtschaften",
-"title": "Mindest-Stellflaeche (Lauflaenge der Zeilen) im Hausarbeitsraum empfohlen",
+"title": "Mindest-Stellfläche (Lauflänge der Zeilen) im Hausarbeitsraum empfohlen",
 "sources": [
 {
 "book": "G",
@@ -13874,7 +13874,7 @@
 {
 "id": "g4b.hwr_bewegungsflaeche",
 "topic": "wirtschaften",
-"title": "Bewegungsflaeche vor Einrichtungen im Hausarbeitsbereich (wie Kueche)",
+"title": "Bewegungsfläche vor Einrichtungen im Hausarbeitsbereich (wie Küche)",
 "sources": [
 {
 "book": "G",
@@ -13898,7 +13898,7 @@
 {
 "id": "g4b.hwr_einrichtungsmasse",
 "topic": "wirtschaften",
-"title": "Einrichtungsmasse Hausarbeitsbereich (Stellflaechenbreite x -tiefe)",
+"title": "Einrichtungsmasse Hausarbeitsbereich (Stellflächenbreite x -tiefe)",
 "sources": [
 {
 "book": "G",
@@ -13912,12 +13912,12 @@
 60
 ],
 [
-"Waeschetrockner",
+"Wäschetrockner",
 60,
 60
 ],
 [
-"Arbeitsflaeche zum Legen der Waesche",
+"Arbeitsfläche zum Legen der Wäsche",
 120,
 60
 ],
@@ -13927,22 +13927,22 @@
 60
 ],
 [
-"Platz fuer Schmutzwaeschebehaelter",
+"Platz für Schmutzwäschebehälter",
 60,
 60
 ],
 [
-"Schrankraum fuer Kleingeraete",
+"Schrankraum für Kleingeräte",
 60,
 60
 ],
 [
-"Stellflaeche Buegelbrett",
+"Stellfläche Bügelbrett",
 "140-170",
 45
 ],
 [
-"Stellflaeche Naehmaschine",
+"Stellfläche Nähmaschine",
 70,
 45
 ]
@@ -13951,7 +13951,7 @@
 {
 "id": "g4b.buegeln_arbeitsflaeche",
 "topic": "wirtschaften",
-"title": "Arbeitsflaeche fuer Buegeln/Naehen empfohlen",
+"title": "Arbeitsfläche für Bügeln/Nähen empfohlen",
 "sources": [
 {
 "book": "G",
@@ -13966,7 +13966,7 @@
 {
 "id": "g4b.buegelbrett_hoehe",
 "topic": "wirtschaften",
-"title": "Arbeitshoehe Buegelbrett (stehend) und Platzbedarf Person dahinter",
+"title": "Arbeitshöhe Bügelbrett (stehend) und Platzbedarf Person dahinter",
 "sources": [
 {
 "book": "G",
@@ -13977,12 +13977,12 @@
 "typ": 85,
 "unit": "cm"
 },
-"condition": "Schnitt; Standflaeche Person 100 ab Brettkante"
+"condition": "Schnitt; Standfläche Person 100 ab Brettkante"
 },
 {
 "id": "g4b.abstellflaeche_je_wohnung",
 "topic": "aufbewahren",
-"title": "Abstellflaeche je Wohnung (Orientierungswert): 6 m2 gesamt, davon >=1 m2 in der Wohnung und 5 m2 im Keller o. ae.",
+"title": "Abstellfläche je Wohnung (Orientierungswert): 6 m2 gesamt, davon >=1 m2 in der Wohnung und 5 m2 im Keller o. ae.",
 "sources": [
 {
 "book": "G",
@@ -13999,7 +13999,7 @@
 {
 "id": "g4b.abstellflaeche_in_wohnung",
 "topic": "aufbewahren",
-"title": "Anteil Abstellflaeche innerhalb der Wohnung",
+"title": "Anteil Abstellfläche innerhalb der Wohnung",
 "sources": [
 {
 "book": "G",
@@ -14016,7 +14016,7 @@
 {
 "id": "g4b.mbo2002_abstellraeume",
 "topic": "aufbewahren",
-"title": "GK 3-5: leicht erreichbare, zugaengliche Abstellraeume fuer Kinderwagen und Fahrraeder sowie je Wohnung ausreichend grosser Abstellraum",
+"title": "GK 3-5: leicht erreichbare, zugaengliche Abstellraeume für Kinderwagen und Fahrraeder sowie je Wohnung ausreichend grosser Abstellraum",
 "sources": [
 {
 "book": "G",
@@ -14029,7 +14029,7 @@
 {
 "id": "g4b.lbo_bw_abstellraum",
 "topic": "aufbewahren",
-"title": "Fuer jede Wohnung ein Abstellraum (LBO BW 2007 § 35 (5)); Entwurf 2009: nur bei Wohngebaeuden mit >=20 Wohnungen",
+"title": "Für jede Wohnung ein Abstellraum (LBO BW 2007 § 35 (5)); Entwurf 2009: nur bei Wohngebaeuden mit >=20 Wohnungen",
 "sources": [
 {
 "book": "G",
@@ -14046,7 +14046,7 @@
 {
 "id": "g4b.greifbereich_aufbewahren",
 "topic": "barrierefrei",
-"title": "Bedien-/Greifbereich fuer Aufbewahrung (Rollstuhl und eingeschraenkt bewegliche Personen)",
+"title": "Bedien-/Greifbereich für Aufbewahrung (Rollstuhl und eingeschränkt bewegliche Personen)",
 "sources": [
 {
 "book": "G",
@@ -14060,7 +14060,7 @@
 "values": {
 "min": 40,
 "max": 140,
-"unit": "cm Hoehe"
+"unit": "cm Höhe"
 },
 "condition": "barrierefrei/rollstuhlgerecht",
 "norm": "DIN 18025 / DIN 18040-2 (Entwurf)"
@@ -14068,7 +14068,7 @@
 {
 "id": "g4b.abstellraum_gang_rollstuhl",
 "topic": "barrierefrei",
-"title": "Bewegungsflaeche (Gangbreite) im Abstellraum zwischen Regalen, rollstuhlgerecht",
+"title": "Bewegungsfläche (Gangbreite) im Abstellraum zwischen Regalen, rollstuhlgerecht",
 "sources": [
 {
 "book": "G",
@@ -14086,7 +14086,7 @@
 {
 "id": "g4b.abstellraum_gang_barrierefrei",
 "topic": "barrierefrei",
-"title": "Bewegungsflaeche (Gangbreite) im Abstellraum, barrierefrei nicht rollstuhlgerecht",
+"title": "Bewegungsfläche (Gangbreite) im Abstellraum, barrierefrei nicht rollstuhlgerecht",
 "sources": [
 {
 "book": "G",
@@ -14103,7 +14103,7 @@
 {
 "id": "g4b.paternoster_schrank",
 "topic": "barrierefrei",
-"title": "Paternoster-Schrank: Entnahmehoehe 75-90, Bewegungsflaeche davor >=150",
+"title": "Paternoster-Schrank: Entnahmehöhe 75-90, Bewegungsfläche davor >=150",
 "sources": [
 {
 "book": "G",
@@ -14113,7 +14113,7 @@
 "values": {
 "min": 75,
 "max": 90,
-"unit": "cm Hoehe"
+"unit": "cm Höhe"
 },
 "condition": "rollstuhlgerecht"
 },
@@ -14136,7 +14136,7 @@
 {
 "id": "g4b.aufbewahrungsgegenstaende",
 "topic": "aufbewahren",
-"title": "Masse typischer aufzubewahrender Gegenstaende (Orientierungswerte, Breite/Durchmesser x Hoehe bzw. Laenge)",
+"title": "Masse typischer aufzubewahrender Gegenstaende (Orientierungswerte, Breite/Durchmesser x Höhe bzw. Länge)",
 "sources": [
 {
 "book": "G",
@@ -14172,7 +14172,7 @@ null,
 "Schuhe (Paar)",
 "18-24",
 null,
-"28-33 (Laenge)"
+"28-33 (Länge)"
 ],
 [
 "Eimer",
@@ -14181,7 +14181,7 @@ null,
 null
 ],
 [
-"Kleiderbuegel",
+"Kleiderbügel",
 55,
 null,
 null
@@ -14205,7 +14205,7 @@ null,
 112
 ],
 [
-"Buegelbrett (zusammengeklappt)",
+"Bügelbrett (zusammengeklappt)",
 40,
 null,
 "140-150"
@@ -14240,7 +14240,7 @@ null,
 {
 "id": "g4b.aufbewahrungsmoebel_masse",
 "topic": "aufbewahren",
-"title": "Orientierungswerte Aufbewahrungsmoebel (Schnitte p288)",
+"title": "Orientierungswerte Aufbewahrungsmöbel (Schnitte p288)",
 "sources": [
 {
 "book": "G",
@@ -14249,7 +14249,7 @@ null,
 ],
 "table": [
 [
-"Einbauschrank Reinigungsgeraete",
+"Einbauschrank Reinigungsgeräte",
 60,
 "unteres Fach 160, oberes Fach 35"
 ],
@@ -14271,7 +14271,7 @@ null,
 [
 "Sitztruhe",
 null,
-"Sitzhoehe 41"
+"Sitzhöhe 41"
 ]
 ],
 "condition": "Masse nur Orientierungswerte"
@@ -14298,7 +14298,7 @@ null,
 {
 "id": "g4b.rf_waschtisch_unterfahrbarkeit",
 "topic": "bad",
-"title": "Unterfahrbarkeit Waschtisch: Kniefreiraum Hoehe >=67 ueber Tiefe (>=30) ab Vorderkante; Fussfreiraum Hoehe >=35; Gesamttiefe unterfahrbar >=55 ab Wand; (<=10) Wandzone, (<=40) Klammermass",
+"title": "Unterfahrbarkeit Waschtisch: Kniefreiraum Höhe >=67 ueber Tiefe (>=30) ab Vorderkante; Fussfreiraum Höhe >=35; Gesamttiefe unterfahrbar >=55 ab Wand; (<=10) Wandzone, (<=40) Klammermass",
 "sources": [
 {
 "book": "G",
@@ -14311,12 +14311,12 @@ null,
 },
 "condition": "rollstuhlgerecht, Schnitt",
 "norm": "DIN 18025-1 / DIN 18040-2 (Entwurf)",
-"notes": "Zahlen: >=67 (Knie-Hoehe), >=35 (Fuss-Hoehe), >=55 (Tiefe ab Wand), (>=30) Tiefe der Kniezone ab Vorderkante, (<=40) und (<=10) Klammermasse - genaue Bedeutung der Klammerwerte nicht erlaeutert"
+"notes": "Zahlen: >=67 (Knie-Höhe), >=35 (Fuss-Höhe), >=55 (Tiefe ab Wand), (>=30) Tiefe der Kniezone ab Vorderkante, (<=40) und (<=10) Klammermasse - genaue Bedeutung der Klammerwerte nicht erlaeutert"
 },
 {
 "id": "g4b.rf_bad_laenge_schnitt",
 "topic": "bad",
-"title": "Laenge rollstuhlgerechtes Bad im Schnitt (Waschtisch bis Duschwand)",
+"title": "Länge rollstuhlgerechtes Bad im Schnitt (Waschtisch bis Duschwand)",
 "sources": [
 {
 "book": "G",
@@ -14332,7 +14332,7 @@ null,
 {
 "id": "g4b.rf_dusche_haltegriff_hoehe",
 "topic": "bad",
-"title": "Waagerechter Haltegriff an der Dusche (Hoehe)",
+"title": "Waagerechter Haltegriff an der Dusche (Höhe)",
 "sources": [
 {
 "book": "G",
@@ -14348,7 +14348,7 @@ null,
 {
 "id": "g4b.rf_duschklappsitz",
 "topic": "bad",
-"title": "Duschklappsitz: Mass >=50 von der Wand bis vor die Sitzvorderkante (Sitz ca. 45 tief, Sitzhoehe ca. 46 gezeichnet, nicht bemasst)",
+"title": "Duschklappsitz: Mass >=50 von der Wand bis vor die Sitzvorderkante (Sitz ca. 45 tief, Sitzhöhe ca. 46 gezeichnet, nicht bemasst)",
 "sources": [
 {
 "book": "G",
@@ -14364,7 +14364,7 @@ null,
 {
 "id": "g4b.abfallmenge_orientierung",
 "topic": "abfall",
-"title": "Orientierungswert Muellanfall (Restmuell + Biotonne) zur Bemessung der Behaelter",
+"title": "Orientierungswert Müllanfall (Restmüll + Biotonne) zur Bemessung der Behaelter",
 "sources": [
 {
 "book": "G",
@@ -14384,7 +14384,7 @@ null,
 {
 "id": "g4b.abfallaufkommen_2006",
 "topic": "abfall",
-"title": "Haushaltsabfaelle Deutschland 2006: 454 kg/Einwohner/Jahr inkl. Sperrmuell = ca. 1,24 kg/Einwohner/Tag; gesamt 40,8 Mio t Haushaltsabfaelle von 340,9 Mio t Abfall",
+"title": "Haushaltsabfaelle Deutschland 2006: 454 kg/Einwohner/Jahr inkl. Sperrmüll = ca. 1,24 kg/Einwohner/Tag; gesamt 40,8 Mio t Haushaltsabfaelle von 340,9 Mio t Abfall",
 "sources": [
 {
 "book": "G",
@@ -14409,11 +14409,11 @@ null,
 ],
 "table": [
 [
-"Hausmuell, aehnliche Gewerbeabfaelle",
+"Hausmüll, aehnliche Gewerbeabfaelle",
 "35 %"
 ],
 [
-"Sperrmuell",
+"Sperrmüll",
 "6 %"
 ],
 [
@@ -14446,20 +14446,20 @@ null,
 {
 "id": "g4b.mbo45_abfall_im_gebaeude",
 "topic": "abfall",
-"title": "Feste Abfaelle in Gebaeuden der GK 3-5 nur in Abfallsammelraeumen mit: feuerbestaendigen raumabschliessenden Trennwaenden/Decken, feuerhemmenden dicht-/selbstschliessenden Oeffnungen ins Gebaeude, Entleerung unmittelbar vom Freien, staendig wirksamer Lueftung",
+"title": "Feste Abfaelle in Gebaeuden der GK 3-5 nur in Abfallsammelraeumen mit: feuerbestaendigen raumabschliessenden Trennwänden/Decken, feuerhemmenden dicht-/selbstschliessenden Öffnungen ins Gebaeude, Entleerung unmittelbar vom Freien, staendig wirksamer Lueftung",
 "sources": [
 {
 "book": "G",
 "page": 296
 }
 ],
-"condition": "GK 3-5 (mehr als 2 Wohnungen oder > 400 m2 Nutzflaeche)",
+"condition": "GK 3-5 (mehr als 2 Wohnungen oder > 400 m2 Nutzfläche)",
 "norm": "MBO § 45; LBO BW § 33 (2)"
 },
 {
 "id": "g4b.standplatz_abstand_aufenthaltsraum",
 "topic": "abfall",
-"title": "Abstand Standplatz zu Oeffnungen von Aufenthaltsraeumen",
+"title": "Abstand Standplatz zu Öffnungen von Aufenthaltsraeumen",
 "sources": [
 {
 "book": "G",
@@ -14508,7 +14508,7 @@ null,
 {
 "id": "g4b.durchgang_hoehe",
 "topic": "abfall",
-"title": "Lichte Hoehe der Durchgaenge zum Standplatz",
+"title": "Lichte Höhe der Durchgaenge zum Standplatz",
 "sources": [
 {
 "book": "G",
@@ -14535,13 +14535,13 @@ null,
 "min": 100,
 "unit": "cm"
 },
-"condition": "bei Grossmuellbehaeltern Wegbreite 150",
+"condition": "bei Grossmüllbehältern Wegbreite 150",
 "norm": "GUV-V C 27"
 },
 {
 "id": "g4b.wegbreite_grossbehaelter",
 "topic": "abfall",
-"title": "Wegbreite bei Grossmuellbehaeltern (4 Raeder)",
+"title": "Wegbreite bei Grossmüllbehältern (4 Räder)",
 "sources": [
 {
 "book": "G",
@@ -14557,7 +14557,7 @@ null,
 {
 "id": "g4b.bewegungsflaeche_behaelterreihe",
 "topic": "abfall",
-"title": "Bewegungsflaeche vor Abfallbehaelterreihen",
+"title": "Bewegungsfläche vor Abfallbehälterreihen",
 "sources": [
 {
 "book": "G",
@@ -14577,7 +14577,7 @@ null,
 {
 "id": "g4b.standplatz_stufenlos",
 "topic": "abfall",
-"title": "Standplatz und Zugangswege unfallsicher, vom Fahrweg ohne Stufen; Tueren im Zugangsweg mit Arretierung",
+"title": "Standplatz und Zugangswege unfallsicher, vom Fahrweg ohne Stufen; Türen im Zugangsweg mit Arretierung",
 "sources": [
 {
 "book": "G",
@@ -14588,7 +14588,7 @@ null,
 {
 "id": "g4b.abfallraum_gefaelle",
 "topic": "abfall",
-"title": "Fussbodengefaelle im Abfallbehaelterraum, mit Bodenablauf und Wasseranschluss",
+"title": "Fussbodengefaelle im Abfallbehälterraum, mit Bodenablauf und Wasseranschluss",
 "sources": [
 {
 "book": "G",
@@ -14603,7 +14603,7 @@ null,
 {
 "id": "g4b.abfallschrank_norm",
 "topic": "abfall",
-"title": "Abfallbehaelterschraenke fuer fahrbare Behaelter bis 1700 l Nennvolumen",
+"title": "Abfallbehälterschränke für fahrbare Behaelter bis 1700 l Nennvolumen",
 "sources": [
 {
 "book": "G",
@@ -14619,7 +14619,7 @@ null,
 {
 "id": "g4b.deckel_oeffnungshoehe",
 "topic": "abfall",
-"title": "Benoetigte lichte Hoehe zum Oeffnen des Deckels fahrbarer Behaelter = h + l (Hoehe + Laenge des Behaelters)",
+"title": "Benoetigte lichte Höhe zum Oeffnen des Deckels fahrbarer Behaelter = h + l (Höhe + Länge des Behaelters)",
 "sources": [
 {
 "book": "G",
@@ -14636,7 +14636,7 @@ null,
 {
 "id": "g4b.en840_1_masse",
 "topic": "abfall",
-"title": "Abmessungen fahrbarer Abfallsammelbehaelter mit 2 Raedern (b x l x h in mm)",
+"title": "Abmessungen fahrbarer Abfallsammelbehälter mit 2 Rädern (b x l x h in mm)",
 "sources": [
 {
 "book": "G",
@@ -14698,7 +14698,7 @@ null,
 {
 "id": "g4b.en840_2_masse",
 "topic": "abfall",
-"title": "Abmessungen fahrbarer Abfallsammelbehaelter mit 4 Raedern, Flachdeckel (mm)",
+"title": "Abmessungen fahrbarer Abfallsammelbehälter mit 4 Rädern, Flachdeckel (mm)",
 "sources": [
 {
 "book": "G",
@@ -14748,7 +14748,7 @@ null,
 {
 "id": "g4b.en840_3_masse",
 "topic": "abfall",
-"title": "Abmessungen fahrbarer Abfallsammelbehaelter mit 4 Raedern nach Teil 3 (mm)",
+"title": "Abmessungen fahrbarer Abfallsammelbehälter mit 4 Rädern nach Teil 3 (mm)",
 "sources": [
 {
 "book": "G",
@@ -14780,7 +14780,7 @@ null,
 {
 "id": "g4b.ummauerung_hoehen",
 "topic": "abfall",
-"title": "Hoehen offener Standplaetze mit Ummauerung/Abdeckung (Beispiele): 240 l ohne Deckeloeffnung im Schrank 119; 240 l mit Deckeloeffnung unter Abdeckung 200; 660 l 220",
+"title": "Höhen offener Standplätze mit Ummauerung/Abdeckung (Beispiele): 240 l ohne Deckelöffnung im Schrank 119; 240 l mit Deckelöffnung unter Abdeckung 200; 660 l 220",
 "sources": [
 {
 "book": "G",
@@ -14796,7 +14796,7 @@ null,
 {
 "id": "g4b.abfall_rollstuhl_bewegungsflaeche",
 "topic": "barrierefrei",
-"title": "Bewegungsflaeche vor Abfallbehaeltern rollstuhlgerecht",
+"title": "Bewegungsfläche vor Abfallbehältern rollstuhlgerecht",
 "sources": [
 {
 "book": "G",
@@ -14812,7 +14812,7 @@ null,
 {
 "id": "g4b.abfall_rollstuhl_einwurfhoehe",
 "topic": "barrierefrei",
-"title": "Einwurfhoehe (Behaelterrand bzw. Einwurfklappe) ueber der Standflaeche des Rollstuhls",
+"title": "Einwurfhöhe (Behaelterrand bzw. Einwurfklappe) ueber der Standfläche des Rollstuhls",
 "sources": [
 {
 "book": "G",
@@ -14824,7 +14824,7 @@ null,
 "max": 85,
 "unit": "cm"
 },
-"condition": "240-l-Tonne auf um 25 tieferer Standflaeche; beim 660-l-Schrank 70"
+"condition": "240-l-Tonne auf um 25 tieferer Standfläche; beim 660-l-Schrank 70"
 },
 {
 "id": "g4b.kreislaufwirtschaft_gesetz",
@@ -14841,7 +14841,7 @@ null,
 {
 "id": "g4b.nutzungsneutral_bewegungsflaeche",
 "topic": "wohnungsgroesse",
-"title": "Bewegungsflaeche um Doppelbett/vor Schrank im nutzungsneutralen Raum: Minimum 70 tief, empfohlen 90",
+"title": "Bewegungsfläche um Doppelbett/vor Schrank im nutzungsneutralen Raum: Minimum 70 tief, empfohlen 90",
 "sources": [
 {
 "book": "G",
@@ -14859,7 +14859,7 @@ null,
 {
 "id": "g4b.nutzungsneutral_quadratisch",
 "topic": "wohnungsgroesse",
-"title": "Mindestmasse Stell- und Bewegungsflaeche quadratischer nutzungsneutraler Raum (Elternschlafzimmer massgebend)",
+"title": "Mindestmasse Stell- und Bewegungsfläche quadratischer nutzungsneutraler Raum (Elternschlafzimmer massgebend)",
 "sources": [
 {
 "book": "G",
@@ -14886,7 +14886,7 @@ null,
 "min": 300,
 "unit": "cm x 440 cm"
 },
-"condition": "Bewegungsflaeche 90; Ketten >=290-300 x >=440-450; >= ca. 14 m2"
+"condition": "Bewegungsfläche 90; Ketten >=290-300 x >=440-450; >= ca. 14 m2"
 },
 {
 "id": "g4b.nutzungsneutral_rollstuhl",
@@ -14902,7 +14902,7 @@ null,
 "min": 420,
 "unit": "cm x 470 cm"
 },
-"condition": "Ketten >=410-420 x >=470-480; >= ca. 20 m2; Bett-Laengsseite 150, andere Seite 118, vor Schraenken 150, Tuer >=90",
+"condition": "Ketten >=410-420 x >=470-480; >= ca. 20 m2; Bett-Längsseite 150, andere Seite 118, vor Schränken 150, Tür >=90",
 "norm": "DIN 18025-1, DIN 18040-2 (Entwurf)"
 },
 {
@@ -14919,13 +14919,13 @@ null,
 "min": 360,
 "unit": "cm x 410 cm"
 },
-"condition": "Ketten >=350-360 x >=410-420; >= ca. 15 m2; Bett-Laengsseite 120, vor Moebeln 90, Tuer >=80",
+"condition": "Ketten >=350-360 x >=410-420; >= ca. 15 m2; Bett-Längsseite 120, vor Möbeln 90, Tür >=80",
 "norm": "DIN 18025-2, DIN 18040-2 (Entwurf)"
 },
 {
 "id": "g4b.bett_laengsseite_rollstuhl",
 "topic": "barrierefrei",
-"title": "Bewegungsflaeche entlang einer Bett-Laengsseite ueber die ganze Bettlaenge (Rollstuhl wenden)",
+"title": "Bewegungsfläche entlang einer Bett-Längsseite ueber die ganze Bettlänge (Rollstuhl wenden)",
 "sources": [
 {
 "book": "G",
@@ -14942,7 +14942,7 @@ null,
 {
 "id": "g4b.vor_schraenken_rollstuhl",
 "topic": "barrierefrei",
-"title": "Bewegungsflaeche vor Schraenken",
+"title": "Bewegungsfläche vor Schränken",
 "sources": [
 {
 "book": "G",
@@ -14959,7 +14959,7 @@ null,
 {
 "id": "g4b.bett_laengsseite_barrierefrei",
 "topic": "barrierefrei",
-"title": "Bewegungsflaeche entlang einer Bett-Laengsseite",
+"title": "Bewegungsfläche entlang einer Bett-Längsseite",
 "sources": [
 {
 "book": "G",
@@ -14976,7 +14976,7 @@ null,
 {
 "id": "g4b.vor_moebeln_barrierefrei",
 "topic": "barrierefrei",
-"title": "Bewegungsflaeche vor Schraenken, Regalen, Kommoden und Betten",
+"title": "Bewegungsfläche vor Schränken, Regalen, Kommoden und Betten",
 "sources": [
 {
 "book": "G",
@@ -14993,7 +14993,7 @@ null,
 {
 "id": "g4b.nutzungsneutralitaet_voraussetzungen",
 "topic": "wohnungsgroesse",
-"title": "Voraussetzungen Nutzungsneutralitaet: Flaechenueberschuss, guenstige Proportion, guenstige Lage von Tueren und Fenstern; Raumgroessen entsprechen Individualraeumen, nicht Gemeinschaftsraeumen",
+"title": "Voraussetzungen Nutzungsneutralitaet: Flächenueberschuss, guenstige Proportion, guenstige Lage von Türen und Fenstern; Raumgrößen entsprechen Individualraeumen, nicht Gemeinschaftsraeumen",
 "sources": [
 {
 "book": "G",
@@ -15004,7 +15004,7 @@ null,
 {
 "id": "g4b.wohnflaeche_anrechnung_freibereich",
 "topic": "freibereich",
-"title": "Anrechnung auf die Wohnflaeche: Balkone, Loggien, Terrassen i. d. R. 1/4, hoechstens 1/2; unbeheizte Wintergaerten 1/2; beheizte Wintergaerten voll",
+"title": "Anrechnung auf die Wohnfläche: Balkone, Loggien, Terrassen i. d. R. 1/4, hoechstens 1/2; unbeheizte Wintergaerten 1/2; beheizte Wintergaerten voll",
 "sources": [
 {
 "book": "G",
@@ -15022,7 +15022,7 @@ null,
 {
 "id": "g4b.umwehrung_mbo_bis12m",
 "topic": "gelaender",
-"title": "Mindesthoehe Umwehrungen (ausser Fensterbruestungen) bei Absturzhoehe 1 m bis 12 m",
+"title": "Mindesthöhe Umwehrungen (ausser Fensterbruestungen) bei Absturzhöhe 1 m bis 12 m",
 "sources": [
 {
 "book": "G",
@@ -15033,13 +15033,13 @@ null,
 "min": 90,
 "unit": "cm"
 },
-"condition": "Absturzhoehe 1-12 m",
+"condition": "Absturzhöhe 1-12 m",
 "norm": "MBO 2002 § 38 (4)"
 },
 {
 "id": "g4b.umwehrung_mbo_ueber12m",
 "topic": "gelaender",
-"title": "Mindesthoehe Umwehrungen bei Absturzhoehe ueber 12 m",
+"title": "Mindesthöhe Umwehrungen bei Absturzhöhe ueber 12 m",
 "sources": [
 {
 "book": "G",
@@ -15050,13 +15050,13 @@ null,
 "min": 110,
 "unit": "cm"
 },
-"condition": "Absturzhoehe > 12 m",
+"condition": "Absturzhöhe > 12 m",
 "norm": "MBO 2002 § 38 (4)"
 },
 {
 "id": "g4b.umwehrung_bw",
 "topic": "gelaender",
-"title": "Baden-Wuerttemberg: bei Absturzhoehe > 1 m Umwehrung mind. 90; Reduktion auf 80 zulaessig, wenn Umwehrung mind. 20 tief",
+"title": "Baden-Wuerttemberg: bei Absturzhöhe > 1 m Umwehrung mind. 90; Reduktion auf 80 zulaessig, wenn Umwehrung mind. 20 tief",
 "sources": [
 {
 "book": "G",
@@ -15073,7 +15073,7 @@ null,
 {
 "id": "g4b.bruestung_balkon_schnitt",
 "topic": "gelaender",
-"title": "Bruestungs-/Gelaenderhoehe im barrierefreien Freibereich (Schnitt)",
+"title": "Bruestungs-/Gelaenderhöhe im barrierefreien Freibereich (Schnitt)",
 "sources": [
 {
 "book": "G",
@@ -15107,7 +15107,7 @@ null,
 {
 "id": "g4b.bruestung_durchsichtig",
 "topic": "barrierefrei",
-"title": "Bruestungen in mind. einem Aufenthaltsraum und von Freisitzen ab dieser Hoehe durchsichtig",
+"title": "Bruestungen in mind. einem Aufenthaltsraum und von Freisitzen ab dieser Höhe durchsichtig",
 "sources": [
 {
 "book": "G",
@@ -15120,7 +15120,7 @@ null,
 ],
 "values": {
 "min": 60,
-"unit": "cm Hoehe"
+"unit": "cm Höhe"
 },
 "condition": "barrierefrei",
 "norm": "DIN 18025-1, DIN 18025-2"
@@ -15128,7 +15128,7 @@ null,
 {
 "id": "g4b.freibereich_bewegungsflaeche",
 "topic": "barrierefrei",
-"title": "Bewegungsflaeche Rollstuhl im Freibereich",
+"title": "Bewegungsfläche Rollstuhl im Freibereich",
 "sources": [
 {
 "book": "G",
@@ -15145,7 +15145,7 @@ null,
 {
 "id": "g4b.freibereich_tuer_breite",
 "topic": "barrierefrei",
-"title": "Lichte Durchgangsbreite Tuer zum Freibereich",
+"title": "Lichte Durchgangsbreite Tür zum Freibereich",
 "sources": [
 {
 "book": "G",
@@ -15177,7 +15177,7 @@ null,
 {
 "id": "g4b.terrassenausgang_schwelle",
 "topic": "barrierefrei",
-"title": "Barrierefreier Terrassen-/Balkonausgang: Schwelle max. 2 cm; vor der Tuer Entwaesserungsrinne mit Gitterrost; Abdichtung >=15 unter Oberkante Belag im Rinnenbereich (Detail M 1:10); zusaetzliche Massnahmen: wannenfoermiger, ggf. beheizbarer Entwaesserungsrost, Gefaelle, Ueberdachung, Tuerrahmen mit Flanschkonstruktion, innere Zusatzabdichtung",
+"title": "Barrierefreier Terrassen-/Balkonausgang: Schwelle max. 2 cm; vor der Tür Entwaesserungsrinne mit Gitterrost; Abdichtung >=15 unter Oberkante Belag im Rinnenbereich (Detail M 1:10); zusaetzliche Massnahmen: wannenfoermiger, ggf. beheizbarer Entwaesserungsrost, Gefaelle, Ueberdachung, Türrahmen mit Flanschkonstruktion, innere Zusatzabdichtung",
 "sources": [
 {
 "book": "G",
@@ -15194,7 +15194,7 @@ null,
 {
 "id": "g4b.terrassentuer_hoehen",
 "topic": "barrierefrei",
-"title": "Schnitt Terrassentuer: lichte Durchgangshoehe >=200, Tuerdruecker auf 85",
+"title": "Schnitt Terrassentür: lichte Durchgangshöhe >=200, Türdrücker auf 85",
 "sources": [
 {
 "book": "G",
@@ -15261,7 +15261,7 @@ null,
 280
 ],
 [
-"barrierefrei Wenden vor Tuer",
+"barrierefrei Wenden vor Tür",
 150,
 150
 ],
@@ -15276,7 +15276,7 @@ null,
 {
 "id": "g4b.freibereich_zone_vor_fassade",
 "topic": "freibereich",
-"title": "Freie Zone zwischen Fassade/Balkontuer und Moeblierung",
+"title": "Freie Zone zwischen Fassade/Balkontür und Moeblierung",
 "sources": [
 {
 "book": "G",
@@ -15300,7 +15300,7 @@ null,
 {
 "id": "g4b.berechnungsgrundlagen",
 "topic": "wohnflaeche",
-"title": "Flaechenermittlung nach WoFlV, BauNVO oder DIN 277 - je nach Grundlage werden Bauteile (z. B. Balkone, Flure) unterschiedlich angerechnet, daher verschiedene Werte fuer dasselbe Gebaeude",
+"title": "Flächenermittlung nach WoFlV, BauNVO oder DIN 277 - je nach Grundlage werden Bauteile (z. B. Balkone, Flure) unterschiedlich angerechnet, daher verschiedene Werte für dasselbe Gebaeude",
 "sources": [
 {
 "book": "G",
@@ -15312,7 +15312,7 @@ null,
 {
 "id": "g4b.woflv_hoehe_voll",
 "topic": "wohnflaeche",
-"title": "WoFlV: Grundflaeche voll angerechnet bei lichter Raumhoehe mind. 2 m",
+"title": "WoFlV: Grundfläche voll angerechnet bei lichter Raumhöhe mind. 2 m",
 "sources": [
 {
 "book": "G",
@@ -15321,7 +15321,7 @@ null,
 ],
 "values": {
 "min": 200,
-"unit": "cm lichte Hoehe",
+"unit": "cm lichte Höhe",
 "factor": 1.0
 },
 "norm": "WoFlV"
@@ -15329,7 +15329,7 @@ null,
 {
 "id": "g4b.woflv_hoehe_halb",
 "topic": "wohnflaeche",
-"title": "WoFlV: Grundflaeche zur Haelfte angerechnet bei lichter Hoehe mind. 1 m und unter 2 m (unter 1 m: nicht angerechnet - im Buch nicht ausdruecklich genannt)",
+"title": "WoFlV: Grundfläche zur Haelfte angerechnet bei lichter Höhe mind. 1 m und unter 2 m (unter 1 m: nicht angerechnet - im Buch nicht ausdrücklich genannt)",
 "sources": [
 {
 "book": "G",
@@ -15339,7 +15339,7 @@ null,
 "values": {
 "min": 100,
 "max": 200,
-"unit": "cm lichte Hoehe",
+"unit": "cm lichte Höhe",
 "factor": 0.5
 },
 "norm": "WoFlV"
@@ -15368,7 +15368,7 @@ null,
 {
 "id": "g4b.woflv_laibungen",
 "topic": "wohnflaeche",
-"title": "WoFlV: Tuer- und Fensterlaibungen/Nischen erst ab mehr als 13 cm Tiefe angerechnet",
+"title": "WoFlV: Tür- und Fensterlaibungen/Nischen erst ab mehr als 13 cm Tiefe angerechnet",
 "sources": [
 {
 "book": "G",
@@ -15384,7 +15384,7 @@ null,
 {
 "id": "g4b.woflv_nicht_angerechnet",
 "topic": "wohnflaeche",
-"title": "WoFlV: technische Funktionsflaechen (Installationsschaechte) und Verkehrsflaechen ausserhalb der Wohnung (Treppenhaus, Flur) zaehlen nicht zur Wohnflaeche; WoFlV gilt fuer Berechnungen nach dem Wohnraumfoerderungsgesetz",
+"title": "WoFlV: technische Funktionsflächen (Installationsschaechte) und Verkehrsflächen ausserhalb der Wohnung (Treppenhaus, Flur) zaehlen nicht zur Wohnfläche; WoFlV gilt für Berechnungen nach dem Wohnraumfoerderungsgesetz",
 "sources": [
 {
 "book": "G",
@@ -15400,7 +15400,7 @@ null,
 {
 "id": "g4b.baunvo_grz_gfz",
 "topic": "wohnflaeche",
-"title": "BauNVO § 19 Grundflaechenzahl/zulaessige Grundflaeche (GR -> GRZ), § 20 Vollgeschosse, Geschossflaechenzahl/Geschossflaeche (GF -> GFZ); GF weicht oft geringfuegig von der Grundflaeche ab und wird haeufig mit der BGF nach DIN 277 verwechselt",
+"title": "BauNVO § 19 Grundflächenzahl/zulaessige Grundfläche (GR -> GRZ), § 20 Vollgeschosse, Geschossflächenzahl/Geschossfläche (GF -> GFZ); GF weicht oft geringfuegig von der Grundfläche ab und wird haeufig mit der BGF nach DIN 277 verwechselt",
 "sources": [
 {
 "book": "G",
@@ -15412,7 +15412,7 @@ null,
 {
 "id": "g4b.din277_gliederung",
 "topic": "wohnflaeche",
-"title": "DIN 277: BGF = KGF + NGF; NGF = NF + TF + VF; KGF enthaelt Tuer-/Fensteroeffnungen und Installationsschaechte bis 1 m2 Querschnitt; umfassendste Grundlage (Wirtschaftlichkeit), weicht von BauNVO und WoFlV in Details ab",
+"title": "DIN 277: BGF = KGF + NGF; NGF = NF + TF + VF; KGF enthaelt Tür-/Fensteröffnungen und Installationsschaechte bis 1 m2 Querschnitt; umfassendste Grundlage (Wirtschaftlichkeit), weicht von BauNVO und WoFlV in Details ab",
 "sources": [
 {
 "book": "G",
@@ -15428,7 +15428,7 @@ null,
 {
 "id": "g4b.baukosten_gebaeudetypen",
 "topic": "kosten",
-"title": "Baukosten je m2 nach Kostengruppen (Naeherung nach BKI)",
+"title": "Baukosten je m2 nach Kostengruppen (Näherung nach BKI)",
 "sources": [
 {
 "book": "G",
@@ -15461,13 +15461,13 @@ null,
 1611
 ]
 ],
-"condition": "Naeherungswerte, BKI",
+"condition": "Näherungswerte, BKI",
 "norm": "DIN 276-1"
 },
 {
 "id": "g4b.baunutzungskosten_50j",
 "topic": "kosten",
-"title": "Baunutzungskosten ueber 50 Jahre (Bundesbauministerium 1990): Erstellung in EUR/m2 BGF, uebrige in EUR/m2 Wohnflaeche",
+"title": "Baunutzungskosten ueber 50 Jahre (Bundesbauministerium 1990): Erstellung in EUR/m2 BGF, uebrige in EUR/m2 Wohnfläche",
 "sources": [
 {
 "book": "G",
@@ -15500,12 +15500,12 @@ null,
 3499
 ]
 ],
-"condition": "Naeherungswerte"
+"condition": "Näherungswerte"
 },
 {
 "id": "g4b.huellflaeche_je_100m2",
 "topic": "kosten",
-"title": "Huellflaeche je 100 m2 Wohnflaeche (Raumvolumen 300 m3) nach Lage/Gebaeudetyp",
+"title": "Huellfläche je 100 m2 Wohnfläche (Raumvolumen 300 m3) nach Lage/Gebaeudetyp",
 "sources": [
 {
 "book": "G",
@@ -15518,57 +15518,57 @@ null,
 ],
 "table": [
 [
-"Geschosswohnung, grosse Gebaeudetiefe, mittig, 1 Aussenflaeche",
+"Geschosswohnung, grosse Gebaeudetiefe, mittig, 1 Aussenfläche",
 20,
 42
 ],
 [
-"Geschosswohnung mittig, 2 Aussenflaechen",
+"Geschosswohnung mittig, 2 Aussenflächen",
 12,
 58
 ],
 [
-"Geschosswohnung Randlage, 3 Aussenflaechen",
+"Geschosswohnung Randlage, 3 Aussenflächen",
 12,
 100
 ],
 [
-"Geschosswohnung Dachgeschoss, 3 Aussenflaechen",
+"Geschosswohnung Dachgeschoss, 3 Aussenflächen",
 12,
 158
 ],
 [
-"Geschosswohnung Randlage Dachgeschoss, 4 Aussenflaechen",
+"Geschosswohnung Randlage Dachgeschoss, 4 Aussenflächen",
 12,
 200
 ],
 [
-"Reihenhaus, 3 Aussenflaechen",
+"Reihenhaus, 3 Aussenflächen",
 12,
 108
 ],
 [
-"Reihenendhaus, 4 Aussenflaechen",
+"Reihenendhaus, 4 Aussenflächen",
 12,
 192
 ],
 [
-"freistehendes Einfamilienhaus, 5 Aussenflaechen",
+"freistehendes Einfamilienhaus, 5 Aussenflächen",
 7,
 256
 ],
 [
-"freistehendes winkelfoermiges Einfamilienhaus, 5 Aussenflaechen",
+"freistehendes winkelfoermiges Einfamilienhaus, 5 Aussenflächen",
 12,
 290
 ]
 ],
-"condition": "geringe Huellflaeche oekonomisch und oekologisch guenstig"
+"condition": "geringe Huellfläche oekonomisch und oekologisch guenstig"
 },
 {
 "id": "g4b.erschliessung_spaenner",
 "topic": "erschliessung",
-"title": "Erschlossene Wohnflaeche je 1 m2 Erschliessungsflaeche (Treppenhaus Regelgeschoss), Spaennertypen",
+"title": "Erschlossene Wohnfläche je 1 m2 Erschliessungsfläche (Treppenhaus Regelgeschoss), Spaennertypen",
 "sources": [
 {
 "book": "G",
@@ -15607,7 +15607,7 @@ null,
 {
 "id": "g4b.erschliessung_flure",
 "topic": "erschliessung",
-"title": "Erschlossene Wohnflaeche je 1 m2 Erschliessungsflaeche bei Flurerschliessung",
+"title": "Erschlossene Wohnfläche je 1 m2 Erschliessungsfläche bei Flurerschliessung",
 "sources": [
 {
 "book": "G",
@@ -15640,12 +15640,12 @@ null,
 20
 ]
 ],
-"condition": "Vertikalerschliessung (Spaenner) effizienter als Horizontalerschliessung; Effizienzsteigerung nur mit Innenflur und mehrgeschossigen Wohnungen (interne Treppen beruecksichtigen); fuer Laubengang spricht Barrierefreiheit (ein Aufzug bis Hochhausgrenze)"
+"condition": "Vertikalerschliessung (Spaenner) effizienter als Horizontalerschliessung; Effizienzsteigerung nur mit Innenflur und mehrgeschossigen Wohnungen (interne Treppen berücksichtigen); für Laubengang spricht Barrierefreiheit (ein Aufzug bis Hochhausgrenze)"
 },
 {
 "id": "g4b.schallschutz_grundsatz",
 "topic": "schall",
-"title": "DIN 4109 (Nov. 1989) Mindestanforderungen schuetzen nur vor unzumutbaren Belaestigungen; anzuwenden sind mind. die erhoehten Anforderungen bzw. SSt II oder SSt III der VDI 4100; SSt I = DIN 4109 Mindestanforderung",
+"title": "DIN 4109 (Nov. 1989) Mindestanforderungen schuetzen nur vor unzumutbaren Belaestigungen; anzuwenden sind mind. die erhöhten Anforderungen bzw. SSt II oder SSt III der VDI 4100; SSt I = DIN 4109 Mindestanforderung",
 "sources": [
 {
 "book": "G",
@@ -15661,7 +15661,7 @@ null,
 {
 "id": "g4b.schallschutz_schema_stufen",
 "topic": "schall",
-"title": "Schemagrundriss Geschosswohnungsbau, Anforderungsstufen: 1 sehr hoch 52-55 dB (Wohnungstrenn-/Treppenraumwaende), 2 hoch 53-55 dB, 3 mittel 40-47 dB (zwischen lauten und leisen Raeumen innerhalb der Wohnung), 4 niedrig",
+"title": "Schemagrundriss Geschosswohnungsbau, Anforderungsstufen: 1 sehr hoch 52-55 dB (Wohnungstrenn-/Treppenraumwände), 2 hoch 53-55 dB, 3 mittel 40-47 dB (zwischen lauten und leisen Raeumen innerhalb der Wohnung), 4 niedrig",
 "sources": [
 {
 "book": "G",
@@ -15792,28 +15792,28 @@ null,
 46
 ],
 [
-"Wohnungstrennwaende",
+"Wohnungstrennwände",
 53,
 null,
 55,
 null
 ],
 [
-"Treppenraumwaende und Waende neben Hausfluren",
+"Treppenraumwände und Wände neben Hausfluren",
 52,
 null,
 55,
 null
 ],
 [
-"Waende neben Durchfahrten",
+"Wände neben Durchfahrten",
 55,
 null,
 55,
 null
 ],
 [
-"Tueren von Hausfluren/Treppenraeumen zu Fluren",
+"Türen von Hausfluren/Treppenraeumen zu Fluren",
 27,
 null,
 37,
@@ -15827,14 +15827,14 @@ null,
 null
 ],
 [
-"Waende zwischen 'lauten' und 'leisen' Raeumen unterschiedlicher Nutzung innerhalb der Wohnung",
+"Wände zwischen 'lauten' und 'leisen' Raeumen unterschiedlicher Nutzung innerhalb der Wohnung",
 40,
 null,
 47,
 null
 ]
 ],
-"condition": "R'w: Mindestwert (groesser = besser); L'n,w: Hoechstwert (kleiner = besser); '-' = keine Anforderung",
+"condition": "R'w: Mindestwert (größer = besser); L'n,w: Hoechstwert (kleiner = besser); '-' = keine Anforderung",
 "norm": "DIN 4109 (Nov. 1989)"
 },
 {
@@ -15863,7 +15863,7 @@ null,
 46
 ],
 [
-"Haus-/(Wohnungs-)Trennwaende",
+"Haus-/(Wohnungs-)Trennwände",
 57,
 null,
 67,
@@ -15914,7 +15914,7 @@ null
 "nicht oder nur selten stoerend"
 ],
 [
-"Hausmusik, laute Rundfunk-/Fernsehgeraete, Parties",
+"Hausmusik, laute Rundfunk-/Fernsehgeräte, Parties",
 "deutlich hoerbar",
 "deutlich hoerbar",
 "im Allg. hoerbar"
@@ -15925,7 +15925,7 @@ null
 {
 "id": "g4b.schalldaemmung_massivwaende",
 "topic": "schall",
-"title": "Schalldaemmung einschaliger massiver Innenwaende Rw,R (dB)",
+"title": "Schalldaemmung einschaliger massiver Innenwände Rw,R (dB)",
 "sources": [
 {
 "book": "G",
@@ -16009,7 +16009,7 @@ null
 {
 "id": "g4b.schalldaemmung_staenderwaende",
 "topic": "schall",
-"title": "Schalldaemmung Holzstaenderwaende (Staender 6/6 oder 6/14 mit Volldaemmung) Rw,R (dB)",
+"title": "Schalldaemmung Holzstaenderwände (Staender 6/6 oder 6/14 mit Volldaemmung) Rw,R (dB)",
 "sources": [
 {
 "book": "G",
@@ -16128,7 +16128,7 @@ null
 [
 "DIN 277-1/-2",
 "02/2005",
-"Grundflaechen und Rauminhalte: Begriffe; Gliederung NGF"
+"Grundflächen und Rauminhalte: Begriffe; Gliederung NGF"
 ],
 [
 "DIN 277-3",
@@ -16138,7 +16138,7 @@ null
 [
 "DIN EN 527-1",
 "07/2000",
-"Bueromoebel - Arbeitstische - Masse"
+"Büromöbel - Arbeitstische - Masse"
 ],
 [
 "DIN EN 716-1",
@@ -16153,22 +16153,22 @@ null
 [
 "DIN EN 840-1 bis -5",
 "07/2004",
-"Fahrbare Abfallsammelbehaelter (Masse, Anforderungen)"
+"Fahrbare Abfallsammelbehälter (Masse, Anforderungen)"
 ],
 [
 "DIN EN 840-6",
 "11/2008",
-"Abfallsammelbehaelter Sicherheit/Gesundheitsschutz"
+"Abfallsammelbehälter Sicherheit/Gesundheitsschutz"
 ],
 [
 "DIN EN 1116 (+Ber. 1 05/2007)",
 "09/2004",
-"Kuechenmoebel - Koordinationsmasse"
+"Küchenmöbel - Koordinationsmasse"
 ],
 [
 "DIN EN 1022",
 "09/2005",
-"Sitzmoebel - Standsicherheit"
+"Sitzmöbel - Standsicherheit"
 ],
 [
 "DIN EN 1130-1",
@@ -16178,12 +16178,12 @@ null
 [
 "DIN EN 1176-1/-3",
 "08/2008",
-"Spielplatzgeraete, Rutschen"
+"Spielplatzgeräte, Rutschen"
 ],
 [
 "DIN EN 1286 / 1287",
 "06/1999",
-"Sanitaerarmaturen: mechanische / thermostatische Mischer"
+"Sanitärarmaturen: mechanische / thermostatische Mischer"
 ],
 [
 "DIN EN 1627 (Entwurf)",
@@ -16193,7 +16193,7 @@ null
 [
 "DIN V ENV 1627",
 "04/1999",
-"Fenster, Tueren, Abschluesse - Einbruchhemmung"
+"Fenster, Türen, Abschluesse - Einbruchhemmung"
 ],
 [
 "DIN EN 1930",
@@ -16208,7 +16208,7 @@ null
 [
 "DIN 4543-1",
 "09/1994",
-"Bueroarbeitsplaetze - Flaechen fuer Bueromoebel"
+"Büroarbeitsplätze - Flächen für Büromöbel"
 ],
 [
 "DIN V 4701-10 (+Bbl. 1 02/2007, A1 12/2006)",
@@ -16258,7 +16258,7 @@ null
 [
 "DIN EN 13724",
 "05/2003",
-"Einwurfoeffnungen Hausbriefkaesten"
+"Einwurföffnungen Hausbriefkaesten"
 ],
 [
 "DIN EN 13203-1",
@@ -16268,12 +16268,12 @@ null
 [
 "DIN EN 14988-1",
 "06/2006",
-"Kinderhochstuehle"
+"Kinderhochstühle"
 ],
 [
 "DIN EN 15132",
 "12/2006",
-"Abfallbehaelterschraenke bis 1700 l"
+"Abfallbehälterschränke bis 1700 l"
 ],
 [
 "DIN 18015-1/-2/-3",
@@ -16283,12 +16283,12 @@ null
 [
 "DIN 18017-1",
 "02/1987",
-"Lueftung innenliegender Baeder/WC, Einzelschacht ohne Ventilator"
+"Lueftung innenliegender Bäder/WC, Einzelschacht ohne Ventilator"
 ],
 [
 "DIN 18017-3",
 "09/2009",
-"Lueftung innenliegender Baeder/WC mit Ventilatoren"
+"Lueftung innenliegender Bäder/WC mit Ventilatoren"
 ],
 [
 "DIN 18106",
@@ -16298,7 +16298,7 @@ null
 [
 "DIN 18025-1",
 "12/1992",
-"Barrierefreie Wohnungen fuer Rollstuhlbenutzer"
+"Barrierefreie Wohnungen für Rollstuhlbenutzer"
 ],
 [
 "DIN 18025-2",
@@ -16318,7 +16318,7 @@ null
 [
 "DIN 33408-1 (+Bbl. 1 01/1987)",
 "03/2008",
-"Koerperumrissschablonen fuer Sitzplaetze"
+"Koerperumrissschablonen für Sitzplätze"
 ],
 [
 "DIN 4109 (+Bbl. 2)",
@@ -16328,37 +16328,37 @@ null
 [
 "DIN 66354",
 "12/1986",
-"Kuecheneinrichtungen - Formen, Planungsgrundsaetze"
+"Kücheneinrichtungen - Formen, Planungsgrundsaetze"
 ],
 [
 "DIN 68881",
 "02/1979",
-"Kuechenmoebel - Begriffe"
+"Küchenmöbel - Begriffe"
 ],
 [
 "DIN 68878-1",
 "01/1987",
-"Stuehle fuer den Wohnbereich"
+"Stühle für den Wohnbereich"
 ],
 [
 "DIN 68885",
 "01/1987",
-"Tische fuer den Wohnbereich"
+"Tische für den Wohnbereich"
 ],
 [
 "DIN 68880-1",
 "10/1973",
-"Moebel - Begriffe"
+"Möbel - Begriffe"
 ],
 [
 "DIN 68890",
 "05/2009",
-"Kleiderschraenke - Gebrauchstauglichkeit"
+"Kleiderschränke - Gebrauchstauglichkeit"
 ],
 [
 "DIN 68935",
 "12/1999",
-"Koordinationsmasse Badmoebel, Geraete, Sanitaerobjekte"
+"Koordinationsmasse Badmöbel, Geräte, Sanitärobjekte"
 ],
 [
 "MBO",
@@ -16378,7 +16378,7 @@ null
 [
 "WoFlV",
 "25.11.2003 (in Kraft 1.1.2004)",
-"Wohnflaechenverordnung"
+"Wohnflächenverordnung"
 ],
 [
 "KrW-/AbfG",
@@ -16393,7 +16393,7 @@ null
 [
 "GUV-V C 27",
 "1979 bzw. 1997",
-"Unfallverhuetung Muellbeseitigung"
+"Unfallverhuetung Müllbeseitigung"
 ],
 [
 "VDI 4100",
@@ -16403,14 +16403,14 @@ null
 [
 "VDI 6000 Blatt 1",
 "02/2008",
-"Ausstattung von und mit Sanitaerraeumen - Wohnungen"
+"Ausstattung von und mit Sanitärraeumen - Wohnungen"
 ]
 ]
 },
 {
 "id": "g4b.asr_stand_der_technik",
 "topic": "arbeitsplatz",
-"title": "Kapitel Arbeiten (Grundlagen) behandelt nur Bueroarbeitsplaetze; nach Ruecknahme der alten Arbeitsstaettenrichtlinien gelten deren Zahlenwerte uebergangsweise (bis Mitte 2010) als Stand der Technik",
+"title": "Kapitel Arbeiten (Grundlagen) behandelt nur Büroarbeitsplätze; nach Rücknahme der alten Arbeitsstaettenrichtlinien gelten deren Zahlenwerte uebergangsweise (bis Mitte 2010) als Stand der Technik",
 "sources": [
 {
 "book": "G",
@@ -16422,12 +16422,12 @@ null
 {
 "id": "g4b.abstand.abfallbehaelter_standplatz_oeffnung_aufenthaltsraum",
 "topic": "abstand",
-"title": "Abstand abfallbehaelter_standplatz – oeffnung_aufenthaltsraum (other)",
+"title": "Abstand abfallbehälter_standplatz – öffnung_aufenthaltsraum (other)",
 "values": {
 "min": 500.0,
 "unit": "cm"
 },
-"condition": "Empfehlung der frueheren MBO 1997; Mindestabstand Standplatz zu Oeffnungen von Aufenthaltsraeumen",
+"condition": "Empfehlung der frueheren MBO 1997; Mindestabstand Standplatz zu Öffnungen von Aufenthaltsraeumen",
 "notes": null,
 "sources": [
 {
@@ -16439,7 +16439,7 @@ null
 {
 "id": "g4b.abstand.abfallbehaelter_standplatz_grundstuecksgrenze",
 "topic": "abstand",
-"title": "Abstand abfallbehaelter_standplatz – grundstuecksgrenze (other)",
+"title": "Abstand abfallbehälter_standplatz – grundstuecksgrenze (other)",
 "values": {
 "min": 200.0,
 "unit": "cm"
@@ -16456,7 +16456,7 @@ null
 {
 "id": "g4b.abstand.abfallbehaelter_standplatz_zufahrtsstrasse_sammelfahrzeug",
 "topic": "abstand",
-"title": "Abstand abfallbehaelter_standplatz – zufahrtsstrasse_sammelfahrzeug (other)",
+"title": "Abstand abfallbehälter_standplatz – zufahrtsstrasse_sammelfahrzeug (other)",
 "values": {
 "min": 1500.0,
 "unit": "cm"
@@ -16499,7 +16499,7 @@ null
 "min": 90.0,
 "unit": "cm"
 },
-"condition": "Laengsseite/Fussende zur Wand, nicht barrierefrei (empfohlen; Minimum 70)",
+"condition": "Längsseite/Fussende zur Wand, nicht barrierefrei (empfohlen; Minimum 70)",
 "notes": null,
 "sources": [
 {
@@ -16520,7 +16520,7 @@ null
 "min": 150.0,
 "unit": "cm"
 },
-"condition": "rollstuhlgerecht (vor Schraenken 150)",
+"condition": "rollstuhlgerecht (vor Schränken 150)",
 "notes": null,
 "sources": [
 {
@@ -16537,7 +16537,7 @@ null
 "min": 150.0,
 "unit": "cm"
 },
-"condition": "rollstuhlgerecht, eine Laengsseite ueber ganze Bettlaenge",
+"condition": "rollstuhlgerecht, eine Längsseite ueber ganze Bettlänge",
 "notes": null,
 "sources": [
 {
@@ -16554,7 +16554,7 @@ null
 "min": 120.0,
 "unit": "cm"
 },
-"condition": "rollstuhlgerecht, andere Laengsseite (Einstieg Nicht-Rollstuhlnutzer); barrierefrei: eine Laengsseite",
+"condition": "rollstuhlgerecht, andere Längsseite (Einstieg Nicht-Rollstuhlnutzer); barrierefrei: eine Längsseite",
 "notes": null,
 "sources": [
 {
@@ -16575,7 +16575,7 @@ null
 "min": 90.0,
 "unit": "cm"
 },
-"condition": "barrierefrei (vor Moebeln 90)",
+"condition": "barrierefrei (vor Möbeln 90)",
 "notes": null,
 "sources": [
 {
@@ -16642,7 +16642,7 @@ null
 "min": 70.0,
 "unit": "cm"
 },
-"condition": "freie Zone vor der Balkontuer/Fassade",
+"condition": "freie Zone vor der Balkontür/Fassade",
 "notes": null,
 "sources": [
 {
@@ -19523,7 +19523,7 @@ null
 {
 "id": "g5.abstand.schreibtisch_sideboard_buero",
 "topic": "abstand",
-"title": "Abstand schreibtisch – sideboard_buero (opposite)",
+"title": "Abstand schreibtisch – sideboard_büro (opposite)",
 "values": {
 "min": 100.0,
 "unit": "cm"
@@ -19540,7 +19540,7 @@ null
 {
 "id": "g5.abstand.schreibtisch_buerostuhl",
 "topic": "abstand",
-"title": "Abstand schreibtisch – buerostuhl (front)",
+"title": "Abstand schreibtisch – bürostuhl (front)",
 "values": {
 "min": 5.0,
 "unit": "cm"
@@ -25867,7 +25867,7 @@ null
 {
 "id": "w.haushalte_anteil_1900_2006",
 "topic": "kontext",
-"title": "Haushaltsgroessen-Entwicklung D: 1900 dominierten Haushalte mit 5+ Personen (44 %), Einpersonenhaushalte 7,1 %; 2006 Einpersonenhaushalte 38 % von knapp 40 Mio. Haushalten, 5+ Personen nur noch 4 %",
+"title": "Haushaltsgrößen-Entwicklung D: 1900 dominierten Haushalte mit 5+ Personen (44 %), Einpersonenhaushalte 7,1 %; 2006 Einpersonenhaushalte 38 % von knapp 40 Mio. Haushalten, 5+ Personen nur noch 4 %",
 "sources": [
 {
 "book": "W",
@@ -25901,7 +25901,7 @@ null
 {
 "id": "w.standardwohnung_1950er",
 "topic": "kontext",
-"title": "Leitbild ab den 1950er Jahren: standardisiertes Wohnungsangebot mit drei Zimmern, Kueche und Bad (in Gesetzen/Richtlinien/Foerderung festgeschrieben, wirkt bis heute nach)",
+"title": "Leitbild ab den 1950er Jahren: standardisiertes Wohnungsangebot mit drei Zimmern, Küche und Bad (in Gesetzen/Richtlinien/Foerderung festgeschrieben, wirkt bis heute nach)",
 "sources": [
 {
 "book": "W",
@@ -25944,7 +25944,7 @@ null
 {
 "id": "w.baukosten_efh",
 "topic": "kosten",
-"title": "Baukosten Einfamilienhaus je m2 Bruttogeschossflaeche (regional differenziert)",
+"title": "Baukosten Einfamilienhaus je m2 Bruttogeschossfläche (regional differenziert)",
 "sources": [
 {
 "book": "W",
@@ -25994,7 +25994,7 @@ null
 {
 "id": "w.wohnkostenanteil",
 "topic": "kosten",
-"title": "Ca. 30 % des (Netto-)Haushaltseinkommens fliessen ins Wohnen, etwa doppelt so viel wie fuer PKW oder Nahrungsmittel",
+"title": "Ca. 30 % des (Netto-)Haushaltseinkommens fliessen ins Wohnen, etwa doppelt so viel wie für PKW oder Nahrungsmittel",
 "sources": [
 {
 "book": "W",
@@ -26013,7 +26013,7 @@ null
 {
 "id": "w.stellschrauben",
 "topic": "kosten",
-"title": "Kostenhebel des Architekten in Reihenfolge der Wirksamkeit: 1) Bemessung des tatsaechlichen Flaechenbedarfs (wichtigster Hebel; selbst genutzte Neubauten oft zu gross), 2) Gebaeudestandard (z. B. einfaches Bad statt Wellnessbereich, Rohbauoberflaechen ohne Belag), 3) Konstruktion (Vorfertigung, standardisierte Bauteile)",
+"title": "Kostenhebel des Architekten in Reihenfolge der Wirksamkeit: 1) Bemessung des tatsaechlichen Flächenbedarfs (wichtigster Hebel; selbst genutzte Neubauten oft zu gross), 2) Gebaeudestandard (z. B. einfaches Bad statt Wellnessbereich, Rohbauoberflächen ohne Belag), 3) Konstruktion (Vorfertigung, standardisierte Bauteile)",
 "sources": [
 {
 "book": "W",
@@ -26039,7 +26039,7 @@ null
 {
 "id": "w.flaechenverbrauch",
 "topic": "kontext",
-"title": "Taeglicher Flaechenverbrauch Siedlung+Verkehr in D ca. 115 ha, Ziel 2020: 30 ha",
+"title": "Taeglicher Flächenverbrauch Siedlung+Verkehr in D ca. 115 ha, Ziel 2020: 30 ha",
 "sources": [
 {
 "book": "W",
@@ -26069,7 +26069,7 @@ null
 {
 "id": "w.bestand_durchschnitt",
 "topic": "wohnungsgroesse",
-"title": "Wohnungsbestand D 2007 rund 40 Mio. Wohnungen, durchschnittlich 4,4 Raeume und 86,3 m2 Wohnflaeche (Familienwohnungs-Bestand)",
+"title": "Wohnungsbestand D 2007 rund 40 Mio. Wohnungen, durchschnittlich 4,4 Raeume und 86,3 m2 Wohnfläche (Familienwohnungs-Bestand)",
 "sources": [
 {
 "book": "W",
@@ -26085,7 +26085,7 @@ null
 {
 "id": "w.stellplatzschluessel",
 "topic": "stellplatz",
-"title": "Bei Neubauprojekten in D werden im Durchschnitt mindestens 1,5 Stellplaetze je Wohneinheit gefordert (46 Mio. PKW bei ca. 39 Mio. Haushalten)",
+"title": "Bei Neubauprojekten in D werden im Durchschnitt mindestens 1,5 Stellplätze je Wohneinheit gefordert (46 Mio. PKW bei ca. 39 Mio. Haushalten)",
 "sources": [
 {
 "book": "W",
@@ -26094,14 +26094,14 @@ null
 ],
 "values": {
 "min": 1.5,
-"unit": "Stellplaetze/WE"
+"unit": "Stellplätze/WE"
 },
 "condition": "Durchschnitt, je nach Stellplatzsatzung"
 },
 {
 "id": "w.tiefgarage_wirtschaftlich",
 "topic": "stellplatz",
-"title": "Stellplaetze im Gebaeude (Parkgeschoss) lohnen sich erst ab einer Mindestzahl von Wohnungen, auf die die Kosten umgelegt werden",
+"title": "Stellplätze im Gebaeude (Parkgeschoss) lohnen sich erst ab einer Mindestzahl von Wohnungen, auf die die Kosten umgelegt werden",
 "sources": [
 {
 "book": "W",
@@ -26112,7 +26112,7 @@ null
 {
 "id": "w.dichte_gfz",
 "topic": "kontext",
-"title": "Bauliche Dichte als GFZ = Geschossflaeche aller Vollgeschosse / Grundstuecksflaeche; Dichte allein ist kein Qualitaetskriterium",
+"title": "Bauliche Dichte als GFZ = Geschossfläche aller Vollgeschosse / Grundstuecksfläche; Dichte allein ist kein Qualitaetskriterium",
 "sources": [
 {
 "book": "W",
@@ -26134,7 +26134,7 @@ null
 {
 "id": "w.tiefe_nach_orientierung",
 "topic": "gebaeudetiefe",
-"title": "Gebaeudetiefe richtet sich nach der Orientierung: Nord-Sued-orientierte Bebauung ist weniger tief (Hauptwohnfunktionen nur einseitig), Ost-West-Orientierung erlaubt Wohn- und Individualbereiche zu beiden Seiten und groessere Tiefe (Werte siehe orientierung/gebaeudetiefe_zweiseitig)",
+"title": "Gebaeudetiefe richtet sich nach der Orientierung: Nord-Sued-orientierte Bebauung ist weniger tief (Hauptwohnfunktionen nur einseitig), Ost-West-Orientierung erlaubt Wohn- und Individualbereiche zu beiden Seiten und größere Tiefe (Werte siehe orientierung/gebaeudetiefe_zweiseitig)",
 "sources": [
 {
 "book": "W",
@@ -26149,7 +26149,7 @@ null
 {
 "id": "w.externe_erschliessungsformen",
 "topic": "erschliessung",
-"title": "Externe Erschliessungsformen: Spaenner (Treppenhaus), Laubengang (Aussengang an der Fassade), Innengang (Mittelgang im Gebaeude); bei Nord-Sued-Ausrichtung kann der Laubengang gegenueber dem Spaenner Vorteile bringen",
+"title": "Externe Erschliessungsformen: Spaenner (Treppenhaus), Laubengang (Aussengang an der Fassade), Innengang (Mittelgang im Gebaeude); bei Nord-Sued-Ausrichtung kann der Laubengang gegenüber dem Spaenner Vorteile bringen",
 "sources": [
 {
 "book": "W",
@@ -26160,7 +26160,7 @@ null
 {
 "id": "w.nebenflaechen_haus",
 "topic": "abstellraum",
-"title": "Jede Wohneinheit braucht ausreichend Lagerraum; zusaetzlich gemeinschaftliche Abstellflaechen fuer Muell sowie Fahrraeder und Kinderwagen im eingangsnahen Bereich",
+"title": "Jede Wohneinheit braucht ausreichend Lagerraum; zusaetzlich gemeinschaftliche Abstellflächen für Müll sowie Fahrraeder und Kinderwagen im eingangsnahen Bereich",
 "sources": [
 {
 "book": "W",
@@ -26175,7 +26175,7 @@ null
 {
 "id": "w.eingangsbereich_gebaeude",
 "topic": "eingang",
-"title": "Hauseingang: eindeutige Adresse; Groesse/Repraesentanz entsprechend Bewohnerzahl; geschlossene EG-Fassaden und Garageneinfahrten zum oeffentlichen Raum vermeiden",
+"title": "Hauseingang: eindeutige Adresse; Größe/Repraesentanz entsprechend Bewohnerzahl; geschlossene EG-Fassaden und Garageneinfahrten zum oeffentlichen Raum vermeiden",
 "sources": [
 {
 "book": "W",
@@ -26186,7 +26186,7 @@ null
 {
 "id": "w.massstab_grundriss_kapitel",
 "topic": "darstellung",
-"title": "Alle 101 Wohnungsgrundrisse im Teil 'Grundriss' einheitlich im Massstab 1:200 neu gezeichnet, konstruktive Besonderheiten abstrahiert, mit standardisierten Moebeln in Abhaengigkeit von der Wohnungsgroesse moebliert",
+"title": "Alle 101 Wohnungsgrundrisse im Teil 'Grundriss' einheitlich im Massstab 1:200 neu gezeichnet, konstruktive Besonderheiten abstrahiert, mit standardisierten Möbeln in Abhaengigkeit von der Wohnungsgröße moebliert",
 "sources": [
 {
 "book": "W",
@@ -26235,7 +26235,7 @@ null
 {
 "id": "w.zellengrundriss",
 "topic": "grundrisstyp",
-"title": "Zellengrundriss (veraltet Kammergrundriss): jeder Wohnfunktion ein separater Raum; braucht Erschliessungsflaeche als Flur oder Diele; dieser Mehrbedarf bedeutet nicht zwingend mehr Gesamtflaeche als beim offenen Wohnen mit integrierter Erschliessung",
+"title": "Zellengrundriss (veraltet Kammergrundriss): jeder Wohnfunktion ein separater Raum; braucht Erschliessungsfläche als Flur oder Diele; dieser Mehrbedarf bedeutet nicht zwingend mehr Gesamtfläche als beim offenen Wohnen mit integrierter Erschliessung",
 "sources": [
 {
 "book": "W",
@@ -26246,7 +26246,7 @@ null
 {
 "id": "w.zentraler_verteilerraum",
 "topic": "grundrisstyp",
-"title": "Prinzip zentraler Verteilerraum: Wohnfunktionen um einen zentralen Verteiler (Diele) gruppieren -> effizienter, flaechensparender Erschliessungsbereich (Bsp. [001] 79 m2: Diele -> Kueche, Wohnen/Essen, zweiter Verteiler -> 2 Individualraeume + Bad)",
+"title": "Prinzip zentraler Verteilerraum: Wohnfunktionen um einen zentralen Verteiler (Diele) gruppieren -> effizienter, flächensparender Erschliessungsbereich (Bsp. [001] 79 m2: Diele -> Küche, Wohnen/Essen, zweiter Verteiler -> 2 Individualraeume + Bad)",
 "sources": [
 {
 "book": "W",
@@ -26261,7 +26261,7 @@ null
 {
 "id": "w.mittiger_kern",
 "topic": "grundrisstyp",
-"title": "Erschliessungs- und Sanitaerbereich als mittiger Kern trennt kommunikative von individuellen Raeumen; ein Verteilerraum nach dem Eingang, ein zweiter Flur fuer Individualraeume, Bad und Abstellraum (Bsp. [002] 94 m2)",
+"title": "Erschliessungs- und Sanitärbereich als mittiger Kern trennt kommunikative von individuellen Raeumen; ein Verteilerraum nach dem Eingang, ein zweiter Flur für Individualraeume, Bad und Abstellraum (Bsp. [002] 94 m2)",
 "sources": [
 {
 "book": "W",
@@ -26276,7 +26276,7 @@ null
 {
 "id": "w.offenes_wohnen",
 "topic": "grundrisstyp",
-"title": "Offenes Wohnen: Kombination kommunikativer (teils auch individueller) Bereiche; Spektrum von kombiniertem Wohnen/Essen ueber fliessenden Grundriss bis Loft; kommt ohne zusaetzliche Erschliessungsflaeche aus, weil Erschliessung im offenen Wohnbereich integriert ist",
+"title": "Offenes Wohnen: Kombination kommunikativer (teils auch individueller) Bereiche; Spektrum von kombiniertem Wohnen/Essen ueber fliessenden Grundriss bis Loft; kommt ohne zusaetzliche Erschliessungsfläche aus, weil Erschliessung im offenen Wohnbereich integriert ist",
 "sources": [
 {
 "book": "W",
@@ -26287,7 +26287,7 @@ null
 {
 "id": "w.funktionsbox",
 "topic": "grundrisstyp",
-"title": "Eingestellte Funktionsbox (Kochen + Sanitaer) als Raumteiler im offenen Bereich; nicht mittig setzen, sondern so, dass klare Zonen fuer Erschliessung der Individualraeume, Kochen, Essen und Wohnen entstehen (Bsp. [005])",
+"title": "Eingestellte Funktionsbox (Kochen + Sanitär) als Raumteiler im offenen Bereich; nicht mittig setzen, sondern so, dass klare Zonen für Erschliessung der Individualraeume, Kochen, Essen und Wohnen entstehen (Bsp. [005])",
 "sources": [
 {
 "book": "W",
@@ -26302,7 +26302,7 @@ null
 {
 "id": "w.moebelschichten",
 "topic": "grundrisstyp",
-"title": "Raumhohe Moebelschichten koennen Waende und Tueren ersetzen und Bereiche fassen (Bsp. [006] Furniture House)",
+"title": "Raumhohe Möbelschichten koennen Wände und Türen ersetzen und Bereiche fassen (Bsp. [006] Furniture House)",
 "sources": [
 {
 "book": "W",
@@ -26317,7 +26317,7 @@ null
 {
 "id": "w.loft",
 "topic": "grundrisstyp",
-"title": "Loft: Aufloesung in einen Raum; nur Erschliessungskern mit angelagertem Sanitaerbereich zoniert; Rueckzug ueber raumhohe Schiebetueren (Bsp. [007] 178 m2)",
+"title": "Loft: Aufloesung in einen Raum; nur Erschliessungskern mit angelagertem Sanitärbereich zoniert; Rückzug ueber raumhohe Schiebetüren (Bsp. [007] 178 m2)",
 "sources": [
 {
 "book": "W",
@@ -26332,7 +26332,7 @@ null
 {
 "id": "w.allraum",
 "topic": "grundrisstyp",
-"title": "Allraum: Verschmelzen von Individualraum und kommunikativen Bereichen zu einem Raum fuer alle Tages-/Nachtnutzungen; typisch fuer Einpersonenwohnungen (Bsp. [016]: ca. 28 m2 Raum hinter kompakter Koch-/Sanitaer-Filterschicht zum Laubengang); fuer zwei Personen nur noch fuer Paare vorstellbar (kein Rueckzug, kein Gast)",
+"title": "Allraum: Verschmelzen von Individualraum und kommunikativen Bereichen zu einem Raum für alle Tages-/Nachtnutzungen; typisch für Einpersonenwohnungen (Bsp. [016]: ca. 28 m2 Raum hinter kompakter Koch-/Sanitär-Filterschicht zum Laubengang); für zwei Personen nur noch für Paare vorstellbar (kein Rückzug, kein Gast)",
 "sources": [
 {
 "book": "W",
@@ -26400,7 +26400,7 @@ null
 {
 "id": "w.durchgangserschliessung",
 "topic": "grundrisstyp",
-"title": "Erschliessung unmittelbar ueber andere Wohnfunktionen (offener Grundriss nur mit Wandscheiben, Mies-Prinzip) nur fuer geringe Bewohnerzahl sinnvoll (Stoerungen) (Bsp. [084])",
+"title": "Erschliessung unmittelbar ueber andere Wohnfunktionen (offener Grundriss nur mit Wandscheiben, Mies-Prinzip) nur für geringe Bewohnerzahl sinnvoll (Stoerungen) (Bsp. [084])",
 "sources": [
 {
 "book": "W",
@@ -26415,7 +26415,7 @@ null
 {
 "id": "w.raumplan_plan_libre",
 "topic": "grundrisstyp",
-"title": "Gestaltungstheorien mit Grundrisswirkung: Raumplan (Loos), plan libre (Le Corbusier: Skelett mit Stuetzen, frei unterteilbar; Bsp. [011] zwei tragende Stuetzen im laengsgerichteten Raum, [097]); klassizistische Merkmale: Spiegelsymmetrie, Eingangshalle mit Treppe, Enfilade ([012])",
+"title": "Gestaltungstheorien mit Grundrisswirkung: Raumplan (Loos), plan libre (Le Corbusier: Skelett mit Stuetzen, frei unterteilbar; Bsp. [011] zwei tragende Stuetzen im längsgerichteten Raum, [097]); klassizistische Merkmale: Spiegelsymmetrie, Eingangshalle mit Treppe, Enfilade ([012])",
 "sources": [
 {
 "book": "W",
@@ -26453,7 +26453,7 @@ null
 {
 "id": "w.patio_baulücke",
 "topic": "gestaltung",
-"title": "Enge Baulueckensituation mit Brandwaenden: Belichtung/Belueftung ueber Patio, Grundrissform folgt den Nachbarbrandwaenden (Bsp. [009] Sevilla)",
+"title": "Enge Baulueckensituation mit Brandwänden: Belichtung/Belueftung ueber Patio, Grundrissform folgt den Nachbarbrandwänden (Bsp. [009] Sevilla)",
 "sources": [
 {
 "book": "W",
@@ -26487,7 +26487,7 @@ null
 {
 "id": "w.nicht_proportional",
 "topic": "bewohneranzahl",
-"title": "Wohnungsgroesse waechst mit der Bewohnerzahl, aber nicht proportional: dienende Funktionen und Gemeinschaftsbereiche werden je Person oekonomischer; Individualflaeche und zugehoerige Sanitaerflaechen wachsen dagegen direkt proportional zur Bewohnerzahl",
+"title": "Wohnungsgröße waechst mit der Bewohnerzahl, aber nicht proportional: dienende Funktionen und Gemeinschaftsbereiche werden je Person oekonomischer; Individualfläche und zugehoerige Sanitärflächen wachsen dagegen direkt proportional zur Bewohnerzahl",
 "sources": [
 {
 "book": "W",
@@ -26498,7 +26498,7 @@ null
 {
 "id": "w.wohngemeinschaft_regel",
 "topic": "bewohneranzahl",
-"title": "Planerisch ist jeder Haushalt ab 2 Personen eine Wohngemeinschaft (Familie oder WG): gleiche Regeln fuer Ruecksichtnahme und Anordnung kommunikativer/individueller Bereiche",
+"title": "Planerisch ist jeder Haushalt ab 2 Personen eine Wohngemeinschaft (Familie oder WG): gleiche Regeln für Rücksichtnahme und Anordnung kommunikativer/individueller Bereiche",
 "sources": [
 {
 "book": "W",
@@ -26509,7 +26509,7 @@ null
 {
 "id": "w.einpersonenhaushalt_flaeche",
 "topic": "bewohneranzahl",
-"title": "Einpersonenhaushalt: 38 % der Haushalte, durchschnittlich 62,5 m2 Wohnflaeche = fast 50 % mehr als die ueblichen 43 m2 je Person",
+"title": "Einpersonenhaushalt: 38 % der Haushalte, durchschnittlich 62,5 m2 Wohnfläche = fast 50 % mehr als die ueblichen 43 m2 je Person",
 "sources": [
 {
 "book": "W",
@@ -26537,7 +26537,7 @@ null
 {
 "id": "w.drei_plus_flaeche_pro_person",
 "topic": "bewohneranzahl",
-"title": "Haushalte ab 3 Personen: durchschnittlich 28,5 m2 Wohnflaeche je Person; gemeinsame Nutzung von Kochen/Essen/Wohnen/Sanitaer/Erschliessung/Lager senkt den Flaechenverbrauch je Person um rund ein Drittel; ab 3 Individualraeumen serieller Umgang mit den Individualraeumen moeglich",
+"title": "Haushalte ab 3 Personen: durchschnittlich 28,5 m2 Wohnfläche je Person; gemeinsame Nutzung von Kochen/Essen/Wohnen/Sanitär/Erschliessung/Lager senkt den Flächenverbrauch je Person um rund ein Drittel; ab 3 Individualraeumen serieller Umgang mit den Individualraeumen moeglich",
 "sources": [
 {
 "book": "W",
@@ -26552,7 +26552,7 @@ null
 {
 "id": "w.wg_beispiel_trondheim",
 "topic": "bewohneranzahl",
-"title": "Flaechenoptimierte WG [022]: 116 m2 (Sidebar 115,8), 5 Individualzimmer (Sidebar: 6 Individualraeume) mit im Schnitt 8,5 m2 an einer kommunikativen Spur mit 2 Sanitaerraeumen -> 25 m2 je Person",
+"title": "Flächenoptimierte WG [022]: 116 m2 (Sidebar 115,8), 5 Individualzimmer (Sidebar: 6 Individualraeume) mit im Schnitt 8,5 m2 an einer kommunikativen Spur mit 2 Sanitärraeumen -> 25 m2 je Person",
 "sources": [
 {
 "book": "W",
@@ -26572,7 +26572,7 @@ null
 {
 "id": "w.studenten_wg_mendrisio",
 "topic": "bewohneranzahl",
-"title": "Studenten-WG [023]: 4 Bewohner teilen ca. 40 m2 Gemeinschaftsbereich (Kochen/Essen/Entspannen, zugleich zentrale Erschliessung); 2 Baeder je zwischen Gemeinschaftsflaeche und Individualraeumen, je 2 Studierende aus ihren Zimmern; Individualraeume ca. 11 m2 (moebliert, temporaere Nutzung)",
+"title": "Studenten-WG [023]: 4 Bewohner teilen ca. 40 m2 Gemeinschaftsbereich (Kochen/Essen/Entspannen, zugleich zentrale Erschliessung); 2 Bäder je zwischen Gemeinschaftsfläche und Individualraeumen, je 2 Studierende aus ihren Zimmern; Individualraeume ca. 11 m2 (moebliert, temporaere Nutzung)",
 "sources": [
 {
 "book": "W",
@@ -26593,7 +26593,7 @@ null
 {
 "id": "w.definitionen",
 "topic": "wohnungsgroesse",
-"title": "Wohnungsgroesse definiert ueber Wohnflaeche (WoFlV), Haushaltsgroesse (Bewohnerzahl, unpraezise) oder Zimmerzahl ('2,5-Zimmer-Wohnung', wenig aussagekraeftig)",
+"title": "Wohnungsgröße definiert ueber Wohnfläche (WoFlV), Haushaltsgröße (Bewohnerzahl, unpraezise) oder Zimmerzahl ('2,5-Zimmer-Wohnung', wenig aussagekraeftig)",
 "sources": [
 {
 "book": "W",
@@ -26605,7 +26605,7 @@ null
 {
 "id": "w.flaeche_pro_kopf",
 "topic": "wohnungsgroesse",
-"title": "Durchschnittlicher Wohnflaechenanspruch je Kopf in D 2007 rund 43 m2, Wachstum ca. 0,5 m2 pro Jahr; durchschnittliche Wohnungsgroesse ca. 87 m2",
+"title": "Durchschnittlicher Wohnflächenanspruch je Kopf in D 2007 rund 43 m2, Wachstum ca. 0,5 m2 pro Jahr; durchschnittliche Wohnungsgröße ca. 87 m2",
 "sources": [
 {
 "book": "W",
@@ -26626,7 +26626,7 @@ null
 {
 "id": "w.flaeche_nach_haushaltsgroesse",
 "topic": "wohnungsgroesse",
-"title": "Durchschnittliche Wohnflaeche nach Haushaltsgroesse (Statistisches Bundesamt, ca. 2006)",
+"title": "Durchschnittliche Wohnfläche nach Haushaltsgröße (Statistisches Bundesamt, ca. 2006)",
 "sources": [
 {
 "book": "W",
@@ -26649,7 +26649,7 @@ null
 "haushalt": "3+ Personen",
 "anteil_pct": 27,
 "wohnflaeche_m2": 107,
-"notes": "Wert fuer 3 Personen; 3+ Personen im Mittel 28,5 m2/Person (PDF 71)"
+"notes": "Wert für 3 Personen; 3+ Personen im Mittel 28,5 m2/Person (PDF 71)"
 },
 {
 "haushalt": "Einfamilienhaus (Durchschnitt)",
@@ -26662,7 +26662,7 @@ null
 {
 "id": "w.groessenklassen",
 "topic": "wohnungsgroesse",
-"title": "Groessenklassen im Buch: Kleinstwohnungen XS (z. B. 5,7 m2 [024], 17 m2 [025]), Standardwohnungen S/M/L (ca. 52-125 m2: [026] 52,5, [027] 70/75, [028] 125 m2), Luxuswohnungen XL (ca. 220 m2: [029] 221,4, [030] 219,3, [031] 221/230 m2)",
+"title": "Größenklassen im Buch: Kleinstwohnungen XS (z. B. 5,7 m2 [024], 17 m2 [025]), Standardwohnungen S/M/L (ca. 52-125 m2: [026] 52,5, [027] 70/75, [028] 125 m2), Luxuswohnungen XL (ca. 220 m2: [029] 221,4, [030] 219,3, [031] 221/230 m2)",
 "sources": [
 {
 "book": "W",
@@ -26685,7 +26685,7 @@ null
 {
 "id": "w.kleinstwohnung",
 "topic": "wohnungsgroesse",
-"title": "Kleinstwohnung (Existenzminimum, CIAM 1930): Mehrfachnutzung des einzigen Raums ueber multifunktionale Einbauten; Vorfertigung, Logistik, Mobilitaet zentral. Bsp. O2-Wuerfel [024] mit 2,65 m Kantenlaenge (5,7 m2 Wohnflaeche); [025] Minimaleinheit, durch Herausziehen eines Raumteils auf doppelte Groesse (17 m2)",
+"title": "Kleinstwohnung (Existenzminimum, CIAM 1930): Mehrfachnutzung des einzigen Raums ueber multifunktionale Einbauten; Vorfertigung, Logistik, Mobilitaet zentral. Bsp. O2-Wuerfel [024] mit 2,65 m Kantenlänge (5,7 m2 Wohnfläche); [025] Minimaleinheit, durch Herausziehen eines Raumteils auf doppelte Größe (17 m2)",
 "sources": [
 {
 "book": "W",
@@ -26708,7 +26708,7 @@ null
 {
 "id": "w.mindestflaechenbedarf_dienend",
 "topic": "wohnungsgroesse",
-"title": "Kleine Wohnungen haben einen Mindestflaechenbedarf, der vor allem durch die dienenden Funktionen (Bad, Kueche, Erschliessung, Lager) entsteht",
+"title": "Kleine Wohnungen haben einen Mindestflächenbedarf, der vor allem durch die dienenden Funktionen (Bad, Küche, Erschliessung, Lager) entsteht",
 "sources": [
 {
 "book": "W",
@@ -26719,7 +26719,7 @@ null
 {
 "id": "w.standard_beispiele",
 "topic": "wohnungsgroesse",
-"title": "Standardwohnungen: [026] 52,5 m2 Einpersonenwohnung ca. 15 m2 unter dem Durchschnitt, trotzdem alle Funktionen; [027] 2-3-Personen-Wohnung 75 m2 (Sidebar 70,0 m2) knapp 20 m2 unter dem Durchschnitt; [028] 125 m2 grosse Standardwohnung um zentrale Diele mit eingestellter Sanitaer-/Abstelleinheit, 3 vollwertige Individualraeume",
+"title": "Standardwohnungen: [026] 52,5 m2 Einpersonenwohnung ca. 15 m2 unter dem Durchschnitt, trotzdem alle Funktionen; [027] 2-3-Personen-Wohnung 75 m2 (Sidebar 70,0 m2) knapp 20 m2 unter dem Durchschnitt; [028] 125 m2 grosse Standardwohnung um zentrale Diele mit eingestellter Sanitär-/Abstelleinheit, 3 vollwertige Individualraeume",
 "sources": [
 {
 "book": "W",
@@ -26742,7 +26742,7 @@ null
 {
 "id": "w.luxus_merkmal",
 "topic": "wohnungsgroesse",
-"title": "Luxuswohnen beginnt oberhalb Flaechenanspruch x Bewohnerzahl; Merkmal ist nicht mehr Individualraeume, sondern grosszuegige Ausweitung der kommunikativen Flaechen (und Aussenraeume, z. B. 4 Terrassen in allen Himmelsrichtungen [029]); Variante: jedem Bewohner ein Kleinappartement als Individualraum im EG, Gemeinschaft im OG ([030])",
+"title": "Luxuswohnen beginnt oberhalb Flächenanspruch x Bewohnerzahl; Merkmal ist nicht mehr Individualraeume, sondern grosszuegige Ausweitung der kommunikativen Flächen (und Aussenraeume, z. B. 4 Terrassen in allen Himmelsrichtungen [029]); Variante: jedem Bewohner ein Kleinappartement als Individualraum im EG, Gemeinschaft im OG ([030])",
 "sources": [
 {
 "book": "W",
@@ -26765,7 +26765,7 @@ null
 {
 "id": "w.wohndauer",
 "topic": "veraenderbarkeit",
-"title": "Durchschnittliche Wohndauer in einer Mietwohnung in D: 12 Jahre -> Grundriss muss Wandel der Beduerfnisse und Zweitnutzer beruecksichtigen",
+"title": "Durchschnittliche Wohndauer in einer Mietwohnung in D: 12 Jahre -> Grundriss muss Wandel der Beduerfnisse und Zweitnutzer berücksichtigen",
 "sources": [
 {
 "book": "W",
@@ -26780,7 +26780,7 @@ null
 {
 "id": "w.drei_ansaetze",
 "topic": "veraenderbarkeit",
-"title": "Drei Ansaetze fuer veraenderbare Grundrisse bei festgelegtem Rahmen (z. B. gleichbleibende Wohnungsgroesse): 1) Nutzungsneutralitaet (gleichwertige Raeume), 2) Grundrissvariabilitaet (Waende versetzbar), 3) Grundrissflexibilitaet (Wohnflaeche waechst/schrumpft durch Zuschalten/Abtrennen)",
+"title": "Drei Ansaetze für veraenderbare Grundrisse bei festgelegtem Rahmen (z. B. gleichbleibende Wohnungsgröße): 1) Nutzungsneutralitaet (gleichwertige Raeume), 2) Grundrissvariabilitaet (Wände versetzbar), 3) Grundrissflexibilitaet (Wohnfläche waechst/schrumpft durch Zuschalten/Abtrennen)",
 "sources": [
 {
 "book": "W",
@@ -26791,7 +26791,7 @@ null
 {
 "id": "w.nutzungsneutralitaet",
 "topic": "veraenderbarkeit",
-"title": "Nutzungsneutral: in der Groesse neutrale, gleichwertige Raeume mit Mindestmoeblierbarkeit fuer verschiedene Nutzungen, evtl. mehrfach zugaenglich; z. B. 3 gleich grosse Individualraeume -> Familie mit 2 Kindern, 3er-WG oder 2 Bewohner + Arbeits-/Gaesteraum; Steigerung bis Ein-Raum-Grundriss",
+"title": "Nutzungsneutral: in der Größe neutrale, gleichwertige Raeume mit Mindestmoeblierbarkeit für verschiedene Nutzungen, evtl. mehrfach zugaenglich; z. B. 3 gleich grosse Individualraeume -> Familie mit 2 Kindern, 3er-WG oder 2 Bewohner + Arbeits-/Gaesteraum; Steigerung bis Ein-Raum-Grundriss",
 "sources": [
 {
 "book": "W",
@@ -26802,7 +26802,7 @@ null
 {
 "id": "w.zuschaltbare_raeume",
 "topic": "veraenderbarkeit",
-"title": "Zuschaltbare Raeume: Individualraeume zusaetzlich zum Flurzugang ueber eine innere Erschliessungsspur an der Fassade mit Schiebetueren verbunden -> stufenweises Zuschalten zum kommunikativen Bereich ([032], 120 m2, 3 Individualraeume); 4 gleichwertige Raeume mit Schiebewaenden, nur Badzelle fixiert ([034], 90 m2); 2 Paare gleichwertiger Individualraeume um den Wohnbereich, je Paar Flur + Bad ([033], 133 m2)",
+"title": "Zuschaltbare Raeume: Individualraeume zusaetzlich zum Flurzugang ueber eine innere Erschliessungsspur an der Fassade mit Schiebetüren verbunden -> stufenweises Zuschalten zum kommunikativen Bereich ([032], 120 m2, 3 Individualraeume); 4 gleichwertige Raeume mit Schiebewänden, nur Badzelle fixiert ([034], 90 m2); 2 Paare gleichwertiger Individualraeume um den Wohnbereich, je Paar Flur + Bad ([033], 133 m2)",
 "sources": [
 {
 "book": "W",
@@ -26836,7 +26836,7 @@ null
 {
 "id": "w.variabilitaet_beispiele",
 "topic": "veraenderbarkeit",
-"title": "Variabilitaets-Beispiele: [035] 2 Raeume mit je 2 Zugaengen in bis zu 4 Raeume teilbar, Loggien an beiden Seiten (79,6 m2); [036] 98 m2 nur Sanitaer-/Abstellkern und Kuechenanschluss fest, Innenwaende frei: Allraum bis 6 kleine Zimmer, Wandachsen ueber je 3 Anschlussmoeglichkeiten an den Fensterfronten vordefiniert; [037] 120 m2 zwischen festen Betonschotten 3 bis 9 Raeume, plus zweiter Zugang je Einheit fuer spaetere Teilung EG/OG",
+"title": "Variabilitaets-Beispiele: [035] 2 Raeume mit je 2 Zugaengen in bis zu 4 Raeume teilbar, Loggien an beiden Seiten (79,6 m2); [036] 98 m2 nur Sanitär-/Abstellkern und Küchenanschluss fest, Innenwände frei: Allraum bis 6 kleine Zimmer, Wandachsen ueber je 3 Anschlussmoeglichkeiten an den Fensterfronten vordefiniert; [037] 120 m2 zwischen festen Betonschotten 3 bis 9 Raeume, plus zweiter Zugang je Einheit für spaetere Teilung EG/OG",
 "sources": [
 {
 "book": "W",
@@ -26864,7 +26864,7 @@ null
 {
 "id": "w.flexibilitaet",
 "topic": "veraenderbarkeit",
-"title": "Grundrissflexibilitaet = Vergroessern/Verkleinern der Wohnflaeche durch Zusammenlegen, Zuschalten, Anbauen, Abtrennen; braucht eingeplante Sollbruchstellen und Nutzerkoordination, langfristige Intervalle; Mittel: zweiter Wohnungszugang (z. B. im 2. OG [039]), Schichtung mit zwei Erschliessungsspuren und abtrennbarer Zimmerschicht mit separatem Zugang ([038], 44,9-225,7 m2); vollstaendige Geschosstrennung erfordert Rueckbau der Treppe und Deckenverschluss",
+"title": "Grundrissflexibilitaet = Vergrößern/Verkleinern der Wohnfläche durch Zusammenlegen, Zuschalten, Anbauen, Abtrennen; braucht eingeplante Sollbruchstellen und Nutzerkoordination, langfristige Intervalle; Mittel: zweiter Wohnungszugang (z. B. im 2. OG [039]), Schichtung mit zwei Erschliessungsspuren und abtrennbarer Zimmerschicht mit separatem Zugang ([038], 44,9-225,7 m2); vollstaendige Geschosstrennung erfordert Rückbau der Treppe und Deckenverschluss",
 "sources": [
 {
 "book": "W",
@@ -26894,7 +26894,7 @@ null
 {
 "id": "w.orientierungscode",
 "topic": "orientierung",
-"title": "Orientierungsangabe in den Projekt-Sidebars: I = einseitig, II = zweiseitig (uebereck oder gegenueber), III = dreiseitig, IV = vierseitig (allseitig), Patio/Innenhof = Sonderbelichtung nach innen",
+"title": "Orientierungsangabe in den Projekt-Sidebars: I = einseitig, II = zweiseitig (uebereck oder gegenüber), III = dreiseitig, IV = vierseitig (allseitig), Patio/Innenhof = Sonderbelichtung nach innen",
 "sources": [
 {
 "book": "W",
@@ -26905,7 +26905,7 @@ null
 {
 "id": "w.vierseitig",
 "topic": "orientierung",
-"title": "Vierseitige Orientierung: freie Grundrissgestaltung, auch Sanitaerraeume an die Fassade; typisch EFH, Penthouse, gestapelte Einheiten; im Geschossbau sehr hoher Erschliessungsaufwand (1 Wohnung je Geschoss) -> meist Luxussegment",
+"title": "Vierseitige Orientierung: freie Grundrissgestaltung, auch Sanitärraeume an die Fassade; typisch EFH, Penthouse, gestapelte Einheiten; im Geschossbau sehr hoher Erschliessungsaufwand (1 Wohnung je Geschoss) -> meist Luxussegment",
 "sources": [
 {
 "book": "W",
@@ -26916,7 +26916,7 @@ null
 {
 "id": "w.dreiseitig",
 "topic": "orientierung",
-"title": "Dreiseitige Orientierung: Doppelhaus, Kopfwohnung einer Zeile; erlaubt tiefere Grundrisse als das Reihenhaus, da Laengsseite Kern belichtet/belueftet",
+"title": "Dreiseitige Orientierung: Doppelhaus, Kopfwohnung einer Zeile; erlaubt tiefere Grundrisse als das Reihenhaus, da Längsseite Kern belichtet/belueftet",
 "sources": [
 {
 "book": "W",
@@ -26945,7 +26945,7 @@ null
 {
 "id": "w.zweiseitig_organisation",
 "topic": "orientierung",
-"title": "Zweiseitig: entweder offener kommunikativer Bereich ueber die ganze Tiefe (zwei Himmelsrichtungen) oder individueller und kommunikativer Bereich je an einer Seite (nur eine Blickrichtung; geeignet fuer Nord-Sued: Wohnen/Essen nach Sueden, Zugang/Kueche/Nebenraeume nach Norden)",
+"title": "Zweiseitig: entweder offener kommunikativer Bereich ueber die ganze Tiefe (zwei Himmelsrichtungen) oder individueller und kommunikativer Bereich je an einer Seite (nur eine Blickrichtung; geeignet für Nord-Sued: Wohnen/Essen nach Sueden, Zugang/Küche/Nebenraeume nach Norden)",
 "sources": [
 {
 "book": "W",
@@ -26956,7 +26956,7 @@ null
 {
 "id": "w.einseitig_tiefe",
 "topic": "orientierung",
-"title": "Einseitig orientierte Wohnungen: Tiefe stark begrenzt – zur belichteten Raumschicht hoechstens eine unbelichtete Erschliessungs- bzw. Servicespur (dienende Funktionen, ggf. Oberlicht) addieren; daher langgestreckt mit Funktionen entlang der Fassade; fehlende Querlueftung ggf. ueber Oberlichter; bevorzugt fuer kleine Wohnungen und Brandwandsituationen",
+"title": "Einseitig orientierte Wohnungen: Tiefe stark begrenzt – zur belichteten Raumschicht hoechstens eine unbelichtete Erschliessungs- bzw. Servicespur (dienende Funktionen, ggf. Oberlicht) addieren; daher langgestreckt mit Funktionen entlang der Fassade; fehlende Querlueftung ggf. ueber Oberlichter; bevorzugt für kleine Wohnungen und Brandwandsituationen",
 "sources": [
 {
 "book": "W",
@@ -26986,7 +26986,7 @@ null
 {
 "id": "w.patio",
 "topic": "orientierung",
-"title": "Sonderbelichtung: Patio/Innenhof belichtet tiefe Grundrisse (z. B. zweite Suedfassade fuer tiefen Nord-Sued-Grundriss); Bsp. [053] Baulücke ca. 25 m tief nur mit Patio belichtbar; [054] zentraler Patio 6 x 3 m als Hauptbelichtung viergeschossiger Back-to-Back-Haeuser; [055] Patio-Haeuser mit nur 5 m Tiefe",
+"title": "Sonderbelichtung: Patio/Innenhof belichtet tiefe Grundrisse (z. B. zweite Suedfassade für tiefen Nord-Sued-Grundriss); Bsp. [053] Baulücke ca. 25 m tief nur mit Patio belichtbar; [054] zentraler Patio 6 x 3 m als Hauptbelichtung viergeschossiger Back-to-Back-Haeuser; [055] Patio-Haeuser mit nur 5 m Tiefe",
 "sources": [
 {
 "book": "W",
@@ -27016,7 +27016,7 @@ null
 {
 "id": "w.grundsatz",
 "topic": "geschossigkeit",
-"title": "Mehrparteienhaeuser: v. a. Geschosswohnungen und zweigeschossige Maisonettes; 3+-geschossige Einheiten nur nach Wirtschaftlichkeitspruefung (zusaetzliche externe Erschliessung); Treppe als starres Element schraenkt Veraenderbarkeit und Barrierefreiheit ein",
+"title": "Mehrparteienhaeuser: v. a. Geschosswohnungen und zweigeschossige Maisonettes; 3+-geschossige Einheiten nur nach Wirtschaftlichkeitspruefung (zusaetzliche externe Erschliessung); Treppe als starres Element schränkt Veraenderbarkeit und Barrierefreiheit ein",
 "sources": [
 {
 "book": "W",
@@ -27027,7 +27027,7 @@ null
 {
 "id": "w.groessengrenzen",
 "topic": "geschossigkeit",
-"title": "Ab einer bestimmten Wohnungsgroesse wird die Belichtung aller Funktionen auf einer Ebene problematisch und die Erschliessung unverhaeltnismaessig; kleine Einheiten profitieren dagegen selten von mehreren Ebenen, die Treppe kostet zusaetzliche Flaeche",
+"title": "Ab einer bestimmten Wohnungsgröße wird die Belichtung aller Funktionen auf einer Ebene problematisch und die Erschliessung unverhaeltnismaessig; kleine Einheiten profitieren dagegen selten von mehreren Ebenen, die Treppe kostet zusaetzliche Fläche",
 "sources": [
 {
 "book": "W",
@@ -27038,7 +27038,7 @@ null
 {
 "id": "w.niveauwechsel",
 "topic": "geschossigkeit",
-"title": "Niveauwechsel/unterschiedliche Raumhoehen in Geschosswohnungen zur Zonierung (z. B. hoeherer kommunikativer Bereich; privater Flur um 2 Stufen niedriger [062]; Rampe + lange Treppe [057]); Aufwand wirkt aufs ganze Gebaeude",
+"title": "Niveauwechsel/unterschiedliche Raumhöhen in Geschosswohnungen zur Zonierung (z. B. höherer kommunikativer Bereich; privater Flur um 2 Stufen niedriger [062]; Rampe + lange Treppe [057]); Aufwand wirkt aufs ganze Gebaeude",
 "sources": [
 {
 "book": "W",
@@ -27094,7 +27094,7 @@ null
 {
 "id": "w.klassische_regeln",
 "topic": "zonierung",
-"title": "Klassische Zonierungsregeln: Individualraeume ungestoert, entkoppelt von kommunikativen Bereichen; Sanitaerbereich von den Individualraeumen aus ohne Durchqueren der kommunikativen Zone erreichbar; idealerweise Individualraeume direkt vom Wohnungseingang ohne Queren des kommunikativen Bereichs erreichbar; dienende von bedienten Bereichen trennen",
+"title": "Klassische Zonierungsregeln: Individualraeume ungestoert, entkoppelt von kommunikativen Bereichen; Sanitärbereich von den Individualraeumen aus ohne Durchqueren der kommunikativen Zone erreichbar; idealerweise Individualraeume direkt vom Wohnungseingang ohne Queren des kommunikativen Bereichs erreichbar; dienende von bedienten Bereichen trennen",
 "sources": [
 {
 "book": "W",
@@ -27105,7 +27105,7 @@ null
 {
 "id": "w.heutige_tendenz",
 "topic": "zonierung",
-"title": "Offene Typen erschliessen oft ueber den kommunikativen Bereich; nutzungsneutrale Raeume schwaechen die strenge Widmung; bei nichtfamiliaeren Wohnformen Rueckzugsraum zunehmend als Mini-Appartement mit eigenem Bad (teils eigener Kochnische)",
+"title": "Offene Typen erschliessen oft ueber den kommunikativen Bereich; nutzungsneutrale Raeume schwaechen die strenge Widmung; bei nichtfamiliaeren Wohnformen Rückzugsraum zunehmend als Mini-Appartement mit eigenem Bad (teils eigener Kochnische)",
 "sources": [
 {
 "book": "W",
@@ -27127,7 +27127,7 @@ null
 {
 "id": "w.funktionsschicht",
 "topic": "zonierung",
-"title": "Schichtung der Wohnungstiefe: an beiden Belichtungsseiten Individual- bzw. Gemeinschaftsraeume, dazwischen eingestellte Funktionsschicht mit Sanitaer, Kueche, Garderobe (Bsp. [063]: 4 unterschiedlich tiefe Zonen)",
+"title": "Schichtung der Wohnungstiefe: an beiden Belichtungsseiten Individual- bzw. Gemeinschaftsraeume, dazwischen eingestellte Funktionsschicht mit Sanitär, Küche, Garderobe (Bsp. [063]: 4 unterschiedlich tiefe Zonen)",
 "sources": [
 {
 "book": "W",
@@ -27168,7 +27168,7 @@ null
 {
 "id": "w.gliederung",
 "topic": "wohnfunktionen",
-"title": "Wohnfunktionen gliedern sich in kommunikative (Wohnen, Essen, zunehmend Kochen; oeffentlicherer Teil, Gaeste), individuelle (Schlafen/Rueckzug) und dienende (Sanitaer, Abstellen/Lagern; Reinigen) Bereiche; Erschliessung ist das verbindende Rueckgrat; privater Aussenraum und zusaetzliche Bereiche (Arbeiten, Hobby, Gaeste, Einlieger) separat",
+"title": "Wohnfunktionen gliedern sich in kommunikative (Wohnen, Essen, zunehmend Kochen; oeffentlicherer Teil, Gaeste), individuelle (Schlafen/Rückzug) und dienende (Sanitär, Abstellen/Lagern; Reinigen) Bereiche; Erschliessung ist das verbindende Rückgrat; privater Aussenraum und zusaetzliche Bereiche (Arbeiten, Hobby, Gaeste, Einlieger) separat",
 "sources": [
 {
 "book": "W",
@@ -27179,7 +27179,7 @@ null
 {
 "id": "w.individualbereich",
 "topic": "wohnfunktionen",
-"title": "Anspruch an ausgepraegten Individualbereich steigt mit dem Alter und sinkender persoenlicher Bindung der Bewohner; Spektrum: offene Integration (Abtrennung nur durch Regal/Schrank in kleinen Wohnungen [068]) ueber Schlafwagenabteil-artig optimierte Kojen ([069]) bis Einliegerwohnung; Zuordnung Individualraum-Sanitaerraum sichert Privatheit",
+"title": "Anspruch an ausgepraegten Individualbereich steigt mit dem Alter und sinkender persoenlicher Bindung der Bewohner; Spektrum: offene Integration (Abtrennung nur durch Regal/Schrank in kleinen Wohnungen [068]) ueber Schlafwagenabteil-artig optimierte Kojen ([069]) bis Einliegerwohnung; Zuordnung Individualraum-Sanitärraum sichert Privatheit",
 "sources": [
 {
 "book": "W",
@@ -27198,7 +27198,7 @@ null
 {
 "id": "w.kommunikativ",
 "topic": "wohnfunktionen",
-"title": "Kommunikativer Bereich: Sitzgruppe + Medienwand, Esstischgruppe, Kochen von voelliger Trennung bis zentral; Erschliessung oft als Erweiterung einbezogen; haeufig ueberhoeht bzw. zweigeschossig inszeniert ([073] Unite)",
+"title": "Kommunikativer Bereich: Sitzgruppe + Medienwand, Esstischgruppe, Kochen von voelliger Trennung bis zentral; Erschliessung oft als Erweiterung einbezogen; haeufig ueberhöht bzw. zweigeschossig inszeniert ([073] Unite)",
 "sources": [
 {
 "book": "W",
@@ -27213,7 +27213,7 @@ null
 {
 "id": "w.sanitaer_konfiguration",
 "topic": "wohnfunktionen",
-"title": "Typische Sanitaerkonfiguration groesserer Wohnungen: vollwertiges Bad mit Dusche und Wanne plus separates (Gaeste-)WC ([075]); bei mehrgeschossigen Wohnungen Sanitaerbereich auf jeder Ebene erwuenscht (ermoeglicht unabhaengige Nutzung bis Einliegerwohnung, [076])",
+"title": "Typische Sanitärkonfiguration größerer Wohnungen: vollwertiges Bad mit Dusche und Wanne plus separates (Gaeste-)WC ([075]); bei mehrgeschossigen Wohnungen Sanitärbereich auf jeder Ebene erwuenscht (ermoeglicht unabhaengige Nutzung bis Einliegerwohnung, [076])",
 "sources": [
 {
 "book": "W",
@@ -27232,7 +27232,7 @@ null
 {
 "id": "w.abstellen",
 "topic": "wohnfunktionen",
-"title": "Abstell-/Lagerflaechen kommen oft zu kurz (Kinderwagen, Fahrraeder, Getraenke); begehbarer Kleiderschrank gewinnt an Bedeutung; Loesung z. B. durchgehende Schrankschicht entlang der Wohnungstrennwand inkl. Kuechenzeile ([077])",
+"title": "Abstell-/Lagerflächen kommen oft zu kurz (Kinderwagen, Fahrraeder, Getraenke); begehbarer Kleiderschrank gewinnt an Bedeutung; Loesung z. B. durchgehende Schrankschicht entlang der Wohnungstrennwand inkl. Küchenzeile ([077])",
 "sources": [
 {
 "book": "W",
@@ -27270,7 +27270,7 @@ null
 {
 "id": "w.grundsatz",
 "topic": "erschliessung",
-"title": "Interne Erschliessung horizontal und vertikal; definiert Anfangs- und Endpunkt (wichtig fuer Funktionsverteilung) oder Mehrfacherschliessung (Rundlauf); Eingangsbereich = Pufferzone fuer Kleiderwechsel und Abstellen (bis Kinderwagen/Fahrrad)",
+"title": "Interne Erschliessung horizontal und vertikal; definiert Anfangs- und Endpunkt (wichtig für Funktionsverteilung) oder Mehrfacherschliessung (Rundlauf); Eingangsbereich = Pufferzone für Kleiderwechsel und Abstellen (bis Kinderwagen/Fahrrad)",
 "sources": [
 {
 "book": "W",
@@ -27292,7 +27292,7 @@ null
 {
 "id": "w.lage_im_grundriss",
 "topic": "treppe",
-"title": "Wohnungsinterne Treppe meist zentral im schlechter belichteten Teil, seltener an der Aussenwand (Ausnahme Nord-Sued-Grundrisse mit geschlossener Nordseite); Strategien: Treppe als Teil der Gebaeudestruktur oder als moebelartig eingestelltes Objekt",
+"title": "Wohnungsinterne Treppe meist zentral im schlechter belichteten Teil, seltener an der Aussenwand (Ausnahme Nord-Sued-Grundrisse mit geschlossener Nordseite); Strategien: Treppe als Teil der Gebaeudestruktur oder als möbelartig eingestelltes Objekt",
 "sources": [
 {
 "book": "W",
@@ -27303,7 +27303,7 @@ null
 {
 "id": "w.quergestellte_treppe",
 "topic": "treppe",
-"title": "Quer gestellte einlaeufige Treppe im Reihenhaus: Gebaeudebreite ergibt sich aus Lauflaenge + Antritt + Austritt ([085])",
+"title": "Quer gestellte einlaeufige Treppe im Reihenhaus: Gebaeudebreite ergibt sich aus Lauflänge + Antritt + Austritt ([085])",
 "sources": [
 {
 "book": "W",
@@ -27318,7 +27318,7 @@ null
 {
 "id": "w.treppentypen_grundriss",
 "topic": "treppe",
-"title": "Zweilaeufige Treppe besonders fuer kompakte, schmale Grundrisse ([086]); dreilaeufige Treppe kann eine Mittelzone/Diele aufspannen, mit Oberlicht ([087]); Kaskadentreppe = effiziente Erschliessung ([088]); Split-Level verbindet Geschosse raeumlich ([089]); Kombination verschiedener Treppentypen kostet viel Flaeche; Rampen zur Inszenierung oder fuer Barrierefreiheit; wohnungsinterne Aufzuege selten (Thema bei vielgeschossigen Stadthaeusern)",
+"title": "Zweilaeufige Treppe besonders für kompakte, schmale Grundrisse ([086]); dreilaeufige Treppe kann eine Mittelzone/Diele aufspannen, mit Oberlicht ([087]); Kaskadentreppe = effiziente Erschliessung ([088]); Split-Level verbindet Geschosse raeumlich ([089]); Kombination verschiedener Treppentypen kostet viel Fläche; Rampen zur Inszenierung oder für Barrierefreiheit; wohnungsinterne Aufzuege selten (Thema bei vielgeschossigen Stadthaeusern)",
 "sources": [
 {
 "book": "W",
@@ -27345,7 +27345,7 @@ null
 {
 "id": "w.tragrichtung",
 "topic": "treppe",
-"title": "Treppen(oeffnungen) sollten der Tragrichtung der Decke folgen (wirtschaftlich, v. a. bei Holz- und Fertigteilbau)",
+"title": "Treppen(öffnungen) sollten der Tragrichtung der Decke folgen (wirtschaftlich, v. a. bei Holz- und Fertigteilbau)",
 "sources": [
 {
 "book": "W",
@@ -27397,7 +27397,7 @@ null
 {
 "id": "w.introvertiert",
 "topic": "freibereich",
-"title": "Introvertierte Aussenraeume (Hof, Atrium, Patio): volle Privatheit; verbreitet bei hoher Dichte und niedriger Geschossigkeit (L-foermige Baukoerper bilden den Hof); bei hoeheren Gebaeuden nur im Dachgeschoss bzw. bei Maisonettes maximal in den beiden obersten Geschossen sinnvoll",
+"title": "Introvertierte Aussenraeume (Hof, Atrium, Patio): volle Privatheit; verbreitet bei hoher Dichte und niedriger Geschossigkeit (L-foermige Baukoerper bilden den Hof); bei höheren Gebaeuden nur im Dachgeschoss bzw. bei Maisonettes maximal in den beiden obersten Geschossen sinnvoll",
 "sources": [
 {
 "book": "W",
@@ -27408,7 +27408,7 @@ null
 {
 "id": "w.aussenraum_anteile_projekte",
 "topic": "freibereich",
-"title": "Privater Aussenraum der Beispielwohnungen mit 50-150 m2 Wohnflaeche (Sidebar-Werte, abgeleitet): n=74, davon 13 ohne ausgewiesenen Aussenraum (0 m2); bei vorhandenem Aussenraum Median 14.1 m2, Quartile 10.1-25.1 m2, Spanne 2.7-164.7 m2",
+"title": "Privater Aussenraum der Beispielwohnungen mit 50-150 m2 Wohnfläche (Sidebar-Werte, abgeleitet): n=74, davon 13 ohne ausgewiesenen Aussenraum (0 m2); bei vorhandenem Aussenraum Median 14.1 m2, Quartile 10.1-25.1 m2, Spanne 2.7-164.7 m2",
 "sources": [
 {
 "book": "W",
@@ -27444,7 +27444,7 @@ null
 {
 "id": "w.lastabtragung_trennwaende",
 "topic": "konstruktion",
-"title": "Zweiseitig orientierte Stadtgebaeude: Lastabtragung meist ueber die unbelichteten Wohnungstrennwaende (Schotten), Fassade nichttragend und frei gestaltbar; Holland: Tunnelschalung legt Raumbreite und -hoehe weitgehend fest; nichttragende Bauteile frei unter Beachtung Schallschutz",
+"title": "Zweiseitig orientierte Stadtgebaeude: Lastabtragung meist ueber die unbelichteten Wohnungstrennwände (Schotten), Fassade nichttragend und frei gestaltbar; Holland: Tunnelschalung legt Raumbreite und -höhe weitgehend fest; nichttragende Bauteile frei unter Beachtung Schallschutz",
 "sources": [
 {
 "book": "W",
@@ -27455,7 +27455,7 @@ null
 {
 "id": "w.raster_mauerwerk",
 "topic": "konstruktion",
-"title": "Bausysteme/Fertigteile mit eigenen Massordnungen (z. B. Mauerwerk-Modul) beachten; davon unabhaengige Planung ist unwirtschaftlich; Rasterfrage im Wohnungsbau weniger dominant als im Buerobau, aber Stellplatzraster der Tiefgarage hat kaum Toleranz",
+"title": "Bausysteme/Fertigteile mit eigenen Massordnungen (z. B. Mauerwerk-Modul) beachten; davon unabhaengige Planung ist unwirtschaftlich; Rasterfrage im Wohnungsbau weniger dominant als im Bürobau, aber Stellplatzraster der Tiefgarage hat kaum Toleranz",
 "sources": [
 {
 "book": "W",
@@ -27466,7 +27466,7 @@ null
 {
 "id": "w.schacht_buendeln",
 "topic": "gebaeudetechnik",
-"title": "Raeume mit hohen haustechnischen Anforderungen (Bad, WC, Kueche) vertikal und horizontal buendeln und ueber gemeinsamen Schacht versorgen; Schachtlage frueh festlegen und so setzen, dass verschiedene Grundrissvarianten am selben Schacht moeglich sind ([101])",
+"title": "Raeume mit hohen haustechnischen Anforderungen (Bad, WC, Küche) vertikal und horizontal buendeln und ueber gemeinsamen Schacht versorgen; Schachtlage frueh festlegen und so setzen, dass verschiedene Grundrissvarianten am selben Schacht moeglich sind ([101])",
 "sources": [
 {
 "book": "W",
@@ -27481,7 +27481,7 @@ null
 {
 "id": "w.medien_querschnitte",
 "topic": "gebaeudetechnik",
-"title": "Rangfolge der Querschnitte/Planungsrelevanz: Luftleitungen (groesste) > Abwasser > Wasserversorgung > Elektro (gering)",
+"title": "Rangfolge der Querschnitte/Planungsrelevanz: Luftleitungen (größte) > Abwasser > Wasserversorgung > Elektro (gering)",
 "sources": [
 {
 "book": "W",
@@ -27507,7 +27507,7 @@ null
 {
 "id": "w.projekttabelle",
 "topic": "projekte",
-"title": "Kenndaten aller 101 Beispielprojekte: Wohnflaeche, privater Aussenraum, Anzahl Individualraeume, Orientierung (I-IV = Anzahl Belichtungsseiten) aus den Sidebars des Grundriss-Teils (Plaene M 1:200); Fertigstellung, Erschliessungstyp der betrachteten Wohnung, Geschosszahl, Wohneinheiten aus dem Projektteil (Plaene M 1:500). Gebaeudetiefen und Achsmasse werden im Buch nicht als Zahl angegeben.",
+"title": "Kenndaten aller 101 Beispielprojekte: Wohnfläche, privater Aussenraum, Anzahl Individualraeume, Orientierung (I-IV = Anzahl Belichtungsseiten) aus den Sidebars des Grundriss-Teils (Plaene M 1:200); Fertigstellung, Erschliessungstyp der betrachteten Wohnung, Geschosszahl, Wohneinheiten aus dem Projektteil (Plaene M 1:500). Gebaeudetiefen und Achsmasse werden im Buch nicht als Zahl angegeben.",
 "sources": [
 {
 "book": "W",
@@ -29171,12 +29171,12 @@ null
 "pdf_projekt_1_500": 310
 }
 ],
-"notes": "Orientierung im Textlayer teils als 'Il'/'Ill' kodiert (Font), hier zu II/III normalisiert. Wohnflaeche/Aussenraum als Spanne bei [038], [039] (mehrere Wohnungstypen)."
+"notes": "Orientierung im Textlayer teils als 'Il'/'Ill' kodiert (Font), hier zu II/III normalisiert. Wohnfläche/Aussenraum als Spanne bei [038], [039] (mehrere Wohnungstypen)."
 },
 {
 "id": "w.projekte_flaeche_je_individualraeume",
 "topic": "wohnungsgroesse",
-"title": "Aus den 101 Beispielwohnungen abgeleitet (nicht im Buch als Regel formuliert): Wohnflaeche nach Anzahl Individualraeume (ohne Kleinstwohnungen XS; Spannen-Angaben ausgelassen)",
+"title": "Aus den 101 Beispielwohnungen abgeleitet (nicht im Buch als Regel formuliert): Wohnfläche nach Anzahl Individualraeume (ohne Kleinstwohnungen XS; Spannen-Angaben ausgelassen)",
 "sources": [
 {
 "book": "W",

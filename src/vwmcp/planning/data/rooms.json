@@ -1371,7 +1371,7 @@
 "MBO 48: every dwelling needs a bath with tub or shower and a WC",
 "MBO 43: windowless baths only with effective ventilation; internal baths mechanically ventilated per DIN 18017",
 "baths may face north",
-"if no Hausarbeitsraum: Stellflaechen + connections for WM, TR and laundry basket in the bath",
+"if no Hausarbeitsraum: Stellflächen + connections for WM, TR and laundry basket in the bath",
 "lockable medicine cabinet, storage for towels and cleaning agents",
 "group installation shafts of wet rooms; stack baths/kitchens vertically",
 "Vorwandinstallation approx 20 deep (horizontal pipes, VDI: from 17) / 25 deep (vertical pipes) measured raw wall to front of boarding without tiles",
@@ -1404,7 +1404,7 @@
 },
 {
 "id": "bad_rollstuhlgerecht",
-"name": "Sanitaerraum rollstuhlgerecht",
+"name": "Sanitärraum rollstuhlgerecht",
 "context": [
 "wohnen"
 ],
@@ -1448,7 +1448,7 @@
 },
 {
 "id": "bad_barrierefrei",
-"name": "Sanitaerraum barrierefrei",
+"name": "Sanitärraum barrierefrei",
 "context": [
 "wohnen"
 ],
@@ -1510,13 +1510,13 @@
 "buegelbrett"
 ],
 "rules": [
-"Mindestflaeche ca. 7-9 m2 (p281)",
-"Mindest-Stellflaeche 3,60 m Lauflaenge empfohlen (p281)",
-"Bewegungsflaeche wie Kueche: 120, rollstuhlgerecht 150 (p282)",
-"Aufteilung in 'nasse' (Waschen, Trocknen, Schleudern) und 'trockene' Hausarbeiten (Buegeln, Naehen, Reinigen, Aufbewahren)",
-"Verbindung zu Kueche oder Bad sinnvoll (Organisation, Installation); direkter Ausgang ins Freie guenstig",
-"moeglichst natuerlich belichtet und belueftet; ausreichend beheizter/beluefteter Kellerraum auch moeglich",
-"im Geschosswohnungsbau eigener Raum unueblich, meist in Kueche/Bad integriert; gemeinschaftliche Waschraeume moeglich"
+"Mindestfläche ca. 7-9 m2 (p281)",
+"Mindest-Stellfläche 3,60 m Lauflänge empfohlen (p281)",
+"Bewegungsfläche wie Küche: 120, rollstuhlgerecht 150 (p282)",
+"Aufteilung in 'nasse' (Waschen, Trocknen, Schleudern) und 'trockene' Hausarbeiten (Bügeln, Nähen, Reinigen, Aufbewahren)",
+"Verbindung zu Küche oder Bad sinnvoll (Organisation, Installation); direkter Ausgang ins Freie guenstig",
+"moeglichst natürlich belichtet und belueftet; ausreichend beheizter/beluefteter Kellerraum auch moeglich",
+"im Geschosswohnungsbau eigener Raum unueblich, meist in Küche/Bad integriert; gemeinschaftliche Waschraeume moeglich"
 ],
 "sources": [
 {
@@ -1535,7 +1535,7 @@
 },
 {
 "id": "abstellraum",
-"name": "Abstellraum / Abstellflaeche je Wohnung",
+"name": "Abstellraum / Abstellfläche je Wohnung",
 "context": [
 "wohnen"
 ],
@@ -1552,9 +1552,9 @@
 },
 "requires": [],
 "rules": [
-"Orientierungswert 6 m2 Abstellflaeche je Wohnung, davon mind. 1 m2 innerhalb der Wohnung, 5 m2 im Keller o. ae. (MBO 1997 § 45; p287)",
-"MBO 2002 § 48 (2): GK 3-5: leicht erreichbare Abstellraeume fuer Kinderwagen und Fahrraeder sowie fuer jede Wohnung ein ausreichend grosser Abstellraum",
-"LBO BW 2007 § 35 (5): fuer jede Wohnung ein Abstellraum; Novellierungsentwurf 2009: nur noch bei Wohngebaeuden mit mind. 20 Wohnungen",
+"Orientierungswert 6 m2 Abstellfläche je Wohnung, davon mind. 1 m2 innerhalb der Wohnung, 5 m2 im Keller o. ae. (MBO 1997 § 45; p287)",
+"MBO 2002 § 48 (2): GK 3-5: leicht erreichbare Abstellraeume für Kinderwagen und Fahrraeder sowie für jede Wohnung ein ausreichend grosser Abstellraum",
+"LBO BW 2007 § 35 (5): für jede Wohnung ein Abstellraum; Novellierungsentwurf 2009: nur noch bei Wohngebaeuden mit mind. 20 Wohnungen",
 "Beispiel Kellerabstellraum 5 m2 mit 500 langer Wand (p288)"
 ],
 "sources": [
@@ -1583,7 +1583,7 @@
 },
 {
 "id": "abfallbehaelterraum",
-"name": "Abfallbehaelterraum (Muellraum)",
+"name": "Abfallbehälterraum (Müllraum)",
 "context": [
 "wohnen",
 "allgemein"
@@ -1605,11 +1605,11 @@
 ],
 "rules": [
 "Ausgang unmittelbar ins Freie; Behaelter muessen direkt vom Freien entleert werden koennen (MBO § 45)",
-"staendig wirksame Lueftung (Lueftungsoeffnungen in Tuer, Rueckwand oder Dach)",
-"GK 3-5 innerhalb von Gebaeuden: Trennwaende und Decken feuerbestaendig/raumabschliessend wie tragende Waende; Oeffnungen ins Gebaeudeinnere feuerhemmend, dicht- und selbstschliessend (MBO § 45, LBO BW § 33 (2))",
-"Fussboden mit 2 % Gefaelle, Bodenablauf und Wasseranschluss fuer Reinigung",
+"staendig wirksame Lueftung (Lueftungsöffnungen in Tür, Rückwand oder Dach)",
+"GK 3-5 innerhalb von Gebaeuden: Trennwände und Decken feuerbestaendig/raumabschliessend wie tragende Wände; Öffnungen ins Gebaeudeinnere feuerhemmend, dicht- und selbstschliessend (MBO § 45, LBO BW § 33 (2))",
+"Fussboden mit 2 % Gefaelle, Bodenablauf und Wasseranschluss für Reinigung",
 "kann neben Garagen oder in Nebengebaeuden liegen",
-"Bewegungsflaeche vor Behaelterreihen >=120 (Beispiel: Mittelgang 120 zwischen zwei 110 tiefen Behaelterzonen)"
+"Bewegungsfläche vor Behaelterreihen >=120 (Beispiel: Mittelgang 120 zwischen zwei 110 tiefen Behaelterzonen)"
 ],
 "sources": [
 {
@@ -1624,7 +1624,7 @@
 },
 {
 "id": "abfallbehaelterstandplatz",
-"name": "Abfallbehaelter-Standplatz (offen, Schrank oder Raum)",
+"name": "Abfallbehälter-Standplatz (offen, Schrank oder Raum)",
 "context": [
 "wohnen",
 "allgemein"
@@ -1642,14 +1642,14 @@
 },
 "requires": [],
 "rules": [
-"drei Standplatzarten: offene Standplaetze im Freien (einfachste, guenstigste; oft umpflanzt oder in Mauernischen), Abfallbehaelterschraenke (DIN EN 15132, bis 1700 l), Abfallbehaelterraeume",
-"Flaeche grosszuegig bemessen (spaeter zusaetzliche Behaelter)",
+"drei Standplatzarten: offene Standplätze im Freien (einfachste, guenstigste; oft umpflanzt oder in Mauernischen), Abfallbehälterschränke (DIN EN 15132, bis 1700 l), Abfallbehälterraeume",
+"Fläche grosszuegig bemessen (spaeter zusaetzliche Behaelter)",
 "ebenerdig, befestigt, trittsicher; leicht erreichbar, gut zugaenglich, moeglichst witterungsgeschuetzt, ausreichend beleuchtet",
-"Abstand zu Aufenthaltsraeumen/Grundstuecksgrenze (MBO 1997: 5 m zu Oeffnungen, 2 m zur Grenze)",
+"Abstand zu Aufenthaltsraeumen/Grundstuecksgrenze (MBO 1997: 5 m zu Öffnungen, 2 m zur Grenze)",
 "max. 15 m von der Zufahrtsstrasse des Sammelfahrzeugs; Wege unfallsicher und stufenlos",
-"Durchgaenge mind. 200 hoch und 100 breit; bei Grossmuellbehaeltern Wegbreite 150 (GUV-V C 27)",
-"Bewegungsflaeche vor Behaelterreihen mind. 120; Tueren im Zugangsweg mit Arretierung",
-"Behaeltermenge: Orientierungswert 45 l (Restmuell + Biotonne) pro Person und Woche"
+"Durchgaenge mind. 200 hoch und 100 breit; bei Grossmüllbehältern Wegbreite 150 (GUV-V C 27)",
+"Bewegungsfläche vor Behaelterreihen mind. 120; Türen im Zugangsweg mit Arretierung",
+"Behaeltermenge: Orientierungswert 45 l (Restmüll + Biotonne) pro Person und Woche"
 ],
 "sources": [
 {
@@ -1708,9 +1708,9 @@
 ],
 "rules": [
 "massgebend: Elternschlafzimmer mit Doppelbett und Schrank",
-"Stell- und Bewegungsflaeche mind. 360 x 380 (Ketten: >=350-360 x >=380-390), >= ca. 14 m2",
-"Bewegungsflaeche mind. 70 tief, empfohlen 90 (WBS Schweiz, BWO 2000)",
-"Nutzbar als Eltern-, Kinder-, Ess-, Arbeits-, Gaestezimmer, bei Installation auch Kueche/Essk./Bad"
+"Stell- und Bewegungsfläche mind. 360 x 380 (Ketten: >=350-360 x >=380-390), >= ca. 14 m2",
+"Bewegungsfläche mind. 70 tief, empfohlen 90 (WBS Schweiz, BWO 2000)",
+"Nutzbar als Eltern-, Kinder-, Ess-, Arbeits-, Gaestezimmer, bei Installation auch Küche/Essk./Bad"
 ],
 "sources": [
 {
@@ -1745,7 +1745,7 @@
 "kleiderschrank"
 ],
 "rules": [
-"Stell- und Bewegungsflaeche mind. 300 x 440 bei 90 breiter Bewegungsflaeche (Ketten >=290-300 x >=440-450), >= ca. 14 m2"
+"Stell- und Bewegungsfläche mind. 300 x 440 bei 90 breiter Bewegungsfläche (Ketten >=290-300 x >=440-450), >= ca. 14 m2"
 ],
 "sources": [
 {
@@ -1776,11 +1776,11 @@
 "kleiderschrank"
 ],
 "rules": [
-"Bewegungsflaeche entlang einer Bett-Laengsseite ueber die ganze Bettlaenge >=150 (Wenden)",
+"Bewegungsfläche entlang einer Bett-Längsseite ueber die ganze Bettlänge >=150 (Wenden)",
 "an der Einstiegsseite des Nicht-Rollstuhlnutzers 120",
-"vor Schraenken >=150",
+"vor Schränken >=150",
 "Mindestmass 420 x 470 (Ketten >=410-420 x >=470-480), >= ca. 20 m2",
-"Tuer lichte Breite >=90"
+"Tür lichte Breite >=90"
 ],
 "sources": [
 {
@@ -1818,10 +1818,10 @@
 "kleiderschrank"
 ],
 "rules": [
-"Bewegungsflaeche >=120 breit entlang einer Bett-Laengsseite",
-">=90 tief vor Schraenken, Regalen, Kommoden und Betten",
+"Bewegungsfläche >=120 breit entlang einer Bett-Längsseite",
+">=90 tief vor Schränken, Regalen, Kommoden und Betten",
 "Mindestmass 360 x 410 (Ketten >=350-360 x >=410-420), >= ca. 15 m2",
-"Tuer lichte Breite >=80"
+"Tür lichte Breite >=80"
 ],
 "sources": [
 {
@@ -1855,11 +1855,11 @@
 },
 "requires": [],
 "rules": [
-"Grundtypen: Atrium (rundum raumhoch umschlossen, oben offen, im Grundriss), Loggia (in die Gebaeudemasse eingeschnitten, 2-3 Seiten + oben umschlossen), Balkon (vor der Fassade, auskragend oder eigene Tragkonstruktion), Terrasse (unterbaut: auf Erdreich, Garage, Geschossruecksprung, Dach - ueber beheizten Raeumen Daemmung/Abdichtung)",
-"Sonderform Wintergarten (verglast): laengere Nutzung, mit Zusatzheizung ganzjaehrig (energieaufwendig)",
-"Ausstattung: Schrank/Stauschrank fuer Gartenmoebel, Strom- und Wasseranschluss",
-"Einflussfaktoren: Himmelsrichtung/Besonnung, Zugwind, Laerm, Einsehbarkeit, Funktionsbeziehung, Baurecht (Abstandsflaechen)",
-"Wohnflaeche (WoFlV): Balkone, Loggien, Dachgaerten, Terrassen i. d. R. zu 1/4, hoechstens 1/2; unbeheizte Wintergaerten 1/2, beheizte voll",
+"Grundtypen: Atrium (rundum raumhoch umschlossen, oben offen, im Grundriss), Loggia (in die Gebaeudemasse eingeschnitten, 2-3 Seiten + oben umschlossen), Balkon (vor der Fassade, auskragend oder eigene Tragkonstruktion), Terrasse (unterbaut: auf Erdreich, Garage, Geschossrücksprung, Dach - ueber beheizten Raeumen Daemmung/Abdichtung)",
+"Sonderform Wintergarten (verglast): längere Nutzung, mit Zusatzheizung ganzjaehrig (energieaufwendig)",
+"Ausstattung: Schrank/Stauschrank für Gartenmöbel, Strom- und Wasseranschluss",
+"Einflussfaktoren: Himmelsrichtung/Besonnung, Zugwind, Laerm, Einsehbarkeit, Funktionsbeziehung, Baurecht (Abstandsflächen)",
+"Wohnfläche (WoFlV): Balkone, Loggien, Dachgaerten, Terrassen i. d. R. zu 1/4, hoechstens 1/2; unbeheizte Wintergaerten 1/2, beheizte voll",
 "barrierefrei: jeder Wohnung mind. 4,5 m2 Freisitz (DIN 18025-1/-2)"
 ],
 "sources": [

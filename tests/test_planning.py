@@ -451,7 +451,10 @@ def test_check_room_reads_keystone_elements(fake):
     assert info["room_cm"] == [160.0, 165.0]
     (e,) = info["elements"]
     assert e["element"] == "wc_wandeinbau" and e["wall"] == "W"
-    assert info["ok"] and info["not_recognised"] == ["Fremd"]
+    assert info["ok"] and info["not_recognised"] == ["Fremd"] and "warning" not in info
+    # a bbox in the wrong unit finds nothing - say so instead of a silent "ok"
+    info = json.loads(T.vw2d_check_room(bbox=[5e6, 5e6, 6.6e6, 6.65e6], preview=False)[0])
+    assert info["elements"] == [] and "nothing was checked" in info["warning"] and "warning_size" in info
 
 
 def test_style_tool(fake):

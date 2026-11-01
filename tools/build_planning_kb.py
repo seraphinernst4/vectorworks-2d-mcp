@@ -469,11 +469,42 @@ def build(src: str) -> dict:
             "style_notes": style_notes, "report": report}
 
 
+# umlauts some notes spelled out (shown in symbol names and texts); word stems only, ids stay as they are
+UMLAUT = [("Moebel", "Möbel"), ("moebel", "möbel"), ("fuer", "für"), ("Fuer", "Für"), ("behaelter", "behälter"),
+          ("Raeder", "Räder"), ("Waesche", "Wäsche"), ("waesche", "wäsche"), ("flaeche", "fläche"),
+          ("Flaeche", "Fläche"), ("Buegel", "Bügel"), ("buegel", "bügel"), ("Naeh", "Näh"), ("naeh", "näh"),
+          ("gegenueber", "gegenüber"), ("Gegenueber", "Gegenüber"), ("Sanitaer", "Sanitär"),
+          ("sanitaer", "sanitär"), ("Kueche", "Küche"), ("kueche", "küche"), ("Spuel", "Spül"), ("spuel", "spül"),
+          ("Geraet", "Gerät"), ("geraet", "gerät"), ("Tuer", "Tür"), ("tuer", "tür"), ("waerts", "wärts"),
+          ("rueck", "rück"), ("Rueck", "Rück"), ("hoehen", "höhen"), ("Hoehe", "Höhe"), ("hoehe", "höhe"),
+          ("laengs", "längs"), ("Laengs", "Längs"), ("Laenge", "Länge"), ("laenge", "länge"),
+          ("Ueberlagerung", "Überlagerung"), ("Muell", "Müll"), ("muell", "müll"), ("oeffnung", "öffnung"),
+          ("Oeffnung", "Öffnung"), ("Hoersaal", "Hörsaal"), ("gestuehl", "gestühl"), ("haengend", "hängend"),
+          ("waende", "wände"), ("Waende", "Wände"), ("traeglich", "träglich"), ("plaetze", "plätze"),
+          ("Plaetze", "Plätze"), ("erhoeh", "erhöh"), ("groess", "größ"), ("Groess", "Größ"),
+          ("Schraenk", "Schränk"), ("schraenk", "schränk"), ("Kuehl", "Kühl"), ("kuehl", "kühl"),
+          ("Stuehle", "Stühle"), ("stuehle", "stühle"), ("Baeder", "Bäder"), ("Buero", "Büro"), ("buero", "büro")]
+ID_LIKE = re.compile(r"^[a-z0-9_]+$")
+ID_KEYS = {"id", "element", "room", "layout", "requires", "overlap_ok", "group", "kind", "short", "category",
+           "context", "mode", "book", "against", "faces", "wall", "side", "align"}
+
+
+def umlauts(x, key=None):
+    if isinstance(x, dict):
+        return {k: (v if k in ID_KEYS else umlauts(v, k)) for k, v in x.items()}
+    if isinstance(x, list):
+        return [umlauts(v, key) for v in x]
+    if isinstance(x, str) and not ID_LIKE.match(x):
+        for a, b in UMLAUT:
+            x = x.replace(a, b)
+    return x
+
+
 def write(kb: dict) -> None:
     os.makedirs(OUT, exist_ok=True)
     for name in ("elements", "rules", "rooms", "layouts", "clearances"):
         with open(os.path.join(OUT, name + ".json"), "w", encoding="utf-8") as f:
-            json.dump(kb[name], f, ensure_ascii=False, indent=0, sort_keys=False)
+            json.dump(umlauts(kb[name]), f, ensure_ascii=False, indent=0, sort_keys=False)
             f.write("\n")
 
 

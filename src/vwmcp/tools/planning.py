@@ -864,6 +864,12 @@ def vw2d_check_room(
     lay = E.Layout(W, D, placed, doors, issues, name="Prüfung")
     info = {"room_cm": [round(W, 3), round(D, 3)], "mode": mode, "elements": [p.to_dict() for p in placed],
             "issues": [i.to_dict() for i in issues], "ok": not any(i.severity == "error" for i in issues)}
+    if not placed:
+        info["warning"] = ("no elements found in the room - nothing was checked. The bbox is in document units "
+                           "(%s); check it and the layer" % units.get("name", "?"))
+    if W > 10000 or D > 10000:
+        info["warning_size"] = "the room is %.0f × %.0f m - is the bbox in document units (%s)?" % (
+            W / 100, D / 100, units.get("name", "?"))
     if unknown:
         info["not_recognised"] = sorted(set(unknown))
         info["hint_unknown"] = ("symbols that are neither Keystone elements nor mapped in the style are ignored; "

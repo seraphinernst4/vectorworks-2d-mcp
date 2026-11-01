@@ -117,7 +117,7 @@
 "d": 85.0,
 "wall": false,
 "h": 100.0,
-"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. Text S. 40: Rollatoren meist 60-65 cm breit; Handhabung braucht deutlich mehr Platz (keine Normwerte)",
+"notes": "w = Breite, d = Länge; stellfläche = Maximalwerte der Spanne. Text S. 40: Rollatoren meist 60-65 cm breit; Handhabung braucht deutlich mehr Platz (keine Normwerte)",
 "sources": [
 {
 "book": "G",
@@ -138,7 +138,7 @@
 "d": 100.0,
 "wall": false,
 "h": 75.0,
-"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. Breite bei schräg gestellten Rädern",
+"notes": "w = Breite, d = Länge; stellfläche = Maximalwerte der Spanne. Breite bei schräg gestellten Rädern",
 "sources": [
 {
 "book": "G",
@@ -159,7 +159,7 @@
 "d": 120.0,
 "wall": false,
 "h": 102.0,
-"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. zusammengefaltet 25-32 cm breit",
+"notes": "w = Breite, d = Länge; stellfläche = Maximalwerte der Spanne. zusammengefaltet 25-32 cm breit",
 "sources": [
 {
 "book": "G",
@@ -180,7 +180,7 @@
 "d": 132.0,
 "wall": false,
 "h": 127.0,
-"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. ",
+"notes": "w = Breite, d = Länge; stellfläche = Maximalwerte der Spanne. ",
 "sources": [
 {
 "book": "G",
@@ -201,7 +201,7 @@
 "d": 140.0,
 "wall": false,
 "h": 110.0,
-"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. ",
+"notes": "w = Breite, d = Länge; stellfläche = Maximalwerte der Spanne. ",
 "sources": [
 {
 "book": "G",
@@ -222,7 +222,7 @@
 "d": 135.0,
 "wall": false,
 "h": 110.0,
-"notes": "w = Breite, d = Länge; stellflaeche = Maximalwerte der Spanne. ",
+"notes": "w = Breite, d = Länge; stellfläche = Maximalwerte der Spanne. ",
 "sources": [
 {
 "book": "G",
@@ -321,7 +321,7 @@
 "barrier_free": {
 "rollstuhl_symbol": false
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
 {
 "book": "G",
@@ -352,7 +352,7 @@
 "barrier_free": {
 "rollstuhl_symbol": false
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
 {
 "book": "G",
@@ -389,7 +389,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -426,7 +426,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -464,7 +464,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -502,7 +502,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
 {
 "book": "G",
@@ -540,7 +540,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97); ACHTUNG: gedruckte Tür 80 cm < 90 cm trotz Piktogramm"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -578,7 +578,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -616,7 +616,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); Personenzahl aus FEM-Legende S. 90 (630 kg = 8 P., 1000 kg = 13 P.)",
 "sources": [
 {
 "book": "G",
@@ -654,7 +654,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
 {
 "book": "G",
@@ -692,7 +692,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
 {
 "book": "G",
@@ -730,7 +730,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
 {
 "book": "G",
@@ -768,7 +768,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
 {
 "book": "G",
@@ -806,7 +806,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite)",
 "sources": [
 {
 "book": "G",
@@ -836,7 +836,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 90 x 200 (S. 85)",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 90 x 200 (S. 85)",
 "sources": [
 {
 "book": "G",
@@ -874,7 +874,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 90 x 200 (S. 85); Schachtbreite gedruckt als '240 (260)'",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 90 x 200 (S. 85); Schachtbreite gedruckt als '240 (260)'",
 "sources": [
 {
 "book": "G",
@@ -912,7 +912,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 100 x 230 (S. 85); Schachtbreite gedruckt als '240 (260)'",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 100 x 230 (S. 85); Schachtbreite gedruckt als '240 (260)'",
 "sources": [
 {
 "book": "G",
@@ -942,7 +942,7 @@
 },
 "notes": "im Buch mit Rollstuhl-Piktogramm markiert; Mindestanforderung rollstuhlgerecht: Fahrkorb >= 110 x 140, lichte Tür >= 90, Vorfläche >= 150 x 150 (S. 84, 96, 97)"
 },
-"notes": "stellflaeche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 100 x 230 (S. 85); Buch zeigt zwei 2500-kg-Bettenaufzüge mit identischen Maßen ('bei beiden 2500 kg'); Unterschied in der Zeichnung nicht erkennbar",
+"notes": "stellfläche = lichtes Schachtmaß (Schachtbreite SBR x Schachttiefe SBT), ohne Schachtwände; Tür in der Schachtvorderwand (w-Seite); mögliche Bettenabmessung 100 x 230 (S. 85); Buch zeigt zwei 2500-kg-Bettenaufzüge mit identischen Maßen ('bei beiden 2500 kg'); Unterschied in der Zeichnung nicht erkennbar",
 "sources": [
 {
 "book": "G",
@@ -3865,7 +3865,7 @@
 "d": 100.0
 }
 ],
-"notes": "Tabellenspalten wirken vertauscht; plausibel Breite ca. 100, Tiefe 30-50. stellflaeche = Interpretation (d=50 als Obergrenze).",
+"notes": "Tabellenspalten wirken vertauscht; plausibel Breite ca. 100, Tiefe 30-50. stellfläche = Interpretation (d=50 als Obergrenze).",
 "sources": [
 {
 "book": "G",
@@ -3927,7 +3927,7 @@
 }
 ],
 "heights": {
-"notes": "Kinder: Tischhöhe nach Körpergröße 46/52/58/64/70/76 (Regel kinder_tisch_stuhl_hoehen)"
+"notes": "Kinder: Tischhöhe nach Körpergröße 46/52/58/64/70/76 (Regel kinder_tisch_stuhl_höhen)"
 },
 "sources": [
 {
@@ -5280,7 +5280,7 @@
 "notes": "knee clearance (Beinfreiraum) under basin; Unterputz/Flachaufputzsiphon (DIN 18025-2)"
 }
 },
-"notes": "Stellflaeche from VDI 6000 Blatt 1 table p268 (>=60 x >=55).",
+"notes": "Stellfläche from VDI 6000 Blatt 1 table p268 (>=60 x >=55).",
 "sources": [
 {
 "book": "G",
@@ -5476,8 +5476,8 @@
 },
 {
 "id": "wc_vorwand",
-"name": "WC mit Vorwand-Spuelkasten",
-"full_name": "WC mit Vorwand-Spuelkasten (Spuelung vor der Wand)",
+"name": "WC mit Vorwand-Spülkasten",
+"full_name": "WC mit Vorwand-Spülkasten (Spülung vor der Wand)",
 "category": "sanitaer",
 "context": [
 "wohnen"
@@ -5515,8 +5515,8 @@
 },
 {
 "id": "wc_wandeinbau",
-"name": "WC mit Wandeinbau-Spuelkasten",
-"full_name": "WC mit Wandeinbau-Spuelkasten (Unterputz)",
+"name": "WC mit Wandeinbau-Spülkasten",
+"full_name": "WC mit Wandeinbau-Spülkasten (Unterputz)",
 "category": "sanitaer",
 "context": [
 "wohnen"
@@ -5874,7 +5874,7 @@
 {
 "side": "front",
 "d": 90.0,
-"note": "90 must be kept free on the operating side; opposite Stellflaechen of WM/TR >= 90"
+"note": "90 must be kept free on the operating side; opposite Stellflächen of WM/TR >= 90"
 }
 ],
 "sources": [
@@ -5894,8 +5894,8 @@
 },
 {
 "id": "waeschetrockner_bad",
-"name": "Waeschetrockner",
-"full_name": "Waeschetrockner (im Bad)",
+"name": "Wäschetrockner",
+"full_name": "Wäschetrockner (im Bad)",
 "category": "wirtschaften",
 "context": [
 "wohnen"
@@ -5928,8 +5928,8 @@
 },
 {
 "id": "hochschrank_bad",
-"name": "Badmoebel Hochschrank",
-"full_name": "Badmoebel Hochschrank (Unter-/Oberschrank)",
+"name": "Badmöbel Hochschrank",
+"full_name": "Badmöbel Hochschrank (Unter-/Oberschrank)",
 "category": "sanitaer",
 "context": [
 "wohnen"
@@ -6017,12 +6017,12 @@
 {
 "side": "front",
 "d": 120.0,
-"note": "im Hausarbeitsbereich gleiche Bewegungsmasse wie in der Kueche: 120 vor der Geraetezeile (p282, Zeichnung p283)"
+"note": "im Hausarbeitsbereich gleiche Bewegungsmasse wie in der Küche: 120 vor der Gerätezeile (p282, Zeichnung p283)"
 }
 ],
 "heights": {
 "top": 85,
-"notes": "Hoehe 85 aus Aufbewahren-Uebersicht p289 (Frontansicht 60 breit x 85 hoch)"
+"notes": "Höhe 85 aus Aufbewahren-Uebersicht p289 (Frontansicht 60 breit x 85 hoch)"
 },
 "barrier_free": {
 "standard": "rollstuhlgerecht (DIN 18025-1 / DIN 18040-2 Entwurf)",
@@ -6032,7 +6032,7 @@
 },
 "notes": "150 vor der Zeile (p282, p284)"
 },
-"notes": "Grundflaeche 60x60 (Tabelle p282). Gleiche Stellflaeche wie g4 'waschmaschine_bad' (dort Bewegungsflaeche 90 im Bad). Plan-Symbol p283: Quadrat ca. 30x30 mit Kreis ca. Ø25 (Bullauge), symbolisch, nicht massstaeblich, mittig im 60x60-Feld.",
+"notes": "Grundfläche 60x60 (Tabelle p282). Gleiche Stellfläche wie g4 'waschmaschine_bad' (dort Bewegungsfläche 90 im Bad). Plan-Symbol p283: Quadrat ca. 30x30 mit Kreis ca. Ø25 (Bullauge), symbolisch, nicht massstaeblich, mittig im 60x60-Feld.",
 "sources": [
 {
 "book": "G",
@@ -6054,8 +6054,8 @@
 },
 {
 "id": "waeschetrockner",
-"name": "Waeschetrockner",
-"full_name": "Waeschetrockner (Hausarbeitsbereich)",
+"name": "Wäschetrockner",
+"full_name": "Wäschetrockner (Hausarbeitsbereich)",
 "category": "wirtschaften",
 "context": [
 "wohnen"
@@ -6068,7 +6068,7 @@
 {
 "side": "front",
 "d": 120.0,
-"note": "wie Kueche: 120"
+"note": "wie Küche: 120"
 }
 ],
 "barrier_free": {
@@ -6078,7 +6078,7 @@
 "d": 150
 }
 },
-"notes": "Grundflaeche 60x60 (p282). Abluft nach aussen guenstig (verschiedene Be-/Entlueftungssysteme). Gleiche Stellflaeche wie g4 'waeschetrockner_bad'.",
+"notes": "Grundfläche 60x60 (p282). Abluft nach aussen guenstig (verschiedene Be-/Entlueftungssysteme). Gleiche Stellfläche wie g4 'wäschetrockner_bad'.",
 "sources": [
 {
 "book": "G",
@@ -6096,8 +6096,8 @@
 },
 {
 "id": "arbeitsflaeche_waesche",
-"name": "Arbeitsflaeche zum Legen/Sortieren der Waesche",
-"full_name": "Arbeitsflaeche zum Legen/Sortieren der Waesche",
+"name": "Arbeitsfläche zum Legen/Sortieren der Wäsche",
+"full_name": "Arbeitsfläche zum Legen/Sortieren der Wäsche",
 "category": "wirtschaften",
 "context": [
 "wohnen"
@@ -6119,7 +6119,7 @@
 "d": 150
 }
 },
-"notes": "direkt neben der Waschmaschine guenstig (Sortieren, Vorbehandeln); dort auch Schmutzwaeschebehaelter unterbringen (p282).",
+"notes": "direkt neben der Waschmaschine guenstig (Sortieren, Vorbehandeln); dort auch Schmutzwäschebehälter unterbringen (p282).",
 "sources": [
 {
 "book": "G",
@@ -6163,8 +6163,8 @@
 },
 {
 "id": "schmutzwaeschebehaelter",
-"name": "Platz fuer Schmutzwaeschebehaelter",
-"full_name": "Platz fuer Schmutzwaeschebehaelter",
+"name": "Platz für Schmutzwäschebehälter",
+"full_name": "Platz für Schmutzwäschebehälter",
 "category": "wirtschaften",
 "context": [
 "wohnen"
@@ -6193,8 +6193,8 @@
 },
 {
 "id": "schrank_kleingeraete",
-"name": "Schrankraum fuer Kleingeraete",
-"full_name": "Schrankraum fuer Kleingeraete (Hausarbeitsraum)",
+"name": "Schrankraum für Kleingeräte",
+"full_name": "Schrankraum für Kleingeräte (Hausarbeitsraum)",
 "category": "wirtschaften",
 "context": [
 "wohnen"
@@ -6223,8 +6223,8 @@
 },
 {
 "id": "buegelbrett",
-"name": "Buegelbrett",
-"full_name": "Buegelbrett",
+"name": "Bügelbrett",
+"full_name": "Bügelbrett",
 "category": "wirtschaften",
 "context": [
 "wohnen"
@@ -6257,11 +6257,11 @@
 ],
 "heights": {
 "top": 85,
-"notes": "Arbeitshoehe Buegelbrett 85 (Schnitt p283)"
+"notes": "Arbeitshöhe Bügelbrett 85 (Schnitt p283)"
 },
 "barrier_free": {
 "standard": "rollstuhlgerecht",
-"notes": "Plan p284: gleiche Anordnung, Bewegungsflaeche vor der Zeile >=150, Gesamttiefe 210"
+"notes": "Plan p284: gleiche Anordnung, Bewegungsfläche vor der Zeile >=150, Gesamttiefe 210"
 },
 "sources": [
 {
@@ -6284,8 +6284,8 @@
 },
 {
 "id": "naehmaschine",
-"name": "Naehmaschine",
-"full_name": "Naehmaschine (Stellflaeche)",
+"name": "Nähmaschine",
+"full_name": "Nähmaschine (Stellfläche)",
 "category": "wirtschaften",
 "context": [
 "wohnen"
@@ -6315,7 +6315,7 @@
 "d": 150
 }
 },
-"notes": "Symbol Naehmaschine ca. 40x28 auf der Zeile.",
+"notes": "Symbol Nähmaschine ca. 40x28 auf der Zeile.",
 "sources": [
 {
 "book": "G",
@@ -6333,8 +6333,8 @@
 },
 {
 "id": "arbeitsflaeche_buegeln_naehen",
-"name": "Arbeitsflaeche Buegeln/Naehen",
-"full_name": "Arbeitsflaeche Buegeln/Naehen",
+"name": "Arbeitsfläche Bügeln/Nähen",
+"full_name": "Arbeitsfläche Bügeln/Nähen",
 "category": "wirtschaften",
 "context": [
 "wohnen"
@@ -6349,7 +6349,7 @@
 "d": 120.0
 }
 ],
-"notes": "Arbeitsflaeche 120 empfohlen (p282).",
+"notes": "Arbeitsfläche 120 empfohlen (p282).",
 "sources": [
 {
 "book": "G",
@@ -6363,8 +6363,8 @@
 },
 {
 "id": "einbauschrank_reinigungsgeraete",
-"name": "Einbauschrank fuer Reinigungsgeraete / Buegelbre",
-"full_name": "Einbauschrank fuer Reinigungsgeraete / Buegelbrett",
+"name": "Einbauschrank für Reinigungsgeräte / Bügelbre",
+"full_name": "Einbauschrank für Reinigungsgeräte / Bügelbrett",
 "category": "aufbewahren",
 "context": [
 "wohnen"
@@ -6382,9 +6382,9 @@
 }
 ],
 "heights": {
-"notes": "unteres Fach lichte Hoehe 160 (Besen, Staubsauger, Buegelbrett stehend), oberes Fach 35 (Eimer) - p283 Schnitt, p288"
+"notes": "unteres Fach lichte Höhe 160 (Besen, Staubsauger, Bügelbrett stehend), oberes Fach 35 (Eimer) - p283 Schnitt, p288"
 },
-"notes": "Schnitt Buegeln p283: 2 x 60 breit; darin Besen (40 Platzbedarf) und Buegelbrett (40) nebeneinander. Masse lt. p288 nur Orientierungswerte.",
+"notes": "Schnitt Bügeln p283: 2 x 60 breit; darin Besen (40 Platzbedarf) und Bügelbrett (40) nebeneinander. Masse lt. p288 nur Orientierungswerte.",
 "sources": [
 {
 "book": "G",
@@ -6398,8 +6398,8 @@
 },
 {
 "id": "schrank_120_tuervarianten",
-"name": "Schrank 120x60 mit Tuervarianten",
-"full_name": "Schrank 120x60 mit Tuervarianten (Falttueren, Drehtueren, Schiebetueren)",
+"name": "Schrank 120x60 mit Türvarianten",
+"full_name": "Schrank 120x60 mit Türvarianten (Falttüren, Drehtüren, Schiebetüren)",
 "category": "aufbewahren",
 "context": [
 "wohnen"
@@ -6410,9 +6410,9 @@
 "wall": true,
 "barrier_free": {
 "standard": "rollstuhlgerecht",
-"notes": "Varianten zeigen Anfahrbarkeit mit Rollstuhl; Schiebe- und Falttueren benoetigen weniger Bewegungsflaeche als Drehtueren"
+"notes": "Varianten zeigen Anfahrbarkeit mit Rollstuhl; Schiebe- und Falttüren benoetigen weniger Bewegungsfläche als Drehtüren"
 },
-"notes": "Plan M 1:50, nur Schrankmasse 120 x 60 bemasst; Tuerfluegelmasse aus der Zeichnung abgeleitet (nicht bemasst).",
+"notes": "Plan M 1:50, nur Schrankmasse 120 x 60 bemasst; Türfluegelmasse aus der Zeichnung abgeleitet (nicht bemasst).",
 "sources": [
 {
 "book": "G",
@@ -6422,8 +6422,8 @@
 },
 {
 "id": "abfallbehaelter_2rad",
-"name": "Fahrbarer Abfallsammelbehaelter mit 2 Raedern",
-"full_name": "Fahrbarer Abfallsammelbehaelter mit 2 Raedern (Muelltonne 80-340 l)",
+"name": "Fahrbarer Abfallsammelbehälter mit 2 Rädern",
+"full_name": "Fahrbarer Abfallsammelbehälter mit 2 Rädern (Mülltonne 80-340 l)",
 "category": "entsorgen",
 "context": [
 "wohnen",
@@ -6474,7 +6474,7 @@
 }
 ],
 "heights": {
-"notes": "w = Breite b (Vorderseite), d = Laenge l (Tiefe inkl. Griff), h = Hoehe bei geschlossenem Deckel; Deckel-Aufklappen erfordert lichte Hoehe h + l (p298)"
+"notes": "w = Breite b (Vorderseite), d = Länge l (Tiefe inkl. Griff), h = Höhe bei geschlossenem Deckel; Deckel-Aufklappen erfordert lichte Höhe h + l (p298)"
 },
 "barrier_free": {
 "standard": "rollstuhlgerecht (p302)",
@@ -6482,9 +6482,9 @@
 "w": 150,
 "d": 150
 },
-"notes": "Einwurfkante 70-85 ueber Standflaeche Rollstuhl; Rollstuhl-Podest 25 hoeher als Tonnenstandflaeche (240 l)"
+"notes": "Einwurfkante 70-85 ueber Standfläche Rollstuhl; Rollstuhl-Podest 25 höher als Tonnenstandfläche (240 l)"
 },
-"notes": "DIN EN 840-1 (bis 400 l, Kammschuettung). Masse im Buch in mm; hier in cm umgerechnet. Default-Stellflaeche = 240 l.",
+"notes": "DIN EN 840-1 (bis 400 l, Kammschuettung). Masse im Buch in mm; hier in cm umgerechnet. Default-Stellfläche = 240 l.",
 "sources": [
 {
 "book": "G",
@@ -6502,8 +6502,8 @@
 },
 {
 "id": "abfallbehaelter_4rad_flachdeckel",
-"name": "Fahrbarer Abfallsammelbehaelter mit 4 Raedern, F",
-"full_name": "Fahrbarer Abfallsammelbehaelter mit 4 Raedern, Flachdeckel (Container 500-1200 l)",
+"name": "Fahrbarer Abfallsammelbehälter mit 4 Rädern, F",
+"full_name": "Fahrbarer Abfallsammelbehälter mit 4 Rädern, Flachdeckel (Container 500-1200 l)",
 "category": "entsorgen",
 "context": [
 "wohnen",
@@ -6518,7 +6518,7 @@
 {
 "side": "front",
 "d": 120.0,
-"note": "Bewegungsflaeche vor Behaelterreihen >=120; Wegbreite fuer Grossmuellbehaelter 150 (p297)"
+"note": "Bewegungsfläche vor Behaelterreihen >=120; Wegbreite für Grossmüllbehälter 150 (p297)"
 }
 ],
 "variants": [
@@ -6542,7 +6542,7 @@
 }
 ],
 "heights": {
-"notes": "Flachdeckel klappt nach hinten auf: lichte Hoehe h + l noetig (p299)"
+"notes": "Flachdeckel klappt nach hinten auf: lichte Höhe h + l noetig (p299)"
 },
 "barrier_free": {
 "standard": "rollstuhlgerecht (p302)",
@@ -6552,7 +6552,7 @@
 },
 "notes": "Einwurf ueber Klappe im Schrank-Deckel, 70 ueber Rollstuhl-Podest"
 },
-"notes": "DIN EN 840-2 (bis 1300 l). Default-Stellflaeche = 660 l (b 1370 +/- 10, l 850, h 1250 mm).",
+"notes": "DIN EN 840-2 (bis 1300 l). Default-Stellfläche = 660 l (b 1370 +/- 10, l 850, h 1250 mm).",
 "sources": [
 {
 "book": "G",
@@ -6574,8 +6574,8 @@
 },
 {
 "id": "abfallbehaelter_4rad_teil3",
-"name": "Fahrbarer Abfallsammelbehaelter mit 4 Raedern na",
-"full_name": "Fahrbarer Abfallsammelbehaelter mit 4 Raedern nach DIN EN 840-3 (770-1300 l)",
+"name": "Fahrbarer Abfallsammelbehälter mit 4 Rädern na",
+"full_name": "Fahrbarer Abfallsammelbehälter mit 4 Rädern nach DIN EN 840-3 (770-1300 l)",
 "category": "entsorgen",
 "context": [
 "wohnen",
@@ -6600,7 +6600,7 @@
 "d": 110.0
 }
 ],
-"notes": "DIN EN 840-3; laut Normenliste p341 Behaelter mit 4 Raedern bis 1300 l 'mit Schiebedeckel(n)'; Zeichnung zeigt gewoelbten Deckel mit Einwurfklappe.",
+"notes": "DIN EN 840-3; laut Normenliste p341 Behaelter mit 4 Rädern bis 1300 l 'mit Schiebedeckel(n)'; Zeichnung zeigt gewoelbten Deckel mit Einwurfklappe.",
 "sources": [
 {
 "book": "G",
@@ -6614,8 +6614,8 @@
 },
 {
 "id": "abfalleimer_gross",
-"name": "Abfallbehaelter Wohnung, rund gross",
-"full_name": "Abfallbehaelter Wohnung, rund gross",
+"name": "Abfallbehälter Wohnung, rund gross",
+"full_name": "Abfallbehälter Wohnung, rund gross",
 "category": "entsorgen",
 "context": [
 "wohnen"
@@ -6625,7 +6625,7 @@
 "d": 54.0,
 "wall": true,
 "h": 97.0,
-"notes": "Draufsicht Kreis Ø54, Hoehe 97 (M 1:50).",
+"notes": "Draufsicht Kreis Ø54, Höhe 97 (M 1:50).",
 "sources": [
 {
 "book": "G",
@@ -6635,8 +6635,8 @@
 },
 {
 "id": "abfalleimer_mittel",
-"name": "Abfallbehaelter Wohnung, rund mittel",
-"full_name": "Abfallbehaelter Wohnung, rund mittel",
+"name": "Abfallbehälter Wohnung, rund mittel",
+"full_name": "Abfallbehälter Wohnung, rund mittel",
 "category": "entsorgen",
 "context": [
 "wohnen"
@@ -6646,7 +6646,7 @@
 "d": 36.0,
 "wall": true,
 "h": 75.0,
-"notes": "Ø36, Hoehe 75.",
+"notes": "Ø36, Höhe 75.",
 "sources": [
 {
 "book": "G",
@@ -6667,7 +6667,7 @@
 "d": 20.0,
 "wall": true,
 "h": 33.0,
-"notes": "20x20, Hoehe 33.",
+"notes": "20x20, Höhe 33.",
 "sources": [
 {
 "book": "G",
@@ -6677,8 +6677,8 @@
 },
 {
 "id": "abfalltrennsystem_spuelenschrank",
-"name": "Abfalltrenn-System im Spuelenunterschrank",
-"full_name": "Abfalltrenn-System im Spuelenunterschrank (an der Tuer, ausschwenkend)",
+"name": "Abfalltrenn-System im Spülenunterschrank",
+"full_name": "Abfalltrenn-System im Spülenunterschrank (an der Tür, ausschwenkend)",
 "category": "entsorgen",
 "context": [
 "wohnen"
@@ -6739,8 +6739,8 @@
 },
 {
 "id": "kuechenzeile_element_60x20",
-"name": "Abschlusselement am Ende der Kuechenzeile",
-"full_name": "Abschlusselement am Ende der Kuechenzeile (unbeschriftet)",
+"name": "Abschlusselement am Ende der Küchenzeile",
+"full_name": "Abschlusselement am Ende der Küchenzeile (unbeschriftet)",
 "category": "kueche",
 "context": [
 "wohnen"
@@ -6749,7 +6749,7 @@
 "w": 60.0,
 "d": 20.0,
 "wall": true,
-"notes": "60 x 20 mit dickerer Kontur (0.5 pt) am Zeilenende neben der Tuerwand; Bedeutung nicht erlaeutert.",
+"notes": "60 x 20 mit dickerer Kontur (0.5 pt) am Zeilenende neben der Türwand; Bedeutung nicht erlaeutert.",
 "sources": [
 {
 "book": "G",
@@ -6859,7 +6859,7 @@
 "d": 145.0
 }
 ],
-"notes": "Tischbreite >=80 (Kette); bei 4 Personen Tischlaenge >=130.",
+"notes": "Tischbreite >=80 (Kette); bei 4 Personen Tischlänge >=130.",
 "sources": [
 {
 "book": "G",
@@ -7926,7 +7926,7 @@
 ],
 "heights": {
 "top": null,
-"notes": "Tischhöhe je Größenklasse siehe Varianten (h) bzw. Regel schulmoebel_en1729_groessen"
+"notes": "Tischhöhe je Größenklasse siehe Varianten (h) bzw. Regel schulmöbel_en1729_größen"
 },
 "notes": "w = Breite parallel zur Sitzkante (Plattenlänge), d = Tiefe zur Schülerseite. Zeichnung M 1:50, Draufsicht: Tisch dunkel = Einzeltisch, hell verlängert = Doppeltisch. EN 1729: Größe 1-3 Doppeltisch 120, Größe 4-7 Doppeltisch 130 bei Einzeltisch 60 (so gezeichnet, Vektor geprüft).",
 "sources": [
@@ -8098,7 +8098,7 @@
 "d": 50.0
 }
 ],
-"notes": "Höhe nach Größenklasse (schuelertisch_groessenklasse)",
+"notes": "Höhe nach Größenklasse (schuelertisch_größenklasse)",
 "sources": [
 {
 "book": "G",
@@ -8234,7 +8234,7 @@
 "d": 33.0
 }
 ],
-"notes": "Maße je Größenklasse siehe schuelerstuhl_groessenklasse",
+"notes": "Maße je Größenklasse siehe schuelerstuhl_größenklasse",
 "sources": [
 {
 "book": "G",
@@ -9576,7 +9576,7 @@
 "page": 45
 }
 ],
-"notes": "nur aus einem Standardgrundriss bekannt (aufzug_vorflaeche_rollstuhl)"
+"notes": "nur aus einem Standardgrundriss bekannt (aufzug_vorfläche_rollstuhl)"
 },
 {
 "id": "rampenlauf_1",
@@ -9616,7 +9616,7 @@
 },
 {
 "id": "fensteroeffnung_licht",
-"name": "Fensteroeffnung licht",
+"name": "Fensteröffnung licht",
 "category": "sonstiges",
 "kind": "box",
 "w": 90.0,
@@ -9648,11 +9648,11 @@
 "page": 105
 }
 ],
-"notes": "nur aus einem Standardgrundriss bekannt (feuerwehr_durchgang_tuer_durchfahrt)"
+"notes": "nur aus einem Standardgrundriss bekannt (feuerwehr_durchgang_tür_durchfahrt)"
 },
 {
 "id": "aufstellflaeche",
-"name": "Aufstellflaeche",
+"name": "Aufstellfläche",
 "category": "sonstiges",
 "kind": "box",
 "w": 1100.0,
@@ -9666,7 +9666,7 @@
 "page": 107
 }
 ],
-"notes": "nur aus einem Standardgrundriss bekannt (aufstellflaeche_parallel_layout)"
+"notes": "nur aus einem Standardgrundriss bekannt (aufstellfläche_parallel_layout)"
 },
 {
 "id": "zufahrt",
@@ -9684,7 +9684,7 @@
 "page": 108
 }
 ],
-"notes": "nur aus einem Standardgrundriss bekannt (bewegungsflaeche_an_zufahrt_layout)"
+"notes": "nur aus einem Standardgrundriss bekannt (bewegungsfläche_an_zufahrt_layout)"
 },
 {
 "id": "klingeltableau",
@@ -9846,7 +9846,7 @@
 "page": 207
 }
 ],
-"notes": "nur aus einem Standardgrundriss bekannt (kueche_arbeitsinsel)"
+"notes": "nur aus einem Standardgrundriss bekannt (küche_arbeitsinsel)"
 },
 {
 "id": "imbisstheke",
@@ -9864,11 +9864,11 @@
 "page": 207
 }
 ],
-"notes": "nur aus einem Standardgrundriss bekannt (kueche_l_essplatz)"
+"notes": "nur aus einem Standardgrundriss bekannt (küche_l_essplatz)"
 },
 {
 "id": "moebel_sideboard",
-"name": "Moebel sideboard",
+"name": "Möbel sideboard",
 "category": "sonstiges",
 "kind": "shelf",
 "w": 210.0,
@@ -9954,7 +9954,7 @@
 "page": 383
 }
 ],
-"notes": "nur aus einem Standardgrundriss bekannt (kombibuero_grundriss)"
+"notes": "nur aus einem Standardgrundriss bekannt (kombibüro_grundriss)"
 },
 {
 "id": "waschbecken",
@@ -9976,7 +9976,7 @@
 },
 {
 "id": "ausguss_spuele",
-"name": "Ausguss spuele",
+"name": "Ausguss spüle",
 "category": "sonstiges",
 "kind": "sink",
 "w": 69.0,
@@ -9997,7 +9997,7 @@
 },
 {
 "id": "hoersaalgestuehl_pult",
-"name": "Hoersaalgestuehl pult",
+"name": "Hörsaalgestühl pult",
 "category": "sonstiges",
 "kind": "box",
 "w": 40.6,
@@ -10051,7 +10051,7 @@
 },
 {
 "id": "wandspuele",
-"name": "Wandspuele",
+"name": "Wandspüle",
 "category": "sonstiges",
 "kind": "sink",
 "w": 144.0,
@@ -10072,7 +10072,7 @@
 },
 {
 "id": "geraeteschrank",
-"name": "Geraeteschrank",
+"name": "Geräteschrank",
 "category": "sonstiges",
 "kind": "wardrobe",
 "w": 779.0,
@@ -10108,7 +10108,7 @@
 },
 {
 "id": "wc_wandhaengend",
-"name": "Wc wandhaengend",
+"name": "Wc wandhängend",
 "category": "sonstiges",
 "kind": "wc",
 "w": 36.9,
@@ -10268,7 +10268,7 @@
 },
 {
 "id": "moebel_45x45",
-"name": "Moebel 45x45",
+"name": "Möbel 45x45",
 "category": "sonstiges",
 "kind": "box",
 "w": 45.0,
@@ -10286,7 +10286,7 @@
 },
 {
 "id": "moebel_345x33",
-"name": "Moebel 345x33",
+"name": "Möbel 345x33",
 "category": "sonstiges",
 "kind": "box",
 "w": 345.0,
@@ -10430,7 +10430,7 @@
 },
 {
 "id": "moebel_86x86",
-"name": "Moebel 86x86",
+"name": "Möbel 86x86",
 "category": "sonstiges",
 "kind": "box",
 "w": 86.0,
@@ -10448,7 +10448,7 @@
 },
 {
 "id": "moebel_87x87",
-"name": "Moebel 87x87",
+"name": "Möbel 87x87",
 "category": "sonstiges",
 "kind": "box",
 "w": 87.0,
@@ -10466,7 +10466,7 @@
 },
 {
 "id": "moebel_73x73",
-"name": "Moebel 73x73",
+"name": "Möbel 73x73",
 "category": "sonstiges",
 "kind": "box",
 "w": 73.0,
@@ -10484,7 +10484,7 @@
 },
 {
 "id": "moebel_465x200",
-"name": "Moebel 465x200",
+"name": "Möbel 465x200",
 "category": "sonstiges",
 "kind": "box",
 "w": 200.0,
@@ -10502,7 +10502,7 @@
 },
 {
 "id": "moebel_233x180",
-"name": "Moebel 233x180",
+"name": "Möbel 233x180",
 "category": "sonstiges",
 "kind": "box",
 "w": 180.0,
@@ -10520,7 +10520,7 @@
 },
 {
 "id": "moebel_465x202",
-"name": "Moebel 465x202",
+"name": "Möbel 465x202",
 "category": "sonstiges",
 "kind": "box",
 "w": 202.0,
@@ -10538,7 +10538,7 @@
 },
 {
 "id": "moebel_50x40",
-"name": "Moebel 50x40",
+"name": "Möbel 50x40",
 "category": "sonstiges",
 "kind": "box",
 "w": 40.0,
@@ -10556,7 +10556,7 @@
 },
 {
 "id": "moebel_91x90",
-"name": "Moebel 91x90",
+"name": "Möbel 91x90",
 "category": "sonstiges",
 "kind": "box",
 "w": 90.0,
@@ -10574,7 +10574,7 @@
 },
 {
 "id": "moebel_90x90",
-"name": "Moebel 90x90",
+"name": "Möbel 90x90",
 "category": "sonstiges",
 "kind": "box",
 "w": 90.0,
@@ -10664,7 +10664,7 @@
 },
 {
 "id": "moebel_93x92",
-"name": "Moebel 93x92",
+"name": "Möbel 93x92",
 "category": "sonstiges",
 "kind": "box",
 "w": 92.0,
@@ -10826,7 +10826,7 @@
 },
 {
 "id": "moebel_121x121",
-"name": "Moebel 121x121",
+"name": "Möbel 121x121",
 "category": "sonstiges",
 "kind": "box",
 "w": 121.0,
@@ -10844,7 +10844,7 @@
 },
 {
 "id": "moebel_121x119",
-"name": "Moebel 121x119",
+"name": "Möbel 121x119",
 "category": "sonstiges",
 "kind": "box",
 "w": 121.0,
@@ -10862,7 +10862,7 @@
 },
 {
 "id": "moebel_119x119",
-"name": "Moebel 119x119",
+"name": "Möbel 119x119",
 "category": "sonstiges",
 "kind": "box",
 "w": 119.0,
@@ -10880,7 +10880,7 @@
 },
 {
 "id": "moebel_90x89",
-"name": "Moebel 90x89",
+"name": "Möbel 90x89",
 "category": "sonstiges",
 "kind": "box",
 "w": 90.0,
@@ -10898,7 +10898,7 @@
 },
 {
 "id": "moebel_89x89",
-"name": "Moebel 89x89",
+"name": "Möbel 89x89",
 "category": "sonstiges",
 "kind": "box",
 "w": 89.0,
@@ -10916,7 +10916,7 @@
 },
 {
 "id": "moebel_48x29",
-"name": "Moebel 48x29",
+"name": "Möbel 48x29",
 "category": "sonstiges",
 "kind": "box",
 "w": 48.0,
@@ -10934,7 +10934,7 @@
 },
 {
 "id": "moebel_170x44",
-"name": "Moebel 170x44",
+"name": "Möbel 170x44",
 "category": "sonstiges",
 "kind": "box",
 "w": 170.0,
@@ -10952,7 +10952,7 @@
 },
 {
 "id": "moebel_41x29",
-"name": "Moebel 41x29",
+"name": "Möbel 41x29",
 "category": "sonstiges",
 "kind": "box",
 "w": 41.0,
@@ -11006,7 +11006,7 @@
 },
 {
 "id": "moebel_136x136",
-"name": "Moebel 136x136",
+"name": "Möbel 136x136",
 "category": "sonstiges",
 "kind": "box",
 "w": 136.0,
@@ -11024,7 +11024,7 @@
 },
 {
 "id": "moebel_85x85",
-"name": "Moebel 85x85",
+"name": "Möbel 85x85",
 "category": "sonstiges",
 "kind": "box",
 "w": 85.0,
@@ -11042,7 +11042,7 @@
 },
 {
 "id": "moebel_200x60",
-"name": "Moebel 200x60",
+"name": "Möbel 200x60",
 "category": "sonstiges",
 "kind": "box",
 "w": 200.0,
@@ -11060,7 +11060,7 @@
 },
 {
 "id": "moebel_450x30",
-"name": "Moebel 450x30",
+"name": "Möbel 450x30",
 "category": "sonstiges",
 "kind": "box",
 "w": 30.0,
@@ -11114,7 +11114,7 @@
 },
 {
 "id": "moebel_55x55",
-"name": "Moebel 55x55",
+"name": "Möbel 55x55",
 "category": "sonstiges",
 "kind": "box",
 "w": 55.0,
@@ -11150,7 +11150,7 @@
 },
 {
 "id": "moebel_78x38",
-"name": "Moebel 78x38",
+"name": "Möbel 78x38",
 "category": "sonstiges",
 "kind": "box",
 "w": 38.0,
@@ -11168,7 +11168,7 @@
 },
 {
 "id": "moebel_66x25",
-"name": "Moebel 66x25",
+"name": "Möbel 66x25",
 "category": "sonstiges",
 "kind": "box",
 "w": 25.0,
@@ -11186,7 +11186,7 @@
 },
 {
 "id": "moebel_106x32",
-"name": "Moebel 106x32",
+"name": "Möbel 106x32",
 "category": "sonstiges",
 "kind": "box",
 "w": 106.0,
@@ -11222,7 +11222,7 @@
 },
 {
 "id": "moebel_120x40",
-"name": "Moebel 120x40",
+"name": "Möbel 120x40",
 "category": "sonstiges",
 "kind": "box",
 "w": 120.0,
@@ -11240,7 +11240,7 @@
 },
 {
 "id": "moebel_121x40",
-"name": "Moebel 121x40",
+"name": "Möbel 121x40",
 "category": "sonstiges",
 "kind": "box",
 "w": 121.0,
@@ -11258,7 +11258,7 @@
 },
 {
 "id": "moebel_120x99",
-"name": "Moebel 120x99",
+"name": "Möbel 120x99",
 "category": "sonstiges",
 "kind": "box",
 "w": 99.0,
@@ -11276,7 +11276,7 @@
 },
 {
 "id": "moebel_258x200",
-"name": "Moebel 258x200",
+"name": "Möbel 258x200",
 "category": "sonstiges",
 "kind": "box",
 "w": 258.0,
@@ -11366,7 +11366,7 @@
 },
 {
 "id": "moebel_127x127",
-"name": "Moebel 127x127",
+"name": "Möbel 127x127",
 "category": "sonstiges",
 "kind": "box",
 "w": 127.0,
@@ -11384,7 +11384,7 @@
 },
 {
 "id": "moebel_100x100",
-"name": "Moebel 100x100",
+"name": "Möbel 100x100",
 "category": "sonstiges",
 "kind": "box",
 "w": 100.0,
@@ -11402,7 +11402,7 @@
 },
 {
 "id": "moebel_77x77",
-"name": "Moebel 77x77",
+"name": "Möbel 77x77",
 "category": "sonstiges",
 "kind": "box",
 "w": 77.0,
@@ -11420,7 +11420,7 @@
 },
 {
 "id": "moebel_105x105",
-"name": "Moebel 105x105",
+"name": "Möbel 105x105",
 "category": "sonstiges",
 "kind": "box",
 "w": 105.0,
@@ -11438,7 +11438,7 @@
 },
 {
 "id": "moebel_86x85",
-"name": "Moebel 86x85",
+"name": "Möbel 86x85",
 "category": "sonstiges",
 "kind": "box",
 "w": 85.0,
@@ -11456,7 +11456,7 @@
 },
 {
 "id": "moebel_41x41",
-"name": "Moebel 41x41",
+"name": "Möbel 41x41",
 "category": "sonstiges",
 "kind": "box",
 "w": 41.0,
@@ -11564,7 +11564,7 @@
 },
 {
 "id": "moebel_451x410",
-"name": "Moebel 451x410",
+"name": "Möbel 451x410",
 "category": "sonstiges",
 "kind": "box",
 "w": 410.0,
@@ -11582,7 +11582,7 @@
 },
 {
 "id": "moebel_240x60",
-"name": "Moebel 240x60",
+"name": "Möbel 240x60",
 "category": "sonstiges",
 "kind": "box",
 "w": 60.0,
@@ -11636,7 +11636,7 @@
 },
 {
 "id": "moebel_165x28",
-"name": "Moebel 165x28",
+"name": "Möbel 165x28",
 "category": "sonstiges",
 "kind": "box",
 "w": 165.0,
@@ -11654,7 +11654,7 @@
 },
 {
 "id": "moebel_59x59",
-"name": "Moebel 59x59",
+"name": "Möbel 59x59",
 "category": "sonstiges",
 "kind": "box",
 "w": 59.0,
@@ -11690,7 +11690,7 @@
 },
 {
 "id": "moebel_159x25",
-"name": "Moebel 159x25",
+"name": "Möbel 159x25",
 "category": "sonstiges",
 "kind": "box",
 "w": 25.0,
@@ -11708,7 +11708,7 @@
 },
 {
 "id": "moebel_130x25",
-"name": "Moebel 130x25",
+"name": "Möbel 130x25",
 "category": "sonstiges",
 "kind": "box",
 "w": 130.0,
@@ -11726,7 +11726,7 @@
 },
 {
 "id": "moebel_155x25",
-"name": "Moebel 155x25",
+"name": "Möbel 155x25",
 "category": "sonstiges",
 "kind": "box",
 "w": 155.0,
@@ -11744,7 +11744,7 @@
 },
 {
 "id": "moebel_75x75",
-"name": "Moebel 75x75",
+"name": "Möbel 75x75",
 "category": "sonstiges",
 "kind": "box",
 "w": 75.0,
@@ -11762,7 +11762,7 @@
 },
 {
 "id": "moebel_70x70",
-"name": "Moebel 70x70",
+"name": "Möbel 70x70",
 "category": "sonstiges",
 "kind": "box",
 "w": 70.0,
@@ -11780,7 +11780,7 @@
 },
 {
 "id": "moebel_539x69",
-"name": "Moebel 539x69",
+"name": "Möbel 539x69",
 "category": "sonstiges",
 "kind": "box",
 "w": 69.0,
@@ -11816,7 +11816,7 @@
 },
 {
 "id": "moebel_180x60",
-"name": "Moebel 180x60",
+"name": "Möbel 180x60",
 "category": "sonstiges",
 "kind": "box",
 "w": 180.0,
@@ -11888,7 +11888,7 @@
 },
 {
 "id": "moebel_299x77",
-"name": "Moebel 299x77",
+"name": "Möbel 299x77",
 "category": "sonstiges",
 "kind": "box",
 "w": 77.0,
@@ -11906,7 +11906,7 @@
 },
 {
 "id": "moebel_46x46",
-"name": "Moebel 46x46",
+"name": "Möbel 46x46",
 "category": "sonstiges",
 "kind": "box",
 "w": 46.0,
@@ -11924,7 +11924,7 @@
 },
 {
 "id": "moebel_39x30",
-"name": "Moebel 39x30",
+"name": "Möbel 39x30",
 "category": "sonstiges",
 "kind": "box",
 "w": 39.0,
@@ -11942,7 +11942,7 @@
 },
 {
 "id": "moebel_46x30",
-"name": "Moebel 46x30",
+"name": "Möbel 46x30",
 "category": "sonstiges",
 "kind": "box",
 "w": 46.0,
@@ -11960,7 +11960,7 @@
 },
 {
 "id": "moebel_80x80",
-"name": "Moebel 80x80",
+"name": "Möbel 80x80",
 "category": "sonstiges",
 "kind": "box",
 "w": 80.0,
@@ -12014,7 +12014,7 @@
 },
 {
 "id": "moebel_451x426",
-"name": "Moebel 451x426",
+"name": "Möbel 451x426",
 "category": "sonstiges",
 "kind": "box",
 "w": 426.0,
@@ -12032,7 +12032,7 @@
 },
 {
 "id": "moebel_82x81",
-"name": "Moebel 82x81",
+"name": "Möbel 82x81",
 "category": "sonstiges",
 "kind": "box",
 "w": 81.0,
@@ -12050,7 +12050,7 @@
 },
 {
 "id": "moebel_78x78",
-"name": "Moebel 78x78",
+"name": "Möbel 78x78",
 "category": "sonstiges",
 "kind": "box",
 "w": 78.0,
@@ -12122,7 +12122,7 @@
 },
 {
 "id": "moebel_79x79",
-"name": "Moebel 79x79",
+"name": "Möbel 79x79",
 "category": "sonstiges",
 "kind": "box",
 "w": 79.0,
@@ -12176,7 +12176,7 @@
 },
 {
 "id": "moebel_256x47",
-"name": "Moebel 256x47",
+"name": "Möbel 256x47",
 "category": "sonstiges",
 "kind": "box",
 "w": 256.0,
@@ -12212,7 +12212,7 @@
 },
 {
 "id": "moebel_280x44",
-"name": "Moebel 280x44",
+"name": "Möbel 280x44",
 "category": "sonstiges",
 "kind": "box",
 "w": 280.0,
@@ -12230,7 +12230,7 @@
 },
 {
 "id": "moebel_128x128",
-"name": "Moebel 128x128",
+"name": "Möbel 128x128",
 "category": "sonstiges",
 "kind": "box",
 "w": 128.0,
@@ -12284,7 +12284,7 @@
 },
 {
 "id": "moebel_259x60",
-"name": "Moebel 259x60",
+"name": "Möbel 259x60",
 "category": "sonstiges",
 "kind": "box",
 "w": 60.0,
@@ -12320,7 +12320,7 @@
 },
 {
 "id": "moebel_99x75",
-"name": "Moebel 99x75",
+"name": "Möbel 99x75",
 "category": "sonstiges",
 "kind": "box",
 "w": 75.0,
