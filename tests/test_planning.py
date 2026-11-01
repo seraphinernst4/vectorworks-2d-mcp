@@ -178,6 +178,10 @@ def test_barrier_free_areas_from_the_independent_check():
     assert any(a["side"] == "front" and a["d"] == 90 for a in kb.element("einzelbett")["areas_bf"])
     ks = kb.element("kleiderschrank")
     assert ks["areas"][0]["d"] == 70 and ks["areas_bf"][0]["d"] == 90 and ks["areas_rg"][0]["d"] == 150
+    # the whole kitchen row has 120 in front (wheelchair 150), not only the base cabinets
+    for eid in ("kuehlschrank", "kueche_hochschrank", "kueche_unterschrank"):
+        e = kb.element(eid)
+        assert e["areas"][0]["d"] == 120 and e["areas_rg"][0]["d"] == 150, eid
     # armchair: the living-room chapter's standard size, the others as variants
     sessel = kb.element("sessel")
     assert (sessel["w"], sessel["d"]) == (90, 85) and any(v["id"] == "60x60" for v in sessel["variants"])

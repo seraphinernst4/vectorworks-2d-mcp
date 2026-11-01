@@ -276,6 +276,13 @@ def build(src: str) -> dict:
                 el.pop("areas", None)
             if el["category"] == "kueche" and kind in ("counter", "sink", "hob", "fridge", "tall", "box"):
                 el["group"] = "kuechenzeile"
+                if kind != "box" and el["wall"]:
+                    # S. 196/202 (printed): in front of the whole kitchen row at least 120 (one person),
+                    # 150 recommended and wheelchair; barrier-free 120
+                    el["areas"] = [{"side": "front", "d": 120.0,
+                                    "note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"}]
+                    el["areas_bf"] = [{"side": "front", "d": 120.0}]
+                    el["areas_rg"] = [{"side": "front", "d": 150.0}]
             if kind in ("table", "chair"):
                 el.pop("areas", None)  # dining: the Essplatz (table + chairs) carries the areas
             if kind in ("parking", "car", "bicycle", "person", "wheelchair"):

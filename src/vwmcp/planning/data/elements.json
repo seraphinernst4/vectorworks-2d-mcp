@@ -1691,7 +1691,7 @@
 {
 "side": "front",
 "d": 120.0,
-"note": "120 vor Küchenzeile (nicht rollstuhlgerecht, eine Person); 150 deutlich besser und rollstuhlgeeignet"
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
 }
 ],
 "variants": [
@@ -1775,7 +1775,21 @@
 "page": 212
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "kueche_oberschrank",
@@ -1872,7 +1886,28 @@
 "page": 200
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "kuehl_gefrierkombination",
@@ -1897,7 +1932,28 @@
 "page": 202
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "kuehlschrank",
@@ -1922,7 +1978,28 @@
 "page": 207
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "gefrierschrank",
@@ -1947,7 +2024,28 @@
 "page": 202
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "arbeitsflaeche_klein",
@@ -1968,7 +2066,28 @@
 "page": 200
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "arbeitsflaeche_gross",
@@ -1993,7 +2112,28 @@
 "page": 200
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "geraetestellflaeche",
@@ -2018,7 +2158,28 @@
 "page": 202
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "abstellflaeche_herd_spuele",
@@ -2051,6 +2212,27 @@
 }
 ],
 "group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+],
 "overlap_ok": [
 "arbeitsinsel",
 "kueche_unterschrank",
@@ -2085,6 +2267,27 @@
 }
 ],
 "group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+],
 "overlap_ok": [
 "arbeitsinsel",
 "kueche_unterschrank",
@@ -2124,6 +2327,27 @@
 }
 ],
 "group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+],
 "overlap_ok": [
 "arbeitsinsel",
 "kueche_unterschrank",
@@ -2159,6 +2383,27 @@
 }
 ],
 "group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+],
 "overlap_ok": [
 "arbeitsinsel",
 "kueche_unterschrank",
@@ -2184,7 +2429,28 @@
 "page": 200
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "mikrowelle_schrank",
@@ -2234,6 +2500,27 @@
 }
 ],
 "group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+],
 "overlap_ok": [
 "arbeitsinsel",
 "kueche_unterschrank",
@@ -2276,6 +2563,27 @@
 }
 ],
 "group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+],
 "overlap_ok": [
 "arbeitsinsel",
 "kueche_unterschrank",
@@ -2318,6 +2626,27 @@
 }
 ],
 "group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+],
 "overlap_ok": [
 "arbeitsinsel",
 "kueche_unterschrank",
@@ -2348,6 +2677,27 @@
 }
 ],
 "group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+],
 "overlap_ok": [
 "arbeitsinsel",
 "kueche_unterschrank",
@@ -6418,7 +6768,28 @@
 "page": 309
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "gartenstuhl",
@@ -6826,7 +7197,28 @@
 "page": 395
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
+}
+],
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "tk_kuehlschrank_unterbau",
@@ -6845,8 +7237,7 @@
 {
 "side": "front",
 "d": 120.0,
-"w": 210.0,
-"note": "gemeinsame Bewegungsfläche 120 vor der ganzen Zeile"
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
 }
 ],
 "notes": "Kaffeemaschine auf der Arbeitsplatte darüber.",
@@ -6856,7 +7247,21 @@
 "page": 411
 }
 ],
-"group": "kuechenzeile"
+"group": "kuechenzeile",
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+]
 },
 {
 "id": "tk_geschirrspueler",
@@ -6877,7 +7282,8 @@
 "areas": [
 {
 "side": "front",
-"d": 120.0
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
 }
 ],
 "sources": [
@@ -6887,6 +7293,20 @@
 }
 ],
 "group": "kuechenzeile",
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+],
 "overlap_ok": [
 "arbeitsinsel",
 "kueche_unterschrank",
@@ -6913,7 +7333,8 @@
 "areas": [
 {
 "side": "front",
-"d": 120.0
+"d": 120.0,
+"note": "vor der Küchenzeile mind. 120 (eine Person), empfohlen 150"
 }
 ],
 "sources": [
@@ -6923,6 +7344,20 @@
 }
 ],
 "group": "kuechenzeile",
+"areas_bf": [
+{
+"side": "front",
+"d": 120.0,
+"align": "any"
+}
+],
+"areas_rg": [
+{
+"side": "front",
+"d": 150.0,
+"align": "any"
+}
+],
 "overlap_ok": [
 "arbeitsinsel",
 "kueche_unterschrank",
