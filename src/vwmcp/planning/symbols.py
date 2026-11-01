@@ -247,16 +247,27 @@ def dining(w: float, d: float, persons: int = 4, table_d: float = 80.0, chair: f
 
 
 def bed(w: float, d: float, persons: int = 1, **_):
-    """Bed (head at the wall): frame, pillow(s), blanket fold."""
+    """Bed: frame, pillow(s), folded-down blanket corner. Head at the wall
+    when the bed is deeper than wide (the usual case), otherwise at the
+    left end (a lounger along the wall)."""
     W, D = _mm(w), _mm(d)
     items = [rect(-W / 2, 0.0, W / 2, -D, role="outline")]
-    n = 2 if persons >= 2 or w >= 140 else 1
-    seg = W / n
-    for i in range(n):
-        x1 = -W / 2 + i * seg + _mm(6)
-        items.append(rounded_rect(x1, -_mm(40), x1 + seg - _mm(12), -_mm(8), _mm(5), role="detail"))
-    items.append(line(-W / 2, -_mm(55), W / 2, -_mm(55), role="detail"))
-    items.append(line(-W / 2, -_mm(55), -W / 2 + min(W, _mm(40)) * 0.6, -_mm(75), role="detail"))
+    if D >= W:
+        n = 2 if persons >= 2 or w >= 140 else 1
+        seg = W / n
+        ph = min(_mm(32), D * 0.16)
+        for i in range(n):
+            x1 = -W / 2 + i * seg + min(_mm(6), seg * 0.08)
+            items.append(rounded_rect(x1, -ph - _mm(8) * (D / _mm(200)), x1 + seg - 2 * min(_mm(6), seg * 0.08),
+                                      -_mm(8) * (D / _mm(200)), min(_mm(5), seg * 0.1), role="detail"))
+        yf = -D * 0.28
+        items.append(line(-W / 2, yf, W / 2, yf, role="detail"))
+        items.append(line(-W / 2, yf, -W / 2 + min(W, _mm(40)) * 0.6, yf - min(D * 0.1, _mm(20)), role="detail"))
+    else:
+        ph = min(_mm(32), W * 0.16)
+        items.append(rounded_rect(-W / 2 + _mm(4), -D + _mm(5), -W / 2 + _mm(4) + ph, -_mm(5), _mm(4), role="detail"))
+        xf = -W / 2 + W * 0.28
+        items.append(line(xf, 0.0, xf, -D, role="detail"))
     return items
 
 
@@ -366,6 +377,28 @@ def person(w: float, d: float, **_):
             korb_oval(0.0, -D / 2, sw, sd, role="outline"), circle(0.0, -D / 2, min(sw, sd) * 0.36, role="outline")]
 
 
+def lift(w: float, d: float, **_):
+    """Lift shaft (w x d) with the car and the door opening at the front."""
+    W, D = _mm(w), _mm(d)
+    m = min(W, D) * 0.12
+    return [rect(-W / 2, 0.0, W / 2, -D, role="outline"),
+            rect(-W / 2 + m, -m, W / 2 - m, -D + m * 1.6, role="detail"),
+            line(-W / 2 + m, -m, W / 2 - m, -D + m * 1.6, role="detail"),
+            line(W / 2 - m, -m, -W / 2 + m, -D + m * 1.6, role="detail")]
+
+
+def bin_(w: float, d: float, **_):
+    """Waste bin: body, lid hinge at the back."""
+    W, D = _mm(w), _mm(d)
+    return [rounded_rect(-W / 2, -D, W / 2, 0.0, min(_mm(4), W / 6), role="outline"),
+            line(-W / 2, -min(_mm(8), D * 0.2), W / 2, -min(_mm(8), D * 0.2), role="detail")]
+
+
+def board(w: float, d: float, **_):
+    W, D = _mm(w), _mm(max(d, 2.0))
+    return [rect(-W / 2, 0.0, W / 2, -D, role="outline")]
+
+
 def generic(w: float, d: float, **_):
     return [body(w, d)]
 
@@ -375,7 +408,7 @@ KINDS = {
     "drum": drum, "counter": counter, "sink": sink, "hob": hob, "fridge": fridge, "tall": tall,
     "wardrobe": wardrobe, "box": box, "shelf": shelf, "chair": chair, "table": table, "bed": bed,
     "sofa": sofa, "armchair": armchair, "desk": desk, "piano": piano, "wheelchair": wheelchair,
-    "dining": dining, "car": car, "parking": parking, "bicycle": bicycle, "person": person, "generic": generic,
+    "dining": dining, "lift": lift, "bin": bin_, "board": board, "car": car, "parking": parking, "bicycle": bicycle, "person": person, "generic": generic,
 }
 
 

@@ -135,7 +135,7 @@ def test_data_is_complete_and_consistent():
         assert e["w"] > 0 and e["d"] > 0
         assert e.get("sources"), e["id"]
         for a in e.get("areas", []) + e.get("areas_bf", []) + e.get("areas_rg", []):
-            assert a["side"] in ("front", "left", "right", "back") and a["d"] > 0
+            assert a["side"] in ("front", "left", "right", "back", "either") and a["d"] > 0
     for lay in kb.layouts().values():
         if lay.get("reference_only"):
             continue

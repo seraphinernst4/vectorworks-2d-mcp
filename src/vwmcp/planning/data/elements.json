@@ -91,7 +91,7 @@
 "context": [
 "allgemein"
 ],
-"kind": "person",
+"kind": "bed",
 "w": 30.0,
 "d": 176.0,
 "wall": false,
@@ -306,7 +306,7 @@
 "context": [
 "wohnen"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 150.0,
 "d": 150.0,
 "wall": false,
@@ -337,7 +337,7 @@
 "context": [
 "wohnen"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 160.0,
 "d": 170.0,
 "wall": false,
@@ -368,7 +368,7 @@
 "context": [
 "wohnen"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 170.0,
 "d": 190.0,
 "wall": false,
@@ -405,7 +405,7 @@
 "context": [
 "wohnen"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 170.0,
 "d": 260.0,
 "wall": false,
@@ -443,7 +443,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 200.0,
 "d": 210.0,
 "wall": false,
@@ -481,7 +481,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 200.0,
 "d": 220.0,
 "wall": false,
@@ -519,7 +519,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 160.0,
 "d": 260.0,
 "wall": false,
@@ -557,7 +557,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 220.0,
 "d": 220.0,
 "wall": false,
@@ -595,7 +595,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 240.0,
 "d": 220.0,
 "wall": false,
@@ -633,7 +633,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 250.0,
 "d": 220.0,
 "wall": false,
@@ -671,7 +671,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 260.0,
 "d": 230.0,
 "wall": false,
@@ -709,7 +709,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 270.0,
 "d": 250.0,
 "wall": false,
@@ -747,7 +747,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 300.0,
 "d": 250.0,
 "wall": false,
@@ -785,7 +785,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "generic",
+"kind": "lift",
 "w": 300.0,
 "d": 260.0,
 "wall": false,
@@ -823,7 +823,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "bed",
+"kind": "lift",
 "w": 210.0,
 "d": 290.0,
 "wall": false,
@@ -853,7 +853,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "bed",
+"kind": "lift",
 "w": 240.0,
 "d": 300.0,
 "wall": false,
@@ -891,7 +891,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "bed",
+"kind": "lift",
 "w": 240.0,
 "d": 330.0,
 "wall": false,
@@ -929,7 +929,7 @@
 "arbeiten",
 "allgemein"
 ],
-"kind": "bed",
+"kind": "lift",
 "w": 270.0,
 "d": 330.0,
 "wall": false,
@@ -1487,6 +1487,191 @@
 {
 "book": "G",
 "page": 123
+}
+]
+},
+{
+"id": "zeitungsrolle",
+"name": "Zeitungsrolle",
+"full_name": "Zeitungsrolle",
+"category": "sonstiges",
+"context": [
+"wohnen"
+],
+"kind": "box",
+"w": 40.0,
+"d": 12.0,
+"wall": true,
+"h": 12.0,
+"heights": {
+"seat": null,
+"top": null,
+"notes": "Länge ≥ 40, Durchmesser ≥ 12"
+},
+"notes": "zylindrisch; w = Länge, d = h = Durchmesser",
+"sources": [
+{
+"book": "G",
+"page": 190
+}
+]
+},
+{
+"id": "sitzbank_ablage_eingang",
+"name": "Sitzgelegenheit/Ablage im eingezogenen Eingang",
+"full_name": "Sitzgelegenheit/Ablage im eingezogenen Eingang",
+"category": "sonstiges",
+"context": [
+"wohnen"
+],
+"kind": "box",
+"w": 140.0,
+"d": 40.0,
+"wall": true,
+"h": 40.0,
+"heights": {
+"seat": 40,
+"top": 40,
+"notes": "Höhe 40 bemaßt"
+},
+"notes": "nur Höhe 40 bemaßt; Länge ca. 140 und Tiefe ca. 40 aus Grundriss M 1:100 abgegriffen",
+"sources": [
+{
+"book": "G",
+"page": 188
+}
+]
+},
+{
+"id": "kinderwagen_abstellplatz",
+"name": "Kinderwagenabstellplatz",
+"full_name": "Kinderwagenabstellplatz (Nische am Eingang)",
+"category": "aufbewahren",
+"context": [
+"wohnen"
+],
+"kind": "parking",
+"w": 140.0,
+"d": 140.0,
+"wall": false,
+"variants": [
+{
+"id": "60x125",
+"label": "einzelner Kinderwagen im Treppenhaus (abgegriffen)",
+"w": 60.0,
+"d": 125.0
+}
+],
+"notes": "Nische ≥ 140 × ≥ 140 bemaßt; Kinderwagen-Symbol ca. 60 × 110–125 (nicht bemaßt)",
+"sources": [
+{
+"book": "G",
+"page": 188
+},
+{
+"book": "G",
+"page": 191
+}
+]
+},
+{
+"id": "rollstuhlabstellplatz",
+"name": "Rollstuhlabstellplatz / Rollstuhlwechselplatz",
+"full_name": "Rollstuhlabstellplatz / Rollstuhlwechselplatz",
+"category": "verkehr",
+"context": [
+"wohnen",
+"allgemein"
+],
+"kind": "chair",
+"w": 190.0,
+"d": 150.0,
+"wall": false,
+"variants": [
+{
+"id": "180x150",
+"label": "DIN 18040 (Entwurf)",
+"w": 180.0,
+"d": 150.0
+},
+{
+"id": "150x190",
+"label": "Zeichnung S. 191: Abstellplatz neben Wechselfläche",
+"w": 150.0,
+"d": 190.0
+}
+],
+"heights": {
+"seat": null,
+"top": null,
+"notes": "stirnseitige Ablage 30–40 tief, unterfahrbar mit lichter Höhe 67; Steckdosen (Ladeplatz) ca. 50 vor Stirnwand"
+},
+"barrier_free": {
+"standard": "DIN 18025 / DIN 18040 (Entwurf) / DIN VDE 0510-3",
+"notes": "Batterieladeplatz für E-Rollstühle"
+},
+"notes": "w entlang der Zugangsseite, d in Anfahrrichtung (Text: 190 breit, 150 tief); in der Zeichnung liegt der Platz 150 breit (Anfahrrichtung) × 190 tief",
+"sources": [
+{
+"book": "G",
+"page": 189
+},
+{
+"book": "G",
+"page": 190
+}
+]
+},
+{
+"id": "garderobe_eingang",
+"name": "Garderobe im Windfang/Vorraum",
+"full_name": "Garderobe im Windfang/Vorraum",
+"category": "aufbewahren",
+"context": [
+"wohnen"
+],
+"kind": "wardrobe",
+"w": 100.0,
+"d": 45.0,
+"wall": true,
+"variants": [
+{
+"id": "215x45",
+"label": "Windfang S. 190 (Länge über ganze Tiefe)",
+"w": 215.0,
+"d": 45.0
+}
+],
+"notes": "nicht bemaßt; Kleiderstange mit Bügeln gezeichnet, Tiefe ca. 40–45 abgegriffen; S. 191: Garderobenzone = ≥ 290 − 190 = ca. 100 lang",
+"sources": [
+{
+"book": "G",
+"page": 188
+},
+{
+"book": "G",
+"page": 189
+}
+]
+},
+{
+"id": "aufzug_kabine_110x140",
+"name": "Aufzugskabine",
+"full_name": "Aufzugskabine (Treppenhausbeispiele)",
+"category": "verkehr",
+"context": [
+"wohnen",
+"allgemein"
+],
+"kind": "lift",
+"w": 110.0,
+"d": 140.0,
+"wall": false,
+"notes": "nicht bemaßt, M 1:100 abgegriffen: Kabine 110 × 140, Schacht innen ca. 170 × 190, Schachtwände ca. 25, Türöffnung ca. 90; Schacht außen 220 breit (bemaßt)",
+"sources": [
+{
+"book": "G",
+"page": 191
 }
 ]
 },
@@ -2201,7 +2386,7 @@
 "wohnen",
 "arbeiten"
 ],
-"kind": "generic",
+"kind": "box",
 "w": 104.0,
 "d": 66.0,
 "wall": true,
@@ -2217,7 +2402,8 @@
 "book": "G",
 "page": 202
 }
-]
+],
+"group": "kuechenzeile"
 },
 {
 "id": "gedeck",
@@ -2387,6 +2573,1785 @@
 {
 "book": "G",
 "page": 217
+}
+]
+},
+{
+"id": "billardtisch",
+"name": "Billardtisch",
+"full_name": "Billardtisch",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "table",
+"w": 225.0,
+"d": 125.0,
+"wall": false,
+"h": 84.0,
+"variants": [
+{
+"id": "215x120",
+"label": "übliche Außenmaße privat/Café",
+"w": 215.0,
+"d": 120.0
+},
+{
+"id": "190x120",
+"label": "Spannweite laut Bemaßung (ca.)",
+"w": 190.0,
+"d": 120.0
+}
+],
+"heights": {
+"spielfeld_min": 80,
+"spielfeld_max": 88,
+"notes": "Spielfeldhöhe ca. 80-88"
+},
+"notes": "Draufsicht M1:50 mit 2 Spielern; gezeichnet ca. 271 x 156 (gemessen). h=84 nur Mittelwert der Spanne.",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
+"id": "tischfussball",
+"name": "Tischfußballspiel",
+"full_name": "Tischfußballspiel (Kicker)",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "table",
+"w": 143.0,
+"d": 74.0,
+"wall": false,
+"heights": {
+"spiel_min": 88,
+"spiel_max": 92,
+"notes": "Spielhöhe ca. 88-92"
+},
+"notes": "143 vermutlich inkl. Stangengriffe. Zeichnung NICHT im Maßstab 1:50 (gemessen ca. 181 x 94, Verhältnis passt, Maßstab ca. 1:40).",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
+"id": "klavier",
+"name": "Klavier",
+"full_name": "Klavier",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "piano",
+"w": 150.0,
+"d": 60.0,
+"wall": false,
+"variants": [
+{
+"id": "140x60",
+"label": "Breitenspanne",
+"w": 140.0,
+"d": 60.0
+}
+],
+"notes": "Rückseite an Wand; Tastatur an der Vorderkante (Draufsicht M1:50, gezeichnet 150 breit)",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
+"id": "fluegel",
+"name": "Flügel",
+"full_name": "Flügel (Stutz-, Salon-, Konzertflügel)",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "piano",
+"w": 150.0,
+"d": 200.0,
+"wall": false,
+"params": {
+"grand": true
+},
+"variants": [
+{
+"id": "114x155",
+"label": "Stutzflügel",
+"w": 114.0,
+"d": 155.0
+},
+{
+"id": "160x275",
+"label": "Konzertflügel",
+"w": 160.0,
+"d": 275.0
+}
+],
+"notes": "w = Breite an der Tastatur, d = Länge. Gemessen (M1:50): Stutzflügel 126 x 152 (beschriftet 114 x 155), Salonflügel 151 x 197, Konzertflügel 166 x 252 (beschriftet 160 x 275).",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+]
+},
+{
+"id": "sofa_sitzgruppe",
+"name": "Sofa",
+"full_name": "Sofa (3-Sitzer) der Sitzgruppe",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "sofa",
+"w": 210.0,
+"d": 70.0,
+"wall": true,
+"notes": "nur gemessen (p232, ca. M1:100, nicht bemaßt): Rücken ca. 15, Armlehnen ca. 15; Sitzfläche durch 2 Striche in 3 Plätze geteilt. Andere Sofa-Maße evtl. auf p222-230 (dort nicht von g3/g3b erfasst).",
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+]
+},
+{
+"id": "sessel",
+"name": "Sessel",
+"full_name": "Sessel",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "armchair",
+"w": 60.0,
+"d": 60.0,
+"wall": false,
+"variants": [
+{
+"id": "80x70",
+"label": "Sitzgruppe p232, gemessen",
+"w": 80.0,
+"d": 70.0
+}
+],
+"notes": "Tabelle p236: Sessel ≥60 x ≥60. p232: Sessel ca. 80 breit (Rücken) x 70 tief, Lehnen als Rahmen um quadratischen Sitz.",
+"sources": [
+{
+"book": "G",
+"page": 230
+},
+{
+"book": "G",
+"page": 234
+},
+{
+"book": "G",
+"page": 306
+},
+{
+"book": "G",
+"page": 307
+},
+{
+"book": "G",
+"page": 308
+},
+{
+"book": "G",
+"page": 309
+}
+]
+},
+{
+"id": "couchtisch",
+"name": "Couchtisch",
+"full_name": "Couchtisch",
+"category": "wohnen",
+"context": [
+"wohnen"
+],
+"kind": "table",
+"w": 150.0,
+"d": 80.0,
+"wall": false,
+"notes": "nur gemessen (p232, nicht bemaßt), mittig vor Sofa",
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+]
+},
+{
+"id": "schrankelement_wohnen",
+"name": "Schrank-/Regalelement Wohnraum",
+"full_name": "Schrank-/Regalelement Wohnraum",
+"category": "aufbewahren",
+"context": [
+"wohnen"
+],
+"kind": "wardrobe",
+"w": 160.0,
+"d": 60.0,
+"wall": true,
+"variants": [
+{
+"id": "130x60",
+"label": "p232 barrierefrei, gemessen",
+"w": 130.0,
+"d": 60.0
+}
+],
+"barrier_free": {
+"standard": "DIN 18025-1/-2, DIN 18040-2 (Entwurf)",
+"bewegungsflaeche": {
+"rollstuhl_d": 150,
+"barrierefrei_d": 90
+}
+},
+"notes": "3 Schrankelemente als Reihe an der Wand, Breiten nur gemessen",
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+]
+},
+{
+"id": "einzelbett",
+"name": "Einzelbett",
+"full_name": "Einzelbett",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 100.0,
+"d": 200.0,
+"wall": true,
+"h": 35.0,
+"areas": [
+{
+"side": "either",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"variants": [
+{
+"id": "90x205",
+"label": "Orientierungswert Mindest-Einrichtungsmaß",
+"w": 90.0,
+"d": 205.0
+},
+{
+"id": "90x190",
+"label": "Kinder ab ca. 9 Jahren",
+"w": 90.0,
+"d": 190.0
+},
+{
+"id": "100x205",
+"label": "Kinderzimmer empfohlen",
+"w": 100.0,
+"d": 205.0
+}
+],
+"heights": {
+"top": 35,
+"notes": "Oberkante Matratze ca. 35 (Ansicht p238)"
+},
+"barrier_free": {
+"standard": "DIN 18025-2 / DIN 18040-2 (Entwurf)",
+"rollstuhlgerecht": {
+"long_side_1": 150,
+"long_side_2": 120
+},
+"barrierefrei": {
+"long_side_1": 120,
+"long_side_2": 90
+},
+"notes": "Regeln p240/241 für Bett allgemein (gezeichnet am Doppelbett)"
+},
+"side_clearance": {
+"wall": 3,
+"notes": "Kinderbetten 3 cm von Wänden (p248); Erwachsenen-Betten 5 cm vom Kopfende (p237)"
+},
+"notes": "w = Breite (Kopfende an Wand), d = Länge. Bezeichnung ab p236 nur 'Einzelbett'.",
+"sources": [
+{
+"book": "G",
+"page": 234
+},
+{
+"book": "G",
+"page": 236
+},
+{
+"book": "G",
+"page": 246
+},
+{
+"book": "G",
+"page": 247
+},
+{
+"book": "G",
+"page": 306
+},
+{
+"book": "G",
+"page": 307
+},
+{
+"book": "G",
+"page": 308
+},
+{
+"book": "G",
+"page": 309
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas_rg": [
+{
+"side": "either",
+"d": 150.0
+}
+],
+"areas_bf": [
+{
+"side": "either",
+"d": 120.0
+}
+]
+},
+{
+"id": "doppelbett",
+"name": "Doppelbett",
+"full_name": "Doppelbett",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 200.0,
+"d": 200.0,
+"wall": true,
+"h": 35.0,
+"areas": [
+{
+"side": "left",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "right",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"variants": [
+{
+"id": "160x205",
+"label": "Orientierungswert Mindest-Einrichtungsmaß",
+"w": 160.0,
+"d": 205.0
+}
+],
+"heights": {
+"top": 35,
+"notes": "Oberkante Matratze ca. 35"
+},
+"barrier_free": {
+"standard": "DIN 18025-2 / DIN 18040-2 (Entwurf) Teil 2",
+"rollstuhlgerecht": {
+"long_side_1": 150,
+"long_side_2": 120,
+"front_of_cupboards": 150,
+"room_min": {
+"w": 470,
+"d": 420
+}
+},
+"barrierefrei": {
+"long_side_1": 120,
+"long_side_2": 90,
+"front_of_cupboards": 90,
+"room_min": {
+"w": 410,
+"d": 360
+}
+},
+"notes": "150 (bzw. 120) über die gesamte Bettlänge entlang einer Längsseite; andere Längsseite ≥120 (bzw. ≥90), damit auch diese angefahren werden kann"
+},
+"side_clearance": {
+"wall": 5,
+"nachttisch": 5,
+"notes": "Kopfende 5 cm vor Wand; Nachttisch 5 cm neben Bett"
+},
+"notes": "Zeichnungen: Rahmen 200x200, 2 Matratzen/Decken; p237 Plan-Bemaßung Breite '200-210' obwohl Tabelle 160-220.",
+"sources": [
+{
+"book": "G",
+"page": 234
+},
+{
+"book": "G",
+"page": 235
+},
+{
+"book": "G",
+"page": 236
+},
+{
+"book": "G",
+"page": 238
+},
+{
+"book": "G",
+"page": 239
+},
+{
+"book": "G",
+"page": 306
+},
+{
+"book": "G",
+"page": 307
+},
+{
+"book": "G",
+"page": 308
+},
+{
+"book": "G",
+"page": 309
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas_rg": [
+{
+"side": "left",
+"d": 120.0
+},
+{
+"side": "right",
+"d": 120.0
+},
+{
+"side": "either",
+"d": 150.0,
+"note": "eine Längsseite 150, die andere 120"
+}
+],
+"areas_bf": [
+{
+"side": "left",
+"d": 90.0
+},
+{
+"side": "right",
+"d": 90.0
+},
+{
+"side": "either",
+"d": 120.0,
+"note": "eine Längsseite 120, die andere 90"
+}
+]
+},
+{
+"id": "franzoesisches_bett",
+"name": "Französisches Bett",
+"full_name": "Französisches Bett",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 140.0,
+"d": 205.0,
+"wall": true,
+"areas": [
+{
+"side": "left",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "right",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 234
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas_rg": [
+{
+"side": "left",
+"d": 120.0
+},
+{
+"side": "right",
+"d": 120.0
+},
+{
+"side": "either",
+"d": 150.0,
+"note": "eine Längsseite 150, die andere 120"
+}
+],
+"areas_bf": [
+{
+"side": "left",
+"d": 90.0
+},
+{
+"side": "right",
+"d": 90.0
+},
+{
+"side": "either",
+"d": 120.0,
+"note": "eine Längsseite 120, die andere 90"
+}
+]
+},
+{
+"id": "nachttisch",
+"name": "Ablage neben Bett / Ablagetisch",
+"full_name": "Ablage neben Bett / Ablagetisch (Nachttisch)",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "table",
+"w": 60.0,
+"d": 40.0,
+"wall": false,
+"h": 35.0,
+"variants": [
+{
+"id": "55x40",
+"label": "Orientierungswert",
+"w": 55.0,
+"d": 40.0
+},
+{
+"id": "40x40",
+"label": "Bettsystem-Zeichnung neben Einzel-/Doppelbett, gemessen",
+"w": 40.0,
+"d": 40.0
+}
+],
+"heights": {
+"top": 35,
+"notes": "in Ansicht p238 gleiche Höhe wie Matratze (gemessen)"
+},
+"side_clearance": {
+"bett": 5,
+"wall": 5
+},
+"notes": "in Plänen 60x40, Hinterkante bündig mit Bett-Kopfende (5 vor Wand), 5 seitlich vom Bett",
+"sources": [
+{
+"book": "G",
+"page": 234
+},
+{
+"book": "G",
+"page": 235
+},
+{
+"book": "G",
+"page": 236
+},
+{
+"book": "G",
+"page": 238
+},
+{
+"book": "G",
+"page": 239
+}
+]
+},
+{
+"id": "kleiderschrank",
+"name": "Kleiderschrank",
+"full_name": "Kleiderschrank",
+"category": "aufbewahren",
+"context": [
+"wohnen"
+],
+"kind": "wardrobe",
+"w": 110.0,
+"d": 60.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 90.0,
+"note": "in Schlafzimmer-Beispielen p237 90 frei vor Schrank; Ankleideraum: ca. 140 zwischen gegenüberliegenden Schränken"
+}
+],
+"variants": [
+{
+"id": "220x60",
+"label": "zwei Personen",
+"w": 220.0,
+"d": 60.0
+},
+{
+"id": "110x65",
+"label": "Kinderzimmer 1 Person",
+"w": 110.0,
+"d": 65.0
+},
+{
+"id": "220x65",
+"label": "Kinderzimmer 2 Personen",
+"w": 220.0,
+"d": 65.0
+},
+{
+"id": "370x60",
+"label": "Schrankwand in Plänen p237/240/241",
+"w": 370.0,
+"d": 60.0
+}
+],
+"heights": {
+"notes": "Ankleideraum-Schnitt p237: Schrank ca. 240 hoch, Raum ca. 250 (gemessen, nicht bemaßt)"
+},
+"barrier_free": {
+"standard": "DIN 18025-2 / DIN 18040-2 (Entwurf)",
+"bewegungsflaeche": {
+"rollstuhl_d": 150,
+"barrierefrei_d": 90
+},
+"rollstuhlgerecht": {
+"kleiderstange_herunterklappbar_max": 140,
+"unterste_ablage_min": 40,
+"front_d": 150
+},
+"notes": "Kleiderschrank mit herunterklappbarer Kleiderstange: abgesenkte Stange ≤140, unterste Nutzhöhe ≥40, davor ≥150"
+},
+"side_clearance": {
+"wall": 5,
+"notes": "in Plänen 5 cm von Rück- und Seitenwänden"
+},
+"sources": [
+{
+"book": "G",
+"page": 234
+},
+{
+"book": "G",
+"page": 235
+},
+{
+"book": "G",
+"page": 238
+},
+{
+"book": "G",
+"page": 239
+},
+{
+"book": "G",
+"page": 247
+}
+]
+},
+{
+"id": "kleinkinderbett",
+"name": "Kleinkinderbett",
+"full_name": "Kleinkinderbett",
+"category": "kinder",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 60.0,
+"d": 120.0,
+"wall": true,
+"variants": [
+{
+"id": "55x100",
+"label": "Orientierungswert",
+"w": 55.0,
+"d": 100.0
+}
+],
+"notes": "siehe auch kinderbett_0_1 / kinderbett_1_4 (p248)",
+"sources": [
+{
+"book": "G",
+"page": 234
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas": [
+{
+"side": "either",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"areas_rg": [
+{
+"side": "either",
+"d": 150.0
+}
+],
+"areas_bf": [
+{
+"side": "either",
+"d": 120.0
+}
+]
+},
+{
+"id": "kommode_regal",
+"name": "Kommode / Regal",
+"full_name": "Kommode / Regal",
+"category": "aufbewahren",
+"context": [
+"wohnen"
+],
+"kind": "shelf",
+"w": 100.0,
+"d": 50.0,
+"wall": true,
+"variants": [
+{
+"id": "30x100",
+"label": "Tabelle wörtlich: Breite ca. 30-50, Tiefe ca. 100",
+"w": 30.0,
+"d": 100.0
+}
+],
+"notes": "Tabellenspalten wirken vertauscht; plausibel Breite ca. 100, Tiefe 30-50. stellflaeche = Interpretation (d=50 als Obergrenze).",
+"sources": [
+{
+"book": "G",
+"page": 234
+}
+]
+},
+{
+"id": "arbeitstisch",
+"name": "Arbeitstisch",
+"full_name": "Arbeitstisch (im Individual-/Kinderzimmer)",
+"category": "arbeiten",
+"context": [
+"wohnen"
+],
+"kind": "desk",
+"w": 80.0,
+"d": 55.0,
+"wall": true,
+"variants": [
+{
+"id": "100x60",
+"label": "Kinderzimmer empfohlen",
+"w": 100.0,
+"d": 60.0
+},
+{
+"id": "100x50",
+"label": "Schlafzimmer-Beispiel p237 links (gemessen)",
+"w": 100.0,
+"d": 50.0
+},
+{
+"id": "140x50",
+"label": "Schlafzimmer-Beispiel p237 rechts (gemessen)",
+"w": 140.0,
+"d": 50.0
+}
+],
+"heights": {
+"notes": "Kinder: Tischhöhe nach Körpergröße 46/52/58/64/70/76 (Regel kinder_tisch_stuhl_hoehen)"
+},
+"sources": [
+{
+"book": "G",
+"page": 234
+},
+{
+"book": "G",
+"page": 235
+},
+{
+"book": "G",
+"page": 247
+}
+]
+},
+{
+"id": "stuhl",
+"name": "Stuhl",
+"full_name": "Stuhl",
+"category": "arbeiten",
+"context": [
+"wohnen"
+],
+"kind": "chair",
+"w": 45.0,
+"d": 50.0,
+"wall": false,
+"variants": [
+{
+"id": "45x55",
+"label": "Kinderzimmer",
+"w": 45.0,
+"d": 55.0
+},
+{
+"id": "30x30",
+"label": "Planssymbol M1:100 (p237)",
+"w": 30.0,
+"d": 30.0
+}
+],
+"heights": {
+"notes": "Kinder: Sitzhöhe 26/30/34/38/42/46 je Körpergröße"
+},
+"sources": [
+{
+"book": "G",
+"page": 234
+},
+{
+"book": "G",
+"page": 235
+},
+{
+"book": "G",
+"page": 247
+}
+]
+},
+{
+"id": "hochbett",
+"name": "Hochbett",
+"full_name": "Hochbett",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 90.0,
+"d": 200.0,
+"wall": true,
+"h": 175.0,
+"notes": "Liegefläche oben, Höhe ca. 175 (Oberkante Gestell/Absturzsicherung, Ansicht); darunter frei (Schreibtisch/Spiel); seitlich Leiter/Regal ca. 40 breit (gemessen). In Draufsicht Ablage ca. 40x40 am Kopfende seitlich.",
+"sources": [
+{
+"book": "G",
+"page": 236
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas": [
+{
+"side": "either",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"areas_rg": [
+{
+"side": "either",
+"d": 150.0
+}
+],
+"areas_bf": [
+{
+"side": "either",
+"d": 120.0
+}
+]
+},
+{
+"id": "hochbett_3_betten",
+"name": "Hochbett, Anordnung mit 3 Betten",
+"full_name": "Hochbett, Anordnung mit 3 Betten (Etagenbett)",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 90.0,
+"d": 200.0,
+"wall": true,
+"h": 185.0,
+"heights": {
+"liegeflaeche_1": 35,
+"liegeflaeche_2": 110,
+"liegeflaeche_3": 185,
+"notes": "Kette ca. 35 | 75 | 75 (Ebenenabstände)"
+},
+"sources": [
+{
+"book": "G",
+"page": 236
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas": [
+{
+"side": "either",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"areas_rg": [
+{
+"side": "either",
+"d": 150.0
+}
+],
+"areas_bf": [
+{
+"side": "either",
+"d": 120.0
+}
+]
+},
+{
+"id": "alkovenbett",
+"name": "Eingebautes Bett",
+"full_name": "Eingebautes Bett (Alkovenbett)",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 90.0,
+"d": 200.0,
+"wall": true,
+"heights": {
+"liegeflaeche": 50,
+"kopfraum": 150,
+"notes": "Schnitt: ca. 50 bis Liegefläche (darunter Schubkästen), ca. 150 lichte Höhe darüber, oben Stauraum"
+},
+"notes": "Nische ca. 90 tief; Draufsicht: Bett 200 lang zwischen Einbauschränken an Kopf- und Fußende (je ca. 67, gemessen), Schiebetüren/Paneele davor",
+"sources": [
+{
+"book": "G",
+"page": 236
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas": [
+{
+"side": "either",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"areas_rg": [
+{
+"side": "either",
+"d": 150.0
+}
+],
+"areas_bf": [
+{
+"side": "either",
+"d": 120.0
+}
+]
+},
+{
+"id": "klappbett_laengs",
+"name": "Klappbett, Bettlänge einklappbar",
+"full_name": "Klappbett, Bettlänge einklappbar",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 100.0,
+"d": 205.0,
+"wall": true,
+"h": 240.0,
+"variants": [
+{
+"id": "100x35",
+"label": "eingeklappt (Schranktiefe)",
+"w": 100.0,
+"d": 35.0
+}
+],
+"notes": "Schrank/Nische ca. 35 tief + ca. 170 auskragend = ca. 205; hochgeklappt ca. 240 hoch; Klappbogen gestrichelt mit Pfeil",
+"sources": [
+{
+"book": "G",
+"page": 236
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas": [
+{
+"side": "either",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"areas_rg": [
+{
+"side": "either",
+"d": 150.0
+}
+],
+"areas_bf": [
+{
+"side": "either",
+"d": 120.0
+}
+]
+},
+{
+"id": "klappbett_quer",
+"name": "Klappbett, Bettbreite einklappbar",
+"full_name": "Klappbett, Bettbreite einklappbar",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 200.0,
+"d": 125.0,
+"wall": true,
+"h": 160.0,
+"variants": [
+{
+"id": "200x35",
+"label": "eingeklappt (Schranktiefe)",
+"w": 200.0,
+"d": 35.0
+}
+],
+"notes": "Bett liegt längs zur Wand: 35 Schrank + 90 Bettbreite = 125; hochgeklappt ca. 160 hoch",
+"sources": [
+{
+"book": "G",
+"page": 236
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas": [
+{
+"side": "left",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "right",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"areas_rg": [
+{
+"side": "left",
+"d": 120.0
+},
+{
+"side": "right",
+"d": 120.0
+},
+{
+"side": "either",
+"d": 150.0,
+"note": "eine Längsseite 150, die andere 120"
+}
+],
+"areas_bf": [
+{
+"side": "left",
+"d": 90.0
+},
+{
+"side": "right",
+"d": 90.0
+},
+{
+"side": "either",
+"d": 120.0,
+"note": "eine Längsseite 120, die andere 90"
+}
+]
+},
+{
+"id": "klappsofa",
+"name": "Klappsofa",
+"full_name": "Klappsofa (Schlafsofa)",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "sofa",
+"w": 160.0,
+"d": 120.0,
+"wall": true,
+"h": 90.0,
+"variants": [
+{
+"id": "160x190",
+"label": "Variante A ausgezogen (Liegefläche)",
+"w": 160.0,
+"d": 190.0
+},
+{
+"id": "160x72",
+"label": "Variante B eingeklappt",
+"w": 160.0,
+"d": 72.0
+}
+],
+"notes": "w entlang Wand (Rückenlehne an Wand)",
+"sources": [
+{
+"book": "G",
+"page": 237
+}
+]
+},
+{
+"id": "klappsessel",
+"name": "Klappsessel",
+"full_name": "Klappsessel",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "armchair",
+"w": 70.0,
+"d": 72.0,
+"wall": false,
+"h": 70.0,
+"variants": [
+{
+"id": "70x190",
+"label": "aufgeklappt",
+"w": 70.0,
+"d": 190.0
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 237
+}
+]
+},
+{
+"id": "matratze",
+"name": "Matratze",
+"full_name": "Matratze (übliche Größen)",
+"category": "schlafen",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 90.0,
+"d": 200.0,
+"wall": true,
+"variants": [
+{
+"id": "50x100",
+"label": "Kinder",
+"w": 50.0,
+"d": 100.0
+},
+{
+"id": "60x120",
+"label": "Kinder",
+"w": 60.0,
+"d": 120.0
+},
+{
+"id": "70x140",
+"label": "Kinder",
+"w": 70.0,
+"d": 140.0
+},
+{
+"id": "80x190",
+"label": "Länge 190",
+"w": 80.0,
+"d": 190.0
+},
+{
+"id": "90x190",
+"label": "Länge 190",
+"w": 90.0,
+"d": 190.0
+},
+{
+"id": "100x190",
+"label": "Länge 190",
+"w": 100.0,
+"d": 190.0
+},
+{
+"id": "80x200",
+"label": "Länge 200",
+"w": 80.0,
+"d": 200.0
+},
+{
+"id": "100x200",
+"label": "Länge 200",
+"w": 100.0,
+"d": 200.0
+},
+{
+"id": "120x200",
+"label": "Länge 200",
+"w": 120.0,
+"d": 200.0
+},
+{
+"id": "140x200",
+"label": "Länge 200",
+"w": 140.0,
+"d": 200.0
+},
+{
+"id": "160x200",
+"label": "Länge 200",
+"w": 160.0,
+"d": 200.0
+},
+{
+"id": "180x200",
+"label": "Länge 200",
+"w": 180.0,
+"d": 200.0
+},
+{
+"id": "200x200",
+"label": "Länge 200",
+"w": 200.0,
+"d": 200.0
+},
+{
+"id": "90x220",
+"label": "Länge 220",
+"w": 90.0,
+"d": 220.0
+},
+{
+"id": "100x220",
+"label": "Länge 220",
+"w": 100.0,
+"d": 220.0
+},
+{
+"id": "120x220",
+"label": "Länge 220",
+"w": 120.0,
+"d": 220.0
+},
+{
+"id": "140x220",
+"label": "Länge 220",
+"w": 140.0,
+"d": 220.0
+},
+{
+"id": "160x220",
+"label": "Länge 220",
+"w": 160.0,
+"d": 220.0
+},
+{
+"id": "180x220",
+"label": "Länge 220",
+"w": 180.0,
+"d": 220.0
+},
+{
+"id": "200x220",
+"label": "Länge 220",
+"w": 200.0,
+"d": 220.0
+}
+],
+"notes": "häufig verwendet 90 x 200",
+"sources": [
+{
+"book": "G",
+"page": 237
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas": [
+{
+"side": "either",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"areas_rg": [
+{
+"side": "either",
+"d": 150.0
+}
+],
+"areas_bf": [
+{
+"side": "either",
+"d": 120.0
+}
+]
+},
+{
+"id": "kinderbett_0_1",
+"name": "Kinderbett ca. 0-1 Jahre",
+"full_name": "Kinderbett ca. 0-1 Jahre",
+"category": "kinder",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 50.0,
+"d": 100.0,
+"wall": true,
+"areas": [
+{
+"side": "either",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"side_clearance": {
+"wall": 3
+},
+"sources": [
+{
+"book": "G",
+"page": 246
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas_rg": [
+{
+"side": "either",
+"d": 150.0
+}
+],
+"areas_bf": [
+{
+"side": "either",
+"d": 120.0
+}
+]
+},
+{
+"id": "kinderbett_1_4",
+"name": "Kinderbett ca. 1-4 Jahre",
+"full_name": "Kinderbett ca. 1-4 Jahre",
+"category": "kinder",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 60.0,
+"d": 120.0,
+"wall": true,
+"areas": [
+{
+"side": "either",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"side_clearance": {
+"wall": 3
+},
+"sources": [
+{
+"book": "G",
+"page": 246
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas_rg": [
+{
+"side": "either",
+"d": 150.0
+}
+],
+"areas_bf": [
+{
+"side": "either",
+"d": 120.0
+}
+]
+},
+{
+"id": "kinderbett_5_8",
+"name": "Kinderbett ca. 5-8 Jahre",
+"full_name": "Kinderbett ca. 5-8 Jahre",
+"category": "kinder",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 70.0,
+"d": 140.0,
+"wall": true,
+"areas": [
+{
+"side": "either",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"side_clearance": {
+"wall": 3
+},
+"sources": [
+{
+"book": "G",
+"page": 246
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas_rg": [
+{
+"side": "either",
+"d": 150.0
+}
+],
+"areas_bf": [
+{
+"side": "either",
+"d": 120.0
+}
+]
+},
+{
+"id": "kinder_zusatzmoebel",
+"name": "Zusätzliches Möbelstück Kinderzimmer",
+"full_name": "Zusätzliches Möbelstück Kinderzimmer (Kommode/Regal)",
+"category": "kinder",
+"context": [
+"wohnen"
+],
+"kind": "box",
+"w": 110.0,
+"d": 55.0,
+"wall": true,
+"sources": [
+{
+"book": "G",
+"page": 247
+}
+]
+},
+{
+"id": "schreibtisch",
+"name": "Schreibtisch / Arbeitstisch Heimarbeitsplatz",
+"full_name": "Schreibtisch / Arbeitstisch Heimarbeitsplatz",
+"category": "arbeiten",
+"context": [
+"wohnen",
+"arbeiten"
+],
+"kind": "desk",
+"w": 160.0,
+"d": 80.0,
+"wall": true,
+"h": 72.0,
+"areas": [
+{
+"side": "front",
+"d": 100.0,
+"note": "Benutzerfläche ≥100 tief zwischen Tischvorderkante und gegenüberliegendem Möbel (DIN 4543-1); Stuhl steht darin"
+}
+],
+"variants": [
+{
+"id": "180x80",
+"label": "verlängert (gestrichelt)",
+"w": 180.0,
+"d": 80.0
+},
+{
+"id": "200x80",
+"label": "verlängert (gestrichelt)",
+"w": 200.0,
+"d": 80.0
+},
+{
+"id": "160x90",
+"label": "tiefer (gestrichelt, +10 an Wandseite)",
+"w": 160.0,
+"d": 90.0
+},
+{
+"id": "80x55",
+"label": "Mindestmaß Tabelle Schlafen (Arbeitstisch)",
+"w": 80.0,
+"d": 55.0
+}
+],
+"heights": {
+"top": 72,
+"adjustable_min": 68,
+"adjustable_max": 76,
+"beinfreiraum": {
+"h_at_front": 65,
+"h_at_20": 62,
+"h_at_45": 55,
+"h_foot_at_60": 12,
+"depth_floor": 60
+},
+"notes": "Normhöhe 72; Höhenverstellbarkeit 68-76 wichtiger. Beinfreiraum (gestrichelt, Maße ab Vorderkante): Höhe 65 an Kante, 62 bei 20 Tiefe, 55 bei 45 Tiefe, Fußraum 12 hoch bis 60 Tiefe"
+},
+"barrier_free": {
+"standard": "DIN 18025-1 / DIN 18040 (Entwurf); DIN 4543-1, DIN EN ISO 9241",
+"rollstuhlgerecht": {
+"top_min": 75,
+"top_max": 90,
+"underside_min": 67,
+"unterfahrbar_w_min": 90,
+"unterfahrbar_d": 80,
+"front_bewegungsflaeche": {
+"w": 150,
+"d": 150
+}
+},
+"notes": "Arbeitsplattenhöhe individuell einstellbar 75-90, Unterkante Tisch ≥67, unterfahrbare Bereiche ≥90 breit; Bewegungsfläche ≥150x150 vor dem Tisch; Greifbereich horizontal ca. 60 (eingeschränkt) bis ca. 80 (uneingeschränkt)"
+},
+"sources": [
+{
+"book": "G",
+"page": 256
+},
+{
+"book": "G",
+"page": 257
+},
+{
+"book": "G",
+"page": 258
+},
+{
+"book": "G",
+"page": 259
+},
+{
+"book": "G",
+"page": 306
+},
+{
+"book": "G",
+"page": 307
+},
+{
+"book": "G",
+"page": 308
+},
+{
+"book": "G",
+"page": 309
+},
+{
+"book": "G",
+"page": 379
+},
+{
+"book": "G",
+"page": 393
+}
+]
+},
+{
+"id": "regal_buero",
+"name": "Regal/Aktenschrank gegenüber Arbeitsplatz",
+"full_name": "Regal/Aktenschrank gegenüber Arbeitsplatz",
+"category": "aufbewahren",
+"context": [
+"wohnen",
+"arbeiten"
+],
+"kind": "shelf",
+"w": 100.0,
+"d": 45.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 100.0,
+"note": "≥100 bis Tischkante; rollstuhlgerecht ≥150"
+}
+],
+"variants": [
+{
+"id": "80x45",
+"label": "p260, 2 Elemente je ca. 80 (gemessen)",
+"w": 80.0,
+"d": 45.0
+}
+],
+"heights": {
+"notes": "Regal im Schnitt p259 ca. 185 hoch (gemessen); rollstuhlgerecht Greifhöhen ≥40 bis ≤140 (p261)"
+},
+"barrier_free": {
+"rollstuhlgerecht": {
+"greifhoehe_min": 40,
+"greifhoehe_max": 140,
+"front_d": 150
+}
+},
+"notes": "Tiefe ca. 45 bemaßt, Breiten nur gemessen",
+"sources": [
+{
+"book": "G",
+"page": 256
+},
+{
+"book": "G",
+"page": 257
+},
+{
+"book": "G",
+"page": 258
+},
+{
+"book": "G",
+"page": 259
 }
 ]
 },
@@ -2835,6 +4800,10 @@
 {
 "book": "G",
 "page": 269
+},
+{
+"book": "G",
+"page": 548
 }
 ]
 },
@@ -3319,7 +5288,7 @@
 "context": [
 "wohnen"
 ],
-"kind": "generic",
+"kind": "box",
 "w": 60.0,
 "d": 60.0,
 "wall": true,
@@ -3379,7 +5348,7 @@
 "context": [
 "wohnen"
 ],
-"kind": "generic",
+"kind": "box",
 "w": 140.0,
 "d": 45.0,
 "wall": true,
@@ -3440,7 +5409,7 @@
 "context": [
 "wohnen"
 ],
-"kind": "generic",
+"kind": "box",
 "w": 70.0,
 "d": 45.0,
 "wall": true,
@@ -3571,6 +5540,494 @@
 ]
 },
 {
+"id": "abfallbehaelter_2rad",
+"name": "Fahrbarer Abfallsammelbehaelter mit 2 Raedern",
+"full_name": "Fahrbarer Abfallsammelbehaelter mit 2 Raedern (Muelltonne 80-340 l)",
+"category": "entsorgen",
+"context": [
+"wohnen",
+"allgemein"
+],
+"kind": "bin",
+"w": 58.0,
+"d": 74.0,
+"wall": true,
+"h": 110.0,
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "vor Behaelterreihen mind. 120 (p299); im Beispiel p302: 70-90 Mindestzone, >=120 empfohlen"
+}
+],
+"variants": [
+{
+"id": "48x55.5",
+"label": "80 l",
+"w": 48.0,
+"d": 55.5
+},
+{
+"id": "47.2x55.8",
+"label": "100 l",
+"w": 47.2,
+"d": 55.8
+},
+{
+"id": "50.5x55.5",
+"label": "120 l",
+"w": 50.5,
+"d": 55.5
+},
+{
+"id": "54.6x73",
+"label": "210 l",
+"w": 54.6,
+"d": 73.0
+},
+{
+"id": "68.5x88",
+"label": "340 l",
+"w": 68.5,
+"d": 88.0
+}
+],
+"heights": {
+"notes": "w = Breite b (Vorderseite), d = Laenge l (Tiefe inkl. Griff), h = Hoehe bei geschlossenem Deckel; Deckel-Aufklappen erfordert lichte Hoehe h + l (p300)"
+},
+"barrier_free": {
+"standard": "rollstuhlgerecht (p304)",
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "Einwurfkante 70-85 ueber Standflaeche Rollstuhl; Rollstuhl-Podest 25 hoeher als Tonnenstandflaeche (240 l)"
+},
+"notes": "DIN EN 840-1 (bis 400 l, Kammschuettung). Masse im Buch in mm; hier in cm umgerechnet. Default-Stellflaeche = 240 l.",
+"sources": [
+{
+"book": "G",
+"page": 298
+},
+{
+"book": "G",
+"page": 300
+},
+{
+"book": "G",
+"page": 302
+}
+]
+},
+{
+"id": "abfallbehaelter_4rad_flachdeckel",
+"name": "Fahrbarer Abfallsammelbehaelter mit 4 Raedern, F",
+"full_name": "Fahrbarer Abfallsammelbehaelter mit 4 Raedern, Flachdeckel (Container 500-1200 l)",
+"category": "entsorgen",
+"context": [
+"wohnen",
+"allgemein"
+],
+"kind": "bin",
+"w": 137.0,
+"d": 85.0,
+"wall": true,
+"h": 125.0,
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"note": "Bewegungsflaeche vor Behaelterreihen >=120; Wegbreite fuer Grossmuellbehaelter 150 (p299)"
+}
+],
+"variants": [
+{
+"id": "137x74",
+"label": "500 l",
+"w": 137.0,
+"d": 74.0
+},
+{
+"id": "137x87",
+"label": "770 l",
+"w": 137.0,
+"d": 87.0
+},
+{
+"id": "137x119",
+"label": "1000 l",
+"w": 137.0,
+"d": 119.0
+}
+],
+"heights": {
+"notes": "Flachdeckel klappt nach hinten auf: lichte Hoehe h + l noetig (p301)"
+},
+"barrier_free": {
+"standard": "rollstuhlgerecht (p304)",
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"notes": "Einwurf ueber Klappe im Schrank-Deckel, 70 ueber Rollstuhl-Podest"
+},
+"notes": "DIN EN 840-2 (bis 1300 l). Default-Stellflaeche = 660 l (b 1370 +/- 10, l 850, h 1250 mm).",
+"sources": [
+{
+"book": "G",
+"page": 299
+},
+{
+"book": "G",
+"page": 300
+},
+{
+"book": "G",
+"page": 301
+},
+{
+"book": "G",
+"page": 302
+}
+]
+},
+{
+"id": "abfallbehaelter_4rad_teil3",
+"name": "Fahrbarer Abfallsammelbehaelter mit 4 Raedern na",
+"full_name": "Fahrbarer Abfallsammelbehaelter mit 4 Raedern nach DIN EN 840-3 (770-1300 l)",
+"category": "entsorgen",
+"context": [
+"wohnen",
+"allgemein"
+],
+"kind": "bin",
+"w": 137.0,
+"d": 124.5,
+"wall": true,
+"h": 147.0,
+"areas": [
+{
+"side": "front",
+"d": 120.0
+}
+],
+"variants": [
+{
+"id": "137x110",
+"label": "770 l",
+"w": 137.0,
+"d": 110.0
+}
+],
+"notes": "DIN EN 840-3; laut Normenliste p343 Behaelter mit 4 Raedern bis 1300 l 'mit Schiebedeckel(n)'; Zeichnung zeigt gewoelbten Deckel mit Einwurfklappe.",
+"sources": [
+{
+"book": "G",
+"page": 299
+},
+{
+"book": "G",
+"page": 341
+}
+]
+},
+{
+"id": "abfalleimer_gross",
+"name": "Abfallbehaelter Wohnung, rund gross",
+"full_name": "Abfallbehaelter Wohnung, rund gross",
+"category": "entsorgen",
+"context": [
+"wohnen"
+],
+"kind": "bin",
+"w": 54.0,
+"d": 54.0,
+"wall": true,
+"h": 97.0,
+"notes": "Draufsicht Kreis Ø54, Hoehe 97 (M 1:50).",
+"sources": [
+{
+"book": "G",
+"page": 296
+}
+]
+},
+{
+"id": "abfalleimer_mittel",
+"name": "Abfallbehaelter Wohnung, rund mittel",
+"full_name": "Abfallbehaelter Wohnung, rund mittel",
+"category": "entsorgen",
+"context": [
+"wohnen"
+],
+"kind": "bin",
+"w": 36.0,
+"d": 36.0,
+"wall": true,
+"h": 75.0,
+"notes": "Ø36, Hoehe 75.",
+"sources": [
+{
+"book": "G",
+"page": 296
+}
+]
+},
+{
+"id": "abfalleimer_klein",
+"name": "Abfalleimer klein",
+"full_name": "Abfalleimer klein",
+"category": "entsorgen",
+"context": [
+"wohnen"
+],
+"kind": "bin",
+"w": 20.0,
+"d": 20.0,
+"wall": true,
+"h": 33.0,
+"notes": "20x20, Hoehe 33.",
+"sources": [
+{
+"book": "G",
+"page": 296
+}
+]
+},
+{
+"id": "abfalltrennsystem_spuelenschrank",
+"name": "Abfalltrenn-System im Spuelenunterschrank",
+"full_name": "Abfalltrenn-System im Spuelenunterschrank (an der Tuer, ausschwenkend)",
+"category": "entsorgen",
+"context": [
+"wohnen"
+],
+"kind": "sink",
+"w": 48.0,
+"d": 22.0,
+"wall": true,
+"h": 47.0,
+"params": {
+"bowls": 1
+},
+"notes": "2 Behaelter nebeneinander, zusammen 48 breit, 22 tief, 47 hoch; im Unterschrank unter dem Becken.",
+"sources": [
+{
+"book": "G",
+"page": 296
+}
+],
+"overlap_ok": [
+"arbeitsinsel",
+"kueche_unterschrank",
+"arbeitsflaeche_klein",
+"arbeitsflaeche_gross"
+]
+},
+{
+"id": "drehstuhl",
+"name": "Arbeits-/Drehstuhl",
+"full_name": "Arbeits-/Drehstuhl (Symbol Kreis)",
+"category": "arbeiten",
+"context": [
+"wohnen"
+],
+"kind": "chair",
+"w": 40.0,
+"d": 40.0,
+"wall": false,
+"notes": "Kreis Ø40, Mitte ca. 30 vor der Tischvorderkante (Kreis beginnt 10 vor Tisch).",
+"sources": [
+{
+"book": "G",
+"page": 306
+},
+{
+"book": "G",
+"page": 307
+},
+{
+"book": "G",
+"page": 308
+},
+{
+"book": "G",
+"page": 309
+}
+]
+},
+{
+"id": "kuechenzeile_element_60x20",
+"name": "Abschlusselement am Ende der Kuechenzeile",
+"full_name": "Abschlusselement am Ende der Kuechenzeile (unbeschriftet)",
+"category": "kueche",
+"context": [
+"wohnen"
+],
+"kind": "counter",
+"w": 60.0,
+"d": 20.0,
+"wall": true,
+"notes": "60 x 20 mit dickerer Kontur (0.5 pt) am Zeilenende neben der Tuerwand; Bedeutung nicht erlaeutert.",
+"sources": [
+{
+"book": "G",
+"page": 306
+},
+{
+"book": "G",
+"page": 307
+},
+{
+"book": "G",
+"page": 308
+},
+{
+"book": "G",
+"page": 309
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "gartenstuhl",
+"name": "Stuhl im Freibereich",
+"full_name": "Stuhl im Freibereich (Gartenstuhl)",
+"category": "freiraum",
+"context": [
+"wohnen"
+],
+"kind": "chair",
+"w": 50.0,
+"d": 55.0,
+"wall": false,
+"variants": [
+{
+"id": "46x55",
+"label": "Symbol (Ellipse/abgerundet) gezeichnet",
+"w": 46.0,
+"d": 55.0
+}
+],
+"notes": "Sitzzone 50-55 ab Tischkante, dahinter 30 bis Gelaender.",
+"sources": [
+{
+"book": "G",
+"page": 315
+},
+{
+"book": "G",
+"page": 317
+},
+{
+"book": "G",
+"page": 318
+}
+]
+},
+{
+"id": "balkontisch",
+"name": "Tisch im Freibereich",
+"full_name": "Tisch im Freibereich",
+"category": "freiraum",
+"context": [
+"wohnen"
+],
+"kind": "table",
+"w": 80.0,
+"d": 65.0,
+"wall": false,
+"variants": [
+{
+"id": "80x130",
+"label": "4 Personen (2 Tische 80x65)",
+"w": 80.0,
+"d": 130.0
+},
+{
+"id": "130x80",
+"label": "6 Personen (2 Tische 65x80)",
+"w": 130.0,
+"d": 80.0
+},
+{
+"id": "80x145",
+"label": "barrierefrei 4 Personen (80x65 + 80x80 unterfahrbar)",
+"w": 80.0,
+"d": 145.0
+}
+],
+"notes": "Tischbreite >=80 (Kette); bei 4 Personen Tischlaenge >=130.",
+"sources": [
+{
+"book": "G",
+"page": 315
+},
+{
+"book": "G",
+"page": 317
+},
+{
+"book": "G",
+"page": 318
+}
+]
+},
+{
+"id": "liegestuhl",
+"name": "Liegestuhl / Liege",
+"full_name": "Liegestuhl / Liege",
+"category": "freiraum",
+"context": [
+"wohnen"
+],
+"kind": "bed",
+"w": 200.0,
+"d": 65.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 70.0,
+"w": 70.0
+}
+],
+"variants": [
+{
+"id": "200x70",
+"label": "Zone lt. Masskette",
+"w": 200.0,
+"d": 70.0
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 316
+}
+]
+},
+{
+"id": "sessel_mit_hocker",
+"name": "Sitzende Person",
+"full_name": "Sitzende Person (Stuhl mit Fusshocker / Liegesessel)",
+"category": "freiraum",
+"context": [
+"wohnen"
+],
+"kind": "chair",
+"w": 48.0,
+"d": 100.0,
+"wall": false,
+"notes": "zwei Ellipsen 46x55 hintereinander gezeichnet (nicht bemasst); Balkon 150 x 185.",
+"sources": [
+{
+"book": "G",
+"page": 316
+}
+]
+},
+{
 "id": "sessel_wartebereich",
 "name": "Sessel Wartebereich",
 "full_name": "Sessel Wartebereich",
@@ -3614,53 +6071,6 @@
 {
 "book": "G",
 "page": 374
-}
-]
-},
-{
-"id": "schreibtisch",
-"name": "Schreibtisch Büroarbeitsplatz",
-"full_name": "Schreibtisch Büroarbeitsplatz (Mindestgröße nach DIN 4543-1)",
-"category": "arbeiten",
-"context": [
-"arbeiten"
-],
-"kind": "desk",
-"w": 160.0,
-"d": 80.0,
-"wall": true,
-"areas": [
-{
-"side": "front",
-"d": 100.0,
-"w": 160.0,
-"note": "Benutzerfläche vor dem Tisch mind. 100 tief über die Tischbreite"
-}
-],
-"variants": [
-{
-"id": "160x90",
-"label": "Tischtiefe 90 (bei Raster 1,35 möglich, S. 396)",
-"w": 160.0,
-"d": 90.0
-}
-],
-"heights": {
-"top": [
-65,
-72
-],
-"notes": "Tischhöhe 65–72 (Empfang S. 373/374); weitere Höhen siehe Ergonomie-Kapitel (nicht in diesem Bereich)"
-},
-"notes": "Tisch + Bewegungsfläche + Sideboard 40 = 220 cm Mindest-Raumbreite; Nettofläche ca. 4 m².",
-"sources": [
-{
-"book": "G",
-"page": 379
-},
-{
-"book": "G",
-"page": 393
 }
 ]
 },
@@ -3746,7 +6156,7 @@
 "context": [
 "arbeiten"
 ],
-"kind": "generic",
+"kind": "desk",
 "w": 320.0,
 "d": 160.0,
 "wall": false,
@@ -3867,6 +6277,567 @@
 ]
 },
 {
+"id": "kuechenzeile",
+"name": "Küchenzeile/Teeküchen-Element",
+"full_name": "Küchenzeile/Teeküchen-Element (Mittelzone Bürogrundriss)",
+"category": "kueche",
+"context": [
+"arbeiten"
+],
+"kind": "counter",
+"w": 240.0,
+"d": 90.0,
+"wall": true,
+"notes": "nur gemessen; Detailmaße Teeküche siehe Nebenräume",
+"sources": [
+{
+"book": "G",
+"page": 395
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "tk_kuehlschrank_unterbau",
+"name": "Teeküche: Unterbau-Kühlschrank",
+"full_name": "Teeküche: Unterbau-Kühlschrank (60er Modul)",
+"category": "kueche",
+"context": [
+"arbeiten"
+],
+"kind": "fridge",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"h": null,
+"areas": [
+{
+"side": "front",
+"d": 120.0,
+"w": 210.0,
+"note": "gemeinsame Bewegungsfläche 120 vor der ganzen Zeile"
+}
+],
+"notes": "Kaffeemaschine auf der Arbeitsplatte darüber.",
+"sources": [
+{
+"book": "G",
+"page": 411
+}
+],
+"group": "kuechenzeile"
+},
+{
+"id": "tk_geschirrspueler",
+"name": "Teeküche: Geschirrspüler 60",
+"full_name": "Teeküche: Geschirrspüler 60",
+"category": "kueche",
+"context": [
+"arbeiten"
+],
+"kind": "sink",
+"w": 60.0,
+"d": 60.0,
+"wall": true,
+"h": null,
+"params": {
+"bowls": 1
+},
+"areas": [
+{
+"side": "front",
+"d": 120.0
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 411
+}
+],
+"group": "kuechenzeile",
+"overlap_ok": [
+"arbeitsinsel",
+"kueche_unterschrank",
+"arbeitsflaeche_klein",
+"arbeitsflaeche_gross"
+]
+},
+{
+"id": "tk_spuele_abtropf",
+"name": "Teeküche: Spüle mit Abtropffläche",
+"full_name": "Teeküche: Spüle mit Abtropffläche (90er Unterschrank, Abfall darunter)",
+"category": "kueche",
+"context": [
+"arbeiten"
+],
+"kind": "sink",
+"w": 90.0,
+"d": 60.0,
+"wall": true,
+"h": null,
+"params": {
+"bowls": 1
+},
+"areas": [
+{
+"side": "front",
+"d": 120.0
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 411
+}
+],
+"group": "kuechenzeile",
+"overlap_ok": [
+"arbeitsinsel",
+"kueche_unterschrank",
+"arbeitsflaeche_klein",
+"arbeitsflaeche_gross"
+]
+},
+{
+"id": "waschtisch_arbeitsstaette",
+"name": "Waschtisch Arbeitsstätte",
+"full_name": "Waschtisch Arbeitsstätte (Mindestmaße)",
+"category": "sanitaer",
+"context": [
+"arbeiten"
+],
+"kind": "basin",
+"w": 65.0,
+"d": 50.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 75.0,
+"w": 105.0
+}
+],
+"heights": {
+"top": 85,
+"notes": "Höhe Waschtischoberkante 85 (Schnitt S. 413)"
+},
+"side_clearance": {
+"each_side": 20
+},
+"notes": "Gesamtfläche 105 x 125 (50 + 75).",
+"sources": [
+{
+"book": "G",
+"page": 412
+},
+{
+"book": "G",
+"page": 413
+}
+]
+},
+{
+"id": "wc_arbeitsstaette",
+"name": "WC-Sitz Arbeitsstätte",
+"full_name": "WC-Sitz Arbeitsstätte (wandhängend, Vorwand 20)",
+"category": "sanitaer",
+"context": [
+"arbeiten"
+],
+"kind": "wc",
+"w": 40.0,
+"d": 60.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 65.0,
+"w": 85.0,
+"note": "Kabine 85 x 125 (60 + 65) vor Vorwand bei Türanschlag nach außen; bei Türanschlag nach innen Kabinentiefe 150"
+}
+],
+"heights": {
+"seat": 42,
+"notes": "Vorwand/Spülkasten 90 hoch, 20 tief"
+},
+"sources": [
+{
+"book": "G",
+"page": 412
+},
+{
+"book": "G",
+"page": 413
+}
+]
+},
+{
+"id": "urinal_arbeitsstaette",
+"name": "Urinal Arbeitsstätte",
+"full_name": "Urinal Arbeitsstätte (Mindestmaße)",
+"category": "sanitaer",
+"context": [
+"arbeiten"
+],
+"kind": "urinal",
+"w": 35.0,
+"d": 38.0,
+"wall": true,
+"short": "UR",
+"areas": [
+{
+"side": "front",
+"d": 60.0,
+"w": 75.0
+}
+],
+"heights": {
+"top": 65,
+"notes": "Beckenvorderkante ca. 65 hoch (Schnitt)"
+},
+"side_clearance": {
+"each_side": 20
+},
+"notes": "Gesamtfläche 75 x 98; Sichtschutzwände empfohlen.",
+"sources": [
+{
+"book": "G",
+"page": 412
+},
+{
+"book": "G",
+"page": 413
+}
+]
+},
+{
+"id": "wc_kabine",
+"name": "WC-Kabine",
+"full_name": "WC-Kabine (Trennwandsystem)",
+"category": "sanitaer",
+"context": [
+"arbeiten"
+],
+"kind": "wc",
+"w": 85.0,
+"d": 125.0,
+"wall": true,
+"h": 190.0,
+"variants": [
+{
+"id": "85x150",
+"label": "Tür nach innen aufschlagend",
+"w": 85.0,
+"d": 150.0
+}
+],
+"heights": {
+"notes": "Trennwände 190 hoch, 10 Bodenfreiheit"
+},
+"notes": "Kabinentür gemessen ca. 60 (nicht bemaßt); Trennwanddicke ca. 3 (aus Summenketten 268/283 usw.).",
+"sources": [
+{
+"book": "G",
+"page": 412
+},
+{
+"book": "G",
+"page": 413
+},
+{
+"book": "G",
+"page": 414
+},
+{
+"book": "G",
+"page": 548
+}
+]
+},
+{
+"id": "ausgussbecken",
+"name": "Ausgussbecken Putzraum",
+"full_name": "Ausgussbecken Putzraum (DIN 68906, mit Spritzwand und Eimerrost)",
+"category": "wirtschaften",
+"context": [
+"arbeiten"
+],
+"kind": "basin",
+"w": 50.0,
+"d": 30.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 100.0,
+"w": 90.0
+}
+],
+"heights": {
+"top": 65
+},
+"side_clearance": {
+"each_side": 20
+},
+"notes": "Tiefe 30 nicht bemaßt (gemessen); Zone 20 | 50 | 20 = 90 breit, 130 tief.",
+"sources": [
+{
+"book": "G",
+"page": 415
+}
+]
+},
+{
+"id": "putzwagen",
+"name": "Putzwagen",
+"full_name": "Putzwagen (Reinigungswagen)",
+"category": "wirtschaften",
+"context": [
+"arbeiten"
+],
+"kind": "box",
+"w": 100.0,
+"d": 65.0,
+"wall": true,
+"h": 100.0,
+"areas": [
+{
+"side": "front",
+"d": 65.0,
+"w": 100.0
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 415
+}
+]
+},
+{
+"id": "liege_ruheraum",
+"name": "Liege",
+"full_name": "Liege (Liegeraum, ASR § 31)",
+"category": "schlafen",
+"context": [
+"arbeiten"
+],
+"kind": "bed",
+"w": 190.0,
+"d": 70.0,
+"wall": true,
+"h": null,
+"areas": [
+{
+"side": "left",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "right",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+},
+{
+"side": "front",
+"d": 70.0,
+"note": "mind. 70, empfohlen 90"
+}
+],
+"heights": {
+"seat": [
+45,
+50
+],
+"notes": "Liegehöhe 45–50"
+},
+"notes": "Mindestmaß > 190 x > 70; gepolstert, abwaschbar oder Einwegauflage.",
+"sources": [
+{
+"book": "G",
+"page": 416
+}
+],
+"overlap_ok": [
+"nachttisch",
+"nachtkonsole"
+],
+"areas_rg": [
+{
+"side": "left",
+"d": 120.0
+},
+{
+"side": "right",
+"d": 120.0
+},
+{
+"side": "either",
+"d": 150.0,
+"note": "eine Längsseite 150, die andere 120"
+}
+],
+"areas_bf": [
+{
+"side": "left",
+"d": 90.0
+},
+{
+"side": "right",
+"d": 90.0
+},
+{
+"side": "either",
+"d": 120.0,
+"note": "eine Längsseite 120, die andere 90"
+}
+]
+},
+{
+"id": "kopierer_normal",
+"name": "Kopierer normale Größe",
+"full_name": "Kopierer normale Größe (mit Ablagen)",
+"category": "arbeiten",
+"context": [
+"arbeiten"
+],
+"kind": "box",
+"w": 100.0,
+"d": 55.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 55.0,
+"w": 160.0,
+"note": "60–70 vor Kopiergeräten (Text)"
+}
+],
+"side_clearance": {
+"each_side": 30
+},
+"notes": "Gesamt 160 x 110; Gerätekörper ca. 60 breit, Ablagen seitlich.",
+"sources": [
+{
+"book": "G",
+"page": 417
+}
+]
+},
+{
+"id": "grosskopierer",
+"name": "Großkopierer / Kopierstation",
+"full_name": "Großkopierer / Kopierstation",
+"category": "arbeiten",
+"context": [
+"arbeiten"
+],
+"kind": "box",
+"w": 160.0,
+"d": 65.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 65.0,
+"w": 220.0
+}
+],
+"side_clearance": {
+"each_side": 30
+},
+"notes": "Gesamt 220 x 130.",
+"sources": [
+{
+"book": "G",
+"page": 417
+}
+]
+},
+{
+"id": "aktenvernichter",
+"name": "Aktenvernichter",
+"full_name": "Aktenvernichter",
+"category": "arbeiten",
+"context": [
+"arbeiten"
+],
+"kind": "box",
+"w": 39.0,
+"d": 29.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 29.0,
+"w": 39.0
+}
+],
+"notes": "gesamt 39 x 58",
+"sources": [
+{
+"book": "G",
+"page": 417
+}
+]
+},
+{
+"id": "papiereimer_20l",
+"name": "Papiereimer 20 l",
+"full_name": "Papiereimer 20 l",
+"category": "entsorgen",
+"context": [
+"arbeiten"
+],
+"kind": "bin",
+"w": 30.0,
+"d": 30.0,
+"wall": true,
+"variants": [
+{
+"id": "30x35",
+"label": "eckig",
+"w": 30.0,
+"d": 35.0
+}
+],
+"notes": "Breite der eckigen Variante nicht bemaßt (gemessen ca. 30).",
+"sources": [
+{
+"book": "G",
+"page": 417
+}
+]
+},
+{
+"id": "ablagetisch_kopierraum",
+"name": "Ablagetisch Kopierraum",
+"full_name": "Ablagetisch Kopierraum",
+"category": "arbeiten",
+"context": [
+"arbeiten"
+],
+"kind": "table",
+"w": 100.0,
+"d": 60.0,
+"wall": false,
+"variants": [
+{
+"id": "80x60",
+"label": "80 x 60 (mit Papiereimer)",
+"w": 80.0,
+"d": 60.0
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 417
+}
+]
+},
+{
 "id": "linienbus_12m",
 "name": "Linienbus",
 "full_name": "Linienbus (Standardbus)",
@@ -3915,6 +6886,1481 @@
 {
 "book": "G",
 "page": 479
+}
+]
+},
+{
+"id": "schuelertisch_groessenklasse",
+"name": "Schülertisch nach Größenklasse",
+"full_name": "Schülertisch nach Größenklasse (Einzel-/Doppeltisch)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "desk",
+"w": 60.0,
+"d": 50.0,
+"wall": true,
+"variants": [
+{
+"id": "120x50",
+"label": "EN 1729 Gr. 1 (orange) Doppeltisch",
+"w": 120.0,
+"d": 50.0
+},
+{
+"id": "130x50",
+"label": "EN 1729 Gr. 4 (rot) Doppeltisch",
+"w": 130.0,
+"d": 50.0
+},
+{
+"id": "60x45",
+"label": "DIN ISO 5970 Gr. 1 (orange) Einzeltisch",
+"w": 60.0,
+"d": 45.0
+},
+{
+"id": "120x45",
+"label": "DIN ISO 5970 Gr. 1 (orange) Doppeltisch",
+"w": 120.0,
+"d": 45.0
+},
+{
+"id": "70x50",
+"label": "DIN ISO 5970 Gr. 3 (gelb) Einzeltisch",
+"w": 70.0,
+"d": 50.0
+}
+],
+"heights": {
+"top": null,
+"notes": "Tischhöhe je Größenklasse siehe Varianten (h) bzw. Regel schulmoebel_en1729_groessen"
+},
+"notes": "w = Breite parallel zur Sitzkante (Plattenlänge), d = Tiefe zur Schülerseite. Zeichnung M 1:50, Draufsicht: Tisch dunkel = Einzeltisch, hell verlängert = Doppeltisch. EN 1729: Größe 1-3 Doppeltisch 120, Größe 4-7 Doppeltisch 130 bei Einzeltisch 60 (so gezeichnet, Vektor geprüft).",
+"sources": [
+{
+"book": "G",
+"page": 506
+},
+{
+"book": "G",
+"page": 507
+}
+]
+},
+{
+"id": "schuelerstuhl_groessenklasse",
+"name": "Schülerstuhl nach Größenklasse",
+"full_name": "Schülerstuhl nach Größenklasse (Sitzfläche)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "chair",
+"w": 38.0,
+"d": 42.0,
+"wall": false,
+"variants": [
+{
+"id": "24x25",
+"label": "EN 1729 Gr. 1 (orange) Sitzfläche",
+"w": 24.0,
+"d": 25.0
+},
+{
+"id": "28x27",
+"label": "EN 1729 Gr. 2 (violett) Sitzfläche",
+"w": 28.0,
+"d": 27.0
+},
+{
+"id": "32x30",
+"label": "EN 1729 Gr. 3 (gelb) Sitzfläche",
+"w": 32.0,
+"d": 30.0
+},
+{
+"id": "34x34",
+"label": "EN 1729 Gr. 4 (rot) Sitzfläche",
+"w": 34.0,
+"d": 34.0
+},
+{
+"id": "38x38",
+"label": "EN 1729 Gr. 5 (grün) Sitzfläche",
+"w": 38.0,
+"d": 38.0
+},
+{
+"id": "40x46",
+"label": "EN 1729 Gr. 7 (braun) Sitzfläche",
+"w": 40.0,
+"d": 46.0
+},
+{
+"id": "25x26",
+"label": "DIN ISO 5970 Gr. 1 (orange) Sitzfläche",
+"w": 25.0,
+"d": 26.0
+},
+{
+"id": "27x29",
+"label": "DIN ISO 5970 Gr. 2 (violett) Sitzfläche",
+"w": 27.0,
+"d": 29.0
+},
+{
+"id": "29x33",
+"label": "DIN ISO 5970 Gr. 3 (gelb) Sitzfläche",
+"w": 29.0,
+"d": 33.0
+},
+{
+"id": "32x36",
+"label": "DIN ISO 5970 Gr. 4 (rot) Sitzfläche",
+"w": 32.0,
+"d": 36.0
+},
+{
+"id": "34x38",
+"label": "DIN ISO 5970 Gr. 5 (grün) Sitzfläche",
+"w": 34.0,
+"d": 38.0
+},
+{
+"id": "36x40",
+"label": "DIN ISO 5970 Gr. 6 (blau) Sitzfläche",
+"w": 36.0,
+"d": 40.0
+}
+],
+"heights": {
+"seat": null,
+"notes": "Sitzhöhe je Größenklasse = h der Varianten; Sitzneigung EN 1729: -5° bis +5°, DIN ISO 5970: 0° bis 4° (Gr. 1-6); Maßtoleranz EN ±1 cm"
+},
+"notes": "Maße = Sitzfläche (w quer, d Sitztiefe in Blickrichtung). In der Draufsicht steht der Stuhl rechts neben dem Tisch, Abstand ca. 3 cm. Stellfläche (Default) = Sitzfläche Gr. 6 + Lehne; die Möblierungsbeispiele S. 513 verwenden Stühle 40 x 35, S. 512 34 x 38 bzw. 40 x 40, S. 520/521 29 x 33.",
+"sources": [
+{
+"book": "G",
+"page": 506
+},
+{
+"book": "G",
+"page": 507
+}
+]
+},
+{
+"id": "werkbank_2er_160x80",
+"name": "Zweier-Arbeitstisch Übungs-/Werkraum",
+"full_name": "Zweier-Arbeitstisch Übungs-/Werkraum",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "desk",
+"w": 160.0,
+"d": 80.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 85.0,
+"w": 160.0,
+"note": "hintereinander 85, Rücken an Rücken 150 zwischen zwei Reihen"
+}
+],
+"notes": "Tiefe 80 nutzungsabhängig",
+"sources": [
+{
+"book": "G",
+"page": 510
+}
+]
+},
+{
+"id": "schuelertisch_2er",
+"name": "Zweiertisch Schüler",
+"full_name": "Zweiertisch Schüler (Klassenraum)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "desk",
+"w": 130.0,
+"d": 50.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 80.0,
+"w": 130.0,
+"note": "Stuhlzone hinter dem Tisch bis zur nächsten Reihe"
+}
+],
+"variants": [
+{
+"id": "120x50",
+"label": "min",
+"w": 120.0,
+"d": 50.0
+}
+],
+"notes": "Höhe nach Größenklasse (schuelertisch_groessenklasse)",
+"sources": [
+{
+"book": "G",
+"page": 510
+},
+{
+"book": "G",
+"page": 511
+},
+{
+"book": "G",
+"page": 518
+}
+]
+},
+{
+"id": "lehrertisch",
+"name": "Lehrertisch Klassenraum",
+"full_name": "Lehrertisch Klassenraum",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "desk",
+"w": 130.0,
+"d": 50.0,
+"wall": true,
+"notes": "in allen Beispielen wie Zweiertisch 130 x 50 gezeichnet, Stuhl auf der Tafelseite",
+"sources": [
+{
+"book": "G",
+"page": 511
+},
+{
+"book": "G",
+"page": 518
+},
+{
+"book": "G",
+"page": 519
+},
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 130
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 138
+},
+{
+"book": "L",
+"page": 139
+},
+{
+"book": "L",
+"page": 142
+},
+{
+"book": "L",
+"page": 151
+},
+{
+"book": "L",
+"page": 165
+},
+{
+"book": "L",
+"page": 169
+},
+{
+"book": "L",
+"page": 171
+}
+]
+},
+{
+"id": "schuelerstuhl",
+"name": "Schülerstuhl",
+"full_name": "Schülerstuhl (Grundriss-Symbol in Möblierungsbeispielen)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "chair",
+"w": 40.0,
+"d": 35.0,
+"wall": false,
+"variants": [
+{
+"id": "34x38",
+"label": "S. 512 Unterrichtsraum",
+"w": 34.0,
+"d": 38.0
+},
+{
+"id": "40x40",
+"label": "S. 512 Werkraum",
+"w": 40.0,
+"d": 40.0
+},
+{
+"id": "29x33",
+"label": "S. 520/521 (M 1:100)",
+"w": 29.0,
+"d": 33.0
+}
+],
+"notes": "Maße je Größenklasse siehe schuelerstuhl_groessenklasse",
+"sources": [
+{
+"book": "G",
+"page": 510
+},
+{
+"book": "G",
+"page": 511
+},
+{
+"book": "G",
+"page": 518
+},
+{
+"book": "G",
+"page": 519
+}
+]
+},
+{
+"id": "lehrerstuhl",
+"name": "Lehrerstuhl",
+"full_name": "Lehrerstuhl",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "chair",
+"w": 40.0,
+"d": 35.0,
+"wall": false,
+"sources": [
+{
+"book": "G",
+"page": 511
+},
+{
+"book": "G",
+"page": 518
+},
+{
+"book": "G",
+"page": 519
+}
+]
+},
+{
+"id": "hocker",
+"name": "Hocker",
+"full_name": "Hocker (Fach-/Werkraum)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "chair",
+"w": 40.0,
+"d": 40.0,
+"wall": false,
+"variants": [
+{
+"id": "45x44",
+"label": "Physik-Übungsraum",
+"w": 45.0,
+"d": 44.0
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 527
+},
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "pinnwand",
+"name": "Pinnwand Klassenraum",
+"full_name": "Pinnwand Klassenraum",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "board",
+"w": 550.0,
+"d": 5.0,
+"wall": true,
+"variants": [
+{
+"id": "110x5",
+"label": "5 Felder à 110",
+"w": 110.0,
+"d": 5.0
+}
+],
+"notes": "an der Rückwand (Wand gegenüber der Tafel)",
+"sources": [
+{
+"book": "G",
+"page": 518
+},
+{
+"book": "G",
+"page": 519
+}
+]
+},
+{
+"id": "schuelertisch_1er_70x50",
+"name": "Einzeltisch Schüler 70 x 50",
+"full_name": "Einzeltisch Schüler 70 x 50",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "desk",
+"w": 70.0,
+"d": 50.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 80.0,
+"w": 70.0
+}
+],
+"notes": "zu Reihen aneinandergestellt",
+"sources": [
+{
+"book": "G",
+"page": 519
+}
+]
+},
+{
+"id": "wandtafel",
+"name": "Wandtafel",
+"full_name": "Wandtafel (Klapptafel) Klassenraum",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "board",
+"w": 400.0,
+"d": 5.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 200.0,
+"w": 400.0,
+"note": "erster Schülerplatz ≥ 2 m, letzter ≤ 9 m von der Tafel; Blickwinkel ≥ 30°"
+}
+],
+"notes": "gezeichnet 100 | 200 | 100, mittig über dem Sitzbereich; zwei Wandtafeln (davon eine Magnettafel) gefordert",
+"sources": [
+{
+"book": "G",
+"page": 518
+},
+{
+"book": "G",
+"page": 519
+}
+]
+},
+{
+"id": "lehrerexperimentiertisch",
+"name": "Lehrer-Experimentiertisch",
+"full_name": "Lehrer-Experimentiertisch (mit Spülbecken-Modul)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "table",
+"w": 300.0,
+"d": 76.0,
+"wall": false,
+"variants": [
+{
+"id": "240x76",
+"label": "Tischteil",
+"w": 240.0,
+"d": 76.0
+},
+{
+"id": "60x76",
+"label": "Spülmodul (Becken ca. 66 x 49)",
+"w": 60.0,
+"d": 76.0
+}
+],
+"notes": "M 1:200 gemessen; Strom, Gas, Wasser, Absaugung",
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+]
+},
+{
+"id": "schuelerexperimentiertisch",
+"name": "Schüler-Experimentiertisch",
+"full_name": "Schüler-Experimentiertisch (Reihe für 4 Schüler)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "table",
+"w": 240.0,
+"d": 60.0,
+"wall": false,
+"notes": "gezeichnet 59-61 x 239-241; am Tischende je ein kleines Element 40 x 30 (Medienversorgung?)",
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+]
+},
+{
+"id": "hoersaalgestuehl",
+"name": "Hörsaalgestühl Lehrsaal",
+"full_name": "Hörsaalgestühl Lehrsaal (Pult + Stuhl je Platz)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "box",
+"w": 269.0,
+"d": 40.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 42.0,
+"w": 269.0,
+"note": "Stuhl 42 x 42; Stufentiefe 85 = Stuhl 42-44 + Pult 39-41"
+}
+],
+"variants": [
+{
+"id": "52.5x85",
+"label": "Platzbreite",
+"w": 52.5,
+"d": 85.0
+}
+],
+"notes": "Schreibfläche 40 tief (Text); Pultreihe für 5 Plätze 269 lang",
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+]
+},
+{
+"id": "werkbank_4er",
+"name": "Schülerwerkbank-Gruppe",
+"full_name": "Schülerwerkbank-Gruppe (Vierer-Arbeitsplatz aus 2 Bänken 80 x 160)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "desk",
+"w": 160.0,
+"d": 160.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 145.0,
+"w": 160.0,
+"note": "Hocker 40 x 40 je 2 pro Seite; Abstände ≥ 100 zwischen den Gruppen in Längsrichtung, 150 zwischen den Gruppen quer, 145 zur Wand"
+}
+],
+"variants": [
+{
+"id": "80x160",
+"label": "Einzelbank",
+"w": 80.0,
+"d": 160.0
+}
+],
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "lehrerarbeitstisch_werkraum",
+"name": "Lehrerarbeitstisch Werkraum",
+"full_name": "Lehrerarbeitstisch Werkraum",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "desk",
+"w": 220.0,
+"d": 80.0,
+"wall": true,
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "maschine_werkraum",
+"name": "Maschine Werkraum",
+"full_name": "Maschine Werkraum (Kreissäge/Hobel o. ä.)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "box",
+"w": 130.0,
+"d": 130.0,
+"wall": true,
+"areas": [
+{
+"side": "front",
+"d": 100.0,
+"note": "≥ 100 Freiraum (Maß im Maschinenraum)"
+}
+],
+"notes": "gezeichnet 129,5 x 129,5",
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "reihenwerkbank",
+"name": "Reihenwerkbank",
+"full_name": "Reihenwerkbank",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "desk",
+"w": 295.0,
+"d": 75.0,
+"wall": true,
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "lagerregal_werken",
+"name": "Lagerregal Materialraum",
+"full_name": "Lagerregal Materialraum",
+"category": "aufbewahren",
+"context": [
+"lernen"
+],
+"kind": "shelf",
+"w": 135.0,
+"d": 50.0,
+"wall": true,
+"notes": "quer zur Wand gestellt",
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "wasserbecken_mit_ablage",
+"name": "Wasserbecken mit Ablage",
+"full_name": "Wasserbecken mit Ablage (Werkraum)",
+"category": "sanitaer",
+"context": [
+"lernen"
+],
+"kind": "basin",
+"w": 100.0,
+"d": 78.0,
+"wall": true,
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "sammlungsschrank_doppel",
+"name": "Sammlungsschrank, doppelseitig",
+"full_name": "Sammlungsschrank, doppelseitig (Raumteiler)",
+"category": "aufbewahren",
+"context": [
+"lernen"
+],
+"kind": "wardrobe",
+"w": 435.0,
+"d": 100.0,
+"wall": true,
+"variants": [
+{
+"id": "435x50",
+"label": "einseitig an der Wand",
+"w": 435.0,
+"d": 50.0
+}
+],
+"notes": "2 x 50 tief, in 3 Abschnitte à ca. 145 geteilt",
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+]
+},
+{
+"id": "mensatisch_80x120",
+"name": "Mensatisch 4 Plätze",
+"full_name": "Mensatisch 4 Plätze (80 x 120)",
+"category": "essen",
+"context": [
+"lernen"
+],
+"kind": "table",
+"w": 120.0,
+"d": 80.0,
+"wall": false,
+"variants": [
+{
+"id": "240x80",
+"label": "zwei Tische gestoßen (8 Plätze)",
+"w": 240.0,
+"d": 80.0
+}
+],
+"notes": "M 1:500 Vektor, 2 Stühle je Längsseite",
+"sources": [
+{
+"book": "G",
+"page": 544
+}
+]
+},
+{
+"id": "waschbecken_rund",
+"name": "Handwaschbecken Vorraum",
+"full_name": "Handwaschbecken Vorraum (Kreissymbol)",
+"category": "sanitaer",
+"context": [
+"lernen"
+],
+"kind": "basin",
+"w": 40.0,
+"d": 50.0,
+"wall": true,
+"notes": "Kreis ø 40 auf 50 tiefer Ablage; Achsabstand in den Vorräumen 77,7 (S. 550 oben) bzw. 93,4 (große Anlagen)",
+"sources": [
+{
+"book": "G",
+"page": 548
+}
+]
+},
+{
+"id": "waschtisch_unterfahrbar",
+"name": "Waschtisch unterfahrbar",
+"full_name": "Waschtisch unterfahrbar (barrierefrei)",
+"category": "sanitaer",
+"context": [
+"allgemein"
+],
+"kind": "basin",
+"w": 60.0,
+"d": 55.0,
+"wall": true,
+"h": 80.0,
+"areas": [
+{
+"side": "front",
+"d": 150.0,
+"w": 150.0
+}
+],
+"variants": [
+{
+"id": "70x50",
+"label": "WB-Rechteck in Schul-WC barrierefrei S. 550",
+"w": 70.0,
+"d": 50.0
+}
+],
+"heights": {
+"top": 80,
+"notes": "Oberkante ≤ 80; Kniefreiraum ≥ 67 hoch, ≥ 30 tief (DIN 18040: 40), über ≥ 90 Breite; Siphonbereich max. 10 tief ab 35 Höhe; Unterputzsiphon; Einhebelmischer langer Hebel ≤ 40 hinter Vorderkante; Spiegel UK 95-100"
+},
+"barrier_free": {
+"standard": "DIN 18024-2 / DIN 18040-1 (Entwurf 2009)",
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+}
+},
+"sources": [
+{
+"book": "G",
+"page": 550
+},
+{
+"book": "G",
+"page": 551
+}
+]
+},
+{
+"id": "wc_barrierefrei",
+"name": "WC barrierefrei",
+"full_name": "WC barrierefrei (Hänge-WC mit Vormauerung)",
+"category": "sanitaer",
+"context": [
+"allgemein"
+],
+"kind": "wc",
+"w": 40.0,
+"d": 70.0,
+"wall": true,
+"h": 48.0,
+"areas": [
+{
+"side": "front",
+"d": 150.0,
+"w": 150.0,
+"note": "Rangierfläche 150 x 150 vor dem WC; beidseitig Übersetzfläche ≥ 95 (DIN 18040 Entwurf ≥ 90) breit x 70 tief"
+}
+],
+"heights": {
+"seat": 48,
+"notes": "Sitzhöhe inkl. Sitz 48 (DIN 18040 Entwurf 46-48); Griffe 85 (74-76)"
+},
+"barrier_free": {
+"standard": "DIN 18024-2; DIN 18040-1 Entwurf",
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+}
+},
+"side_clearance": {
+"left": 95,
+"right": 95
+},
+"notes": "Tiefe 70 ab Wand = 55 WC + 15 Vormauerung",
+"sources": [
+{
+"book": "G",
+"page": 550
+},
+{
+"book": "G",
+"page": 551
+}
+]
+},
+{
+"id": "schultisch_120x60",
+"name": "Schülertisch Zweiertisch 120x60",
+"full_name": "Schülertisch Zweiertisch 120x60",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "table",
+"w": 120.0,
+"d": 60.0,
+"wall": false,
+"variants": [
+{
+"id": "117x58",
+"label": "117x58 (Albisriederplatz [69])",
+"w": 117.0,
+"d": 58.0
+},
+{
+"id": "115x58",
+"label": "115x58 (Linden [52], Gruppentisch)",
+"w": 115.0,
+"d": 58.0
+},
+{
+"id": "121x60",
+"label": "121x59..61 (Riedmatt [43])",
+"w": 121.0,
+"d": 60.0
+},
+{
+"id": "130x65",
+"label": "130x65 (Mummelsoll [47], Lehrer-/Gruppentisch)",
+"w": 130.0,
+"d": 65.0
+},
+{
+"id": "136x68",
+"label": "136x68 (Saleggi [24])",
+"w": 136.0,
+"d": 68.0
+}
+],
+"heights": {
+"seat": null,
+"top": null,
+"notes": "keine Höhen angegeben"
+},
+"notes": "Häufigstes Tischmaß in allen Klassenzimmerplänen (M 1:250). 2 Schülerplätze an der Langseite; Stuhlsymbol 40x20 an der Langseite. Gemessen aus Projektplan M 1:250 (Vektorgeometrie, ca. ±2 cm); das Buch gibt keine Maße an.",
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 130
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 139
+},
+{
+"book": "L",
+"page": 142
+},
+{
+"book": "L",
+"page": 151
+},
+{
+"book": "L",
+"page": 161
+},
+{
+"book": "L",
+"page": 171
+}
+]
+},
+{
+"id": "schultisch_einzel_60x60",
+"name": "Schülertisch Einzeltisch 60x60",
+"full_name": "Schülertisch Einzeltisch 60x60",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "table",
+"w": 60.0,
+"d": 60.0,
+"wall": false,
+"variants": [
+{
+"id": "58x58",
+"label": "57-58 x 57-58 (Linden [52])",
+"w": 58.0,
+"d": 58.0
+},
+{
+"id": "65x65",
+"label": "65x65 (Mummelsoll [47])",
+"w": 65.0,
+"d": 65.0
+}
+],
+"notes": "1 Platz. Gemessen aus Projektplan M 1:250 (Vektorgeometrie, ca. ±2 cm); das Buch gibt keine Maße an.",
+"sources": [
+{
+"book": "L",
+"page": 133
+},
+{
+"book": "L",
+"page": 135
+},
+{
+"book": "L",
+"page": 138
+},
+{
+"book": "L",
+"page": 145
+},
+{
+"book": "L",
+"page": 147
+},
+{
+"book": "L",
+"page": 165
+},
+{
+"book": "L",
+"page": 167
+},
+{
+"book": "L",
+"page": 169
+}
+]
+},
+{
+"id": "schulstuhl",
+"name": "Schulstuhl",
+"full_name": "Schulstuhl (Planzeichen)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "chair",
+"w": 40.0,
+"d": 40.0,
+"wall": false,
+"variants": [
+{
+"id": "40x20",
+"label": "am Tisch eingeschoben: sichtbarer Teil 40x20",
+"w": 40.0,
+"d": 20.0
+},
+{
+"id": "42x42",
+"label": "freistehend 42x42 (Turmatt [67])",
+"w": 42.0,
+"d": 42.0
+},
+{
+"id": "47x47",
+"label": "Stuhl mit Armlehne/Sitzkreis 47x47 (Openluchtschool [02])",
+"w": 47.0,
+"d": 47.0
+},
+{
+"id": "46x23",
+"label": "Saleggi [24] 46x23 sichtbar",
+"w": 46.0,
+"d": 23.0
+}
+],
+"notes": "Im Klassenzimmer wird nur der vor der Tischkante sichtbare Teil (40 breit, 20 tief) gezeichnet, Stühle sitzen bündig an der Tischkante, 2 je 120er Tisch mit Achsabstand 60 (Stuhlmitte 30 cm von Tischende). Gemessen aus Projektplan M 1:250 (Vektorgeometrie, ca. ±2 cm); das Buch gibt keine Maße an.",
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 154
+},
+{
+"book": "L",
+"page": 194
+},
+{
+"book": "L",
+"page": 195
+}
+]
+},
+{
+"id": "reihenstuhl_aula",
+"name": "Stuhl in Reihenbestuhlung",
+"full_name": "Stuhl in Reihenbestuhlung (Musiksaal/Aula)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "chair",
+"w": 40.0,
+"d": 40.0,
+"wall": false,
+"notes": "Thurzelg [49]: 12 Reihen x 15 Stühle = 180; Letzi [06]: 7 Reihen x 14 Stühle = 98. Gemessen aus Projektplan M 1:250 (Vektorgeometrie, ca. ±2 cm); das Buch gibt keine Maße an.",
+"sources": [
+{
+"book": "L",
+"page": 194
+},
+{
+"book": "L",
+"page": 195
+}
+]
+},
+{
+"id": "tafel",
+"name": "Wandtafel",
+"full_name": "Wandtafel",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "board",
+"w": 300.0,
+"d": 10.0,
+"wall": true,
+"variants": [
+{
+"id": "287x10",
+"label": "287 (Linden [52])",
+"w": 287.0,
+"d": 10.0
+},
+{
+"id": "322x8",
+"label": "322 (Mummelsoll [47])",
+"w": 322.0,
+"d": 8.0
+},
+{
+"id": "330x10",
+"label": "330 (Scherr [55])",
+"w": 330.0,
+"d": 10.0
+},
+{
+"id": "360x10",
+"label": "360 (Kantonsschule Zug [53])",
+"w": 360.0,
+"d": 10.0
+},
+{
+"id": "303x10",
+"label": "303 + 243 Doppeltafel (Mäder [33])",
+"w": 303.0,
+"d": 10.0
+}
+],
+"notes": "Gezeichnet als Rechteck 300x10 an der Wand plus Linie (Ablage) davor; meist mittig auf der Stirnwand, gegenüber der Schülerblickrichtung. Gemessen aus Projektplan M 1:250 (Vektorgeometrie, ca. ±2 cm); das Buch gibt keine Maße an.",
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 130
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 139
+},
+{
+"book": "L",
+"page": 142
+},
+{
+"book": "L",
+"page": 151
+},
+{
+"book": "L",
+"page": 158
+},
+{
+"book": "L",
+"page": 161
+},
+{
+"book": "L",
+"page": 165
+},
+{
+"book": "L",
+"page": 169
+},
+{
+"book": "L",
+"page": 171
+}
+]
+},
+{
+"id": "labortisch_240x60",
+"name": "Labor-/Experimentiertisch",
+"full_name": "Labor-/Experimentiertisch (naturwiss. Übungsraum)",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "table",
+"w": 240.0,
+"d": 60.0,
+"wall": false,
+"notes": "Schreienesch [66]: 8 Tische 240x60 in 4 Reihen x 2, Abstand zwischen den beiden Tischen einer Reihe 99 cm (Gang). Dazu Lehrer-/Demotische 100x75. Gemessen aus Projektplan M 1:250 (Vektorgeometrie, ca. ±2 cm); das Buch gibt keine Maße an.",
+"sources": [
+{
+"book": "L",
+"page": 189
+}
+]
+},
+{
+"id": "gruppentisch_90x90",
+"name": "Gruppentisch quadratisch 90x90",
+"full_name": "Gruppentisch quadratisch 90x90",
+"category": "lernen",
+"context": [
+"lernen"
+],
+"kind": "table",
+"w": 90.0,
+"d": 90.0,
+"wall": false,
+"notes": "Volta [39], Gruppenecke im Klassenzimmer. Gemessen aus Projektplan M 1:250 (Vektorgeometrie, ca. ±2 cm); das Buch gibt keine Maße an.",
+"sources": [
+{
+"book": "L",
+"page": 137
+}
+]
+},
+{
+"id": "regal_110x45",
+"name": "Regal/Ablage niedrig 110x45",
+"full_name": "Regal/Ablage niedrig 110x45 (Reihe)",
+"category": "aufbewahren",
+"context": [
+"lernen"
+],
+"kind": "shelf",
+"w": 110.0,
+"d": 45.0,
+"wall": true,
+"notes": "Leutschenbach [68]: 6 Elemente in Reihe = 660 cm als Raumteiler zwischen Lehr- und Gruppentischzone. Gemessen aus Projektplan M 1:250 (Vektorgeometrie, ca. ±2 cm); das Buch gibt keine Maße an.",
+"sources": [
+{
+"book": "L",
+"page": 147
+}
+]
+},
+{
+"id": "wc_symbol_schule",
+"name": "WC",
+"full_name": "WC (Planzeichen in Schultoiletten)",
+"category": "sanitaer",
+"context": [
+"lernen"
+],
+"kind": "wc",
+"w": 37.0,
+"d": 57.0,
+"wall": true,
+"notes": "Rechteck 37x57 mit 7 cm tiefem Spülkastenstreifen an der Wand; mittig in der Kabine. Gemessen aus Projektplan M 1:250 (Vektordaten), keine Buchmaße.",
+"sources": [
+{
+"book": "L",
+"page": 241
+},
+{
+"book": "L",
+"page": 246
+},
+{
+"book": "L",
+"page": 247
+},
+{
+"book": "L",
+"page": 251
+}
+]
+},
+{
+"id": "waschtisch_schule",
+"name": "Waschtisch",
+"full_name": "Waschtisch (Reihenanlage Schule)",
+"category": "sanitaer",
+"context": [
+"lernen"
+],
+"kind": "basin",
+"w": 50.0,
+"d": 40.0,
+"wall": true,
+"variants": [
+{
+"id": "36x26",
+"label": "Becken innen 36x26",
+"w": 36.0,
+"d": 26.0
+},
+{
+"id": "49x40",
+"label": "49x40 (Wasgenring [04])",
+"w": 49.0,
+"d": 40.0
+},
+{
+"id": "35x35",
+"label": "rund Ø ca. 35 (Indersdorf [44])",
+"w": 35.0,
+"d": 35.0
+}
+],
+"notes": "Planzeichen: Rechteck 50x40 mit innerem Becken 36x26. Gemessen aus Projektplan M 1:250 (Vektordaten), keine Buchmaße.",
+"sources": [
+{
+"book": "L",
+"page": 241
+},
+{
+"book": "L",
+"page": 245
+},
+{
+"book": "L",
+"page": 246
+},
+{
+"book": "L",
+"page": 247
+},
+{
+"book": "L",
+"page": 251
+}
+]
+},
+{
+"id": "urinal_schule",
+"name": "Urinal",
+"full_name": "Urinal (Planzeichen Dreieck)",
+"category": "sanitaer",
+"context": [
+"lernen"
+],
+"kind": "urinal",
+"w": 38.0,
+"d": 30.0,
+"wall": true,
+"notes": "Als Dreieck an der Wand, Basis 34-42 cm; Achsabstand ca. 60-68 cm (Andreanum 7 Stück je Wand). Gemessen aus Projektplan M 1:250 (Vektordaten), keine Buchmaße.",
+"sources": [
+{
+"book": "L",
+"page": 241
+},
+{
+"book": "L",
+"page": 243
+},
+{
+"book": "L",
+"page": 247
+}
+]
+},
+{
+"id": "kabinentrennwand",
+"name": "WC-Kabinentrennwand",
+"full_name": "WC-Kabinentrennwand",
+"category": "sanitaer",
+"context": [
+"lernen"
+],
+"kind": "box",
+"w": 7.0,
+"d": 160.0,
+"wall": true,
+"variants": [
+{
+"id": "7x161",
+"label": "Andreanum 7x161",
+"w": 7.0,
+"d": 161.0
+},
+{
+"id": "7x169",
+"label": "Indersdorf 7x169 (Doppellinie)",
+"w": 7.0,
+"d": 169.0
+},
+{
+"id": "8x121",
+"label": "Wasgenring Grundschule 8x121",
+"w": 8.0,
+"d": 121.0
+}
+],
+"notes": "Trennwände 7-8 cm dick, Länge = Kabinentiefe. Gemessen aus Projektplan M 1:250 (Vektordaten), keine Buchmaße.",
+"sources": [
+{
+"book": "L",
+"page": 241
+},
+{
+"book": "L",
+"page": 245
+},
+{
+"book": "L",
+"page": 247
+},
+{
+"book": "L",
+"page": 251
+}
+]
+},
+{
+"id": "spind_schule",
+"name": "Schülerspind",
+"full_name": "Schülerspind (Flur)",
+"category": "aufbewahren",
+"context": [
+"lernen"
+],
+"kind": "wardrobe",
+"w": 33.0,
+"d": 48.0,
+"wall": true,
+"notes": "Im Birch [59]: Spindreihe ca. 9,5 m lang an der Flurwand, Spindbreite ca. 33 cm, Tiefe ca. 48 cm (grau angelegt). Gemessen aus Projektplan M 1:250 (Vektordaten), keine Buchmaße.",
+"sources": [
+{
+"book": "L",
+"page": 227
 }
 ]
 },
@@ -4107,11 +8553,12 @@
 "id": "fahrkorb",
 "name": "Fahrkorb",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "lift",
 "w": 110.0,
 "d": 140.0,
 "wall": true,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4124,11 +8571,12 @@
 "id": "rampenlauf_1",
 "name": "Rampenlauf 1",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 600.0,
 "d": 120.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4141,11 +8589,12 @@
 "id": "rampenlauf_2",
 "name": "Rampenlauf 2",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 600.0,
 "d": 120.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4158,11 +8607,12 @@
 "id": "fensteroeffnung_licht",
 "name": "Fensteroeffnung licht",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 90.0,
 "d": 90.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4175,11 +8625,12 @@
 "id": "durchgang",
 "name": "Durchgang",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 125.0,
 "d": 220.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4192,11 +8643,12 @@
 "id": "aufstellflaeche",
 "name": "Aufstellflaeche",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 1100.0,
 "d": 500.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4209,11 +8661,12 @@
 "id": "zufahrt",
 "name": "Zufahrt",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 2000.0,
 "d": 300.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4223,14 +8676,159 @@
 "notes": "nur aus einem Standardgrundriss bekannt (bewegungsflaeche_an_zufahrt_layout)"
 },
 {
+"id": "klingeltableau",
+"name": "Klingeltableau",
+"category": "sonstiges",
+"kind": "box",
+"w": 34.0,
+"d": 25.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 189
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (rollstuhl_eingang_min)"
+},
+{
+"id": "ablage_unterfahrbar",
+"name": "Ablage unterfahrbar",
+"category": "sonstiges",
+"kind": "box",
+"w": 190.0,
+"d": 30.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 189
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (rollstuhlwechselplatz_aussen)"
+},
+{
+"id": "treppenlauf",
+"name": "Treppenlauf",
+"category": "sonstiges",
+"kind": "box",
+"w": 210.0,
+"d": 100.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 191
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (treppenhaus_zweilaeufig)"
+},
+{
+"id": "treppenauge_handlauf",
+"name": "Treppenauge handlauf",
+"category": "sonstiges",
+"kind": "box",
+"w": 30.0,
+"d": 240.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 191
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (treppenhaus_zweilaeufig)"
+},
+{
+"id": "podest",
+"name": "Podest",
+"category": "sonstiges",
+"kind": "box",
+"w": 230.0,
+"d": 100.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 191
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (treppenhaus_zweilaeufig)"
+},
+{
+"id": "aufzugsschacht",
+"name": "Aufzugsschacht",
+"category": "sonstiges",
+"kind": "lift",
+"w": 220.0,
+"d": 240.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 191
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (treppenhaus_zweilaeufig_aufzug)"
+},
+{
+"id": "flur_gehbereich",
+"name": "Flur gehbereich",
+"category": "sonstiges",
+"kind": "box",
+"w": 720.0,
+"d": 150.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 191
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (treppenhaus_einlaeufig_aufzug)"
+},
+{
+"id": "nebenraum_schacht",
+"name": "Nebenraum schacht",
+"category": "sonstiges",
+"kind": "box",
+"w": 86.0,
+"d": 190.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 191
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (treppenhaus_einlaeufig_aufzug)"
+},
+{
 "id": "arbeitsinsel",
 "name": "Arbeitsinsel",
 "category": "kueche",
-"kind": "generic",
+"kind": "box",
 "w": 190.0,
 "d": 100.0,
 "wall": true,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4248,6 +8846,7 @@
 "d": 240.0,
 "wall": true,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4255,40 +8854,6 @@
 }
 ],
 "notes": "nur aus einem Standardgrundriss bekannt (kueche_l_essplatz)"
-},
-{
-"id": "hocker",
-"name": "Hocker",
-"category": "kueche",
-"kind": "chair",
-"w": 40.0,
-"d": 40.0,
-"wall": false,
-"derived": true,
-"sources": [
-{
-"book": "G",
-"page": 205
-}
-],
-"notes": "nur aus einem Standardgrundriss bekannt (kueche_l_essplatz)"
-},
-{
-"id": "kuechenzeile",
-"name": "Kuechenzeile",
-"category": "kueche",
-"kind": "generic",
-"w": 360.0,
-"d": 60.0,
-"wall": true,
-"derived": true,
-"sources": [
-{
-"book": "G",
-"page": 208
-}
-],
-"notes": "nur aus einem Standardgrundriss bekannt (kueche_einzeilig_rollstuhl)"
 },
 {
 "id": "moebel_sideboard",
@@ -4299,6 +8864,7 @@
 "d": 40.0,
 "wall": true,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4306,6 +8872,24 @@
 }
 ],
 "notes": "nur aus einem Standardgrundriss bekannt (essplatz_eckig_4p)"
+},
+{
+"id": "regal_wohnraum",
+"name": "Regal wohnraum",
+"category": "sonstiges",
+"kind": "shelf",
+"w": 150.0,
+"d": 40.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 306
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (nn_quadratisch_kinderzimmer)"
 },
 {
 "id": "empfangstheke",
@@ -4316,6 +8900,7 @@
 "d": 290.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4333,6 +8918,7 @@
 "d": 340.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "G",
@@ -4340,6 +8926,262 @@
 }
 ],
 "notes": "nur aus einem Standardgrundriss bekannt (kombibuero_grundriss)"
+},
+{
+"id": "waschbecken",
+"name": "Waschbecken",
+"category": "sonstiges",
+"kind": "basin",
+"w": 60.0,
+"d": 50.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 518
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (klassenraum_60m2_30_schueler)"
+},
+{
+"id": "ausguss_spuele",
+"name": "Ausguss spuele",
+"category": "sonstiges",
+"kind": "sink",
+"w": 69.0,
+"d": 58.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (nawi_lehrsaal_40)",
+"params": {
+"bowls": 1
+}
+},
+{
+"id": "hoersaalgestuehl_pult",
+"name": "Hoersaalgestuehl pult",
+"category": "sonstiges",
+"kind": "box",
+"w": 40.6,
+"d": 269.2,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (nawi_lehrsaal_40)"
+},
+{
+"id": "einbauschrank",
+"name": "Einbauschrank",
+"category": "sonstiges",
+"kind": "wardrobe",
+"w": 503.0,
+"d": 51.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (nawi_sammlung_vorbereitung)"
+},
+{
+"id": "vorbereitungstisch_oder_schrank",
+"name": "Vorbereitungstisch oder schrank",
+"category": "sonstiges",
+"kind": "table",
+"w": 435.0,
+"d": 74.5,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (nawi_sammlung_vorbereitung)"
+},
+{
+"id": "wandspuele",
+"name": "Wandspuele",
+"category": "sonstiges",
+"kind": "sink",
+"w": 144.0,
+"d": 54.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (nawi_lehr_uebungsraum_32)",
+"params": {
+"bowls": 1
+}
+},
+{
+"id": "geraeteschrank",
+"name": "Geraeteschrank",
+"category": "sonstiges",
+"kind": "wardrobe",
+"w": 779.0,
+"d": 40.5,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (nawi_lehr_uebungsraum_32)"
+},
+{
+"id": "versorgungseinheit",
+"name": "Versorgungseinheit",
+"category": "sonstiges",
+"kind": "box",
+"w": 40.5,
+"d": 29.5,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (nawi_lehr_uebungsraum_32)"
+},
+{
+"id": "wc_wandhaengend",
+"name": "Wc wandhaengend",
+"category": "sonstiges",
+"kind": "wc",
+"w": 36.9,
+"d": 66.8,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 548
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (toilettenanlage_lehrer_30_30)"
+},
+{
+"id": "vormauerung_wc",
+"name": "Vormauerung wc",
+"category": "sonstiges",
+"kind": "box",
+"w": 40.0,
+"d": 15.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 550
+},
+{
+"book": "G",
+"page": 551
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (wc_barrierefrei_oeffentlich)"
+},
+{
+"id": "ablage",
+"name": "Ablage",
+"category": "sonstiges",
+"kind": "box",
+"w": 30.0,
+"d": 15.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 550
+},
+{
+"book": "G",
+"page": 551
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (wc_barrierefrei_oeffentlich)"
+},
+{
+"id": "abfallkorb",
+"name": "Abfallkorb",
+"category": "sonstiges",
+"kind": "box",
+"w": 35.0,
+"d": 15.0,
+"wall": true,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 550
+},
+{
+"book": "G",
+"page": 551
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (wc_barrierefrei_oeffentlich)"
+},
+{
+"id": "bodeneinlauf",
+"name": "Bodeneinlauf",
+"category": "sonstiges",
+"kind": "box",
+"w": 7.0,
+"d": 7.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "G",
+"page": 550
+},
+{
+"book": "G",
+"page": 551
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (wc_barrierefrei_oeffentlich)"
 },
 {
 "id": "lehrertisch_120x60",
@@ -4350,6 +9192,7 @@
 "d": 120.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4367,40 +9210,7 @@
 "d": 40.0,
 "wall": false,
 "derived": true,
-"sources": [
-{
-"book": "L",
-"page": 129
-}
-],
-"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p131_r1)"
-},
-{
-"id": "tafel",
-"name": "Tafel",
-"category": "sonstiges",
-"kind": "generic",
-"w": 303.0,
-"d": 10.0,
-"wall": true,
-"derived": true,
-"sources": [
-{
-"book": "L",
-"page": 129
-}
-],
-"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p131_r1)"
-},
-{
-"id": "schultisch_120x60",
-"name": "Schultisch 120x60",
-"category": "sonstiges",
-"kind": "table",
-"w": 60.0,
-"d": 120.0,
-"wall": false,
-"derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4418,6 +9228,7 @@
 "d": 60.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4430,11 +9241,12 @@
 "id": "moebel_45x45",
 "name": "Moebel 45x45",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 45.0,
 "d": 45.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4447,11 +9259,12 @@
 "id": "moebel_345x33",
 "name": "Moebel 345x33",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 345.0,
 "d": 33.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4469,6 +9282,7 @@
 "d": 58.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4486,6 +9300,7 @@
 "d": 58.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4503,6 +9318,7 @@
 "d": 57.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4520,6 +9336,7 @@
 "d": 57.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4537,6 +9354,7 @@
 "d": 38.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4554,6 +9372,7 @@
 "d": 114.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4571,6 +9390,7 @@
 "d": 57.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4583,11 +9403,12 @@
 "id": "moebel_86x86",
 "name": "Moebel 86x86",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 86.0,
 "d": 86.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4600,11 +9421,12 @@
 "id": "moebel_87x87",
 "name": "Moebel 87x87",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 87.0,
 "d": 87.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4617,28 +9439,12 @@
 "id": "moebel_73x73",
 "name": "Moebel 73x73",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 73.0,
 "d": 73.0,
 "wall": false,
 "derived": true,
-"sources": [
-{
-"book": "L",
-"page": 135
-}
-],
-"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p137_r0)"
-},
-{
-"id": "schultisch_einzel_60x60",
-"name": "Schultisch einzel 60x60",
-"category": "sonstiges",
-"kind": "table",
-"w": 60.0,
-"d": 60.0,
-"wall": false,
-"derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4651,11 +9457,12 @@
 "id": "moebel_465x200",
 "name": "Moebel 465x200",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 200.0,
 "d": 465.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4668,11 +9475,12 @@
 "id": "moebel_233x180",
 "name": "Moebel 233x180",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 180.0,
 "d": 233.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4685,11 +9493,12 @@
 "id": "moebel_465x202",
 "name": "Moebel 465x202",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 202.0,
 "d": 465.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4702,11 +9511,12 @@
 "id": "moebel_50x40",
 "name": "Moebel 50x40",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 40.0,
 "d": 50.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4719,11 +9529,12 @@
 "id": "moebel_91x90",
 "name": "Moebel 91x90",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 90.0,
 "d": 91.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4736,11 +9547,12 @@
 "id": "moebel_90x90",
 "name": "Moebel 90x90",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 90.0,
 "d": 90.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4758,6 +9570,7 @@
 "d": 121.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4775,6 +9588,7 @@
 "d": 120.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4792,6 +9606,7 @@
 "d": 121.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4809,6 +9624,7 @@
 "d": 121.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4821,11 +9637,12 @@
 "id": "moebel_93x92",
 "name": "Moebel 93x92",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 92.0,
 "d": 93.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4843,6 +9660,7 @@
 "d": 64.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4860,6 +9678,7 @@
 "d": 65.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4877,6 +9696,7 @@
 "d": 65.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4894,6 +9714,7 @@
 "d": 129.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4911,6 +9732,7 @@
 "d": 130.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4928,6 +9750,7 @@
 "d": 130.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4945,6 +9768,7 @@
 "d": 129.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4962,6 +9786,7 @@
 "d": 129.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4974,11 +9799,12 @@
 "id": "moebel_121x121",
 "name": "Moebel 121x121",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 121.0,
 "d": 121.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -4991,11 +9817,12 @@
 "id": "moebel_121x119",
 "name": "Moebel 121x119",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 121.0,
 "d": 119.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5008,11 +9835,12 @@
 "id": "moebel_119x119",
 "name": "Moebel 119x119",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 119.0,
 "d": 119.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5025,11 +9853,12 @@
 "id": "moebel_90x89",
 "name": "Moebel 90x89",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 90.0,
 "d": 89.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5042,11 +9871,12 @@
 "id": "moebel_89x89",
 "name": "Moebel 89x89",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 89.0,
 "d": 89.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5059,11 +9889,12 @@
 "id": "moebel_48x29",
 "name": "Moebel 48x29",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 48.0,
 "d": 29.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5076,11 +9907,12 @@
 "id": "moebel_170x44",
 "name": "Moebel 170x44",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 170.0,
 "d": 44.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5093,11 +9925,12 @@
 "id": "moebel_41x29",
 "name": "Moebel 41x29",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 41.0,
 "d": 29.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5115,6 +9948,7 @@
 "d": 67.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5132,6 +9966,7 @@
 "d": 136.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5144,11 +9979,12 @@
 "id": "moebel_136x136",
 "name": "Moebel 136x136",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 136.0,
 "d": 136.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5161,11 +9997,12 @@
 "id": "moebel_85x85",
 "name": "Moebel 85x85",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 85.0,
 "d": 85.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5178,11 +10015,12 @@
 "id": "moebel_200x60",
 "name": "Moebel 200x60",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 200.0,
 "d": 60.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5195,11 +10033,12 @@
 "id": "moebel_450x30",
 "name": "Moebel 450x30",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 30.0,
 "d": 450.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5217,6 +10056,7 @@
 "d": 45.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5234,6 +10074,7 @@
 "d": 45.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5246,11 +10087,12 @@
 "id": "moebel_55x55",
 "name": "Moebel 55x55",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 55.0,
 "d": 55.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5268,6 +10110,7 @@
 "d": 61.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5280,11 +10123,12 @@
 "id": "moebel_78x38",
 "name": "Moebel 78x38",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 38.0,
 "d": 78.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5297,11 +10141,12 @@
 "id": "moebel_66x25",
 "name": "Moebel 66x25",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 25.0,
 "d": 66.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5314,11 +10159,12 @@
 "id": "moebel_106x32",
 "name": "Moebel 106x32",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 106.0,
 "d": 32.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5336,6 +10182,7 @@
 "d": 59.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5348,11 +10195,12 @@
 "id": "moebel_120x40",
 "name": "Moebel 120x40",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 120.0,
 "d": 40.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5365,11 +10213,12 @@
 "id": "moebel_121x40",
 "name": "Moebel 121x40",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 121.0,
 "d": 40.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5382,11 +10231,12 @@
 "id": "moebel_120x99",
 "name": "Moebel 120x99",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 99.0,
 "d": 120.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5399,11 +10249,12 @@
 "id": "moebel_258x200",
 "name": "Moebel 258x200",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 258.0,
 "d": 200.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5421,6 +10272,7 @@
 "d": 46.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5438,6 +10290,7 @@
 "d": 39.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5455,6 +10308,7 @@
 "d": 47.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5472,6 +10326,7 @@
 "d": 42.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5484,11 +10339,12 @@
 "id": "moebel_127x127",
 "name": "Moebel 127x127",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 127.0,
 "d": 127.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5501,11 +10357,12 @@
 "id": "moebel_100x100",
 "name": "Moebel 100x100",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 100.0,
 "d": 100.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5518,11 +10375,12 @@
 "id": "moebel_77x77",
 "name": "Moebel 77x77",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 77.0,
 "d": 77.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5535,11 +10393,12 @@
 "id": "moebel_105x105",
 "name": "Moebel 105x105",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 105.0,
 "d": 105.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5552,11 +10411,12 @@
 "id": "moebel_86x85",
 "name": "Moebel 86x85",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 85.0,
 "d": 86.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5566,14 +10426,15 @@
 "notes": "nur aus einem Standardgrundriss bekannt (lernen_gruppenraum_p165_r2)"
 },
 {
-"id": "stuhl_41x41",
-"name": "Stuhl 41x41",
+"id": "moebel_41x41",
+"name": "Moebel 41x41",
 "category": "sonstiges",
-"kind": "chair",
+"kind": "box",
 "w": 41.0,
 "d": 41.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5591,6 +10452,7 @@
 "d": 60.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5608,6 +10470,7 @@
 "d": 60.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5625,6 +10488,7 @@
 "d": 59.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5642,6 +10506,7 @@
 "d": 59.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5659,6 +10524,7 @@
 "d": 58.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5671,11 +10537,12 @@
 "id": "moebel_451x410",
 "name": "Moebel 451x410",
 "category": "sonstiges",
-"kind": "generic",
+"kind": "box",
 "w": 410.0,
 "d": 451.0,
 "wall": false,
 "derived": true,
+"catalog": false,
 "sources": [
 {
 "book": "L",
@@ -5683,5 +10550,779 @@
 }
 ],
 "notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p173_r0)"
+},
+{
+"id": "moebel_240x60",
+"name": "Moebel 240x60",
+"category": "sonstiges",
+"kind": "box",
+"w": 60.0,
+"d": 240.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 189
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_naturwiss_uebungsraum_p191)"
+},
+{
+"id": "schultisch_100x75",
+"name": "Schultisch 100x75",
+"category": "sonstiges",
+"kind": "table",
+"w": 75.0,
+"d": 100.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 189
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_naturwiss_uebungsraum_p191)"
+},
+{
+"id": "stuhl_40x40",
+"name": "Stuhl 40x40",
+"category": "sonstiges",
+"kind": "chair",
+"w": 40.0,
+"d": 40.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 195
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_musiksaal_p197)"
+},
+{
+"id": "moebel_165x28",
+"name": "Moebel 165x28",
+"category": "sonstiges",
+"kind": "box",
+"w": 165.0,
+"d": 28.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 195
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_musiksaal_p197)"
+},
+{
+"id": "moebel_59x59",
+"name": "Moebel 59x59",
+"category": "sonstiges",
+"kind": "box",
+"w": 59.0,
+"d": 59.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 195
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_musiksaal_p197)"
+},
+{
+"id": "schultisch_125x59",
+"name": "Schultisch 125x59",
+"category": "sonstiges",
+"kind": "table",
+"w": 59.0,
+"d": 125.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 195
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_musiksaal_p197)"
+},
+{
+"id": "moebel_159x25",
+"name": "Moebel 159x25",
+"category": "sonstiges",
+"kind": "box",
+"w": 25.0,
+"d": 159.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 194
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_musiksaal_p196)"
+},
+{
+"id": "moebel_130x25",
+"name": "Moebel 130x25",
+"category": "sonstiges",
+"kind": "box",
+"w": 130.0,
+"d": 25.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 194
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_musiksaal_p196)"
+},
+{
+"id": "moebel_155x25",
+"name": "Moebel 155x25",
+"category": "sonstiges",
+"kind": "box",
+"w": 155.0,
+"d": 25.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 194
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_musiksaal_p196)"
+},
+{
+"id": "moebel_75x75",
+"name": "Moebel 75x75",
+"category": "sonstiges",
+"kind": "box",
+"w": 75.0,
+"d": 75.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 194
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_musiksaal_p196)"
+},
+{
+"id": "moebel_70x70",
+"name": "Moebel 70x70",
+"category": "sonstiges",
+"kind": "box",
+"w": 70.0,
+"d": 70.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 194
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_musiksaal_p196)"
+},
+{
+"id": "moebel_539x69",
+"name": "Moebel 539x69",
+"category": "sonstiges",
+"kind": "box",
+"w": 69.0,
+"d": 539.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 194
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_musiksaal_p196)"
+},
+{
+"id": "schultisch_einzel_55x55",
+"name": "Schultisch einzel 55x55",
+"category": "sonstiges",
+"kind": "table",
+"w": 55.0,
+"d": 55.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 213
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_lehrerzimmer_p215_r0)"
+},
+{
+"id": "moebel_180x60",
+"name": "Moebel 180x60",
+"category": "sonstiges",
+"kind": "box",
+"w": 180.0,
+"d": 60.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 213
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_lehrerzimmer_p215_r0)"
+},
+{
+"id": "schultisch_140x80",
+"name": "Schultisch 140x80",
+"category": "sonstiges",
+"kind": "table",
+"w": 80.0,
+"d": 140.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 214
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_lehrerzimmer_p216_r2)"
+},
+{
+"id": "schultisch_110x48",
+"name": "Schultisch 110x48",
+"category": "sonstiges",
+"kind": "table",
+"w": 48.0,
+"d": 110.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 214
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_lehrerzimmer_p216_r2)"
+},
+{
+"id": "schultisch_109x60",
+"name": "Schultisch 109x60",
+"category": "sonstiges",
+"kind": "table",
+"w": 60.0,
+"d": 109.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 214
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_lehrerzimmer_p216_r2)"
+},
+{
+"id": "moebel_299x77",
+"name": "Moebel 299x77",
+"category": "sonstiges",
+"kind": "box",
+"w": 77.0,
+"d": 299.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 214
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_lehrerzimmer_p216_r3)"
+},
+{
+"id": "moebel_46x46",
+"name": "Moebel 46x46",
+"category": "sonstiges",
+"kind": "box",
+"w": 46.0,
+"d": 46.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 214
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_lehrerzimmer_p216_r3)"
+},
+{
+"id": "moebel_39x30",
+"name": "Moebel 39x30",
+"category": "sonstiges",
+"kind": "box",
+"w": 39.0,
+"d": 30.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 212
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_besprechungsraum_p214_r1)"
+},
+{
+"id": "moebel_46x30",
+"name": "Moebel 46x30",
+"category": "sonstiges",
+"kind": "box",
+"w": 46.0,
+"d": 30.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 212
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_besprechungsraum_p214_r1)"
+},
+{
+"id": "moebel_80x80",
+"name": "Moebel 80x80",
+"category": "sonstiges",
+"kind": "box",
+"w": 80.0,
+"d": 80.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 212
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_besprechungsraum_p214_r1)"
+},
+{
+"id": "schultisch_einzel_62x50",
+"name": "Schultisch einzel 62x50",
+"category": "sonstiges",
+"kind": "table",
+"w": 62.0,
+"d": 50.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 222
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p224_r0)"
+},
+{
+"id": "stuhl_45x32",
+"name": "Stuhl 45x32",
+"category": "sonstiges",
+"kind": "chair",
+"w": 45.0,
+"d": 32.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 222
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p224_r0)"
+},
+{
+"id": "moebel_451x426",
+"name": "Moebel 451x426",
+"category": "sonstiges",
+"kind": "box",
+"w": 426.0,
+"d": 451.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 223
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p225_r0)"
+},
+{
+"id": "moebel_82x81",
+"name": "Moebel 82x81",
+"category": "sonstiges",
+"kind": "box",
+"w": 81.0,
+"d": 82.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 223
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p225_r0)"
+},
+{
+"id": "moebel_78x78",
+"name": "Moebel 78x78",
+"category": "sonstiges",
+"kind": "box",
+"w": 78.0,
+"d": 78.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 224
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p226_r0)"
+},
+{
+"id": "schultisch_einzel_56x56",
+"name": "Schultisch einzel 56x56",
+"category": "sonstiges",
+"kind": "table",
+"w": 56.0,
+"d": 56.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 224
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p226_r0)"
+},
+{
+"id": "schultisch_einzel_57x56",
+"name": "Schultisch einzel 57x56",
+"category": "sonstiges",
+"kind": "table",
+"w": 56.0,
+"d": 57.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 224
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p226_r0)"
+},
+{
+"id": "lehrertisch_114x56",
+"name": "Lehrertisch 114x56",
+"category": "sonstiges",
+"kind": "desk",
+"w": 56.0,
+"d": 114.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 224
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p226_r0)"
+},
+{
+"id": "moebel_79x79",
+"name": "Moebel 79x79",
+"category": "sonstiges",
+"kind": "box",
+"w": 79.0,
+"d": 79.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 225
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p227_r0)"
+},
+{
+"id": "schultisch_124x61",
+"name": "Schultisch 124x61",
+"category": "sonstiges",
+"kind": "table",
+"w": 124.0,
+"d": 61.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 226
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p228_r0)"
+},
+{
+"id": "schultisch_124x62",
+"name": "Schultisch 124x62",
+"category": "sonstiges",
+"kind": "table",
+"w": 124.0,
+"d": 62.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 226
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p228_r0)"
+},
+{
+"id": "moebel_256x47",
+"name": "Moebel 256x47",
+"category": "sonstiges",
+"kind": "box",
+"w": 256.0,
+"d": 47.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 228
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p230_r0)"
+},
+{
+"id": "schultisch_einzel_75x47",
+"name": "Schultisch einzel 75x47",
+"category": "sonstiges",
+"kind": "table",
+"w": 47.0,
+"d": 75.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 228
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p230_r0)"
+},
+{
+"id": "moebel_280x44",
+"name": "Moebel 280x44",
+"category": "sonstiges",
+"kind": "box",
+"w": 280.0,
+"d": 44.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 228
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p230_r0)"
+},
+{
+"id": "moebel_128x128",
+"name": "Moebel 128x128",
+"category": "sonstiges",
+"kind": "box",
+"w": 128.0,
+"d": 128.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 231
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p233_r0)"
+},
+{
+"id": "schultisch_128x72",
+"name": "Schultisch 128x72",
+"category": "sonstiges",
+"kind": "table",
+"w": 72.0,
+"d": 128.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 231
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p233_r0)"
+},
+{
+"id": "schultisch_128x64",
+"name": "Schultisch 128x64",
+"category": "sonstiges",
+"kind": "table",
+"w": 64.0,
+"d": 128.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 231
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p233_r0)"
+},
+{
+"id": "moebel_259x60",
+"name": "Moebel 259x60",
+"category": "sonstiges",
+"kind": "box",
+"w": 60.0,
+"d": 259.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 231
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p233_r0)"
+},
+{
+"id": "schultisch_einzel_60x57",
+"name": "Schultisch einzel 60x57",
+"category": "sonstiges",
+"kind": "table",
+"w": 57.0,
+"d": 60.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 234
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p236_r0)"
+},
+{
+"id": "moebel_99x75",
+"name": "Moebel 99x75",
+"category": "sonstiges",
+"kind": "box",
+"w": 75.0,
+"d": 99.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 234
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_klassenzimmer_p236_r0)"
+},
+{
+"id": "wand",
+"name": "Wand",
+"category": "sonstiges",
+"kind": "box",
+"w": 276.0,
+"d": 10.0,
+"wall": false,
+"derived": true,
+"catalog": false,
+"sources": [
+{
+"book": "L",
+"page": 251
+}
+],
+"notes": "nur aus einem Standardgrundriss bekannt (lernen_toilette_wasgenring)"
 }
 ]

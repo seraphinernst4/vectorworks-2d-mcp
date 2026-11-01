@@ -30,6 +30,13 @@ OFFSET = 2  # printed page = PDF page - 2 in all four volumes
 
 # element id -> (kind, params); first matching regex wins
 KINDS = [
+    (r"^aufzug_\d|^aufzug_15|aufzugsschacht|fahrkorb|aufzug_kabine", "lift", {}),
+    (r"abfallbehaelter|abfalleimer|papiereimer|muelltonne", "bin", {}),
+    (r"wandtafel|^tafel|pinnwand", "board", {}),
+    (r"matratze|liege", "bed", {}),
+    (r"werkbank|arbeitsplatzinsel", "desk", {}),
+    (r"spind|garderobe", "wardrobe", {}),
+    (r"ausgussbecken|wasserbecken", "basin", {}),
     (r"^doppelwaschtisch$|^einbauwaschtisch_2$", "basin", {"bowls": 2}),
     (r"waschtisch|waschbecken|^handwaschbecken", "basin", {}),
     (r"^bidet$", "bidet", {}),
@@ -45,7 +52,7 @@ KINDS = [
     (r"herd|kochfeld", "hob", {}),
     (r"kuehl|gefrier", "fridge", {}),
     (r"hochschrank|backofen_schrank|einbaubackofen", "tall", {}),
-    (r"unterschrank|arbeitsflaeche|abstellflaeche|abtropfflaeche|geraetestell|geschirrspueler|essbar|theke", "counter", {}),
+    (r"unterschrank|arbeitsflaeche|abstellflaeche|abtropfflaeche|geraetestell|geschirrspueler|essbar|theke|kuechenzeile", "counter", {}),
     (r"oberschrank|haengeschrank|mikrowelle", "box", {}),
     (r"schreibtisch|arbeitstisch|buerotisch|schuelertisch|lehrertisch", "desk", {}),
     (r"esstisch_rund|tisch_rund", "table", {"round": True}),
@@ -112,7 +119,7 @@ def kind_of(eid: str):
     for rx, kind, params in KINDS:
         if re.search(rx, eid):
             return kind, dict(params)
-    return "generic", {}
+    return "box", {}
 
 
 def areas_from(bf, w) -> list[dict]:
@@ -237,6 +244,23 @@ def build(src: str) -> dict:
                 for a in el.get("areas_bf", []) + el.get("areas_rg", []):
                     if a["d"] > a["w"]:  # given as length x depth: along the tub x in front
                         a["w"], a["d"] = a["d"], a["w"]
+            if kind == "bed" and el["category"] in ("schlafen", "kinder"):
+                # Raumpilot Grundlagen S. 235/246: 70 (recommended 90) at the access sides and the foot;
+                # double beds both long sides; S. 238/239: wheelchair 150 / 120, barrier-free 120 / 90
+                el["overlap_ok"] = ["nachttisch", "nachtkonsole"]  # S. 235: nightstands stand in this zone
+                double = w >= 140 and not eid.startswith(("kinder", "klein", "hoch", "alkoven"))
+                note = "mind. 70, empfohlen 90"
+                if double:
+                    el["areas"] = [{"side": "left", "d": 70.0, "note": note}, {"side": "right", "d": 70.0, "note": note},
+                                   {"side": "front", "d": 70.0, "note": note}]
+                    el["areas_rg"] = [{"side": "left", "d": 120.0}, {"side": "right", "d": 120.0},
+                                      {"side": "either", "d": 150.0, "note": "eine Längsseite 150, die andere 120"}]
+                    el["areas_bf"] = [{"side": "left", "d": 90.0}, {"side": "right", "d": 90.0},
+                                      {"side": "either", "d": 120.0, "note": "eine Längsseite 120, die andere 90"}]
+                else:
+                    el["areas"] = [{"side": "either", "d": 70.0, "note": note}, {"side": "front", "d": 70.0, "note": note}]
+                    el["areas_rg"] = [{"side": "either", "d": 150.0}]
+                    el["areas_bf"] = [{"side": "either", "d": 120.0}]
             if kind in ("hob", "sink"):
                 el["overlap_ok"] = ["arbeitsinsel", "kueche_unterschrank", "arbeitsflaeche_klein",
                                     "arbeitsflaeche_gross"]
@@ -312,6 +336,11 @@ def build(src: str) -> dict:
                   "dims": lay.get("dims"), "notes": lay.get("notes"), "sources": sources(book, lay.get("page"))}
             if not ok or not els:
                 lo["reference_only"] = True  # geometry not complete enough to place
+            if agent.startswith("l2"):
+                # measured from real school projects (no dimensioned drawings in that part)
+                lo["reference_only"], lo["measured"] = True, True
+                if lay.get("metrics"):
+                    lo["metrics"] = lay["metrics"]
             layouts[lay["id"]] = lo
         for s in d.get("style", []):
             style_notes.append({"agent": agent, "note": s})
@@ -357,7 +386,7 @@ def build(src: str) -> dict:
             elements[x["element"]] = {"id": x["element"], "name": x["element"].replace("_", " ").capitalize(),
                                       "category": "kueche" if "kueche" in (lay.get("room") or "") else "sonstiges",
                                       "kind": kind, "w": lw, "d": ld, "wall": x.get("against") is not None,
-                                      "derived": True, "sources": list(lay["sources"]),
+                                      "derived": True, "catalog": False, "sources": list(lay["sources"]),
                                       "notes": "nur aus einem Standardgrundriss bekannt (%s)" % lay["id"]}
             if params:
                 elements[x["element"]]["params"] = params

@@ -463,7 +463,7 @@
 "area": null
 },
 "requires": [
-"aufzug_15309_normal_630kg"
+"aufzug_kabine_110x140"
 ],
 "rules": [
 "DIN 15306 Wohngebäude: Tiefe = FKT, mind. 150; Fläche FKT x SBR, mind. 150 x 150; Reihe: tiefster Fahrkorb, Breite über äußerste Schachtwände",
@@ -632,6 +632,142 @@
 ]
 },
 {
+"id": "eingangsbereich_wohnung",
+"name": "Eingangsbereich / Windfang (Wohnung, Haus)",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 180,
+"d": 215,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"garderobe_eingang"
+],
+"rules": [
+"Garderobe zugänglich, möglichst WC zugeordnet",
+"Abstellfläche für Taschen",
+"bei direktem Ausgang ins Freie (Laubengang) äußere + innere Tür (Windfang)",
+"Windfang mit Garderobe ≥ 180 × ≥ 215"
+],
+"sources": [
+{
+"book": "G",
+"page": 187
+},
+{
+"book": "G",
+"page": 188
+},
+{
+"book": "G",
+"page": 189
+}
+],
+"barrier_free": {
+"min_w": 200,
+"min_d": 150,
+"variant_straight": {
+"w": 150,
+"d": 200
+},
+"wendeflaeche": {
+"w": 150,
+"d": 150
+},
+"with_wechselplatz_innen": {
+"w": 300,
+"d": 290
+},
+"norm": "DIN 18025 / DIN 18040 (Entwurf)"
+},
+"requires_text": [
+"eingangstuer_wohnung"
+]
+},
+{
+"id": "treppenhaus_mfh_eingang",
+"name": "Treppenhaus mit Eingangsbereich im Geschosswohnungsbau",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 230,
+"d": 600,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"Laufbreite ≥ 100",
+"Podest ≥ 100 tief",
+"zweiläufig mit Aufzug: Breite ≥ 100 + 220 + ≥ 100",
+"einläufig mit Aufzug: Breite ≥ ca. 230, Halle ≥ 720 lang (zzgl. Aufzugsvorraum)",
+"Kinderwagenabstellfläche im Eingang (gezeichnet)"
+],
+"sources": [
+{
+"book": "G",
+"page": 191
+}
+],
+"requires_text": [
+"treppe",
+"eingangstuer_wohnung"
+]
+},
+{
+"id": "rollstuhlabstellplatz",
+"name": "Rollstuhlabstell-/Wechselplatz",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 190,
+"d": 150,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": 300,
+"d": 190,
+"area": null
+},
+"requires": [
+"rollstuhlabstellplatz"
+],
+"rules": [
+"je Rollstuhlbenutzer ein Platz im Hauseingang oder vor der Wohnung",
+"Ladeplatz E-Rollstuhl nach DIN VDE 0510-3",
+"Wechselplatz außen gezeichnet 150 + 150 = 300 × ≥ 190"
+],
+"sources": [
+{
+"book": "G",
+"page": 189
+},
+{
+"book": "G",
+"page": 190
+}
+],
+"barrier_free": {
+"norm": "DIN 18025; DIN 18040 E: 180 × 150"
+}
+},
+{
 "id": "kueche",
 "name": "Küche / Kochnische",
 "context": [
@@ -762,6 +898,266 @@
 "page": 219
 }
 ]
+},
+{
+"id": "wohnzimmer",
+"name": "Wohnraum / Sitzgruppe (nur barrierefreie Mindestflächen aus diesem Bereich)",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"sofa_sitzgruppe",
+"couchtisch",
+"sessel"
+],
+"rules": [
+"Sitzgruppe rollstuhlgerecht: Streifen ≥150 vor Schränken, Wendefläche 150x150, Durchgang ≥120",
+"barrierefrei: ≥90 statt 150/120"
+],
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+],
+"barrier_free": {
+"rollstuhlgerecht": "≥150 vor Schränken, Wendefläche 150x150, ≥120 Durchgang, Tür ≥90 (Beispiel 450x480 + Schränke)",
+"barrierefrei": "≥90 vor Schränken und an Sofa-Stirnseiten, Tür ≥80 (Beispiel 390x390 + Schränke)"
+}
+},
+{
+"id": "schlafzimmer",
+"name": "Schlafzimmer / Individualraum",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 14,
+"clear_height": 240
+},
+"typical": {
+"w": 380,
+"d": 415,
+"area": 15.8
+},
+"requires": [
+"doppelbett",
+"nachttisch",
+"kleiderschrank"
+],
+"rules": [
+"nutzungsneutrale Raumgröße mind. 14-15 m² empfohlen; ca. 2 m² weniger möglich, wenn Kleider-/Wäscheschränke und Ankleiden anderswo (z.B. Ankleideraum)",
+"lichte Höhe ≥240 (MBO, Aufenthaltsraum); LBO BW: 230, in Dachräumen 220 über mind. halber Fläche, Teile unter 150 lichter Höhe nicht mitgerechnet",
+"natürlich belichtet und belüftet; Rohbaumaß Fensteröffnung ca. 1/8 der Grundfläche",
+"Besonnung erwünscht, Abschirmung von Lärm",
+"Doppelbett: Platzbedarf mit 90 Bewegungsfläche ≥380 x ≥295 (nur Bett + Nachttische)",
+"Beispielräume: 380-390 x 415-425 (Schrank gegenüber Bett-Fußende) bzw. 445-455 x 360-370 (Schrank an Fußende, Arbeitstisch seitlich)",
+"starke Funktionsbeziehung zu Sanitär- und Ankleidebereich"
+],
+"sources": [
+{
+"book": "G",
+"page": 233
+},
+{
+"book": "G",
+"page": 234
+},
+{
+"book": "G",
+"page": 235
+},
+{
+"book": "G",
+"page": 238
+},
+{
+"book": "G",
+"page": 239
+}
+],
+"barrier_free": {
+"standard": "DIN 18025-2 / DIN 18040-2 (Entwurf)",
+"rollstuhlgerecht": {
+"w": 470,
+"d": 420,
+"notes": "≥150 an einer Bettlängsseite und vor Schränken, ≥120 andere Seite"
+},
+"barrierefrei": {
+"w": 410,
+"d": 360,
+"notes": "≥120 an einer Längsseite, ≥90 vor Schränken und andere Seite"
+}
+}
+},
+{
+"id": "ankleideraum",
+"name": "Ankleideraum",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 260,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": 260,
+"d": null,
+"area": null
+},
+"requires": [
+"kleiderschrank"
+],
+"rules": [
+"Schränke 60 tief beidseitig, dazwischen empfohlener Bewegungsraum ca. 140 (60 | 140 | 60 = 260)"
+],
+"sources": [
+{
+"book": "G",
+"page": 235
+}
+]
+},
+{
+"id": "kinderzimmer",
+"name": "Kinderzimmer",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 14,
+"clear_height": 240
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 15
+},
+"requires": [
+"einzelbett",
+"kleiderschrank",
+"kinder_zusatzmoebel",
+"arbeitstisch",
+"stuhl"
+],
+"rules": [
+"nutzungsneutraler Zuschnitt, nicht unter 14 m²",
+"Aufenthaltsraum: lichte Höhe ≥240 (MBO 2002 § 47), LBO BW ≥230",
+"natürlich belichtet/belüftet; Fenster-Rohbaumaß ≥1/8 der Netto-Grundfläche inkl. verglaster Vorbauten und Loggien",
+"Säugling/Kleinkind: Nähe zum Elternschlafbereich, ggf. direkte Kopplung; anfangs können 2 Kinder ein Zimmer teilen; ab ca. 8-10 Jahren eigenes Zimmer je Kind",
+"eigener Arbeitsplatz spätestens ab Schuleintritt; für Jugendliche ideal: eigener Wohnbereich mit Sanitär und eigenem Eingang",
+"Orientierung Süd oder West (Nutzung v.a. nachmittags)",
+"Raumhöhen ab ca. 250 erlauben vertikale Unterteilung (Hochbett, Podeste, Nischen); kleinere Kinder mögen niedrige Nischen/Höhlen",
+"warme Farben, Kontraste, gute Belichtung; veränderbare/selbst gestaltbare Einrichtung, abwaschbare bemalbare Wandflächen"
+],
+"sources": [
+{
+"book": "G",
+"page": 243
+},
+{
+"book": "G",
+"page": 244
+},
+{
+"book": "G",
+"page": 247
+},
+{
+"book": "G",
+"page": 248
+}
+]
+},
+{
+"id": "arbeitsplatz_wohnen",
+"name": "Häuslicher Arbeitsplatz / Arbeitszimmer",
+"context": [
+"wohnen",
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": 235,
+"d": 200,
+"area": null
+},
+"requires": [
+"schreibtisch",
+"buerostuhl"
+],
+"rules": [
+"Größe abhängig von der Art der Arbeit; Computerarbeit auch temporär in anderen Wohnbereichen möglich",
+"Orientierung (Arbeitsstätten, DIN 4543-1): Tisch 80 (bis 90) tief + Benutzerfläche ≥100 + Regal 45 = ca. 225-235 Tiefe bei 160-200 Tischlänge",
+"Beleuchtung 300-1000 lx am Arbeitsplatz, im Mittel 500 lx; matte Tischoberflächen, Reflexionsgrade beachten",
+"Kombinationen Wohnen/Arbeiten: Arbeitsplatz im Allraum/Loft (überlagert oder flexibel abtrennbar), im flexiblen Möbelelement, getrenntes Arbeitszimmer, interner Schaltraum mit eigenem Zugang von außen, externer Schaltraum zuschaltbar/getrennt nutzbar, Satellitenbüro im Gebäude/Quartier",
+"spätere Nutzungswechsel einplanen (nutzungsneutrale Zuschnitte, Schalträume mit getrennten Eingängen)",
+"störende Einflüsse der Arbeit: Kunden, Mitarbeiter, Anlieferung, Lärm"
+],
+"sources": [
+{
+"book": "G",
+"page": 253
+},
+{
+"book": "G",
+"page": 254
+},
+{
+"book": "G",
+"page": 255
+},
+{
+"book": "G",
+"page": 256
+},
+{
+"book": "G",
+"page": 257
+},
+{
+"book": "G",
+"page": 258
+},
+{
+"book": "G",
+"page": 259
+}
+],
+"barrier_free": {
+"rollstuhlgerecht": {
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"tisch_h": "75-90",
+"uk_tisch_min": 67,
+"unterfahrbar_w_min": 90,
+"greifhoehe": "40-140"
+}
+}
 },
 {
 "id": "wc_raum",
@@ -958,7 +1354,7 @@
 },
 "typical": null,
 "requires": [
-"wc_vorwand"
+"wc_kabine"
 ],
 "rules": [
 "MBO 48: every dwelling needs a bath with tub or shower and a WC",
@@ -1172,6 +1568,316 @@
 40,
 140
 ]
+}
+},
+{
+"id": "abfallbehaelterraum",
+"name": "Abfallbehaelterraum (Muellraum)",
+"context": [
+"wohnen",
+"allgemein"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": 340,
+"d": 320,
+"area": 10.88
+},
+"requires": [
+"abfallbehaelter_2rad",
+"abfallbehaelter_4rad_flachdeckel"
+],
+"rules": [
+"Ausgang unmittelbar ins Freie; Behaelter muessen direkt vom Freien entleert werden koennen (MBO § 45)",
+"staendig wirksame Lueftung (Lueftungsoeffnungen in Tuer, Rueckwand oder Dach)",
+"GK 3-5 innerhalb von Gebaeuden: Trennwaende und Decken feuerbestaendig/raumabschliessend wie tragende Waende; Oeffnungen ins Gebaeudeinnere feuerhemmend, dicht- und selbstschliessend (MBO § 45, LBO BW § 33 (2))",
+"Fussboden mit 2 % Gefaelle, Bodenablauf und Wasseranschluss fuer Reinigung",
+"kann neben Garagen oder in Nebengebaeuden liegen",
+"Bewegungsflaeche vor Behaelterreihen >=120 (Beispiel: Mittelgang 120 zwischen zwei 110 tiefen Behaelterzonen)"
+],
+"sources": [
+{
+"book": "G",
+"page": 296
+},
+{
+"book": "G",
+"page": 301
+}
+]
+},
+{
+"id": "abfallbehaelterstandplatz",
+"name": "Abfallbehaelter-Standplatz (offen, Schrank oder Raum)",
+"context": [
+"wohnen",
+"allgemein"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"drei Standplatzarten: offene Standplaetze im Freien (einfachste, guenstigste; oft umpflanzt oder in Mauernischen), Abfallbehaelterschraenke (DIN EN 15132, bis 1700 l), Abfallbehaelterraeume",
+"Flaeche grosszuegig bemessen (spaeter zusaetzliche Behaelter)",
+"ebenerdig, befestigt, trittsicher; leicht erreichbar, gut zugaenglich, moeglichst witterungsgeschuetzt, ausreichend beleuchtet",
+"Abstand zu Aufenthaltsraeumen/Grundstuecksgrenze (MBO 1997: 5 m zu Oeffnungen, 2 m zur Grenze)",
+"max. 15 m von der Zufahrtsstrasse des Sammelfahrzeugs; Wege unfallsicher und stufenlos",
+"Durchgaenge mind. 200 hoch und 100 breit; bei Grossmuellbehaeltern Wegbreite 150 (GUV-V C 27)",
+"Bewegungsflaeche vor Behaelterreihen mind. 120; Tueren im Zugangsweg mit Arretierung",
+"Behaeltermenge: Orientierungswert 45 l (Restmuell + Biotonne) pro Person und Woche"
+],
+"sources": [
+{
+"book": "G",
+"page": 297
+},
+{
+"book": "G",
+"page": 298
+},
+{
+"book": "G",
+"page": 300
+},
+{
+"book": "G",
+"page": 301
+},
+{
+"book": "G",
+"page": 302
+}
+],
+"barrier_free": {
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"einwurfhoehe": [
+70,
+85
+],
+"notes": "p304"
+}
+},
+{
+"id": "nutzungsneutraler_raum_quadratisch",
+"name": "Nutzungsneutraler Raum, quadratisch",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 350,
+"d": 380,
+"area": 14,
+"clear_height": null
+},
+"typical": {
+"w": 360,
+"d": 390,
+"area": null
+},
+"requires": [
+"doppelbett",
+"kleiderschrank"
+],
+"rules": [
+"massgebend: Elternschlafzimmer mit Doppelbett und Schrank",
+"Stell- und Bewegungsflaeche mind. 360 x 380 (Ketten: >=350-360 x >=380-390), >= ca. 14 m2",
+"Bewegungsflaeche mind. 70 tief, empfohlen 90 (WBS Schweiz, BWO 2000)",
+"Nutzbar als Eltern-, Kinder-, Ess-, Arbeits-, Gaestezimmer, bei Installation auch Kueche/Essk./Bad"
+],
+"sources": [
+{
+"book": "G",
+"page": 305
+},
+{
+"book": "G",
+"page": 306
+}
+]
+},
+{
+"id": "nutzungsneutraler_raum_rechteckig",
+"name": "Nutzungsneutraler Raum, rechteckig",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 290,
+"d": 440,
+"area": 14,
+"clear_height": null
+},
+"typical": {
+"w": 300,
+"d": 450,
+"area": null
+},
+"requires": [
+"doppelbett",
+"kleiderschrank"
+],
+"rules": [
+"Stell- und Bewegungsflaeche mind. 300 x 440 bei 90 breiter Bewegungsflaeche (Ketten >=290-300 x >=440-450), >= ca. 14 m2"
+],
+"sources": [
+{
+"book": "G",
+"page": 307
+}
+]
+},
+{
+"id": "nutzungsneutraler_raum_rollstuhl",
+"name": "Nutzungsneutraler Raum rollstuhlgerecht (DIN 18025-1 / DIN 18040-2 Entwurf)",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 410,
+"d": 470,
+"area": 20,
+"clear_height": null
+},
+"typical": {
+"w": 420,
+"d": 480,
+"area": null
+},
+"requires": [
+"doppelbett",
+"kleiderschrank"
+],
+"rules": [
+"Bewegungsflaeche entlang einer Bett-Laengsseite ueber die ganze Bettlaenge >=150 (Wenden)",
+"an der Einstiegsseite des Nicht-Rollstuhlnutzers 120",
+"vor Schraenken >=150",
+"Mindestmass 420 x 470 (Ketten >=410-420 x >=470-480), >= ca. 20 m2",
+"Tuer lichte Breite >=90"
+],
+"sources": [
+{
+"book": "G",
+"page": 308
+}
+],
+"barrier_free": {
+"standard": "DIN 18025-1, DIN 18040-2 (Entwurf)",
+"bett_laengsseite": 150,
+"bett_andere_seite": 120,
+"vor_schraenken": 150,
+"tuer": 90
+}
+},
+{
+"id": "nutzungsneutraler_raum_barrierefrei",
+"name": "Nutzungsneutraler Raum barrierefrei (DIN 18025-2 / DIN 18040-2 Entwurf)",
+"context": [
+"wohnen"
+],
+"min": {
+"w": 350,
+"d": 410,
+"area": 15,
+"clear_height": null
+},
+"typical": {
+"w": 360,
+"d": 420,
+"area": null
+},
+"requires": [
+"doppelbett",
+"kleiderschrank"
+],
+"rules": [
+"Bewegungsflaeche >=120 breit entlang einer Bett-Laengsseite",
+">=90 tief vor Schraenken, Regalen, Kommoden und Betten",
+"Mindestmass 360 x 410 (Ketten >=350-360 x >=410-420), >= ca. 15 m2",
+"Tuer lichte Breite >=80"
+],
+"sources": [
+{
+"book": "G",
+"page": 309
+}
+],
+"barrier_free": {
+"standard": "DIN 18025-2, DIN 18040-2 (Entwurf)",
+"bett_laengsseite": 120,
+"vor_moebeln": 90,
+"tuer": 80
+}
+},
+{
+"id": "privater_freibereich",
+"name": "Privater Freibereich (Balkon, Loggia, Terrasse, Atrium, Wintergarten)",
+"context": [
+"wohnen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 4.5,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"Grundtypen: Atrium (rundum raumhoch umschlossen, oben offen, im Grundriss), Loggia (in die Gebaeudemasse eingeschnitten, 2-3 Seiten + oben umschlossen), Balkon (vor der Fassade, auskragend oder eigene Tragkonstruktion), Terrasse (unterbaut: auf Erdreich, Garage, Geschossruecksprung, Dach - ueber beheizten Raeumen Daemmung/Abdichtung)",
+"Sonderform Wintergarten (verglast): laengere Nutzung, mit Zusatzheizung ganzjaehrig (energieaufwendig)",
+"Ausstattung: Schrank/Stauschrank fuer Gartenmoebel, Strom- und Wasseranschluss",
+"Einflussfaktoren: Himmelsrichtung/Besonnung, Zugwind, Laerm, Einsehbarkeit, Funktionsbeziehung, Baurecht (Abstandsflaechen)",
+"Wohnflaeche (WoFlV): Balkone, Loggien, Dachgaerten, Terrassen i. d. R. zu 1/4, hoechstens 1/2; unbeheizte Wintergaerten 1/2, beheizte voll",
+"barrierefrei: jeder Wohnung mind. 4,5 m2 Freisitz (DIN 18025-1/-2)"
+],
+"sources": [
+{
+"book": "G",
+"page": 313
+},
+{
+"book": "G",
+"page": 314
+},
+{
+"book": "G",
+"page": 315
+},
+{
+"book": "G",
+"page": 318
+}
+],
+"barrier_free": {
+"min_area_m2": 4.5,
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+},
+"tuer_lichte_breite": 90,
+"schwelle_max_cm": 2,
+"bruestung_durchsichtig_ab": 60
 }
 },
 {
@@ -1453,6 +2159,286 @@
 {
 "book": "G",
 "page": 386
+}
+]
+},
+{
+"id": "buero_flex",
+"name": "Reversible Bürogeschossfläche (Flexibilitätsstudie)",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": 1250,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": 1400,
+"area": null
+},
+"requires": [],
+"rules": [
+"Gebäudetiefen 12,50 und 14,00 m untersucht",
+"14 m optimal für Großraum (3-/4-reihig) und Gruppenbüro",
+"Zellen bei 14 m zu tief",
+"Kombi-Mittelzone ab 3,20 m nutzbar"
+],
+"sources": [
+{
+"book": "G",
+"page": 403
+},
+{
+"book": "G",
+"page": 404
+},
+{
+"book": "G",
+"page": 405
+},
+{
+"book": "G",
+"page": 406
+}
+]
+},
+{
+"id": "pausenraum",
+"name": "Pausenraum",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"≥ 1 m² je gleichzeitig anwesender Person",
+"bis 50 Personen +10 % Verkehrsfläche",
+"≤ 5 min erreichbar",
+"Sitzbank 60 cm je Person"
+],
+"sources": [
+{
+"book": "G",
+"page": 410
+}
+],
+"requires_text": [
+"tische",
+"sitzgelegenheiten",
+"abfallbehaelter_mit_deckel"
+]
+},
+{
+"id": "teekueche",
+"name": "Teeküche",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": 210,
+"d": 180,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"tk_kuehlschrank_unterbau",
+"tk_geschirrspueler",
+"tk_spuele_abtropf"
+],
+"rules": [
+"mit Pausenraum kombiniert ≥ 1 m²/Person",
+"Lüftung, ggf. mechanisch"
+],
+"sources": [
+{
+"book": "G",
+"page": 411
+}
+]
+},
+{
+"id": "toilettenanlage_buero",
+"name": "Toilettenanlage Arbeitsstätte",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"wc_arbeitsstaette",
+"waschtisch_arbeitsstaette",
+"urinal_arbeitsstaette"
+],
+"rules": [
+"Anzahl nach ASR § 37 Tabellen",
+"ab 5 Beschäftigten getrennt + Vorraum",
+"≤ 100 m vom Arbeitsplatz, ≤ 1 Geschoss"
+],
+"sources": [
+{
+"book": "G",
+"page": 412
+},
+{
+"book": "G",
+"page": 413
+},
+{
+"book": "G",
+"page": 414
+}
+]
+},
+{
+"id": "putzraum",
+"name": "Putzraum",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": 190,
+"d": 130,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"ausgussbecken",
+"putzwagen"
+],
+"rules": [
+"möglichst je Geschoss"
+],
+"sources": [
+{
+"book": "G",
+"page": 415
+}
+]
+},
+{
+"id": "liegeraum",
+"name": "Liegeraum",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": 190,
+"d": 200,
+"area": null,
+"clear_height": 250,
+"volume_m3_per_liege": 10
+},
+"typical": {
+"w": 200,
+"d": 200,
+"area": 4.0
+},
+"requires": [
+"liege_ruheraum"
+],
+"rules": [
+"Anzahl Liegen nach ASR § 31",
+"120 Bewegungsfläche vor der Liege"
+],
+"sources": [
+{
+"book": "G",
+"page": 416
+}
+]
+},
+{
+"id": "sanitaetsraum",
+"name": "Sanitätsraum",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"ab > 1000 Beschäftigten, bei besonderer Unfallgefahr ab 100",
+"Anforderungen VDI 6000-2 5.1.3 / ASR § 38"
+],
+"sources": [
+{
+"book": "G",
+"page": 415
+}
+]
+},
+{
+"id": "kopierraum",
+"name": "Kopierraum / Kopierbereich",
+"context": [
+"arbeiten"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": 300,
+"d": 240,
+"area": 7.2
+},
+"requires": [
+"kopierer_normal",
+"aktenvernichter",
+"ablagetisch_kopierraum",
+"papiereimer_20l"
+],
+"rules": [
+"60–70 vor Kopierer",
+"abgeschirmt (Lärm)"
+],
+"sources": [
+{
+"book": "G",
+"page": 417
 }
 ]
 },
@@ -1864,7 +2850,9 @@
 "d": null,
 "area": null
 },
-"requires": [],
+"requires": [
+"garderobe_eingang"
+],
 "rules": [
 "in größeren Schulen eigener Raum (Aula), bei außerschulischer Nutzung Bühne sinnvoll",
 "Nebenbereiche: Garderoben, Toiletten, ggf. Stuhllager, Requisitenlager",
@@ -1883,8 +2871,1417 @@
 }
 ],
 "requires_text": [
-"garderobe",
 "toiletten"
+]
+},
+{
+"id": "klassenraum",
+"name": "Klassenraum / allgemeiner Unterrichtsraum (ASE BW)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": 300
+},
+"typical": {
+"w": 720,
+"d": 835,
+"area": 60
+},
+"requires": [
+"schuelertisch_2er",
+"schuelerstuhl",
+"lehrertisch",
+"wandtafel",
+"handwaschbecken",
+"pinnwand",
+"einbauschrank_reinigungsgeraete"
+],
+"rules": [
+"Grundfläche ≥ 1,8 bis 2 m² je Schüler (allgemeine Unterrichtsräume); ≥ 2,7 m² je Schüler in naturwiss. Fachräumen",
+"Raumtiefe i. d. R. 7,20 m, ab 70 m² bis 8,40 m; > 8,40 m nur mit beidseitiger Belichtung (Fenster/Oberlichter)",
+"lichte Raumhöhe ≥ 3,20 m bei natürlicher Be- und Entlüftung, ≥ 3,00 m bei künstlicher",
+"wirksame senkrechte Fensterfläche (reine Glasfläche) ≥ 1/5 der Grundfläche",
+"voll zu öffnende Lüftungsflügel ≥ 0,3 m² je Schüler; einseitige Fensterlüftung bis 8,40 m Raumtiefe, wenn lichte Höhe ≥ 3,20 m und innere Zone ca. 1 m nur Verkehrsfläche",
+"Luftraum ≥ 6 je Schüler (im Buch 'm²', gemeint vermutlich m³)",
+"Sichtabstand Schülerplatz-Tafel ≥ 2 m und ≤ 9 m; ungünstigster Blickwinkel zur Tafel ≥ 30°",
+"Grundausstattung: Waschbecken, zwei Wandtafeln (eine Magnettafel), Projektionsfläche, (Einbau-)Schrank, Pinnwand, Tische und Stühle",
+"Oberflächen tageslichtaufhellend, reflexionsarm",
+"Klassenraumtüren ab 40 Benutzern in Fluchtrichtung aufschlagend; nach außen schlagende Türen dürfen in Endstellung inkl. Drücker max. 20 cm in den Fluchtweg ragen",
+"Garderoben im Flur (ASE-Empfehlung, Brandlast beachten), im Raum oder bereichsweise; im Raum gut lüftbar anordnen",
+"Tageslicht von links und Südorientierung bevorzugt; Sonnen-/Blendschutz je Orientierung"
+],
+"sources": [
+{
+"book": "G",
+"page": 518
+},
+{
+"book": "G",
+"page": 519
+},
+{
+"book": "G",
+"page": 520
+},
+{
+"book": "G",
+"page": 521
+}
+],
+"requires_text": [
+"projektionsflaeche"
+]
+},
+{
+"id": "gruppenraum",
+"name": "Gruppenraum / Klassenraumerweiterung",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"Anordnungsvarianten: Reihung ohne Gruppenraum; ein Gruppenraum für mehrere Klassen; ein Gruppenraum je Klasse bzw. im Klassenraum integriert; Gruppenraum überlagert mit Erschließungszone; 'offene Lernlandschaft'; Klassenraumerweiterung in den Freibereich (Schemata M 1:2500, ohne Maße)",
+"Gemessen 22-30 m² (Scherr 22,0; Mummelsoll 25,8; Gelsenkirchen 25,9; Linden 28,9; Laborschule 29,9)",
+"typische Möblierung: ein Gruppentisch aus 4 Tischen (ca. 240x120 bzw. 260x130) mit 8 Stühlen",
+"Zuordnung: 1 Gruppenraum je Klasse oder zwischen 2 Klassen (siehe l.json gruppenraum_zuordnung)"
+],
+"sources": [
+{
+"book": "G",
+"page": 516
+},
+{
+"book": "G",
+"page": 517
+},
+{
+"book": "L",
+"page": 133
+},
+{
+"book": "L",
+"page": 135
+},
+{
+"book": "L",
+"page": 138
+},
+{
+"book": "L",
+"page": 163
+},
+{
+"book": "L",
+"page": 167
+}
+]
+},
+{
+"id": "nawi_lehrsaal",
+"name": "Lehrsaal Naturwissenschaften (Demonstrationsunterricht, ansteigendes Gestühl)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": 230
+},
+"typical": {
+"w": 790,
+"d": 840,
+"area": 66
+},
+"requires": [
+"lehrerexperimentiertisch",
+"wandtafel",
+"hoersaalgestuehl"
+],
+"rules": [
+"Beispiel 40 Schüler, 7,90 x 8,40 m, 66 m²",
+"Lehrerexperimentiertisch mit Strom-, Gas-, Wasseranschluss und Absaugung; Wandtafel; Projektion; Hörsaalgestühl",
+"2-3 Podeststufen je 15-17 cm; bis 10 % Steigung als Rampe, steiler Stufen; vorderste Reihe barrierefrei",
+"Schreibfläche ausreichend tief: 40 cm",
+"lichte Höhe über oberster Stufe ≥ 230 (Schnitt)",
+"≥ 120 cm zwischen Lehrerexperimentiertisch und erster Schülerreihe"
+],
+"sources": [
+{
+"book": "G",
+"page": 526
+},
+{
+"book": "G",
+"page": 527
+}
+]
+},
+{
+"id": "nawi_sammlung_vorbereitung",
+"name": "Sammlungs- und Vorbereitungsraum Naturwissenschaften",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": 670,
+"d": 840,
+"area": 56.3
+},
+"requires": [
+"kuehlschrank"
+],
+"rules": [
+"Beispiel 6,70 x 8,40 m",
+"den Lehrräumen direkt und ohne Stufen zugeordnet; ggf. eigene Abluftanlage",
+"Türen zu diesen Räumen und zu Lehrsälen für Transportgut ca. 60 cm höher als Normtüren (Schnitt: 260)",
+"Chemikalien/Gefahrstoffe in eigenem Chemikalienraum ca. 6-10 m² oder in entlüfteten Chemikalienschränken (GUV-V S1 § 26)"
+],
+"sources": [
+{
+"book": "G",
+"page": 526
+},
+{
+"book": "G",
+"page": 527
+}
+]
+},
+{
+"id": "nawi_lehr_uebungsraum",
+"name": "Lehr- und Übungsraum Naturwissenschaften (Schülerexperimente)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 84,
+"clear_height": null
+},
+"typical": {
+"w": 1000,
+"d": 840,
+"area": 84
+},
+"requires": [
+"lehrerexperimentiertisch",
+"schuelerexperimentiertisch",
+"kuehlschrank"
+],
+"rules": [
+"Beispiel 32 Schüler, 10 x 8,40 m, 84-90 m²",
+"Lehrer- und Schülerexperimentiertische mit Strom, Gas, Wasser; Schränke für Experimentiergeräte ≥ 30 cm tief; Wandspüle",
+"2-3 Podeststufen je 15-17 cm empfehlenswert",
+"für unterschiedliche Unterrichtsformen geeignet"
+],
+"sources": [
+{
+"book": "G",
+"page": 526
+},
+{
+"book": "G",
+"page": 527
+}
+],
+"requires_text": [
+"wandspuele"
+]
+},
+{
+"id": "chemikalienraum",
+"name": "Chemikalienraum",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 6,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 10
+},
+"requires": [],
+"rules": [
+"ca. 6-10 m²; alternativ entlüftete Chemikalienschränke je Gefahrstoffgruppe"
+],
+"sources": [
+{
+"book": "G",
+"page": 526
+}
+]
+},
+{
+"id": "musiksaal",
+"name": "Musiksaal",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"abgeschlossen oder über (möglichst schalldichte) flexible Wände mit anderen Räumen/Aula/Eingangshalle koppelbar",
+"angegliederter Lehrmittelraum für Instrumente, Tonträger",
+"hohe raumakustische Anforderungen (DIN 18041, Nachhallzeit); Wände/Decken zu besonders lauten Räumen R'w 55 dB (DIN 4109)",
+"Letzi [06]: Saal ca. 8,0 m Zuschauerbereich + ca. 3,0 m Bühne, 98 Stühle (7 Reihen x 14), Bühnenzugang über 2 seitliche Treppen",
+"Thurzelg [49]: 180 Stühle (12 Reihen x 15), Reihenlänge ca. 7 m, Seitengänge",
+"Musikraum Freudenberg [11]: Sitzkreis aus ca. 18 Stühlen, Durchmesser ca. 4,5 m"
+],
+"sources": [
+{
+"book": "G",
+"page": 528
+},
+{
+"book": "L",
+"page": 192
+},
+{
+"book": "L",
+"page": 194
+},
+{
+"book": "L",
+"page": 195
+}
+]
+},
+{
+"id": "zeichensaal_kunst",
+"name": "Kunst-/Zeichensaal",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"gleichmäßige Beleuchtung, daher Nordorientierung (ASE BW)",
+"ausreichend Stell- und Hängeflächen für Material, Objekte, Bilder",
+"Spülbecken in ausreichender Zahl",
+"mit Werkräumen zusammenfassen (oft gleicher Lehrer)"
+],
+"sources": [
+{
+"book": "G",
+"page": 528
+}
+],
+"requires_text": [
+"spuelbecken"
+]
+},
+{
+"id": "werkraum",
+"name": "Werkraum / Werkstattraum",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 66
+},
+"requires": [
+"werkbank_4er",
+"lehrerarbeitstisch_werkraum",
+"einbauschrank_reinigungsgeraete",
+"wandtafel",
+"wasserbecken_mit_ablage",
+"lagerregal_werken"
+],
+"rules": [
+"Beispiel 16 Schüler: 66 m² + 30 m² Restfläche (Hauptschule)",
+"Lage so, dass Arbeitslärm andere Räume nicht stört; gut zugängliche Erdgeschosslage (Materialandienung); mit Kunst zusammenfassen",
+"Mindestabstände zwischen Arbeitstischen wie Sitzplatzanordnung Werkraum (S. 512); Verkehrsflächen nicht enthalten; Durchgang zwischen zwei Arbeitstischen zusätzlich ≥ 60 cm",
+"Material- und Maschinenraum unmittelbar vom Werkraum erreichbar; Maschinenraum baulich getrennt, mit Sichtverbindung (Sichtfenster ca. 3,00 x 1,00 m)",
+"mindestens zwei möglichst weit auseinanderliegende Ausgänge; einer darf durch den Maschinenraum führen (DIN 58125 § 21 f.)",
+"sachgerechte Beleuchtung und Lüftung; Holzstaub-Absaugung; Brennöfen in Schülerbereichen mit Entlüftung ins Freie (DIN 58125 § 26)",
+"Bodenbelag auch bei Staub trittsicher (DIN 58125 § 23); Werkräume Holz: ggf. raumlufttechnische Anlage"
+],
+"sources": [
+{
+"book": "G",
+"page": 528
+},
+{
+"book": "G",
+"page": 529
+},
+{
+"book": "G",
+"page": 565
+}
+],
+"requires_text": [
+"brennofen",
+"trockenschrank",
+"absaugung"
+]
+},
+{
+"id": "materialraum_werken",
+"name": "Materialraum (Werken)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 42
+},
+"requires": [
+"lagerregal_werken",
+"einbauschrank_reinigungsgeraete"
+],
+"rules": [
+"Beispiel 42 m² (Beschriftung)"
+],
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "maschinenraum_werken",
+"name": "Maschinenraum (Werken)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 36
+},
+"requires": [
+"naehmaschine",
+"reihenwerkbank"
+],
+"rules": [
+"Beispiel 36 m² (Beschriftung)",
+"baulich vom Schülerübungsraum getrennt (Lärm), Sichtverbindung für die Aufsicht"
+],
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "lehrerzimmer",
+"name": "Lehrerzimmer / Lehrerarbeitsbereich",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"schreibtisch",
+"stuhl"
+],
+"rules": [
+"traditionelles gemeinsames Lehrerzimmer: je Lehrer nur ca. 3 m² Arbeitsplatz",
+"Größe nach Schultyp und Lehrerzahl",
+"statt großem Konferenztisch Einzeltische (Kleinschreibtische), frei gruppierbar oder zum Konferenztisch zusammenstellbar",
+"Postfächer je Lehrkraft, Informationstafeln, Handbibliothek; Lehrergarderobe und -toiletten in der Nähe",
+"Arbeitsplätze für Einzelarbeit + Team-/Besprechungsräume unterschiedlicher Größe + Pausenräume für Erholung und Kommunikation",
+"zentral (ggf. am Informationsbereich/Bibliothek) oder dezentral bei den Fachbereichen (bei großen Schulen meist sinnvoll, ASE)",
+"Riedmatt [43]: Lehrerbereich mit Teeküche 9,6 x 5,6 m = 53 m², ein großer Tisch 360x120 für 16; separater Arbeitsraum 3,6 x 7,4 m = 27 m² mit 4 Einzelarbeitsplätzen (ca. 6,7 m² je Platz); Schulleiterbüro 3,6 x 4,4 m = 16 m²",
+"Paspels [37]: kleine Lehrerbereiche 2,9 x 7,2 m (21 m²) und 2,4 x 7,3 m (17,5 m²) je Geschoss, Tisch 140x80 für 6, Küchenzeile",
+"Leutschenbach [68] 4. OG: Lehrerbereich mit Teeküche neben Bibliothek, Besprechungs-/Gruppenräume 8,0 x 4,5 m (36 m²) und 8,0 x 4,3 m (34 m²) mit Tischen 120x60 für 10-12",
+"Mattenhof [50], Hellerup [45], Laborschule [20]: Lehrerbereich bzw. Teambüro als Zone in/an der offenen Unterrichtszone (dezentral bei den Klassen)"
+],
+"sources": [
+{
+"book": "G",
+"page": 533
+},
+{
+"book": "G",
+"page": 534
+},
+{
+"book": "G",
+"page": 535
+},
+{
+"book": "L",
+"page": 209
+},
+{
+"book": "L",
+"page": 210
+},
+{
+"book": "L",
+"page": 211
+},
+{
+"book": "L",
+"page": 212
+},
+{
+"book": "L",
+"page": 213
+},
+{
+"book": "L",
+"page": 214
+},
+{
+"book": "L",
+"page": 215
+}
+],
+"requires_text": [
+"postfaecher"
+]
+},
+{
+"id": "schulsekretariat",
+"name": "Schulsekretariat",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"erste Anlaufstelle für Besucher, Eltern, Schüler – leicht auffindbar",
+"Wartezone mit Sitzgelegenheit im Flur davor",
+"datentechnisch geschützter Bereich für vertrauliche Vorgänge"
+],
+"sources": [
+{
+"book": "G",
+"page": 535
+}
+]
+},
+{
+"id": "rektorat",
+"name": "Rektorat (Schulleiter, Stellvertreter)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"nahe den übrigen Lehrerbereichen",
+"je Raum ein kleiner Besprechungsbereich für ca. 6 Personen"
+],
+"sources": [
+{
+"book": "G",
+"page": 535
+}
+],
+"requires_text": [
+"besprechungstisch_6"
+]
+},
+{
+"id": "schulbibliothek",
+"name": "Schulbibliothek / Mediathek (Informationszentrum)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": 2700,
+"d": 1860,
+"area": null
+},
+"requires": [
+"gruppentisch_90x90"
+],
+"rules": [
+"Bibliotheks-/Mediatheksfläche ca. 0,4-0,55 m² je Schüler",
+"Richtwerte Schule mit 1000 Schülern: 10 000 Bände, ca. 4000 AV-Medien, ca. 50 Zeitschriften; ca. 40 Arbeitsplätze 80 m²; ca. 6 Carrels (Lesekabinen) 16,80 m²; ca. 1 Gruppenraum 50 m²; Arbeitsraum Bibliothekare 18 m²; Magazin 20 m²",
+"Bereiche: Theke/Verwaltung, Regalzone, Einzelarbeit, Gruppenarbeit, AV-Bereich, Ausstellung, ggf. Veranstaltung",
+"zentral, gut auffindbar; möglichst über Unterrichtszeit hinaus und für Externe geöffnet; Zusammenfassung mit Mediathek, Lehr-/Lernmittel-, Karten-, Sammlungsräumen, Fachbibliotheken empfohlen",
+"Beispielgrundriss M 1:200 (ca. 27,0 x 18,6 m innen): 1 Ausleihe, 2 Büro, 3 Einzelarbeit (Tische 50 x 40 mit Stuhl an der Fensterwand), 4 Gruppenarbeit (Tische 80 x 100 / 80 x 160 / rund ø 120 mit 4-8 Stühlen), 5 Hörkabinen, 6 Computerarbeit, 7 Bücherregale (Doppelregale 2 x 40 tief, Elemente 100 lang), 8 Mehrzweckraum"
+],
+"sources": [
+{
+"book": "G",
+"page": 539
+},
+{
+"book": "G",
+"page": 540
+}
+],
+"requires_text": [
+"buecherregal",
+"leseplatz",
+"carrel",
+"ausleihtheke"
+]
+},
+{
+"id": "schulmensa_speiseraum",
+"name": "Schulmensa / Speiseraum",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": 2200,
+"d": 1900,
+"area": null
+},
+"requires": [
+"mensatisch_80x120",
+"stuhl",
+"garderobe_eingang"
+],
+"rules": [
+"Anzahl Plätze = Essensteilnehmer / Platzwechsel",
+"Grundfläche ca. 1,4 m² je Platz, Grundschulen 1,25 m² je Platz",
+"Beispiel: 400 Schüler, 80 % essen, dreifacher Platzwechsel: 400 x 0,8 / 3 = 107 Plätze",
+"über 200 Personen: Versammlungsstättenverordnung (VStättVO) beachten",
+"Eingangsbereich: Garderobe (1 Haken je Platz) und ausreichend Toiletten",
+"Lage nahe Pausenhof, kombiniert mit Freizeiträumen; mehrfach nutzbar; für Pausen ggf. Ausgabetheke/Cafeteria",
+"Spülküche als eigener, von der Kochküche abtrennbarer Bereich; kurze Anbindung der Geschirrrückgabe",
+"Großküchen mit Fachplaner; Lager/Kühlung von außen zugänglich und lüftbar; Personalräume (Umkleide, Wasch-, WC-, Pausen-, Ruheraum) nach ArbStättV/ASR"
+],
+"sources": [
+{
+"book": "G",
+"page": 543
+},
+{
+"book": "G",
+"page": 544
+}
+],
+"requires_text": [
+"toilette"
+]
+},
+{
+"id": "toilettenanlage_schule",
+"name": "Toilettenanlage Schule",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"wc_kabine",
+"urinal",
+"waschbecken_rund",
+"wc_barrierefrei"
+],
+"rules": [
+"Bemessung ASE BW: je 40-50 Schüler 1 Sitz + 2 Stände; je 20-25 Schülerinnen 1 Sitz; je 10 Lehrer 1 Sitz + 1 Stand; je 5 Lehrerinnen 1 Sitz; plus rollstuhlgerechtes WC",
+"je 1 Sitz Jungen bzw. 2 Sitze Mädchen ein Handwaschbecken (Text S. 549)",
+"nach Geschlechtern getrennt, mit Vorräumen (Seifenspender, hygienische Trockenmöglichkeit, Spiegel, Handwaschbecken)",
+"Sitze durch mindestens 2 m hohe abwaschbare Wände abtrennen",
+"Sammelanlagen geschossweise oder bereichsbezogen; große Anlagen im Pausen-/Aulabereich auch außerschulisch nutzbar; kleinere Anlagen nahe den Unterrichtsräumen; je Geschoss mindestens ein barrierefreies WC",
+"Vorschule/Grundschule: Höhe der Sanitärobjekte und Waschbecken an die Körpergröße anpassen (VDI 6000 Blatt 6)"
+],
+"sources": [
+{
+"book": "G",
+"page": 547
+},
+{
+"book": "G",
+"page": 548
+}
+]
+},
+{
+"id": "wc_barrierefrei_oeffentlich",
+"name": "Öffentliche barrierefreie Toilette",
+"context": [
+"allgemein",
+"lernen"
+],
+"min": {
+"w": 220,
+"d": 230,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": 220,
+"d": 230,
+"area": 5.06
+},
+"requires": [
+"wc_barrierefrei",
+"waschtisch_unterfahrbar"
+],
+"rules": [
+"Schulgebäude grundsätzlich barrierefrei (MBO § 50 (2); LBO BW § 39)",
+"Rangierfläche 150 x 150 quadratisch, nicht kreisförmig",
+"beidseitig des WC Bewegungsfläche zum Umsetzen ≥ 95 (≥ 90) breit, ≥ 70 tief; Klappgriffe beidseitig",
+"Raum ≥ 220 breit x ≥ 230 (≥ 220) tief",
+"Tür lichte Breite 90, lichte Höhe 210, nach außen schlagend, außen Bewegungsfläche ≥ 150",
+"Waschtisch unterfahrbar; Greifhöhe 85; Notrufmelder auch vom Boden erreichbar; Kleiderhaken 90/150/180; Spülung mit Ellbogen auslösbar; mechanische Lüftung auch bei Fenster",
+"WC-Sitzhöhe (46-) 48, WC-Vorderkante 70 ab Wand, Griffhöhe (74-76) 85, Griffabstand (65-) 70"
+],
+"sources": [
+{
+"book": "G",
+"page": 550
+},
+{
+"book": "G",
+"page": 551
+}
+],
+"barrier_free": {
+"standard": "DIN 18024-2 (1996), DIN 18040-1 Entwurf 2009 (Werte in Klammern)",
+"bewegungsflaeche": {
+"w": 150,
+"d": 150
+}
+},
+"requires_text": [
+"stuetzklappgriff",
+"notruf"
+]
+},
+{
+"id": "hausmeisterraum",
+"name": "Hausmeisterdienstzimmer",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 12
+},
+"requires": [],
+"rules": [
+"ca. 12 m², gut auffindbar im Eingangsbereich, Fenster nach außen und zur Eingangshalle günstig"
+],
+"sources": [
+{
+"book": "G",
+"page": 549
+}
+]
+},
+{
+"id": "erste_hilfe_raum",
+"name": "Erste-Hilfe-Raum",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"liegestuhl",
+"handwaschbecken"
+],
+"rules": [
+"mindestens ein Raum je Schule; möglichst ebenerdig, zentral, für Rettungsdienst gut zugänglich, Türbreite ≥ 120",
+"Krankentrage oder Liege, Waschbecken mit Kalt- und Warmwasser",
+"kombinierbar mit Elternsprech- oder Hausmeisterzimmer, wenn Ausrüstung vorhanden (GUV-SI 8065)"
+],
+"sources": [
+{
+"book": "G",
+"page": 549
+}
+]
+},
+{
+"id": "elternsprechzimmer",
+"name": "Elternsprechzimmer",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 12,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 18
+},
+"requires": [],
+"rules": [
+"12-18 m², nahe Lehrerbereich, leicht auffindbar; kann mit Erste-Hilfe- und Arztraum kombiniert werden"
+],
+"sources": [
+{
+"book": "G",
+"page": 549
+}
+]
+},
+{
+"id": "arztraum_schule",
+"name": "Arztraum (schulärztliche Untersuchung)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [
+"handwaschbecken"
+],
+"rules": [
+"eigener Raum nicht erforderlich; ruhiger (Kurs-)Raum mit angeschlossenem Raum zum Auskleiden; Handwaschbecken, gute Beleuchtung und Lüftung (ASE 1983 S. 619)"
+],
+"sources": [
+{
+"book": "G",
+"page": 549
+}
+]
+},
+{
+"id": "schuelervertretung",
+"name": "Raum Schülervertretung",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 18
+},
+"requires": [],
+"rules": [
+"eigener Raum erforderlich, ca. 18 m² (abhängig von Schultyp/-größe)"
+],
+"sources": [
+{
+"book": "G",
+"page": 549
+}
+]
+},
+{
+"id": "lehr_lernmittelraum",
+"name": "Lehr- und Lernmittelraum",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": 24,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 60
+},
+"requires": [],
+"rules": [
+"mindestens zwei je Schule, zentral, nahe Lehrerbereich; je 24-60 m² nach Schulgröße und Raumprogramm"
+],
+"sources": [
+{
+"book": "G",
+"page": 549
+}
+]
+},
+{
+"id": "personalraum_reinigung",
+"name": "Personalräume (Reinigungs-/Küchenpersonal)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"Umkleide sowie Wasch- und Toilettenraum; Größe nach Personenzahl"
+],
+"sources": [
+{
+"book": "G",
+"page": 549
+}
+]
+},
+{
+"id": "putzraum_schule",
+"name": "Putzraum / Gebäudereinigung",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": 222,
+"d": 122,
+"area": 2.7
+},
+"requires": [],
+"rules": [
+"Stauraum für Reinigungsgeräte mit Wasseranschluss, fugenfreier Hartbelag empfohlen",
+"Beispiele S. 550: 222 x 122 bzw. 222 x 210 in den Toilettenanlagen"
+],
+"sources": [
+{
+"book": "G",
+"page": 548
+},
+{
+"book": "G",
+"page": 549
+}
+]
+},
+{
+"id": "abstellraum_schule",
+"name": "Abstellräume",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"in angemessener Größe und Lage; Zugänge möglichst mit barrierefreien Verkehrsflächen"
+],
+"sources": [
+{
+"book": "G",
+"page": 549
+}
+]
+},
+{
+"id": "schulhof",
+"name": "Schulhof / Pausenhof",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": 210
+},
+"typical": {
+"w": null,
+"d": null,
+"area": null
+},
+"requires": [],
+"rules": [
+"offene Pausenhofflächen 4-6 m² je Schüler; Grundschulen 6 m² je Schüler (ASE); angrenzende öffentliche Flächen anteilig anrechenbar",
+"offene überdeckte Pausenflächen (Wandelhöfe) 0,4 m² je Schüler, lichte Höhe ≥ 2,10 m",
+"gut besonnt und windgeschützt; Bewegungs-, Spiel-, Sitz- und Naturbereiche; große Schulen: getrennte Pausenbereiche je Altersstufe",
+"Nutzungsbereiche: Rückzugsbereiche (überdachte Aufenthaltsbereiche, geschützte Sitzecken, modelliertes Gelände mit Nischen), Freiklassen-/Präsentationsbereiche, Bewegungszonen (Ballspiel, Klettern, Spielplatz, Fahrradübungsgelände), begrünte Bereiche (Schulgarten, Teich)",
+"Freiklassen so orientieren, dass andere Unterrichtsräume nicht gestört werden",
+"Pausenhallen mit Verbindungsgängen, Eingangshallen, Speise- und Mehrzweckräumen kombinierbar",
+"Spielgeräte nach DIN 7926 / DIN EN 1176-1 bis -7",
+"notwendige Verkehrswege, Treppen, Hindernisse mit ≥ 5 lx beleuchten (DIN 5035-2; DIN 58125 § 14)",
+"Zufahrten Feuerwehr, Müll, Lieferung ≥ 3,50 m breit freihalten, ausreichend tragfähig",
+"Abfalleimer in ausreichender Zahl",
+"Bodenbeläge im Freien auch bei Nässe rutschhemmend; Einfriedungen ohne spitze/scharfkantige Teile",
+"keine Giftpflanzen; Dornen- und Allergiepflanzen vermeiden"
+],
+"sources": [
+{
+"book": "G",
+"page": 555
+},
+{
+"book": "G",
+"page": 556
+},
+{
+"book": "G",
+"page": 557
+},
+{
+"book": "G",
+"page": 558
+}
+]
+},
+{
+"id": "klassenzimmer",
+"name": "Klassenzimmer (Beispiele Raumpilot Lernen)",
+"context": [
+"lernen"
+],
+"min": {
+"w": null,
+"d": null,
+"area": null,
+"clear_height": null
+},
+"typical": {
+"w": null,
+"d": null,
+"area": 67
+},
+"requires": [
+"schultisch_120x60",
+"schulstuhl",
+"tafel",
+"lehrertisch"
+],
+"rules": [
+"36 gemessene Beispiele (M 1:250): Standard-Klassenzimmer 43-85 m², Median 67 m²; Seitenlängen 5,6-12,3 m (meist 6,4-10,6)",
+"Schülerplätze 18-34 (Ausreißer 8 Förderklasse, 39-41 Großraum); Fläche je Schüler meist 1,7-3,1 m² (Extreme 1,45-5,8), Median ca. 2,5 m²",
+"Seitenverhältnis 1,0-1,5 (annähernd quadratisch bevorzugt)",
+"erster Schülertisch 167-410 cm von der Tafelwand (Median ca. 280 cm); Lehrertisch 79-207 cm (Median ca. 115 cm)",
+"Achsabstand Tischreihen 118-150 cm bei 60 cm Tischtiefe",
+"Gang zwischen Tischgruppen in Reihenstellung ca. 80-100 cm (Mäder 95)"
+],
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 130
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 133
+},
+{
+"book": "L",
+"page": 135
+},
+{
+"book": "L",
+"page": 137
+},
+{
+"book": "L",
+"page": 138
+},
+{
+"book": "L",
+"page": 139
+},
+{
+"book": "L",
+"page": 142
+},
+{
+"book": "L",
+"page": 145
+},
+{
+"book": "L",
+"page": 147
+},
+{
+"book": "L",
+"page": 149
+},
+{
+"book": "L",
+"page": 151
+},
+{
+"book": "L",
+"page": 153
+},
+{
+"book": "L",
+"page": 158
+},
+{
+"book": "L",
+"page": 161
+},
+{
+"book": "L",
+"page": 165
+},
+{
+"book": "L",
+"page": 169
+},
+{
+"book": "L",
+"page": 171
+}
+]
+},
+{
+"id": "naturwiss_uebungsraum",
+"name": "Naturwissenschaftlicher Lehr-/Übungsraum",
+"context": [
+"lernen"
+],
+"min": null,
+"typical": {
+"w": 891,
+"d": 912,
+"area": 81
+},
+"requires": [
+"labortisch_240x60",
+"tafel"
+],
+"rules": [
+"Schreienesch [66]: ca. 8,9 x 9,1 m, 8 Labortische 240x60 (2 je Reihe, 4 Reihen, ca. 32 Plätze), Tafel 300 an Stirnwand, Vorbereitungsraum zwischen zwei Übungsräumen mit Türen in beide"
+],
+"sources": [
+{
+"book": "L",
+"page": 189
+}
+]
+},
+{
+"id": "lehrsaal_ansteigend",
+"name": "Lehrsaal mit ansteigendem Gestühl (Physik/Chemie)",
+"context": [
+"lernen"
+],
+"min": null,
+"typical": {
+"w": null,
+"d": 940,
+"area": null
+},
+"requires": [],
+"rules": [
+"Lünen [14] (Scharoun): trapezförmiger Hörsaal, 4 gekrümmte ansteigende Tischreihen mit je ca. 8-9 Plätzen, vorn Experimentiertisch ca. 340x50, Raumtiefe ca. 9,4 m, Breite hinten ca. 7 m, vorn ca. 4 m; Vorbereitungs-/Sammlungsraum seitlich"
+],
+"sources": [
+{
+"book": "L",
+"page": 188
+}
+]
+},
+{
+"id": "garderobe_schule",
+"name": "Garderobe / Abstellorte (Beispiele)",
+"context": [
+"lernen"
+],
+"min": null,
+"typical": null,
+"requires": [
+"spind_schule"
+],
+"rules": [
+"Garderobe im Klassenzimmer nur in Nischen/Einbauschränken (Riva San Vitale [17], Heilbronn [56] in Stützentiefe, Mattenhof [50] Eingangsnische)",
+"Garderobe im Nebenraum/Vorraum (Munkegård [07], Lauder Chabad [36], Almere [26] Block je 2 Klassen)",
+"Garderobe im Flur: Spinde (Im Birch [59]: Spind ca. 33 breit, 48 tief), Nischen vor den Klassen (Nagele [08]), Hakenleiste + Bank (Vella [29]: Flur 290 cm lichte Breite = Bank 49 + Durchgang ca. 182 + Garderobenzone 57)",
+"Stauraumzone flurseitig im Klassenzimmer: Riedmatt [43] 140 cm tief (Schränke, Waschbecken, Computernischen); Weid [64] Zone mit Regalen, Schränken, Waschbecken, Installationen",
+"Fensterbänke/Brüstungen als Ablage (Mäder [33], Riedmatt [43])"
+],
+"sources": [
+{
+"book": "L",
+"page": 220
+},
+{
+"book": "L",
+"page": 221
+},
+{
+"book": "L",
+"page": 222
+},
+{
+"book": "L",
+"page": 223
+},
+{
+"book": "L",
+"page": 224
+},
+{
+"book": "L",
+"page": 225
+},
+{
+"book": "L",
+"page": 226
+},
+{
+"book": "L",
+"page": 227
+},
+{
+"book": "L",
+"page": 228
+},
+{
+"book": "L",
+"page": 229
+},
+{
+"book": "L",
+"page": 230
+},
+{
+"book": "L",
+"page": 231
+},
+{
+"book": "L",
+"page": 232
+},
+{
+"book": "L",
+"page": 233
+},
+{
+"book": "L",
+"page": 234
+},
+{
+"book": "L",
+"page": 235
+}
+],
+"requires_text": [
+"garderobe_haken_bank"
+]
+},
+{
+"id": "schultoilette",
+"name": "Schultoilettenanlage (Beispiele)",
+"context": [
+"lernen"
+],
+"min": null,
+"typical": null,
+"requires": [
+"wc_symbol_schule",
+"waschtisch_schule",
+"urinal_schule",
+"kabinentrennwand"
+],
+"rules": [
+"Kabinen lichte Breite 84-91 cm, Achsmaß 93-98 cm, Trennwand 7-8 cm",
+"Kabinentiefe Sekundarschule 160-169 cm, Primarschule 121 cm",
+"Kabinenreihen gegenüber: Gang 93 cm bei nach außen schlagenden Türen (Andreanum)",
+"Waschtische 50x40, Achsmaß 63-78 cm, im Vorraum vor den WCs",
+"Urinale als Reihe, Achsmaß ca. 60-68 cm",
+"Kleinanlagen: je Klasse/Klassenpaar WC-Raum mit 1 WC + Waschtisch (Crow Island [03], Lauder Chabad [36], Almere [26])"
+],
+"sources": [
+{
+"book": "L",
+"page": 241
+},
+{
+"book": "L",
+"page": 242
+},
+{
+"book": "L",
+"page": 243
+},
+{
+"book": "L",
+"page": 245
+},
+{
+"book": "L",
+"page": 246
+},
+{
+"book": "L",
+"page": 247
+},
+{
+"book": "L",
+"page": 249
+},
+{
+"book": "L",
+"page": 250
+},
+{
+"book": "L",
+"page": 251
+}
 ]
 }
 ]

@@ -40,6 +40,7 @@ def drawn_areas(p: E.Placed, room: E.Rect | None = None) -> list[tuple[E.Rect, s
     s = p.spec
     for i, a in enumerate(s.areas):
         sh = p.shifts.get(i, 0.0)
+        sd = p.sides.get(i)
         if a.side == "front" and p.wall:
             lx1, _, lx2, _ = a.local(s.w, s.d, None, sh)
             out.append((E.local_rect_to_world(lx1, -(s.d + a.d), lx2, 0.0, p.ix, p.iy, p.deg), "movement"))
@@ -47,10 +48,10 @@ def drawn_areas(p: E.Placed, room: E.Rect | None = None) -> list[tuple[E.Rect, s
                 out.append((E.local_rect_to_world(lx1, -(s.d + a.d_extra), lx2, -(s.d + a.d), p.ix, p.iy, p.deg),
                             "movement_extra"))
         else:  # free-standing elements and side areas: the area itself, extra depth lighter
-            lx1, ly1, lx2, ly2 = a.local(s.w, s.d, None, sh)
+            lx1, ly1, lx2, ly2 = a.local(s.w, s.d, None, sh, sd)
             out.append((E.local_rect_to_world(lx1, ly1, lx2, ly2, p.ix, p.iy, p.deg), "movement"))
             if a.d_extra and a.d_extra > a.d and a.side in ("front", "back"):
-                ex1, ey1, ex2, ey2 = a.local(s.w, s.d, a.d_extra, sh)
+                ex1, ey1, ex2, ey2 = a.local(s.w, s.d, a.d_extra, sh, sd)
                 if a.side == "front":
                     ey2 = ly1
                 else:

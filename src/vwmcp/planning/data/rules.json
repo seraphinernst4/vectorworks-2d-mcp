@@ -9151,6 +9151,1054 @@
 "condition": "Spalten = Neigung in Grad"
 },
 {
+"id": "g2b.energie_normen_literatur",
+"topic": "energie",
+"title": "Normen/Regelwerke zum Kapitel Energie (Tageslicht, Klimadaten, Kühllast, Wärmeschutz)",
+"sources": [
+{
+"book": "G",
+"page": 152
+}
+],
+"table": [
+{
+"norm": "DIN 5034-1 (10/1999)",
+"inhalt": "Tageslicht in Innenräumen – allgemeine Anforderungen"
+},
+{
+"norm": "DIN 5034-2 (02/1985)",
+"inhalt": "Tageslicht – Grundlagen"
+},
+{
+"norm": "DIN 5034-3 (02/2007)",
+"inhalt": "Tageslicht – Berechnung"
+},
+{
+"norm": "DIN 5034-4 (09/1994)",
+"inhalt": "vereinfachte Bestimmung von Mindestfenstergrößen für Wohnräume"
+},
+{
+"norm": "DIN 5034-5 (01/1993, Entwurf 09/2009)",
+"inhalt": "Tageslicht – Messung"
+},
+{
+"norm": "DIN 5034-6 (02/2007)",
+"inhalt": "vereinfachte Bestimmung von Oberlichtöffnungen in Dachflächen"
+},
+{
+"norm": "DIN 4710 (01/2003) + Ber. 1 (11/2006) + Beiblatt 1",
+"inhalt": "meteorologische Daten für Heiz-/RLT-Energiebedarf"
+},
+{
+"norm": "VDI 4710 Blatt 1–3 (2007–2009)",
+"inhalt": "meteorologische Grundlagen TGA (außereuropäisch, Gradtage)"
+},
+{
+"norm": "VDI 2078 Blatt 1 (02/2003)",
+"inhalt": "Kühllast bei Raumkühlung über gekühlte Flächen"
+},
+{
+"norm": "DIN V 4108-6 Ber. 1 (03/2004)",
+"inhalt": "Jahresheizwärme-/Jahresheizenergiebedarf"
+},
+{
+"norm": "BauNVO (1962, letzte Änd. 1993); EnEV 2009; LBO BW 2007",
+"inhalt": "Gesetze/Verordnungen"
+}
+]
+},
+{
+"id": "g2b.dichte_rechenannahmen",
+"topic": "staedtebau",
+"title": "Dichtebeispiele auf 1 ha (100 m × 100 m): Ø Wohnfläche neuer Geschosswohnungen 2006 = 79 m² → gerundet 100 m² Geschossfläche je WE; je WE 2 Personen und 1 Auto",
+"sources": [
+{
+"book": "G",
+"page": 157
+}
+],
+"values": {
+"typ": 100,
+"unit": "m² BGF/WE"
+},
+"condition": "Statistik: 1 Kfz je 2 Personen, 1 Pkw je 1,7 Personen (Stand 2008); Bestandsdurchschnitt 42,9 m² (Stand 2007, Bezug siehe open_questions)"
+},
+{
+"id": "g2b.dichte_beispiele",
+"topic": "staedtebau",
+"title": "Personen und Pkw je ha für verschiedene Bebauungsformen (Isometrien M 1:3000; Gebäudetyp aus Bild gedeutet, nicht beschriftet)",
+"sources": [
+{
+"book": "G",
+"page": 158
+},
+{
+"book": "G",
+"page": 159
+},
+{
+"book": "G",
+"page": 160
+}
+],
+"table": [
+{
+"bild": "freistehende Einfamilienhäuser im Raster",
+"personen_ha": 70,
+"pkw_ha": 35,
+"page": 160
+},
+{
+"bild": "Atriumhäuser (paarweise)",
+"personen_ha": 80,
+"pkw_ha": 40,
+"page": 160
+},
+{
+"bild": "kleine Hauseinheiten in vielen dichten Reihen (Ketten-/Doppelhäuser?)",
+"personen_ha": 90,
+"pkw_ha": 45,
+"page": 160
+},
+{
+"bild": "größere Hauseinheiten in Reihen (Doppel-/Reihenhäuser?)",
+"personen_ha": 140,
+"pkw_ha": 70,
+"page": 160
+},
+{
+"bild": "lange Reihenhauszeilen",
+"personen_ha": 160,
+"pkw_ha": 80,
+"page": 161
+},
+{
+"bild": "Zeilenbebauung ca. 4–5 Geschosse",
+"personen_ha": 220,
+"pkw_ha": 110,
+"page": 161
+},
+{
+"bild": "Punkthäuser/Stadthäuser ca. 8 Geschosse",
+"personen_ha": 320,
+"pkw_ha": 160,
+"page": 161
+},
+{
+"bild": "Stadthäuser mit Lichthof ca. 6 Geschosse",
+"personen_ha": 380,
+"pkw_ha": 190,
+"page": 161
+},
+{
+"bild": "aufgelöste Blockrandbebauung",
+"personen_ha": 420,
+"pkw_ha": 210,
+"page": 162
+},
+{
+"bild": "geschlossene Blockrandbebauung",
+"personen_ha": 760,
+"pkw_ha": 380,
+"page": 162
+},
+{
+"bild": "Wohnturm (Le Corbusier)",
+"personen_ha": 1060,
+"pkw_ha": 530,
+"page": 162
+}
+],
+"condition": "jeweils Pkw = Personen/2 (Annahme 2 Personen + 1 Pkw je WE)"
+},
+{
+"id": "g2b.grz_definition",
+"topic": "staedtebau",
+"title": "GRZ = überbaute Grundstücksfläche / gesamte Grundstücksfläche; Beispiel 96 m² auf 480 m² → GRZ 0,2",
+"sources": [
+{
+"book": "G",
+"page": 161
+}
+],
+"values": {
+"typ": 0.2,
+"unit": "-"
+},
+"condition": "genaue Berechnung nach BauNVO § 19",
+"norm": "BauNVO § 19"
+},
+{
+"id": "g2b.gfz_definition",
+"topic": "staedtebau",
+"title": "GFZ = Summe aller Geschossflächen / gesamte Grundstücksfläche; Beispiel (96 + 96) m² auf 480 m² → GFZ 0,4",
+"sources": [
+{
+"book": "G",
+"page": 161
+}
+],
+"values": {
+"typ": 0.4,
+"unit": "-"
+},
+"norm": "BauNVO"
+},
+{
+"id": "g2b.baunvo_17_obergrenzen",
+"topic": "staedtebau",
+"title": "Obergrenzen Maß der baulichen Nutzung je Baugebiet (Auszug); Überschreitung z. B. aus besonderen städtebaulichen Gründen möglich",
+"sources": [
+{
+"book": "G",
+"page": 162
+}
+],
+"table": [
+{
+"baugebiet": "reines Wohngebiet WR",
+"grz_max": 0.4,
+"gfz_max": 1.2
+},
+{
+"baugebiet": "besonderes Wohngebiet WB",
+"grz_max": 0.6,
+"gfz_max": 1.6
+},
+{
+"baugebiet": "Kerngebiet MK",
+"grz_max": 1.0,
+"gfz_max": 3.0
+}
+],
+"norm": "BauNVO § 17"
+},
+{
+"id": "g2b.grz_gfz_beispiele",
+"topic": "staedtebau",
+"title": "Beispielwerte GRZ/GFZ je Gebäudetyp (teils Höchstwerte)",
+"sources": [
+{
+"book": "G",
+"page": 162
+},
+{
+"book": "G",
+"page": 163
+}
+],
+"table": [
+{
+"typ": "Einfamilienhaus freistehend",
+"ebenen": 2,
+"grz": 0.2,
+"gfz": 0.4,
+"page": 164
+},
+{
+"typ": "Atriumhaus",
+"ebenen": 1,
+"grz": 0.4,
+"gfz": 0.4,
+"page": 164
+},
+{
+"typ": "Reihenhaus",
+"ebenen": 2,
+"grz": 0.4,
+"gfz": 0.8,
+"page": 164
+},
+{
+"typ": "Doppelhaushälfte",
+"ebenen": 2,
+"grz": 0.4,
+"gfz": 0.8,
+"page": 164
+},
+{
+"typ": "Kettenhaus",
+"ebenen": 2,
+"grz": 0.2,
+"gfz": 0.3,
+"page": 164
+},
+{
+"typ": "Zeilenbebauung",
+"ebenen": 4,
+"grz": 0.3,
+"gfz": 1.2,
+"page": 164
+},
+{
+"typ": "Stadthaus (Punkthaus)",
+"ebenen": 8,
+"grz": 0.2,
+"gfz": 1.6,
+"page": 164
+},
+{
+"typ": "Stadthaus mit Lichthof",
+"ebenen": 6,
+"grz": 0.3,
+"gfz": 1.8,
+"page": 164
+},
+{
+"typ": "aufgelöste Blockrandbebauung",
+"ebenen": 6,
+"grz": 0.3,
+"gfz": 1.8,
+"page": 165
+},
+{
+"typ": "Blockrandbebauung",
+"ebenen": 8,
+"grz": 0.5,
+"gfz": 4.0,
+"page": 165
+},
+{
+"typ": "Wohnturm Le Corbusier",
+"ebenen": 49,
+"grz": 0.1,
+"gfz": 4.9,
+"page": 165
+}
+],
+"condition": "Isometrien M 1:2000"
+},
+{
+"id": "g2b.abstandsflaeche_messung",
+"topic": "abstandsflaeche",
+"title": "Tiefe der Abstandsfläche = Faktor × Wandhöhe h, senkrecht zur Wand gemessen; h = Schnittpunkt Wand/Gelände bis Schnittpunkt Wand/Dachhaut bzw. oberer Wandabschluss",
+"sources": [
+{
+"book": "G",
+"page": 164
+}
+],
+"condition": "Faktor laut LBO je Baugebiet 0,4 bis 0,125 (LBO BW)",
+"norm": "LBO BW"
+},
+{
+"id": "g2b.abstandsflaeche_faktoren",
+"topic": "abstandsflaeche",
+"title": "Faktoren der Abstandsflächentiefe nach Baugebiet",
+"sources": [
+{
+"book": "G",
+"page": 164
+}
+],
+"table": [
+{
+"gebiet": "allgemein",
+"faktor": 0.4
+},
+{
+"gebiet": "Kerngebiete, Dorfgebiete, besondere Wohngebiete",
+"faktor": 0.25
+},
+{
+"gebiet": "Gewerbe-, Industriegebiete, Sondergebiete (nicht Erholung)",
+"faktor": 0.125
+}
+],
+"condition": "LBO BW Novellierung (voraussichtlich ab 2010); Zeichnung zeigt zusätzlich 0,6·h (ältere Regelung?)",
+"norm": "LBO BW"
+},
+{
+"id": "g2b.abstandsflaeche_dach",
+"topic": "abstandsflaeche",
+"title": "Dach-/Giebelflächen: Neigung ≤ 45° → nur Wandhöhe h (0,4·h); Neigung > 45° → 0,4·(h + X·h1); Neigung > 70° → 0,4·(h + X·h2) mit h1/h2 = Dachhöhe; X = anzurechnender Anteil laut LBO (im Buch nicht beziffert)",
+"sources": [
+{
+"book": "G",
+"page": 164
+}
+],
+"values": {
+"typ": 0.4,
+"unit": "Faktor"
+},
+"condition": "Darstellung für allgemeinen Faktor 0,4",
+"norm": "LBO BW"
+},
+{
+"id": "g2b.spaenner_typen",
+"topic": "erschliessung",
+"title": "Spännertypen nach Zahl der Wohnungen je Erschließungskern (Treppe, i. d. R. mit Aufzug) und Geschoss: Einspänner 1, Zweispänner 2, Dreispänner 3, Vierspänner 4, Sechsspänner 6, Achtspänner 8 WE; Darstellungen nur als unbemaßte Isometrien (Kern innenliegend oder an der Fassade, Kern bei Zeilen zwischen Hausabschnitten, bei Dreispännern auch in Winkel-/Fächerformen, Achtspänner als Rundturm mit zentralem Kern)",
+"sources": [
+{
+"book": "G",
+"page": 167
+},
+{
+"book": "G",
+"page": 168
+},
+{
+"book": "G",
+"page": 169
+}
+],
+"table": [
+{
+"typ": "Einspänner",
+"we_je_kern": 1,
+"page": 169
+},
+{
+"typ": "Zweispänner",
+"we_je_kern": 2,
+"page": 170
+},
+{
+"typ": "Dreispänner",
+"we_je_kern": 3,
+"page": 170
+},
+{
+"typ": "Vierspänner",
+"we_je_kern": 4,
+"page": 171
+},
+{
+"typ": "Sechsspänner",
+"we_je_kern": 6,
+"page": 171
+},
+{
+"typ": "Achtspänner",
+"we_je_kern": 8,
+"page": 171
+}
+],
+"condition": "keine Kernmaße angegeben; Maße für Treppenhäuser siehe S. 193"
+},
+{
+"id": "g2b.spaenner_brandschutz",
+"topic": "erschliessung",
+"title": "mehr als 6 Wohneinheiten an einem Kern → erhöhte Brandschutzanforderungen; Kern an Außenwand kann baurechtlich gefordert sein (Rauchabzug, Sichtkontakt zur Feuerwehr)",
+"sources": [
+{
+"book": "G",
+"page": 167
+}
+],
+"values": {
+"max": 6,
+"unit": "WE je Kern ohne erhöhte Anforderungen"
+},
+"norm": "LBO"
+},
+{
+"id": "g2b.kern_planungsfaktoren",
+"topic": "erschliessung",
+"title": "Lage/Gestaltung des Kerns abwägen: Raumqualität über Ebenen, Kommunikation, Wirtschaftlichkeit (Zahl angeschlossener WE), Barrierefreiheit, Belichtung, Belüftung, Energie (Hüllfläche, Lage Außenwand/Mitte, Dachanschluss), EG-Eingang, Hofzugang, UG/Tiefgarage, baurechtliche Mindestmaße",
+"sources": [
+{
+"book": "G",
+"page": 167
+}
+]
+},
+{
+"id": "g2b.aussengang_prinzipien",
+"topic": "erschliessung",
+"title": "Außengang (Laubengang): unmittelbar am Gebäude, angesetzt oder vom Gebäude abgesetzt, eingezogen; erschließt 1, 2 (Maisonette) oder 3 Ebenen (Triplex); wirtschaftlich barrierefrei mit einem Aufzug erschließbar; Nachteil Privatheit; offener Gang → Witterungsschutz an jedem Wohnungseingang erforderlich",
+"sources": [
+{
+"book": "G",
+"page": 170
+},
+{
+"book": "G",
+"page": 171
+},
+{
+"book": "G",
+"page": 172
+}
+],
+"condition": "Breite nicht bemaßt; aus Schnitten M 1:500 abgegriffen ca. 200 cm Gangbreite, ca. 100 cm Abstand beim abgesetzten Gang, ca. 300 cm Geschosshöhe"
+},
+{
+"id": "g2b.aussengang_varianten_wertung",
+"topic": "erschliessung",
+"title": "eingezogener Außengang: gute Flächenausnutzung, aber hohe bauphysikalische/konstruktive Belastung bei offenem kaltem Gang; angesetzter Gang: einfach, wirtschaftlich, gestalterisch dominant; abgesetzter Gang: mehr Privatheit, wenn Durchblick nach oben/unten entlang der Außenwand eingeschränkt ist",
+"sources": [
+{
+"book": "G",
+"page": 171
+}
+]
+},
+{
+"id": "g2b.aussengang_orientierung_brandschutz",
+"topic": "erschliessung",
+"title": "Außengang häufig an Nord- oder Ostseite; ohne zwei bauliche Rettungswege sind Öffnungen in der Gangwand stark eingeschränkt (LBO); angrenzende Fassade oft erhöhte Brandschutzanforderungen",
+"sources": [
+{
+"book": "G",
+"page": 168
+},
+{
+"book": "G",
+"page": 170
+}
+],
+"norm": "LBO"
+},
+{
+"id": "g2b.innengang",
+"topic": "erschliessung",
+"title": "Innengang: selten; bedingt West-Ost-Orientierung der Wohnungen; hohe Variabilität der Ebenenkombination (Gang erschließt zwei Ebenen); Gang ohne natürliches Licht/Lüftung, sofern keine Außenkontaktflächen; wirtschaftlich durch geringe Hüllfläche",
+"sources": [
+{
+"book": "G",
+"page": 173
+}
+],
+"condition": "Breite nicht bemaßt; aus Schnitt M 1:500 abgegriffen ca. 300 cm Gang bei ca. 19 m Gebäudetiefe"
+},
+{
+"id": "g2b.gebaeudetiefen_geschosswohnungsbau",
+"topic": "gebaeudetiefe",
+"title": "Gebäudetiefen (min./max., m) im Geschosswohnungsbau bei linearer Anordnung (Quelle Faller, Der Wohngrundriss)",
+"sources": [
+{
+"book": "G",
+"page": 177
+}
+],
+"table": [
+{
+"typ": "I",
+"tiefe_m": {
+"min": 12,
+"max": 20
+},
+"orientierung": "zweiseitig",
+"merkmal": "große unbelichtete Nebenraumzonen",
+"erschliessung": "Innengang"
+},
+{
+"typ": "II",
+"tiefe_m": {
+"min": 10,
+"max": 13
+},
+"orientierung": "zweiseitig",
+"merkmal": "große unbelichtete Nebenraumzone",
+"erschliessung": "Spänner"
+},
+{
+"typ": "III",
+"tiefe_m": {
+"min": 9,
+"max": 11
+},
+"orientierung": "zweiseitig",
+"merkmal": "Normalfall, wenig unbelichtete Innenbereiche",
+"erschliessung": "Spänner"
+},
+{
+"typ": "IV",
+"tiefe_m": {
+"min": 8,
+"max": 11
+},
+"orientierung": "einseitig",
+"merkmal": "Sondersituation (Lärmschutz)",
+"erschliessung": "Außengang (Spänner)"
+},
+{
+"typ": "V",
+"tiefe_m": {
+"min": 6,
+"max": 8
+},
+"orientierung": "einseitig",
+"merkmal": "Sondersituation (Lärmschutz)",
+"erschliessung": "Spänner"
+},
+{
+"typ": "VI",
+"tiefe_m": {
+"min": 4,
+"max": 8
+},
+"orientierung": "zweiseitig",
+"merkmal": "Durchwohnen, hoher Wohnwert",
+"erschliessung": "Spänner"
+}
+],
+"condition": "Einheit m (nicht cm)"
+},
+{
+"id": "g2b.wohnungsbelichtung_typen",
+"topic": "belichtung",
+"title": "Belichtungstypen der Wohnung",
+"sources": [
+{
+"book": "G",
+"page": 178
+}
+],
+"table": [
+{
+"typ": "eine Seite",
+"hinweis": "Wohnungstiefe begrenzt, innenliegende Räume unbelichtet; möglichst nach S, O oder W"
+},
+{
+"typ": "zwei gegenüberliegende Seiten",
+"hinweis": "bei N-S-Ausrichtung Tiefe begrenzt, bei O-W-Ausrichtung größere Grundrisstiefe möglich"
+},
+{
+"typ": "zwei Seiten (Eckwohnung)",
+"hinweis": "innenliegende Ecke schwer nutzbar; SW günstig, NO ungünstig"
+},
+{
+"typ": "drei Seiten",
+"hinweis": "meist Zeilenende, sehr gute Belichtung"
+},
+{
+"typ": "Innenhof (Atrium)",
+"hinweis": "introvertiert, Qualität von Hofgröße abhängig"
+},
+{
+"typ": "vier Seiten (Penthouse)",
+"hinweis": "alle Richtungen, nutzungsabhängige Anordnung"
+}
+]
+},
+{
+"id": "g2b.orientierung_blockrand",
+"topic": "orientierung",
+"title": "Blockrand: (a) nach Himmelsrichtung – Wohnungen nach S/W, Erschließung N/O; (b) zur Straße – Erschließung zum Hof, extrovertiert; (c) zum Innenhof – Erschließung zur Straße, introvertiert, Emissionsschutz",
+"sources": [
+{
+"book": "G",
+"page": 179
+}
+]
+},
+{
+"id": "g2b.orientierung_west_ost",
+"topic": "orientierung",
+"title": "West-Ost-Zellengrundrisse: (1) Service-Nebenräume in Gebäudemitte, Aufenthaltsräume O+W, tiefer Grundriss, gebündelte Installation; (2) Wohnen W, Individualräume O, über Wohnen erschlossen, 2 Installationsbereiche; (3) wie 2, aber getrennt erschlossen, Wohnen+Essen in einem Raum; (4) Durchwohnen, Wohnen zweiseitig, Individualräume über Wohnen",
+"sources": [
+{
+"book": "G",
+"page": 180
+}
+]
+},
+{
+"id": "g2b.orientierung_nord_sued",
+"topic": "orientierung",
+"title": "Nord-Süd-Zellengrundrisse: (1) Individualräume S, Service N, gemeinsamer Flur, Durchwohnbereich, geringe Tiefe, gebündelte Installation; (2) Individualräume S, Service+Kochen N, getrennte Schlafbereiche; (3) Wohnen S, Service+Kochen N, zwei Schlafbereiche unterschiedlich orientiert",
+"sources": [
+{
+"book": "G",
+"page": 181
+}
+]
+},
+{
+"id": "g2b.grundriss_organisation",
+"topic": "grundriss",
+"title": "Organisationsprinzipien: linear (Räume entlang zentraler Achse, Flur oft lang/unbelichtet); zoniert (Trennung Gemeinschafts-/Individualbereich, getrennte Erschließung); zentral (Wohnraum als Verteiler, spart Erschließungsfläche, weniger Privatheit); zirkular (Umgang, große Verkehrsfläche und Außenwand); peripher (eingestellte installierte Kerne Küche/Bad, kaum Erschließungsfläche)",
+"sources": [
+{
+"book": "G",
+"page": 182
+},
+{
+"book": "G",
+"page": 183
+}
+],
+"condition": "Beispiele u. a. Lyons, Alder, Ungers, Aalto, Duinker/van der Torre"
+},
+{
+"id": "g2b.eingangsbereich_ausstattung",
+"topic": "eingang",
+"title": "Eingangszone: Garderobe für Mäntel/Schirme zugänglich, möglichst WC zugeordnet, Abstellmöglichkeit (Einkaufstaschen); bei Wohnungen mit direktem Ausgang ins Freie (z. B. am Laubengang) möglichst äußere + innere Tür (Windfang)",
+"sources": [
+{
+"book": "G",
+"page": 187
+}
+]
+},
+{
+"id": "g2b.eingangstuer_mindestmasse",
+"topic": "tuer",
+"title": "Eingangstür empfohlene Mindestmaße: lichte Durchgangsbreite ≥ 90, lichte Durchgangshöhe ≥ 210",
+"sources": [
+{
+"book": "G",
+"page": 188
+}
+],
+"values": {
+"min": 90,
+"unit": "cm",
+"hoehe_min": 210
+},
+"condition": "Wohnungs-/Hauseingang"
+},
+{
+"id": "g2b.eingangsvarianten_masse",
+"topic": "eingang",
+"title": "Mindestbreiten der Eingangsvarianten (Grundrisse M 1:100)",
+"sources": [
+{
+"book": "G",
+"page": 188
+}
+],
+"table": [
+{
+"variante": "einfache Eingangstür",
+"breite_min": 90
+},
+{
+"variante": "überdachter Eingang mit Glasfeld (Tür + Seitenteil)",
+"breite_min": 125
+},
+{
+"variante": "eingezogener Eingang mit Sitzgelegenheit und Ablage",
+"breite_min": 150,
+"sitz_ablage_hoehe": 40
+},
+{
+"variante": "eingezogener Eingang mit Glasfenster",
+"breite_min": 200
+},
+{
+"variante": "eingezogener Eingang mit Kinderwagenabstellplatz",
+"kinderwagenplatz_min": {
+"w": 140,
+"d": 140
+}
+},
+{
+"variante": "Eingangsbereich mit Windfang und Garderobe",
+"breite_min": 180,
+"tiefe_min": 215,
+"bedienhoehe": 105
+}
+]
+},
+{
+"id": "g2b.briefkasten_din_en_13724",
+"topic": "briefkasten",
+"title": "Hausbriefkasten: Einwurfschlitz ≥ 23 breit (C4 längs) bzw. ≥ 32,5 breit (C4 quer), Schlitzhöhe ≥ 3; Entnahmesicherung ≥ 1,5 tief und 80 % der Schlitzbreite; ≥ 0,5 Abstand Hinterkante Entnahmesicherung zu 4 cm dickem Poststapel",
+"sources": [
+{
+"book": "G",
+"page": 190
+}
+],
+"values": {
+"min": 23,
+"unit": "cm"
+},
+"norm": "DIN EN 13724"
+},
+{
+"id": "g2b.briefkasten_lage",
+"topic": "briefkasten",
+"title": "Briefkästen/Klingeln für Zusteller jederzeit erreichbar, ohne Betreten des Gebäudes. ≤ 4 WE: an der Grundstücksgrenze; ist Grenze–Eingang > 8 m: auch im Eingangsbereich, an der Hausaußenseite oder als Durchwurfanlage. > 4 WE: am oder vor dem Haus oder als Durchwurfanlage",
+"sources": [
+{
+"book": "G",
+"page": 190
+}
+],
+"values": {
+"max": 800,
+"unit": "cm",
+"condition": "Abstand Grundstücksgrenze–Eingang für Anbringung an Grenze (≤4 WE)"
+},
+"norm": "DIN EN 13724"
+},
+{
+"id": "g2b.briefkasten_barrierefrei_hoehen",
+"topic": "barrierefrei",
+"title": "Briefkasten rollstuhlgerecht: im senkrechten Greifbereich, anfahrbar; Einwurfklappe zwischen 50 und 170 über Fußboden; Bedienhöhe möglichst 85–105",
+"sources": [
+{
+"book": "G",
+"page": 189
+},
+{
+"book": "G",
+"page": 190
+}
+],
+"values": {
+"min": 50,
+"max": 170,
+"unit": "cm",
+"bedienhoehe": {
+"min": 85,
+"max": 105
+}
+},
+"norm": "DIN 18025 / DIN 18040 (Entwurf)"
+},
+{
+"id": "g2b.rollstuhlabstellplatz",
+"topic": "barrierefrei",
+"title": "je Rollstuhlbenutzer ein Rollstuhlabstellplatz zum Umsteigen Straßen-/Zimmerrollstuhl, bevorzugt im Hauseingangsbereich oder vor der Wohnung: DIN 18025 ≥ 190 breit × ≥ 150 tief; DIN 18040 (Entwurf) 180 × 150; Batterieladeplatz für E-Rollstühle nach DIN VDE 0510 Teil 3",
+"sources": [
+{
+"book": "G",
+"page": 190
+}
+],
+"values": {
+"w_min": 190,
+"d_min": 150,
+"unit": "cm"
+},
+"condition": "rollstuhlgerechte Wohnungen; DIN 18040 E: 180 × 150",
+"norm": "DIN 18025 / DIN 18040 (Entwurf) / DIN VDE 0510-3"
+},
+{
+"id": "g2b.hauseingang_aussen_schwelle",
+"topic": "barrierefrei",
+"title": "Zugang schwellenlos; nur ausnahmsweise Schwelle ≤ 2 cm",
+"sources": [
+{
+"book": "G",
+"page": 190
+}
+],
+"values": {
+"max": 2,
+"unit": "cm"
+},
+"condition": "Ausnahmefall",
+"norm": "DIN 18025"
+},
+{
+"id": "g2b.hauptwege_breite_gefaelle",
+"topic": "barrierefrei",
+"title": "Hauptwege zu Hauseingang, Garage, Müllbehältern ≥ 120 breit, bei jeder Witterung gefahrlos; Längsgefälle ≤ 3 %, Quergefälle ≤ 2 % (rollstuhlgerecht)",
+"sources": [
+{
+"book": "G",
+"page": 190
+}
+],
+"values": {
+"min": 120,
+"unit": "cm",
+"laengsgefaelle_max_pct": 3,
+"quergefaelle_max_pct": 2
+},
+"condition": "rollstuhlgerechte Planung",
+"norm": "DIN 18025"
+},
+{
+"id": "g2b.hauseingang_innen_wendeflaeche",
+"topic": "barrierefrei",
+"title": "Wendefläche im Hauseingang innen ≥ 150 × 150",
+"sources": [
+{
+"book": "G",
+"page": 189
+},
+{
+"book": "G",
+"page": 190
+}
+],
+"values": {
+"min": 150,
+"unit": "cm",
+"d_min": 150
+},
+"norm": "DIN 18025-1 / DIN 18040 (Entwurf)"
+},
+{
+"id": "g2b.eingang_rollstuhl_mindestmasse",
+"topic": "barrierefrei",
+"title": "rollstuhlgerechter Eingangsbereich (Windfang mit Tür über Eck): ≥ 200 breit × ≥ 150 tief; Variante gerade durchgehend: ≥ 150 breit × ≥ 200 tief; Vorraum mit Garderobe + Wechselplatz innen ≥ 300 × ≥ 290 (davon Wechselplatz 190 tief, Türzone ≥ 150 breit); Wechselplatz außen 150 + 150 = 300 breit × ≥ 190 tief",
+"sources": [
+{
+"book": "G",
+"page": 189
+}
+],
+"condition": "Zeichnungen M 1:100",
+"norm": "DIN 18025 / DIN 18040 (Entwurf)"
+},
+{
+"id": "g2b.treppenhaus_geschosswohnungsbau",
+"topic": "treppe",
+"title": "Eingangsbereich/Treppenhaus Geschosswohnungsbau (M 1:100): Laufbreite ≥ 100, Podesttiefe ≥ 100; zweiläufig ohne Aufzug ≥ 100 + Auge + ≥ 100 (gezeichnet 230 breit) und Länge ≥ 600 inkl. Eingangszone; zweiläufig mit Aufzug zwischen den Läufen ≥ 100 + 220 + ≥ 100; einläufig mit Aufzug Breite ≥ ca. 230, Halllänge ≥ 720 (ohne Aufzugszone)",
+"sources": [
+{
+"book": "G",
+"page": 191
+}
+],
+"table": [
+{
+"beispiel": "zweiläufige Treppe",
+"breite": "≥100 | (30) | ≥100",
+"laenge_min": 600,
+"podest_min": 100,
+"page": 193
+},
+{
+"beispiel": "zweiläufige Treppe mit Aufzug",
+"breite": "≥100 | 220 | ≥100",
+"podest_min": 100,
+"page": 193
+},
+{
+"beispiel": "einläufige Treppe mit Aufzug",
+"breite": "≥100 | (30) | ≥100 = ≥ ca. 230",
+"laenge_min": 720,
+"page": 193
+}
+],
+"condition": "Werte in Klammern gemessen, nicht beschriftet"
+},
+{
+"id": "g2b.einbruchschutz_widerstandsklassen",
+"topic": "einbruchschutz",
+"title": "Widerstandsklassen Fenster/Türen nach DIN EN 1627 (Prüfnorm) mit Widerstandszeit und Tätertyp",
+"sources": [
+{
+"book": "G",
+"page": 192
+}
+],
+"table": [
+{
+"klasse": "WK 1",
+"widerstandszeit_min": null,
+"taeter": "Grundschutz gegen Gelegenheitstäter, körperliche Gewalt/Vandalismus; keine manuelle Prüfung"
+},
+{
+"klasse": "WK 2",
+"widerstandszeit_min": 3,
+"taeter": "Gelegenheitstäter mit einfachem Werkzeug (Schraubendreher, Zange, Keil)"
+},
+{
+"klasse": "WK 3",
+"widerstandszeit_min": 5,
+"taeter": "zusätzlich Profischraubendreher, Kuhfuß"
+},
+{
+"klasse": "WK 4",
+"widerstandszeit_min": 10,
+"taeter": "erfahrener Täter mit Hammer, Meißel, Schlagaxt, Akkubohrer"
+},
+{
+"klasse": "WK 5",
+"widerstandszeit_min": 15,
+"taeter": "zusätzlich Elektrowerkzeuge (Bohrmaschine, Säge, Winkelschleifer)"
+},
+{
+"klasse": "WK 6",
+"widerstandszeit_min": 20,
+"taeter": "wie WK 5 (gemeinsame Zeile)"
+}
+],
+"condition": "Gesamtkonstruktion (Rahmen, Beschlag, Verglasung bzw. Türblatt, Zarge, Schloss) ohne Schwachpunkt",
+"norm": "DIN EN 1627"
+},
+{
+"id": "g2b.einbruchschutz_massnahmen",
+"topic": "einbruchschutz",
+"title": "Mechanische Sicherung hat Vorrang (u. a. Aufbohrschutz, Fensterverriegelung, Pilzkopfverriegelung, Querriegel-/Stangen-/Sicherheitsschloss, Schutzbeschlag, Türspion, einbruchhemmende Rollläden und Verglasung, Lichtschachtsicherung, Vergitterung nach DIN 18106); elektronisch (Alarmglas, Einbruch-/Überfallmeldeanlage, Video); ergänzend Zutrittskontrolle, Zaun, Außenbeleuchtung, Tresor, Nachbarschaftshilfe, Wachdienst; Kombination mechanisch + elektronisch optimal",
+"sources": [
+{
+"book": "G",
+"page": 192
+}
+],
+"norm": "DIN 18106 (Vergitterung)"
+},
+{
+"id": "g2b.abstand.briefkasten_einwurf_fussboden",
+"topic": "abstand",
+"title": "Abstand briefkasten_einwurf – fussboden (other)",
+"values": {
+"min": 50.0,
+"unit": "cm"
+},
+"condition": "min. Höhe Einwurfklappe über OKF, rollstuhlgerecht",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 190
+}
+]
+},
+{
+"id": "g2b.abstand.briefkasten_einwurf_fussboden",
+"topic": "abstand",
+"title": "Abstand briefkasten_einwurf – fussboden (other)",
+"values": {
+"min": 170.0,
+"unit": "cm"
+},
+"condition": "max. Höhe Einwurfklappe über OKF, rollstuhlgerecht",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 190
+}
+]
+},
+{
+"id": "g2b.abstand.grundstuecksgrenze_hauseingang",
+"topic": "abstand",
+"title": "Abstand grundstuecksgrenze – hauseingang (other)",
+"values": {
+"min": 800.0,
+"unit": "cm"
+},
+"condition": "> 800: Briefkästen bei ≤ 4 WE auch am Haus/Durchwurf zulässig",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 190
+}
+]
+},
+{
+"id": "g2b.abstand.steckdose_ladeplatz_stirnwand_rollstuhlabstellplatz",
+"topic": "abstand",
+"title": "Abstand steckdose_ladeplatz – stirnwand_rollstuhlabstellplatz (wall)",
+"values": {
+"min": 50.0,
+"unit": "cm"
+},
+"condition": "Deutung des Maßes 50 in Zeichnung S. 191",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 189
+}
+]
+},
+{
 "id": "g3.kuechen_mindestabstaende",
 "topic": "kueche",
 "title": "Mindestabstände zwischen Stellflächen und gegenüberliegenden Stellflächen/Wänden ≥120, anliegenden Wänden ≥3, Tür-/Fensterlaibungen ≥10 (nicht rollstuhlgerecht)",
@@ -10309,6 +11357,1340 @@
 {
 "book": "G",
 "page": 219
+}
+]
+},
+{
+"id": "g3b.billardtisch_masse",
+"topic": "freizeit",
+"title": "Billardtisch übliche Außenmaße 215x120 oder 225x125; Spielfeldhöhe ca. 80-88; großer Bewegungsraum ringsum",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+],
+"values": {
+"min": 80,
+"max": 88,
+"unit": "cm"
+}
+},
+{
+"id": "g3b.tischfussball_masse",
+"topic": "freizeit",
+"title": "Tischfußball ca. 143 x 74, Spielhöhe ca. 88-92",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+],
+"values": {
+"min": 88,
+"max": 92,
+"unit": "cm"
+}
+},
+{
+"id": "g3b.klavier_fluegel_masse",
+"topic": "freizeit",
+"title": "Klavier 140-160 x 60; Stutzflügel 114 x 155, Salonflügel 150 x 200, Konzertflügel 160 x 275 (Breite x Länge)",
+"sources": [
+{
+"book": "G",
+"page": 229
+}
+],
+"table": [
+[
+"Klavier",
+"140-160",
+60
+],
+[
+"Stutzflügel",
+114,
+155
+],
+[
+"Salonflügel",
+150,
+200
+],
+[
+"Konzertflügel",
+160,
+275
+]
+]
+},
+{
+"id": "g3b.sitzgruppe_rollstuhl",
+"topic": "barrierefrei",
+"title": "Sitzgruppe rollstuhlgerecht: Bewegungsfläche ≥150 vor Schränken, ≥150x150 Wendefläche, ≥120 Durchgang, Tür ≥90",
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+],
+"values": {
+"min": 150,
+"unit": "cm"
+},
+"norm": "DIN 18025-1 / DIN 18040-2 (Entwurf)"
+},
+{
+"id": "g3b.sitzgruppe_barrierefrei",
+"topic": "barrierefrei",
+"title": "Sitzgruppe barrierefrei: Bewegungsflächen ≥90 (vor Schränken, an Sofa-Stirnseiten), Tür ≥80",
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+],
+"values": {
+"min": 90,
+"unit": "cm"
+},
+"norm": "DIN 18025-2 / DIN 18040-2 (Entwurf)"
+},
+{
+"id": "g3b.mindest_einrichtungsmasse",
+"topic": "schlafen",
+"title": "Orientierungswerte Mindest-Einrichtungsmaße Schlafen (Breite x Tiefe)",
+"sources": [
+{
+"book": "G",
+"page": 234
+}
+],
+"table": [
+[
+"Einzelbett",
+"90-140",
+"205-220"
+],
+[
+"Doppelbett",
+"160-220",
+"205-220"
+],
+[
+"Französisches Bett",
+"140-160",
+"205-220"
+],
+[
+"Ablage neben Bett",
+"55-60",
+"40"
+],
+[
+"Kleiderschrank 1 Person",
+"≥110",
+"60-65"
+],
+[
+"Kleiderschrank 2 Personen",
+"≥220",
+"60-65"
+],
+[
+"Kleinkinderbett",
+"55-60",
+"100-120"
+],
+[
+"Kommode/Regal",
+"30-50",
+"100 (Spalten vermutlich vertauscht)"
+],
+[
+"Arbeitstisch",
+"≥80",
+"≥55"
+],
+[
+"Stuhl",
+"45",
+"50"
+],
+[
+"Sessel",
+"≥60",
+"≥60"
+]
+]
+},
+{
+"id": "g3b.lichte_hoehe_aufenthaltsraum",
+"topic": "schlafen",
+"title": "lichte Raumhöhe Aufenthaltsräume (Individualraum, Schlafzimmer) mind. 240 (MBO); LBO BW 230, Dachräume 220 über mind. Hälfte der Fläche (Teile ≤150 lichte Höhe nicht mitgerechnet)",
+"sources": [
+{
+"book": "G",
+"page": 234
+},
+{
+"book": "G",
+"page": 247
+}
+],
+"values": {
+"min": 240,
+"unit": "cm"
+},
+"norm": "MBO § 44 (laut p236; p249 nennt MBO 2002 § 47), LBO BW § 34"
+},
+{
+"id": "g3b.fensterflaeche_aufenthaltsraum",
+"topic": "belichtung",
+"title": "Rohbaumaß Fensteröffnung ca. 1/8 der Grundfläche (Kinderzimmer: mind. 1/8 der Netto-Grundfläche inkl. verglaster Vorbauten/Loggien)",
+"sources": [
+{
+"book": "G",
+"page": 234
+},
+{
+"book": "G",
+"page": 247
+}
+],
+"values": {
+"min": 0.125,
+"unit": "Anteil Grundfläche"
+}
+},
+{
+"id": "g3b.individualraum_groesse",
+"topic": "schlafen",
+"title": "Individualräume nutzungsneutral mind. 14-15 m²; ca. 2 m² weniger, wenn Schränke/Ankleiden ausgelagert",
+"sources": [
+{
+"book": "G",
+"page": 235
+}
+],
+"values": {
+"min": 14,
+"max": 15,
+"unit": "m²"
+}
+},
+{
+"id": "g3b.bett_bewegungsflaeche",
+"topic": "schlafen",
+"title": "Bewegungsfläche um das Doppelbett (Längsseiten + Fußende): mind. 70, empfohlen 90; Platzbedarf ≥380 x ≥295",
+"sources": [
+{
+"book": "G",
+"page": 235
+}
+],
+"values": {
+"min": 70,
+"typ": 90,
+"unit": "cm"
+}
+},
+{
+"id": "g3b.ankleideraum",
+"topic": "schlafen",
+"title": "Ankleideraum: Bewegungsraum zwischen Schrankreihen ca. 140 (60 | 140 | 60)",
+"sources": [
+{
+"book": "G",
+"page": 235
+}
+],
+"values": {
+"typ": 140,
+"unit": "cm"
+}
+},
+{
+"id": "g3b.bett_rollstuhlgerecht",
+"topic": "barrierefrei",
+"title": "Bewegungsfläche 150 breit entlang einer Bett-Längsseite (ganze Länge) und vor Schränken; andere Längsseite ≥120; Platzbedarf ≥470 x ≥420",
+"sources": [
+{
+"book": "G",
+"page": 238
+}
+],
+"values": {
+"min": 150,
+"unit": "cm"
+},
+"norm": "DIN 18025 Teil 2 bzw. DIN 18040-2 (Entwurf) (Seitenpiktogramm rollstuhlgerecht 150)"
+},
+{
+"id": "g3b.bett_barrierefrei",
+"topic": "barrierefrei",
+"title": "Bewegungsfläche 120 breit entlang einer Bett-Längsseite; vor Schränken und an anderer Längsseite ≥90; Platzbedarf ≥410 x ≥360",
+"sources": [
+{
+"book": "G",
+"page": 239
+}
+],
+"values": {
+"min": 120,
+"unit": "cm"
+},
+"norm": "DIN 18025 Teil 2 bzw. DIN 18040-2 (Entwurf)"
+},
+{
+"id": "g3b.kleiderschrank_rollstuhl",
+"topic": "barrierefrei",
+"title": "Kleiderschrank mit herunterklappbarer Kleiderstange: Greifhöhe Stange ≤140, unterste Ablage ≥40, Bewegungsfläche davor ≥150",
+"sources": [
+{
+"book": "G",
+"page": 238
+}
+],
+"values": {
+"min": 40,
+"max": 140,
+"unit": "cm"
+}
+},
+{
+"id": "g3b.matratzengroessen",
+"topic": "schlafen",
+"title": "übliche Matratzengrößen (B x L); häufig 90 x 200",
+"sources": [
+{
+"book": "G",
+"page": 237
+}
+],
+"table": [
+[
+"Kinder",
+"50x100, 60x120, 70x140"
+],
+[
+"L 190",
+"80, 90, 100"
+],
+[
+"L 200",
+"80, 90, 100, 120, 140, 160, 180, 200"
+],
+[
+"L 220",
+"90, 100, 120, 140, 160, 180, 200"
+]
+]
+},
+{
+"id": "g3b.bettsysteme",
+"topic": "schlafen",
+"title": "Bettsysteme (ca.): Einzelbett 100x200 h35; Doppelbett 200x200 h35; Hochbett 90x200 h175; 3 Betten übereinander Ebenen 35/75/75; Alkovenbett 90 tief, Liegefläche h50, 150 darüber; Klappbett längs 35+170=205 (hoch 240), quer 35+90=125 (hoch 160), Breite 100 bzw. Länge 200",
+"sources": [
+{
+"book": "G",
+"page": 236
+}
+]
+},
+{
+"id": "g3b.klappmoebel",
+"topic": "schlafen",
+"title": "Klappsofa A: 160 x 120, h 90, ausgezogen 160 x 190; Klappsofa B: 160 x 72, h 70, aufgeklappt 160 x 190; Klappsessel 70 x 72, h 70, aufgeklappt 70 x 190",
+"sources": [
+{
+"book": "G",
+"page": 237
+}
+]
+},
+{
+"id": "g3b.anordnung_schlafbereich",
+"topic": "schlafen",
+"title": "Anordnungsmöglichkeiten Schlafbereich (Schemata M1:200): Individualräume getrennt; Individualräume flexibel abtrennbar (Schiebewände); Loft mit Serviceinsel zoniert (mit/ohne Schiebewände); Loft nur mit Möbeln zoniert; für Individualräume nutzungsneutraler Zuschnitt empfohlen",
+"sources": [
+{
+"book": "G",
+"page": 234
+}
+]
+},
+{
+"id": "g3b.funktionsbeziehungen_schlafen",
+"topic": "schlafen",
+"title": "starke Beziehung Schlafen – Sanitär/Ankleiden; ggf. Elternschlafzimmer – Kleinkinderzimmer; bei Bettlägrigkeit flexible Raumtrennung (Schiebewände) zum Wohnbereich günstig",
+"sources": [
+{
+"book": "G",
+"page": 233
+}
+]
+},
+{
+"id": "g3b.kinder_tisch_stuhl_hoehen",
+"topic": "kinder",
+"title": "Orientierungswerte Tisch-/Sitzhöhe nach Körpergröße der Kinder (siehe auch Kapitel Lernen)",
+"sources": [
+{
+"book": "G",
+"page": 246
+}
+],
+"table": [
+[
+"≤113",
+46,
+26
+],
+[
+"113-127",
+52,
+30
+],
+[
+"128-142",
+58,
+34
+],
+[
+"143-157",
+64,
+38
+],
+[
+"158-172",
+70,
+42
+],
+[
+"≥173",
+76,
+46
+]
+]
+},
+{
+"id": "g3b.kinderbett_abmessungen",
+"topic": "kinder",
+"title": "Bettabmessungen + Mindestbewegungsfläche 70 (Längsseite + Stirnseite), Bett 3 von Wänden: 0-1 J 50x100 (Fläche 123x173); 1-4 J 60x120 (133x193); 5-8 J 70x140 (143x213); ab 9 J 90-160 x 190-205 (163-233 x 263-278)",
+"sources": [
+{
+"book": "G",
+"page": 246
+}
+],
+"table": [
+[
+"0-1",
+50,
+100,
+123,
+173
+],
+[
+"1-4",
+60,
+120,
+133,
+193
+],
+[
+"5-8",
+70,
+140,
+143,
+213
+],
+[
+"ab 9",
+"90-160",
+"190-205",
+"163-233",
+"263-278"
+]
+]
+},
+{
+"id": "g3b.kinderzimmer_groesse",
+"topic": "kinder",
+"title": "Kinderzimmer: Ein-Personen-Zimmer 14-16 m², Zwei-Personen-Zimmer (bis 6 Jahre) 16-20 m²; nutzungsneutral nicht unter 14 m²",
+"sources": [
+{
+"book": "G",
+"page": 243
+},
+{
+"book": "G",
+"page": 247
+}
+],
+"values": {
+"min": 14,
+"max": 20,
+"unit": "m²"
+}
+},
+{
+"id": "g3b.kinderzimmer_moebel_1p",
+"topic": "kinder",
+"title": "Ein-Personen-Kinderzimmer: 1 Bett 100x205, 1 Kleiderschrank 110x65, 1 zusätzl. Möbelstück 110x55, 1 Arbeitstisch 100x60, 1 Stuhl 45x55",
+"sources": [
+{
+"book": "G",
+"page": 247
+}
+]
+},
+{
+"id": "g3b.kinderzimmer_moebel_2p",
+"topic": "kinder",
+"title": "Zwei-Personen-Kinderzimmer: 2 Betten 100x205, Kleiderschrank 1x 220x65 oder 2x 110x65, 1 zusätzl. Möbelstück 110x55, 2 Arbeitstische 100x60, 2 Stühle 45x55",
+"sources": [
+{
+"book": "G",
+"page": 247
+}
+]
+},
+{
+"id": "g3b.kinderzimmer_raumhoehe",
+"topic": "kinder",
+"title": "Kinderzimmer lichte Höhe ≥240 (MBO 2002 § 47), LBO BW ≥230; übliche Raumhöhen ab ca. 250 bieten Möglichkeiten zur vertikalen Unterteilung (Hochbett mit Leiter, erhöhtes Podest, Nischen)",
+"sources": [
+{
+"book": "G",
+"page": 247
+},
+{
+"book": "G",
+"page": 248
+}
+],
+"values": {
+"min": 240,
+"typ": 250,
+"unit": "cm"
+},
+"norm": "MBO 2002 § 47, LBO BW § 34"
+},
+{
+"id": "g3b.eigenes_zimmer_alter",
+"topic": "kinder",
+"title": "ab ca. 8-10 Jahren eigenes Zimmer je Kind empfohlen; eigener Arbeitsplatz spätestens ab Schuleintritt",
+"sources": [
+{
+"book": "G",
+"page": 244
+}
+],
+"values": {
+"min": 8,
+"max": 10,
+"unit": "Jahre"
+}
+},
+{
+"id": "g3b.kinderzimmer_orientierung",
+"topic": "kinder",
+"title": "Kinderzimmer Süd- oder Westorientierung (Nachmittagsnutzung ab Kindergarten-/Schulalter)",
+"sources": [
+{
+"book": "G",
+"page": 244
+}
+]
+},
+{
+"id": "g3b.kindgerechte_planung",
+"topic": "kinder",
+"title": "Hinweise kindgerechte Planung (ohne Zahlen): Sicherung elektrischer Anlagen, Absturzsicherung, niedrige Fensterbrüstungen für Ausblick, niedrige Geschossigkeit für Ruf-/Blickbeziehung, Abstellflächen Kinderwagen/Roller/Fahrrad, Sicherung Außenraum (Teiche, Giftpflanzen), erhöhter Schallschutz, Treppengeländer Greifhöhe/Sicherheit, Möblierung nach Größe/Farbe/Material",
+"sources": [
+{
+"book": "G",
+"page": 245
+}
+]
+},
+{
+"id": "g3b.kinder_bewegungshoehen",
+"topic": "anthropometrie",
+"title": "Höhen spielender Kinder (Schnitte M1:50): 3 Jahre – Kind mit Ball (sitzend, Ball hoch) 66-78, Klettern 92-111, Springseil 92-111; 6 Jahre – spielende Kinder 111-129, Springen 111-129, Kaufladen-Möbel ca. 123 hoch",
+"sources": [
+{
+"book": "G",
+"page": 248
+},
+{
+"book": "G",
+"page": 249
+}
+],
+"table": [
+[
+"3 J",
+"Kind mit Ball",
+"66-78"
+],
+[
+"3 J",
+"Klettern",
+"92-111"
+],
+[
+"3 J",
+"Kind mit Springseil",
+"92-111"
+],
+[
+"6 J",
+"Spielende Kinder",
+"111-129"
+],
+[
+"6 J",
+"Springen",
+"111-129"
+],
+[
+"6 J",
+"Kinder mit Kaufladen",
+"123"
+]
+],
+"notes": "Bezug von 123 (Kaufladen oder Kind) nicht eindeutig; Maßlinie reicht bis Oberkante Kaufladen-Dach"
+},
+{
+"id": "g3b.raummodulation_nischen_podeste",
+"topic": "kinder",
+"title": "Raummodulation für Kinder mit Nischen und Podesten (Schnitt ohne Maße): gemessen ca. Raumhöhe 263, Nische mit ca. 143 lichter Höhe, Podest ca. 40 hoch x 88 breit, Hochebene ca. 171 über Boden mit ca. 92 Kopfhöhe",
+"sources": [
+{
+"book": "G",
+"page": 249
+}
+],
+"notes": "alle Werte nur gemessen (M1:50), nicht bemaßt"
+},
+{
+"id": "g3b.entwicklungsphasen",
+"topic": "kinder",
+"title": "Raumbezug Kind–Bezugsperson nach Phasen: Säugling (0-1), Kleinkind (1-6), Schulkind (6-12), Jugendlicher (12-18), Erwachsener; Bindung lockert sich mit dem Alter -> zunehmende Abgrenzung der Kinderbereiche",
+"sources": [
+{
+"book": "G",
+"page": 244
+}
+]
+},
+{
+"id": "g3b.arbeitstisch_groesse",
+"topic": "arbeitsplatz",
+"title": "Orientierungswert Arbeitstisch 160 x 80 Arbeitsfläche (Varianten 180/200 lang, 90 tief)",
+"sources": [
+{
+"book": "G",
+"page": 256
+}
+],
+"values": {
+"typ": 160,
+"unit": "cm"
+}
+},
+{
+"id": "g3b.schreibtisch_hoehe",
+"topic": "arbeitsplatz",
+"title": "Normhöhe Schreibtisch 72; wichtiger Höhenverstellbarkeit 68-76",
+"sources": [
+{
+"book": "G",
+"page": 256
+}
+],
+"values": {
+"min": 68,
+"max": 76,
+"typ": 72,
+"unit": "cm"
+}
+},
+{
+"id": "g3b.benutzerflaeche",
+"topic": "arbeitsplatz",
+"title": "Freie Fläche vor dem Schreibtisch (bis gegenüberliegendes Möbel) ≥100",
+"sources": [
+{
+"book": "G",
+"page": 256
+},
+{
+"book": "G",
+"page": 257
+}
+],
+"values": {
+"min": 100,
+"unit": "cm"
+},
+"norm": "DIN 4543-1"
+},
+{
+"id": "g3b.beinfreiraum",
+"topic": "arbeitsplatz",
+"title": "Beinfreiraum unter Tisch (ab Vorderkante): lichte Höhe 65 an Kante, 62 bei 20 Tiefe, 55 bei 45 Tiefe, Fußraum 12 hoch bis 60 Tiefe",
+"sources": [
+{
+"book": "G",
+"page": 257
+}
+],
+"table": [
+[
+0,
+65
+],
+[
+20,
+62
+],
+[
+45,
+55
+],
+[
+60,
+12
+]
+],
+"norm": "DIN 4543-1, DIN EN ISO 9241"
+},
+{
+"id": "g3b.beleuchtungsstaerke_arbeitsplatz",
+"topic": "licht",
+"title": "Beleuchtungsstärke am (häuslichen) Arbeitsplatz 300-1000 lx, durchschnittlich 500 lx; Schreibtischoberflächen matt (Blendung), Reflexionsgrade von Möbeln/Wänden beachten",
+"sources": [
+{
+"book": "G",
+"page": 255
+}
+],
+"values": {
+"min": 300,
+"max": 1000,
+"typ": 500,
+"unit": "lx"
+}
+},
+{
+"id": "g3b.beleuchtungsstaerken_vergleich",
+"topic": "licht",
+"title": "Vergleichswerte Beleuchtungsstärken",
+"sources": [
+{
+"book": "G",
+"page": 255
+}
+],
+"table": [
+[
+"Sternenhimmel",
+0.01
+],
+[
+"Vollmond",
+0.24
+],
+[
+"nächtliche Straßenbeleuchtung",
+"1-30"
+],
+[
+"Energiesparlampe 20 W in 2 m",
+35
+],
+[
+"gute Arbeitsbeleuchtung",
+"300-2000"
+],
+[
+"trüber Wintertag",
+3000
+],
+[
+"Sommertag bedeckt",
+20000
+],
+[
+"Sommertag Sonne",
+100000
+]
+]
+},
+{
+"id": "g3b.beleuchtungskonzepte",
+"topic": "licht",
+"title": "Beleuchtungskonzepte: direkt (effizient auf Arbeitsebene, aber dunkle Decke/Schatten), indirekt (hell, aber diffus/schattenarm), indirekt-direkt (Kombination, empfohlen), 'mildes Licht' (tageslichtähnlich)",
+"sources": [
+{
+"book": "G",
+"page": 255
+}
+]
+},
+{
+"id": "g3b.arbeitsplatz_rollstuhl",
+"topic": "barrierefrei",
+"title": "Rollstuhlgerechter Arbeitsplatz: Arbeitsplatte individuell 75-90 hoch, Unterkante ≥67, unterfahrbar ≥90 breit, Bewegungsfläche ≥150x150 vor dem Tisch; horizontaler Greifbereich ca. 60 (eingeschränkt) bis ca. 80 (uneingeschränkt); vertikaler Greifbereich ≥40 bis ≤140",
+"sources": [
+{
+"book": "G",
+"page": 258
+},
+{
+"book": "G",
+"page": 259
+}
+],
+"values": {
+"min": 75,
+"max": 90,
+"unit": "cm"
+},
+"norm": "DIN 18025-1 / DIN 18040 (Entwurf)"
+},
+{
+"id": "g3b.kombination_wohnen_arbeiten",
+"topic": "arbeitsplatz",
+"title": "Kombinationsmöglichkeiten Wohnen/Arbeiten (Schemata M1:200, unbemaßt): Arbeitsplatz im Allraum/Loft (überlagert bzw. flexibel abtrennbar), im flexiblen Möbelelement (temporär zuschaltbar), getrenntes Arbeitszimmer in der Wohneinheit, interner Schaltraum mit direktem Zugang von außen, externer Schaltraum (temporär einer Wohneinheit zuschaltbar oder getrennt), Satellitenbüro im Gebäude/Quartier",
+"sources": [
+{
+"book": "G",
+"page": 254
+}
+]
+},
+{
+"id": "g3b.funktionsbeziehungen_arbeiten",
+"topic": "arbeitsplatz",
+"title": "Häuslicher Arbeitsbereich mit Beziehungen zu Ankommen (Eingang), WC, Essen, Entspannen/Kommunizieren, Schlafen, Freibereich – stark abhängig von der Art der Arbeit",
+"sources": [
+{
+"book": "G",
+"page": 253
+}
+]
+},
+{
+"id": "g3b.abstand.sofa_sitzgruppe_wand_stirnseite",
+"topic": "abstand",
+"title": "Abstand sofa_sitzgruppe – wand_stirnseite (wall)",
+"values": {
+"min": 120.0,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht, Durchgang zwischen Sofa-Stirnseite und Wand, ≥",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+]
+},
+{
+"id": "g3b.abstand.sofa_sitzgruppe_wand_stirnseite",
+"topic": "abstand",
+"title": "Abstand sofa_sitzgruppe – wand_stirnseite (wall)",
+"values": {
+"min": 150.0,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht, andere Sofa-Stirnseite: Wendefläche 150x150 zwischen Sofa und Wand, ≥",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+]
+},
+{
+"id": "g3b.abstand.sofa_sitzgruppe_wand_stirnseite",
+"topic": "abstand",
+"title": "Abstand sofa_sitzgruppe – wand_stirnseite (wall)",
+"values": {
+"min": 90.0,
+"unit": "cm"
+},
+"condition": "barrierefrei, beide Stirnseiten ≥90",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+]
+},
+{
+"id": "g3b.abstand.schrankelement_wohnen_sessel",
+"topic": "abstand",
+"title": "Abstand schrankelement_wohnen – sessel (front)",
+"values": {
+"min": 150.0,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht, freier Streifen vor Schränken ≥150",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+]
+},
+{
+"id": "g3b.abstand.schrankelement_wohnen_sessel",
+"topic": "abstand",
+"title": "Abstand schrankelement_wohnen – sessel (front)",
+"values": {
+"min": 90.0,
+"unit": "cm"
+},
+"condition": "barrierefrei, freier Streifen vor Schränken ≥90",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+]
+},
+{
+"id": "g3b.abstand.sofa_sitzgruppe_couchtisch",
+"topic": "abstand",
+"title": "Abstand sofa_sitzgruppe – couchtisch (front)",
+"values": {
+"min": 40.0,
+"unit": "cm"
+},
+"condition": "nur gemessen, nicht bemaßt",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+]
+},
+{
+"id": "g3b.abstand.couchtisch_sessel",
+"topic": "abstand",
+"title": "Abstand couchtisch – sessel (front)",
+"values": {
+"min": 40.0,
+"unit": "cm"
+},
+"condition": "nur gemessen, nicht bemaßt",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 230
+}
+]
+},
+{
+"id": "g3b.abstand.doppelbett_wand_kopfende",
+"topic": "abstand",
+"title": "Abstand doppelbett – wand_kopfende (wall)",
+"values": {
+"min": 5.0,
+"unit": "cm"
+},
+"condition": "Kopfende Abstand zur Wand",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 235
+},
+{
+"book": "G",
+"page": 238
+},
+{
+"book": "G",
+"page": 239
+}
+]
+},
+{
+"id": "g3b.abstand.nachttisch_doppelbett",
+"topic": "abstand",
+"title": "Abstand nachttisch – doppelbett (side)",
+"values": {
+"min": 5.0,
+"unit": "cm"
+},
+"condition": "Nachttisch neben Bett",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 235
+},
+{
+"book": "G",
+"page": 238
+},
+{
+"book": "G",
+"page": 239
+}
+]
+},
+{
+"id": "g3b.abstand.doppelbett_wand_oder_moebel",
+"topic": "abstand",
+"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"values": {
+"min": 70.0,
+"unit": "cm"
+},
+"condition": "Mindestbewegungsfläche an jeder Längsseite und am Fußende",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 235
+}
+]
+},
+{
+"id": "g3b.abstand.doppelbett_wand_oder_moebel",
+"topic": "abstand",
+"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"values": {
+"min": 90.0,
+"unit": "cm"
+},
+"condition": "empfohlene Bewegungsfläche an Längsseiten und Fußende",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 235
+}
+]
+},
+{
+"id": "g3b.abstand.kleiderschrank_doppelbett",
+"topic": "abstand",
+"title": "Abstand kleiderschrank – doppelbett (opposite)",
+"values": {
+"min": 90.0,
+"unit": "cm"
+},
+"condition": "Schrankfront bis Bett-Fußende in Raumbeispielen (gemessen, = empfohlene 90)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 235
+}
+]
+},
+{
+"id": "g3b.abstand.kleiderschrank_arbeitstisch",
+"topic": "abstand",
+"title": "Abstand kleiderschrank – arbeitstisch (opposite)",
+"values": {
+"min": 90.0,
+"unit": "cm"
+},
+"condition": "Raumbeispiel p237 links (gemessen)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 235
+}
+]
+},
+{
+"id": "g3b.abstand.kleiderschrank_wand",
+"topic": "abstand",
+"title": "Abstand kleiderschrank – wand (wall)",
+"values": {
+"min": 5.0,
+"unit": "cm"
+},
+"condition": "Rück- und Seitenabstand in Plänen",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 235
+},
+{
+"book": "G",
+"page": 238
+},
+{
+"book": "G",
+"page": 239
+}
+]
+},
+{
+"id": "g3b.abstand.kleiderschrank_kleiderschrank",
+"topic": "abstand",
+"title": "Abstand kleiderschrank – kleiderschrank (opposite)",
+"values": {
+"min": 140.0,
+"unit": "cm"
+},
+"condition": "Ankleideraum, empfohlener Bewegungsraum ca. 140",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 235
+}
+]
+},
+{
+"id": "g3b.abstand.doppelbett_wand_oder_moebel",
+"topic": "abstand",
+"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"values": {
+"min": 150.0,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht: eine Längsseite über ganze Bettlänge",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 238
+}
+]
+},
+{
+"id": "g3b.abstand.doppelbett_wand_oder_moebel",
+"topic": "abstand",
+"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"values": {
+"min": 120.0,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht: andere Längsseite",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 238
+}
+]
+},
+{
+"id": "g3b.abstand.kleiderschrank_doppelbett",
+"topic": "abstand",
+"title": "Abstand kleiderschrank – doppelbett (front)",
+"values": {
+"min": 150.0,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht: vor Schränken",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 238
+}
+]
+},
+{
+"id": "g3b.abstand.doppelbett_wand_oder_moebel",
+"topic": "abstand",
+"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"values": {
+"min": 120.0,
+"unit": "cm"
+},
+"condition": "barrierefrei: eine Längsseite",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 239
+}
+]
+},
+{
+"id": "g3b.abstand.doppelbett_wand_oder_moebel",
+"topic": "abstand",
+"title": "Abstand doppelbett – wand_oder_moebel (side)",
+"values": {
+"min": 90.0,
+"unit": "cm"
+},
+"condition": "barrierefrei: andere Längsseite",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 239
+}
+]
+},
+{
+"id": "g3b.abstand.kleiderschrank_doppelbett",
+"topic": "abstand",
+"title": "Abstand kleiderschrank – doppelbett (front)",
+"values": {
+"min": 90.0,
+"unit": "cm"
+},
+"condition": "barrierefrei: vor Schränken",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 239
+}
+]
+},
+{
+"id": "g3b.abstand.kinderbett_0_1_wand",
+"topic": "abstand",
+"title": "Abstand kinderbett_0_1 – wand (wall)",
+"values": {
+"min": 3.0,
+"unit": "cm"
+},
+"condition": "Bett in Raumecke, Abstand zu beiden Wänden",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 246
+}
+]
+},
+{
+"id": "g3b.abstand.kinderbett_1_4_wand",
+"topic": "abstand",
+"title": "Abstand kinderbett_1_4 – wand (wall)",
+"values": {
+"min": 3.0,
+"unit": "cm"
+},
+"condition": "Bett in Raumecke",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 246
+}
+]
+},
+{
+"id": "g3b.abstand.kinderbett_5_8_wand",
+"topic": "abstand",
+"title": "Abstand kinderbett_5_8 – wand (wall)",
+"values": {
+"min": 3.0,
+"unit": "cm"
+},
+"condition": "Bett in Raumecke",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 246
+}
+]
+},
+{
+"id": "g3b.abstand.einzelbett_wand",
+"topic": "abstand",
+"title": "Abstand einzelbett – wand (wall)",
+"values": {
+"min": 3.0,
+"unit": "cm"
+},
+"condition": "Kinder ab ca. 9 Jahren, Bett in Raumecke",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 246
+}
+]
+},
+{
+"id": "g3b.abstand.kinderbett_0_1_wand_oder_moebel",
+"topic": "abstand",
+"title": "Abstand kinderbett_0_1 – wand_oder_moebel (side)",
+"values": {
+"min": 70.0,
+"unit": "cm"
+},
+"condition": "Mindestbewegungsfläche an freier Längs- und Stirnseite (gilt für alle Kinderbetten p248)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 246
+}
+]
+},
+{
+"id": "g3b.abstand.schreibtisch_regal_buero",
+"topic": "abstand",
+"title": "Abstand schreibtisch – regal_buero (opposite)",
+"values": {
+"min": 100.0,
+"unit": "cm"
+},
+"condition": "Tischvorderkante bis gegenüberliegendes Möbel/Wand, Benutzerfläche (DIN 4543-1), ≥",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 256
+},
+{
+"book": "G",
+"page": 257
+}
+]
+},
+{
+"id": "g3b.abstand.schreibtisch_regal_buero",
+"topic": "abstand",
+"title": "Abstand schreibtisch – regal_buero (opposite)",
+"values": {
+"min": 150.0,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht, Bewegungsfläche 150x150 vor Tisch, ≥",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 258
+},
+{
+"book": "G",
+"page": 259
 }
 ]
 },
@@ -11607,6 +13989,2325 @@ null,
 "condition": "rollstuhlgerecht"
 },
 {
+"id": "g4b.abfallmenge_orientierung",
+"topic": "abfall",
+"title": "Orientierungswert Muellanfall (Restmuell + Biotonne) zur Bemessung der Behaelter",
+"sources": [
+{
+"book": "G",
+"page": 295
+},
+{
+"book": "G",
+"page": 297
+}
+],
+"values": {
+"typ": 45,
+"unit": "l/Person/Woche"
+},
+"condition": "erste Planung; genaue Werte beim Entsorger"
+},
+{
+"id": "g4b.abfallaufkommen_2006",
+"topic": "abfall",
+"title": "Haushaltsabfaelle Deutschland 2006: 454 kg/Einwohner/Jahr inkl. Sperrmuell = ca. 1,24 kg/Einwohner/Tag; gesamt 40,8 Mio t Haushaltsabfaelle von 340,9 Mio t Abfall",
+"sources": [
+{
+"book": "G",
+"page": 295
+}
+],
+"values": {
+"typ": 454,
+"unit": "kg/EW/a"
+},
+"condition": "Statistisches Bundesamt"
+},
+{
+"id": "g4b.zusammensetzung_haushaltsabfall",
+"topic": "abfall",
+"title": "Zusammensetzung Haushaltsabfaelle 2006 (Anteile)",
+"sources": [
+{
+"book": "G",
+"page": 295
+}
+],
+"table": [
+[
+"Hausmuell, aehnliche Gewerbeabfaelle",
+"35 %"
+],
+[
+"Sperrmuell",
+"6 %"
+],
+[
+"Biotonne",
+"9 %"
+],
+[
+"Garten-, Parkabfaelle",
+"10 %"
+],
+[
+"Papier, Pappe, Kartonagen",
+"20 %"
+],
+[
+"Leichtverpackungen, Kunststoffe",
+"11 %"
+],
+[
+"Glas",
+"5 %"
+],
+[
+"Sonstiges (Metalle, Verbunde, Textilien)",
+"4 %"
+]
+],
+"condition": "Kreisdiagramm; 'andere getrennt gesammelte Fraktionen' zusammen 40 %"
+},
+{
+"id": "g4b.mbo45_abfall_im_gebaeude",
+"topic": "abfall",
+"title": "Feste Abfaelle in Gebaeuden der GK 3-5 nur in Abfallsammelraeumen mit: feuerbestaendigen raumabschliessenden Trennwaenden/Decken, feuerhemmenden dicht-/selbstschliessenden Oeffnungen ins Gebaeude, Entleerung unmittelbar vom Freien, staendig wirksamer Lueftung",
+"sources": [
+{
+"book": "G",
+"page": 296
+}
+],
+"condition": "GK 3-5 (mehr als 2 Wohnungen oder > 400 m2 Nutzflaeche)",
+"norm": "MBO § 45; LBO BW § 33 (2)"
+},
+{
+"id": "g4b.standplatz_abstand_aufenthaltsraum",
+"topic": "abfall",
+"title": "Abstand Standplatz zu Oeffnungen von Aufenthaltsraeumen",
+"sources": [
+{
+"book": "G",
+"page": 297
+}
+],
+"values": {
+"min": 5,
+"unit": "m"
+},
+"condition": "Empfehlung fruehere MBO 1997",
+"norm": "MBO 1997"
+},
+{
+"id": "g4b.standplatz_abstand_grenze",
+"topic": "abfall",
+"title": "Abstand Standplatz zur Grundstuecksgrenze",
+"sources": [
+{
+"book": "G",
+"page": 297
+}
+],
+"values": {
+"min": 2,
+"unit": "m"
+},
+"condition": "Empfehlung fruehere MBO 1997",
+"norm": "MBO 1997"
+},
+{
+"id": "g4b.standplatz_entfernung_strasse",
+"topic": "abfall",
+"title": "Max. Entfernung Standplatz - Zufahrtsstrasse Sammelfahrzeug",
+"sources": [
+{
+"book": "G",
+"page": 297
+}
+],
+"values": {
+"max": 15,
+"unit": "m"
+}
+},
+{
+"id": "g4b.durchgang_hoehe",
+"topic": "abfall",
+"title": "Lichte Hoehe der Durchgaenge zum Standplatz",
+"sources": [
+{
+"book": "G",
+"page": 297
+}
+],
+"values": {
+"min": 200,
+"unit": "cm"
+},
+"norm": "GUV-V C 27"
+},
+{
+"id": "g4b.durchgang_breite",
+"topic": "abfall",
+"title": "Breite der Durchgaenge zum Standplatz",
+"sources": [
+{
+"book": "G",
+"page": 297
+}
+],
+"values": {
+"min": 100,
+"unit": "cm"
+},
+"condition": "bei Grossmuellbehaeltern Wegbreite 150",
+"norm": "GUV-V C 27"
+},
+{
+"id": "g4b.wegbreite_grossbehaelter",
+"topic": "abfall",
+"title": "Wegbreite bei Grossmuellbehaeltern (4 Raeder)",
+"sources": [
+{
+"book": "G",
+"page": 297
+}
+],
+"values": {
+"min": 150,
+"unit": "cm"
+},
+"norm": "GUV-V C 27"
+},
+{
+"id": "g4b.bewegungsflaeche_behaelterreihe",
+"topic": "abfall",
+"title": "Bewegungsflaeche vor Abfallbehaelterreihen",
+"sources": [
+{
+"book": "G",
+"page": 297
+},
+{
+"book": "G",
+"page": 300
+}
+],
+"values": {
+"min": 120,
+"unit": "cm"
+},
+"condition": "Beispiel Einzelstandplatz: 70-90, >=120 empfohlen"
+},
+{
+"id": "g4b.standplatz_stufenlos",
+"topic": "abfall",
+"title": "Standplatz und Zugangswege unfallsicher, vom Fahrweg ohne Stufen; Tueren im Zugangsweg mit Arretierung",
+"sources": [
+{
+"book": "G",
+"page": 297
+}
+]
+},
+{
+"id": "g4b.abfallraum_gefaelle",
+"topic": "abfall",
+"title": "Fussbodengefaelle im Abfallbehaelterraum, mit Bodenablauf und Wasseranschluss",
+"sources": [
+{
+"book": "G",
+"page": 301
+}
+],
+"values": {
+"typ": 2,
+"unit": "%"
+}
+},
+{
+"id": "g4b.abfallschrank_norm",
+"topic": "abfall",
+"title": "Abfallbehaelterschraenke fuer fahrbare Behaelter bis 1700 l Nennvolumen",
+"sources": [
+{
+"book": "G",
+"page": 301
+}
+],
+"values": {
+"max": 1700,
+"unit": "l"
+},
+"norm": "DIN EN 15132 (Dez. 2006)"
+},
+{
+"id": "g4b.deckel_oeffnungshoehe",
+"topic": "abfall",
+"title": "Benoetigte lichte Hoehe zum Oeffnen des Deckels fahrbarer Behaelter = h + l (Hoehe + Laenge des Behaelters)",
+"sources": [
+{
+"book": "G",
+"page": 298
+},
+{
+"book": "G",
+"page": 299
+}
+],
+"condition": "Behaelter mit nach hinten klappendem Deckel",
+"norm": "DIN EN 840"
+},
+{
+"id": "g4b.en840_1_masse",
+"topic": "abfall",
+"title": "Abmessungen fahrbarer Abfallsammelbehaelter mit 2 Raedern (b x l x h in mm)",
+"sources": [
+{
+"book": "G",
+"page": 298
+}
+],
+"table": [
+[
+80,
+"480 +/- 5",
+555,
+975
+],
+[
+100,
+"472 +/- 5",
+558,
+1021
+],
+[
+120,
+"505 +/- 5",
+555,
+1005
+],
+[
+130,
+"472 +/- 5",
+558,
+1021
+],
+[
+140,
+"505 +/- 5",
+555,
+1100
+],
+[
+210,
+"546 +/- 5",
+730,
+1095
+],
+[
+240,
+"580 +/- 5",
+740,
+1100
+],
+[
+340,
+"685 max",
+880,
+1115
+]
+],
+"norm": "DIN EN 840-1"
+},
+{
+"id": "g4b.en840_2_masse",
+"topic": "abfall",
+"title": "Abmessungen fahrbarer Abfallsammelbehaelter mit 4 Raedern, Flachdeckel (mm)",
+"sources": [
+{
+"book": "G",
+"page": 299
+}
+],
+"table": [
+[
+500,
+"1370 +/- 10",
+740,
+1170
+],
+[
+660,
+"1370 +/- 10",
+850,
+1250
+],
+[
+770,
+"1370 +/- 10",
+870,
+1370
+],
+[
+1000,
+"1370 +/- 10",
+1190,
+1470
+],
+[
+1100,
+"1370 +/- 10",
+1190,
+1470
+],
+[
+1200,
+"1370 +/- 10",
+1190,
+1470
+]
+],
+"norm": "DIN EN 840-2"
+},
+{
+"id": "g4b.en840_3_masse",
+"topic": "abfall",
+"title": "Abmessungen fahrbarer Abfallsammelbehaelter mit 4 Raedern nach Teil 3 (mm)",
+"sources": [
+{
+"book": "G",
+"page": 299
+}
+],
+"table": [
+[
+770,
+"1370 +/- 10",
+1100,
+1425
+],
+[
+1100,
+"1370 +/- 10",
+1245,
+1470
+],
+[
+1300,
+"1370 +/- 10",
+1245,
+1480
+]
+],
+"norm": "DIN EN 840-3"
+},
+{
+"id": "g4b.ummauerung_hoehen",
+"topic": "abfall",
+"title": "Hoehen offener Standplaetze mit Ummauerung/Abdeckung (Beispiele): 240 l ohne Deckeloeffnung im Schrank 119; 240 l mit Deckeloeffnung unter Abdeckung 200; 660 l 220",
+"sources": [
+{
+"book": "G",
+"page": 300
+}
+],
+"values": {
+"typ": 200,
+"unit": "cm"
+},
+"condition": "Schnitte p302"
+},
+{
+"id": "g4b.abfall_rollstuhl_bewegungsflaeche",
+"topic": "barrierefrei",
+"title": "Bewegungsflaeche vor Abfallbehaeltern rollstuhlgerecht",
+"sources": [
+{
+"book": "G",
+"page": 302
+}
+],
+"values": {
+"min": 150,
+"unit": "cm x 150 cm"
+},
+"condition": "rollstuhlgerecht"
+},
+{
+"id": "g4b.abfall_rollstuhl_einwurfhoehe",
+"topic": "barrierefrei",
+"title": "Einwurfhoehe (Behaelterrand bzw. Einwurfklappe) ueber der Standflaeche des Rollstuhls",
+"sources": [
+{
+"book": "G",
+"page": 302
+}
+],
+"values": {
+"min": 70,
+"max": 85,
+"unit": "cm"
+},
+"condition": "240-l-Tonne auf um 25 tieferer Standflaeche; beim 660-l-Schrank 70"
+},
+{
+"id": "g4b.kreislaufwirtschaft_gesetz",
+"topic": "abfall",
+"title": "Begriffe: KrW-/AbfG (1996, ersetzt AbfG) und LAbfG; Hausabfall nach DIN 30706-1 = Sperrabfall + Haushaltsabfall + haushaltsaehnlicher Gewerbeabfall; Abfalltrennung nach kommunaler Abfallentsorgungssatzung, Holsystem",
+"sources": [
+{
+"book": "G",
+"page": 295
+}
+],
+"norm": "KrW-/AbfG, DIN 30706-1"
+},
+{
+"id": "g4b.nutzungsneutral_bewegungsflaeche",
+"topic": "wohnungsgroesse",
+"title": "Bewegungsflaeche um Doppelbett/vor Schrank im nutzungsneutralen Raum: Minimum 70 tief, empfohlen 90",
+"sources": [
+{
+"book": "G",
+"page": 306
+}
+],
+"values": {
+"min": 70,
+"typ": 90,
+"unit": "cm"
+},
+"condition": "nicht barrierefrei; Empfehlung WBS Schweiz (BWO 2000, S. 22 f.)",
+"norm": "WBS 2000"
+},
+{
+"id": "g4b.nutzungsneutral_quadratisch",
+"topic": "wohnungsgroesse",
+"title": "Mindestmasse Stell- und Bewegungsflaeche quadratischer nutzungsneutraler Raum (Elternschlafzimmer massgebend)",
+"sources": [
+{
+"book": "G",
+"page": 306
+}
+],
+"values": {
+"min": 360,
+"unit": "cm x 380 cm"
+},
+"condition": "Ketten >=350-360 x >=380-390; >= ca. 14 m2"
+},
+{
+"id": "g4b.nutzungsneutral_rechteckig",
+"topic": "wohnungsgroesse",
+"title": "Mindestmasse rechteckiger nutzungsneutraler Raum",
+"sources": [
+{
+"book": "G",
+"page": 307
+}
+],
+"values": {
+"min": 300,
+"unit": "cm x 440 cm"
+},
+"condition": "Bewegungsflaeche 90; Ketten >=290-300 x >=440-450; >= ca. 14 m2"
+},
+{
+"id": "g4b.nutzungsneutral_rollstuhl",
+"topic": "barrierefrei",
+"title": "Mindestmasse nutzungsneutraler Raum rollstuhlgerecht",
+"sources": [
+{
+"book": "G",
+"page": 308
+}
+],
+"values": {
+"min": 420,
+"unit": "cm x 470 cm"
+},
+"condition": "Ketten >=410-420 x >=470-480; >= ca. 20 m2; Bett-Laengsseite 150, andere Seite 120, vor Schraenken 150, Tuer >=90",
+"norm": "DIN 18025-1, DIN 18040-2 (Entwurf)"
+},
+{
+"id": "g4b.nutzungsneutral_barrierefrei",
+"topic": "barrierefrei",
+"title": "Mindestmasse nutzungsneutraler Raum barrierefrei (nicht rollstuhlgerecht)",
+"sources": [
+{
+"book": "G",
+"page": 309
+}
+],
+"values": {
+"min": 360,
+"unit": "cm x 410 cm"
+},
+"condition": "Ketten >=350-360 x >=410-420; >= ca. 15 m2; Bett-Laengsseite 120, vor Moebeln 90, Tuer >=80",
+"norm": "DIN 18025-2, DIN 18040-2 (Entwurf)"
+},
+{
+"id": "g4b.bett_laengsseite_rollstuhl",
+"topic": "barrierefrei",
+"title": "Bewegungsflaeche entlang einer Bett-Laengsseite ueber die ganze Bettlaenge (Rollstuhl wenden)",
+"sources": [
+{
+"book": "G",
+"page": 308
+}
+],
+"values": {
+"min": 150,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht; an der Einstiegsseite des Nicht-Rollstuhlnutzers 120",
+"norm": "DIN 18025-1, DIN 18040-2 (Entwurf)"
+},
+{
+"id": "g4b.vor_schraenken_rollstuhl",
+"topic": "barrierefrei",
+"title": "Bewegungsflaeche vor Schraenken",
+"sources": [
+{
+"book": "G",
+"page": 308
+}
+],
+"values": {
+"min": 150,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht",
+"norm": "DIN 18025-1"
+},
+{
+"id": "g4b.bett_laengsseite_barrierefrei",
+"topic": "barrierefrei",
+"title": "Bewegungsflaeche entlang einer Bett-Laengsseite",
+"sources": [
+{
+"book": "G",
+"page": 309
+}
+],
+"values": {
+"min": 120,
+"unit": "cm"
+},
+"condition": "barrierefrei (nicht rollstuhlgerecht)",
+"norm": "DIN 18025-2, DIN 18040-2 (Entwurf)"
+},
+{
+"id": "g4b.vor_moebeln_barrierefrei",
+"topic": "barrierefrei",
+"title": "Bewegungsflaeche vor Schraenken, Regalen, Kommoden und Betten",
+"sources": [
+{
+"book": "G",
+"page": 309
+}
+],
+"values": {
+"min": 90,
+"unit": "cm"
+},
+"condition": "barrierefrei (nicht rollstuhlgerecht)",
+"norm": "DIN 18025-2, DIN 18040-2 (Entwurf)"
+},
+{
+"id": "g4b.nutzungsneutralitaet_voraussetzungen",
+"topic": "wohnungsgroesse",
+"title": "Voraussetzungen Nutzungsneutralitaet: Flaechenueberschuss, guenstige Proportion, guenstige Lage von Tueren und Fenstern; Raumgroessen entsprechen Individualraeumen, nicht Gemeinschaftsraeumen",
+"sources": [
+{
+"book": "G",
+"page": 305
+}
+]
+},
+{
+"id": "g4b.wohnflaeche_anrechnung_freibereich",
+"topic": "freibereich",
+"title": "Anrechnung auf die Wohnflaeche: Balkone, Loggien, Terrassen i. d. R. 1/4, hoechstens 1/2; unbeheizte Wintergaerten 1/2; beheizte Wintergaerten voll",
+"sources": [
+{
+"book": "G",
+"page": 315
+}
+],
+"values": {
+"typ": 0.25,
+"max": 0.5,
+"unit": "Faktor"
+},
+"condition": "WoFlV (Wohnraumfoerderungsgesetz)",
+"norm": "WoFlV"
+},
+{
+"id": "g4b.umwehrung_mbo_bis12m",
+"topic": "gelaender",
+"title": "Mindesthoehe Umwehrungen (ausser Fensterbruestungen) bei Absturzhoehe 1 m bis 12 m",
+"sources": [
+{
+"book": "G",
+"page": 316
+}
+],
+"values": {
+"min": 90,
+"unit": "cm"
+},
+"condition": "Absturzhoehe 1-12 m",
+"norm": "MBO 2002 § 38 (4)"
+},
+{
+"id": "g4b.umwehrung_mbo_ueber12m",
+"topic": "gelaender",
+"title": "Mindesthoehe Umwehrungen bei Absturzhoehe ueber 12 m",
+"sources": [
+{
+"book": "G",
+"page": 316
+}
+],
+"values": {
+"min": 110,
+"unit": "cm"
+},
+"condition": "Absturzhoehe > 12 m",
+"norm": "MBO 2002 § 38 (4)"
+},
+{
+"id": "g4b.umwehrung_bw",
+"topic": "gelaender",
+"title": "Baden-Wuerttemberg: bei Absturzhoehe > 1 m Umwehrung mind. 90; Reduktion auf 80 zulaessig, wenn Umwehrung mind. 20 tief",
+"sources": [
+{
+"book": "G",
+"page": 316
+}
+],
+"values": {
+"min": 90,
+"unit": "cm"
+},
+"condition": "BW; 80 bei Tiefe >=20",
+"norm": "LBOAVO BW § 4 (2)"
+},
+{
+"id": "g4b.bruestung_balkon_schnitt",
+"topic": "gelaender",
+"title": "Bruestungs-/Gelaenderhoehe im barrierefreien Freibereich (Schnitt)",
+"sources": [
+{
+"book": "G",
+"page": 319
+}
+],
+"values": {
+"min": 90,
+"max": 110,
+"unit": "cm"
+},
+"condition": "gedruckt '>= 90 - 110'"
+},
+{
+"id": "g4b.freisitz_mindestflaeche",
+"topic": "barrierefrei",
+"title": "Jeder Wohnung soll ein Freisitz (Terrasse, Loggia oder Balkon) zugeordnet sein",
+"sources": [
+{
+"book": "G",
+"page": 318
+}
+],
+"values": {
+"min": 4.5,
+"unit": "m2"
+},
+"condition": "barrierefrei/rollstuhlgerecht",
+"norm": "DIN 18025-1, DIN 18025-2"
+},
+{
+"id": "g4b.bruestung_durchsichtig",
+"topic": "barrierefrei",
+"title": "Bruestungen in mind. einem Aufenthaltsraum und von Freisitzen ab dieser Hoehe durchsichtig",
+"sources": [
+{
+"book": "G",
+"page": 318
+},
+{
+"book": "G",
+"page": 319
+}
+],
+"values": {
+"min": 60,
+"unit": "cm Hoehe"
+},
+"condition": "barrierefrei",
+"norm": "DIN 18025-1, DIN 18025-2"
+},
+{
+"id": "g4b.freibereich_bewegungsflaeche",
+"topic": "barrierefrei",
+"title": "Bewegungsflaeche Rollstuhl im Freibereich",
+"sources": [
+{
+"book": "G",
+"page": 318
+}
+],
+"values": {
+"min": 150,
+"unit": "cm x 150 cm"
+},
+"condition": "rollstuhlgerecht",
+"norm": "DIN 18025-1"
+},
+{
+"id": "g4b.freibereich_tuer_breite",
+"topic": "barrierefrei",
+"title": "Lichte Durchgangsbreite Tuer zum Freibereich",
+"sources": [
+{
+"book": "G",
+"page": 318
+}
+],
+"values": {
+"min": 90,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht"
+},
+{
+"id": "g4b.unterfahrbarkeit_anfahrbreite",
+"topic": "barrierefrei",
+"title": "Bei unterfahrbaren Ausstattungsgegenstaenden und Tischen jeweils mind. 90 Anfahrbreite unterfahrbar",
+"sources": [
+{
+"book": "G",
+"page": 318
+}
+],
+"values": {
+"min": 90,
+"unit": "cm"
+},
+"condition": "Rollstuhlfahrer"
+},
+{
+"id": "g4b.terrassenausgang_schwelle",
+"topic": "barrierefrei",
+"title": "Barrierefreier Terrassen-/Balkonausgang: Schwelle max. 2 cm; vor der Tuer Entwaesserungsrinne mit Gitterrost; Abdichtung >=15 unter Oberkante Belag im Rinnenbereich (Detail M 1:10); zusaetzliche Massnahmen: wannenfoermiger, ggf. beheizbarer Entwaesserungsrost, Gefaelle, Ueberdachung, Tuerrahmen mit Flanschkonstruktion, innere Zusatzabdichtung",
+"sources": [
+{
+"book": "G",
+"page": 319
+}
+],
+"values": {
+"max": 2,
+"unit": "cm"
+},
+"condition": "barrierefrei",
+"norm": "Flachdachrichtlinie Okt. 2008, 4.4 (3)"
+},
+{
+"id": "g4b.terrassentuer_hoehen",
+"topic": "barrierefrei",
+"title": "Schnitt Terrassentuer: lichte Durchgangshoehe >=200, Tuerdruecker auf 85",
+"sources": [
+{
+"book": "G",
+"page": 319
+}
+],
+"values": {
+"min": 200,
+"unit": "cm"
+},
+"condition": "barrierefrei"
+},
+{
+"id": "g4b.freibereich_platzbedarf",
+"topic": "freibereich",
+"title": "Platzbedarf auf Balkon/Terrasse (Beispiele): stehende Person 90 x 70; 2 Personen 240 x 135; Liegestuhl 270 x 140; sitzende Person 150 x 185; 4 Personen 240 x 200; 6 Personen >=290 x >=280",
+"sources": [
+{
+"book": "G",
+"page": 315
+},
+{
+"book": "G",
+"page": 316
+},
+{
+"book": "G",
+"page": 317
+},
+{
+"book": "G",
+"page": 318
+}
+],
+"table": [
+[
+"stehende Person",
+90,
+70
+],
+[
+"Sitzplatz 2 Personen",
+240,
+135
+],
+[
+"Liegestuhl",
+270,
+140
+],
+[
+"sitzende Person",
+150,
+185
+],
+[
+"Sitzplatz 4 Personen",
+240,
+200
+],
+[
+"Sitzplatz 6 Personen",
+290,
+280
+],
+[
+"barrierefrei Wenden vor Tuer",
+150,
+150
+],
+[
+"barrierefrei Sitzplatz mit Rollstuhl",
+310,
+215
+]
+],
+"condition": "Tiefe ab Fassade; Zone 70 vor der Fassade frei"
+},
+{
+"id": "g4b.freibereich_zone_vor_fassade",
+"topic": "freibereich",
+"title": "Freie Zone zwischen Fassade/Balkontuer und Moeblierung",
+"sources": [
+{
+"book": "G",
+"page": 315
+},
+{
+"book": "G",
+"page": 316
+},
+{
+"book": "G",
+"page": 317
+}
+],
+"values": {
+"typ": 70,
+"unit": "cm"
+},
+"condition": "alle Balkon-Beispiele"
+},
+{
+"id": "g4b.berechnungsgrundlagen",
+"topic": "wohnflaeche",
+"title": "Flaechenermittlung nach WoFlV, BauNVO oder DIN 277 - je nach Grundlage werden Bauteile (z. B. Balkone, Flure) unterschiedlich angerechnet, daher verschiedene Werte fuer dasselbe Gebaeude",
+"sources": [
+{
+"book": "G",
+"page": 323
+}
+],
+"norm": "WoFlV, BauNVO, DIN 277"
+},
+{
+"id": "g4b.woflv_hoehe_voll",
+"topic": "wohnflaeche",
+"title": "WoFlV: Grundflaeche voll angerechnet bei lichter Raumhoehe mind. 2 m",
+"sources": [
+{
+"book": "G",
+"page": 323
+}
+],
+"values": {
+"min": 200,
+"unit": "cm lichte Hoehe",
+"factor": 1.0
+},
+"norm": "WoFlV"
+},
+{
+"id": "g4b.woflv_hoehe_halb",
+"topic": "wohnflaeche",
+"title": "WoFlV: Grundflaeche zur Haelfte angerechnet bei lichter Hoehe mind. 1 m und unter 2 m (unter 1 m: nicht angerechnet - im Buch nicht ausdruecklich genannt)",
+"sources": [
+{
+"book": "G",
+"page": 323
+}
+],
+"values": {
+"min": 100,
+"max": 200,
+"unit": "cm lichte Hoehe",
+"factor": 0.5
+},
+"norm": "WoFlV"
+},
+{
+"id": "g4b.woflv_balkon",
+"topic": "wohnflaeche",
+"title": "WoFlV: Balkone, Loggien, Terrassen i. d. R. zu 1/4, hoechstens zur Haelfte; unbeheizte Wintergaerten 1/2, beheizte voll",
+"sources": [
+{
+"book": "G",
+"page": 315
+},
+{
+"book": "G",
+"page": 323
+}
+],
+"values": {
+"typ": 0.25,
+"max": 0.5,
+"unit": "Faktor"
+},
+"norm": "WoFlV"
+},
+{
+"id": "g4b.woflv_laibungen",
+"topic": "wohnflaeche",
+"title": "WoFlV: Tuer- und Fensterlaibungen/Nischen erst ab mehr als 13 cm Tiefe angerechnet",
+"sources": [
+{
+"book": "G",
+"page": 323
+}
+],
+"values": {
+"min": 13,
+"unit": "cm Tiefe"
+},
+"norm": "WoFlV"
+},
+{
+"id": "g4b.woflv_nicht_angerechnet",
+"topic": "wohnflaeche",
+"title": "WoFlV: technische Funktionsflaechen (Installationsschaechte) und Verkehrsflaechen ausserhalb der Wohnung (Treppenhaus, Flur) zaehlen nicht zur Wohnflaeche; WoFlV gilt fuer Berechnungen nach dem Wohnraumfoerderungsgesetz",
+"sources": [
+{
+"book": "G",
+"page": 323
+},
+{
+"book": "G",
+"page": 344
+}
+],
+"norm": "WoFlV (25.11.2003, in Kraft 1.1.2004)"
+},
+{
+"id": "g4b.baunvo_grz_gfz",
+"topic": "wohnflaeche",
+"title": "BauNVO § 19 Grundflaechenzahl/zulaessige Grundflaeche (GR -> GRZ), § 20 Vollgeschosse, Geschossflaechenzahl/Geschossflaeche (GF -> GFZ); GF weicht oft geringfuegig von der Grundflaeche ab und wird haeufig mit der BGF nach DIN 277 verwechselt",
+"sources": [
+{
+"book": "G",
+"page": 324
+}
+],
+"norm": "BauNVO §§ 19, 20"
+},
+{
+"id": "g4b.din277_gliederung",
+"topic": "wohnflaeche",
+"title": "DIN 277: BGF = KGF + NGF; NGF = NF + TF + VF; KGF enthaelt Tuer-/Fensteroeffnungen und Installationsschaechte bis 1 m2 Querschnitt; umfassendste Grundlage (Wirtschaftlichkeit), weicht von BauNVO und WoFlV in Details ab",
+"sources": [
+{
+"book": "G",
+"page": 325
+}
+],
+"values": {
+"max": 1,
+"unit": "m2 Schachtquerschnitt in KGF"
+},
+"norm": "DIN 277-1/-2/-3 (2005)"
+},
+{
+"id": "g4b.baukosten_gebaeudetypen",
+"topic": "kosten",
+"title": "Baukosten je m2 nach Kostengruppen (Naeherung nach BKI)",
+"sources": [
+{
+"book": "G",
+"page": 326
+}
+],
+"table": [
+[
+"Mehrfamilienhaus > 6 WE, mittlerer Standard",
+40,
+"800 (76,9 %)",
+"69 (6,6 %)",
+"131 (12,6 %)",
+1040
+],
+[
+"Reihenhaus, mittlerer Standard",
+54,
+"850 (70,3 %)",
+"81 (6,7 %)",
+"224 (18,5 %)",
+1209
+],
+[
+"Einfamilienhaus unterkellert, hoher Standard",
+18,
+"1296 (80,4 %)",
+"81 (5,0 %)",
+"216 (13,4 %)",
+1611
+]
+],
+"condition": "Naeherungswerte, BKI",
+"norm": "DIN 276-1"
+},
+{
+"id": "g4b.baunutzungskosten_50j",
+"topic": "kosten",
+"title": "Baunutzungskosten ueber 50 Jahre (Bundesbauministerium 1990): Erstellung in EUR/m2 BGF, uebrige in EUR/m2 Wohnflaeche",
+"sources": [
+{
+"book": "G",
+"page": 327
+}
+],
+"table": [
+[
+"Mehrfamilienhaus > 6 WE, mittel",
+"1040 (52,4 %)",
+"481 (24,3 %)",
+"215 (10,8 %)",
+"248 (12,5 %)",
+1984
+],
+[
+"Reihenhaus, mittel",
+"1209 (53,6 %)",
+"571 (25,4 %)",
+"222 (9,8 %)",
+"255 (11,2 %)",
+2257
+],
+[
+"Einfamilienhaus unterkellert, hoch",
+"1611 (46,0 %)",
+"1262 (36,1 %)",
+"318 (9,1 %)",
+"308 (8,8 %)",
+3499
+]
+],
+"condition": "Naeherungswerte"
+},
+{
+"id": "g4b.huellflaeche_je_100m2",
+"topic": "kosten",
+"title": "Huellflaeche je 100 m2 Wohnflaeche (Raumvolumen 300 m3) nach Lage/Gebaeudetyp",
+"sources": [
+{
+"book": "G",
+"page": 328
+},
+{
+"book": "G",
+"page": 329
+}
+],
+"table": [
+[
+"Geschosswohnung, grosse Gebaeudetiefe, mittig, 1 Aussenflaeche",
+20,
+42
+],
+[
+"Geschosswohnung mittig, 2 Aussenflaechen",
+12,
+58
+],
+[
+"Geschosswohnung Randlage, 3 Aussenflaechen",
+12,
+100
+],
+[
+"Geschosswohnung Dachgeschoss, 3 Aussenflaechen",
+12,
+158
+],
+[
+"Geschosswohnung Randlage Dachgeschoss, 4 Aussenflaechen",
+12,
+200
+],
+[
+"Reihenhaus, 3 Aussenflaechen",
+12,
+108
+],
+[
+"Reihenendhaus, 4 Aussenflaechen",
+12,
+192
+],
+[
+"freistehendes Einfamilienhaus, 5 Aussenflaechen",
+7,
+256
+],
+[
+"freistehendes winkelfoermiges Einfamilienhaus, 5 Aussenflaechen",
+12,
+290
+]
+],
+"condition": "geringe Huellflaeche oekonomisch und oekologisch guenstig"
+},
+{
+"id": "g4b.erschliessung_spaenner",
+"topic": "erschliessung",
+"title": "Erschlossene Wohnflaeche je 1 m2 Erschliessungsflaeche (Treppenhaus Regelgeschoss), Spaennertypen",
+"sources": [
+{
+"book": "G",
+"page": 330
+}
+],
+"table": [
+[
+"Einspaenner",
+7,
+"100"
+],
+[
+"Zweispaenner",
+13,
+"100+100"
+],
+[
+"Dreispaenner",
+17,
+"100+50+100"
+],
+[
+"Vierspaenner",
+20,
+"100+50+50+100"
+],
+[
+"Fuenfspaenner",
+25,
+"5 x 100"
+]
+],
+"condition": "stark vereinfachtes Modell"
+},
+{
+"id": "g4b.erschliessung_flure",
+"topic": "erschliessung",
+"title": "Erschlossene Wohnflaeche je 1 m2 Erschliessungsflaeche bei Flurerschliessung",
+"sources": [
+{
+"book": "G",
+"page": 330
+},
+{
+"book": "G",
+"page": 331
+}
+],
+"table": [
+[
+"Aussenflur, 6 WE (100,4x50,100)",
+7,
+6
+],
+[
+"Aussenflur, 10 WE (100,8x50,100)",
+5,
+10
+],
+[
+"Innenflur 1 Ebene, 20 WE (50/100)",
+9,
+20
+],
+[
+"Innenflur, 3 Ebenen (Maisonetten 140/290), 20 WE",
+13,
+20
+]
+],
+"condition": "Vertikalerschliessung (Spaenner) effizienter als Horizontalerschliessung; Effizienzsteigerung nur mit Innenflur und mehrgeschossigen Wohnungen (interne Treppen beruecksichtigen); fuer Laubengang spricht Barrierefreiheit (ein Aufzug bis Hochhausgrenze)"
+},
+{
+"id": "g4b.schallschutz_grundsatz",
+"topic": "schall",
+"title": "DIN 4109 (Nov. 1989) Mindestanforderungen schuetzen nur vor unzumutbaren Belaestigungen; anzuwenden sind mind. die erhoehten Anforderungen bzw. SSt II oder SSt III der VDI 4100; SSt I = DIN 4109 Mindestanforderung",
+"sources": [
+{
+"book": "G",
+"page": 335
+},
+{
+"book": "G",
+"page": 336
+}
+],
+"norm": "DIN 4109 (1989), VDI 4100 (Aug. 2007)"
+},
+{
+"id": "g4b.schallschutz_schema_stufen",
+"topic": "schall",
+"title": "Schemagrundriss Geschosswohnungsbau, Anforderungsstufen: 1 sehr hoch 52-55 dB (Wohnungstrenn-/Treppenraumwaende), 2 hoch 53-55 dB, 3 mittel 40-47 dB (zwischen lauten und leisen Raeumen innerhalb der Wohnung), 4 niedrig",
+"sources": [
+{
+"book": "G",
+"page": 335
+}
+],
+"table": [
+[
+"1 sehr hoch",
+"52-55 dB"
+],
+[
+"2 hoch",
+"53-55 dB"
+],
+[
+"3 mittel",
+"40-47 dB"
+],
+[
+"4 niedrig",
+null
+]
+],
+"condition": "Schemagrundriss M 1:200",
+"norm": "DIN 4109 (1989)"
+},
+{
+"id": "g4b.din4109_geschosshaeuser",
+"topic": "schall",
+"title": "Anforderungen baulicher Schallschutz Geschosshaeuser mit Wohnungen und Arbeitsraeumen (dB): R'w (Luftschall, min) und L'n,w (Trittschall, max)",
+"sources": [
+{
+"book": "G",
+"page": 336
+}
+],
+"table": [
+[
+"Decken unter begehbaren Dachraeumen (z. B. Boeden)",
+53,
+53,
+55,
+46
+],
+[
+"- Gebaeude mit zwei Wohnungen",
+52,
+63,
+null,
+null
+],
+[
+"Wohnungstrenndecken und -treppen",
+54,
+53,
+55,
+46
+],
+[
+"- Gebaeude mit zwei Wohnungen",
+52,
+53,
+null,
+null
+],
+[
+"Decken ueber Kellern, Hausfluren, Treppenraeumen unter Aufenthaltsraeumen",
+52,
+53,
+55,
+46
+],
+[
+"Decken ueber Durchfahrten - unter Aufenthaltsraeumen",
+55,
+53,
+null,
+46
+],
+[
+"Decken ueber Durchfahrten - ueber Gemeinschaftsraeumen",
+55,
+46,
+null,
+null
+],
+[
+"Decken unter Terrassen und Loggien ueber Aufenthaltsraeumen",
+null,
+53,
+null,
+46
+],
+[
+"Decken unter Laubengaengen",
+null,
+53,
+null,
+46
+],
+[
+"Decken unter Bad und WC",
+54,
+53,
+55,
+46
+],
+[
+"Treppen und Treppenpodeste",
+null,
+58,
+null,
+46
+],
+[
+"- innerhalb von Wohnungen",
+null,
+53,
+null,
+46
+],
+[
+"Decken unter Hausfluren",
+null,
+53,
+null,
+46
+],
+[
+"Wohnungstrennwaende",
+53,
+null,
+55,
+null
+],
+[
+"Treppenraumwaende und Waende neben Hausfluren",
+52,
+null,
+55,
+null
+],
+[
+"Waende neben Durchfahrten",
+55,
+null,
+55,
+null
+],
+[
+"Tueren von Hausfluren/Treppenraeumen zu Fluren",
+27,
+null,
+37,
+null
+],
+[
+"- zu Aufenthaltsraeumen",
+37,
+null,
+37,
+null
+],
+[
+"Waende zwischen 'lauten' und 'leisen' Raeumen unterschiedlicher Nutzung innerhalb der Wohnung",
+40,
+null,
+47,
+null
+]
+],
+"condition": "R'w: Mindestwert (groesser = besser); L'n,w: Hoechstwert (kleiner = besser); '-' = keine Anforderung",
+"norm": "DIN 4109 (Nov. 1989)"
+},
+{
+"id": "g4b.din4109_einfamilienhaeuser",
+"topic": "schall",
+"title": "Anforderungen baulicher Schallschutz Einfamilien-Doppel- und -Reihenhaeuser (dB)",
+"sources": [
+{
+"book": "G",
+"page": 336
+}
+],
+"table": [
+[
+"Decken",
+null,
+48,
+null,
+38
+],
+[
+"Treppen, Treppenpodeste und Decken unter Fluren",
+null,
+53,
+null,
+46
+],
+[
+"Haus-/(Wohnungs-)Trennwaende",
+57,
+null,
+67,
+null
+]
+],
+"norm": "DIN 4109 (Nov. 1989)"
+},
+{
+"id": "g4b.vdi4100_schallschutzstufen",
+"topic": "schall",
+"title": "VDI 4100 Schallschutzstufen: Wahrnehmung von Geraeuschen aus der Nachbarwohnung",
+"sources": [
+{
+"book": "G",
+"page": 336
+}
+],
+"table": [
+[
+"laute Sprache",
+"verstehbar",
+"im Allg. verstehbar",
+"im Allg. nicht verstehbar"
+],
+[
+"Sprache mit angehobener Sprechweise",
+"im Allg. verstehbar",
+"im Allg. nicht verstehbar",
+"nicht verstehbar"
+],
+[
+"Sprache mit normaler Sprechweise",
+"im Allg. nicht verstehbar",
+"nicht verstehbar",
+"nicht hoerbar"
+],
+[
+"Gehgeraeusche",
+"im Allg. stoerend",
+"im Allg. nicht mehr stoerend",
+"nicht stoerend"
+],
+[
+"Geraeusche aus Haustechnikanlagen",
+"unzumutbare Belaestigungen im Allg. vermieden",
+"gelegentlich stoerend",
+"nicht oder nur selten stoerend"
+],
+[
+"Hausmusik, laute Rundfunk-/Fernsehgeraete, Parties",
+"deutlich hoerbar",
+"deutlich hoerbar",
+"im Allg. hoerbar"
+]
+],
+"norm": "VDI 4100 (Aug. 2007)"
+},
+{
+"id": "g4b.schalldaemmung_massivwaende",
+"topic": "schall",
+"title": "Schalldaemmung einschaliger massiver Innenwaende Rw,R (dB)",
+"sources": [
+{
+"book": "G",
+"page": 337
+}
+],
+"table": [
+[
+"Stahlbetonwand beidseitig Duennputz",
+"10,0 cm",
+46
+],
+[
+"Stahlbetonwand",
+"12,5 cm",
+49
+],
+[
+"Stahlbetonwand",
+"15,0 cm",
+51
+],
+[
+"Stahlbetonwand",
+"17,5 cm",
+53
+],
+[
+"Stahlbetonwand",
+"20,0 cm",
+54
+],
+[
+"Stahlbetonwand",
+"22,5 cm",
+56
+],
+[
+"Stahlbetonwand",
+"25,0 cm",
+57
+],
+[
+"11,5 cm Mauerwerk, beidseitig 1,5 cm Putz",
+"RDK 1.2/1.4/1.6/1.8/2.0",
+"42/44/45/46/47"
+],
+[
+"17,5 cm Mauerwerk, beidseitig 1,5 cm Putz",
+"RDK 1.2/1.4/1.6/1.8/2.0",
+"46/48/49/50/51"
+],
+[
+"24 cm Mauerwerk, beidseitig 1,5 cm Putz",
+"RDK 1.2/1.4/1.6/1.8/2.0",
+"50/51/53/54/55"
+],
+[
+"30 cm Mauerwerk, beidseitig 1,5 cm Putz",
+"RDK 1.2/1.4/1.6/1.8/2.0",
+"52/54/55/56/57"
+],
+[
+"36,5 cm Mauerwerk, beidseitig 1,5 cm Putz",
+"RDK 1.2/1.4/1.6/1.8/2.0",
+"54/56/57/59/60"
+],
+[
+"Porenbeton-Plansteine, beidseitig 1 cm Putz",
+"10,0 / 12,5 / 15,0 / 17,5 / 15,0(?) cm",
+"35/38/39/42/44"
+],
+[
+"Gipsplatten-Wand (Vollgips), beidseitig Duennputz",
+"6,0 / 8,0 / 10,0 cm",
+"35/39/44"
+]
+],
+"condition": "Rohdichteklasse (RDK) in kg/dm3"
+},
+{
+"id": "g4b.schalldaemmung_staenderwaende",
+"topic": "schall",
+"title": "Schalldaemmung Holzstaenderwaende (Staender 6/6 oder 6/14 mit Volldaemmung) Rw,R (dB)",
+"sources": [
+{
+"book": "G",
+"page": 337
+}
+],
+"table": [
+[
+"je Seite 1x 1,25 Gipsplatte",
+6.0,
+8.5,
+36
+],
+[
+"je Seite 1x 1,25 Gipsplatte",
+14.0,
+16.5,
+40
+],
+[
+"1,25 Gipsplatte (Variante 2, gleicher Aufbau)",
+6.0,
+8.5,
+41
+],
+[
+"1,25 Gipsplatte (Variante 2)",
+14.0,
+16.5,
+42
+],
+[
+"je Seite 1,0 + 1,25 Gipsplatte",
+6.0,
+10.5,
+46
+],
+[
+"je Seite 1,0 + 1,25 Gipsplatte",
+14.0,
+18.5,
+46
+],
+[
+"je Seite 1,5 OSB",
+6.0,
+9.0,
+33
+],
+[
+"je Seite 1,5 OSB",
+14.0,
+17.0,
+36
+],
+[
+"0,95 Gipsplatte + 1,5 OSB / 1,25 Gipsplatte",
+6.0,
+9.7,
+37
+],
+[
+"0,95 Gipsplatte + 1,5 OSB / 1,25 Gipsplatte",
+14.0,
+17.7,
+40
+],
+[
+"13,5 Brettsperrholz + Holzstaender 8/8 mit 8 cm Daemmung + 1,25 Gipsplatte",
+8.0,
+22.8,
+43
+],
+[
+"Doppelstaender 2 x 6/6 mit 6 cm Daemmung, 3 cm Trennfuge, je Seite 2 x 1,25 Gipsplatte",
+6.0,
+20.0,
+59
+]
+],
+"condition": "die ersten beiden Gipsplatten-Zeilen sind im Buch textgleich, aber mit unterschiedlichen Werten (36/40 und 41/42) - Unterschied nicht erkennbar"
+},
+{
+"id": "g4b.normen_wohnen",
+"topic": "normen",
+"title": "Im Kapitel Wohnen genannte Normen, Gesetze und Richtlinien (Stand 2009/2010)",
+"sources": [
+{
+"book": "G",
+"page": 341
+},
+{
+"book": "G",
+"page": 342
+},
+{
+"book": "G",
+"page": 343
+},
+{
+"book": "G",
+"page": 344
+}
+],
+"table": [
+[
+"DIN EN 71-8",
+"09/2006",
+"Spielzeug: Schaukeln, Rutschen, Aktivitaetsspielzeug haeuslich"
+],
+[
+"DIN 276-1",
+"12/2008",
+"Kosten im Bauwesen - Hochbau"
+],
+[
+"DIN 277-1/-2",
+"02/2005",
+"Grundflaechen und Rauminhalte: Begriffe; Gliederung NGF"
+],
+[
+"DIN 277-3",
+"04/2005",
+"Mengen und Bezugseinheiten"
+],
+[
+"DIN EN 527-1",
+"07/2000",
+"Bueromoebel - Arbeitstische - Masse"
+],
+[
+"DIN EN 716-1",
+"09/2008",
+"Kinderbetten und Reisekinderbetten"
+],
+[
+"DIN EN 747-1",
+"07/2007",
+"Etagenbetten und Hochbetten"
+],
+[
+"DIN EN 840-1 bis -5",
+"07/2004",
+"Fahrbare Abfallsammelbehaelter (Masse, Anforderungen)"
+],
+[
+"DIN EN 840-6",
+"11/2008",
+"Abfallsammelbehaelter Sicherheit/Gesundheitsschutz"
+],
+[
+"DIN EN 1116 (+Ber. 1 05/2007)",
+"09/2004",
+"Kuechenmoebel - Koordinationsmasse"
+],
+[
+"DIN EN 1022",
+"09/2005",
+"Sitzmoebel - Standsicherheit"
+],
+[
+"DIN EN 1130-1",
+"07/1996",
+"Krippen und Wiegen"
+],
+[
+"DIN EN 1176-1/-3",
+"08/2008",
+"Spielplatzgeraete, Rutschen"
+],
+[
+"DIN EN 1286 / 1287",
+"06/1999",
+"Sanitaerarmaturen: mechanische / thermostatische Mischer"
+],
+[
+"DIN EN 1627 (Entwurf)",
+"04/2006",
+"Einbruchhemmende Bauprodukte"
+],
+[
+"DIN V ENV 1627",
+"04/1999",
+"Fenster, Tueren, Abschluesse - Einbruchhemmung"
+],
+[
+"DIN EN 1930",
+"03/2006",
+"Kinderschutzgitter"
+],
+[
+"DIN 1946-6",
+"05/2009",
+"Lueftung von Wohnungen"
+],
+[
+"DIN 4543-1",
+"09/1994",
+"Bueroarbeitsplaetze - Flaechen fuer Bueromoebel"
+],
+[
+"DIN V 4701-10 (+Bbl. 1 02/2007, A1 12/2006)",
+"08/2003",
+"Energetische Bewertung Heizung, Trinkwassererwaermung, Lueftung"
+],
+[
+"DIN 4708-2",
+"04/1994",
+"Zentrale Wassererwaermung - Waermebedarf"
+],
+[
+"DIN 5035-8",
+"07/2007",
+"Arbeitsplatzleuchten"
+],
+[
+"DIN 51130 (im Buch einmal als 'DIN 31130')",
+"06/2004",
+"Rutschhemmung von Bodenbelaegen"
+],
+[
+"DIN EN ISO 9241",
+"02/2009",
+"Ergonomie Bildschirmarbeit"
+],
+[
+"DIN EN 12221-1",
+"08/2008",
+"Wickeleinrichtungen"
+],
+[
+"DIN EN 12227-1",
+"04/2000",
+"Kinderlaufstaelle"
+],
+[
+"DIN EN 12464-1",
+"03/2003",
+"Beleuchtung von Arbeitsstaetten in Innenraeumen"
+],
+[
+"DIN EN 12764",
+"04/2008",
+"Whirlwannen"
+],
+[
+"DIN EN 13724",
+"05/2003",
+"Einwurfoeffnungen Hausbriefkaesten"
+],
+[
+"DIN EN 13203-1",
+"11/2006",
+"Gas-Warmwasserbereiter"
+],
+[
+"DIN EN 14988-1",
+"06/2006",
+"Kinderhochstuehle"
+],
+[
+"DIN EN 15132",
+"12/2006",
+"Abfallbehaelterschraenke bis 1700 l"
+],
+[
+"DIN 18015-1/-2/-3",
+"09/2007, 08/2004, 09/2007 (+Ber. 01/2008)",
+"Elektrische Anlagen in Wohngebaeuden (Planung, Mindestausstattung, Leitungsfuehrung)"
+],
+[
+"DIN 18017-1",
+"02/1987",
+"Lueftung innenliegender Baeder/WC, Einzelschacht ohne Ventilator"
+],
+[
+"DIN 18017-3",
+"09/2009",
+"Lueftung innenliegender Baeder/WC mit Ventilatoren"
+],
+[
+"DIN 18106",
+"09/2003",
+"Einbruchhemmende Gitter"
+],
+[
+"DIN 18025-1",
+"12/1992",
+"Barrierefreie Wohnungen fuer Rollstuhlbenutzer"
+],
+[
+"DIN 18025-2",
+"12/1992",
+"Barrierefreie Wohnungen"
+],
+[
+"DIN 18040-2 (Entwurf)",
+"02/2009",
+"Barrierefreies Bauen - Wohnungen"
+],
+[
+"DIN 30706-1",
+"12/2006",
+"Begriffe Abfallentsorgung"
+],
+[
+"DIN 33408-1 (+Bbl. 1 01/1987)",
+"03/2008",
+"Koerperumrissschablonen fuer Sitzplaetze"
+],
+[
+"DIN 4109 (+Bbl. 2)",
+"11/1989",
+"Schallschutz im Hochbau"
+],
+[
+"DIN 66354",
+"12/1986",
+"Kuecheneinrichtungen - Formen, Planungsgrundsaetze"
+],
+[
+"DIN 68881",
+"02/1979",
+"Kuechenmoebel - Begriffe"
+],
+[
+"DIN 68878-1",
+"01/1987",
+"Stuehle fuer den Wohnbereich"
+],
+[
+"DIN 68885",
+"01/1987",
+"Tische fuer den Wohnbereich"
+],
+[
+"DIN 68880-1",
+"10/1973",
+"Moebel - Begriffe"
+],
+[
+"DIN 68890",
+"05/2009",
+"Kleiderschraenke - Gebrauchstauglichkeit"
+],
+[
+"DIN 68935",
+"12/1999",
+"Koordinationsmasse Badmoebel, Geraete, Sanitaerobjekte"
+],
+[
+"MBO",
+"2002",
+"Musterbauordnung"
+],
+[
+"LBO BW",
+"2007 (Entwurf Novelle 2009)",
+"Landesbauordnung Baden-Wuerttemberg"
+],
+[
+"BauNVO",
+"1962, zuletzt 1993",
+"Baunutzungsverordnung"
+],
+[
+"WoFlV",
+"25.11.2003 (in Kraft 1.1.2004)",
+"Wohnflaechenverordnung"
+],
+[
+"KrW-/AbfG",
+"27.09.1994",
+"Kreislaufwirtschafts- und Abfallgesetz"
+],
+[
+"LAbfG BW",
+"14.10.2008",
+"Landesabfallgesetz BW"
+],
+[
+"GUV-V C 27",
+"1979 bzw. 1997",
+"Unfallverhuetung Muellbeseitigung"
+],
+[
+"VDI 4100",
+"08/2007",
+"Schallschutz von Wohnungen"
+],
+[
+"VDI 6000 Blatt 1",
+"02/2008",
+"Ausstattung von und mit Sanitaerraeumen - Wohnungen"
+]
+]
+},
+{
+"id": "g4b.asr_stand_der_technik",
+"topic": "arbeitsplatz",
+"title": "Kapitel Arbeiten (Grundlagen) behandelt nur Bueroarbeitsplaetze; nach Ruecknahme der alten Arbeitsstaettenrichtlinien gelten deren Zahlenwerte uebergangsweise (bis Mitte 2010) als Stand der Technik",
+"sources": [
+{
+"book": "G",
+"page": 348
+}
+],
+"norm": "ASR (alt), ArbStaettV"
+},
+{
+"id": "g4b.abstand.abfallbehaelter_standplatz_oeffnung_aufenthaltsraum",
+"topic": "abstand",
+"title": "Abstand abfallbehaelter_standplatz – oeffnung_aufenthaltsraum (other)",
+"values": {
+"min": 500.0,
+"unit": "cm"
+},
+"condition": "Empfehlung der frueheren MBO 1997; Mindestabstand Standplatz zu Oeffnungen von Aufenthaltsraeumen",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 297
+}
+]
+},
+{
+"id": "g4b.abstand.abfallbehaelter_standplatz_grundstuecksgrenze",
+"topic": "abstand",
+"title": "Abstand abfallbehaelter_standplatz – grundstuecksgrenze (other)",
+"values": {
+"min": 200.0,
+"unit": "cm"
+},
+"condition": "Empfehlung der frueheren MBO 1997",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 297
+}
+]
+},
+{
+"id": "g4b.abstand.abfallbehaelter_standplatz_zufahrtsstrasse_sammelfahrzeug",
+"topic": "abstand",
+"title": "Abstand abfallbehaelter_standplatz – zufahrtsstrasse_sammelfahrzeug (other)",
+"values": {
+"min": 1500.0,
+"unit": "cm"
+},
+"condition": "max. Entfernung ('nicht weiter als 15 m')",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 297
+}
+]
+},
+{
+"id": "g4b.abstand.doppelbett_kleiderschrank",
+"topic": "abstand",
+"title": "Abstand doppelbett – kleiderschrank (opposite)",
+"values": {
+"min": 90.0,
+"unit": "cm"
+},
+"condition": "nutzungsneutraler Raum, nicht barrierefrei; empfohlen 90, Minimum 70",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 306
+},
+{
+"book": "G",
+"page": 307
+}
+]
+},
+{
+"id": "g4b.abstand.doppelbett_wand",
+"topic": "abstand",
+"title": "Abstand doppelbett – wand (wall)",
+"values": {
+"min": 90.0,
+"unit": "cm"
+},
+"condition": "Laengsseite/Fussende zur Wand, nicht barrierefrei (empfohlen; Minimum 70)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 306
+},
+{
+"book": "G",
+"page": 307
+}
+]
+},
+{
+"id": "g4b.abstand.doppelbett_kleiderschrank",
+"topic": "abstand",
+"title": "Abstand doppelbett – kleiderschrank (opposite)",
+"values": {
+"min": 150.0,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht (vor Schraenken 150)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 308
+}
+]
+},
+{
+"id": "g4b.abstand.doppelbett_wand",
+"topic": "abstand",
+"title": "Abstand doppelbett – wand (wall)",
+"values": {
+"min": 150.0,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht, eine Laengsseite ueber ganze Bettlaenge",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 308
+}
+]
+},
+{
+"id": "g4b.abstand.doppelbett_wand",
+"topic": "abstand",
+"title": "Abstand doppelbett – wand (wall)",
+"values": {
+"min": 120.0,
+"unit": "cm"
+},
+"condition": "rollstuhlgerecht, andere Laengsseite (Einstieg Nicht-Rollstuhlnutzer); barrierefrei: eine Laengsseite",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 308
+},
+{
+"book": "G",
+"page": 309
+}
+]
+},
+{
+"id": "g4b.abstand.doppelbett_kleiderschrank",
+"topic": "abstand",
+"title": "Abstand doppelbett – kleiderschrank (opposite)",
+"values": {
+"min": 90.0,
+"unit": "cm"
+},
+"condition": "barrierefrei (vor Moebeln 90)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 309
+}
+]
+},
+{
+"id": "g4b.abstand.drehstuhl_schreibtisch",
+"topic": "abstand",
+"title": "Abstand drehstuhl – schreibtisch (front)",
+"values": {
+"min": 10.0,
+"unit": "cm"
+},
+"condition": "gezeichneter Abstand Stuhlkreis Ø40 zur Tischvorderkante (nicht bemasst)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 306
+},
+{
+"book": "G",
+"page": 307
+},
+{
+"book": "G",
+"page": 309
+}
+]
+},
+{
+"id": "g4b.abstand.gartenstuhl_gelaender",
+"topic": "abstand",
+"title": "Abstand gartenstuhl – gelaender (wall)",
+"values": {
+"min": 30.0,
+"unit": "cm"
+},
+"condition": "hinter der Sitzzone (50-55) bis Gelaender/Rand",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 315
+},
+{
+"book": "G",
+"page": 317
+},
+{
+"book": "G",
+"page": 318
+}
+]
+},
+{
+"id": "g4b.abstand.moeblierung_fassade",
+"topic": "abstand",
+"title": "Abstand moeblierung – fassade (door)",
+"values": {
+"min": 70.0,
+"unit": "cm"
+},
+"condition": "freie Zone vor der Balkontuer/Fassade",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 315
+},
+{
+"book": "G",
+"page": 316
+},
+{
+"book": "G",
+"page": 317
+},
+{
+"book": "G",
+"page": 318
+}
+]
+},
+{
+"id": "g4b.abstand.liegestuhl_gelaender_seitlich",
+"topic": "abstand",
+"title": "Abstand liegestuhl – gelaender_seitlich (side)",
+"values": {
+"min": 70.0,
+"unit": "cm"
+},
+"condition": "neben dem Fussende der Liege (Kette 200|70)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 316
+}
+]
+},
+{
 "id": "g5.gebaeudetiefe_einbund",
 "topic": "buero",
 "title": "Bürogebäude Einbund (ein Flur, Räume einseitig): Gebäudetiefe",
@@ -12730,6 +17431,1668 @@ null,
 ]
 },
 {
+"id": "g5.rasterarten",
+"topic": "raster",
+"title": "Rastergrundmaß = Achsmaß zwischen benachbarten Rasterachsen. Rasterarten: Konstruktions-/Tragwerksraster (Stützen), Ausbauraster (leichte Trennwände, Unterdecken, Doppelböden, Lage der Fassade), Fassadenraster (kleinste Einheit). Konstruktions- und Ausbauraster getrennt oder deckungsgleich; Ausbau- und Fassadenraster sollen sich überlagern (Trennwandanschluss an der Fassade). Versetztes Konstruktionsraster vermeidet Trennwandanschlüsse an Stützen, kostet aber Raumfläche. Bürogebäude oft nur in Längsrichtung gerastert; bei freistehenden/Eckgebäuden auch quer. Stützenraster der Bürogeschosse mit Tiefgarage (Stellplätze, Fahrgasse) und Lage der Kerne abstimmen.",
+"sources": [
+{
+"book": "G",
+"page": 389
+}
+]
+},
+{
+"id": "g5.rastergrundmass_kriterien",
+"topic": "raster",
+"title": "Kriterien für das Rastergrundmaß: Gebäudestruktur, Organisationsform, Modul Standardbüro (kleinster Flächenbaustein), Standardraumgeometrie (min. Breite 2,20 m, min. Tiefe 3,40 m), Anzahl AP je Büro, Anzahl Standardräume je Geschoss, max. Raumgröße, lichte Raumhöhe, Organisation der Tiefgarage.",
+"sources": [
+{
+"book": "G",
+"page": 390
+}
+],
+"values": {
+"w_min": 220,
+"d_min": 340,
+"unit": "cm"
+}
+},
+{
+"id": "g5.achsmasse_bewertung",
+"topic": "raster",
+"title": "Übliche Büroachsmaße: 110 cm (kleines Achsmaß, feine Anpassung, teurer wegen vieler Bauteile; Tabelle daneben verwendet 0,90 m mit Faktor 3), 125 cm (oktametrisch aus Mauerwerksbau, kleinteilig, teurer; Doppel-AP braucht 4 Achsen), 135 cm (für alle Bürotypen, hohe Flexibilität; Raumtiefe 3,80 m erlaubt zusätzliche Registraturmöbel; wirtschaftliche Tiefgarage), 150 cm (wirtschaftlich für Zellenbüros mit Doppel-AP; Arbeitsplatztiefe 2,20 m, lichtes Raummaß bei 10 cm Wand 4,40 m; gut für Tiefgarage). Achsmaße 120–150 cm: 2 Achsen ergeben einen ausreichenden Einpersonenraum.",
+"sources": [
+{
+"book": "G",
+"page": 391
+}
+]
+},
+{
+"id": "g5.modulordnung_din18000",
+"topic": "raster",
+"title": "Koordinationsmaße nach DIN 18000; übliche Ausbauraster 9 M (90 cm), 12 M (120 cm), 18 M (180 cm), alle aus Vorzugsreihe 3 M. 12 M bevorzugt bei vielen kleinen Räumen; 18 M wirtschaftlicher (weniger Elemente/Anschlüsse).",
+"sources": [
+{
+"book": "G",
+"page": 391
+}
+],
+"norm": "DIN 18000"
+},
+{
+"id": "g5.raumgroesse_achsmass_tiefe",
+"topic": "raster",
+"title": "Raumfläche Einzelbüro = Achsmaß x Faktor x Raumtiefe (Faktor: 3 bei 0,90 m, sonst 2 Achsen)",
+"sources": [
+{
+"book": "G",
+"page": 391
+}
+],
+"values": {
+"unit": "m²"
+},
+"table": [
+{
+"raumtiefe_m": 3.6,
+"a090_f3": 9.72,
+"a120_f2": 8.64,
+"a135_f2": 9.72,
+"a150_f2": 10.8
+},
+{
+"raumtiefe_m": 4.0,
+"a090_f3": 10.8,
+"a120_f2": 9.6,
+"a135_f2": 10.8,
+"a150_f2": 12.0
+},
+{
+"raumtiefe_m": 4.5,
+"a090_f3": 12.15,
+"a120_f2": 10.8,
+"a135_f2": 12.15,
+"a150_f2": 13.5
+},
+{
+"raumtiefe_m": 4.8,
+"a090_f3": 12.96,
+"a120_f2": 11.52,
+"a135_f2": 12.96,
+"a150_f2": 14.4
+},
+{
+"raumtiefe_m": 5.0,
+"a090_f3": 13.5,
+"a120_f2": 12.0,
+"a135_f2": 13.5,
+"a150_f2": 15.0
+},
+{
+"raumtiefe_m": 5.5,
+"a090_f3": 14.85,
+"a120_f2": 13.2,
+"a135_f2": 14.85,
+"a150_f2": 16.5
+}
+],
+"condition": "Achsmaßflächen (ohne Wandabzug)"
+},
+{
+"id": "g5.tragwerk_tiefgarage_tabelle",
+"topic": "garage",
+"title": "Tragwerk/Tiefgarage: Stützenraster (Achsmaß) mit Fahrbahnbreite und Stellplatzbreite bei senkrechter/schräger Aufstellung",
+"sources": [
+{
+"book": "G",
+"page": 391
+}
+],
+"table": [
+{
+"achsmass_m": "9,00 x 9,00",
+"fahrbahn_senkrecht_m": 8.0,
+"fahrbahn_schraeg_m": 3.7,
+"stellplatz_senkrecht_m": 3.0,
+"stellplatz_schraeg_m": 2.5
+},
+{
+"achsmass_m": "10,80 x 10,80",
+"fahrbahn_senkrecht_m": 6.3,
+"fahrbahn_schraeg_m": 5.0,
+"stellplatz_senkrecht_m": 2.7,
+"stellplatz_schraeg_m": 2.4
+},
+{
+"achsmass_m": "7,20 x 10,80",
+"fahrbahn_senkrecht_m": 6.2,
+"fahrbahn_schraeg_m": 5.6,
+"stellplatz_senkrecht_m": 2.4,
+"stellplatz_schraeg_m": 2.5
+},
+{
+"achsmass_m": "9,00 x 10,80",
+"fahrbahn_senkrecht_m": 6.2,
+"fahrbahn_schraeg_m": 6.2,
+"stellplatz_senkrecht_m": 3.0,
+"stellplatz_schraeg_m": 2.6
+},
+{
+"achsmass_m": "7,20 x 9,00",
+"fahrbahn_senkrecht_m": 8.4,
+"fahrbahn_schraeg_m": 5.4,
+"stellplatz_senkrecht_m": 2.4,
+"stellplatz_schraeg_m": 2.4
+}
+],
+"notes": "Werte wie gedruckt; 8,00/8,40 m Fahrbahn bei 9,00/7,20 x 9,00 erscheinen ungewöhnlich groß."
+},
+{
+"id": "g5.stuetzenstellung",
+"topic": "raster",
+"title": "a) Konstruktionsachsen = Ausbauraster: Trennwandanschlüsse an Stützen nötig. b) Stützen nach innen gerückt (getrennt): keine Anschlussprobleme, Möblierbarkeit an freigestellten Stützen eingeschränkt. Stützenstellung Tiefgarage/Normalgeschoss: einfeldig, zweifeldig symmetrisch/asymmetrisch, dreifeldig.",
+"sources": [
+{
+"book": "G",
+"page": 392
+}
+]
+},
+{
+"id": "g5.flaechenmodul_ableitung",
+"topic": "raster",
+"title": "Raster 1,20 m aus Minimalanforderung Einzel-AP mit Schrank: 80 Tisch + 100 Bewegung + 40 Schrank = 220 + 10 Trennwand = 230 (Text druckt '2,30 cm') minimales Raumachsmaß → 2 x 120 = 240; Nachteil schlauchartige Räume (Raumtiefe min. 3,60 m). 1,35 und 1,50 m gängigste Maße (reversibel, wirtschaftliche Tiefgarage). Doppel-AP: 1,50 m am wirtschaftlichsten (3 Felder = 4,50 m); bei kleineren Rastern (z. B. 1,25) 4 Felder nötig.",
+"sources": [
+{
+"book": "G",
+"page": 393
+}
+],
+"values": {
+"achsmass_min": 230,
+"unit": "cm"
+}
+},
+{
+"id": "g5.flaechenmodul_einzel_ap",
+"topic": "raster",
+"title": "Einzel-AP-Modul 2 Achsen x 400 Achstiefe; lichte Fläche (Achse − 10 cm Wand): Raster 1,20 → 8,97 m² (2,30 x 3,90); 1,35 → 10,14 m² (2,60 x 3,90); 1,50 → 11,31 m² (2,90 x 3,90)",
+"sources": [
+{
+"book": "G",
+"page": 393
+}
+],
+"values": {
+"unit": "cm/m²"
+},
+"table": [
+{
+"raster": 120,
+"breite_achse": 240,
+"tiefe_achse": 400,
+"flaeche_m2": 8.97
+},
+{
+"raster": 135,
+"breite_achse": 270,
+"tiefe_achse": 400,
+"flaeche_m2": 10.14
+},
+{
+"raster": 150,
+"breite_achse": 300,
+"tiefe_achse": 400,
+"flaeche_m2": 11.31
+}
+]
+},
+{
+"id": "g5.verbindungsgang",
+"topic": "raster",
+"title": "Verbindungsgang zwischen Stuhl-/Arbeitsbereich und Schrankreihe in Mehrplatzmodulen > 60 cm",
+"sources": [
+{
+"book": "G",
+"page": 393
+}
+],
+"values": {
+"min": 60,
+"unit": "cm"
+},
+"condition": "Doppelarbeitsplatzmodule S. 393"
+},
+{
+"id": "g5.raster_120_kennwerte",
+"topic": "raster",
+"title": "Rastermaß 1,20 m (= 12 M, DIN 18000): Gebäudetiefe 16,80 m; AP-Modul EA 2,40 m, DA 4,80 m; Konstruktionsraster quer 4,80/7,20/4,80 m, längs 7,20 m; Stellplatz 2,40 x 5,00 m; Fahrbahn 6,80 m (Tiefgarage 5,00 + 6,80 + 5,00); Ausbau- und Konstruktionsraster deckungsgleich; Rasterführung horizontal und vertikal; Geschosshöhe im Schnitt 3,00 m. Minimale Einzelraumbreite 2,30 m (10 cm Wand). Nachteil: 16,80 m überschreitet 15 m Grenze für natürliche Belichtung/Lüftung; reine Zellenstruktur ergibt sehr tiefe Mittelzone.",
+"sources": [
+{
+"book": "G",
+"page": 394
+}
+],
+"values": {
+"raster": 120,
+"gebaeudetiefe": 1680,
+"ea": 240,
+"da": 480,
+"stuetzen_quer": [
+480,
+720,
+480
+],
+"stuetzen_laengs": 720,
+"stellplatz": [
+240,
+500
+],
+"fahrbahn": 680,
+"geschosshoehe": 300,
+"unit": "cm"
+},
+"norm": "DIN 18000"
+},
+{
+"id": "g5.gebaeudetiefe_max_natuerlich",
+"topic": "belichtung",
+"title": "Gebäudetiefe max. ca. 15 m für natürliche Belichtung und Belüftung (darüber zusätzliche Beleuchtung/Lüftung)",
+"sources": [
+{
+"book": "G",
+"page": 394
+}
+],
+"values": {
+"max": 1500,
+"unit": "cm"
+},
+"condition": "zweiseitig belichtet"
+},
+{
+"id": "g5.raster_135_kennwerte",
+"topic": "raster",
+"title": "Rastermaß 1,35 m: Gebäudetiefe 16,20 m; AP-Modul EA 2,70 m, DA 4,05 m; Konstruktionsraster quer 4,05/8,10/4,05 m, längs 8,10 m; Stellplatz 2,70 x 5,00 m (= Breite Einzel-AP darüber); Fahrbahn 6,20 m (5,00 + 6,20 + 5,00); deckungsgleich; Rasterführung horizontal und vertikal; Geschosshöhe 3,00 m. Erlaubt Schreibtischtiefe 90 cm plus Zusatzmöblierung; effizient für Einzelzimmer Kombi- und Zellenbüro.",
+"sources": [
+{
+"book": "G",
+"page": 396
+}
+],
+"values": {
+"raster": 135,
+"gebaeudetiefe": 1620,
+"ea": 270,
+"da": 405,
+"stuetzen_quer": [
+405,
+810,
+405
+],
+"stuetzen_laengs": 810,
+"stellplatz": [
+270,
+500
+],
+"fahrbahn": 620,
+"geschosshoehe": 300,
+"unit": "cm"
+}
+},
+{
+"id": "g5.raster_150_kennwerte",
+"topic": "raster",
+"title": "Rastermaß 1,50 m: Gebäudetiefe 16,50 m; AP-Modul EA 3,00 m, DA 4,50 m; Konstruktionsraster quer 4,50/7,50/4,50 m, längs 9,00 m; Stellplatz 3,00 x 5,00 m; Fahrbahn 6,50 m (5,00 + 6,50 + 5,00); deckungsgleich; horizontal und vertikal; Geschosshöhe 3,00 m. Doppelarbeitsplatzmodul 17,50 m²; besonders wirtschaftlich für Zellenbüros mit Doppel-AP (3 Felder = 4,50 m).",
+"sources": [
+{
+"book": "G",
+"page": 398
+}
+],
+"values": {
+"raster": 150,
+"gebaeudetiefe": 1650,
+"ea": 300,
+"da": 450,
+"stuetzen_quer": [
+450,
+750,
+450
+],
+"stuetzen_laengs": 900,
+"stellplatz": [
+300,
+500
+],
+"fahrbahn": 650,
+"geschosshoehe": 300,
+"da_modul_m2": 17.5,
+"unit": "cm"
+}
+},
+{
+"id": "g5.gebaeudetiefe_zweibund_de_eu",
+"topic": "buero",
+"title": "Zweibund-Zellenstruktur mit Doppel-AP: in Deutschland übliche Gebäudetiefe 12–13 m; europäisch gelten ab ca. 13,50 m als effizient und reversibel (geringere Tiefen nur bedingt für Kombibüros).",
+"sources": [
+{
+"book": "G",
+"page": 398
+}
+],
+"values": {
+"min": 1200,
+"max": 1300,
+"eu_min": 1350,
+"unit": "cm"
+}
+},
+{
+"id": "g5.reversibles_buero",
+"topic": "raster",
+"title": "Reversibles Büro: Gebäudetiefe so wählen, dass Zellen-, Kombi- und Großraumbüro wirtschaftlich möglich sind; Gebäudetiefe hängt von Arbeitsplatzgröße, Organisation und Erschließung ab. Untersucht: Gebäudetiefen 12,50 m und 14 m. Achsmaße: 120 (klein, seltener), 135 (mittel, sehr häufig, mit Stellplatzraster kombinierbar: 4 x 1,35 = 5,40 m = 2 Stellplätze mit Stütze), 150 (breit, seltener, gut für Doppel-AP in Zellen). Beachten: Stirnseiten, seitliche Anschlüsse, Achsdrehung um 90° bei Winkelanschlüssen (Kamm/Blockrand).",
+"sources": [
+{
+"book": "G",
+"page": 403
+}
+],
+"values": {
+"tiefen": [
+1250,
+1400
+],
+"unit": "cm"
+}
+},
+{
+"id": "g5.flexibilitaet_zonierung",
+"topic": "raster",
+"title": "Zonierung (Fassade → Fassade) der Bürotypen bei Gebäudetiefe 12,50 bzw. 14,00 m je Raster (dunkelblau = Räume, hellblau = offene Nutzfläche, weiß = Erschließung)",
+"sources": [
+{
+"book": "G",
+"page": 404
+},
+{
+"book": "G",
+"page": 405
+},
+{
+"book": "G",
+"page": 406
+}
+],
+"values": {
+"unit": "cm"
+},
+"table": [
+{
+"raster": 120,
+"gebaeudetiefe": 1250,
+"typ": "Großraum",
+"zonen": [
+1250
+],
+"summe": 1250
+},
+{
+"raster": 120,
+"gebaeudetiefe": 1400,
+"typ": "Großraum",
+"zonen": [
+1400
+],
+"summe": 1400
+},
+{
+"raster": 120,
+"gebaeudetiefe": 1250,
+"typ": "Gruppe (Zweibund, offene Arbeitsfläche)",
+"zonen": [
+650,
+150,
+450
+],
+"summe": 1250
+},
+{
+"raster": 120,
+"gebaeudetiefe": 1400,
+"typ": "Gruppe",
+"zonen": [
+860,
+155,
+385
+],
+"summe": 1400
+},
+{
+"raster": 120,
+"gebaeudetiefe": 1250,
+"typ": "Zelle",
+"zonen": [
+490,
+270,
+490
+],
+"summe": 1250
+},
+{
+"raster": 120,
+"gebaeudetiefe": 1400,
+"typ": "Zelle",
+"zonen": [
+540,
+320,
+540
+],
+"summe": 1400
+},
+{
+"raster": 120,
+"gebaeudetiefe": 1250,
+"typ": "Kombi",
+"zonen": [
+360,
+130,
+270,
+130,
+360
+],
+"summe": 1250
+},
+{
+"raster": 120,
+"gebaeudetiefe": 1400,
+"typ": "Kombi",
+"zonen": [
+385,
+155,
+320,
+155,
+385
+],
+"summe": 1400
+},
+{
+"raster": 135,
+"gebaeudetiefe": 1250,
+"typ": "Großraum",
+"zonen": [
+1250
+],
+"summe": 1250
+},
+{
+"raster": 135,
+"gebaeudetiefe": 1400,
+"typ": "Großraum",
+"zonen": [
+1400
+],
+"summe": 1400
+},
+{
+"raster": 135,
+"gebaeudetiefe": 1250,
+"typ": "Gruppe",
+"zonen": [
+650,
+150,
+450
+],
+"summe": 1250
+},
+{
+"raster": 135,
+"gebaeudetiefe": 1400,
+"typ": "Gruppe",
+"zonen": [
+860,
+155,
+385
+],
+"summe": 1400
+},
+{
+"raster": 135,
+"gebaeudetiefe": 1250,
+"typ": "Zelle",
+"zonen": [
+490,
+270,
+490
+],
+"summe": 1250
+},
+{
+"raster": 135,
+"gebaeudetiefe": 1400,
+"typ": "Zelle",
+"zonen": [
+540,
+320,
+540
+],
+"summe": 1400
+},
+{
+"raster": 135,
+"gebaeudetiefe": 1250,
+"typ": "Kombi",
+"zonen": [
+360,
+130,
+270,
+130,
+360
+],
+"summe": 1250
+},
+{
+"raster": 135,
+"gebaeudetiefe": 1400,
+"typ": "Kombi",
+"zonen": [
+385,
+155,
+320,
+155,
+385
+],
+"summe": 1400
+},
+{
+"raster": 150,
+"gebaeudetiefe": 1250,
+"typ": "Großraum",
+"zonen": [
+1250
+],
+"summe": 1250
+},
+{
+"raster": 150,
+"gebaeudetiefe": 1400,
+"typ": "Großraum",
+"zonen": [
+1400
+],
+"summe": 1400
+},
+{
+"raster": 150,
+"gebaeudetiefe": 1250,
+"typ": "Gruppe",
+"zonen": [
+650,
+150,
+450
+],
+"summe": 1250
+},
+{
+"raster": 150,
+"gebaeudetiefe": 1400,
+"typ": "Gruppe",
+"zonen": [
+860,
+155,
+385
+],
+"summe": 1400
+},
+{
+"raster": 150,
+"gebaeudetiefe": 1250,
+"typ": "Zelle",
+"zonen": [
+515,
+220,
+515
+],
+"summe": 1250
+},
+{
+"raster": 150,
+"gebaeudetiefe": 1400,
+"typ": "Zelle",
+"zonen": [
+540,
+320,
+540
+],
+"summe": 1400
+},
+{
+"raster": 150,
+"gebaeudetiefe": 1250,
+"typ": "Kombi",
+"zonen": [
+360,
+130,
+270,
+130,
+360
+],
+"summe": 1250
+},
+{
+"raster": 150,
+"gebaeudetiefe": 1400,
+"typ": "Kombi",
+"zonen": [
+385,
+155,
+320,
+155,
+385
+],
+"summe": 1400
+}
+],
+"notes": "Kommentare: Großraum mit 3- bzw. 4-reihiger Möblierung, 14 m optimal; Gruppenbüro als Zweibund mit offener Arbeitsfläche nur bei 14 m komfortabel; Zellenbüro: Einzel-/Doppelzimmer bei 14 m zu tief bzw. schlauchartig; Kombi: Mittelzone erst ab 3,20 m nutzbar. Alle Ketten addieren sich korrekt."
+},
+{
+"id": "g5.kombi_mittelzone_min",
+"topic": "buero",
+"title": "Mittelzone des Kombibüros erst ab 3,20 m Breite nutzbar",
+"sources": [
+{
+"book": "G",
+"page": 404
+},
+{
+"book": "G",
+"page": 405
+},
+{
+"book": "G",
+"page": 406
+}
+],
+"values": {
+"min": 320,
+"unit": "cm"
+}
+},
+{
+"id": "g5.nebenraeume_kommunikation",
+"topic": "buero",
+"title": "Teeküchen, Pausenräume, Kantinen sind Hauptkommunikationspunkte; Teeküchen/Pausenräume nahe den Arbeitsplätzen; attraktive Angebote auch in Erschließung und Nebenräumen; Ruheräume/-zonen in größeren Verwaltungsbauten.",
+"sources": [
+{
+"book": "G",
+"page": 409
+}
+]
+},
+{
+"id": "g5.pausenraum_pflicht",
+"topic": "pausenraum",
+"title": "Pausenraum/-bereich nach ArbStättV 2004 bei mehr als 10 Beschäftigten oder aus Sicherheits-/Gesundheitsgründen; Ausnahme bei Büroräumen mit gleichwertiger Erholungsmöglichkeit. Auch < 10 Beschäftigte erforderlich bei: Räumen ohne Sichtverbindung nach außen, Räumen mit Zutritt Dritter (Kunden), Hitze/Kälte/Nässe/Staub/Lärm/Gefahrstoffe, überwiegend Arbeit im Freien.",
+"sources": [
+{
+"book": "G",
+"page": 410
+}
+],
+"values": {
+"min_persons": 10
+},
+"norm": "ArbStättV 2004, ASR § 29, VDI 6000 Blatt 2"
+},
+{
+"id": "g5.pausenraum_flaeche",
+"topic": "pausenraum",
+"title": "Pausenraum: mind. 1 m² je Person (gleichzeitig anwesende Beschäftigte); bis 50 Personen Fläche für Verkehrswege um 10 % erhöhen; in 5 Minuten erreichbar; Tische und Sitzgelegenheiten in ausreichender Zahl; Sitzbank 60 cm Sitzbreite je Person.",
+"sources": [
+{
+"book": "G",
+"page": 410
+}
+],
+"values": {
+"m2_per_person": 1.0,
+"zuschlag_verkehr_pct": 10,
+"max_walk_min": 5,
+"bank_sitzbreite": 60,
+"unit": "m²/%/min/cm"
+},
+"norm": "ASR § 29"
+},
+{
+"id": "g5.teekueche",
+"topic": "kueche",
+"title": "Teeküche von ASR nicht gefordert; kombiniert mit Pausenraum mind. 1 m² je Person. Ohne Kantine: Möglichkeit zum Kühlen und Aufwärmen mitgebrachter Speisen (ASR § 29). Grundausstattung Kühlschrank, Spüle mit Abtropffläche, Kaffeemaschine, Geschirrspüler; bei Bedarf Herd/Kochplatte/Mikrowelle; Stauraum. Lüftung natürlich, sonst mechanisch (DIN 68905), RLT-Anlagen L90; Mülltrennung; Abfallbehälter mit Deckel.",
+"sources": [
+{
+"book": "G",
+"page": 411
+},
+{
+"book": "G",
+"page": 415
+}
+],
+"values": {
+"m2_per_person": 1.0
+},
+"norm": "ASR § 29, VDI 6000-2, DIN 68905"
+},
+{
+"id": "g5.teekueche_mindestzeile",
+"topic": "kueche",
+"title": "Teeküche Grundausstattung: Zeile 210 breit (60 | 60 | 90), 60 tief, Arbeitshöhe 85–95, Hängeschränke 60 über Arbeitsplatte, 65 hoch (OK 215), Bewegungsfläche 120 vor der Zeile → Gesamttiefe 180; beliebig erweiterbar.",
+"sources": [
+{
+"book": "G",
+"page": 411
+}
+],
+"values": {
+"w": 210,
+"d": 60,
+"bewegung": 120,
+"total_d": 180,
+"unit": "cm"
+}
+},
+{
+"id": "g5.toiletten_anzahl_frauen",
+"topic": "toiletten",
+"title": "Notwendige Sanitärelemente Frauen nach Anzahl weiblicher Beschäftigter (ASR § 37)",
+"sources": [
+{
+"book": "G",
+"page": 412
+}
+],
+"table": [
+{
+"bis": 5,
+"wc": 1,
+"waschtische": 1
+},
+{
+"bis": 10,
+"wc": 1,
+"waschtische": 1
+},
+{
+"bis": 20,
+"wc": 2,
+"waschtische": 1
+},
+{
+"bis": 35,
+"wc": 3,
+"waschtische": 1
+},
+{
+"bis": 50,
+"wc": 4,
+"waschtische": 1
+},
+{
+"bis": 65,
+"wc": 5,
+"waschtische": 1
+},
+{
+"bis": 80,
+"wc": 6,
+"waschtische": 2
+},
+{
+"bis": 100,
+"wc": 7,
+"waschtische": 2
+},
+{
+"bis": 120,
+"wc": 8,
+"waschtische": 2
+},
+{
+"bis": 140,
+"wc": 9,
+"waschtische": 2
+},
+{
+"bis": 160,
+"wc": 10,
+"waschtische": 2
+}
+],
+"condition": "Gültigkeit der alten ASR beachten (bis 2010)",
+"norm": "ASR § 37, VDI 6000 Blatt 2"
+},
+{
+"id": "g5.toiletten_anzahl_maenner",
+"topic": "toiletten",
+"title": "Notwendige Sanitärelemente Männer nach Anzahl männlicher Beschäftigter (ASR § 37)",
+"sources": [
+{
+"book": "G",
+"page": 412
+}
+],
+"table": [
+{
+"bis": 5,
+"wc": 1,
+"urinale": 1,
+"waschtische": 1
+},
+{
+"bis": 10,
+"wc": 1,
+"urinale": 1,
+"waschtische": 1
+},
+{
+"bis": 25,
+"wc": 2,
+"urinale": 2,
+"waschtische": 1
+},
+{
+"bis": 50,
+"wc": 3,
+"urinale": 3,
+"waschtische": 1
+},
+{
+"bis": 75,
+"wc": 4,
+"urinale": 4,
+"waschtische": 1
+},
+{
+"bis": 100,
+"wc": 5,
+"urinale": 5,
+"waschtische": 1
+},
+{
+"bis": 130,
+"wc": 6,
+"urinale": 6,
+"waschtische": 2
+},
+{
+"bis": 160,
+"wc": 7,
+"urinale": 7,
+"waschtische": 2
+},
+{
+"bis": 190,
+"wc": 8,
+"urinale": 8,
+"waschtische": 2
+},
+{
+"bis": 220,
+"wc": 9,
+"urinale": 9,
+"waschtische": 2
+},
+{
+"bis": 250,
+"wc": 10,
+"urinale": 10,
+"waschtische": 2
+}
+],
+"condition": "Gültigkeit der alten ASR beachten (bis 2010)",
+"norm": "ASR § 37, VDI 6000 Blatt 2"
+},
+{
+"id": "g5.toiletten_getrennt_vorraum",
+"topic": "toiletten",
+"title": "Ab 5 Beschäftigten getrennte Toiletten für Männer und Frauen und ein Vorraum; Vorraum entbehrlich nur bei einzelner Toilette mit direkt zugeordnetem Waschbecken. Urinale mit Sichtschutzwänden; Anlage von außen nicht einsehbar; Kabinen abschließbar; je Kabine Kleiderhaken, Papierhalter; im Vorraum je 2 Waschtische ein Seifenspender und eine Handtrocknung.",
+"sources": [
+{
+"book": "G",
+"page": 412
+},
+{
+"book": "G",
+"page": 413
+}
+],
+"values": {
+"min_persons": 5
+},
+"norm": "ASR § 37"
+},
+{
+"id": "g5.toiletten_entfernung",
+"topic": "toiletten",
+"title": "Toiletten max. 100 m vom Arbeitsplatz; Weg nicht über mehr als ein Stockwerk und nicht durchs Freie; nahe Pausen-/Aufenthaltsräumen; ausreichend lüften/belichten (natürliche Lüftung empfehlenswert); Barrierefreiheit zusätzlich beachten.",
+"sources": [
+{
+"book": "G",
+"page": 413
+}
+],
+"values": {
+"max": 100,
+"unit": "m",
+"max_storeys": 1
+},
+"norm": "ASR § 37"
+},
+{
+"id": "g5.toiletten_flaechenbedarf",
+"topic": "toiletten",
+"title": "Benötigte Fläche für Toilettenanlagen (aufgerundet) nach Türaufschlag und Anzahl WC",
+"sources": [
+{
+"book": "G",
+"page": 413
+}
+],
+"values": {
+"unit": "m²"
+},
+"table": [
+{
+"tuer": "innen",
+"anlage": "Einzelkabine ohne Waschbecken",
+"maenner_m2": null,
+"frauen_m2": 1.3
+},
+{
+"tuer": "innen",
+"anlage": "2 WC",
+"maenner_m2": 10.8,
+"frauen_m2": 8.6
+},
+{
+"tuer": "innen",
+"anlage": "4 WC",
+"maenner_m2": 17.5,
+"frauen_m2": 14.0
+},
+{
+"tuer": "innen",
+"anlage": "10 WC",
+"maenner_m2": 38.0,
+"frauen_m2": 26.0
+},
+{
+"tuer": "außen",
+"anlage": "Einzelkabine ohne Waschbecken",
+"maenner_m2": null,
+"frauen_m2": 1.1
+},
+{
+"tuer": "außen",
+"anlage": "Einzelkabine",
+"maenner_m2": 3.5,
+"frauen_m2": 2.8
+},
+{
+"tuer": "außen",
+"anlage": "2 WC",
+"maenner_m2": 11.2,
+"frauen_m2": 9.0
+},
+{
+"tuer": "außen",
+"anlage": "4 WC",
+"maenner_m2": 18.3,
+"frauen_m2": 15.0
+},
+{
+"tuer": "außen",
+"anlage": "10 WC",
+"maenner_m2": 40.0,
+"frauen_m2": 30.0
+}
+],
+"norm": "ASR § 37"
+},
+{
+"id": "g5.wc_kabine_tiefe",
+"topic": "toiletten",
+"title": "WC-Kabine Mindestmaße: 85 breit; Tiefe vor Vorwand 125 (60 WC + 65) bei Türanschlag nach außen, 150 bei Türanschlag nach innen; Vorwand 20 tief, 90 hoch; Sitzhöhe 42; Trennwände 190 hoch mit 10 Bodenfreiheit; Urinal-Bereich bis Kabine 165 (Schnitt, Gesamt 318).",
+"sources": [
+{
+"book": "G",
+"page": 412
+},
+{
+"book": "G",
+"page": 413
+}
+],
+"values": {
+"w": 85,
+"d_out": 125,
+"d_in": 150,
+"unit": "cm"
+},
+"norm": "ASR § 37"
+},
+{
+"id": "g5.putzraum",
+"topic": "toiletten",
+"title": "Möglichst je Geschoss ein Putzraum (keine Größenvorgabe), kann der Toilettenanlage zugeordnet sein; Ausgussbecken mit Spritzwänden und Eimerrost (DIN 68906); Abstellfläche Putzwagen; in großen Betrieben Aufenthaltsbereich für Reinigungspersonal. Mindestmaße Zeichnung 190 x 130. Wird je Geschoss Müll gesammelt: eigener Müllraum je Geschoss oder Zusatzfläche im Putzraum.",
+"sources": [
+{
+"book": "G",
+"page": 415
+}
+],
+"values": {
+"w": 190,
+"d": 130,
+"unit": "cm"
+},
+"norm": "DIN 68906"
+},
+{
+"id": "g5.erste_hilfe",
+"topic": "buero",
+"title": "Erste-Hilfe: bis 50 Beschäftigte 'kleiner Verbandkasten', bis 300 'großer Verbandkasten', gut erreichbar und gekennzeichnet. Sanitätsraum ab > 1000 Beschäftigten bzw. ab 100 Beschäftigten bei besonderer Unfallgefahr (VDI 6000-2 5.1.3, ASR § 38).",
+"sources": [
+{
+"book": "G",
+"page": 415
+}
+],
+"values": {
+"klein_bis": 50,
+"gross_bis": 300,
+"sanitaetsraum_ab": 1000,
+"sanitaetsraum_ab_unfallgefahr": 100
+},
+"norm": "ASR § 38, VDI 6000-2"
+},
+{
+"id": "g5.abfallbehaelter_buero",
+"topic": "abfall",
+"title": "Ausreichend Abfallbehälter in Büros und Gemeinschaftsräumen; in Pausenräumen/Teeküchen und Toiletten mind. ein Behälter mit Deckel; Müllsammlung meist im UG oder außen in Containern.",
+"sources": [
+{
+"book": "G",
+"page": 415
+}
+],
+"norm": "ASR § 29, § 37"
+},
+{
+"id": "g5.liegen_anzahl",
+"topic": "liegeraum",
+"title": "Liegen für Schwangere/Stillende nach Anzahl beschäftigter Frauen (ASR § 31.1.1): bis 20 → 1, bis 50 → 2, bis 100 → 3, bis 300 → 4, bis 500 → 5. Bei nur einer Liege kein eigener Raum nötig (z. B. im Pausenraum, ungestört).",
+"sources": [
+{
+"book": "G",
+"page": 416
+}
+],
+"table": [
+{
+"frauen_bis": 20,
+"liegen": 1
+},
+{
+"frauen_bis": 50,
+"liegen": 2
+},
+{
+"frauen_bis": 100,
+"liegen": 3
+},
+{
+"frauen_bis": 300,
+"liegen": 4
+},
+{
+"frauen_bis": 500,
+"liegen": 5
+}
+],
+"norm": "ASR § 31"
+},
+{
+"id": "g5.liegeraum_masse",
+"topic": "liegeraum",
+"title": "Liege mind. 190 x 70, Höhe 45–50; je Liege 10 m³ Luftraum; Bewegungsfläche 120 vor der Liege; bei Raumhöhe ≥ 2,50 m Raumbreite ≥ 1,90 m (Zeichnung: Raum 200 x 200, 250 hoch).",
+"sources": [
+{
+"book": "G",
+"page": 416
+}
+],
+"values": {
+"luftraum_m3": 10,
+"bewegung": 120,
+"raumbreite_min": 190,
+"raumhoehe_min": 250,
+"unit": "cm/m³"
+},
+"norm": "ASR § 31"
+},
+{
+"id": "g5.lagerraum_buero",
+"topic": "buero",
+"title": "Lagerraum für Papier/Büromaterial nahe den Arbeitsplätzen; größere Vorräte und Altakten im UG oder ausgelagert.",
+"sources": [
+{
+"book": "G",
+"page": 416
+}
+]
+},
+{
+"id": "g5.kopierraum",
+"topic": "buero",
+"title": "Kopierraum ohne Größenvorgabe, wegen Geräuschen abgeschirmt; vor Kopiergerät ca. 60–70 cm Bewegungsfläche; Möbelfunktionsflächen nach DIN 4543-1; Ausstattung: Kopierer, Aktenvernichter, Ablagefläche, Papiereimer, Lagerfläche für kleine Papiermengen.",
+"sources": [
+{
+"book": "G",
+"page": 417
+}
+],
+"values": {
+"min": 60,
+"max": 70,
+"unit": "cm vor Kopierer"
+},
+"norm": "DIN 4543-1"
+},
+{
+"id": "g5.schallschutzklassen_fenster",
+"topic": "schall",
+"title": "Fenster/Fassaden nach VDI 2719 in Schallschutzklassen 1–6 eingestuft: Klasse 1 R'w 25–29 dB … Klasse 6 R'w ≥ 50 dB. Fassaden- und Innenbauteilwerte (Trennwand-, Deckenanschlüsse, Längsleitung) aufeinander abstimmen; zweischalige Fassade, höheres Schalengewicht und größerer Schalenabstand verbessern die Dämmung.",
+"sources": [
+{
+"book": "G",
+"page": 421
+}
+],
+"values": {
+"klasse1": [
+25,
+29
+],
+"klasse6_min": 50,
+"unit": "dB"
+},
+"norm": "VDI 2719, DIN 4109"
+},
+{
+"id": "g5.geraeuschpegel_arbeitsplatz",
+"topic": "schall",
+"title": "Richtwerte Beurteilungspegel am Arbeitsplatz: überwiegend geistige Arbeit ≤ 55 dB(A) (ArbStättV § 15, VDI 2058); einfache/mechanisierte Büroarbeit ≤ 70 dB(A); sonstige Tätigkeiten ≤ 85 dB(A); empfohlener Bereich BAuA 30–45 dB(A). Vergleich: Hörgrenze 0, Wald ca. 20–30, Wohnraum ca. 40–50, Unterhaltung ca. 60–70, Straßenverkehr ca. 80–90, Presslufthammer ca. 100–120 dB(A).",
+"sources": [
+{
+"book": "G",
+"page": 421
+}
+],
+"values": {
+"unit": "dB(A)"
+},
+"table": [
+{
+"taetigkeit": "geistige Arbeit",
+"max_dBA": 55
+},
+{
+"taetigkeit": "einfache, mechanisierte Arbeit",
+"max_dBA": 70
+},
+{
+"taetigkeit": "sonstige Tätigkeiten",
+"max_dBA": 85
+},
+{
+"taetigkeit": "Empfehlung BAuA",
+"range_dBA": [
+30,
+45
+]
+}
+],
+"norm": "ArbStättV § 15 (alt), VDI 2058"
+},
+{
+"id": "g5.luftschalldaemmung_aussenbauteile",
+"topic": "schall",
+"title": "Erforderliche Gesamt-Schalldämmung von Außenbauteilen (Büroräume) nach maßgeblichem Außenlärmpegel, DIN 4109 Tab. 8",
+"sources": [
+{
+"book": "G",
+"page": 422
+}
+],
+"values": {
+"unit": "dB"
+},
+"table": [
+{
+"aussenlaerm_dBA": "bis 55",
+"R_w_res_dB": null
+},
+{
+"aussenlaerm_dBA": "56–60",
+"R_w_res_dB": 30
+},
+{
+"aussenlaerm_dBA": "61–65",
+"R_w_res_dB": 30
+},
+{
+"aussenlaerm_dBA": "66–70",
+"R_w_res_dB": 35
+},
+{
+"aussenlaerm_dBA": "71–75",
+"R_w_res_dB": 40
+},
+{
+"aussenlaerm_dBA": "76–80",
+"R_w_res_dB": 45
+},
+{
+"aussenlaerm_dBA": "≥ 80",
+"R_w_res_dB": 50
+}
+],
+"condition": "Glasflächenanteil beeinflusst das Schalldämmmaß",
+"norm": "DIN 4109 (1989) Tab. 8"
+},
+{
+"id": "g5.doppelfassade_schall",
+"topic": "schall",
+"title": "Einfachfassade: außen 80 dB(A) → innen 30–50 dB(A); schallschutzoptimierte zweischalige Fassade: 80 → 65 im Zwischenraum → 30–35 dB(A) innen; zweite Schale verbessert die Dämmung im Wandbereich um ca. 15 dB und reduziert Lärm bei geöffneten Fenstern.",
+"sources": [
+{
+"book": "G",
+"page": 422
+}
+],
+"values": {
+"verbesserung_dB": 15
+}
+},
+{
+"id": "g5.lueftung_fassade_faustregel",
+"topic": "luft",
+"title": "Natürliche Lüftung über die Fassade: Lüftungsöffnungen mind. 4 % der Grundfläche, entspricht bei Raumhöhe:Raumtiefe 1:2,5 ca. 10 % der Fassadenfläche. Geschützte Lüftungsöffnungen können außerhalb der Nutzungszeit offen bleiben (Nachtkühlung). Fenster: Schallschutz gering; Kastenfenster: sehr gut (Lüftung, Lärmschutz, Vorwärmung, Nachtlüftung); Lüftungsklappe/-element: gut.",
+"sources": [
+{
+"book": "G",
+"page": 425
+}
+],
+"values": {
+"oeffnung_pct_grundflaeche": 4,
+"oeffnung_pct_fassade": 10
+},
+"condition": "Raumhöhe:Raumtiefe = 1:2,5"
+},
+{
+"id": "g5.raumgruppen_asr5",
+"topic": "luft",
+"title": "ASR 5 Raumgruppen: A vorwiegend sitzend; B vorwiegend nicht sitzend; C starke Geruchsbelästigung/schwere körperliche Arbeit. Lüftungssysteme: I einseitig (Öffnungen in einer Außenwand); II Querlüftung gegenüberliegende Außenwände bzw. Außenwand + Dach; III Außenwand + gegenüberliegender Schacht (Schacht ≥ 80 cm², ≥ 4 m hoch, davon ≥ 3 m im Gebäude); IV Dachaufsätze (Kuppel, Laterne, Deflektor) + Wandöffnungen.",
+"sources": [
+{
+"book": "G",
+"page": 425
+},
+{
+"book": "G",
+"page": 426
+}
+],
+"norm": "ASR 5"
+},
+{
+"id": "g5.lueftungsquerschnitte_asr5",
+"topic": "luft",
+"title": "Zu- und Abluftquerschnitt je m² Bodenfläche für freie Lüftung (Bezugsfläche 6 m² je Arbeitnehmer)",
+"sources": [
+{
+"book": "G",
+"page": 426
+}
+],
+"values": {
+"unit": "cm²/m²"
+},
+"table": [
+{
+"system": "I",
+"lichte_hoehe": "bis 4 m",
+"max_raumtiefe": "2,5 x H",
+"A_cm2_m2": 200,
+"B_cm2_m2": 350,
+"C_cm2_m2": 500
+},
+{
+"system": "II",
+"lichte_hoehe": "bis 4 m",
+"max_raumtiefe": "5,0 x H",
+"A_cm2_m2": 120,
+"B_cm2_m2": 200,
+"C_cm2_m2": 300
+},
+{
+"system": "III",
+"lichte_hoehe": "bis 4 m",
+"max_raumtiefe": "5,0 x H",
+"A_cm2_m2": 80,
+"B_cm2_m2": 140,
+"C_cm2_m2": 200
+},
+{
+"system": "IV",
+"lichte_hoehe": "über 4 m",
+"max_raumtiefe": "5,0 x H",
+"A_cm2_m2": 80,
+"B_cm2_m2": 140,
+"C_cm2_m2": 200
+}
+],
+"condition": "Querschnitte müssen verstellbar (verkleinerbar) sein; mit Ventilatorunterstützung bis 50 % kleiner",
+"norm": "ASR 5"
+},
+{
+"id": "g5.lueftungsrate_en15251",
+"topic": "luft",
+"title": "Gesamtlüftungsrate q_tot = n · q_p + A · q_B (l/s): n Personen, q_p Rate je Person, A Grundfläche, q_B Rate je m² für Gebäudeemissionen (Gebäude sehr schadstoffarm/schadstoffarm/nicht schadstoffarm).",
+"sources": [
+{
+"book": "G",
+"page": 426
+}
+],
+"norm": "DIN EN 15251, DIN EN 13779"
+},
+{
+"id": "g5.aussenluftstrom_person",
+"topic": "luft",
+"title": "Lüftungstechnische Anlagen nötig, wenn freie Lüftung nicht möglich (Raumgröße, Tieflage, hohe Wärmelast). Empfohlener Außenluftstrom: 20–40 m³/h je Person (vorwiegend sitzend), 40–60 m³/h (nicht sitzend), 65 m³/h (schwere körperliche Arbeit); bei hoher Luftbelastung jeweils oberer Wert.",
+"sources": [
+{
+"book": "G",
+"page": 426
+}
+],
+"values": {
+"unit": "m³/h je Person"
+},
+"table": [
+{
+"taetigkeit": "sitzend",
+"m3h_person": [
+20,
+40
+]
+},
+{
+"taetigkeit": "nicht sitzend",
+"m3h_person": [
+40,
+60
+]
+},
+{
+"taetigkeit": "schwer körperlich",
+"m3h_person": 65
+}
+],
+"norm": "ASR"
+},
+{
+"id": "g5.fenster_din5034_asr7",
+"topic": "licht",
+"title": "Fenster in Büroräumen (DIN 5034-1, ASR 7/1): Fensteroberkante ≥ 2,20 m über FFB; Rohbauöffnungshöhe > 1,30 m (auch bei Raumhöhe > 3,50 m); durchsichtiger Fensterteil beginnt spätestens 0,95 m über FFB; Brüstung ≤ 0,90 m; Breite durchsichtiger Teil > 1 m; Summe der durchsichtigen Breiten ≥ 55 % der Außenwandbreite. Sichtverbindung nach außen in Augenhöhe gefordert.",
+"sources": [
+{
+"book": "G",
+"page": 429
+}
+],
+"values": {
+"oberkante_min": 220,
+"hoehe_rohbau_min": 130,
+"durchsicht_ab_max": 95,
+"bruestung_max": 90,
+"breite_min": 100,
+"breitenanteil_min_pct": 55,
+"unit": "cm/%"
+},
+"norm": "DIN 5034-1, ASR 7/1"
+},
+{
+"id": "g5.fensterflaechenanteil",
+"topic": "licht",
+"title": "Fensterflächenanteil Büro: ab 50 % Tageslichtautonomie 30 % erreichbar; ab 60 % Sättigung nahezu erreicht; 65 % Optimum (maximale Tageslichtautonomie/Stromeinsparung), darüber keine Verbesserung. Nennbeleuchtungsstärke 500 lx; Tageslicht hat bis zu 10-fach geringeren Wärmeeintrag als Kunstlicht bei gleicher Lichtmenge.",
+"sources": [
+{
+"book": "G",
+"page": 429
+}
+],
+"values": {
+"min": 50,
+"opt": 65,
+"unit": "% Fensterflächenanteil"
+}
+},
+{
+"id": "g5.tageslichtquotient",
+"topic": "licht",
+"title": "Tageslichtquotient D = E_innen/E_außen · 100 (bedeckter Himmel, 10 000 lx außen). D ≥ 3 % → ausschließlich Tageslicht ausreichend (tageslichtorientierter AP, Tageslichtautonomie ≥ 70 %); < 3 % Kunstlichtbedarf; 1 % absolutes Minimum (Einschaltgrenze 75 lx, DIN 5034). Für 300 lx innen nötig: D = 3 % bei 10 000 lx, 6 % bei 5 000 lx, 12 % bei 2 500 lx. In Mitteleuropa überschritten: 10 000 lx an 50 %, 5 000 lx an 75 %, 2 500 lx an 90 % der Tagesstunden. Bei D = 3 %: 75 lx an 90 %, 300 lx an 50 % der Tagesstunden. Beispieldiagramm: 3 % bei ca. 2,6 m, 1 % bei ca. 4,6 m Raumtiefe (abgelesen).",
+"sources": [
+{
+"book": "G",
+"page": 430
+},
+{
+"book": "G",
+"page": 431
+}
+],
+"values": {
+"D_min_tageslichtorientiert": 3,
+"D_absolut_min": 1,
+"unit": "%"
+},
+"condition": "bedeckter Himmel",
+"norm": "DIN 5034, DIN 5035, EN 12464"
+},
+{
+"id": "g5.beleuchtungsstaerken",
+"topic": "licht",
+"title": "Beleuchtungsstärke: tageslichtorientierte AP / CAD, Schreiben, Lesen 500 lx; unmittelbare Umgebung 300 lx; subjektive Einschaltgrenze Kunstlicht 75 lx. Leuchtdichteverhältnis Sehaufgabe : Umgebung : fernes Umfeld = 10 : 3 : 1.",
+"sources": [
+{
+"book": "G",
+"page": 430
+},
+{
+"book": "G",
+"page": 433
+}
+],
+"values": {
+"arbeitsbereich_lx": 500,
+"umgebung_lx": 300,
+"einschaltgrenze_lx": 75
+},
+"norm": "DIN 5035, DIN EN 12464-1"
+},
+{
+"id": "g5.fassadenzonen_belichtung",
+"topic": "licht",
+"title": "Belichtungszonen der Fassade: Oberlichtbereich wichtig für Tageslicht, mittlerer Bereich für Ausblick und Tageslicht, Brüstungsbereich ohne nennenswerten Tageslichtnutzen.",
+"sources": [
+{
+"book": "G",
+"page": 430
+}
+]
+},
+{
+"id": "g5.tageslichtlenkung_sonnenschutz",
+"topic": "licht",
+"title": "Tageslichtlenksysteme (Prismenplatten, Jalousien, Lichtschwerter im oberen Fensterdrittel, Spiegelprofile, Laser-Cut-Panels, Lichtlenkglas) erfordern helle reflektierende Decken. Sonnenschutzfunktionen: Hitze-, Blend-, Wärmeschutz, Lichtlenkung. Blendschutz meist innen, flexibel. Außenliegender Sonnenschutz: nur Strahlungsanteil erwärmt den Raum; innenliegend gibt absorbierte Strahlung als Wärme ab. Vergleich Jalousie innen / Sonnenschutzglas / Vorbau + Blendschutz innen (nur Süd) / Rollo außen / Jalousie außen (Wartung sehr hoch, Regelbarkeit sehr gut).",
+"sources": [
+{
+"book": "G",
+"page": 431
+},
+{
+"book": "G",
+"page": 432
+},
+{
+"book": "G",
+"page": 433
+},
+{
+"book": "G",
+"page": 434
+}
+],
+"norm": "DIN EN 12464-1"
+},
+{
+"id": "g5.fassadentypen_buero",
+"topic": "fassade",
+"title": "Bürofassaden: Funktionen Konstruktion, Belichtung, Belüftung, Sonnen-/Blendschutz, Installation, Schall-, Brandschutz.",
+"sources": [
+{
+"book": "G",
+"page": 437
+},
+{
+"book": "G",
+"page": 438
+},
+{
+"book": "G",
+"page": 440
+},
+{
+"book": "G",
+"page": 442
+},
+{
+"book": "G",
+"page": 444
+}
+],
+"values": {
+"unit": "%/cm"
+},
+"table": [
+{
+"typ": "Lochfassade",
+"fensterflaechenanteil_pct": 30,
+"tiefe_D_gt_3pct_cm": 150,
+"trennwandanschluss": "einfach, funktional begrenzt",
+"eignung": "Zellenbüro",
+"schallverbesserung": "Kastenfenster"
+},
+{
+"typ": "Bandfassade",
+"fensterflaechenanteil_pct": 60,
+"tiefe_D_gt_3pct_cm": 300,
+"trennwandanschluss": "schwieriger, flexibel",
+"eignung": "häufig Kombibüro",
+"schallverbesserung": "Prallscheibe",
+"notes": "30–40 % weniger Kunstlichtenergie als 30 % Verglasung"
+},
+{
+"typ": "Pfosten-Riegel-Fassade",
+"fensterflaechenanteil_pct": 90,
+"tiefe_D_gt_3pct_cm": 325,
+"trennwandanschluss": "schwierig, flexibel",
+"eignung": "alle Organisationsformen",
+"schallverbesserung": "Doppelfassade",
+"notes": "raumhoch verglast; Brüstungsverglasung bringt kaum Licht"
+},
+{
+"typ": "Elementfassade",
+"fensterflaechenanteil_pct": null,
+"tiefe_D_gt_3pct_cm": 250,
+"trennwandanschluss": "einfach, flexibel",
+"eignung": "große einheitliche Fassaden, Hochhaus",
+"schallverbesserung": "Doppelfassade",
+"notes": "vorgefertigte, mind. geschosshohe Elemente; oft mechanische dezentrale Lüftung"
+}
+],
+"condition": "Tiefe D > 3 % = Zone ohne Kunstlichtbedarf (ca.-Werte aus Grundriss/Schnitt)",
+"norm": "DIN 5035-1"
+},
+{
+"id": "g5.installationsfuehrung",
+"topic": "fassade",
+"title": "Installationsführung: abgehängte Decke (RLT einfach, Kabel entlang Brüstung, Raumakustik über Deckenplatten, Bauteilaktivierung möglich), Doppel-/Hohlraumboden (max. flexible Kabel, Quellluftboden, größere Geschosshöhe, Akustikprobleme, keine Bauteilaktivierung am Boden), Technikintegration im Fassadenelement (dezentral heizen/lüften, keine Installationen im Raum, hohe Kosten).",
+"sources": [
+{
+"book": "G",
+"page": 439
+},
+{
+"book": "G",
+"page": 441
+},
+{
+"book": "G",
+"page": 443
+},
+{
+"book": "G",
+"page": 445
+}
+]
+},
+{
+"id": "g5.normen_arbeiten",
+"topic": "buero",
+"title": "Relevante Normen/Regeln Kapitel Arbeiten (Stand Buch 2012): DIN 107, DIN 277-1/-2/-3, DIN 4102-5, DIN 4108, DIN 4109 (+Beiblätter), DIN 4543-1 (Büroarbeitsplätze, Flächen für Aufstellung und Benutzung von Büromöbeln), DIN 5034-1, DIN 5035, DIN 14090 (Feuerwehrflächen), DIN 18040-1/-2, DIN 18650-1/-2, DIN 68905, DIN 68906, DIN EN 1125, DIN EN 13724, EN 13761 (Besucherstühle), EN 12464-1, EAE 85/95 (zurückgezogen); VDI 2719, VDI 2058-3; ArbStättV 2004/2008, LV 40 (2009); ASR 10/1 Türen/Tore, ASR 17/1,2 Verkehrswege, ASR 29/1-4 Pausenräume (alte ASR, nur bis 2010 gültig).",
+"sources": [
+{
+"book": "G",
+"page": 449
+},
+{
+"book": "G",
+"page": 450
+},
+{
+"book": "G",
+"page": 451
+}
+]
+},
+{
+"id": "g5.schule_rechtsrahmen",
+"topic": "schule",
+"title": "Schulen sind Sonderbauten (LBO BW § 38 (2)): besondere Anforderungen oder Erleichterungen im Einzelfall; grundsätzlich barrierefrei (MBO § 50 (2), LBO BW § 39 (11)); Anforderungen der Gesetzlichen Unfallversicherung (GUV) beachten (können von LBO abweichen); Raumprogramme nach Schulbauförderrichtlinien (BW Feb. 2006) bzw. Schulbauempfehlungen der Länder (ASE BW 1983); Muster-Schulbau-Richtlinie MSchulbauR seit Juli 1998.",
+"sources": [
+{
+"book": "G",
+"page": 454
+}
+],
+"norm": "LBO BW, MBO, MSchulbauR, GUV"
+},
+{
 "id": "g5.abstand.sessel_wartebereich_couchtisch_wartebereich",
 "topic": "abstand",
 "title": "Abstand sessel_wartebereich – couchtisch_wartebereich (front)",
@@ -12853,6 +19216,108 @@ null,
 {
 "book": "G",
 "page": 386
+}
+]
+},
+{
+"id": "g5.abstand.waschtisch_arbeitsstaette_wand",
+"topic": "abstand",
+"title": "Abstand waschtisch_arbeitsstaette – wand (side)",
+"values": {
+"min": 20.0,
+"unit": "cm"
+},
+"condition": "Mindestmaß je Seite (Zone 105)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 412
+}
+]
+},
+{
+"id": "g5.abstand.urinal_arbeitsstaette_wand_nachbar",
+"topic": "abstand",
+"title": "Abstand urinal_arbeitsstaette – wand/nachbar (side)",
+"values": {
+"min": 20.0,
+"unit": "cm"
+},
+"condition": "Mindestmaß je Seite (Zone 75)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 412
+}
+]
+},
+{
+"id": "g5.abstand.kopierer_normal_wand_nachbar",
+"topic": "abstand",
+"title": "Abstand kopierer_normal – wand/nachbar (side)",
+"values": {
+"min": 30.0,
+"unit": "cm"
+},
+"condition": "je Seite",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 417
+}
+]
+},
+{
+"id": "g5.abstand.grosskopierer_wand_nachbar",
+"topic": "abstand",
+"title": "Abstand grosskopierer – wand/nachbar (side)",
+"values": {
+"min": 30.0,
+"unit": "cm"
+},
+"condition": "je Seite",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 417
+}
+]
+},
+{
+"id": "g5.abstand.ausgussbecken_wand",
+"topic": "abstand",
+"title": "Abstand ausgussbecken – wand (side)",
+"values": {
+"min": 20.0,
+"unit": "cm"
+},
+"condition": "je Seite",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 415
+}
+]
+},
+{
+"id": "g5.abstand.kopierer_normal_grosskopierer",
+"topic": "abstand",
+"title": "Abstand kopierer_normal – grosskopierer (opposite)",
+"values": {
+"min": 120.0,
+"unit": "cm"
+},
+"condition": "zweizeiliger Kopierbereich, Mittelzone (Zonen 60 | 120 | 60)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 417
 }
 ]
 },
@@ -14785,6 +21250,2347 @@ null
 ]
 },
 {
+"id": "g6b.schulmoebel_en1729_groessen",
+"topic": "schule",
+"title": "Schulmöbel-Größenklassen nach DIN EN 1729-1 (2006): Körperhöhe, Kennfarbe, Tisch-/Sitzhöhe, Tisch- und Sitzflächenmaße",
+"sources": [
+{
+"book": "G",
+"page": 506
+},
+{
+"book": "G",
+"page": 507
+}
+],
+"table": [
+{
+"groesse": 0,
+"koerperhoehe_min": 80,
+"koerperhoehe_max": 95,
+"kennfarbe": "weiß",
+"tischhoehe": 40,
+"sitzhoehe": 21,
+"tischtiefe": null,
+"tischbreite_einzel": null,
+"tischbreite_doppel": null,
+"sitztiefe": null,
+"sitzbreite": null,
+"sitzneigung_grad": [
+-5,
+5
+],
+"toleranz": 1,
+"notes": "Tisch-/Stuhlmaße in der Draufsicht 'o. A.' (ohne Angabe)"
+},
+{
+"groesse": 1,
+"koerperhoehe_min": 93,
+"koerperhoehe_max": 116,
+"kennfarbe": "orange",
+"tischhoehe": 46,
+"sitzhoehe": 26,
+"tischtiefe": 50,
+"tischbreite_einzel": 60,
+"tischbreite_doppel": 120,
+"sitztiefe": 25,
+"sitzbreite": 24,
+"sitzneigung_grad": [
+-5,
+5
+],
+"toleranz": 1,
+"notes": "Skala am Balken mit 115 beschriftet, Text 93-116"
+},
+{
+"groesse": 2,
+"koerperhoehe_min": 108,
+"koerperhoehe_max": 121,
+"kennfarbe": "violett",
+"tischhoehe": 53,
+"sitzhoehe": 31,
+"tischtiefe": 50,
+"tischbreite_einzel": 60,
+"tischbreite_doppel": 120,
+"sitztiefe": 27,
+"sitzbreite": 28,
+"sitzneigung_grad": [
+-5,
+5
+],
+"toleranz": 1,
+"notes": ""
+},
+{
+"groesse": 3,
+"koerperhoehe_min": 119,
+"koerperhoehe_max": 142,
+"kennfarbe": "gelb",
+"tischhoehe": 59,
+"sitzhoehe": 35,
+"tischtiefe": 50,
+"tischbreite_einzel": 60,
+"tischbreite_doppel": 120,
+"sitztiefe": 30,
+"sitzbreite": 32,
+"sitzneigung_grad": [
+-5,
+5
+],
+"toleranz": 1,
+"notes": ""
+},
+{
+"groesse": 4,
+"koerperhoehe_min": 133,
+"koerperhoehe_max": 159,
+"kennfarbe": "rot",
+"tischhoehe": 64,
+"sitzhoehe": 38,
+"tischtiefe": 50,
+"tischbreite_einzel": 60,
+"tischbreite_doppel": 130,
+"sitztiefe": 34,
+"sitzbreite": 34,
+"sitzneigung_grad": [
+-5,
+5
+],
+"toleranz": 1,
+"notes": ""
+},
+{
+"groesse": 5,
+"koerperhoehe_min": 146,
+"koerperhoehe_max": 176.5,
+"kennfarbe": "grün",
+"tischhoehe": 71,
+"sitzhoehe": 43,
+"tischtiefe": 50,
+"tischbreite_einzel": 60,
+"tischbreite_doppel": 130,
+"sitztiefe": 38,
+"sitzbreite": 38,
+"sitzneigung_grad": [
+-5,
+5
+],
+"toleranz": 1,
+"notes": "Beschriftung Sitztiefe '48' und Sitzbreite '36'; gezeichnet (Vektor, M 1:50) 38 x 38 -> '48' vermutlich Druckfehler für 38"
+},
+{
+"groesse": 6,
+"koerperhoehe_min": 159,
+"koerperhoehe_max": 188,
+"kennfarbe": "blau",
+"tischhoehe": 76,
+"sitzhoehe": 46,
+"tischtiefe": 50,
+"tischbreite_einzel": 60,
+"tischbreite_doppel": 130,
+"sitztiefe": 42,
+"sitzbreite": 38,
+"sitzneigung_grad": [
+-5,
+5
+],
+"toleranz": 1,
+"notes": ""
+},
+{
+"groesse": 7,
+"koerperhoehe_min": 174,
+"koerperhoehe_max": 207,
+"kennfarbe": "braun",
+"tischhoehe": 82,
+"sitzhoehe": 51,
+"tischtiefe": 50,
+"tischbreite_einzel": 60,
+"tischbreite_doppel": 130,
+"sitztiefe": 46,
+"sitzbreite": 40,
+"sitzneigung_grad": [
+-5,
+5
+],
+"toleranz": 1,
+"notes": "Sitzbreite als '400' beschriftet (Druckfehler), gezeichnet 40"
+}
+],
+"condition": "Größe 7 (braun) neu für sehr große Schüler; EN berücksichtigt dynamisches Sitzen durch zulässige Sitzwinkel",
+"norm": "DIN EN 1729-1:2006-09 (im Buch pr EN 1729-1)"
+},
+{
+"id": "g6b.schulmoebel_din_iso5970_groessen",
+"topic": "schule",
+"title": "Schulmöbel-Größenklassen nach DIN ISO 5970 (1981): Körperhöhe (Einzelwert), Kennfarbe, Tisch-/Sitzhöhe, Maße",
+"sources": [
+{
+"book": "G",
+"page": 506
+},
+{
+"book": "G",
+"page": 507
+}
+],
+"table": [
+{
+"groesse": 0,
+"koerperhoehe": 90,
+"kennfarbe": "weiß",
+"tischhoehe": 40,
+"sitzhoehe": 22,
+"tischtiefe": null,
+"tischbreite_einzel": null,
+"tischbreite_doppel": null,
+"sitztiefe": null,
+"sitzbreite": null,
+"sitzneigung_grad": null,
+"notes": "Draufsicht 'o. A.'; kein Sitzwinkel angegeben"
+},
+{
+"groesse": 1,
+"koerperhoehe": 105,
+"kennfarbe": "orange",
+"tischhoehe": 46,
+"sitzhoehe": 26,
+"tischtiefe": 45,
+"tischbreite_einzel": 60,
+"tischbreite_doppel": 120,
+"sitztiefe": 26,
+"sitzbreite": 25,
+"sitzneigung_grad": [
+0,
+4
+],
+"notes": "gezeichnet ca. 44 x 59 bzw. Stuhl 25 x 24 (Zeichnung ~1 cm kleiner als Beschriftung)"
+},
+{
+"groesse": 2,
+"koerperhoehe": 120,
+"kennfarbe": "violett",
+"tischhoehe": 52,
+"sitzhoehe": 30,
+"tischtiefe": 50,
+"tischbreite_einzel": 60,
+"tischbreite_doppel": 120,
+"sitztiefe": 29,
+"sitzbreite": 27,
+"sitzneigung_grad": [
+0,
+4
+],
+"notes": "neben Größe 2 steht zusätzlich eine einzelne Zahl '50' ohne Maßlinie (Zuordnung unklar)"
+},
+{
+"groesse": 3,
+"koerperhoehe": 135,
+"kennfarbe": "gelb",
+"tischhoehe": 58,
+"sitzhoehe": 34,
+"tischtiefe": 50,
+"tischbreite_einzel": 70,
+"tischbreite_doppel": 130,
+"sitztiefe": 33,
+"sitzbreite": 29,
+"sitzneigung_grad": [
+0,
+4
+],
+"notes": ""
+},
+{
+"groesse": 4,
+"koerperhoehe": 150,
+"kennfarbe": "rot",
+"tischhoehe": 64,
+"sitzhoehe": 38,
+"tischtiefe": 50,
+"tischbreite_einzel": 70,
+"tischbreite_doppel": 130,
+"sitztiefe": 36,
+"sitzbreite": 32,
+"sitzneigung_grad": [
+0,
+4
+],
+"notes": ""
+},
+{
+"groesse": 5,
+"koerperhoehe": 165,
+"kennfarbe": "grün",
+"tischhoehe": 70,
+"sitzhoehe": 42,
+"tischtiefe": 50,
+"tischbreite_einzel": 70,
+"tischbreite_doppel": 130,
+"sitztiefe": 38,
+"sitzbreite": 34,
+"sitzneigung_grad": [
+0,
+4
+],
+"notes": ""
+},
+{
+"groesse": 6,
+"koerperhoehe": 180,
+"kennfarbe": "blau",
+"tischhoehe": 76,
+"sitzhoehe": 46,
+"tischtiefe": 50,
+"tischbreite_einzel": 70,
+"tischbreite_doppel": 130,
+"sitztiefe": 40,
+"sitzbreite": 36,
+"sitzneigung_grad": [
+0,
+4
+],
+"notes": ""
+}
+],
+"condition": "Norm geht von physiologisch 'richtiger' statischer Sitzhaltung aus; noch gültig neben EN 1729",
+"norm": "DIN ISO 5970:1981-01"
+},
+{
+"id": "g6b.moebel_kanten_radius",
+"topic": "schule",
+"title": "Kanten, Ecken, Haken von Einrichtung bis 2 m über Standfläche abrunden oder fassen",
+"sources": [
+{
+"book": "G",
+"page": 505
+},
+{
+"book": "G",
+"page": 563
+}
+],
+"values": {
+"min": 2,
+"unit": "mm"
+},
+"condition": "Radius ≥ 2 mm; gilt bis 200 cm Höhe ab OK Standfläche",
+"norm": "DIN 58125 § 6, GUV-V S1 § 6, GUV-SI 8011"
+},
+{
+"id": "g6b.schulmoebel_anforderungen",
+"topic": "schule",
+"title": "Schulmöbel: normgerecht/sicherheitsgeprüft, ausreichendes Größensortiment, Tisch und Stuhl aufeinander abgestimmt; in Fachräumen möglichst zwei Tischhöhen durch höhenverstellbare Platte; Tischoberfläche hell und matt; Gestühl beweglich und kombinierbar",
+"sources": [
+{
+"book": "G",
+"page": 505
+}
+],
+"norm": "GUV-SI 8011 S. 4; ASE BW"
+},
+{
+"id": "g6b.schulmoebel_anpassung",
+"topic": "schule",
+"title": "Schulmöbel möglichst halbjährlich individuell anpassen. A Sitzhöhe: beide Füße ganz auf dem Boden, Oberschenkel waagrecht; B Sitztiefe: Kniekehle/Unterschenkelrückseite berühren die Sitzvorderkante nicht; C Tischhöhe: Ellbogenspitze bei hängenden Armen auf Höhe Tischplatte; D Beinfreiraum zwischen Tischunterbau und Oberschenkel",
+"sources": [
+{
+"book": "G",
+"page": 508
+}
+],
+"norm": "GUV-SI 8011"
+},
+{
+"id": "g6b.computerarbeitsplatz_schule",
+"topic": "schule",
+"title": "Computertisch: Tiefe ≥ 80 (besser 90); Höhe ca. 64 (Primarstufe) / ca. 72 (Sekundarstufe); Augenabstand 45-70; Blickrichtung parallel zur Fensterfront; Bildschirmoberkante unter Augenhöhe; abschließbare Kabelführung",
+"sources": [
+{
+"book": "G",
+"page": 508
+},
+{
+"book": "G",
+"page": 509
+}
+],
+"values": {
+"min": 80,
+"typ": 90,
+"unit": "cm"
+},
+"norm": "GUV-SI 8009"
+},
+{
+"id": "g6b.ergonomische_moebel",
+"topic": "schule",
+"title": "Ergonomische Tische: höhenverstellbar und mit neigbarer Platte empfohlen; dreieckige Tische mit höhenverstellbaren Stühlen erlauben raschen Wechsel der Unterrichtsform",
+"sources": [
+{
+"book": "G",
+"page": 505
+},
+{
+"book": "G",
+"page": 509
+}
+]
+},
+{
+"id": "g6b.sitzplatz_hintereinander_allgemein",
+"topic": "klassenzimmer",
+"title": "Schülerplätze hintereinander (regulärer Unterrichtsraum): seitlicher Tischabstand (Gang) 80 (Zeichnung 60-80), Zweiertisch 120-130 breit, 50 tief, Abstand vorn/hinten 80 (Reihenraster 130); Achsmaß Gang+Tisch 180-210",
+"sources": [
+{
+"book": "G",
+"page": 510
+}
+],
+"values": {
+"min": 80,
+"unit": "cm"
+},
+"condition": "Gang seitlich 60-80 laut Zeichnung, Text 80",
+"norm": "OFD Baden-Württemberg"
+},
+{
+"id": "g6b.sitzplatz_werkraum_ruecken_an_ruecken",
+"topic": "klassenzimmer",
+"title": "Übungs-/Werkräume, Rücken-an-Rücken: seitlicher Tischabstand 100 (besser 120), Zweiertisch 160 breit, 80 tief (nutzungsabhängig), Abstand der Tischreihen 150 (Zeichnung: 80 | 150 | 80 = 230)",
+"sources": [
+{
+"book": "G",
+"page": 510
+}
+],
+"values": {
+"min": 100,
+"typ": 120,
+"unit": "cm"
+},
+"norm": "GUV-SI 8009; DIN 58125 § 25; GUV-V S1 § 25"
+},
+{
+"id": "g6b.sitzplatz_werkraum_hintereinander",
+"topic": "klassenzimmer",
+"title": "Übungs-/Werkräume hintereinander: Tisch 160 x 80, Gang 100, Abstand Tischvorderkante zur nächsten Tischreihe 85 (Reihenraster 165)",
+"sources": [
+{
+"book": "G",
+"page": 510
+}
+],
+"values": {
+"min": 85,
+"unit": "cm"
+},
+"notes": "nur aus Zeichnung (Maßketten 260 = 100 | 160; 165 = 80 | 85)"
+},
+{
+"id": "g6b.abstand_lehrerexperimentiertisch",
+"topic": "klassenzimmer",
+"title": "Abstand Lehrer-Experimentiertisch zu den ersten Schülertischen",
+"sources": [
+{
+"book": "G",
+"page": 510
+}
+],
+"values": {
+"min": 120,
+"unit": "cm"
+},
+"norm": "DIN 58125 § 25; GUV-V S1 § 25"
+},
+{
+"id": "g6b.raumform_klassenraum",
+"topic": "klassenzimmer",
+"title": "Quadratische, annähernd quadratische oder polygonale Raumzuschnitte eignen sich für vielseitige Möblierung; rechteckige schränken ein, sind aber besser teilbar; Gruppenunterricht braucht mehr Fläche als Frontalunterricht",
+"sources": [
+{
+"book": "G",
+"page": 510
+}
+],
+"norm": "ASE BW"
+},
+{
+"id": "g6b.klassenraumgroessen_ofd",
+"topic": "klassenzimmer",
+"title": "Klassenraumgrößen nach Schülerzahl",
+"sources": [
+{
+"book": "G",
+"page": 511
+}
+],
+"table": [
+{
+"schueler": 24,
+"flaeche_m2": 54
+},
+{
+"schueler": 30,
+"flaeche_m2": 60
+},
+{
+"schueler": 33,
+"flaeche_m2": 66
+},
+{
+"schueler": 36,
+"flaeche_m2": 72
+}
+],
+"norm": "OFD BW",
+"notes": "Beispiele S. 513: rechteckig 7,10 x 9,30 m = 66 m², quadratisch 8,10 x 8,10 m = 65,5 m², je 32 Sitzplätze"
+},
+{
+"id": "g6b.ase_grundflaeche_je_schueler",
+"topic": "klassenzimmer",
+"title": "Grundfläche je Schüler",
+"sources": [
+{
+"book": "G",
+"page": 518
+},
+{
+"book": "G",
+"page": 519
+}
+],
+"values": {
+"min": 1.8,
+"max": 2.0,
+"unit": "m²"
+},
+"condition": "allgemeine Unterrichtsräume; Fachräume Naturwissenschaften ≥ 2,7 m²",
+"norm": "ASE BW"
+},
+{
+"id": "g6b.ase_grundflaeche_fachraum_nawi",
+"topic": "klassenzimmer",
+"title": "Grundfläche je Schüler in naturwissenschaftlichen Fachräumen",
+"sources": [
+{
+"book": "G",
+"page": 518
+},
+{
+"book": "G",
+"page": 519
+}
+],
+"values": {
+"min": 2.7,
+"unit": "m²"
+},
+"norm": "ASE BW"
+},
+{
+"id": "g6b.ase_raumtiefe",
+"topic": "klassenzimmer",
+"title": "Raumtiefe Klassenraum",
+"sources": [
+{
+"book": "G",
+"page": 518
+}
+],
+"values": {
+"typ": 720,
+"max": 840,
+"unit": "cm"
+},
+"condition": "720 im Allgemeinen; bis 840 bei Räumen ab 70 m²; tiefer nur mit beidseitiger Belichtung",
+"norm": "ASE BW"
+},
+{
+"id": "g6b.ase_raumhoehe",
+"topic": "klassenzimmer",
+"title": "lichte Raumhöhe Unterrichtsraum",
+"sources": [
+{
+"book": "G",
+"page": 518
+},
+{
+"book": "G",
+"page": 520
+}
+],
+"values": {
+"min": 320,
+"unit": "cm"
+},
+"condition": "natürliche Be- und Entlüftung 320; künstliche Be- und Entlüftung ≥ 300",
+"norm": "ASE BW"
+},
+{
+"id": "g6b.ase_raumhoehe_geneigte_decke",
+"topic": "klassenzimmer",
+"title": "nicht ebene Decken: mittlere lichte Höhe 320 bzw. 300 (je nach Lüftung) nicht überschreiten, an der niedrigsten Stelle ≥ 250",
+"sources": [
+{
+"book": "G",
+"page": 520
+}
+],
+"values": {
+"min": 250,
+"typ": 320,
+"unit": "cm"
+},
+"norm": "ASE BW",
+"notes": "Schnitt M 1:100 mit Raumtiefe 840"
+},
+{
+"id": "g6b.ase_fensterflaeche",
+"topic": "belichtung",
+"title": "wirksame senkrechte Fensterfläche (reine Glasfläche) ≥ 1/5 der Raumgrundfläche",
+"sources": [
+{
+"book": "G",
+"page": 518
+}
+],
+"values": {
+"min": 0.2,
+"unit": "Anteil Grundfläche"
+},
+"norm": "ASE BW"
+},
+{
+"id": "g6b.ase_lueftungsflaeche",
+"topic": "luft",
+"title": "voll zu öffnende Lüftungsflügel je Schüler",
+"sources": [
+{
+"book": "G",
+"page": 518
+},
+{
+"book": "G",
+"page": 519
+}
+],
+"values": {
+"min": 0.3,
+"unit": "m²"
+},
+"condition": "einseitige freie Fensterlüftung bis 840 cm Raumtiefe, wenn lichte Höhe ≥ 320 und innere Zone ca. 100 cm nur Verkehrsfläche",
+"norm": "ASE BW"
+},
+{
+"id": "g6b.ase_luftraum",
+"topic": "luft",
+"title": "Luftraum je Schüler",
+"sources": [
+{
+"book": "G",
+"page": 518
+}
+],
+"values": {
+"min": 6,
+"unit": "m³ (im Buch m²)"
+},
+"norm": "ASE BW"
+},
+{
+"id": "g6b.ase_sichtabstand_tafel",
+"topic": "klassenzimmer",
+"title": "Abstand Schülerarbeitsplatz zur Wandtafel",
+"sources": [
+{
+"book": "G",
+"page": 518
+}
+],
+"values": {
+"min": 200,
+"max": 900,
+"unit": "cm"
+},
+"norm": "ASE BW"
+},
+{
+"id": "g6b.ase_blickwinkel_tafel",
+"topic": "klassenzimmer",
+"title": "ungünstigster Blickwinkel zur Tafel",
+"sources": [
+{
+"book": "G",
+"page": 518
+}
+],
+"values": {
+"min": 30,
+"unit": "°"
+},
+"norm": "ASE BW"
+},
+{
+"id": "g6b.klassenraumtuer_fluchtrichtung",
+"topic": "tuer",
+"title": "Klassenraumtüren ab 40 Benutzern in Fluchtrichtung aufschlagend; nach außen schlagende Türen dürfen in Endstellung einschließlich Türgriff max. 20 cm in den Fluchtweg ragen",
+"sources": [
+{
+"book": "G",
+"page": 519
+}
+],
+"values": {
+"max": 20,
+"unit": "cm"
+},
+"condition": "≥ 40 Benutzer"
+},
+{
+"id": "g6b.garderoben_schule",
+"topic": "schule",
+"title": "Garderoben im Flur (ASE-Empfehlung; zusätzliche Brandlast beachten), im Klassenraum (gut lüftbar) oder bereichsweise zusammengefasst",
+"sources": [
+{
+"book": "G",
+"page": 519
+}
+],
+"norm": "ASE BW"
+},
+{
+"id": "g6b.unterrichtsraum_fenster_ausblick",
+"topic": "belichtung",
+"title": "alle Unterrichtsräume mit Fenstern und Ausblick ins Freie; Lernmittelräume u. ä. können fensterlos oder von oben belichtet sein; Tageslicht von links und Südorientierung bevorzugt; Sonnen- und Blendschutz nach Orientierung",
+"sources": [
+{
+"book": "G",
+"page": 521
+},
+{
+"book": "G",
+"page": 566
+}
+],
+"norm": "DIN 5034, Landesrecht, ASE BW"
+},
+{
+"id": "g6b.kuenstliche_beleuchtung_unterricht",
+"topic": "licht",
+"title": "künstliche Beleuchtung nutzungsgerecht, blendfrei, Lichtfarbe tageslichtähnlich",
+"sources": [
+{
+"book": "G",
+"page": 521
+}
+],
+"norm": "DIN 5035"
+},
+{
+"id": "g6b.schallschutz_schule_rw",
+"topic": "schall",
+"title": "erforderliches bewertetes Schalldämmmaß R'w in Schulen (DIN 4109:1989-11, Tab. 3)",
+"sources": [
+{
+"book": "G",
+"page": 521
+},
+{
+"book": "G",
+"page": 528
+}
+],
+"table": [
+{
+"bauteil": "Decken zwischen Unterrichtsräumen und Sporthallen, Musikräumen, Werkräumen",
+"R_w_dB": 55
+},
+{
+"bauteil": "Wände zwischen Unterrichtsräumen o. ä. und Fluren",
+"R_w_dB": 47
+},
+{
+"bauteil": "Wände zwischen Unterrichtsräumen o. ä. und Treppenhäusern",
+"R_w_dB": 52
+},
+{
+"bauteil": "Wände zwischen Unterrichtsräumen o. ä. und besonders lauten Räumen (Sporthallen, Musikräume)",
+"R_w_dB": 55
+},
+{
+"bauteil": "Türen zwischen Unterrichtsräumen o. ä. und Fluren",
+"R_w_dB": 32
+}
+],
+"norm": "DIN 4109"
+},
+{
+"id": "g6b.nachhallzeit_unterricht",
+"topic": "schall",
+"title": "Hörsamkeit/differenzierte Nachhallzeit für Unterrichtsräume nach DIN 18041:2005-04 beachten",
+"sources": [
+{
+"book": "G",
+"page": 521
+}
+],
+"norm": "DIN 18041"
+},
+{
+"id": "g6b.aussenlaerm_fensterlueftung",
+"topic": "schall",
+"title": "Außengeräuschpegel bis 65 dB(A): Fensterlüftung möglich, keine besonderen Anforderungen an Außenwände/Fenster; über 65 dB(A): Fenster im Unterricht geschlossen, Luftschallschutzmaß -12 dB, ggf. lüftungstechnische Anlage",
+"sources": [
+{
+"book": "G",
+"page": 521
+}
+],
+"values": {
+"max": 65,
+"unit": "dB(A)"
+}
+},
+{
+"id": "g6b.akustik_absorberanordnung",
+"topic": "schall",
+"title": "Schallabsorber: Absorber in Deckenmitte ungünstig für Frontalunterricht (keine Reflexion in die Raumtiefe), günstig für Gruppenunterricht; oberer Teil der Rückwand und seitliche Deckenstreifen absorbierend, Deckenmitte reflektierend günstig für Frontalunterricht; Rückwandreflexion ungünstig",
+"sources": [
+{
+"book": "G",
+"page": 521
+}
+],
+"notes": "stark vereinfachte Schemata"
+},
+{
+"id": "g6b.fachklassen_zusammenfassen",
+"topic": "schule",
+"title": "Fachklassen fächerbezogen räumlich zusammenfassen (Installation, Funktion)",
+"sources": [
+{
+"book": "G",
+"page": 525
+}
+]
+},
+{
+"id": "g6b.nawi_zwei_fluchtwege",
+"topic": "rettungsweg",
+"title": "Räume mit erhöhter Brandgefahr (Chemie, Holzwerkräume) brauchen zwei getrennte 'sichere' Fluchtwege in möglichst entgegengesetzte Richtungen; nicht erfüllt, wenn der zweite über Sammlungs-/Vorbereitungsraum führt und dessen Zugang in derselben Ecke liegt wie der Raumausgang; Fluchttüren in Fluchtrichtung; zweiter Fluchtweg über Fenster nur auf Balkon/Terrasse/Außentreppe, nicht über Anleitern (ca. 3 min je Person); nicht über Fenster bei vollständiger Verdunkelung",
+"sources": [
+{
+"book": "G",
+"page": 525
+},
+{
+"book": "G",
+"page": 526
+}
+]
+},
+{
+"id": "g6b.lehrsaal_podeststufen",
+"topic": "schule",
+"title": "Lehrsaal mit ansteigendem fest installiertem Gestühl: meist 2-3 Podeststufen à 15-17 cm; bis 10 % Steigung Rampe, darüber Stufen; vorderste Reihe barrierefrei",
+"sources": [
+{
+"book": "G",
+"page": 526
+},
+{
+"book": "G",
+"page": 527
+}
+],
+"values": {
+"min": 15,
+"max": 17,
+"unit": "cm"
+}
+},
+{
+"id": "g6b.nawi_tuer_transport",
+"topic": "tuer",
+"title": "Türen zu Sammlungs-/Vorbereitungsräumen und Lehrsälen für Transportgut ca. 60 cm höher als Normtüren",
+"sources": [
+{
+"book": "G",
+"page": 526
+}
+],
+"values": {
+"typ": 60,
+"unit": "cm"
+},
+"notes": "Schnitt S. 529: Verbindungstür 260 hoch"
+},
+{
+"id": "g6b.chemikalienraum_groesse",
+"topic": "schule",
+"title": "Chemikalien/Gefahrstoffe in eigenem Chemikalienraum ca. 6-10 m² oder in entlüfteten Chemikalienschränken",
+"sources": [
+{
+"book": "G",
+"page": 526
+}
+],
+"values": {
+"min": 6,
+"max": 10,
+"unit": "m²"
+},
+"norm": "GUV-V S1 § 26"
+},
+{
+"id": "g6b.lehrsaal_schreibflaeche",
+"topic": "schule",
+"title": "Schreibgelegenheit im Lehrsaal ausreichend tief",
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+],
+"values": {
+"min": 40,
+"unit": "cm"
+}
+},
+{
+"id": "g6b.geraeteschrank_tiefe",
+"topic": "schule",
+"title": "Schränke für Experimentiergeräte mindestens 30 cm tief",
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+],
+"values": {
+"min": 30,
+"unit": "cm"
+}
+},
+{
+"id": "g6b.werkraum_durchgang",
+"topic": "schule",
+"title": "Durchgänge zwischen zwei Arbeitstischen im Werkraum zusätzlich ≥ 60 cm (Verkehrsflächen nicht in den Mindestabständen enthalten)",
+"sources": [
+{
+"book": "G",
+"page": 528
+}
+],
+"values": {
+"min": 60,
+"unit": "cm"
+},
+"norm": "GUV"
+},
+{
+"id": "g6b.werkraum_ausgaenge",
+"topic": "schule",
+"title": "Werkräume mit mindestens zwei möglichst weit auseinanderliegenden Ausgängen; einer darf durch den Maschinenraum führen",
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+],
+"values": {
+"min": 2,
+"unit": "Ausgänge"
+},
+"norm": "DIN 58125 § 21 f.; GUV-V S1 § 21 f."
+},
+{
+"id": "g6b.maschinenraum_sichtverbindung",
+"topic": "schule",
+"title": "Maschinenraum baulich vom Schülerübungsraum getrennt, mit Sichtverbindung (Beispiel Sichtfenster ca. 300 x 100)",
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+],
+"values": {
+"typ": 300,
+"unit": "cm"
+}
+},
+{
+"id": "g6b.brennofen_entlueftung",
+"topic": "luft",
+"title": "Brennöfen in Aufenthaltsbereichen von Schülern mit Entlüftung ins Freie; Holzstaub absaugen",
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+],
+"norm": "DIN 58125 § 26; GUV-V S1 § 26"
+},
+{
+"id": "g6b.werkraum_bodenbelag",
+"topic": "schule",
+"title": "Bodenbeläge in Werkräumen auch bei Staubanfall ausreichend trittsicher",
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+],
+"norm": "DIN 58125 § 23; GUV-V S1 § 23"
+},
+{
+"id": "g6b.musikraum_schallschutz",
+"topic": "schall",
+"title": "Wände/Decken zwischen Unterrichtsräumen und besonders lauten Räumen (Musik, Sport) R'w 55 dB",
+"sources": [
+{
+"book": "G",
+"page": 528
+}
+],
+"values": {
+"min": 55,
+"unit": "dB"
+},
+"norm": "DIN 4109"
+},
+{
+"id": "g6b.kunstraum_nordorientierung",
+"topic": "belichtung",
+"title": "Zeichensäle nach Norden orientieren (gleichmäßiges Licht)",
+"sources": [
+{
+"book": "G",
+"page": 528
+}
+],
+"norm": "ASE BW"
+},
+{
+"id": "g6b.lehrerarbeitsplatz_flaeche",
+"topic": "schule",
+"title": "Arbeitsplatzfläche je Lehrer im traditionellen gemeinsamen Lehrerzimmer",
+"sources": [
+{
+"book": "G",
+"page": 534
+}
+],
+"values": {
+"typ": 3,
+"unit": "m²"
+},
+"notes": "vom Buch als zu knapp ('nur') bewertet"
+},
+{
+"id": "g6b.rektorat_besprechung",
+"topic": "schule",
+"title": "Besprechungsbereich in Rektorat/Stellvertreterzimmer",
+"sources": [
+{
+"book": "G",
+"page": 535
+}
+],
+"values": {
+"typ": 6,
+"unit": "Plätze"
+}
+},
+{
+"id": "g6b.bibliothek_flaeche_je_schueler",
+"topic": "schule",
+"title": "Bibliotheks-/Mediatheksfläche je Schüler",
+"sources": [
+{
+"book": "G",
+"page": 539
+}
+],
+"values": {
+"min": 0.4,
+"max": 0.55,
+"unit": "m²"
+}
+},
+{
+"id": "g6b.bibliothek_richtwerte_1000",
+"topic": "schule",
+"title": "Richtwerte Schulbibliothek für 1000 Schüler",
+"sources": [
+{
+"book": "G",
+"page": 539
+}
+],
+"table": [
+{
+"posten": "Bände",
+"anzahl": 10000
+},
+{
+"posten": "audiovisuelle Medien",
+"anzahl": 4000
+},
+{
+"posten": "Zeitschriften",
+"anzahl": 50
+},
+{
+"posten": "Arbeitsplätze",
+"anzahl": 40,
+"flaeche_m2": 80.0
+},
+{
+"posten": "Carrels (Lesekabinen)",
+"anzahl": 6,
+"flaeche_m2": 16.8
+},
+{
+"posten": "Gruppenraum",
+"anzahl": 1,
+"flaeche_m2": 50.0
+},
+{
+"posten": "Arbeitsraum Bibliothekare",
+"flaeche_m2": 18.0
+},
+{
+"posten": "Magazin",
+"flaeche_m2": 20.0
+}
+],
+"notes": "abgeleitet: 2,0 m² je Arbeitsplatz, 2,8 m² je Carrel"
+},
+{
+"id": "g6b.mensa_plaetze",
+"topic": "schule",
+"title": "Speiseplätze = Essensteilnehmer : Platzwechsel",
+"sources": [
+{
+"book": "G",
+"page": 544
+}
+],
+"notes": "Beispiel 400 x 0,8 / 3 = 107"
+},
+{
+"id": "g6b.mensa_flaeche_je_platz",
+"topic": "schule",
+"title": "Grundfläche Speiseraum je Platz",
+"sources": [
+{
+"book": "G",
+"page": 544
+}
+],
+"values": {
+"typ": 1.4,
+"unit": "m²"
+},
+"condition": "Grundschulen 1,25 m²"
+},
+{
+"id": "g6b.mensa_vstaettvo",
+"topic": "schule",
+"title": "Speiseräume für mehr als 200 Personen: VStättVO beachten",
+"sources": [
+{
+"book": "G",
+"page": 544
+}
+],
+"values": {
+"min": 200,
+"unit": "Personen"
+},
+"norm": "VStättVO"
+},
+{
+"id": "g6b.mensa_garderobe",
+"topic": "schule",
+"title": "Garderobe im Eingangsbereich des Speisesaals: 1 Haken je Platz",
+"sources": [
+{
+"book": "G",
+"page": 544
+}
+],
+"values": {
+"typ": 1,
+"unit": "Haken/Platz"
+}
+},
+{
+"id": "g6b.schule_toiletten_bemessung_ase",
+"topic": "toiletten",
+"title": "Bemessung Toilettenanlagen Schule (ASE BW)",
+"sources": [
+{
+"book": "G",
+"page": 547
+}
+],
+"table": [
+{
+"nutzer": "Schüler (Jungen)",
+"je": "40-50",
+"sitze": 1,
+"staende": 2
+},
+{
+"nutzer": "Schülerinnen",
+"je": "20-25",
+"sitze": 1,
+"staende": 0
+},
+{
+"nutzer": "Lehrer",
+"je": 10,
+"sitze": 1,
+"staende": 1
+},
+{
+"nutzer": "Lehrerinnen",
+"je": 5,
+"sitze": 1,
+"staende": 0
+},
+{
+"nutzer": "zusätzlich",
+"je": null,
+"sitze": "1 rollstuhlgerechtes WC",
+"staende": null
+}
+],
+"norm": "ASE BW"
+},
+{
+"id": "g6b.schule_handwaschbecken",
+"topic": "toiletten",
+"title": "ein Handwaschbecken je 1 Sitz Jungen bzw. je 2 Sitze Mädchen",
+"sources": [
+{
+"book": "G",
+"page": 547
+}
+],
+"notes": "Beispielpläne S. 550 zeigen deutlich weniger Becken (2-5 je Vorraum)"
+},
+{
+"id": "g6b.schule_wc_trennwand_hoehe",
+"topic": "toiletten",
+"title": "WC-Sitze durch mindestens 2 m hohe abwaschbare Wände abtrennen",
+"sources": [
+{
+"book": "G",
+"page": 548
+}
+],
+"values": {
+"min": 200,
+"unit": "cm"
+}
+},
+{
+"id": "g6b.schule_wc_kabine_masse",
+"topic": "toiletten",
+"title": "WC-Kabine 85 breit x 150 tief, Kabinentür 65 (nach innen); Gang vor einer Kabinenreihe 165, zwischen zwei Reihen 125",
+"sources": [
+{
+"book": "G",
+"page": 548
+}
+],
+"values": {
+"min": 85,
+"unit": "cm"
+},
+"notes": "aus Maßketten und Vektor"
+},
+{
+"id": "g6b.schule_urinal_abstand",
+"topic": "toiletten",
+"title": "Urinale: Achsabstand ≥ 60, Achse zur Wand ≥ 45",
+"sources": [
+{
+"book": "G",
+"page": 548
+}
+],
+"values": {
+"min": 60,
+"unit": "cm"
+}
+},
+{
+"id": "g6b.schule_wc_barrierefrei_je_geschoss",
+"topic": "toiletten",
+"title": "je Geschoss mindestens ein barrierefreies WC",
+"sources": [
+{
+"book": "G",
+"page": 547
+}
+],
+"values": {
+"min": 1,
+"unit": "WC/Geschoss"
+}
+},
+{
+"id": "g6b.bf_wc_rangierflaeche",
+"topic": "barrierefrei",
+"title": "Rangierfläche barrierefreie Toilette 150 x 150 (quadratisch)",
+"sources": [
+{
+"book": "G",
+"page": 550
+}
+],
+"values": {
+"min": 150,
+"unit": "cm"
+},
+"norm": "DIN 18024-2 / DIN 18040-1 E"
+},
+{
+"id": "g6b.bf_wc_seitenflaeche",
+"topic": "barrierefrei",
+"title": "Bewegungsfläche beidseitig neben dem WC (Breite x Tiefe)",
+"sources": [
+{
+"book": "G",
+"page": 550
+},
+{
+"book": "G",
+"page": 551
+}
+],
+"values": {
+"min": 95,
+"unit": "cm"
+},
+"condition": "DIN 18024-2: ≥ 95; DIN 18040-1 Entwurf: ≥ 90; Tiefe ≥ 70"
+},
+{
+"id": "g6b.bf_wc_raumgroesse",
+"topic": "barrierefrei",
+"title": "Raumgröße öffentliche barrierefreie Toilette",
+"sources": [
+{
+"book": "G",
+"page": 550
+}
+],
+"values": {
+"min": 220,
+"unit": "cm"
+},
+"condition": "Breite ≥ 220 (= ≥ 70 + ≥ 150), Tiefe ≥ 230 (DIN 18040 E: ≥ 220)"
+},
+{
+"id": "g6b.bf_wc_hoehen",
+"topic": "barrierefrei",
+"title": "Höhen barrierefreie Toilette",
+"sources": [
+{
+"book": "G",
+"page": 551
+}
+],
+"table": [
+{
+"bauteil": "WC-Sitz inkl. Sitz",
+"hoehe": 48,
+"din18040_entwurf": "46-48"
+},
+{
+"bauteil": "Stützklappgriffe",
+"hoehe": 85,
+"din18040_entwurf": "74-76 (28 über Sitz)"
+},
+{
+"bauteil": "Waschtisch-Oberkante",
+"hoehe": "≤ 80"
+},
+{
+"bauteil": "Kniefreiraum Waschtisch (Höhe)",
+"hoehe": "≥ 67",
+"tiefe": "≥ 30 (DIN 18040 E: 40)",
+"breite": "≥ 90"
+},
+{
+"bauteil": "Fußfreiraum",
+"hoehe": "(≥ 35)"
+},
+{
+"bauteil": "Greifhöhe (Bedienelemente)",
+"hoehe": 85
+},
+{
+"bauteil": "Spiegel Unterkante",
+"hoehe": "95-100",
+"notes": "Spiegelhöhe ≥ 100"
+},
+{
+"bauteil": "Kleiderhaken",
+"hoehe": "90 / 150 / 180"
+},
+{
+"bauteil": "Tür lichte Höhe",
+"hoehe": 210
+},
+{
+"bauteil": "Ablagefläche",
+"masse": "15 x 30"
+}
+]
+},
+{
+"id": "g6b.bf_wc_tuer",
+"topic": "barrierefrei",
+"title": "Tür barrierefreie Toilette: lichte Breite 90, nach außen aufschlagend, Querstange zum Zuziehen; Drückergarnitur mit Verriegelungshebel",
+"sources": [
+{
+"book": "G",
+"page": 550
+},
+{
+"book": "G",
+"page": 551
+}
+],
+"values": {
+"min": 90,
+"unit": "cm"
+}
+},
+{
+"id": "g6b.erste_hilfe_tuer",
+"topic": "schule",
+"title": "Tür Erste-Hilfe-Raum lichte Breite ≥ 1,20 m",
+"sources": [
+{
+"book": "G",
+"page": 549
+}
+],
+"values": {
+"min": 120,
+"unit": "cm"
+}
+},
+{
+"id": "g6b.nebenraum_flaechen",
+"topic": "schule",
+"title": "Flächenrichtwerte Nebenräume Schule",
+"sources": [
+{
+"book": "G",
+"page": 549
+}
+],
+"table": [
+{
+"raum": "Hausmeisterdienstzimmer",
+"flaeche_m2": 12
+},
+{
+"raum": "Elternsprechzimmer",
+"flaeche_m2": "12-18"
+},
+{
+"raum": "Schülervertretung",
+"flaeche_m2": 18
+},
+{
+"raum": "Lehr- und Lernmittelraum (je, mind. 2)",
+"flaeche_m2": "24-60"
+}
+]
+},
+{
+"id": "g6b.pausenhof_offen_je_schueler",
+"topic": "freibereich",
+"title": "offene Pausenhoffläche je Schüler",
+"sources": [
+{
+"book": "G",
+"page": 555
+}
+],
+"values": {
+"min": 4,
+"max": 6,
+"unit": "m²"
+},
+"condition": "Grundschulen 6 m² je Schüler",
+"norm": "ASE BW"
+},
+{
+"id": "g6b.pausenhof_ueberdeckt_je_schueler",
+"topic": "freibereich",
+"title": "offene überdeckte Pausenhoffläche je Schüler, lichte Höhe ≥ 2,10 m",
+"sources": [
+{
+"book": "G",
+"page": 555
+}
+],
+"values": {
+"typ": 0.4,
+"unit": "m²"
+},
+"condition": "lichte Höhe ≥ 210 cm",
+"norm": "ASE BW"
+},
+{
+"id": "g6b.teich_wassertiefe",
+"topic": "freibereich",
+"title": "Teiche/Feuchtbiotope außerhalb von Lauf-/Spielbereichen: max. Wassertiefe 1,20 m und am Rand mindestens 1 m breite Flachwasserzone mit max. 0,40 m Tiefe; sonst Ufer durch Zaun/Hecke sichern",
+"sources": [
+{
+"book": "G",
+"page": 557
+}
+],
+"values": {
+"max": 120,
+"unit": "cm"
+},
+"condition": "Flachwasserzone ≥ 100 breit, ≤ 40 tief",
+"norm": "DIN 58125 § 14; GUV-V S1 § 14",
+"notes": "Schnitt Teichanlage M 1:50: Vegetation als Puffer"
+},
+{
+"id": "g6b.aussen_beleuchtung_verkehrswege",
+"topic": "freibereich",
+"title": "notwendige Verkehrswege, Treppen, Hindernisse im Außenbereich beleuchten",
+"sources": [
+{
+"book": "G",
+"page": 557
+},
+{
+"book": "G",
+"page": 565
+}
+],
+"values": {
+"min": 5,
+"unit": "lx"
+},
+"norm": "DIN 5035-2 (S. 559) bzw. DIN 5032-2 (S. 567); DIN 58125 § 14"
+},
+{
+"id": "g6b.zufahrt_feuerwehr_schule",
+"topic": "freibereich",
+"title": "Zufahrten für Feuerwehr-, Müll-, Lieferfahrzeuge freihalten und ausreichend tragfähig",
+"sources": [
+{
+"book": "G",
+"page": 557
+}
+],
+"values": {
+"min": 350,
+"unit": "cm"
+}
+},
+{
+"id": "g6b.sitzlandschaft_abgestuft",
+"topic": "freibereich",
+"title": "abgestufte Sitzlandschaft (Podeste/Stufen) als größenunabhängige Sitzgelegenheit; Platzbedarf je Person sitzend ca. 80 (angezogene Beine) bis ca. 95; Stufenhöhen im Schnitt ca. 40",
+"sources": [
+{
+"book": "G",
+"page": 558
+}
+],
+"values": {
+"typ": 80,
+"unit": "cm"
+},
+"notes": "Schnitt M 1:50; 'ca. 95' gezeichnet ca. 110"
+},
+{
+"id": "g6b.aussen_bodenbelag_rutschhemmend",
+"topic": "freibereich",
+"title": "Bodenbeläge von Aufenthaltsbereichen im Freien auch bei Nässe rutschhemmend; Pausenhöfe R 11",
+"sources": [
+{
+"book": "G",
+"page": 558
+},
+{
+"book": "G",
+"page": 562
+},
+{
+"book": "G",
+"page": 565
+}
+],
+"norm": "DIN 58125 § 14; GUV-V S1 § 14; GUV-R 181"
+},
+{
+"id": "g6b.einfriedung_schule",
+"topic": "gelaender",
+"title": "Zäune, Gitter, Einfriedungen ohne spitze oder scharfkantige Teile",
+"sources": [
+{
+"book": "G",
+"page": 558
+}
+]
+},
+{
+"id": "g6b.stolperstellen",
+"topic": "schule",
+"title": "Stolperstellen und Einzelstufen in Schulen vermeiden; unvermeidbare Einzelstufen optisch deutlich absetzen; Stolperstelle = Höhenunterschied > 4 mm",
+"sources": [
+{
+"book": "G",
+"page": 561
+}
+],
+"values": {
+"max": 4,
+"unit": "mm"
+},
+"norm": "DIN 58125 § 5; GUV-V S1 § 5"
+},
+{
+"id": "g6b.abstreifmatte",
+"topic": "schule",
+"title": "flächenbündige Abstreifmatten in Eingangsbereichen über die gesamte Durchgangsbreite, Tiefe ≥ 150 cm, stolperfrei (Mattenbauhöhe handelsüblich ca. 25-40 mm)",
+"sources": [
+{
+"book": "G",
+"page": 561
+}
+],
+"values": {
+"min": 150,
+"unit": "cm"
+},
+"norm": "DIN 58125 § 5; GUV-V S1 § 5"
+},
+{
+"id": "g6b.rutschhemmung_bewertungsgruppen",
+"topic": "schule",
+"title": "Zuordnung Gesamtmittelwert Neigungswinkel zu Bewertungsgruppe der Rutschhemmung",
+"sources": [
+{
+"book": "G",
+"page": 562
+}
+],
+"table": [
+{
+"gruppe": "R 9",
+"winkel_grad": "6-10"
+},
+{
+"gruppe": "R 10",
+"winkel_grad": "11-19"
+},
+{
+"gruppe": "R 11",
+"winkel_grad": "20-27"
+},
+{
+"gruppe": "R 12",
+"winkel_grad": "28-35"
+},
+{
+"gruppe": "R 13",
+"winkel_grad": "> 35"
+}
+],
+"norm": "GUV-R 181; DIN 51130"
+},
+{
+"id": "g6b.rutschhemmung_nach_nutzung",
+"topic": "schule",
+"title": "erforderliche Rutschhemmung nach Nutzung (Schule)",
+"sources": [
+{
+"book": "G",
+"page": 562
+}
+],
+"table": [
+{
+"bereich": "allgemein, Klassenräume, Treppen",
+"klasse": "R 9"
+},
+{
+"bereich": "Sanitärräume, Lehrküchen, Werkräume",
+"klasse": "R 10"
+},
+{
+"bereich": "Pausenhöfe",
+"klasse": "R 11"
+},
+{
+"bereich": "Umkleiden (barfuß)",
+"klasse": "A"
+},
+{
+"bereich": "Duschräume (barfuß)",
+"klasse": "B"
+},
+{
+"bereich": "Eingangsbereich (Empfehlung)",
+"klasse": "R 10"
+},
+{
+"bereich": "Chemieräume",
+"klasse": "besondere Anforderungen"
+}
+],
+"norm": "GUV-R 181 (Okt. 2003); GUV-I 8527 (Barfuß)",
+"notes": "in Schulen R 9 bis R 11 gefordert; R 13 höchste Rutschhemmung; Barfußbereiche A/B/C (C höchste)"
+},
+{
+"id": "g6b.rutschfestigkeit_belaege",
+"topic": "schule",
+"title": "Rutschfestigkeit verschiedener Bodenbeläge",
+"sources": [
+{
+"book": "G",
+"page": 562
+}
+],
+"table": [
+{
+"belag": "keramische Bodenbeläge",
+"klasse": "R 9 bis R 13"
+},
+{
+"belag": "Gitterroste",
+"klasse": "R 10 bis R 13"
+},
+{
+"belag": "PVC",
+"klasse": "R 9 bis R 10"
+},
+{
+"belag": "Elastomer",
+"klasse": "R 9 bis R 10"
+},
+{
+"belag": "Laminat",
+"klasse": "R 9, evtl. R 10"
+},
+{
+"belag": "Linoleum",
+"klasse": "R 9, evtl. R 10"
+},
+{
+"belag": "textile Bodenbeläge",
+"klasse": "R 9 bis R 12"
+},
+{
+"belag": "Naturstein",
+"klasse": "R 9 bis R 13"
+}
+]
+},
+{
+"id": "g6b.wandoberflaeche_2m",
+"topic": "schule",
+"title": "Oberflächen von Wänden/Stützen bis 2 m über Standfläche glatt ohne Grate; Ecken/Kanten nicht scharfkantig: Radius ≥ 2 mm gerundet, gefast oder gebrochen, Putz mit gerundeten Eckschienen; gilt auch für Möbel, Fensterbänke, Türen, Bedienhebel",
+"sources": [
+{
+"book": "G",
+"page": 563
+}
+],
+"values": {
+"min": 2,
+"unit": "mm"
+},
+"condition": "bis 200 cm Höhe",
+"norm": "DIN 58125 § 6; GUV-V S1 § 6"
+},
+{
+"id": "g6b.verglasung_bruchsicher_schule",
+"topic": "fassade",
+"title": "Verglasungen (auch an Möbeln) in Schüler-Aufenthaltsbereichen bis 2 m über Standfläche bruchsicher (ESG oder VSG, kein Drahtglas)",
+"sources": [
+{
+"book": "G",
+"page": 564
+}
+],
+"values": {
+"min": 200,
+"unit": "cm"
+},
+"norm": "DIN 58125 § 7; GUV-V S1 § 7"
+},
+{
+"id": "g6b.verglasung_abschirmung",
+"topic": "fassade",
+"title": "Sicherheitsglas entbehrlich bei Abschirmung: Umwehrung/Geländer ≥ 1 m hoch und ≥ 20 cm vor der Verglasung, bepflanzte Schutzzone, oder Fensterbrüstung ≥ 80 cm mit Fensterbank ≥ 20 cm tief",
+"sources": [
+{
+"book": "G",
+"page": 564
+}
+],
+"values": {
+"min": 20,
+"unit": "cm"
+},
+"condition": "Geländer ≥ 100 hoch, ≥ 20 vor dem Glas; Brüstung ≥ 80 + Fensterbank ≥ 20"
+},
+{
+"id": "g6b.verglasung_erkennbar",
+"topic": "fassade",
+"title": "Verglasungen und lichtdurchlässige Flächen leicht erkennbar machen (Strukturierung, Farbgebung, Querriegel)",
+"sources": [
+{
+"book": "G",
+"page": 564
+}
+],
+"norm": "DIN 58125 § 7"
+},
+{
+"id": "g6b.absturzsicherung_30_100",
+"topic": "gelaender",
+"title": "Absturzhöhe 0,30-1 m: Sicherung durch Pflanztröge, Pflanzstreifen, Bänke oder deutliche Markierung ausreichend",
+"sources": [
+{
+"book": "G",
+"page": 565
+}
+],
+"values": {
+"min": 30,
+"max": 100,
+"unit": "cm Absturzhöhe"
+}
+},
+{
+"id": "g6b.umwehrung_schule_hoehe",
+"topic": "gelaender",
+"title": "Absturzhöhe > 1 m: Umwehrung/Geländer ≥ 1,00 m hoch (zusätzlich LBO); > 12 m Absturzhöhe ≥ 1,10 m (MBO § 38)",
+"sources": [
+{
+"book": "G",
+"page": 565
+}
+],
+"values": {
+"min": 100,
+"unit": "cm"
+},
+"condition": "> 12 m Absturzhöhe: 110",
+"norm": "DIN 58125 § 8; GUV-V S1 § 8; MBO 2002 § 38"
+},
+{
+"id": "g6b.fensterbruestung_hoehe",
+"topic": "gelaender",
+"title": "Fensterbrüstungen: Absturzhöhe bis 12 m ≥ 0,80 m, über 12 m ≥ 0,90 m; niedriger zulässig, wenn Geländer o. ä. die Mindesthöhe herstellt",
+"sources": [
+{
+"book": "G",
+"page": 565
+}
+],
+"values": {
+"min": 80,
+"unit": "cm"
+},
+"condition": "> 12 m: 90",
+"norm": "MBO 2002 § 38"
+},
+{
+"id": "g6b.schule_treppengelaender_hoehe",
+"topic": "treppe",
+"title": "Treppengeländer und Treppenbrüstungen in Schulen mindestens 1,10 m hoch",
+"sources": [
+{
+"book": "G",
+"page": 565
+}
+],
+"values": {
+"min": 110,
+"unit": "cm"
+},
+"norm": "MSchulbauR (4)"
+},
+{
+"id": "g6b.schule_nennbeleuchtungsstaerke",
+"topic": "licht",
+"title": "Nennbeleuchtungsstärken in Schulen (DIN 5035-4)",
+"sources": [
+{
+"book": "G",
+"page": 565
+}
+],
+"table": [
+{
+"nutzung": "Verkehrswege in Gebäuden",
+"lx": 50
+},
+{
+"nutzung": "Treppen in Gebäuden",
+"lx": 100
+},
+{
+"nutzung": "Klassen- und Verwaltungsräume",
+"lx": 500
+},
+{
+"nutzung": "Werkräume Holz und Metall",
+"lx": 300
+},
+{
+"nutzung": "Maschinenräume Werkbereich",
+"lx": 500
+},
+{
+"nutzung": "Lehrküchen",
+"lx": 500
+},
+{
+"nutzung": "Speiseräume",
+"lx": 200
+},
+{
+"nutzung": "Informatikräume",
+"lx": 500
+},
+{
+"nutzung": "Toilettenräume",
+"lx": 100
+},
+{
+"nutzung": "Außenbereich",
+"lx": 5
+}
+],
+"norm": "DIN 5035-4"
+},
+{
+"id": "g6b.rlt_verdunkelbare_raeume",
+"topic": "luft",
+"title": "vollständig verdunkelbare Räume, Chemie-Fachräume, Holzwerkstätten: ggf. raumlufttechnische Anlage",
+"sources": [
+{
+"book": "G",
+"page": 565
+}
+],
+"norm": "DIN 58125 § 26; GUV-V S1 § 26"
+},
+{
+"id": "g6b.schule_tuer_anordnung",
+"topic": "tuer",
+"title": "Türen so anordnen, dass nach außen aufschlagende Flügel Schüler nicht gefährden: in den Raum aufschlagend, in Nischen oder am Flurende",
+"sources": [
+{
+"book": "G",
+"page": 566
+}
+]
+},
+{
+"id": "g6b.schule_tuer_breite_hoehe",
+"topic": "tuer",
+"title": "Türen zu Unterrichtsräumen lichte Breite ≥ 1,00 m (gefordert 0,90 m nach SchulBauR); einheitlich 1 m sinnvoll (Barrierefreiheit); lichte Höhe aller Türen ≥ 2,10 m",
+"sources": [
+{
+"book": "G",
+"page": 566
+}
+],
+"values": {
+"min": 100,
+"unit": "cm"
+},
+"condition": "Mindestforderung 90; Höhe ≥ 210",
+"norm": "SchulBauR"
+},
+{
+"id": "g6b.schule_fenster_sicherung",
+"topic": "fassade",
+"title": "Fenster dürfen beim Öffnen/Schließen und geöffnet niemanden gefährden: Öffnungsbegrenzung bei Schwingflügeln, Sperrsicherung an Dreh-Kipp-Beschlägen, Bremse bei Schiebefenstern; volle Lüftungsfunktion erhalten; Beschläge gerundet",
+"sources": [
+{
+"book": "G",
+"page": 566
+}
+],
+"norm": "DIN 58125 § 10; GUV-V S1 § 10"
+},
+{
+"id": "g6b.schule_zweiter_rettungsweg_fenster",
+"topic": "rettungsweg",
+"title": "zweiter Rettungsweg über Fenster und Feuerwehrleiter nur bei älteren Schulen (Baugenehmigung vor Januar 2001) nach Rettungskonzept – dann ohne Sperrsicherung; sonst in Schulen nicht erlaubt",
+"sources": [
+{
+"book": "G",
+"page": 526
+},
+{
+"book": "G",
+"page": 566
+}
+]
+},
+{
+"id": "g6b.unterrichtsraum_fensterlos_ausnahme",
+"topic": "belichtung",
+"title": "Ausnahmen fensterlos/Oberlicht: Werkstätten, Lehr- und Lernmittelräume, Sammlungs- und Putzräume",
+"sources": [
+{
+"book": "G",
+"page": 566
+}
+],
+"norm": "ASE BW"
+},
+{
+"id": "g6b.planungsgrundlagen_schulbau",
+"topic": "schule",
+"title": "maßgebliche Regelwerke Schulbau: Landesbauordnungen, DIN 58125 (Juli 2002) Schulbau, GUV-V S1 (Mai 2001) Unfallverhütungsvorschrift Schulen, GUV-SR 2001, Muster-Schulbau-Richtlinie MSchulbauR (10.07.1998), ASE BW (08.07.1983), SchBauFR (03.02.2006), VDI 6000 Blatt 3 und 6 (Nov. 2006), DIN 18024-1/-2, DIN 18040-1 (Entwurf 2009), DIN 4109 (1989), DIN 18041 (2004), DIN 18065 (2000), DIN 51130 (2004), GUV-R 181, GUV-I 8527, GUV-I 561 (Treppen)",
+"sources": [
+{
+"book": "G",
+"page": 561
+},
+{
+"book": "G",
+"page": 569
+}
+]
+},
+{
+"id": "g6b.abstand.schuelertisch_2er_schuelertisch_2er",
+"topic": "abstand",
+"title": "Abstand schuelertisch_2er – schuelertisch_2er (side)",
+"values": {
+"min": 80.0,
+"unit": "cm"
+},
+"condition": "Gang zwischen Tischspalten, regulärer Unterrichtsraum (Zeichnung 60-80)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 510
+}
+]
+},
+{
+"id": "g6b.abstand.schuelertisch_2er_schuelertisch_2er",
+"topic": "abstand",
+"title": "Abstand schuelertisch_2er – schuelertisch_2er (between)",
+"values": {
+"min": 80.0,
+"unit": "cm"
+},
+"condition": "Tischhinterkante zu Vorderkante nächste Reihe (Stuhlzone), hintereinander; Reihenraster 130",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 510
+}
+]
+},
+{
+"id": "g6b.abstand.werkbank_2er_160x80_werkbank_2er_160x80",
+"topic": "abstand",
+"title": "Abstand werkbank_2er_160x80 – werkbank_2er_160x80 (side)",
+"values": {
+"min": 100.0,
+"unit": "cm"
+},
+"condition": "Übungs-/Werkraum, besser 120 (GUV-SI 8009)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 510
+}
+]
+},
+{
+"id": "g6b.abstand.werkbank_2er_160x80_werkbank_2er_160x80",
+"topic": "abstand",
+"title": "Abstand werkbank_2er_160x80 – werkbank_2er_160x80 (between)",
+"values": {
+"min": 150.0,
+"unit": "cm"
+},
+"condition": "Rücken an Rücken, freier Abstand zwischen den Tischreihen (DIN 58125 § 25)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 510
+}
+]
+},
+{
+"id": "g6b.abstand.werkbank_2er_160x80_werkbank_2er_160x80",
+"topic": "abstand",
+"title": "Abstand werkbank_2er_160x80 – werkbank_2er_160x80 (between)",
+"values": {
+"min": 85.0,
+"unit": "cm"
+},
+"condition": "hintereinander (nur Zeichnung)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 510
+}
+]
+},
+{
+"id": "g6b.abstand.lehrerexperimentiertisch_schuelertisch",
+"topic": "abstand",
+"title": "Abstand lehrerexperimentiertisch – schuelertisch (front)",
+"values": {
+"min": 120.0,
+"unit": "cm"
+},
+"condition": "Mindestabstand (DIN 58125 § 25)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 510
+},
+{
+"book": "G",
+"page": 527
+}
+]
+},
+{
+"id": "g6b.abstand.werkbank_4er_wand",
+"topic": "abstand",
+"title": "Abstand werkbank_4er – wand (wall)",
+"values": {
+"min": 145.0,
+"unit": "cm"
+},
+"condition": "Längsseite mit Hockern zur Wand (Maßkette)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "g6b.abstand.werkbank_4er_werkbank_4er",
+"topic": "abstand",
+"title": "Abstand werkbank_4er – werkbank_4er (side)",
+"values": {
+"min": 150.0,
+"unit": "cm"
+},
+"condition": "zwischen zwei Gruppen an den Hockerseiten (Maßkette)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "g6b.abstand.werkbank_4er_werkbank_4er",
+"topic": "abstand",
+"title": "Abstand werkbank_4er – werkbank_4er (between)",
+"values": {
+"min": 100.0,
+"unit": "cm"
+},
+"condition": "≥ 100 an den Stirnseiten bzw. zur Wand (Maßkette)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 529
+}
+]
+},
+{
+"id": "g6b.abstand.arbeitstisch_werkraum_arbeitstisch_werkraum",
+"topic": "abstand",
+"title": "Abstand arbeitstisch_werkraum – arbeitstisch_werkraum (other)",
+"values": {
+"min": 60.0,
+"unit": "cm"
+},
+"condition": "zusätzlich ≥ 60 für Durchgänge zwischen zwei Arbeitstischen (über die Mindestabstände hinaus)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 528
+}
+]
+},
+{
+"id": "g6b.abstand.lehrerexperimentiertisch_wandtafel",
+"topic": "abstand",
+"title": "Abstand lehrerexperimentiertisch – wandtafel (front)",
+"values": {
+"min": 100.0,
+"unit": "cm"
+},
+"condition": "im Beispiel gezeichnet ca. 100 (kein Mindestmaß angegeben)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 527
+}
+]
+},
+{
+"id": "g6b.abstand.urinal_urinal",
+"topic": "abstand",
+"title": "Abstand urinal – urinal (between)",
+"values": {
+"min": 60.0,
+"unit": "cm"
+},
+"condition": "Achsabstand ≥ 60 (Schule)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 548
+}
+]
+},
+{
+"id": "g6b.abstand.urinal_wand",
+"topic": "abstand",
+"title": "Abstand urinal – wand (wall)",
+"values": {
+"min": 45.0,
+"unit": "cm"
+},
+"condition": "Achse zur Seitenwand ≥ 45",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 548
+}
+]
+},
+{
+"id": "g6b.abstand.wc_kabine_wc_kabine",
+"topic": "abstand",
+"title": "Abstand wc_kabine – wc_kabine (opposite)",
+"values": {
+"min": 125.0,
+"unit": "cm"
+},
+"condition": "Gang zwischen zwei gegenüberliegenden Kabinenreihen",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 548
+}
+]
+},
+{
+"id": "g6b.abstand.wc_kabine_wand",
+"topic": "abstand",
+"title": "Abstand wc_kabine – wand (opposite)",
+"values": {
+"min": 165.0,
+"unit": "cm"
+},
+"condition": "Gang vor einseitiger Kabinenreihe (Vorderkante bis Wand)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 548
+}
+]
+},
+{
+"id": "g6b.abstand.wc_barrierefrei_wand",
+"topic": "abstand",
+"title": "Abstand wc_barrierefrei – wand (side)",
+"values": {
+"min": 95.0,
+"unit": "cm"
+},
+"condition": "WC-Seitenkante zur Wand beidseitig ≥ 95 (DIN 18040 E ≥ 90)",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 550
+}
+]
+},
+{
+"id": "g6b.abstand.stuetzklappgriff_stuetzklappgriff",
+"topic": "abstand",
+"title": "Abstand stuetzklappgriff – stuetzklappgriff (between)",
+"values": {
+"min": 70.0,
+"unit": "cm"
+},
+"condition": "lichter Abstand (65-) 70",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 550
+}
+]
+},
+{
+"id": "g6b.abstand.waschtisch_unterfahrbar_wand",
+"topic": "abstand",
+"title": "Abstand waschtisch_unterfahrbar – wand (side)",
+"values": {
+"min": 20.0,
+"unit": "cm"
+},
+"condition": "im Beispiel zur Seitenwand",
+"notes": null,
+"sources": [
+{
+"book": "G",
+"page": 550
+}
+]
+},
+{
 "id": "l.lernformation_zeitanteile",
 "topic": "schule",
 "title": "Faustregel zeitliche Verteilung der Sozialformen im Unterricht der zukünftigen Schule (Seydel): 30 % allein, 30 % Kleingruppe (2–6 Schüler), 10 % Kreis der Klasse, 30 % frontal",
@@ -15751,6 +24557,939 @@ null
 }
 ],
 "condition": "qualitativ"
+},
+{
+"id": "l2.kz_flaeche_beispiele",
+"topic": "klassenzimmer",
+"title": "Gemessene Klassenzimmerflächen der Beispielpläne (M 1:250)",
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 130
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 133
+},
+{
+"book": "L",
+"page": 135
+},
+{
+"book": "L",
+"page": 137
+},
+{
+"book": "L",
+"page": 138
+},
+{
+"book": "L",
+"page": 139
+},
+{
+"book": "L",
+"page": 142
+},
+{
+"book": "L",
+"page": 145
+},
+{
+"book": "L",
+"page": 147
+},
+{
+"book": "L",
+"page": 149
+},
+{
+"book": "L",
+"page": 151
+},
+{
+"book": "L",
+"page": 153
+},
+{
+"book": "L",
+"page": 158
+},
+{
+"book": "L",
+"page": 161
+},
+{
+"book": "L",
+"page": 165
+},
+{
+"book": "L",
+"page": 169
+},
+{
+"book": "L",
+"page": 171
+}
+],
+"values": {
+"min": 43,
+"max": 85,
+"typ": 67,
+"unit": "m²"
+},
+"condition": "Standard-Klassenzimmer ohne Großraum/Doppelklasse; Großräume bis 116-140 m²",
+"notes": "aus Vektordaten gemessen, keine Buchangabe"
+},
+{
+"id": "l2.kz_flaeche_je_schueler",
+"topic": "klassenzimmer",
+"title": "Fläche je Schülerplatz in den gezeichneten Möblierungen",
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 142
+},
+{
+"book": "L",
+"page": 151
+},
+{
+"book": "L",
+"page": 165
+},
+{
+"book": "L",
+"page": 169
+}
+],
+"values": {
+"min": 1.7,
+"max": 3.1,
+"typ": 2.5,
+"unit": "m²/Schüler"
+},
+"condition": "Raumfläche lichte Maße / gezeichnete Schülerstühle"
+},
+{
+"id": "l2.kz_reihenabstand",
+"topic": "klassenzimmer",
+"title": "Achsabstand der Tischreihen bei Frontalunterricht (Tischtiefe 60-65 cm)",
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 130
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 133
+},
+{
+"book": "L",
+"page": 138
+},
+{
+"book": "L",
+"page": 139
+},
+{
+"book": "L",
+"page": 142
+},
+{
+"book": "L",
+"page": 151
+},
+{
+"book": "L",
+"page": 165
+},
+{
+"book": "L",
+"page": 169
+},
+{
+"book": "L",
+"page": 171
+}
+],
+"values": {
+"min": 118,
+"max": 150,
+"typ": 140,
+"unit": "cm"
+},
+"condition": "Mäder 140, Indersdorf 140, Ostfildern 120, Linden 134, Mummelsoll 129, Uetikon 140, Monte Carasso 118-122, Zug 130, Minami-Yamashiro 123, Sarasota 148, Mattenhof 140"
+},
+{
+"id": "l2.kz_abstand_tafel_erster_tisch",
+"topic": "klassenzimmer",
+"title": "Abstand Tafelwand bis Vorderkante erster Schülertisch",
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 133
+},
+{
+"book": "L",
+"page": 151
+},
+{
+"book": "L",
+"page": 165
+},
+{
+"book": "L",
+"page": 169
+},
+{
+"book": "L",
+"page": 171
+}
+],
+"values": {
+"min": 167,
+"max": 410,
+"typ": 280,
+"unit": "cm"
+},
+"condition": "Zone dazwischen für Lehrertisch und Bewegung"
+},
+{
+"id": "l2.kz_abstand_tafel_lehrertisch",
+"topic": "klassenzimmer",
+"title": "Abstand Tafelwand bis Lehrertisch (nächste Kante)",
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 138
+},
+{
+"book": "L",
+"page": 142
+},
+{
+"book": "L",
+"page": 151
+},
+{
+"book": "L",
+"page": 165
+},
+{
+"book": "L",
+"page": 169
+},
+{
+"book": "L",
+"page": 171
+}
+],
+"values": {
+"min": 79,
+"max": 207,
+"typ": 115,
+"unit": "cm"
+}
+},
+{
+"id": "l2.kz_tafel_laenge",
+"topic": "klassenzimmer",
+"title": "Wandtafel-Länge in den Plänen",
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 133
+},
+{
+"book": "L",
+"page": 135
+},
+{
+"book": "L",
+"page": 138
+},
+{
+"book": "L",
+"page": 151
+}
+],
+"values": {
+"min": 287,
+"max": 360,
+"typ": 300,
+"unit": "cm"
+},
+"condition": "zentriert an der Stirnwand; Mäder zusätzlich zweite Tafel 243"
+},
+{
+"id": "l2.kz_moeblierungsarten",
+"topic": "klassenzimmer",
+"title": "Gezeichnete Möblierungsvarianten: Frontal-Reihen (Zweiertische oder Einzeltische paarweise), U-Form aus Einzeltischen, Gruppentische (2-6 Tische), Mischformen mit Sitzkreis/Gruppenecke; Klassenraum mit 140 cm tiefer Dienstzone (Schränke, Waschbecken, Computer) flurseitig",
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 135
+},
+{
+"book": "L",
+"page": 145
+},
+{
+"book": "L",
+"page": 147
+},
+{
+"book": "L",
+"page": 149
+},
+{
+"book": "L",
+"page": 154
+},
+{
+"book": "L",
+"page": 158
+}
+]
+},
+{
+"id": "l2.kz_waschbecken",
+"topic": "klassenzimmer",
+"title": "Waschbecken im Klassenzimmer neben der Tür, meist in Nische/Schrankzone an der Flurwand",
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 133
+},
+{
+"book": "L",
+"page": 145
+},
+{
+"book": "L",
+"page": 149
+}
+]
+},
+{
+"id": "l2.bestuhlung_saal_reihen",
+"topic": "fachraum",
+"title": "Reihenbestuhlung in Musik-/Mehrzwecksälen: Platzbreite 46,6 cm, Reihenabstand 87,5 cm (Stuhl 40x40)",
+"sources": [
+{
+"book": "L",
+"page": 194
+},
+{
+"book": "L",
+"page": 195
+}
+],
+"values": {
+"typ": 87.5,
+"unit": "cm"
+},
+"condition": "Thurzelg [49] 15 Plätze je Reihe; Letzi [06] 14 je Reihe"
+},
+{
+"id": "l2.laborraum_reihen",
+"topic": "fachraum",
+"title": "Naturwiss. Übungsraum: Labortische 240x60 paarweise je Reihe mit ca. 100 cm Mittelgang, Reihenachsabstand ca. 145 cm",
+"sources": [
+{
+"book": "L",
+"page": 189
+}
+],
+"values": {
+"typ": 145,
+"unit": "cm"
+}
+},
+{
+"id": "l2.kabinenmasse_schule_beispiele",
+"topic": "toiletten",
+"title": "WC-Kabinen in Schulbeispielen: lichte Breite 84-91, Tiefe 121 (Grundschule) bis 169 (Gymnasium)",
+"sources": [
+{
+"book": "L",
+"page": 241
+},
+{
+"book": "L",
+"page": 245
+},
+{
+"book": "L",
+"page": 247
+},
+{
+"book": "L",
+"page": 251
+}
+],
+"values": {
+"min": 84,
+"max": 91,
+"unit": "cm"
+},
+"condition": "gemessen M 1:250"
+},
+{
+"id": "l2.geschosshoehe_schulbauten_beispiele",
+"topic": "schule",
+"title": "Geschosshöhen (OK Rohdecke bis OK Rohdecke) in Schulschnitten",
+"sources": [
+{
+"book": "L",
+"page": 75
+},
+{
+"book": "L",
+"page": 76
+},
+{
+"book": "L",
+"page": 99
+},
+{
+"book": "L",
+"page": 101
+}
+],
+"values": {
+"min": 326,
+"max": 366,
+"typ": 360,
+"unit": "cm"
+},
+"condition": "Brühl [30] 353-358; Mäder [33] 362; Ostfildern [48] 366; Andreanum [13] 326 (1960er)",
+"notes": "gemessen aus Schnitt/Grundriss M 1:250 (Rasterprofil 300 dpi, ca. ±3 cm)"
+},
+{
+"id": "l2.lichte_raumhoehe_beispiele",
+"topic": "klassenzimmer",
+"title": "Lichte Raumhöhe Klassenzimmer/Flure in Beispielschnitten",
+"sources": [
+{
+"book": "L",
+"page": 75
+},
+{
+"book": "L",
+"page": 76
+},
+{
+"book": "L",
+"page": 99
+},
+{
+"book": "L",
+"page": 100
+},
+{
+"book": "L",
+"page": 101
+},
+{
+"book": "L",
+"page": 169
+},
+{
+"book": "L",
+"page": 170
+}
+],
+"values": {
+"min": 296,
+"max": 334,
+"typ": 330,
+"unit": "cm"
+},
+"condition": "Brühl 320-326, Mäder 332, Ostfildern 332-334, Andreanum 296; mit Shed/Pultdach bis ca. 385 (Buochs [65]) bzw. Sarasota [10] ca. 330 / 270, Freudenberg [11] ca. 365",
+"notes": "gemessen aus Schnitt/Grundriss M 1:250 (Rasterprofil 300 dpi, ca. ±3 cm); Deckenstärke inkl. Aufbau im Schnitt 23-34 cm"
+},
+{
+"id": "l2.schultreppe_laufbreite_beispiele",
+"topic": "treppe",
+"title": "Laufbreite von Treppen in Schulgrundrissen M 1:250",
+"sources": [
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 133
+},
+{
+"book": "L",
+"page": 139
+},
+{
+"book": "L",
+"page": 147
+}
+],
+"values": {
+"min": 119,
+"max": 158,
+"unit": "cm"
+},
+"condition": "Uetikon [63] 119, Leutschenbach [68] 125, Ostfildern [48] 151, Linden [52] 158 (Länge der Stufenlinien)",
+"notes": "gemessen aus Vektordaten"
+},
+{
+"id": "l2.schultreppe_auftritt_beispiele",
+"topic": "treppe",
+"title": "Auftrittsbreite (Stufenlinienabstand) in Schulgrundrissen",
+"sources": [
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 133
+},
+{
+"book": "L",
+"page": 139
+},
+{
+"book": "L",
+"page": 147
+}
+],
+"values": {
+"min": 27,
+"max": 29,
+"typ": 28,
+"unit": "cm"
+},
+"condition": "Leutschenbach 27 (23 Stufen in einem Lauf), Uetikon 27, Linden 27,7-28, Ostfildern 28,5-29; bei Geschosshöhe ca. 3,6 m ergibt sich Steigung um 16 cm (vgl. l.json schultreppe_steigung_max)",
+"notes": "gemessen aus Vektordaten"
+},
+{
+"id": "l2.flurbreite_beispiele",
+"topic": "flur",
+"title": "Lichte Flurbreiten in Beispielen",
+"sources": [
+{
+"book": "L",
+"page": 149
+},
+{
+"book": "L",
+"page": 229
+}
+],
+"values": {
+"min": 290,
+"max": 383,
+"unit": "cm"
+},
+"condition": "Vella [29] 290 (inkl. Garderobenzone 57 und Sitzbank 49, freier Durchgang ca. 182); Riedmatt [43] 383 (Flur vor Klassen mit 140 cm Dienstzone im Klassenraum)",
+"notes": "gemessen aus Schnitt/Grundriss M 1:250 (Rasterprofil 300 dpi, ca. ±3 cm)"
+},
+{
+"id": "l2.aula_reihenbestuhlung_plan800",
+"topic": "aula",
+"title": "Aula-Bestuhlung in Grundrissen M 1:800: Stühle 45x45 dicht an dicht in Reihen (Achsmaß ca. 43-45), Reihenachsabstand ca. 105 cm, Mittelgang",
+"sources": [
+{
+"book": "L",
+"page": 108
+},
+{
+"book": "L",
+"page": 111
+},
+{
+"book": "L",
+"page": 113
+}
+],
+"values": {
+"typ": 105,
+"unit": "cm"
+},
+"condition": "Marie-Curie-Gymnasium [61] ca. 145 Stühle; Munkegårdsskolen [07] ca. 147; Letzi [06] ca. 67; Messgenauigkeit bei 1:800 ca. ±3 cm"
+},
+{
+"id": "l2.saal_reihenbestuhlung_plan250",
+"topic": "aula",
+"title": "Saalbestuhlung in Plänen M 1:250: Stuhl 40x40, Platzbreite 46,6, Reihenachsabstand 87,5 (freier Reihendurchgang 47,5)",
+"sources": [
+{
+"book": "L",
+"page": 194
+},
+{
+"book": "L",
+"page": 195
+}
+],
+"values": {
+"typ": 87.5,
+"unit": "cm"
+},
+"condition": "Thurzelg [49] 180 Plätze, Letzi Musiksaal [06] 98 Plätze"
+},
+{
+"id": "l2.abstand.wc_kabine_wc_kabine",
+"topic": "abstand",
+"title": "Abstand wc_kabine – wc_kabine (between)",
+"values": {
+"min": 97.0,
+"unit": "cm"
+},
+"condition": "Achsabstand Kabinen Andreanum [13] (Sek.), Kabine lichte Breite 90, Trennwand 7",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 241
+}
+]
+},
+{
+"id": "l2.abstand.wc_kabine_wc_kabine",
+"topic": "abstand",
+"title": "Abstand wc_kabine – wc_kabine (between)",
+"values": {
+"min": 98.0,
+"unit": "cm"
+},
+"condition": "Achsabstand Indersdorf [44], lichte Breite 91",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 245
+}
+]
+},
+{
+"id": "l2.abstand.wc_kabine_wc_kabine",
+"topic": "abstand",
+"title": "Abstand wc_kabine – wc_kabine (between)",
+"values": {
+"min": 94.0,
+"unit": "cm"
+},
+"condition": "Achsabstand Eichstätt [40], lichte Breite 87",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 247
+}
+]
+},
+{
+"id": "l2.abstand.wc_kabine_wc_kabine",
+"topic": "abstand",
+"title": "Abstand wc_kabine – wc_kabine (between)",
+"values": {
+"min": 93.0,
+"unit": "cm"
+},
+"condition": "Achsabstand Wasgenring [04] Primarschule, lichte Breite 84-89",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 251
+}
+]
+},
+{
+"id": "l2.abstand.waschtisch_schule_waschtisch_schule",
+"topic": "abstand",
+"title": "Abstand waschtisch_schule – waschtisch_schule (between)",
+"values": {
+"min": 63.0,
+"unit": "cm"
+},
+"condition": "Achsabstand Waschtische 50 breit (13 cm Lücke), Eichstätt [40]",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 247
+}
+]
+},
+{
+"id": "l2.abstand.waschtisch_schule_waschtisch_schule",
+"topic": "abstand",
+"title": "Abstand waschtisch_schule – waschtisch_schule (between)",
+"values": {
+"min": 78.0,
+"unit": "cm"
+},
+"condition": "Achsabstand Waschtische Andreanum [13] (28 cm Lücke)",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 241
+}
+]
+},
+{
+"id": "l2.abstand.waschtisch_schule_wand",
+"topic": "abstand",
+"title": "Abstand waschtisch_schule – wand (wall)",
+"values": {
+"min": 30.0,
+"unit": "cm"
+},
+"condition": "erster Waschtisch Seitenabstand zur Wand, Andreanum [13]",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 241
+}
+]
+},
+{
+"id": "l2.abstand.wc_kabinenreihe_wc_kabinenreihe",
+"topic": "abstand",
+"title": "Abstand wc_kabinenreihe – wc_kabinenreihe (opposite)",
+"values": {
+"min": 93.0,
+"unit": "cm"
+},
+"condition": "Gang zwischen zwei gegenüberliegenden Kabinenreihen (Türen schlagen in den Gang), Andreanum [13]",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 241
+}
+]
+},
+{
+"id": "l2.abstand.schultisch_schultisch",
+"topic": "abstand",
+"title": "Abstand schultisch – schultisch (between)",
+"values": {
+"min": 140.0,
+"unit": "cm"
+},
+"condition": "Achsabstand Tischreihen Frontalunterricht, typisch; Bereich 118-150 (Tischtiefe 60)",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 130
+},
+{
+"book": "L",
+"page": 139
+},
+{
+"book": "L",
+"page": 171
+}
+]
+},
+{
+"id": "l2.abstand.tafelwand_schultisch",
+"topic": "abstand",
+"title": "Abstand tafelwand – schultisch (front)",
+"values": {
+"min": 280.0,
+"unit": "cm"
+},
+"condition": "Tafelwand bis erste Schülertischreihe, Median der Beispiele; Bereich 167-410",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 133
+},
+{
+"book": "L",
+"page": 151
+},
+{
+"book": "L",
+"page": 165
+},
+{
+"book": "L",
+"page": 169
+}
+]
+},
+{
+"id": "l2.abstand.tafelwand_lehrertisch",
+"topic": "abstand",
+"title": "Abstand tafelwand – lehrertisch (front)",
+"values": {
+"min": 115.0,
+"unit": "cm"
+},
+"condition": "Tafelwand bis Lehrertisch, Median; Bereich 79-207",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 129
+},
+{
+"book": "L",
+"page": 131
+},
+{
+"book": "L",
+"page": 138
+},
+{
+"book": "L",
+"page": 142
+},
+{
+"book": "L",
+"page": 151
+},
+{
+"book": "L",
+"page": 165
+},
+{
+"book": "L",
+"page": 169
+}
+]
+},
+{
+"id": "l2.abstand.schultisch_gruppe_schultisch_gruppe",
+"topic": "abstand",
+"title": "Abstand schultisch_gruppe – schultisch_gruppe (between)",
+"values": {
+"min": 95.0,
+"unit": "cm"
+},
+"condition": "Gang zwischen Tischblöcken einer Reihe (Mäder [33])",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 129
+}
+]
+},
+{
+"id": "l2.abstand.labortisch_240x60_labortisch_240x60",
+"topic": "abstand",
+"title": "Abstand labortisch_240x60 – labortisch_240x60 (between)",
+"values": {
+"min": 99.0,
+"unit": "cm"
+},
+"condition": "Mittelgang zwischen den beiden Labortischen einer Reihe (Schreienesch [66])",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 189
+}
+]
+},
+{
+"id": "l2.abstand.reihenstuhl_aula_reihenstuhl_aula",
+"topic": "abstand",
+"title": "Abstand reihenstuhl_aula – reihenstuhl_aula (opposite)",
+"values": {
+"min": 87.5,
+"unit": "cm"
+},
+"condition": "Reihenachsabstand Saalbestuhlung M 1:250; seitlich Achsmaß 46,6",
+"notes": null,
+"sources": [
+{
+"book": "L",
+"page": 194
+},
+{
+"book": "L",
+"page": 195
+}
+]
 },
 {
 "id": "w.haushalte_anteil_1900_2006",

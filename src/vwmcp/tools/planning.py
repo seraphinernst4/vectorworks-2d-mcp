@@ -354,7 +354,7 @@ def vw2d_knowledge(
         out.append(json.dumps(info, ensure_ascii=False))
         return out
     cats: dict[str, list[str]] = {}
-    for e in kb.elements().values():
+    for e in kb.catalog().values():
         cats.setdefault(e.get("category", "sonstiges"), []).append(e["id"])
     info = {"sources": list(kb.BOOKS.values()),
             "elements_by_category": cats,

@@ -45,6 +45,12 @@ def elements() -> dict[str, dict]:
     return {e["id"]: e for e in _load("elements.json")}
 
 
+def catalog() -> dict[str, dict]:
+    """The elements to offer (without helpers that only exist inside a
+    standard layout, like an unlabelled built-in)."""
+    return {k: e for k, e in elements().items() if e.get("catalog", True)}
+
+
 @functools.cache
 def clearances() -> dict:
     return _load("clearances.json")
@@ -123,7 +129,7 @@ def search(query: str, limit: int = 40) -> dict:
     def hit(hay: str) -> bool:
         return all(one(w, hay) for w in words)
 
-    for e in elements().values():
+    for e in catalog().values():
         if hit(_hay(e["id"], e["name"], e.get("category"), e.get("short"), " ".join(e.get("keywords", [])),
                     " ".join(e.get("context", [])))):
             out["elements"].append(e["id"])
@@ -131,6 +137,8 @@ def search(query: str, limit: int = 40) -> dict:
         if hit(_hay(r["id"], r["name"], " ".join(r.get("context", [])), " ".join(r.get("keywords", [])))):
             out["rooms"].append(r["id"])
     for lay in layouts().values():
+        if lay.get("measured"):
+            continue
         if hit(_hay(lay["id"], lay["name"], lay.get("room"))):
             out["layouts"].append(lay["id"])
     for r in rules():
@@ -196,7 +204,8 @@ def spec(eid: str, mode: str = "standard", variant: str | None = None, w: float 
     return E.Spec(id=eid, w=W, d=D, short=e.get("short"), wall=bool(e.get("wall", True)),
                   areas=areas_of(e, mode), overlap_ok=tuple(e.get("overlap_ok", ())),
                   corner_ok=bool(e.get("corner_ok")), name=tag or e["name"],
-                  walkable=bool(e.get("walkable")), group=e.get("group"))
+                  walkable=bool(e.get("walkable")), group=e.get("group"),
+                  movable=e.get("kind") == "chair")
 
 
 def sides(mode: str = "standard") -> dict:
@@ -231,9 +240,10 @@ def placed_from_layout(lay: dict, mode: str = "standard") -> list[E.Placed]:
         rot = E.WALL_ROT.get(wall or "N", 0.0) if wall else float(el.get("rotation", 0.0))
         # local size: w along the wall
         lw, ld = (w, d) if wall in (None, "N", "S") else (d, w)
-        if wall is None and el.get("faces") in ("E", "W"):
-            lw, ld = d, w
-            rot = 90.0 if el["faces"] == "E" else 270.0
+        if wall is None and el.get("faces") in ("N", "S", "E", "W"):
+            # free-standing: turned so its front (local -y) points to where the user is
+            rot = {"S": 0.0, "N": 180.0, "E": 90.0, "W": 270.0}[el["faces"]]
+            lw, ld = (w, d) if el["faces"] in ("N", "S") else (d, w)
         try:
             sp = spec(el["element"], mode, w=lw, d=ld)
         except KeyError:
@@ -271,12 +281,10 @@ def fit(lay: dict, W: float, D: float, turn: int = 0, mirror: bool = False, mode
             rot = (-p.deg + turn * 90.0) % 360.0
         lw, ld = (x2 - x1, y2 - y1) if rot % 180 == 0 else (y2 - y1, x2 - x1)
         sp = E.Spec(p.spec.id, lw, ld, p.spec.short, p.spec.wall, p.spec.areas, p.spec.overlap_ok,
-                    p.spec.corner_ok, p.spec.name, p.spec.walkable, p.spec.group)
+                    p.spec.corner_ok, p.spec.name, p.spec.walkable, p.spec.group, p.spec.movable)
         bx, by = E.rot(0.0, ld / 2, rot)
         placed.append(E.Placed(sp, (x1 + x2) / 2 + bx, (y1 + y2) / 2 + by, rot, wall, p.tag))
-    doors = []
-    for dr in lay.get("doors") or []:
-        doors.append(_turn_door(dr, float(lay["W"]), float(lay["D"]), turn, mirror, dW, dD))
+    doors = []  # the book's doors are only sketched; the user gives the real door
     out = E.Layout(W, D, placed, [d for d in doors if d is not None], source=source_text(lay.get("sources")),
                    name=lay["name"])
     return out

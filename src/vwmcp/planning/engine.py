@@ -92,7 +92,8 @@ def local_rect_to_world(lx1, ly1, lx2, ly2, ix, iy, deg) -> Rect:
 @dataclass
 class Area:
     """A movement area beside an element (local frame).
-    side: front (towards -y) | left (-x) | right (+x) | back (+y, rare).
+    side: front (towards -y) | left (-x) | right (+x) | back (+y, rare) |
+    either (left or right, whichever is free - a single bed's access side).
     w: extent along the side (None = the element's side length); d: depth
     away from the element; d_extra: larger depth when another element faces
     it (opposite arrangement) - checked as a distance, drawn lighter.
@@ -106,11 +107,15 @@ class Area:
     offset: float = 0.0
     note: str = ""
 
-    def local(self, ew: float, ed: float, depth: float | None = None, shift: float = 0.0) -> tuple[float, float, float, float]:
+    def local(self, ew: float, ed: float, depth: float | None = None, shift: float = 0.0,
+              side: str | None = None) -> tuple[float, float, float, float]:
         """The area in the element's frame; shift moves an align="any" area
-        along the side (see shifts())."""
+        along the side, side resolves "either" (see resolve_shifts())."""
         d = self.d if depth is None else depth
-        if self.side in ("front", "back"):
+        side = side or self.side
+        if side == "either":
+            side = "left"
+        if side in ("front", "back"):
             w = ew if self.w is None else self.w
             if self.align == "start":
                 x1 = -ew / 2
@@ -119,14 +124,14 @@ class Area:
             else:
                 x1 = -w / 2
             x1 += self.offset + shift
-            if self.side == "front":
+            if side == "front":
                 return x1, -ed - d, x1 + w, -ed
             return x1, 0.0, x1 + w, d
         # along the side, from the back (wall, s = 0) to the front (s = ed)
         w = ed if self.w is None else self.w
         s0 = {"end": ed - w, "center": (ed - w) / 2}.get(self.align, 0.0) + self.offset + shift
         top, bottom = -s0, -(s0 + w)
-        if self.side == "left":
+        if side == "left":
             return -ew / 2 - d, bottom, -ew / 2, top
         return ew / 2, bottom, ew / 2 + d, top
 
@@ -145,6 +150,7 @@ class Spec:
     name: str = ""
     walkable: bool = False            # floor-level (bodengleicher Duschplatz): never blocks movement areas
     group: str | None = None          # same group (kitchen row) may stand in each other's areas (corners)
+    movable: bool = False             # chairs: stand in movement areas and under tables/desks
 
     def shift_range(self, a: Area) -> list[float]:
         """Positions to try for an align="any" area: centred first, then
@@ -171,6 +177,7 @@ class Placed:
     wall: str | None    # N/E/S/W or None (free)
     tag: str = ""
     shifts: dict = field(default_factory=dict)  # area index -> chosen shift (align="any")
+    sides: dict = field(default_factory=dict)   # area index -> chosen side (side="either")
 
     @property
     def rect(self) -> Rect:
@@ -181,13 +188,13 @@ class Placed:
         out = []
         for i, a in enumerate(self.spec.areas):
             depth = (a.d_extra if extra and a.d_extra else a.d)
-            lx1, ly1, lx2, ly2 = a.local(self.spec.w, self.spec.d, depth, self.shifts.get(i, 0.0))
+            lx1, ly1, lx2, ly2 = a.local(self.spec.w, self.spec.d, depth, self.shifts.get(i, 0.0), self.sides.get(i))
             out.append((a, local_rect_to_world(lx1, ly1, lx2, ly2, self.ix, self.iy, self.deg)))
         return out
 
-    def area_at(self, i: int, shift: float) -> Rect:
+    def area_at(self, i: int, shift: float, side: str | None = None) -> Rect:
         a = self.spec.areas[i]
-        lx1, ly1, lx2, ly2 = a.local(self.spec.w, self.spec.d, None, shift)
+        lx1, ly1, lx2, ly2 = a.local(self.spec.w, self.spec.d, None, shift, side)
         return local_rect_to_world(lx1, ly1, lx2, ly2, self.ix, self.iy, self.deg)
 
     @property
@@ -289,7 +296,7 @@ class Issue:
 
 def _blocks(q: Placed, p: Placed) -> bool:
     """Does q's Stellfläche count as an obstacle for p's movement areas?"""
-    if q is p or q.spec.walkable:
+    if q is p or q.spec.walkable or q.spec.movable:
         return False
     if q.spec.id in p.spec.overlap_ok or p.spec.id in q.spec.overlap_ok:
         return False
@@ -301,19 +308,25 @@ def resolve_shifts(placed: list[Placed], W: float, D: float) -> None:
     first) that is inside the room and free of other objects."""
     room = Rect(0.0, 0.0, W, D)
     for p in placed:
-        p.shifts = {}
+        p.shifts, p.sides = {}, {}
         for i, a in enumerate(p.spec.areas):
-            if a.align != "any":
+            if a.align != "any" and a.side != "either":
                 continue
-            best = None
-            for sh in p.spec.shift_range(a):
-                r = p.area_at(i, sh)
-                if r.inside(room) and not any(r.clip(q.rect) for q in placed if _blocks(q, p)):
-                    best = sh
+            best, free = None, False
+            for side in (("left", "right") if a.side == "either" else (None,)):
+                for sh in p.spec.shift_range(a):
+                    r = p.area_at(i, sh, side)
+                    if r.inside(room) and not any(r.clip(q.rect) for q in placed if _blocks(q, p)):
+                        best, free = (sh, side), True
+                        break
+                    if best is None and r.inside(room):
+                        best = (sh, side)  # inside at least
+                if free:
                     break
-                if best is None and r.inside(room):
-                    best = sh  # inside at least
-            p.shifts[i] = 0.0 if best is None else best
+            sh, side = best if best is not None else (0.0, None)
+            p.shifts[i] = sh
+            if side:
+                p.sides[i] = side
 
 
 def _label(p: Placed) -> str:
@@ -341,7 +354,7 @@ def check(placed: list[Placed], W: float, D: float, doors: list[Door] = (), side
     for p, q in itertools.combinations(placed, 2):
         if q.spec.id in p.spec.overlap_ok or p.spec.id in q.spec.overlap_ok:
             continue
-        if p.spec.walkable and q.spec.walkable:
+        if (p.spec.walkable and q.spec.walkable) or p.spec.movable or q.spec.movable:
             continue
         ov = p.rect.overlap(q.rect)
         if ov > 0:
@@ -362,6 +375,12 @@ def check(placed: list[Placed], W: float, D: float, doors: list[Door] = (), side
         fp, fq = p.facing, q.facing
         if abs(fp[0] + fq[0]) > 1e-6 or abs(fp[1] + fq[1]) > 1e-6:
             continue  # not facing each other
+        if p.spec.movable or q.spec.movable or p.spec.walkable or q.spec.walkable:
+            continue
+        cp = ((p.rect.x1 + p.rect.x2) / 2, (p.rect.y1 + p.rect.y2) / 2)
+        cq = ((q.rect.x1 + q.rect.x2) / 2, (q.rect.y1 + q.rect.y2) / 2)
+        if (cq[0] - cp[0]) * fp[0] + (cq[1] - cp[1]) * fp[1] <= 0:
+            continue  # back to back, not front to front
         need = max([a.d_extra or a.d for a in p.spec.areas if a.side == "front"]
                    + [a.d_extra or a.d for a in q.spec.areas if a.side == "front"] + [0.0])
         rp, rq = p.rect, q.rect
