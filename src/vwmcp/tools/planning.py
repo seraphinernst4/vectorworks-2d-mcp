@@ -260,7 +260,7 @@ def _rule_out(r: dict) -> dict:
     return out
 
 
-@mcp.tool(annotations=READ)
+@mcp.tool(annotations=READ, structured_output=False)
 def vw2d_knowledge(
     query: str | None = None,
     topic: str | None = None,
@@ -654,7 +654,7 @@ def _room_overlay(lay: E.Layout, st: dict, origin_mm, outline: bool, dims: bool)
     return under, over
 
 
-@mcp.tool(annotations=WRITE)
+@mcp.tool(annotations=WRITE, structured_output=False)
 def vw2d_plan_room(
     width: float | None = None,
     depth: float | None = None,
@@ -782,7 +782,7 @@ def vw2d_plan_room(
 
 # ---- checking a drawn room ------------------------------------------------------------------
 
-@mcp.tool(annotations=READ)
+@mcp.tool(annotations=READ, structured_output=False)
 def vw2d_check_room(
     room_uuid: str | None = None,
     bbox: list[float] | None = None,

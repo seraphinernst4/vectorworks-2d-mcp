@@ -75,7 +75,7 @@ def _assets_brief(found: list) -> list[dict]:
              "params": {k: v[0] for k, v in a.params.items()}} for a in found]
 
 
-@mcp.tool(annotations=READ)
+@mcp.tool(annotations=READ, structured_output=False)
 def vw2d_assets(
     query: str | None = None,
     category: Literal["sanitary", "kitchen", "furniture", "plants", "people", "vehicles"] | None = None,

@@ -50,6 +50,13 @@ Raumpilot-Bände und zeichnet es in einem Stil, den du bestimmst.
 - Gezeichnete Räume prüfen: Keystone-Elemente werden an ihrer
   Symbolbeschreibung erkannt, eure eigenen Symbole über den Stil.
 
+### Behoben
+- Vorschaubilder (`vw2d_assets`, `vw2d_knowledge`, `vw2d_plan_room`,
+  `vw2d_check_room`) brachen mit pydantic 2.14.2 ab („Error executing
+  tool“): diese Werkzeuge liefern jetzt Text + Bild ohne strukturierte
+  Ausgabe, wie schon `vw2d_check`/`vw2d_preview`. Betraf auch 0.5.0
+  (`vw2d_assets` mit Vorschau).
+
 ### Stil (`vw2d_style`, `vw2d_place_element`)
 - Erste Ebene ist der Raumpilot-Stil: schlichte Umrisse mit runden Ecken,
   weiß gefüllt; Bewegungsflächen hellblau von der Wand bis zur Mindesttiefe,

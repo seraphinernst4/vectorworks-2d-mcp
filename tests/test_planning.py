@@ -462,3 +462,24 @@ def test_style_tool(fake):
         T.vw2d_style("save", "mein", {"show": {"movement": 3}})
     T.vw2d_style("use", "raumpilot")
     assert T.vw2d_style("show")["active"] == "raumpilot"
+
+
+def test_tools_with_pictures_have_no_structured_output():
+    """A tool that returns text + preview image must not declare structured
+    output: pydantic >= 2.14.2 cannot serialise the Image and the call fails
+    ("Error executing tool"), seen live in Claude Desktop on 01.11.2026."""
+    import typing
+
+    from mcp.server.mcpserver import Image as Img
+
+    from vwmcp.server import mcp
+
+    pic = [json.dumps({"ok": True}), Img(data=b"\x89PNG\r\n\x1a\n", format="png")]
+    checked = []
+    for t in mcp._tool_manager.list_tools():
+        ret = str(typing.get_type_hints(t.fn).get("return"))
+        if "Image" in ret or ret in ("list[typing.Any]", "typing.Any"):
+            assert t.output_schema is None, t.name
+            t.fn_metadata.convert_result(pic)  # must not raise
+            checked.append(t.name)
+    assert {"vw2d_knowledge", "vw2d_plan_room", "vw2d_check_room", "vw2d_assets"} <= set(checked)
