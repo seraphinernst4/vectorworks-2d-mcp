@@ -73,7 +73,8 @@
     { "name": "vw2d_assets", "description": "Detailed symbols for elevations and sections (sanitary, furniture, trees, people, cars)." },
     { "name": "vw2d_place_asset", "description": "Places those symbols exactly, oriented to the wall." },
     { "name": "vw_revert_last", "description": "Undoes exactly Claude's last step." },
-    { "name": "vw_ping", "description": "Checks the connection to Vectorworks." }
+    { "name": "vw_ping", "description": "Checks the connection to Vectorworks (and whether a newer Keystone is out)." },
+    { "name": "vw_update", "description": "Finds the newest Keystone, downloads it and opens the install dialog." }
   ],
   "tools_generated": true,
   "compatibility": {

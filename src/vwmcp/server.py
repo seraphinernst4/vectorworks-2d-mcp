@@ -44,6 +44,9 @@ def main() -> None:
                 print(msg, file=sys.stderr)
         except (Exception, SystemExit) as e:  # never block the server
             print(f"bridge install skipped: {e}", file=sys.stderr)
+    from vwmcp import update
+
+    update.refresh_in_background()  # is there a newer Keystone? (cached; vw_ping reports it)
     mcp.run("stdio")
 
 

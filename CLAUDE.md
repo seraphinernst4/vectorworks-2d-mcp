@@ -2,7 +2,7 @@
 
 Mac-native MCP server for exact, well-organised 2D drawing in Vectorworks.
 Fork of https://github.com/giorgiomoroder/vectorworks-mcp (MIT), repo
-https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.6.3
+https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.6.4
 beta**, tested on Vectorworks 2026 Update 7 (German) on macOS; Vectorworks
 2027 prepared (Python 3.14), not live-tested. Read `docs/architecture.md`,
 `docs/api-pitfalls.md` and `docs/vs-notes.md` before changing anything that
@@ -69,6 +69,11 @@ touches Vectorworks.
   typed tool call. **Must stay Python 3.9** (VW 2026 embeds 3.9.2): no `match`,
   no `X | Y`, stdlib only. `tests/test_calls.py` parses it with `feature_version=(3, 9)`.
 - `src/vwmcp/journal.py`: per-call revert journal (`~/.vwmcp/journal.jsonl`).
+- `src/vwmcp/update.py`: update check against `server.json` on GitHub `main`
+  (cached 6 h, background thread at start; `vw_ping` reports it) and
+  `vw_update` (downloads the newest `.mcpb`, checks its manifest, opens it so
+  Claude Desktop shows the install dialog). Bump `server.json` with every
+  release - it is what installed copies compare against.
 - `src/vwmcp/tools/generic.py`, `tools/spotlight.py`: MCP tools (mcp 2.x `MCPServer`,
   the renamed FastMCP). `app.py` holds the server, `vw()` helper, annotations.
 - `src/vwmcp/install.py` + `server.py`: `vwmcp` (stdio server), `vwmcp install-plugin`.

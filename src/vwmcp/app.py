@@ -29,6 +29,11 @@ INSTRUCTIONS = """\
 Tools for a live Vectorworks session. Every call runs inside the user's open
 document (Keystone starts its bridge through AppleScript/VectorScript).
 
+UPDATES: vw_ping reports "update_available" when a newer Keystone is out -
+tell the user and offer vw_update (it finds the newest version, downloads the
+extension file to Downloads and opens Claude's install dialog; the user
+confirms "Aktualisieren"). Asked for the newest version, use vw_update too.
+
 EXACT 2D DRAWING (vw2d_* tools) - rules for architectural drawings:
 - Exactness first. Give coordinates in document units (or pass unit="mm"/"m";
   conversion and relative point chains use exact decimal arithmetic). Never

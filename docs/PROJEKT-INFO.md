@@ -2,7 +2,7 @@
 
 Alles Wissen zum Projekt an einer Stelle: was es ist, wie es aufgebaut ist,
 wie man es installiert, baut und veröffentlicht, was getestet ist und was
-offen ist. Stand: **01.11.2026, Version 0.6.3 (Beta)**.
+offen ist. Stand: **01.11.2026, Version 0.6.4 (Beta)**.
 
 ## Auf einen Blick
 
@@ -38,8 +38,14 @@ offen ist. Stand: **01.11.2026, Version 0.6.3 (Beta)**.
 3. **Test:** Zeichnung offen, neuer Chat: „Ping Vectorworks.“ macOS fragt,
    ob Claude Vectorworks steuern darf → **OK**.
 
-**Update:** Installer erneut ausführen (oder neue `.mcpb` doppelklicken) → in
-Claude „Aktualisieren“. **Vectorworks 2027:** nichts einstellen – Keystone
+**Update:** Ab 0.6.4 meldet `vw_ping` eine neuere Version (Abfrage der
+Versionsnummer auf GitHub `main`, `server.json`, höchstens alle 6 h,
+Zwischenspeicher `~/.vwmcp/update.json`, abschaltbar mit
+`VWMCP_UPDATE_CHECK=0`). `vw_update` lädt die neueste `.mcpb` in den
+Download-Ordner, prüft Name und Version im Paket und öffnet sie → Claude zeigt
+den Dialog, Nutzer klickt „Aktualisieren“. Claude Desktop selbst aktualisiert
+selbst installierte `.mcpb` nicht. Von Hand: Installer erneut ausführen oder
+neue `.mcpb` doppelklicken. **Vectorworks 2027:** nichts einstellen – Keystone
 nimmt das laufende Vectorworks; die Versions-Einstellung entscheidet nur,
 wenn mehrere gleichzeitig laufen.
 
@@ -52,7 +58,7 @@ Claude Desktop
                          und die erste tools/list SOFORT aus server/static.json,
                          reicht alles andere an Python weiter, findet/lädt uv
        └─ uv run server/main.py   (Python + Pakete in ~/.vwmcp/venv)
-            └─ vwmcp (src/vwmcp)  MCP-Server, 36 Werkzeuge
+            └─ vwmcp (src/vwmcp)  MCP-Server, 37 Werkzeuge
                  ├─ geom/          rechnet auf dem Server: exakte Bögen, Prüfungen,
                  │                 Korrekturen, Prüfbild (shapely, matplotlib)
                  ├─ planning/      Raumpilot-Wissen, Raumplanung, Prüfung, Stil
@@ -80,6 +86,7 @@ Claude Desktop
 | `src/vwmcp/tools/planning.py` | `vw2d_knowledge`, `vw2d_plan_room`, `vw2d_check_room`, `vw2d_place_element`, `vw2d_style` |
 | `src/vwmcp/organize.py`, `src/vwmcp/tools/organize.py` | Regeln zum Sortieren auf Klassen/Ebenen (`vw2d_organize`, Probelauf + ein Schritt) |
 | `src/vwmcp/tools/generic.py` | Werkzeuge aus dem Original (ping, records, Symbole, `vw_exec_python`, `vw_revert_last`) |
+| `src/vwmcp/update.py` | Neue Version? (GitHub `main`, Zwischenspeicher), neueste `.mcpb` laden und prüfen, Installationsdialog öffnen |
 | `src/vwmcp/journal.py` | Rückgängig-Journal `~/.vwmcp/journal.jsonl` |
 | `src/vwmcp/app.py` | Server, Anweisungen an Claude (Zeichen- und Organisationsregeln), Icon |
 | `vw-plugin/vwmcp/vwmcp_bridge.py` | Brücke in Vectorworks (0.2.1): atomares Beanspruchen (`.working`), geprüfter `vs`-Proxy, Bibliotheks-Cache, lädt sich bei Updates selbst neu; Python 3.9 + 3.14 |
@@ -95,7 +102,7 @@ Claude Desktop
 | `docs/api-pitfalls.md` | Übernommene API-Fallstricke (vwx-mcp, vwmcp) mit Live-Befund |
 | `NOTICE`, `CHANGELOG.md` | Lizenzhinweise der Vorlagen; Änderungen |
 
-## Werkzeuge (36)
+## Werkzeuge (37)
 
 **2D:** `vw2d_structure` (Ebenen/Klassen + Organisationsprobleme), `vw2d_read`,
 `vw2d_resources` (Schraffuren, Linienarten, Klassen, Ebenen), `vw2d_setup`
@@ -119,7 +126,8 @@ eigener Bürostil mit eigenen Symbolen, Klassen, Farben).
 **Aus dem Original:** `vw_ping`, `vw_document_info`, `vw_list_layers`,
 `vw_list_classes`, `vw_get_selection`, `vw_find_objects`, `vw_get_record`,
 `vw_set_record`, `vw_list_symbols`, `vw_insert_symbol`, `vw_revert_last`,
-`vw_exec_python`, `vw_vs_lookup`. Spotlight-Werkzeuge nur mit
+`vw_exec_python`, `vw_vs_lookup`; dazu `vw_update` (neueste Version holen und
+den Installationsdialog öffnen). Spotlight-Werkzeuge nur mit
 `VWMCP_SPOTLIGHT=1`.
 
 **Regeln, die Claude mitbekommt** (`app.py`, Skill): exakt (nichts runden,
@@ -332,3 +340,4 @@ Start 0,7 s, Ping, Signaturprüfung, Lesen, Wissen, Raum planen bestanden.
 | 0.6.1 | 01.11.2026 | Vorschaubilder in Claude Desktop (pydantic 2.14.2 konnte die Bilder nicht verpacken) |
 | 0.6.2 | 01.11.2026 | Tür-Abstand wie im Plan abgelesen (von der linken unteren Innenecke), deutsche Wandnamen, umbrochene Bildunterschriften |
 | 0.6.3 | 01.11.2026 | Echte Umlaute in Namen/Texten, Raumprüfung warnt bei leerem/unplausiblem Raum; live in Claude Desktop geprüft (Vorschau, Tür, Zeichnen, Prüfen, Rückgängig) |
+| 0.6.4 | 02.11.2026 | Update-Meldung in `vw_ping`, `vw_update` holt die neueste Version und öffnet den Installationsdialog |

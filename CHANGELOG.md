@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.4 – 02.11.2026
+
+- **Updates über Claude:** `vw_ping` meldet, wenn eine neuere Version
+  veröffentlicht ist. `vw_update` sucht die neueste Version heraus, legt die
+  Erweiterung in den Download-Ordner (Name und Version im Paket geprüft) und
+  öffnet den Installationsdialog von Claude – nur noch „Aktualisieren“
+  klicken. In Vectorworks ist nichts zu tun. Gefragt wird nur nach der
+  Versionsnummer auf GitHub, höchstens alle 6 Stunden;
+  `VWMCP_UPDATE_CHECK=0` schaltet es ab.
+
 ## 0.6.3 – 01.11.2026
 
 - Namen und Texte der Wissensbasis mit echten Umlauten (Symbol „WC mit

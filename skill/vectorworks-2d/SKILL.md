@@ -117,3 +117,9 @@ lückenlose Flächen, klare Ebenen- und Klassenstruktur.
   Einsetzpunkt bei Wandobjekten: Mitte der Wandseite.
 - Maße als `params` in mm; mehrere gleiche Objekte über `placements`;
   linke/rechte Variante mit `mirror`.
+
+## Updates
+
+- Meldet `vw_ping` „update_available“: dem Nutzer sagen und `vw_update`
+  anbieten – lädt die neueste Erweiterung in „Downloads“ und öffnet den
+  Installationsdialog; der Nutzer klickt „Aktualisieren“.

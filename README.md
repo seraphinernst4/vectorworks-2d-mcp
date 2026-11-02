@@ -117,7 +117,11 @@ Mit einer offenen Zeichnung in Vectorworks schreibst du Claude: *„Ping
 Vectorworks.“* Beim ersten Mal fragt macOS,
 ob Claude Vectorworks steuern darf – **OK** klicken.
 
-**Update:** Neue `.mcpb` herunterladen und doppelklicken. **Vectorworks 2027:**
+**Update:** Claude meldet von selbst, wenn eine neue Version da ist („Update
+verfügbar“). Sag dann z. B. „Aktualisiere Keystone“: Claude sucht die neueste
+Version heraus, legt sie in deinen Download-Ordner und öffnet den
+Installationsdialog – du klickst nur noch **Aktualisieren**. (Von Hand: neue
+`.mcpb` herunterladen und doppelklicken.) **Vectorworks 2027:**
 nichts einstellen – Keystone spricht mit dem Vectorworks, das gerade läuft.
 Nur wenn 2026 und 2027 gleichzeitig offen sind, entscheidet die Einstellung
 Claude ▸ Einstellungen ▸ Erweiterungen ▸ Keystone for Vectorworks ▸
@@ -185,7 +189,9 @@ Was Claude aus deiner Zeichnung liest (Koordinaten, Namen, Klassen, Texte),
 geht als Teil deiner Unterhaltung an Anthropic. Die `.vwx`-Datei selbst wird
 nicht hochgeladen. Bei Projekten mit Vertraulichkeitsvereinbarung vorher
 prüfen, ob das erlaubt ist. Die Brücke läuft komplett auf deinem Mac
-(`~/.vwmcp/`).
+(`~/.vwmcp/`). Für die Update-Meldung fragt Keystone alle paar Stunden bei
+GitHub nach der Versionsnummer – ohne Daten von dir; abschalten mit
+`VWMCP_UPDATE_CHECK=0`.
 
 ## Fehlersuche
 

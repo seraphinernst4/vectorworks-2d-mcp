@@ -20,3 +20,9 @@ def fake_vs():
 @pytest.fixture
 def root(tmp_path):
     return tmp_path / "vwmcp"
+
+
+@pytest.fixture(autouse=True)
+def _no_update_check(monkeypatch):
+    """Tests never ask GitHub for a newer Keystone (test_update fakes it)."""
+    monkeypatch.setenv("VWMCP_UPDATE_CHECK", "0")

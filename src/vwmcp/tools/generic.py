@@ -5,8 +5,9 @@ from __future__ import annotations
 from typing import Any
 
 from mcp.server.mcpserver.exceptions import ToolError
+from mcp.types import ToolAnnotations
 
-from vwmcp import app, calls
+from vwmcp import __version__, app, calls, update
 from vwmcp.app import READ, WRITE, mcp, vw
 from vwmcp.client import BridgeError
 from vwmcp.journal import JournalError
@@ -85,8 +86,52 @@ def vw_ping() -> dict:
     timing = app.get_bridge().last_timing
     if timing:
         out["round_trip_s"] = timing.get("total_s")
+    out["keystone_version"] = __version__
+    try:
+        u = update.check(timeout=2.0)
+        if u.get("update_available"):
+            out["update_available"] = {
+                "latest": u["latest"],
+                "hint": "Tell the user Keystone %s is out (this is %s) and offer vw_update: it downloads the "
+                        "newest extension file and opens Claude's install dialog." % (u["latest"], __version__)}
+    except Exception:  # noqa: BLE001 - the ping must never fail because of the update check
+        pass
     if warnings:
         out["warning"] = " ".join(warnings)
+    return out
+
+
+@mcp.tool(annotations=ToolAnnotations(read_only_hint=False, destructive_hint=False, open_world_hint=True))
+def vw_update(install: bool = True, force: bool = False) -> dict:
+    """Keystone itself: is there a newer version - and get it. Looks up the
+    newest release (GitHub, main branch). If it is newer than this one (or
+    force=True), downloads the extension file into the user's Downloads
+    folder and, with install=True, opens it: Claude Desktop shows its
+    install dialog and the user confirms with "Aktualisieren"/"Update"
+    (Keystone restarts; nothing to do in Vectorworks, the bridge updates
+    itself). install=False only downloads (file path returned) - e.g. to
+    hand the file over. Tell the user the version, where the file is, and
+    that they have to confirm the dialog."""
+    st = update.check(force=True, timeout=8.0)
+    out = {"current": __version__, "latest": st.get("latest")}
+    if st.get("error") and not st.get("latest"):
+        raise ToolError(st["error"])
+    if not st.get("update_available") and not force:
+        out["up_to_date"] = True
+        out["message"] = "Keystone %s is the newest version." % __version__
+        return out
+    try:
+        got = update.download()
+    except OSError as e:
+        raise ToolError(str(e)) from e
+    out.update(got)
+    if install:
+        out["installer_opened"] = update.open_installer(got["file"])
+        out["message"] = (("Claude Desktop shows the install dialog for Keystone %s - confirm with "
+                           "'Aktualisieren'/'Update'." % got["version"]) if out["installer_opened"] else
+                          "Downloaded; double-click the file to install it.")
+    else:
+        out["message"] = "Downloaded Keystone %s to %s." % (got["version"], got["file"])
     return out
 
 
