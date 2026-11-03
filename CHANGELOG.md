@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.6.5 – 03.11.2026
+
+- **Claude besteht auf Updates:** Solange eine neuere Version veröffentlicht
+  ist, hängt Keystone an **jede** Werkzeug-Antwort einen Update-Hinweis an
+  (nicht nur an `vw_ping`). Claude unterbricht dann die Arbeit, sagt, dass
+  eine neue Version da ist, und bietet an, sofort mit `vw_update` zu
+  aktualisieren. Nur wenn man ausdrücklich „nicht jetzt“ sagt, arbeitet
+  Claude weiter – und erinnert am Ende jeder Antwort erneut, bis aktualisiert
+  ist.
+- Der Hinweis kommt nur aus dem Zwischenspeicher und lässt kein Werkzeug auf
+  GitHub warten. Läuft Claude Desktop tagelang, fragt Keystone bei veraltetem
+  Zwischenspeicher im Hintergrund neu nach (höchstens alle 15 Minuten).
+  `VWMCP_UPDATE_CHECK=0` schaltet weiterhin alles ab.
+
 ## 0.6.4 – 02.11.2026
 
 - **Updates über Claude:** `vw_ping` meldet, wenn eine neuere Version

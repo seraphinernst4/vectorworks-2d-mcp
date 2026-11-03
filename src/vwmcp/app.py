@@ -9,9 +9,9 @@ from pathlib import Path
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
-from mcp.types import Icon, ToolAnnotations
+from mcp.types import CallToolResult, Icon, TextContent, ToolAnnotations
 
-from vwmcp import calls
+from vwmcp import calls, update
 from vwmcp.client import Bridge, BridgeError
 from vwmcp.journal import Journal
 
@@ -29,10 +29,16 @@ INSTRUCTIONS = """\
 Tools for a live Vectorworks session. Every call runs inside the user's open
 document (Keystone starts its bridge through AppleScript/VectorScript).
 
-UPDATES: vw_ping reports "update_available" when a newer Keystone is out -
-tell the user and offer vw_update (it finds the newest version, downloads the
-extension file to Downloads and opens Claude's install dialog; the user
-confirms "Aktualisieren"). Asked for the newest version, use vw_update too.
+UPDATES - insist on them: while a newer Keystone is out, every tool result
+ends with a "KEYSTONE UPDATE REQUIRED" note (vw_ping: "update_available").
+Then, before you continue the user's task, stop and tell the user that a new
+version is available and that they should update now; insist on it and offer
+to do it right away with vw_update (it finds the newest version, downloads
+the extension file to Downloads and opens Claude's install dialog; the user
+confirms "Aktualisieren"; nothing to do in Vectorworks). Don't just mention
+it in passing. Only if the user explicitly says not now, carry on - and
+remind them at the end of every reply until they have updated. Asked for the
+newest version, use vw_update too.
 
 EXACT 2D DRAWING (vw2d_* tools) - rules for architectural drawings:
 - Exactness first. Give coordinates in document units (or pass unit="mm"/"m";
@@ -119,8 +125,28 @@ def _icons() -> list[Icon]:
                  mime_type="image/png", sizes=["256x256"])]
 
 
-mcp = MCPServer(DISPLAY_NAME, title=DISPLAY_NAME, instructions=INSTRUCTIONS, website_url=HOMEPAGE,
-                icons=_icons() or None, version=_version())
+class KeystoneServer(MCPServer):
+    """MCPServer that appends the update note to every tool result while a
+    newer Keystone is out (from the cache only - never waits for GitHub)."""
+
+    QUIET = frozenset({"vw_update", "vw_ping"})  # they report the update themselves
+
+    async def call_tool(self, name, arguments, context=None):
+        result = await super().call_tool(name, arguments, context)
+        if name in self.QUIET or not isinstance(result, CallToolResult):
+            return result
+        try:
+            p = update.pending()
+        except Exception:  # noqa: BLE001 - a tool result must never fail because of the update check
+            return result
+        if not p:
+            return result
+        note = TextContent(type="text", text=update.notice(p))
+        return result.model_copy(update={"content": [*result.content, note]})
+
+
+mcp = KeystoneServer(DISPLAY_NAME, title=DISPLAY_NAME, instructions=INSTRUCTIONS, website_url=HOMEPAGE,
+                     icons=_icons() or None, version=_version())
 
 
 @functools.cache

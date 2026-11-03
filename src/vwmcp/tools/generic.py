@@ -90,10 +90,7 @@ def vw_ping() -> dict:
     try:
         u = update.check(timeout=2.0)
         if u.get("update_available"):
-            out["update_available"] = {
-                "latest": u["latest"],
-                "hint": "Tell the user Keystone %s is out (this is %s) and offer vw_update: it downloads the "
-                        "newest extension file and opens Claude's install dialog." % (u["latest"], __version__)}
+            out["update_available"] = {"latest": u["latest"], "hint": update.notice(u)}
     except Exception:  # noqa: BLE001 - the ping must never fail because of the update check
         pass
     if warnings:

@@ -2,7 +2,7 @@
 
 Alles Wissen zum Projekt an einer Stelle: was es ist, wie es aufgebaut ist,
 wie man es installiert, baut und veröffentlicht, was getestet ist und was
-offen ist. Stand: **01.11.2026, Version 0.6.4 (Beta)**.
+offen ist. Stand: **03.11.2026, Version 0.6.5 (Beta)**.
 
 ## Auf einen Blick
 
@@ -38,7 +38,11 @@ offen ist. Stand: **01.11.2026, Version 0.6.4 (Beta)**.
 3. **Test:** Zeichnung offen, neuer Chat: „Ping Vectorworks.“ macOS fragt,
    ob Claude Vectorworks steuern darf → **OK**.
 
-**Update:** Ab 0.6.4 meldet `vw_ping` eine neuere Version (Abfrage der
+**Update:** Ab 0.6.5 hängt Keystone an jede Werkzeug-Antwort einen Hinweis
+„KEYSTONE UPDATE REQUIRED“, solange eine neuere Version veröffentlicht ist;
+Claude unterbricht dann und besteht auf dem Update (nur aus dem
+Zwischenspeicher, kein Warten auf GitHub; veralteter Zwischenspeicher wird
+höchstens alle 15 min im Hintergrund erneuert). Ab 0.6.4 meldet `vw_ping` eine neuere Version (Abfrage der
 Versionsnummer auf GitHub `main`, `server.json`, höchstens alle 6 h,
 Zwischenspeicher `~/.vwmcp/update.json`, abschaltbar mit
 `VWMCP_UPDATE_CHECK=0`). `vw_update` lädt die neueste `.mcpb` in den
@@ -341,3 +345,4 @@ Start 0,7 s, Ping, Signaturprüfung, Lesen, Wissen, Raum planen bestanden.
 | 0.6.2 | 01.11.2026 | Tür-Abstand wie im Plan abgelesen (von der linken unteren Innenecke), deutsche Wandnamen, umbrochene Bildunterschriften |
 | 0.6.3 | 01.11.2026 | Echte Umlaute in Namen/Texten, Raumprüfung warnt bei leerem/unplausiblem Raum; live in Claude Desktop geprüft (Vorschau, Tür, Zeichnen, Prüfen, Rückgängig) |
 | 0.6.4 | 02.11.2026 | Update-Meldung in `vw_ping`, `vw_update` holt die neueste Version und öffnet den Installationsdialog |
+| 0.6.5 | 03.11.2026 | Update-Hinweis an jeder Werkzeug-Antwort; Claude besteht auf dem sofortigen Update |

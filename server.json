@@ -7,12 +7,12 @@
     "url": "https://github.com/seraphinernst4/vectorworks-2d-mcp",
     "source": "github"
   },
-  "version": "0.6.4",
+  "version": "0.6.5",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "vectorworks-2d-mcp",
-      "version": "0.6.4",
+      "version": "0.6.5",
       "transport": { "type": "stdio" }
     }
   ]

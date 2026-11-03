@@ -117,11 +117,13 @@ Mit einer offenen Zeichnung in Vectorworks schreibst du Claude: *„Ping
 Vectorworks.“* Beim ersten Mal fragt macOS,
 ob Claude Vectorworks steuern darf – **OK** klicken.
 
-**Update:** Claude meldet von selbst, wenn eine neue Version da ist („Update
-verfügbar“). Sag dann z. B. „Aktualisiere Keystone“: Claude sucht die neueste
+**Update:** Ist eine neue Version da, unterbricht Claude und besteht darauf,
+dass du gleich aktualisierst (ab 0.6.5 bei jedem Werkzeugaufruf, vorher nur
+beim Ping). Sag „Ja“ oder „Aktualisiere Keystone“: Claude sucht die neueste
 Version heraus, legt sie in deinen Download-Ordner und öffnet den
-Installationsdialog – du klickst nur noch **Aktualisieren**. (Von Hand: neue
-`.mcpb` herunterladen und doppelklicken.) **Vectorworks 2027:**
+Installationsdialog – du klickst nur noch **Aktualisieren**. Sagst du „nicht
+jetzt“, arbeitet Claude weiter und erinnert dich am Ende jeder Antwort.
+(Von Hand: neue `.mcpb` herunterladen und doppelklicken.) **Vectorworks 2027:**
 nichts einstellen – Keystone spricht mit dem Vectorworks, das gerade läuft.
 Nur wenn 2026 und 2027 gleichzeitig offen sind, entscheidet die Einstellung
 Claude ▸ Einstellungen ▸ Erweiterungen ▸ Keystone for Vectorworks ▸

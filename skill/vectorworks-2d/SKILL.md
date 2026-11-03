@@ -120,6 +120,10 @@ lückenlose Flächen, klare Ebenen- und Klassenstruktur.
 
 ## Updates
 
-- Meldet `vw_ping` „update_available“: dem Nutzer sagen und `vw_update`
-  anbieten – lädt die neueste Erweiterung in „Downloads“ und öffnet den
-  Installationsdialog; der Nutzer klickt „Aktualisieren“.
+- Steht in einer Werkzeug-Antwort „KEYSTONE UPDATE REQUIRED“ (bei `vw_ping`:
+  „update_available“): vor dem Weiterarbeiten anhalten, dem Nutzer sagen,
+  dass eine neue Version da ist, auf dem Update bestehen und sofort
+  `vw_update` anbieten – lädt die neueste Erweiterung in „Downloads“ und
+  öffnet den Installationsdialog; der Nutzer klickt „Aktualisieren“. Nur
+  bei ausdrücklichem „nicht jetzt“ weitermachen und am Ende jeder Antwort
+  erneut erinnern.
