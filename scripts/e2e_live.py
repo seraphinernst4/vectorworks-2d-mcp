@@ -134,6 +134,21 @@ def _close(a, b, tol):
     return a == b
 
 
+def looks(layer):
+    """What each object shows (attributes without the by-class flags, class left out)."""
+    recs = draw2d._read(layer=layer, geometry=True, allow_temp=False, limit=200000)["objects"]
+    out = []
+    for r in recs:
+        a = dict(r.get("attrs") or {})
+        a.pop("by_class", None)
+        if r.get("kind") == "line":  # a line shows no fill
+            for k in ("fill", "fill_color", "hatch"):
+                a.pop(k, None)
+        geo = r.get("vertices") or [r.get("p1"), r.get("p2")]
+        out.append(json.dumps(_round({"kind": r.get("kind"), "attrs": a, "geo": geo}), sort_keys=True))
+    return out
+
+
 def same(a, b):
     """Ordered and unordered comparison of two fingerprints."""
     from collections import Counter
@@ -254,8 +269,13 @@ def phase_organize_group():
              {"match": {"class": "*Fills"}, "class": "Schnitt-Füllung", "by_class": True},
              {"match": {"class": "Make2D$Visible$*"}, "class": "Ansicht", "by_class": True}]
     run("organize dry", lambda: pick(organize.vw2d_organize(rules=rules, layer=lay), ("to_change", "unmatched", "targets")))
-    run("organize apply", lambda: pick(organize.vw2d_organize(rules=rules, layer=lay, dry_run=False),
-                                       ("changed", "targets", "dry_run")))
+    def org():
+        lk0 = looks(lay)
+        out = pick(organize.vw2d_organize(rules=rules, layer=lay, dry_run=False),
+                   ("changed", "targets", "dry_run", "by_class_looks"))
+        out["look_kept"] = same(lk0, looks(lay))
+        return out
+    run("organize apply", org)
     run("setup line weights", lambda: pick(draw2d.vw2d_setup(classes=[
         {"name": "Schnitt-Linie", "attributes": {"pen": "#000000", "line_weight": 0.5, "fill": "none"}},
         {"name": "Schnitt-Füllung", "attributes": {"pen": "#000000", "fill": "#404040", "line_weight": 0.05}},
@@ -489,11 +509,13 @@ def phase_vectorview():
                                                 ("errors", "warnings", "by_kind")))
 
     def bycls():
+        lk0 = looks(lay)
         n0 = len(J.path.read_text(encoding="utf-8").splitlines()) if J.path.exists() else 0
         r = res(draw2d.vw2d_fix("by_class", layer=lay, image=False))
         n1 = len(J.path.read_text(encoding="utf-8").splitlines()) if J.path.exists() else 0
         state["applied"] += 1 if n1 > n0 else 0
-        return {"journaled": n1 > n0, "summary": pick(r.get("summary") or {}, ("errors", "warnings"))}
+        return {"journaled": n1 > n0, "by_class_looks": (r.get("applied") or {}).get("by_class_looks"),
+                "look_kept": same(lk0, looks(lay))}
     run("vv by_class", bycls)
     run("vv check after cleanup", lambda: pick(res(draw2d.vw2d_check(layer=lay, image=False, max_issues=1,
                                                                      preset="drawing"))["summary"],

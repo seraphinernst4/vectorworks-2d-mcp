@@ -1706,6 +1706,10 @@ def _revert2d(ops):
             if fh is not None and _is_nil(vs.FInFolder(fh)):
                 vs.DelObject(fh)
                 deleted += 1
+        elif kind == "class_look":
+            if op["class"] in class_names():
+                _set_class_look(op["class"], op["before"])
+                restored += 1
         elif kind == "fields":
             h = _get_by_uuid(op["uuid"], hmap)
             if _is_nil(h):
@@ -1767,6 +1771,109 @@ def _unique(hs):
     return out
 
 
+LOOK_KEYS = ("fpat", "hatch", "fill_fore", "fill_back", "pen_fore", "pen_back", "lw", "lsn")  # what 'by class' covers
+
+
+def _class_look(c):
+    """A class's graphic attributes in raw_attrs form."""
+    hatch = vs.GetClVectorFill(c)
+    if isinstance(hatch, (tuple, list)):
+        hatch = hatch[1] if hatch[0] else None
+    return {"fpat": vs.GetClFPat(c), "hatch": _str(hatch) or None, "fill_fore": list(vs.GetClFillFore(c)),
+            "fill_back": list(vs.GetClFillBack(c)), "pen_fore": list(vs.GetClPenFore(c)),
+            "pen_back": list(vs.GetClPenBack(c)), "lw": vs.GetClLW(c), "lsn": vs.GetClLSN(c)}
+
+
+def _set_class_look(c, k):
+    vs.SetClPenFore(c, tuple(k["pen_fore"]))
+    vs.SetClPenBack(c, tuple(k["pen_back"]))
+    vs.SetClFillFore(c, tuple(k["fill_fore"]))
+    vs.SetClFillBack(c, tuple(k["fill_back"]))
+    if k.get("hatch"):
+        vs.SetClVectorFill(c, k["hatch"])
+    else:
+        vs.SetClFPat(c, k["fpat"])
+    vs.SetClLW(c, k["lw"])
+    vs.SetClLSN(c, k["lsn"])
+
+
+def _obj_look(h, cl):
+    """What the object shows: its own attributes, the class's where it already follows it."""
+    r = raw_attrs(h)
+    fp, fc, pc, lw, ls = r["by_class"]
+    k = {x: r[x] for x in LOOK_KEYS}
+    if fp:
+        k["fpat"], k["hatch"] = cl["fpat"], cl["hatch"]
+    if fc:
+        k["fill_fore"], k["fill_back"] = cl["fill_fore"], cl["fill_back"]
+    if pc:
+        k["pen_fore"], k["pen_back"] = cl["pen_fore"], cl["pen_back"]
+    if lw:
+        k["lw"] = cl["lw"]
+    if ls:
+        k["lsn"] = cl["lsn"]
+    if vs.GetTypeN(h) in (2, 17, 63):  # no fill to show: any class fill is fine
+        k["fpat"] = k["hatch"] = k["fill_fore"] = k["fill_back"] = None
+    return k
+
+
+def _merge_looks(looks):
+    """One look all agree on (None = don't care), or None when they differ."""
+    out = {}
+    for k in looks:
+        for x, v in k.items():
+            if v is None:
+                continue
+            if x in out and out[x] != v:
+                return None
+            out[x] = v
+    return out
+
+
+def keep_looks(hs):
+    """Before objects switch to 'by class': a class whose objects here all
+    look the same, and that no other object follows yet, takes that look -
+    so the drawing looks exactly as before (imported classes rarely match
+    their objects: VectorView outlines would turn into black fills). Returns
+    (journal ops, report). Classes with mixed looks are reported, not
+    changed."""
+    by = {}
+    for h in hs:
+        if vs.GetTypeN(h) in SHAPE_TYPES or vs.GetTypeN(h) in (10, 17, 63):
+            by.setdefault(_str(vs.GetClass(h)), []).append(h)
+    ops, rep = [], {"adopted": [], "mixed": [], "shared": []}
+    for c, items in by.items():
+        try:
+            cl = _class_look(c)
+        except Exception:  # noqa: BLE001 - e.g. a class Vectorworks won't report
+            continue
+        merged = _merge_looks([_obj_look(h, cl) for h in items])
+        if merged is None:
+            rep["mixed"].append(c)
+            continue
+        look = dict(cl, **merged)
+        if all(look[x] == cl[x] for x in LOOK_KEYS):
+            continue  # already the class's look
+        mine = set(str(h) for h in items)
+        others = []
+
+        def visit(o, others=others, mine=mine):
+            if str(o) not in mine and len(others) < 1:
+                try:
+                    if any(raw_attrs(o)["by_class"]):
+                        others.append(o)
+                except Exception:  # noqa: BLE001
+                    pass
+        vs.ForEachObject(visit, "(C='%s')" % c.replace("'", "''"))
+        if others:
+            rep["shared"].append(c)
+            continue
+        ops.append({"op": "class_look", "class": c, "before": cl})
+        _set_class_look(c, look)
+        rep["adopted"].append(c)
+    return ops, rep
+
+
 def set_attributes(uuids, attributes, layer=None):
     # a layer move carries a group's contents along: move only the outermost;
     # attributes and class go to every object named (a group's class is its own)
@@ -1792,12 +1899,22 @@ def set_attributes(uuids, attributes, layer=None):
     if layer:
         ensure_layer(layer)
         target = vs.GetLayerByName(layer)
+    looks = None
+    if attributes.get("by_class") and attributes.get("keep_look", True):
+        if attributes.get("class"):
+            ensure_class(attributes["class"])
+            for h in hs:
+                vs.SetClass(h, attributes["class"])
+        cops, looks = keep_looks(hs)
+        ops = cops + ops
     for h in hs:
         apply_attrs(h, attributes)
         if target is not None:
             vs.SetParent(h, target)
-    return {"document": current_document(), "ops": ops,
-            "objects": [read_obj(h, False) for h in hs]}
+    out = {"document": current_document(), "ops": ops, "objects": [read_obj(h, False) for h in hs]}
+    if looks is not None:
+        out["looks"] = looks
+    return out
 
 
 def organize_apply(moves):
@@ -1811,6 +1928,7 @@ def organize_apply(moves):
     zm = _z_map(movers) if movers else {}
     front = _front_neighbours(movers)  # before anything moves
     have = set(class_names())
+    class_ops, looks = [], {}
     try:
         for m in moves:
             cls = m.get("class")
@@ -1837,11 +1955,20 @@ def organize_apply(moves):
                 applied.append(op)
                 if cls:
                     vs.SetClass(h, cls)
-                if m.get("by_class"):
-                    apply_attrs(h, {"by_class": True})
                 if target is not None:
                     vs.SetParent(h, target)
+            if m.get("by_class"):
+                hs = [hmap.get(u) or handle(u) for u in m["uuids"]]
+                if m.get("keep_look", True):
+                    cops, rep = keep_looks(hs)
+                    class_ops += cops
+                    for k, v in rep.items():
+                        looks.setdefault(k, [])
+                        looks[k] += [c for c in v if c not in looks[k]]
+                for h in hs:
+                    apply_attrs(h, {"by_class": True})
     except BaseException:
+        applied = class_ops + applied
         try:
             revert2d(applied)
         except Exception:  # noqa: BLE001 - then one by one, so one bad object can't stop the rest
@@ -1851,7 +1978,10 @@ def organize_apply(moves):
                 except Exception:  # noqa: BLE001
                     pass
         raise
-    return {"document": current_document(), "ops": applied, "changed": len(applied)}
+    out = {"document": current_document(), "ops": class_ops + applied, "changed": len(applied)}
+    if looks:
+        out["looks"] = looks
+    return out
 
 
 def delete_objects(uuids):

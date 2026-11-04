@@ -415,3 +415,59 @@ def test_group_takes_members_class_not_the_active_one():
     assert run(["a", "b"])["groups"][0]["class"] == "Vorhang"
     assert run(["a", "c"])["groups"][0]["class"] == "Keine"
     assert run(["a", "c"], **{"class": "Eigen"})["groups"][0]["class"] == "Eigen"
+
+
+def _look_vs(objs, classes):
+    """Fake vs for keep_looks: objects carry raw attributes, classes their own."""
+    W, B = (65535, 65535, 65535), (0, 0, 0)
+
+    def cl(key):
+        return lambda c: classes[c][key]
+
+    def setcl(key):
+        return lambda c, v: classes[c].__setitem__(key, v)
+
+    def ob(key):
+        return lambda h: h.a[key]
+
+    fns = dict(
+        GetTypeN=lambda h: h.t, GetClass=lambda h: h.cls,
+        GetVectorFill=lambda h: (False, ""), GetOpacityN=lambda h: (True, 100, 100),
+        GetPenFore=ob("pen"), GetPenBack=lambda h: W, GetFillFore=ob("fill"), GetFillBack=ob("fill"),
+        GetFPat=ob("fpat"), GetLSN=lambda h: 2, GetLW=ob("lw"),
+        IsFPatByClass=lambda h: h.a.get("bc", False), IsFillColorByClass=lambda h: h.a.get("bc", False),
+        IsPenColorByClass=lambda h: h.a.get("bc", False), IsLWByClass=lambda h: h.a.get("bc", False),
+        IsLSByClass=lambda h: h.a.get("bc", False),
+        GetClVectorFill=lambda c: (False, ""), GetClFPat=cl("fpat"), GetClFillFore=cl("fill"),
+        GetClFillBack=cl("fill"), GetClPenFore=cl("pen"), GetClPenBack=lambda c: W, GetClLW=cl("lw"),
+        GetClLSN=lambda c: 2,
+        SetClPenFore=setcl("pen"), SetClPenBack=lambda c, v: None, SetClFillFore=setcl("fill"),
+        SetClFillBack=setcl("fill"), SetClVectorFill=lambda c, v: True, SetClFPat=setcl("fpat"),
+        SetClLW=setcl("lw"), SetClLSN=lambda c, v: None,
+        ForEachObject=lambda fn, crit: [fn(o) for o in objs if "'%s'" % o.cls in crit],
+    )
+    return fns, W, B
+
+
+def test_by_class_keeps_the_look_of_imported_classes():
+    """VectorView outline polygons have no fill, their imported class says
+    solid black: 'by class' would turn the section into black areas (live
+    0.7 beta). The class takes the objects' look first."""
+    W, B = (65535, 65535, 65535), (0, 0, 0)
+    mk = lambda cls, t=5, **a: types.SimpleNamespace(cls=cls, t=t, a=dict(dict(pen=B, fill=B, fpat=0, lw=10), **a))
+    outlines = [mk("VV_Faces") for _ in range(3)] + [mk("VV_Faces", t=2, fpat=1)]  # a line: its fill doesn't count
+    fills = [mk("VV_Fill", fpat=1, fill=W, pen=W, lw=0) for _ in range(2)]
+    mixed = [mk("Mix", lw=10), mk("Mix", lw=20)]
+    shared_cls = [mk("Shared", fpat=0)]
+    follower = mk("Shared", bc=True)  # an object elsewhere that already follows the class
+    classes = {c: {"fpat": 2, "fill": B, "pen": B, "lw": 10} for c in ("VV_Faces", "VV_Fill", "Mix", "Shared")}
+    fns, _W, _B = _look_vs(outlines + fills + mixed + shared_cls + [follower], classes)
+    ns = _ns(**fns)
+    ops, rep = ns["keep_looks"](outlines + fills + mixed + shared_cls)
+    assert sorted(rep["adopted"]) == ["VV_Faces", "VV_Fill"] and rep["mixed"] == ["Mix"] and rep["shared"] == ["Shared"]
+    assert classes["VV_Faces"]["fpat"] == 0  # outlines stay unfilled
+    assert classes["VV_Fill"] == {"fpat": 1, "fill": W, "pen": W, "lw": 0}
+    assert classes["Mix"]["lw"] == 10 and classes["Shared"]["fpat"] == 2  # untouched
+    # revert puts the class back
+    before = [o for o in ops if o["class"] == "VV_Fill"][0]["before"]
+    assert before["fpat"] == 2 and before["fill_fore"] == list(B)

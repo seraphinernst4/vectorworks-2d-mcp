@@ -45,7 +45,10 @@ def vw2d_organize(
     ([min, max], null = open end), closed, in_group, bbox [x1, y1, x2, y2]
     (inside that area, document units - e.g. one curtain of a section),
     touches [x1, y1, x2, y2] (reaches into it), not {...}.
-    by_class: also set every graphic attribute to 'by class'.
+    by_class: also set every graphic attribute to 'by class' (the drawing
+    keeps its look: a target class whose objects all look alike and that
+    nothing else follows yet takes that look; by_class_looks in the result
+    names classes where the look changed - tell the user).
     class_map {"old*": "New"} / layer_map: shortcuts for rules that only
     match a class / layer (applied before `rules`).
     Scope: layer ("*" = all design layers, None = active layer), class_name,
@@ -84,4 +87,20 @@ def vw2d_organize(
     res = app.vw2d("organize_apply", timeout=ORGANIZE_TIMEOUT, moves=moves)
     _journal(res["document"], "vw2d_organize", res["ops"])
     out["changed"] = res["changed"]
+    if res.get("looks"):
+        out["by_class_looks"] = _looks_note(res["looks"])
+    return out
+
+
+def _looks_note(looks: dict) -> dict:
+    """What 'by class' did to the look (for telling the user)."""
+    out = {}
+    if looks.get("adopted"):
+        out["classes_took_the_objects_look"] = looks["adopted"]
+    if looks.get("mixed"):
+        out["look_changed_mixed_attributes"] = looks["mixed"]
+        out["note"] = ("objects of these classes looked different from each other, so they now show the class "
+                       "attributes - set the classes' attributes (vw2d_setup) or tell the user")
+    if looks.get("shared"):
+        out["look_follows_existing_class"] = looks["shared"]
     return out

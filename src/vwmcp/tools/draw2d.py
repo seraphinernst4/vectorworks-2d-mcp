@@ -634,8 +634,10 @@ def vw2d_set_attributes(
     layer: move them to this design layer. attributes: pen, fill ("none" |
     "#rrggbb"), hatch, line_style, line_weight (mm), opacity, name, or
     {"by_class": true} to make every graphic attribute follow the class
-    (recommended). Any single value "class" = that attribute by class.
-    One undo step."""
+    (recommended; a class whose objects all look the same and that nothing
+    else follows yet takes their look first, so nothing changes on screen -
+    {"by_class": true, "keep_look": false} skips that). Any single value
+    "class" = that attribute by class. One undo step."""
     a = dict(attributes or {})
     if class_name:
         a["class"] = class_name
@@ -643,9 +645,15 @@ def vw2d_set_attributes(
         raise ToolError("nothing to change")
     res = app.vw2d("set_attributes", timeout=WRITE_TIMEOUT, uuids=uuids, attributes=a, layer=layer)
     _journal(res["document"], "vw2d_set_attributes", res["ops"])
-    return {"document": res["document"], "objects": [{"uuid": r["uuid"], "class": r["class"],
-                                                      "layer": r["layer"], "attrs": r.get("attrs")}
-                                                     for r in res["objects"]]}
+    out = {"document": res["document"], "objects": [{"uuid": r["uuid"], "class": r["class"],
+                                                     "layer": r["layer"], "attrs": r.get("attrs")}
+                                                    for r in res["objects"][:50]]}
+    if len(res["objects"]) > 50:
+        out["objects_more"] = len(res["objects"]) - 50
+    if res.get("looks"):
+        from vwmcp.tools.organize import _looks_note
+        out["by_class_looks"] = _looks_note(res["looks"])
+    return out
 
 
 @mcp.tool(annotations=DELETE)
@@ -785,7 +793,8 @@ def vw2d_fix(
       so the drawing looks the same but has no stacked fills.
     merge: union all objects in scope (or uuids) into one area.
     by_class: set every graphic attribute of the scoped objects to 'by
-      class'.
+      class' (keeping the look: a class whose objects all look alike takes
+      that look first; the result names classes where the look changed).
     issue_ids limits the fix to issues from the last vw2d_check with the
     same scope/settings."""
     neighbours = action in ("snap", "overlaps", "duplicates", "clean")
@@ -874,6 +883,9 @@ def vw2d_fix(
                      attributes={"by_class": True}, layer=None)
         ops += r["ops"]
         applied["objects"] = len(targets)
+        if r.get("looks"):
+            from vwmcp.tools.organize import _looks_note
+            applied["by_class_looks"] = _looks_note(r["looks"])
     _journal(doc, "vw2d_fix", ops)
     m = _uuid_map(ops)
     if m:
