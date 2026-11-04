@@ -564,3 +564,21 @@ def test_join_and_simplify_refuse_zero_tolerance(fake):
         cleanup.vw2d_join(layer="L", tolerance_mm=0)
     with pytest.raises(ToolError, match="more than 0"):
         cleanup.vw2d_simplify(layer="L", tolerance_mm=-1)
+
+
+def test_check_preset_drawing_hairline_overlap_of_fills_is_a_warning(fake):
+    """VectorView fills overlap by hundredths of a millimetre (live: 43
+    'errors' on a fresh export) - invisible, so a warning in drawings."""
+    a = _poly([(0, 0), (1, 0), (1, 1), (0, 1)], closed=True)
+    b = _poly([(0.99998, 0), (2, 0), (2, 1), (0.99998, 1)], closed=True)  # 0.02 mm overlap (units: m)
+    big = _poly([(0.5, 0), (2, 0), (2, 1), (0.5, 1)], closed=True)
+    for r in (a, b, big):
+        r["attrs"]["fill"] = "solid"
+    fake([a, b])
+    drawing = json.loads(draw2d.vw2d_check(layer="L", image=False, preset="drawing"))
+    assert drawing["summary"]["errors"] == 0 and drawing["issues"][0]["severity"] == "warning"
+    plan = json.loads(draw2d.vw2d_check(layer="L", image=False, checks=["overlap"]))
+    assert plan["summary"]["errors"] == 1
+    fake([a, big])
+    drawing = json.loads(draw2d.vw2d_check(layer="L", image=False, preset="drawing"))
+    assert drawing["summary"]["errors"] == 1

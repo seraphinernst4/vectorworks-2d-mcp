@@ -1522,11 +1522,31 @@ def _restack(entries, hmap=None, mapping=None, restored=None):
             vs.HMoveForward(k, True)
 
 
+def _class_defaults_off(cls):
+    """A class with "use at creation" gives new objects its by-class flags,
+    and a line's fill flag can't be cleared afterwards (no fill to set) -
+    so a restored line would differ from the original (live 2026: imported
+    VectorView classes). Off while rebuilding; returns the old setting."""
+    try:
+        if cls and vs.GetClUseGraphic(cls):
+            vs.SetClUseGraphic(cls, False)
+            return True
+    except Exception:  # noqa: BLE001 - class may not exist yet
+        pass
+    return False
+
+
+def _class_defaults_back(cls, use):
+    if use:
+        vs.SetClUseGraphic(cls, True)
+
+
 def restore(snap, mapping, hmap=None, place=True):
     """Recreate an object from its snapshot. Returns the new handle.
     place=False leaves it in front (the caller restacks many at once)."""
     rec = snap["rec"]
     state = _begin(rec["layer"], create_layer=True)
+    use = _class_defaults_off(rec["class"])
     try:
         vs.NameClass(rec["class"])
         if rec["kind"] == "group":
@@ -1539,6 +1559,7 @@ def restore(snap, mapping, hmap=None, place=True):
         else:
             h = _rebuild(rec)
     finally:
+        _class_defaults_back(rec["class"], use)
         _end(state)
     if _is_nil(h):
         raise RuntimeError("could not restore %s %s" % (rec["kind"], rec["uuid"]))
@@ -1915,10 +1936,12 @@ def _replace_with_poly(old, verts, closed, holes, hmap=None, place=True):
     nxt = vs.NextObj(old)
     above = None if _is_nil(nxt) else h_uuid(nxt)
     state = _begin(_str(vs.GetLName(vs.GetLayer(old))))
+    use = _class_defaults_off(cls)
     try:
         vs.NameClass(cls)
         h = add_holes(make_poly(verts, closed), holes)
     finally:
+        _class_defaults_back(cls, use)
         _end(state)
     vs.SetClass(h, cls)
     if raw:

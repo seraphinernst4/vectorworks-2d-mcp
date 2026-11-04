@@ -198,7 +198,10 @@ def run_checks(records: list[dict], units: dict, tolerance_mm: float = 1.0,
                 small = th <= tol
                 if small:
                     msg += " (nur %s mm, Ungenauigkeit)" % _fmt(rep.mm(th))
-                rep.add("overlap", "error", [s.uuid, o.uuid], _rep_point(inter), msg,
+                # drawings (VectorView/Make2D fills): a hair-thin overlap is
+                # exporter imprecision, invisible in print - a warning
+                sev = "warning" if small and overlap_fills_only else "error"
+                rep.add("overlap", sev, [s.uuid, o.uuid], _rep_point(inter), msg,
                         thickness_mm=rep.mm(th), area=inter.area,
                         region=_ring_coords(inter),
                         fix={"action": "snap" if small else "overlaps"})
