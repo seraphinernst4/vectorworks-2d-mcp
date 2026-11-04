@@ -1,5 +1,54 @@
 # Changelog
 
+## 0.7.0 – 04.11.2026
+
+Anlass: Eine Kommilitonin ließ einen Rhino-Schnitt bereinigen (Linienstärken,
+gruppieren, organische Vorhänge vereinfachen) – heraus kam Unbrauchbares.
+Nachgestellt mit echten Rhino-Exporten; die Ursachen sind behoben.
+
+- **Der Nutzer entscheidet:** Keystones Arbeitsregeln sind jetzt ein
+  **Profil**, das jeder anpassen kann (`vw2d_profile`, gespeichert in
+  `~/.vwmcp/profile.json`): Detailtreue, Teile vereinigen, Flächen, Bögen,
+  Klassen, Attribute, Prüfmodus, ab wie vielen Objekten Claude erst an einem
+  Ausschnitt zeigt und nachfragt, Toleranzen und **eigene Regeln** in eigenen
+  Worten. Was man im Chat ausdrücklich verlangt, geht immer vor. Die
+  bisherigen festen Regeln (nichts vereinfachen, jede Kante behalten, Teile
+  zu einer Fläche vereinigen) widersprachen Bitten wie „vereinfache die
+  Vorhänge“ – jetzt sind es Voreinstellungen.
+- **`vw2d_import`:** DWG/DXF ohne Dialog importieren oder eine importierte
+  Ebene aufnehmen: was angekommen ist, was fehlt (DXF wird nachgezählt), wie
+  zerstückelt die Zeichnung ist und was als Nächstes sinnvoll ist.
+  Rückgängig löscht die importierten Ebenen.
+- **Import-Verluste werden benannt:** Vectorworks übernimmt aus DWG/DXF keine
+  gewichteten Splines (Kreise, Ellipsen, Ringe aus Rhino) – im Test fehlten
+  so 16 % eines Rhino-Schnitts ohne jede Meldung; aus R12-DXF fehlen alle
+  Splines. Abhilfe: in Rhino „Splines/Polykurven als Polylinien“ exportieren
+  (getestet: alles kommt an).
+- **`vw2d_join`:** lose Stücke (Make2D, VectorView, DWG) zu Linienzügen
+  verbinden – nur gleiche Ebene, Klasse, Gruppe und gleiches Aussehen;
+  geschlossene Züge werden Flächen ohne Füllung.
+- **`vw2d_simplify`:** Punkte ausdünnen, ohne die Form zu verändern (eine
+  Teilmenge der Originalpunkte, Abweichung höchstens die Toleranz; Standard
+  0,1 mm auf dem Papier × Maßstab), mit Vorher-Nachher-Bild.
+- **`vw2d_group`:** Objekte gruppieren (nach Bereich, Klasse, Auswahl);
+  rückgängig machbar.
+- **Prüfen von Schnitten und Importen:** `vw2d_check(preset="drawing")` meldet
+  nur echte Probleme – nicht die Fugen zwischen Make2D-Stücken und Umrisse
+  auf Füllflächen, die solche Zeichnungen von Natur aus haben (ein normaler
+  Make2D-Grundriss hatte vorher 4955 „Fehler“). Keine Reparaturschleife mehr
+  auf Importen.
+- **Prüfbild:** höchstens 60 Markierungen (die schlimmsten zuerst), damit die
+  Zeichnung sichtbar bleibt; `vw2d_preview(marks=false)` zeigt die Zeichnung
+  ohne Markierungen.
+- **Sortieren nach Bereich:** `vw2d_organize` kennt `bbox` (liegt im Bereich)
+  und `touches` (reicht hinein) – z. B. um einen Vorhang in eine eigene Klasse
+  zu legen.
+- **Kurze Antworten:** große UUID-Listen (`vw2d_fix`, `vw_revert_last`) kommen
+  als Anzahl, Restfehler zusammengefasst – vorher füllten wenige Aufrufe
+  Claudes Gedächtnis mit Kennungen.
+- Kein Massenbearbeiten mit `vw_exec_python` mehr empfohlen; fehlt ein
+  Werkzeug, sagt Claude das.
+
 ## 0.6.5 – 03.11.2026
 
 - **Claude besteht auf Updates:** Solange eine neuere Version veröffentlicht

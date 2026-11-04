@@ -2,7 +2,7 @@
 
 Mac-native MCP server for exact, well-organised 2D drawing in Vectorworks.
 Fork of https://github.com/giorgiomoroder/vectorworks-mcp (MIT), repo
-https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.6.5
+https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.7.0
 beta**, tested on Vectorworks 2026 Update 7 (German) on macOS; Vectorworks
 2027 prepared (Python 3.14), not live-tested. Read `docs/architecture.md`,
 `docs/api-pitfalls.md` and `docs/vs-notes.md` before changing anything that
@@ -23,6 +23,28 @@ touches Vectorworks.
   vwlib + vwlib2d with each call; results come back as a JSON string.
 - Live-test VW-side changes on a throwaway document (the tests only cover
   server-side logic plus a fake for the tool flow).
+
+## Profile, imports and clean-up (0.7)
+
+- `src/vwmcp/profile.py`: the user's profile (settings + own rules,
+  `~/.vwmcp/profile.json`). `app.build_instructions()` puts its rule lines
+  into the server instructions; an explicit request in the chat always wins.
+  The extension launcher answers `initialize` from static.json, so
+  `mcpb/server/profile.js` swaps the default profile block for the user's
+  one (from `profile.table()`, written into static.json by
+  `scripts/dump_static.py`); `tests/test_profile_js.py` keeps both texts
+  identical. Change a rule text only in `profile.SETTINGS`.
+- `src/vwmcp/tools/cleanup.py`: `vw2d_profile`, `vw2d_import` (DWG/DXF via
+  `vwlib2d.import_dwg` = `ImportDXFDWGFile(path, True)`, no dialog; journal op
+  `layers_created`), `vw2d_join` (`geom/join.py`, VW side `join_pieces`),
+  `vw2d_simplify` (`geom/simplify.py`, Douglas-Peucker on the original
+  points, via `replace_geometry`), `vw2d_group` (`group_objects`, journal op
+  `grouped` -> `HUngroup`). `dxfscan.py` counts DXF entities;
+  `geom/inventory.py` is the stock-taking report.
+- Known Vectorworks 2026 import losses (tested with Rhino 8): rational
+  splines are dropped from DWG/DXF; R12 DXF drops all splines. Rhino export
+  with splines/polycurves as polylines brings everything.
+- `vw2d_check(preset="drawing")` for Make2D/VectorView/DWG drawings.
 
 ## Planning (0.6, Raumpilot knowledge)
 

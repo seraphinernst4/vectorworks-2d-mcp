@@ -361,5 +361,10 @@ def vw_revert_last() -> dict:
         raise ToolError("The revert of %s did not finish in Vectorworks, it may be partly done: %s\n\n"
                         "Check the drawing (Vectorworks' own Undo may take back the partial revert). This step is "
                         "no longer in the revert journal." % (entry["tool"], e)) from e
-    journal.remap(document, result.get("mapping") or {})
-    return {"reverted_tool": entry["tool"], **result}
+    mapping = result.get("mapping") or {}
+    journal.remap(document, mapping)
+    out = {"reverted_tool": entry["tool"], **result}
+    if len(mapping) > 20:  # thousands of uuids help nobody; read the objects again if needed
+        out["mapping"] = {"count": len(mapping), "note": "%d restored objects got new uuids; read them again "
+                          "(vw2d_read) when you need them" % len(mapping)}
+    return out

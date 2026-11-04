@@ -42,7 +42,9 @@ def vw2d_organize(
     text (regex), pen / fill_color ("#rrggbb"), fill ("none" | "solid" |
     "hatch"), hatch / line_style (names), line_weight_mm (number - 0.5 also
     matches Vectorworks' stored 0.508 - or [min, max]), area_m2 / size_mm
-    ([min, max], null = open end), closed, in_group, not {...}.
+    ([min, max], null = open end), closed, in_group, bbox [x1, y1, x2, y2]
+    (inside that area, document units - e.g. one curtain of a section),
+    touches [x1, y1, x2, y2] (reaches into it), not {...}.
     by_class: also set every graphic attribute to 'by class'.
     class_map {"old*": "New"} / layer_map: shortcuts for rules that only
     match a class / layer (applied before `rules`).

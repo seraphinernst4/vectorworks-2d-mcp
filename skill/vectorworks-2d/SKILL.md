@@ -5,56 +5,88 @@ description: Exakte, sauber organisierte 2D-Architekturzeichnungen in Vectorwork
 
 # Exakt zeichnen in Vectorworks (2D)
 
-Ziel: Pläne, die ein Architekturbüro so abgeben würde. Exakte Geometrie,
-lückenlose Flächen, klare Ebenen- und Klassenstruktur.
+Ziel: Pläne, die ein Architekturbüro so abgeben würde – so, wie **dieser
+Nutzer** sie haben will.
 
-## Grundregeln
+## Der Nutzer entscheidet
+
+- Was der Nutzer im Chat ausdrücklich verlangt, gilt immer vor jeder Regel
+  hier: Bittet er ums Vereinfachen, wird vereinfacht; will er alles
+  behalten, bleibt alles.
+- Seine Arbeitsweise steht in seinem **Profil** (`vw2d_profile`):
+  Detailtreue (`detail`), Teile vereinigen (`merge_parts`), Flächen
+  (`areas`), Bögen (`curves`), Klassen, Attribute, Prüfmodus
+  (`check_mode`), ab wie vielen Objekten erst nachgefragt wird
+  (`confirm_above`), Toleranzen und **eigene Regeln** in seinen Worten.
+- Korrigiert der Nutzer, wie gearbeitet wird, und soll es künftig so
+  bleiben: anbieten, es im Profil zu speichern (Einstellung oder eigene
+  Regel). Nie ungefragt ändern.
+- Unklar bei etwas, das viel Geometrie verändert: einmal nachfragen.
+
+## Grundregeln (Voreinstellungen – das Profil kann sie ändern)
 
 1. **Exakt.** Koordinaten in Dokumenteinheiten oder mit `unit="mm"/"m"`.
    Nichts schätzen, nichts runden. Maßketten als `relative: true`.
-   Bögen als echte Bögen (`path` mit `arc_to`), nie als Polygon-Annäherung.
-   Nach jedem Zeichnen `all_exact` prüfen – Abweichung muss 0 sein.
-2. **Lückenlos und ohne Überlappung.** Benachbarte Flächen teilen sich exakt
-   ihre Kanten. Keine übereinanderliegenden Füllflächen, keine Doppellinien.
-   Zusammengehörige Bauteile (ein Ring, eine Decke, ein Rost) sind **eine**
-   geschlossene Fläche – Teile mit `vw2d_boolean` (union) vereinigen.
-3. **Nichts verlieren.** Beim Nachzeichnen oder Bereinigen jede Kante und
-   jede Stufe übernehmen. Lieber nachfragen als vereinfachen.
+   Bögen als echte Bögen (`path` mit `arc_to`). Nach jedem Zeichnen
+   `all_exact` prüfen – Abweichung muss 0 sein.
+2. **Lückenlos und ohne Überlappung** (`areas`). Benachbarte Flächen teilen
+   sich exakt ihre Kanten. Zusammengehörige Bauteile zu einer Fläche
+   vereinigen – nach `merge_parts` (Standard: vorschlagen).
+3. **Detailtreue** (`detail`). Beim Nachzeichnen jede Kante und Stufe
+   übernehmen; vereinfachen, wenn der Nutzer darum bittet.
 4. **Organisiert.**
    - Konstruktionsebenen trennen Geschosse/Zeichnungsbereiche (z. B. „EG“,
      „OG1“, „Lageplan“) und haben den richtigen Maßstab.
    - Klassen trennen Bauteile (Wände, Stützen, Öffnungen, Treppen,
      Ausstattung, Achsen, Bemaßung, Beschriftung, Schraffur …). Hierarchie
      mit Bindestrich („Wand-Tragend“).
-   - Jedes Objekt in eine passende Klasse – nie in „Keine“.
-   - Grafische Attribute **nach Klasse** (Standard). Eigene Attribute nur,
-     wenn es wirklich nötig ist.
+   - Jedes Objekt in eine passende Klasse; grafische Attribute nach Klasse
+     (`classes`, `attributes`).
    - Erst `vw2d_structure` lesen und dem vorhandenen Standard folgen.
      Fehlendes mit `vw2d_setup` anlegen (die Vorlage „architektur“ nur, wenn
      es noch keinen Standard gibt und der Nutzer zustimmt).
 5. **2D bleibt 2D.** In der geöffneten Datei arbeiten, nichts in andere
    Dateien oder Programme übertragen.
 
-## Ablauf
+## Ablauf (neue Zeichnung)
 
-1. `vw2d_structure` – Ebenen, Klassen, Probleme. Bei Bestandszeichnungen
-   zusätzlich `vw2d_read` für die Geometrie.
+1. `vw2d_structure` – Ebenen, Klassen, Probleme.
 2. Plan klären: Welche Ebene, welche Klassen, welche Maße? Bei Unklarheit
    kurz nachfragen.
 3. `vw2d_draw` (mehrere Objekte in einem Aufruf, Klasse immer angeben).
-4. `vw2d_check` auf der Ebene (`tolerance_mm` ca. 1; Klassen, die absichtlich
-   überlappen – Möbel, Schraffuren – über `ignore_classes` auslassen).
-5. Fehler mit `vw2d_fix` beheben:
-   - `snap` für Spalte, knapp verfehlte Punkte und kleine Überlappungen
-     (Bestand mit `fixed` festhalten),
-   - `overlaps` für echte Überlappungen (`priority`, sonst gewinnt das obere
-     Objekt),
-   - `close`, `clean`, `duplicates`, `merge`, `by_class`.
-   Danach erneut prüfen, bis keine Fehler mehr übrig sind.
-6. Ergebnis zeigen: Prüfbild aus `vw2d_check`/`vw2d_preview` und
-   `vw2d_select` (zoomt in Vectorworks auf die Objekte).
-7. Kurz berichten: was gezeichnet wurde, in welchen Ebenen/Klassen, dass die
-   Prüfung sauber ist.
+4. `vw2d_check` auf der Ebene (`tolerance_mm` aus dem Profil; Klassen, die
+   absichtlich überlappen – Möbel, Schraffuren – über `ignore_classes`).
+5. Fehler mit `vw2d_fix` beheben (`snap`, `overlaps`, `close`, `clean`,
+   `duplicates`, `merge`, `by_class`) und erneut prüfen – so weit der
+   Prüfmodus des Profils es vorsieht.
+6. Ergebnis zeigen: `vw2d_preview` (mit `marks=false` die Zeichnung ohne
+   Markierungen) und `vw2d_select`.
+7. Kurz berichten: was gezeichnet wurde, in welchen Ebenen/Klassen.
+
+## Importe, Schnitte, Ansichten bereinigen (Rhino Make2D, VectorView, DWG)
+
+1. **Aufnehmen:** `vw2d_import(path=…)` importiert DWG/DXF ohne Dialog,
+   `vw2d_import(layer=…)` nimmt eine schon importierte Ebene auf. Die
+   Antwort sagt, was angekommen ist, was fehlt, wie zerstückelt die
+   Zeichnung ist, und was als Nächstes sinnvoll ist. Fehlende Objekte dem
+   Nutzer sagen: Vectorworks übernimmt keine gewichteten Splines (Kreise,
+   Ellipsen, Ringe aus Rhino), aus R12-DXF gar keine Splines – in Rhino mit
+   „Splines und Polykurven als Polylinien“ (DWG 2018) neu exportieren.
+2. **Prüfen:** `vw2d_check(preset="drawing")` – lose Stücke, Fugen zwischen
+   Make2D-Stücken und Umrisse auf Füllflächen sind bei solchen Zeichnungen
+   normal und kein Fehler. Nicht „bis fehlerfrei“ reparieren.
+3. **Sortieren und Linienstärken:** `vw2d_organize` (auch nach Bereich:
+   `bbox`/`touches`, z. B. ein Vorhang), dann Attribute nach Klasse und
+   Linienstärken der Klassen mit `vw2d_setup`.
+4. **Verbinden:** `vw2d_join` macht aus losen Stücken Linienzüge
+   (geschlossene ohne Füllung).
+5. **Vereinfachen:** `vw2d_simplify` dünnt Punkte aus (Toleranz aus dem
+   Profil: Papier-mm × Maßstab), erst Vorschau rot/schwarz zeigen, dann
+   `dry_run=false`. Organisches bleibt organisch – nur weniger Punkte.
+6. **Gruppieren:** `vw2d_group` (nach Bereich, Klasse oder Auswahl).
+7. Große Zeichnungen Bereich für Bereich; über `confirm_above` Objekten erst
+   an einem Ausschnitt zeigen und auf das OK warten. Kein Massenbearbeiten
+   mit `vw_exec_python` – fehlt ein Werkzeug, das sagen.
 
 ## Tipps
 
@@ -63,10 +95,8 @@ lückenlose Flächen, klare Ebenen- und Klassenstruktur.
 - Öffnungen in Flächen: `holes` beim Zeichnen oder `vw2d_boolean` subtract.
 - Punkt exakt auf Punkt verschieben: `vw2d_transform` mit `from_point` und
   `to_point`.
-- Rückgängig für genau einen Schritt: `vw_revert_last`.
-- Große Bestandspläne (z. B. aus Rhino importiert): erst prüfen, dann mit
-  `snap` (Toleranz ruhig 2–5 mm) und `clean` bereinigen; organische
-  Bestandsformen nur vereinfachen, nicht eckig machen.
+- Rückgängig für genau einen Schritt: `vw_revert_last` (auch nach Import,
+  Verbinden, Vereinfachen, Gruppieren).
 
 ## Sortieren (DWG-Import, alles in „Keine“)
 

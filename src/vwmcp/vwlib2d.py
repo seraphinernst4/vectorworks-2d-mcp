@@ -1525,7 +1525,8 @@ def revert2d(ops):
     try:
         return _revert2d(ops)
     finally:
-        _use_layer(home)
+        if not _is_nil(vs.GetLayerByName(home)):  # a reverted import may have deleted it
+            _use_layer(home)
 
 
 def _revert2d(ops):
@@ -1607,6 +1608,26 @@ def _revert2d(ops):
             else:
                 _write_fields(h, op["record"], op["before"])
                 restored += 1
+        elif kind == "grouped":
+            h = _get_by_uuid(op["uuid"], hmap)
+            if _is_nil(h) or vs.GetTypeN(h) != 11:
+                missing.append(op["uuid"])
+            else:
+                hmap.pop(op["uuid"], None)
+                vs.HUngroup(h)
+                restored += 1
+        elif kind == "layers_created":
+            for name in op.get("layers") or []:
+                lay = vs.GetLayerByName(name)
+                if _is_nil(lay):
+                    missing.append(name)
+                    continue
+                if name == _str(vs.GetLName(vs.ActLayer())):
+                    _activate_other_layer(name)
+                if name == home:
+                    home = _str(vs.GetLName(vs.ActLayer()))
+                vs.DelObject(lay)
+                deleted += 1
     # objects moved back to their layer: old stacking position, frontmost first
     # (so an object's `above` neighbour is already back in place)
     _use_layer(home)
@@ -1867,6 +1888,119 @@ def insert_vertices(inserts):
         after.append(h_uuid(h))
     return {"document": current_document(),
             "ops": [{"op": "replaced", "before": snaps, "after": after}]}
+
+
+def join_pieces(changes, drop):
+    """vw2d_join: each change rebuilds its first piece as the joined polyline
+    (same class, attributes, group and stacking place; optional `attrs`
+    applied afterwards, e.g. no fill), then the other pieces are deleted.
+    One job, one journal entry."""
+    res = replace_geometry(changes)
+    ops = list(res["ops"])
+    out = []
+    for ch, rec in zip(changes, res["objects"]):
+        if ch.get("attrs"):
+            h = handle(rec["uuid"])
+            apply_attrs(h, ch["attrs"])
+            vs.ResetObject(h)
+            rec = read_obj(h, True, None, False)
+        out.append(rec)
+    if drop:
+        ops += delete_objects(drop)["ops"]
+    return {"document": current_document(), "objects": out, "ops": ops, "deleted": len(drop)}
+
+
+def group_objects(groups):
+    """groups: [{"uuids", "name"}] - each becomes one group on the layer of
+    its objects (top-level objects of one layer only). The objects keep their
+    uuids; reverting ungroups."""
+    home = _str(vs.GetLName(vs.ActLayer()))
+    ops, made = [], []
+    try:
+        for g in groups:
+            hs = _unique(handles(g["uuids"]))
+            if not hs:
+                continue
+            lays = set(_layer_name(h) for h in hs)
+            if len(lays) != 1:
+                raise ValueError("a group can only hold objects of one layer (got %s)" % ", ".join(sorted(lays)))
+            for h in hs:
+                par = vs.GetParent(h)
+                if not _is_nil(par) and vs.GetTypeN(par) == 11:
+                    raise ValueError("object %s is already inside a group" % h_uuid(h))
+            _use_layer(lays.pop())
+            vs.DSelectAll()
+            for h in hs:
+                vs.SetSelect(h)
+            vs.Group()
+            gh = vs.FSActLayer()
+            if _is_nil(gh) or vs.GetTypeN(gh) != 11:
+                raise RuntimeError("Vectorworks did not create the group")
+            if g.get("name"):
+                _set_name(gh, g["name"])
+            vs.DSelectAll()
+            u = h_uuid(gh)
+            ops.append({"op": "grouped", "uuid": u})
+            made.append(read_obj(gh, False))
+    except BaseException:
+        for op in reversed(ops):
+            h = handle(op["uuid"])
+            if not _is_nil(h):
+                vs.HUngroup(h)
+        raise
+    finally:
+        _use_layer(home)
+    return {"document": current_document(), "groups": made, "ops": ops}
+
+
+def _layer_list():
+    out, h = [], vs.FLayer()
+    while not _is_nil(h):
+        out.append(_str(vs.GetLName(h)))
+        h = vs.NextLayer(h)
+    return out
+
+
+def _layer_counts():
+    out, h = {}, vs.FLayer()
+    while not _is_nil(h):
+        n, o = 0, vs.FInLayer(h)
+        while not _is_nil(o):
+            n += 1
+            o = vs.NextObj(o)
+        out[_str(vs.GetLName(h))] = n
+        h = vs.NextLayer(h)
+    return out
+
+
+def _activate_other_layer(name):
+    for n in _layer_list():
+        if n != name and not _is_sheet(vs.GetLayerByName(n)):
+            _use_layer(n)
+            return
+
+
+def import_dwg(path):
+    """Import a DWG/DXF file with Vectorworks' current import settings and no
+    dialog (ImportDXFDWGFile in batch mode). Returns the new layers; reverting
+    deletes them."""
+    import os
+    import time
+
+    if not os.path.isfile(path):
+        raise ValueError("file not found: %s" % path)
+    if os.path.splitext(path)[1].lower() not in (".dwg", ".dxf"):
+        raise ValueError("only .dwg and .dxf files can be imported without a dialog")
+    before = _layer_counts()
+    t0 = time.time()
+    r = vs.ImportDXFDWGFile(path, True)
+    seconds = round(time.time() - t0, 2)
+    after = _layer_counts()
+    new = [n for n in after if n not in before]
+    grown = dict((n, after[n] - before[n]) for n in after if n in before and after[n] > before[n])
+    ops = [{"op": "layers_created", "layers": new}] if new else []
+    return {"document": current_document(), "result_code": r, "seconds": seconds, "new_layers": new,
+            "grown_layers": grown, "ops": ops}
 
 
 def transform(uuids, op, params, copy=False):

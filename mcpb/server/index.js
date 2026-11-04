@@ -33,7 +33,9 @@ function readJson(p) {
   try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (e) { return null; }
 }
 const VERSION = (readJson(path.join(BUNDLE, "manifest.json")) || {}).version || "";
-const STATIC = readJson(path.join(__dirname, "static.json")); // {protocolVersions, initialize, tools}
+const STATIC = readJson(path.join(__dirname, "static.json")); // {protocolVersions, initialize, tools, profile}
+let PROFILE = null;
+try { PROFILE = require("./profile.js"); } catch (e) { /* older bundle layout: default profile */ }
 
 function log(msg) {
   const line = `${new Date().toISOString()} ${msg}`;
@@ -62,7 +64,15 @@ function initializeResult(params) {
     capabilities: { tools: {} },
     serverInfo: { name: NAME, version: VERSION },
   };
-  return { ...base, protocolVersion: versions.includes(asked) ? asked : versions[versions.length - 1] };
+  const out = { ...base, protocolVersion: versions.includes(asked) ? asked : versions[versions.length - 1] };
+  if (PROFILE && STATIC && STATIC.profile && out.instructions) {
+    try {
+      out.instructions = PROFILE.withProfile(out.instructions, STATIC.profile, ROOT); // the user's own rules
+    } catch (e) {
+      log(`profile: ${e.message}`);
+    }
+  }
+  return out;
 }
 
 // ---- state ----------------------------------------------------------------

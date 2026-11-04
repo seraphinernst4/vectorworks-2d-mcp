@@ -114,11 +114,35 @@ def _check(scope: dict, tolerance_mm: float, checks=None, compare="layer", ignor
     return data, res
 
 
-def _image(data, res, focus=None, title="", width_px=1600):
+def _image(data, res, focus=None, title="", width_px=1600, marks=True):
     t = units_tolerances(data["units"], 1.0)
-    png = R.render(data["objects"], res["_shapes"], res["_all_issues"], t["chord"], focus=focus,
+    png = R.render(data["objects"], res["_shapes"], res["_all_issues"] if marks else [], t["chord"], focus=focus,
                    width_px=width_px, title=title or data.get("document", ""), mpu=t["mpu"])
     return Image(data=png, format="png")
+
+
+# Checks for imported/generated drawings (Make2D, VectorView, sections, DWG):
+# their loose pieces, gaps between fragments and outlines on fills are normal.
+PRESETS = {
+    "full": None,
+    "drawing": ["overlap", "duplicate", "self_intersection", "tiny", "classes"],
+}
+
+
+def _preset(preset, checks, compare):
+    if preset and preset not in PRESETS:
+        raise ToolError("preset must be one of %s" % ", ".join(PRESETS))
+    if preset == "drawing":
+        return checks or PRESETS["drawing"], "class" if compare == "layer" else compare
+    return checks, compare
+
+
+def _compact_map(m: dict, limit: int = 20):
+    """Small uuid maps in full; big ones as a count (read the objects again for their uuids)."""
+    if len(m) <= limit:
+        return m
+    return {"count": len(m), "note": "%d objects got new uuids; read them again (vw2d_read) when you need them"
+            % len(m)}
 
 
 def _scope(uuids, layer, class_name, selection, bbox=None) -> dict:
@@ -644,9 +668,16 @@ def vw2d_check(
     image: bool = True,
     max_issues: int = 60,
     bbox: list[float] | None = None,
+    preset: Literal["full", "drawing"] = "full",
 ):
     """Check drawing quality on the exact geometry and return a report (and a
     check image with numbered issues).
+
+    preset="drawing" for imported or generated drawings (Make2D, VectorView,
+    sections, elevations, DWG): only real problems (overlapping fills of one
+    class, duplicates, self-intersections, tiny objects, missing classes) -
+    not the gaps between fragments and outlines on fills those drawings have
+    by nature.
 
     Finds: overlaps and stacked fills, gaps and slivers between neighbours,
     points that miss each other or an edge by up to tolerance_mm, duplicates,
@@ -662,6 +693,7 @@ def vw2d_check(
     big drawings). Precision: 0.005 mm; distances are measured on true
     arcs."""
     scope = _scope(uuids, layer, class_name, selection, bbox)
+    checks, compare = _preset(preset, checks, compare)
     data, res = _check(scope, tolerance_mm, checks, compare, ignore_classes)
     out = {"document": data["document"], "units": data["units"]["name"], "summary": res["summary"],
            "issues": [_issue_out(i) for i in res["issues"][:max_issues]],
@@ -684,14 +716,18 @@ def vw2d_preview(
     compare: Literal["layer", "class", "all"] = "layer",
     ignore_classes: list[str] | None = None,
     width_px: int = 1600,
+    marks: bool = True,
+    preset: Literal["full", "drawing"] = "full",
 ):
     """Check image of a scope, rendered from the exact geometry with issues
     marked (red errors, orange warnings, arrows = where vw2d_fix snap would
-    move a point). focus_issue zooms to one issue id from vw2d_check;
-    bbox [x1, y1, x2, y2] shows (and checks) only that area (document
-    units)."""
+    move a point; at most 60 marks, the worst first). marks=False shows the
+    drawing alone (to show the user a result). focus_issue zooms to one issue
+    id from vw2d_check; bbox [x1, y1, x2, y2] shows (and checks) only that
+    area (document units). preset as in vw2d_check."""
     scope = _scope(uuids, layer, class_name, selection, bbox)
-    data, res = _check(scope, tolerance_mm, None, compare, ignore_classes)
+    checks, compare = _preset(preset, None, compare)
+    data, res = _check(scope, tolerance_mm, checks, compare, ignore_classes)
     focus = tuple(bbox) if bbox else None
     if focus_issue is not None:
         it = next((i for i in res["_all_issues"] if i["id"] == focus_issue), None)
@@ -702,7 +738,7 @@ def vw2d_preview(
                    / units_tolerances(data["units"], 1.0)["mpu"])
         focus = R.focus_box(it, size)
     summary = json.dumps({"document": data["document"], "summary": res["summary"]}, ensure_ascii=False)
-    return [summary, _image(data, res, focus=focus, width_px=width_px)]
+    return [summary, _image(data, res, focus=focus, width_px=width_px, marks=marks)]
 
 
 @mcp.tool(annotations=WRITE, structured_output=False)
@@ -830,8 +866,8 @@ def vw2d_fix(
     _journal(doc, "vw2d_fix", ops)
     m = _uuid_map(ops)
     if m:
-        # rebuilt objects have new uuids: report those
-        applied["new_uuids"] = m
+        # rebuilt objects have new uuids: report those (big maps as a count)
+        applied["new_uuids"] = _compact_map(m)
         for k in ("clipped", "deleted_covered"):
             if k in applied:
                 applied[k] = [m.get(u, u) for u in applied[k]]
@@ -852,8 +888,11 @@ def vw2d_fix(
         focus = _focus_of(data2, now, t["tol"] * 40)
     else:
         after, remaining = res2["summary"], res2["issues"]
+    rem_kinds: dict[str, int] = {}
+    for i in remaining:
+        rem_kinds[i["kind"]] = rem_kinds.get(i["kind"], 0) + 1
     out = {"document": doc, "applied": applied, "before": before, "after": after,
-           "remaining": [_issue_out(i) for i in remaining[:30]]}
+           "remaining_by_kind": rem_kinds, "remaining": [_issue_out(i) for i in remaining[:10]]}
     text = json.dumps(out, ensure_ascii=False, indent=1)
     if not image:
         return text
@@ -875,9 +914,8 @@ def sauber_zeichnen(aufgabe: str = "") -> str:
     return (
         "Zeichne in der geöffneten Vectorworks-Datei exakt und sauber organisiert (nur 2D). "
         "Lies zuerst die Struktur (vw2d_structure) und halte dich an vorhandene Ebenen und Klassen; "
-        "fehlende legst du mit vw2d_setup an. Jedes Objekt in eine passende Klasse, Attribute nach "
-        "Klasse. Flächen schließen lückenlos und ohne Überlappung aneinander, zusammengehörige "
-        "Bauteile sind eine Fläche, keine Doppellinien, keine Kanten verlieren, Bögen als echte Bögen. "
-        "Nach dem Zeichnen vw2d_check, Fehler mit vw2d_fix beheben, erneut prüfen und das Prüfbild "
+        "fehlende legst du mit vw2d_setup an. Wie genau du arbeitest (Detailtreue, Flächen, Klassen, "
+        "Prüfen), steht im Profil des Nutzers (vw2d_profile) – was der Nutzer ausdrücklich verlangt, "
+        "geht immer vor. Importierte Zeichnungen erst mit vw2d_import aufnehmen. Am Ende das Ergebnis "
         "zeigen.\n\nAufgabe: " + (aufgabe or "(folgt)")
     )

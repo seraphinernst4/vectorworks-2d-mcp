@@ -25,7 +25,7 @@ READ = ToolAnnotations(read_only_hint=True, open_world_hint=False)
 WRITE = ToolAnnotations(read_only_hint=False, destructive_hint=False, open_world_hint=False)
 DELETE = ToolAnnotations(read_only_hint=False, destructive_hint=True, open_world_hint=False)
 
-INSTRUCTIONS = """\
+_HEAD = """\
 Tools for a live Vectorworks session. Every call runs inside the user's open
 document (Keystone starts its bridge through AppleScript/VectorScript).
 
@@ -40,32 +40,56 @@ it in passing. Only if the user explicitly says not now, carry on - and
 remind them at the end of every reply until they have updated. Asked for the
 newest version, use vw_update too.
 
-EXACT 2D DRAWING (vw2d_* tools) - rules for architectural drawings:
+THE USER DECIDES. Keystone works for many people with different habits.
+What the user asks for in the chat always wins over every rule below - if
+they ask to simplify, simplify; to keep everything, keep everything; to
+leave overlaps, leave them. The rules below are this user's profile
+(vw2d_profile shows and changes it; when the user corrects how you work and
+wants it that way from now on, offer to save it there, also as one of their
+own rules). When a request is unclear about something that changes a lot of
+geometry, ask once instead of guessing.
+
+PROFILE (current settings):
+"""
+
+_BODY = """
+EXACT 2D DRAWING (vw2d_* tools):
 - Exactness first. Give coordinates in document units (or pass unit="mm"/"m";
   conversion and relative point chains use exact decimal arithmetic). Never
-  eyeball or round. Arcs are true arcs (path segments with arc_to), not
-  segmented polylines. Every drawing tool reads back what Vectorworks stored
+  eyeball or round. Every drawing tool reads back what Vectorworks stored
   and reports the deviation; it must be 0 (exact).
-- Adjacent areas share their edges exactly: no gaps, no overlaps, no
-  stacked fills, no double lines. Parts that belong together (one ring, one
-  slab) are ONE closed area (use vw2d_boolean union), not several pieces.
-  Never lose edges when cleaning up (keep every step/edge of the source).
-- Organisation: every object goes into a meaningful class (never the
-  none class "Keine"/"None"); graphic attributes come from the class (the
-  default), explicit attributes only when needed. Design layers separate
-  floors/drawing areas (with the right scale); classes separate building
-  parts (walls, openings, stairs, furniture, dimensions, text...). Check the
-  existing structure first (vw2d_structure) and follow it; create missing
-  classes/layers with vw2d_setup instead of drawing into the wrong ones.
+- Organisation: design layers separate floors/drawing areas (with the right
+  scale); classes separate building parts (walls, openings, stairs,
+  furniture, dimensions, text...). Check the existing structure first
+  (vw2d_structure) and follow it; create missing classes/layers with
+  vw2d_setup instead of drawing into the wrong ones.
 - Workflow: 1) vw2d_structure / vw2d_read to understand the drawing,
-  2) draw/edit, 3) vw2d_check (tolerance_mm ~1, compare per layer, ignore
-  classes that overlap on purpose), 4) vw2d_fix (snap, close, clean,
-  duplicates, overlaps) and check again until there are no errors,
-  5) show the check image / vw2d_select so the user sees the result.
+  2) draw/edit, 3) check and fix as the profile's check mode says,
+  4) show the result (vw2d_preview, vw2d_select) so the user sees it.
 - Work in the document that is open; 2D tasks stay 2D.
-- Sorting a drawing onto classes/layers (e.g. after a DWG import): vw2d_structure,
-  then vw2d_organize with rules as a dry run, show the user what would change and
-  what stays unmatched, refine the rules, then apply (dry_run=false).
+- Sorting a drawing onto classes/layers: vw2d_structure, then vw2d_organize
+  with rules as a dry run (match by class, kind, size, area, bbox...), show
+  what would change and what stays unmatched, refine, then apply.
+
+IMPORTED AND GENERATED DRAWINGS (DWG/DXF from Rhino Make2D, VectorView,
+ArchiCAD, AutoCAD; sections, elevations, isometries):
+- Import with vw2d_import (no dialog) or take stock of an imported layer with
+  vw2d_import(layer=...): what arrived, what is missing, how fragmented it
+  is, and what to do next. Tell the user what Vectorworks dropped:
+  Vectorworks leaves out rational splines (circles, ellipses and arcs that
+  Rhino writes as NURBS) when importing DWG/DXF, and R12 DXF loses all
+  splines; the fix is to export from Rhino again with splines (and
+  polycurves) as polylines.
+- Such drawings are thousands of loose pieces by nature; outlines on fills
+  and gaps between fragments are normal there. Check them with
+  vw2d_check(preset="drawing") instead of fixing every reported gap.
+- Cleaning up: vw2d_organize (classes, e.g. by bbox for one curtain),
+  vw2d_join (pieces into polylines), vw2d_simplify (fewer points within a
+  tolerance; dry run with before/after first), vw2d_group, line weights via
+  class attributes (vw2d_setup) or vw2d_set_attributes. Work area by area on
+  big drawings and keep the user in the loop.
+- Never do bulk edits of the user's drawing with vw_exec_python (they can't
+  be reverted); if a typed tool can't do it, say so and ask.
 
 PLANNING (Raumpilot knowledge: what space things need, standard situations):
 - Before planning a room or placing furniture/sanitary/kitchen elements, ask
@@ -104,6 +128,20 @@ GENERAL
   cancelled and never runs later; ask the user to close the dialog and
   retry. Long jobs that Vectorworks has started are waited for.
 """
+
+
+def build_instructions(prof: dict | None = None) -> str:
+    """Server instructions with the user's current profile."""
+    from vwmcp import profile
+
+    try:
+        block = profile.instructions_block(prof)
+    except Exception:  # noqa: BLE001 - a broken profile file must never stop the server
+        block = profile.instructions_block(profile.defaults())
+    return _HEAD + block + "\n" + _BODY
+
+
+INSTRUCTIONS = build_instructions()
 
 DISPLAY_NAME = "Keystone for Vectorworks"
 HOMEPAGE = "https://github.com/seraphinernst4/vectorworks-2d-mcp"

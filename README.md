@@ -30,7 +30,9 @@ bevor du sie siehst.
 | **Planen (Raumpilot)** | Das Planungswissen der vier Raumpilot-Bände (Grundlagen, Wohnen, Arbeiten, Lernen; Wüstenrot Stiftung): Stell- und Bewegungsflächen jedes Einrichtungsgegenstands, Abstände (VDI 6000), Höhen, barrierefreie und rollstuhlgerechte Werte (DIN 18040), Raumgrößen und über 700 Regeln zu Treppen, Türen, Fluren, Aufzügen, Stellplätzen, Rettungswegen, Arbeitsplätzen, Schulen – jeweils mit Buchseite. Räume planen: Claude passt die Standardsituationen des Buchs (WC-Räume, Duschbäder, Bäder, Küchenformen, Essplätze …) an deine Raummaße und Tür an, erzeugt weitere Varianten nach denselben Regeln, prüft alles und zeichnet die gewählte Variante. Gezeichnete Räume prüfen. |
 | **Stil** | Gezeichnet wird zuerst im Raumpilot-Stil (schlichte Umrisse, Bewegungsflächen hellblau). Das ist nur die erste Ebene: Du legst deinen Bürostil fest (Klassen, Farben, Bewegungsflächen an/aus) und ordnest jedem Element **eure eigenen Symbole** zu – auch aus einer Bibliotheksdatei. |
 | **Ansichten** | Detaillierte Symbole für Ansichten und Schnitte (Sanitär, Möbel, Bäume, Personen, Fahrzeuge). |
-| **Rückgängig** | `vw_revert_last` macht genau den letzten Schritt von Claude rückgängig (Geometrie, Attribute, Klasse, Name, Stapelreihenfolge). |
+| **Importe bereinigen** | DWG/DXF ohne Dialog importieren und aufnehmen: was angekommen ist, was Vectorworks weggelassen hat (z. B. Kreise und Ringe aus Rhino) und wie zerstückelt die Zeichnung ist. Lose Make2D-/VectorView-Stücke zu Linienzügen verbinden, organische Formen ausdünnen, ohne sie zu verändern (Vorher-Nachher-Bild), gruppieren, nach Bereich in Klassen sortieren, Schnitte mit eigener Prüfvorgabe prüfen. |
+| **Dein Profil** | Wie Claude arbeitet, stellst du ein: Detailtreue, Teile vereinigen ja/nein/fragen, Flächen, Bögen, Klassen, Attribute, Prüfmodus, ab wie vielen Objekten erst nachgefragt wird, Toleranzen und eigene Regeln in deinen Worten. Was du im Chat verlangst, geht immer vor. |
+| **Rückgängig** | `vw_revert_last` macht genau den letzten Schritt von Claude rückgängig (Geometrie, Attribute, Klasse, Name, Stapelreihenfolge – auch Import, Verbinden, Vereinfachen, Gruppieren). |
 
 So fragst du Claude zum Beispiel:
 
@@ -44,6 +46,9 @@ So fragst du Claude zum Beispiel:
 > - „Prüf das Bad auf Ebene EG – stimmen die Bewegungsflächen?“
 > - „Nimm statt der Keystone-Symbole unsere Bürosymbole aus Bibliothek.vwx: WC = ‚WC Geberit‘, Waschtisch = ‚WT 60‘.“
 > - „Zeichne vor die Fassade drei Bäume und zwei Personen in der Ansicht.“
+> - „Importier /Users/…/schnitt.dwg und sag mir, ob alles angekommen ist.“
+> - „Bereinige den Schnitt: Schnittlinien 0,5 mm, Ansicht 0,18 mm, die Vorhänge vereinfachen und gruppieren.“
+> - „Merk dir: Bestand immer organisch lassen, nur vereinfachen.“ (eigene Regel im Profil)
 
 ## Installation (macOS, ca. 2 Minuten)
 
@@ -142,14 +147,17 @@ Arbeitsablauf ausführlicher und lässt sich an euren Klassenstandard anpassen.
 1. **Struktur lesen** (`vw2d_structure`): welche Ebenen, Klassen, Maßstäbe gibt es?
 2. **Zeichnen** (`vw2d_draw`) in der richtigen Ebene und Klasse – exakt.
 3. **Prüfen** (`vw2d_check`) mit Prüfbild.
-4. **Korrigieren** (`vw2d_fix`) und erneut prüfen, bis keine Fehler mehr da sind.
+4. **Korrigieren** (`vw2d_fix`) und erneut prüfen – bei neuen Zeichnungen bis keine Fehler mehr da sind, bei Importen und Schnitten nur, was du willst (einstellbar im Profil).
 5. **Zeigen** (`vw2d_select`): Claude markiert, was es gezeichnet hat.
 
 Alle Werkzeuge: `vw2d_read`, `vw2d_structure`, `vw2d_resources`, `vw2d_setup`,
 `vw2d_draw`, `vw2d_edit`, `vw2d_transform`, `vw2d_boolean`, `vw2d_offset`,
 `vw2d_set_attributes`, `vw2d_delete`, `vw2d_check`, `vw2d_preview`,
 `vw2d_fix`, `vw2d_select`, `vw2d_organize`, `vw2d_assets`,
-`vw2d_place_asset`, dazu aus dem Original `vw_ping`,
+`vw2d_place_asset`, `vw2d_import`, `vw2d_join`, `vw2d_simplify`,
+`vw2d_group`, `vw2d_profile`, die Planungswerkzeuge `vw2d_knowledge`,
+`vw2d_plan_room`, `vw2d_check_room`, `vw2d_place_element`, `vw2d_style`,
+dazu `vw_update` und aus dem Original `vw_ping`,
 `vw_document_info`, `vw_list_layers`, `vw_list_classes`, `vw_get_selection`,
 `vw_find_objects`, `vw_get_record`, `vw_set_record`, `vw_list_symbols`,
 `vw_insert_symbol`, `vw_revert_last`, `vw_exec_python`, `vw_vs_lookup`.

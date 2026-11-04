@@ -13,7 +13,7 @@ rm -rf "$STAGE" && mkdir -p "$STAGE/server" release
 sed "s/@VERSION@/$VERSION/" mcpb/manifest.json > "$STAGE/manifest.json"
 sed "s/@VERSION@/$VERSION/" mcpb/pyproject.toml > "$STAGE/pyproject.toml"
 cp mcpb/.mcpbignore "$STAGE/.mcpbignore"
-cp mcpb/server/main.py mcpb/server/index.js "$STAGE/server/"
+cp mcpb/server/main.py mcpb/server/index.js mcpb/server/profile.js "$STAGE/server/"
 cp src/vwmcp/assets/icon.png "$STAGE/icon.png"
 cp LICENSE "$STAGE/LICENSE"
 # server code without caches

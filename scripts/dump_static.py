@@ -9,11 +9,15 @@ import json
 import os
 import subprocess
 import sys
+import tempfile
 
 from mcp_types.version import HANDSHAKE_PROTOCOL_VERSIONS
 
 src, out = sys.argv[1], sys.argv[2]
 env = {k: v for k, v in os.environ.items() if not k.startswith("VWMCP_")}
+# the static answers must hold the default profile, never the build machine's own
+env["VWMCP_HOME"] = tempfile.mkdtemp(prefix="vwmcp-build-")
+env["VWMCP_UPDATE_CHECK"] = "0"
 code = f"import sys; sys.path.insert(0, {os.path.abspath(src)!r}); sys.argv = ['vwmcp']; from vwmcp.server import main; main()"
 proc = subprocess.Popen([sys.executable, "-c", code], stdin=subprocess.PIPE, stdout=subprocess.PIPE, env=env, text=True)
 
@@ -43,7 +47,14 @@ finally:
     proc.wait(timeout=20)
 
 init.pop("protocolVersion", None)
-data = {"protocolVersions": list(HANDSHAKE_PROTOCOL_VERSIONS), "initialize": init, "tools": tools["tools"]}
+sys.path.insert(0, os.path.abspath(src))
+from vwmcp import profile  # noqa: E402
+
+block = profile.instructions_block(profile.defaults())
+if block not in init.get("instructions", ""):
+    raise SystemExit("the server instructions don't contain the default profile block")
+data = {"protocolVersions": list(HANDSHAKE_PROTOCOL_VERSIONS), "initialize": init, "tools": tools["tools"],
+        "profile": {"table": profile.table(), "defaultBlock": block}}
 with open(out, "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
 print(f"static.json: {init['serverInfo']['name']} {init['serverInfo'].get('version')}, {len(tools['tools'])} tools")

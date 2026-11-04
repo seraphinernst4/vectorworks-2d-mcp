@@ -20,6 +20,9 @@ of"):
                       size = larger bounding box side); null = open end
   closed      true/false (polygons/polylines)
   in_group    true: only objects inside groups; false: only top-level ones
+  bbox        [x1, y1, x2, y2] in document units: the object lies inside this area
+              (e.g. one curtain of an imported section)
+  touches     [x1, y1, x2, y2]: the object reaches into this area
   not         a nested match that must NOT hold
 """
 
@@ -31,7 +34,8 @@ from collections import Counter, defaultdict
 from typing import Any
 
 MATCH_KEYS = {"class", "layer", "name", "symbol", "kind", "text", "pen", "fill_color", "fill", "hatch",
-              "line_style", "line_weight_mm", "area_m2", "size_mm", "closed", "in_group", "not"}
+              "line_style", "line_weight_mm", "area_m2", "size_mm", "closed", "in_group", "bbox", "touches",
+              "not"}
 GEOMETRY_KEYS = {"text", "symbol", "closed", "area_m2"}  # need records with geometry
 MM_PER_MIL = 0.0254
 NUMERIC_KEYS = ("line_weight_mm", "area_m2", "size_mm")
@@ -117,6 +121,12 @@ def _check_match(m: dict, where: str) -> None:
     for k in ("closed", "in_group"):
         if k in m and not isinstance(m[k], bool):
             raise RuleError("%s: %s must be true or false" % (where, k))
+    for k in ("bbox", "touches"):
+        if k in m:
+            v = m[k]
+            if not (isinstance(v, (list, tuple)) and len(v) == 4
+                    and all(isinstance(x, (int, float)) and not isinstance(x, bool) for x in v)):
+                raise RuleError("%s: %s must be [x1, y1, x2, y2] in document units" % (where, k))
     if "not" in m:
         if not isinstance(m["not"], dict):
             raise RuleError("%s: 'not' must be a match object" % where)
@@ -169,6 +179,15 @@ def matches(rec: dict, m: dict, mpu: float) -> bool:
             return False
         if k == "in_group" and bool(rec.get("parent")) != bool(v):
             return False
+        if k in ("bbox", "touches"):
+            b = rec.get("bbox")
+            x1, y1, x2, y2 = min(v[0], v[2]), min(v[1], v[3]), max(v[0], v[2]), max(v[1], v[3])
+            if not b:
+                return False
+            if k == "bbox" and not (b[0] >= x1 and b[1] >= y1 and b[2] <= x2 and b[3] <= y2):
+                return False
+            if k == "touches" and (b[2] < x1 or b[0] > x2 or b[3] < y1 or b[1] > y2):
+                return False
         if k == "not" and matches(rec, v, mpu):
             return False
     return True
