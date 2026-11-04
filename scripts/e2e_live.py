@@ -124,13 +124,34 @@ def fingerprint(layer):
     return out
 
 
+def _close(a, b, tol):
+    if isinstance(a, float) or isinstance(b, float):
+        return isinstance(a, (int, float)) and isinstance(b, (int, float)) and abs(a - b) <= tol
+    if isinstance(a, list) and isinstance(b, list):
+        return len(a) == len(b) and all(_close(x, y, tol) for x, y in zip(a, b))
+    if isinstance(a, dict) and isinstance(b, dict):
+        return a.keys() == b.keys() and all(_close(a[k], b[k], tol) for k in a)
+    return a == b
+
+
 def same(a, b):
     """Ordered and unordered comparison of two fingerprints."""
     from collections import Counter
     ca, cb = Counter(a), Counter(b)
     out = {"objects": [len(a), len(b)], "exact_order": a == b, "same_set": ca == cb,
            "missing": sum((ca - cb).values()), "extra": sum((cb - ca).values())}
-    if ca != cb:  # what differs: the first missing/extra records, key by key
+    if ca != cb:  # float noise only? (the user origin shift costs a few ULP on a round trip; the fingerprint rounds to 1e-6)
+        miss, extra = list((ca - cb).elements()), list((cb - ca).elements())
+        left = [json.loads(e) for e in extra]
+        matched = 0
+        for m in miss:
+            dm = json.loads(m)
+            k = next((i for i, de in enumerate(left) if _close(dm, de, 1.01e-6)), None)
+            if k is not None:
+                left.pop(k)
+                matched += 1
+        out["same_within_1um"] = matched == len(miss) and not left
+    if ca != cb and not out.get("same_within_1um"):  # what differs: the first missing/extra records, key by key
         miss, extra = list((ca - cb).elements())[:3], list((cb - ca).elements())[:3]
         diffs = []
         for m, e in zip(miss, extra):
