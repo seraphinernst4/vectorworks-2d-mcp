@@ -77,9 +77,9 @@ ArchiCAD, AutoCAD; sections, elevations, isometries):
   vw2d_import(layer=...): what arrived, what is missing, how fragmented it
   is, and what to do next. Tell the user what Vectorworks dropped:
   Vectorworks leaves out rational splines (circles, ellipses and arcs that
-  Rhino writes as NURBS) when importing DWG/DXF, and R12 DXF loses all
-  splines; the fix is to export from Rhino again with splines (and
-  polycurves) as polylines.
+  Rhino writes as NURBS) when importing DWG/DXF, and Rhino writes no splines
+  at all into R12 DXF; the fix is to export from Rhino again (DWG 2018) with
+  splines and polycurves as polylines.
 - Such drawings are thousands of loose pieces by nature; outlines on fills
   and gaps between fragments are normal there. Check them with
   vw2d_check(preset="drawing") instead of fixing every reported gap.

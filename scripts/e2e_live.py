@@ -61,10 +61,54 @@ def count(layer):
 def run(step, fn):
     t0 = time.time()
     try:
-        out = fn()
-        log(step, ok=True, s=round(time.time() - t0, 1), **(out or {}))
+        out = dict(fn() or {})
+        for k in ("ok", "s", "step", "t"):  # a tool result's own keys must not clash with the log's
+            if k in out:
+                out["result_" + k] = out.pop(k)
+        log(step, ok=True, s=round(time.time() - t0, 1), **out)
     except Exception as e:  # noqa: BLE001
         log(step, ok=False, s=round(time.time() - t0, 1), error=repr(e)[:800], tb=traceback.format_exc()[-1500:])
+
+
+def expect_error(fn, *words):
+    """Run fn, expecting a ToolError whose message has all words."""
+    try:
+        fn()
+    except Exception as e:  # noqa: BLE001
+        msg = str(e)
+        return {"raised": type(e).__name__, "message": msg[:300], "as_expected": all(w in msg for w in words)}
+    return {"raised": None, "as_expected": False}
+
+
+def _round(v):
+    if isinstance(v, float):
+        return round(v, 6) + 0.0
+    if isinstance(v, list):
+        return [_round(x) for x in v]
+    if isinstance(v, dict):
+        return {k: _round(x) for k, x in sorted(v.items())}
+    return v
+
+
+def fingerprint(layer):
+    """Everything a revert must bring back, without uuids: geometry with
+    vertex types, class, attributes, group membership, stacking order."""
+    recs = draw2d._read(layer=layer, geometry=True, allow_temp=False, limit=200000)["objects"]
+    idx = {r["uuid"]: i for i, r in enumerate(recs)}
+    out = []
+    for r in recs:
+        d = {k: v for k, v in r.items() if k not in ("uuid", "parent", "approx_polygon", "name")}
+        d["parent"] = idx.get(r.get("parent")) if r.get("parent") else None
+        out.append(json.dumps(_round(d), sort_keys=True, ensure_ascii=False))
+    return out
+
+
+def same(a, b):
+    """Ordered and unordered comparison of two fingerprints."""
+    from collections import Counter
+    ca, cb = Counter(a), Counter(b)
+    return {"objects": [len(a), len(b)], "exact_order": a == b, "same_set": ca == cb,
+            "missing": sum((ca - cb).values()), "extra": sum((cb - ca).values())}
 
 
 def pick(d, keys):
@@ -120,8 +164,9 @@ def phase_join():
     run("join apply " + lay, lambda: dict(pick(res(cleanup.vw2d_join(layer=lay, dry_run=False), "join_apply_testschnitt"),
                                                ("polylines", "closed", "objects_after", "applied")),
                                           count_now=count(lay)))
-    run("check after join", lambda: pick(res(draw2d.vw2d_check(layer=lay, image=False, max_issues=1,
-                                                               preset="drawing"))["summary"], ("errors", "warnings")))
+    run("check after join", lambda: (lambda d: dict(pick(d["summary"], ("errors", "warnings", "by_kind")),
+                                                    issues=[pick(i, ("kind", "message")) for i in d["issues"]]))(
+        res(draw2d.vw2d_check(layer=lay, image=False, max_issues=6, preset="drawing"))))
     run("preview after join", lambda: {"ok": bool(res(draw2d.vw2d_preview(layer=lay, marks=False, width_px=1400),
                                                       "after_join_testschnitt"))})
     run("revert join", lambda: dict(pick(generic.vw_revert_last(), ("reverted_tool", "deleted", "restored", "missing")),
@@ -242,9 +287,155 @@ def phase_workflow():
     run("wf preview", lambda: {"ok": bool(res(draw2d.vw2d_preview(layer=lay, marks=False, width_px=1600), "wf_final"))})
 
 
+def phase_exact():
+    """Revert must give back exactly the drawing it started from - geometry
+    (Bezier vertices of imported splines too), attributes, groups, order."""
+    for lay, steps in (("testschnitt", ("join",)), ("m2d_schnitt_polylinien", ("join", "simplify", "by_class")),
+                       ("m2d_grundriss", ("join", "by_class")), ("plan_bloecke", ("join",)),
+                       ("m2d_iso_schnitt", ("join", "simplify"))):
+        def one(lay=lay, steps=steps):
+            fp0 = fingerprint(lay)
+            done, info = 0, {}
+            for st in steps:
+                try:
+                    if st == "join":
+                        r = res(cleanup.vw2d_join(layer=lay, dry_run=False, image=False))
+                        info["join"] = pick(r, ("joined_pieces", "polylines", "objects_after", "applied"))
+                        if not r.get("applied"):
+                            continue
+                    elif st == "simplify":
+                        r = res(cleanup.vw2d_simplify(layer=lay, dry_run=False, image=False))
+                        info["simplify"] = pick(r, ("objects", "vertices_before", "vertices_after", "applied"))
+                        if not r.get("applied"):
+                            continue
+                    elif st == "by_class":
+                        r = res(draw2d.vw2d_fix("by_class", layer=lay, image=False))
+                        info["by_class"] = pick(r, ("changed", "fixed", "summary"))
+                    done += 1
+                except Exception as e:  # noqa: BLE001
+                    info[st + "_error"] = repr(e)[:300]
+            fp1 = fingerprint(lay)
+            reverts = [pick(generic.vw_revert_last(), ("reverted_tool", "deleted", "restored", "missing"))
+                       for _ in range(done)]
+            fp2 = fingerprint(lay)
+            return dict(info, changed=fp0 != fp1, reverts=reverts, compare=same(fp0, fp2))
+        run("exact " + lay, one)
+
+
+def phase_scenarios():
+    """User wishes and edge cases."""
+    lay, side = "testschnitt", [0.6, 1.2, 2.3, 6.0]
+    # the profile drives the defaults ...
+    for tol in (0.05, 1.0, 5.0):
+        run("join tol %g mm" % tol, lambda tol=tol: pick(res(cleanup.vw2d_join(layer=lay, tolerance_mm=tol,
+                                                                              dry_run=True, image=False)),
+                                                         ("joined_pieces", "polylines", "objects_after")))
+    run("join no curves", lambda: pick(res(cleanup.vw2d_join(layer=lay, include_curves=False, dry_run=True, image=False)),
+                                       ("joined_pieces", "polylines", "objects_after", "not_joinable")))
+    run("join through junctions", lambda: pick(res(cleanup.vw2d_join(layer=lay, through_junctions=True, dry_run=True,
+                                                                     image=False)),
+                                               ("joined_pieces", "polylines", "objects_after")))
+    run("profile tolerance 3", lambda: {"rules": cleanup.vw2d_profile("set", values={"tolerance_mm": 3})["rules_now"]})
+    run("join with profile tol 3", lambda: pick(res(cleanup.vw2d_join(layer=lay, dry_run=True, image=False)),
+                                                ("tolerance_mm", "joined_pieces", "objects_after")))
+    for paper in (0.05, 0.1, 0.5):
+        def simp(paper=paper):
+            cleanup.vw2d_profile("set", values={"simplify_paper_mm": paper})
+            return pick(res(cleanup.vw2d_simplify(layer="m2d_schnitt_polylinien", bbox=side, image=False)),
+                        ("tolerance_mm", "objects", "vertices_before", "vertices_after"))
+        run("simplify paper %g mm" % paper, simp)
+    # ... and an explicit request wins over the profile
+    run("profile confirm_above 10", lambda: {"set": bool(cleanup.vw2d_profile("set", values={"confirm_above": 10}))})
+    run("join default -> dry (profile)", lambda: pick(res(cleanup.vw2d_join(layer=lay, image=False)),
+                                                     ("dry_run", "applied", "note")))
+    run("join dry_run=False wins", lambda: pick(res(cleanup.vw2d_join(layer=lay, dry_run=False, image=False)),
+                                               ("dry_run", "applied", "objects_after")))
+    run("revert explicit join", lambda: dict(pick(generic.vw_revert_last(), ("reverted_tool", "restored", "missing")),
+                                             count_now=count(lay)))
+    # own rules land in the instructions every chat starts with
+    run("rule add", lambda: {"rules": cleanup.vw2d_profile("add_rule", rule="Bestand und Ruinen organisch lassen, "
+                                                                            "nur vereinfachen")["settings"].get("rules")})
+    run("rule in instructions", lambda: {"in_instructions": "Ruinen organisch" in app.build_instructions(profile.load()),
+                                         "tolerance_text": [ln for ln in app.build_instructions(profile.load())
+                                                            .splitlines() if "3 mm" in ln][:2]})
+    run("rule remove", lambda: {"rules": cleanup.vw2d_profile("remove_rule", index=0)["settings"].get("rules")})
+    run("profile wrong value", lambda: expect_error(lambda: cleanup.vw2d_profile("set", values={"detail": "egal"}),
+                                                    "detail"))
+    run("profile negative", lambda: expect_error(lambda: cleanup.vw2d_profile("set", values={"confirm_above": -5}),
+                                                 "confirm_above"))
+    run("profile reset", lambda: {"settings": cleanup.vw2d_profile("reset")["settings"]})
+    # wrong input says what is wrong
+    run("join unknown layer", lambda: expect_error(lambda: cleanup.vw2d_join(layer="gibts_nicht", dry_run=True), ))
+    run("import missing file", lambda: expect_error(lambda: cleanup.vw2d_import(path=T + "fehlt.dwg"), "not found"))
+    run("import 3dm", lambda: expect_error(lambda: cleanup.vw2d_import(path=T + "testschnitt.3dm")))
+    run("simplify tolerance 0", lambda: expect_error(lambda: cleanup.vw2d_simplify(layer=lay, tolerance_mm=0)))
+    run("group one object", lambda: expect_error(lambda: cleanup.vw2d_group(layer=lay, bbox=[0, 0, 0.0001, 0.0001]),
+                                                 "at least two"))
+    # group class: the members' class, not the active one
+    def grp():
+        r = cleanup.vw2d_group(layer="m2d_schnitt_polylinien", bbox=side, per_class=True, name="Seite")
+        out = {"groups": [pick(g, ("name", "class")) for g in r["groups"]][:6], "objects": r["objects"]}
+        out["revert"] = pick(generic.vw_revert_last(), ("reverted_tool", "restored", "missing"))
+        return out
+    run("group per class", grp)
+    def grp2():
+        r = cleanup.vw2d_group(layer="m2d_schnitt_polylinien", bbox=side, name="Seite", group_class="Ansicht")
+        out = {"groups": [pick(g, ("name", "class")) for g in r["groups"]]}
+        out["revert"] = pick(generic.vw_revert_last(), ("reverted_tool", "restored", "missing"))
+        return out
+    run("group own class", grp2)
+    # organize by touching an area (a curtain crossing the frame)
+    run("organize touches dry", lambda: pick(organize.vw2d_organize(
+        rules=[{"match": {"touches": side}, "class": "Vorhang"}], layer="m2d_schnitt_polylinien"),
+        ("to_change", "unmatched", "targets")))
+    # pictures for the user
+    run("preview bbox", lambda: {"objects": res(draw2d.vw2d_preview(layer="m2d_schnitt_polylinien", bbox=side,
+                                                                    marks=False, width_px=1200),
+                                                "preview_side_bbox").get("objects")})
+    run("preview drawing marks", lambda: res(draw2d.vw2d_preview(layer=lay, preset="drawing", width_px=1400),
+                                             "preview_drawing_marks")["summary"])
+
+
+def phase_vectorview():
+    """VectorView export (Keystone for Rhino) into Vectorworks."""
+    f = T + "vv_schnitt.dwg"
+    if not os.path.exists(f):
+        log("vectorview", ok=False, error="no vv_schnitt.dwg")
+        return
+    state = {}
+
+    def imp():
+        out = cleanup.vw2d_import(path=f)
+        state["layer"] = (out.get("imported") or {}).get("new_layers", [None])[0]
+        return pick(out, ("imported", "source", "objects", "kinds", "classes_total", "lines", "polylines",
+                          "joinable", "looks_generated", "next_steps"))
+    run("vv import", imp)
+    lay = state.get("layer")
+    if not lay:
+        return
+    run("vv check full", lambda: pick(res(draw2d.vw2d_check(layer=lay, image=False, max_issues=1))["summary"],
+                                      ("errors", "warnings", "infos")))
+    run("vv check drawing", lambda: (lambda d: dict(pick(d["summary"], ("errors", "warnings", "by_kind")),
+                                                    issues=[pick(i, ("kind", "message")) for i in d["issues"]]))(
+        res(draw2d.vw2d_check(layer=lay, image=False, max_issues=5, preset="drawing"))))
+    run("vv preview", lambda: {"objects": res(draw2d.vw2d_preview(layer=lay, marks=False, width_px=1600),
+                                              "vv_import").get("objects")})
+    fp0 = fingerprint(lay)
+    run("vv join", lambda: pick(res(cleanup.vw2d_join(layer=lay, dry_run=False), "vv_join"),
+                                ("joined_pieces", "polylines", "closed", "objects_after", "applied")))
+    run("vv simplify dry", lambda: pick(res(cleanup.vw2d_simplify(layer=lay), "vv_simplify"),
+                                        ("tolerance_mm", "objects", "vertices_before", "vertices_after")))
+    run("vv check after join", lambda: pick(res(draw2d.vw2d_check(layer=lay, image=False, max_issues=1,
+                                                                  preset="drawing"))["summary"], ("errors", "warnings")))
+    run("vv revert join", lambda: dict(pick(generic.vw_revert_last(), ("reverted_tool", "deleted", "restored")),
+                                       compare=same(fp0, fingerprint(lay))))
+    run("vv revert import", lambda: pick(generic.vw_revert_last(), ("reverted_tool", "deleted", "missing")))
+
+
 PHASES = {"stock": phase_stock, "import": phase_import, "check": phase_check, "join": phase_join,
           "simplify": phase_simplify, "organize": phase_organize_group, "profile": phase_profile, "big": phase_big,
-          "workflow": phase_workflow}
+          "workflow": phase_workflow, "exact": phase_exact, "scenarios": phase_scenarios,
+          "vectorview": phase_vectorview}
 
 if __name__ == "__main__":
     log("start", phases=sys.argv[1:], version=__import__("vwmcp").__version__)

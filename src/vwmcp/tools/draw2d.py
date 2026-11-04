@@ -20,7 +20,7 @@ from vwmcp.geom import checks as K
 from vwmcp.geom import fixes as F
 from vwmcp.geom import render as R
 from vwmcp.geom import specs as S
-from vwmcp.geom.shapes import units_tolerances
+from vwmcp.geom.shapes import from_records, units_tolerances
 
 READ_TIMEOUT = 600.0  # big drawings; the client stops early if Vectorworks quits
 WRITE_TIMEOUT = 600.0  # thousands of clips take minutes; a timeout would lose the journal entry
@@ -104,10 +104,12 @@ def _issue_out(it: dict, max_moves: int = 4) -> dict:
 CHECK_LIMIT = 100000
 
 
-def _check(scope: dict, tolerance_mm: float, checks=None, compare="layer", ignore_classes=None):
+def _check(scope: dict, tolerance_mm: float, checks=None, compare="layer", ignore_classes=None,
+           fills_only: bool = False):
     data = _read(**scope, limit=CHECK_LIMIT)
     res = K.run_checks(data["objects"], data["units"], tolerance_mm, checks=checks,
-                       none_class=data["none_class"], compare=compare, ignore_classes=ignore_classes)
+                       none_class=data["none_class"], compare=compare, ignore_classes=ignore_classes,
+                       overlap_fills_only=fills_only)
     if data.get("truncated"):
         res["summary"]["warning"] = ("more than %d objects in scope: only the first %d were checked - "
                                      "check layer by layer" % (CHECK_LIMIT, CHECK_LIMIT))
@@ -130,11 +132,12 @@ PRESETS = {
 
 
 def _preset(preset, checks, compare):
+    """-> checks, compare, overlap between filled areas only."""
     if preset and preset not in PRESETS:
         raise ToolError("preset must be one of %s" % ", ".join(PRESETS))
     if preset == "drawing":
-        return checks or PRESETS["drawing"], "class" if compare == "layer" else compare
-    return checks, compare
+        return checks or PRESETS["drawing"], "class" if compare == "layer" else compare, True
+    return checks, compare, False
 
 
 def _compact_map(m: dict, limit: int = 20):
@@ -693,8 +696,8 @@ def vw2d_check(
     big drawings). Precision: 0.005 mm; distances are measured on true
     arcs."""
     scope = _scope(uuids, layer, class_name, selection, bbox)
-    checks, compare = _preset(preset, checks, compare)
-    data, res = _check(scope, tolerance_mm, checks, compare, ignore_classes)
+    checks, compare, fills_only = _preset(preset, checks, compare)
+    data, res = _check(scope, tolerance_mm, checks, compare, ignore_classes, fills_only)
     out = {"document": data["document"], "units": data["units"]["name"], "summary": res["summary"],
            "issues": [_issue_out(i) for i in res["issues"][:max_issues]],
            "truncated": len(res["_all_issues"]) > max_issues}
@@ -726,8 +729,16 @@ def vw2d_preview(
     id from vw2d_check; bbox [x1, y1, x2, y2] shows (and checks) only that
     area (document units). preset as in vw2d_check."""
     scope = _scope(uuids, layer, class_name, selection, bbox)
-    checks, compare = _preset(preset, None, compare)
-    data, res = _check(scope, tolerance_mm, checks, compare, ignore_classes)
+    if not marks and focus_issue is None:
+        # just the drawing: no checks needed (they are slow on long polylines)
+        data = _read(**scope, limit=CHECK_LIMIT)
+        t = units_tolerances(data["units"], tolerance_mm)
+        shapes = from_records(data["objects"], t["chord"])
+        summary = json.dumps({"document": data["document"], "objects": len(data["objects"])}, ensure_ascii=False)
+        return [summary, _image(data, {"_shapes": shapes, "_all_issues": []}, focus=tuple(bbox) if bbox else None,
+                                width_px=width_px, marks=False)]
+    checks, compare, fills_only = _preset(preset, None, compare)
+    data, res = _check(scope, tolerance_mm, checks, compare, ignore_classes, fills_only)
     focus = tuple(bbox) if bbox else None
     if focus_issue is not None:
         it = next((i for i in res["_all_issues"] if i["id"] == focus_issue), None)

@@ -2,9 +2,10 @@
 an import what Vectorworks left out. DWG is a binary format: only its
 version is read.
 
-Known losses when Vectorworks 2026 imports DWG/DXF (tested with Rhino 8
-exports): rational splines (circles, ellipses, arcs and conic curves that
-Rhino writes as NURBS) are dropped; in R12 DXF every spline is dropped.
+Known losses (tested with Rhino 8 exports and Vectorworks 2026): Vectorworks
+drops rational splines (circles, ellipses, arcs and conic curves that Rhino
+writes as NURBS) when importing DWG/DXF; Rhino's R12 DXF contains no splines
+at all (Rhino leaves them out when writing R12).
 """
 
 from __future__ import annotations
@@ -102,8 +103,7 @@ def expected_losses(src: dict[str, Any]) -> dict[str, Any]:
     if not src.get("countable"):
         return {}
     if src.get("version") == "R12":
-        lost = src.get("splines", 0)
-        why = "R12-DXF: Vectorworks übernimmt keine Splines"
+        return {"objects": None, "why": "R12-DXF enthält keine Splines (Rhino lässt sie beim R12-Export weg)"}
     else:
         lost = src.get("rational_splines", 0)
         why = "gewichtete Splines (Kreise, Ellipsen, Bögen als NURBS) übernimmt Vectorworks nicht"

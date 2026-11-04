@@ -41,9 +41,10 @@ touches Vectorworks.
   points, via `replace_geometry`), `vw2d_group` (`group_objects`, journal op
   `grouped` -> `HUngroup`). `dxfscan.py` counts DXF entities;
   `geom/inventory.py` is the stock-taking report.
-- Known Vectorworks 2026 import losses (tested with Rhino 8): rational
-  splines are dropped from DWG/DXF; R12 DXF drops all splines. Rhino export
-  with splines/polycurves as polylines brings everything.
+- Known losses (tested with Rhino 8 / Vectorworks 2026): Vectorworks drops
+  rational splines from DWG/DXF; Rhino writes no splines into R12 DXF.
+  Rhino export (DWG 2018) with splines/polycurves as polylines brings
+  everything.
 - `vw2d_check(preset="drawing")` for Make2D/VectorView/DWG drawings.
 
 ## Planning (0.6, Raumpilot knowledge)

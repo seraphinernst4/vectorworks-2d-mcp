@@ -354,6 +354,10 @@ def vw_revert_last() -> dict:
         # Vectorworks took it: it is still running, ran partway or stopped with
         # an error. Putting the step back would let a second revert restore the
         # same objects twice.
+        if "nothing was changed" in str(e):
+            raise ToolError("Can't revert %s: %s\n\nThe drawing is unchanged. The step was taken off the revert "
+                            "journal (it can never be reverted), so the next vw_revert_last goes to the step "
+                            "before it." % (entry["tool"], e)) from e
         if "still working on this request" in str(e):
             raise ToolError("The revert of %s is still running in Vectorworks (large step). Wait until "
                             "Vectorworks is responsive again and check the drawing; this step is no longer "

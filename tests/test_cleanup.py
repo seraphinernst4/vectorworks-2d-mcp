@@ -145,7 +145,9 @@ def test_dxfscan_r12_and_dwg(tmp_path):
     f = tmp_path / "r12.dxf"
     f.write_text(_dxf("AC1009", [LINE, SPLINE, RATIONAL]))
     s = dxfscan.scan(f)
-    assert s["version"] == "R12" and dxfscan.expected_losses(s)["objects"] == 2
+    assert s["version"] == "R12" and dxfscan.expected_losses(s)["objects"] is None
+    st = take_stock([_line((0, 0), (1, 0))], 1000.0, 1e-6, source=s, arrived_by_layer={"L": 1})
+    assert any("Rhino lässt sie beim R12-Export weg" in t for t in st["next_steps"])
     d = tmp_path / "x.dwg"
     d.write_bytes(b"AC1027" + b"\0" * 40)
     assert dxfscan.scan(d) == {"format": "DWG", "version": "2013", "countable": False}
@@ -466,6 +468,9 @@ def test_group_tool(fake):
     sent = [kw for fn, kw in f.calls if fn == "group_objects"][0]["groups"]
     assert len(sent) == 1 and sorted(sent[0]["uuids"]) == sorted([a["uuid"], b["uuid"]])
     assert sent[0]["name"] == "Vorhang" and out["objects"] == 2
+    assert sent[0]["class"] is None  # the bridge picks the members' class
+    cleanup.vw2d_group(layer="L", bbox=[-1, -1, 2, 2], group_class="Vorhang")
+    assert [kw for fn, kw in f.calls if fn == "group_objects"][-1]["groups"][0]["class"] == "Vorhang"
     d = _line((0, 0.5), (1, 0.5))  # second object of class A
     f = fake([a, b, c, d])
     cleanup.vw2d_group(layer="L", bbox=[-1, -1, 2, 2], per_class=True, name="Vorhang")
@@ -494,6 +499,10 @@ def test_import_tool(fake, tmp_path):
         cleanup.vw2d_import(path=str(tmp_path / "nope.dwg"))
     with pytest.raises(ToolError, match="give the path"):
         cleanup.vw2d_import()
+    rh = tmp_path / "modell.3dm"
+    rh.write_bytes(b"3D Geometry File Format")
+    with pytest.raises(ToolError, match="DWG 2018"):
+        cleanup.vw2d_import(path=str(rh))
 
 
 def test_check_preset_drawing(fake):
@@ -507,8 +516,42 @@ def test_check_preset_drawing(fake):
         draw2d.vw2d_check(layer="L", image=False, preset="nope")
 
 
+def test_check_preset_drawing_nested_outlines_are_no_overlap(fake):
+    """A window outline inside a facade outline is a drawing; two stacked
+    fills of one class are an error (live 0.7 beta: joined outlines of a
+    section counted as 8 overlap errors)."""
+    outer = _poly([(0, 0), (10, 0), (10, 10), (0, 10)], closed=True)
+    inner = _poly([(2, 2), (4, 2), (4, 4), (2, 4)], closed=True)
+    for r in (outer, inner):
+        r["attrs"]["fill"] = "none"
+    fake([outer, inner])
+    drawing = json.loads(draw2d.vw2d_check(layer="L", image=False, preset="drawing"))
+    assert drawing["summary"]["errors"] == 0
+    full = json.loads(draw2d.vw2d_check(layer="L", image=False, checks=["overlap"]))
+    assert full["summary"]["errors"] == 1  # the plan check stays strict
+    for r in (outer, inner):
+        r["attrs"]["fill"] = "solid"
+    fake([outer, inner])
+    drawing = json.loads(draw2d.vw2d_check(layer="L", image=False, preset="drawing"))
+    assert [i["kind"] for i in drawing["issues"]] == ["overlap"]
+    twin = dict(inner, uuid="twin")
+    twin["attrs"] = dict(inner["attrs"], fill="none")
+    inner["attrs"]["fill"] = "none"
+    fake([outer, inner, twin])
+    drawing = json.loads(draw2d.vw2d_check(layer="L", image=False, preset="drawing"))
+    assert [i["kind"] for i in drawing["issues"]] == ["duplicate"]  # a doubled outline still counts
+
+
 def test_revert_mapping_is_compact(fake):
     f = fake()
     f.journal.record("Test.vwx", "vw2d_fix", [{"op": "replaced", "before": [], "after": []}])
     out = generic.vw_revert_last()
     assert out["mapping"]["count"] == 50
+
+
+def test_join_and_simplify_refuse_zero_tolerance(fake):
+    fake([_line((0, 0), (1, 0)), _line((1, 0), (2, 0))])
+    with pytest.raises(ToolError, match="more than 0"):
+        cleanup.vw2d_join(layer="L", tolerance_mm=0)
+    with pytest.raises(ToolError, match="more than 0"):
+        cleanup.vw2d_simplify(layer="L", tolerance_mm=-1)

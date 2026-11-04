@@ -37,6 +37,8 @@ class Shape:
     _chord: float | None = None
     _valid: bool | None = None
     _anchors: list | None = None
+    _segidx: tuple | None = None
+    _anchor_grid: tuple | None = None
 
     # ---- classification ----
     @property
@@ -112,14 +114,95 @@ class Shape:
         self._anchors = uniq
         return uniq
 
-    def distance_to(self, p) -> tuple[float, tuple[float, float] | None]:
-        """Exact distance from p to the outline and the closest point."""
+    def nearest_anchor(self, p, within: float) -> tuple[float, tuple[float, float] | None]:
+        """Nearest exact vertex within `within` (else (inf, None)); ties: the
+        first in anchor order."""
+        anchors = self.anchors()
+        if len(anchors) <= 32:
+            cands = enumerate(anchors)
+        else:
+            if self._anchor_grid is None or self._anchor_grid[0] != within:
+                cell = max(within, 1e-12)
+                grid: dict[tuple[int, int], list[int]] = {}
+                for i, q in enumerate(anchors):
+                    grid.setdefault((int(math.floor(q[0] / cell)), int(math.floor(q[1] / cell))), []).append(i)
+                self._anchor_grid = (within, cell, grid)
+            _w, cell, grid = self._anchor_grid
+            cx, cy = int(math.floor(p[0] / cell)), int(math.floor(p[1] / cell))
+            idx = sorted(i for gx in (cx - 1, cx, cx + 1) for gy in (cy - 1, cy, cy + 1)
+                         for i in grid.get((gx, gy), ()))
+            cands = ((i, anchors[i]) for i in idx)
+        vd, vp = math.inf, None
+        for _i, q in cands:
+            dq = math.hypot(q[0] - p[0], q[1] - p[1])
+            if dq < vd:
+                vd, vp = dq, q
+        if vd > within:
+            return math.inf, None
+        return vd, vp
+
+    def _segment_index(self):
+        """Grid of segment numbers (long outlines: only nearby segments are measured)."""
+        if self._segidx is None:
+            segs = self.segments
+            boxes = [_seg_box(s) for s in segs]
+            total = sum(max(b[2] - b[0], b[3] - b[1]) for b in boxes)
+            cell = max(total / max(len(segs), 1) * 2.0, 1e-12)
+            grid: dict[tuple[int, int], list[int]] = {}
+            big = []
+            for i, b in enumerate(boxes):
+                x0, y0 = int(math.floor(b[0] / cell)), int(math.floor(b[1] / cell))
+                x1, y1 = int(math.floor(b[2] / cell)), int(math.floor(b[3] / cell))
+                if (x1 - x0 + 1) * (y1 - y0 + 1) > 64:
+                    big.append(i)  # long segment: always measured
+                    continue
+                for gx in range(x0, x1 + 1):
+                    for gy in range(y0, y1 + 1):
+                        grid.setdefault((gx, gy), []).append(i)
+            self._segidx = (segs, cell, grid, big)
+        return self._segidx
+
+    def distance_to(self, p, within: float | None = None) -> tuple[float, tuple[float, float] | None]:
+        """Exact distance from p to the outline and the closest point. With
+        `within`, only distances up to it count (farther: (inf, None)) - fast
+        on long outlines."""
+        if within is None:
+            segs = self.segments
+            cand = range(len(segs))
+        else:
+            segs, cell, grid, big = self._segment_index()  # cached segment list too
+            r = within
+        if within is None or len(segs) <= 32:
+            cand = range(len(segs))
+        else:
+            x0, x1 = int(math.floor((p[0] - r) / cell)), int(math.floor((p[0] + r) / cell))
+            y0, y1 = int(math.floor((p[1] - r) / cell)), int(math.floor((p[1] + r) / cell))
+            if (x1 - x0 + 1) * (y1 - y0 + 1) > 4096:
+                cand = range(len(segs))
+            else:
+                found = set(big)
+                for gx in range(x0, x1 + 1):
+                    for gy in range(y0, y1 + 1):
+                        found.update(grid.get((gx, gy), ()))
+                cand = sorted(found)
         best, bp = math.inf, None
-        for s in self.segments:
+        for i in cand:
+            s = segs[i]
             d = C.point_segment_distance(p, s)
             if d < best:
                 best, bp = d, C.closest_point_on_segment(p, s)
+        if within is not None and best > within:
+            return math.inf, None
         return best, bp
+
+
+def _seg_box(s) -> tuple[float, float, float, float]:
+    """Bounding box of a segment (arcs: their whole circle - safe and simple)."""
+    if s[0] == "L":
+        (ax, ay), (bx, by) = s[1], s[2]
+        return (min(ax, bx), min(ay, by), max(ax, bx), max(ay, by))
+    c, r = s[3], s[4]
+    return (c[0] - r, c[1] - r, c[0] + r, c[1] + r)
 
 
 def polygonal(g: BaseGeometry) -> BaseGeometry:
@@ -239,7 +322,7 @@ class PointIndex:
             b = self.boxes.get(s.uuid)
             if b is None or p[0] < b[0] - eps or p[0] > b[2] + eps or p[1] < b[1] - eps or p[1] > b[3] + eps:
                 continue
-            if s.distance_to(p)[0] <= eps:
+            if s.distance_to(p, eps)[0] <= eps:
                 return True
         return False
 

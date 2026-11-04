@@ -90,8 +90,9 @@ def vw2d_import(path: str | None = None, layer: str | None = None) -> dict:
     with the file (DXF: counted; DWG can't be counted), how fragmented it is
     (loose lines, joinable pieces, points), and the next steps. Tell the user
     when objects are missing: Vectorworks leaves out rational splines
-    (circles, ellipses, arcs Rhino writes as NURBS), R12 DXF all splines -
-    exporting from Rhino again with splines/polycurves as polylines fixes it.
+    (circles, ellipses, arcs Rhino writes as NURBS); Rhino's R12 DXF holds no
+    splines at all - exporting from Rhino again (DWG 2018) with
+    splines/polycurves as polylines fixes both.
     vw_revert_last after an import deletes the imported layers."""
     if not path and not layer:
         raise ToolError("give the path of a .dwg/.dxf file, or a layer to take stock of")
@@ -103,6 +104,12 @@ def vw2d_import(path: str | None = None, layer: str | None = None) -> dict:
         path = os.path.expanduser(path)
         if not os.path.isfile(path):
             raise ToolError("file not found: %s" % path)
+        ext = os.path.splitext(path)[1].lower()
+        if ext not in (".dwg", ".dxf"):
+            raise ToolError("vw2d_import takes .dwg or .dxf files, not %s%s" % (
+                ext or "files without extension",
+                " - in Rhino export the view as DWG 2018 (splines and polycurves as polylines) or use "
+                "Make2D/VectorView and export that" if ext == ".3dm" else ""))
         try:
             source = dxfscan.scan(path)
         except OSError as e:
@@ -212,6 +219,8 @@ def vw2d_join(
     applies it (one undo step), left out = the profile decides (dry run first
     above its confirm_above). Scope: uuids, selection, layer, class_name,
     bbox."""
+    if tolerance_mm is not None and not tolerance_mm > 0:
+        raise ToolError("tolerance_mm must be more than 0 (how far apart piece ends may be, real size)")
     scope = _scope(uuids, layer, class_name, selection, bbox)
     data = _read(**scope, geometry=True, allow_temp=include_curves, limit=200000)
     units = data["units"]
@@ -281,6 +290,8 @@ def vw2d_simplify(
     dry_run=True (default) reports the reduction and shows before (red) /
     after (black); call again with dry_run=False to apply (one undo step).
     Run vw2d_join first when the shape is made of many separate pieces."""
+    if tolerance_mm is not None and not tolerance_mm > 0:
+        raise ToolError("tolerance_mm must be more than 0 (how far the thinned outline may deviate, real size)")
     scope = _scope(uuids, layer, class_name, selection, bbox)
     data = _read(**scope, geometry=True, allow_temp=True, limit=200000)
     units = data["units"]
@@ -324,11 +335,13 @@ def vw2d_group(
     bbox: list[float] | None = None,
     name: str | None = None,
     per_class: bool = False,
+    group_class: str | None = None,
 ) -> dict:
     """Group objects (top-level ones; one group per layer, or per layer and
     class with per_class). Scope: uuids, selection, layer, class_name, bbox
-    (objects inside the area). The objects keep their uuids; vw_revert_last
-    ungroups again."""
+    (objects inside the area). The group gets its members' class when they
+    share one, else the none class; group_class sets it (existing class).
+    The objects keep their uuids; vw_revert_last ungroups again."""
     scope = _scope(uuids, layer, class_name, selection, bbox)
     data = _read(**scope, geometry=False, allow_temp=False, limit=200000)
     recs = [r for r in data["objects"] if not r.get("parent")]
@@ -347,7 +360,7 @@ def vw2d_group(
         if len(us) < 2:
             continue
         nm = name if name and len(buckets) == 1 else ((name + " " if name else "") + (cls or lay or "")).strip() or None
-        groups.append({"uuids": us, "name": nm})
+        groups.append({"uuids": us, "name": nm, "class": group_class})
     if not groups:
         raise ToolError("nothing to group: every layer/class has only one object")
     res = app.vw2d("group_objects", timeout=WRITE_TIMEOUT, groups=groups)

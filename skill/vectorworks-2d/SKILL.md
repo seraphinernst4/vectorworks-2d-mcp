@@ -70,8 +70,9 @@ Nutzer** sie haben will.
    Antwort sagt, was angekommen ist, was fehlt, wie zerstückelt die
    Zeichnung ist, und was als Nächstes sinnvoll ist. Fehlende Objekte dem
    Nutzer sagen: Vectorworks übernimmt keine gewichteten Splines (Kreise,
-   Ellipsen, Ringe aus Rhino), aus R12-DXF gar keine Splines – in Rhino mit
-   „Splines und Polykurven als Polylinien“ (DWG 2018) neu exportieren.
+   Ellipsen, Ringe aus Rhino); R12-DXF aus Rhino enthält gar keine Splines –
+   in Rhino als DWG 2018 mit „Splines und Polykurven als Polylinien“ neu
+   exportieren.
 2. **Prüfen:** `vw2d_check(preset="drawing")` – lose Stücke, Fugen zwischen
    Make2D-Stücken und Umrisse auf Füllflächen sind bei solchen Zeichnungen
    normal und kein Fehler. Nicht „bis fehlerfrei“ reparieren.

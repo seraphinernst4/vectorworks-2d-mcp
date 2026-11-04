@@ -324,3 +324,94 @@ def test_bbox_is_plan_coordinates_in_any_view():
     ns["_JOB_CACHE"].clear()
     view[0] = (0.0, 0.0, 0.0, (0, 0, 0))
     assert ns["_bbox"](objs["poly"]) == [0.0, 0.0, 9.0, 0.0]
+
+
+class _PolyVS:
+    """Enough of BeginPoly/EndPoly to see which calls make_poly makes. Like
+    Vectorworks 2026 (live), ArcTo makes an arc vertex (3) and the radius
+    vertex type (4) only comes from SetPolylineVertex."""
+
+    def __init__(self):
+        self.verts, self.calls, self.obj = [], [], None
+
+    def fns(self):
+        def add(t):
+            return lambda p, r=0.0: (self.calls.append((t, p)), self.verts.append([p[0], p[1], t, r]))
+
+        def end():
+            self.obj = types.SimpleNamespace(verts=self.verts)
+            self.verts = []
+
+        def setv(h, i, p, t, r, recalc):
+            self.calls.append(("set", i, t, r))
+            h.verts[i - 1] = [p[0], p[1], t, r]
+
+        return dict(ClosePoly=lambda: None, OpenPoly=lambda: None, BeginPoly=lambda: self.verts.clear(), EndPoly=end,
+                    AddPoint=add(0), CurveTo=add(1), CurveThrough=add(2), ArcTo=add(3),
+                    LNewObj=lambda: self.obj, GetVertNum=lambda h: len(h.verts),
+                    GetPolylineVertex=lambda h, i: ((h.verts[i - 1][0], h.verts[i - 1][1]), h.verts[i - 1][2],
+                                                    h.verts[i - 1][3]),
+                    SetPolylineVertex=setv, ResetBBox=lambda h: self.calls.append(("reset",)))
+
+
+def test_make_poly_exact_rebuilds_every_vertex_type():
+    """Restoring an imported spline (Bezier vertices) must not raise - a
+    revert that stops halfway leaves the drawing in neither state (live,
+    0.7 beta)."""
+    import pytest
+
+    f = _PolyVS()
+    ns = _ns(**f.fns())
+    verts = [[0, 0, 0, 0], [1, 2, 1, 0], [3, 1, 2, 0], [4, 0, 3, 0.5], [5, 1, 4, 0.25], [6, 0, 0, 0]]
+    with pytest.raises(ValueError, match="vertex type 1"):
+        ns["make_poly"](verts, False)
+    h = ns["make_poly"](verts, False, exact=True)
+    assert [v[2] for v in h.verts] == [0, 1, 2, 3, 4, 0]
+    assert h.verts[4][3] == 0.25 and h.verts[3][3] == 0.5
+    assert ("set", 5, 4, 0.25) in f.calls and ("reset",) in f.calls
+    # corners and arcs only: no fix-up pass
+    f.calls.clear()
+    ns["make_poly"]([[0, 0, 0, 0], [4, 0, 3, 0.5], [6, 0, 0, 0]], True, exact=True)
+    assert not [c for c in f.calls if c[0] in ("set", "reset")]
+
+
+def test_revert_refuses_before_changing_anything_when_a_snapshot_cant_be_rebuilt():
+    import pytest
+
+    deleted = []
+    ns = _ns(DelObject=deleted.append, GetLName=lambda h: "L", ActLayer=lambda: None)
+    bad = {"op": "replaced", "after": ["new-1"],
+           "before": [{"z": 1, "rec": {"kind": "polyline", "uuid": "a", "layer": "L", "class": "None",
+                                       "closed": False, "vertices": [[0, 0, 7, 0]]}},
+                      {"z": 2, "rec": {"kind": "wall", "uuid": "b", "layer": "L", "class": "None"}}]}
+    with pytest.raises(ValueError, match="nothing was changed: 2 object"):
+        ns["_revert2d"]([bad])
+    assert deleted == []
+    ok = {"op": "replaced", "after": [], "before": [
+        {"z": 1, "rec": {"kind": "polyline", "uuid": "a", "layer": "L", "class": "None", "closed": False,
+                         "vertices": [[0, 0, 0, 0], [1, 1, 1, 0], [2, 0, 0, 0]]}},
+        {"z": 2, "rec": {"kind": "group", "uuid": "g"}, "children": [{"z": 1, "rec": {"kind": "line", "uuid": "c"}}]}]}
+    assert ns["_check_restorable"]([ok]) is None
+
+
+def test_group_takes_members_class_not_the_active_one():
+    objs = {u: types.SimpleNamespace(uid=u, cls=c, t=2) for u, c in (("a", "Vorhang"), ("b", "Vorhang"), ("c", "X"))}
+    grp = types.SimpleNamespace(uid="g", cls="Aktiv", t=11)
+    sel = []
+
+    def run(uuids, **g):
+        ns = _ns(GetObjectByUuid=lambda u: objs.get(u), GetLName=lambda h: "L", ActLayer=lambda: "L",
+                 GetLayer=lambda h: "L", GetLayerByName=lambda n: "L", GetParent=lambda h: "L",
+                 GetTypeN=lambda h: getattr(h, "t", 31), DSelectAll=sel.clear, SetSelect=sel.append, Group=lambda: None,
+                 FSActLayer=lambda: grp, GetClass=lambda h: h.cls,
+                 SetClass=lambda h, c: setattr(h, "cls", c), GetObjectUuid=lambda h: h.uid,
+                 ClassList=lambda i: "Keine", ClassNum=lambda: 1, GetDescriptionText=lambda h: "")
+        ns["read_obj"] = lambda h, geo: {"uuid": h.uid, "class": h.cls}
+        ns["none_class"] = lambda: "Keine"
+        ns["_layer_name"] = lambda h: "L"
+        ns["current_document"] = lambda: "T.vwx"
+        return ns["group_objects"]([dict(uuids=uuids, **g)])
+
+    assert run(["a", "b"])["groups"][0]["class"] == "Vorhang"
+    assert run(["a", "c"])["groups"][0]["class"] == "Keine"
+    assert run(["a", "c"], **{"class": "Eigen"})["groups"][0]["class"] == "Eigen"

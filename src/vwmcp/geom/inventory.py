@@ -59,11 +59,12 @@ def take_stock(records: list[dict], mpu: float, join_tol: float, source: dict | 
         out["source"] = {"entities": exp, "arrived": got, "missing": max(0, exp - got),
                          "rational_splines": source.get("rational_splines", 0),
                          "splines": source.get("splines", 0), "version": source.get("version")}
+        if source.get("version") == "R12":
+            tips.append("R12-DXF: Geschwungene Kurven (Splines) fehlen schon in der Datei – Rhino lässt sie beim "
+                        "R12-Export weg. In Rhino als DWG 2018 mit „Splines und Polykurven als Polylinien“ neu "
+                        "exportieren.")
         if exp > got:
-            if source.get("version") == "R12" and source.get("splines"):
-                tips.append("Es fehlen %d Objekte: Vectorworks übernimmt aus R12-DXF keine Splines. In Rhino "
-                            "neu exportieren (DWG 2018, Splines und Polykurven als Polylinien)." % (exp - got))
-            elif source.get("rational_splines"):
+            if source.get("rational_splines"):
                 tips.append("Es fehlen %d Objekte, darunter %d gewichtete Splines (Kreise, Ellipsen, Ringe). In "
                             "Rhino mit „Splines als Polylinien“ neu exportieren, dann kommt alles an."
                             % (exp - got, source["rational_splines"]))

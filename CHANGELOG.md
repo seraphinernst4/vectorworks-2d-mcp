@@ -21,8 +21,9 @@ Nachgestellt mit echten Rhino-Exporten; die Ursachen sind behoben.
   Rückgängig löscht die importierten Ebenen.
 - **Import-Verluste werden benannt:** Vectorworks übernimmt aus DWG/DXF keine
   gewichteten Splines (Kreise, Ellipsen, Ringe aus Rhino) – im Test fehlten
-  so 16 % eines Rhino-Schnitts ohne jede Meldung; aus R12-DXF fehlen alle
-  Splines. Abhilfe: in Rhino „Splines/Polykurven als Polylinien“ exportieren
+  so 16 % eines Rhino-Schnitts ohne jede Meldung. R12-DXF aus Rhino enthält
+  gar keine Splines (Rhino lässt sie beim Export weg). Abhilfe für beides: in
+  Rhino als DWG 2018 mit „Splines/Polykurven als Polylinien“ exportieren
   (getestet: alles kommt an).
 - **`vw2d_join`:** lose Stücke (Make2D, VectorView, DWG) zu Linienzügen
   verbinden – nur gleiche Ebene, Klasse, Gruppe und gleiches Aussehen;

@@ -10,6 +10,7 @@ from __future__ import annotations
 import math
 from collections import defaultdict
 
+import shapely
 from shapely import STRtree
 from shapely.geometry import Point, Polygon
 from shapely.ops import unary_union
@@ -102,12 +103,14 @@ def _class_matcher(patterns):
 
 def run_checks(records: list[dict], units: dict, tolerance_mm: float = 1.0,
                checks=None, none_class: str = "", max_issues: int = 200,
-               compare: str = "layer", ignore_classes=None) -> dict:
+               compare: str = "layer", ignore_classes=None, overlap_fills_only: bool = False) -> dict:
     """compare: which objects are checked against each other for overlaps,
     gaps and near misses: 'layer' (same layer, default), 'class' (same
     class and layer) or 'all'. ignore_classes: class names (or 'Prefix*')
     left out of geometric checks, e.g. furniture or hatch classes that
-    overlap on purpose."""
+    overlap on purpose. overlap_fills_only: overlaps only between filled
+    areas (drawings: an unfilled outline inside another - a window in a
+    facade - is a drawing, not an error; duplicates still count)."""
     ignored = _class_matcher(ignore_classes)
     records_all = records
     records = [r for r in records if not ignored(r.get("class", ""))]
@@ -178,7 +181,7 @@ def run_checks(records: list[dict], units: dict, tolerance_mm: float = 1.0,
                                 "Doppelte Fläche (deckungsgleich)",
                                 fix={"action": "duplicates"})
                     continue
-                if "overlap" not in checks:
+                if "overlap" not in checks or (overlap_fills_only and not (s.filled and o.filled)):
                     continue
                 inside = None
                 if gj.buffer(thin).contains(gi):
@@ -204,22 +207,28 @@ def run_checks(records: list[dict], units: dict, tolerance_mm: float = 1.0,
         seen = set()
         near_pairs = defaultdict(list)
         for s in geo:
-            for p in s.anchors():
-                hits = gtree.query(Point(p).buffer(tol))
+            anchors = s.anchors()
+            if not anchors:
+                continue
+            # one bulk query per object (exact distances are tested below)
+            xs = [a[0] for a in anchors]
+            ys = [a[1] for a in anchors]
+            inp, idx = gtree.query(shapely.box([x - tol for x in xs], [y - tol for y in ys],
+                                               [x + tol for x in xs], [y + tol for y in ys]))
+            hits_by: dict[int, list[int]] = defaultdict(list)
+            for i, j in zip(inp.tolist(), idx.tolist()):
+                hits_by[i].append(j)
+            for ai, p in enumerate(anchors):
                 best = None
-                for j in hits:
+                for j in sorted(hits_by.get(ai, ())):
                     o = geo[int(j)]
                     if o.uuid == s.uuid or not comparable(s, o):
                         continue
-                    d, cp = o.distance_to(p)
+                    d, cp = o.distance_to(p, tol)
                     if d > tol:
                         continue
-                    # nearest exact vertex of the other object
-                    vd, vp = math.inf, None
-                    for q in o.anchors():
-                        dq = math.hypot(q[0] - p[0], q[1] - p[1])
-                        if dq < vd:
-                            vd, vp = dq, q
+                    # nearest exact vertex of the other object (within tol, else none)
+                    vd, vp = o.nearest_anchor(p, tol)
                     if d <= eps:
                         if eps < vd <= tol:
                             cand = ("node", vd, o, vp)

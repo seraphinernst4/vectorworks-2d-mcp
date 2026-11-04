@@ -584,6 +584,15 @@ def collect(uuids=None, layer=None, cls=None, selection=False, bbox=None):
     [x1, y1, x2, y2] keeps only objects whose bounding box touches it."""
     if uuids:
         return [handle(u) for u in uuids]
+    if layer not in (None, "*") and _is_nil(vs.GetLayerByName(layer)):
+        names = []
+        lay = vs.FLayer()
+        while not _is_nil(lay) and len(names) < 40:
+            names.append(_str(vs.GetLName(lay)))
+            lay = vs.NextLayer(lay)
+        raise LookupError("no layer %r - layers: %s" % (layer, ", ".join(names)))
+    if cls is not None and cls not in class_names():
+        raise LookupError("no class %r in this document" % cls)
     found = []
     vs.ForEachObject(found.append, "(SEL=TRUE)" if selection else "(ALL)")
     act = _str(vs.GetLName(vs.ActLayer()))
@@ -723,7 +732,13 @@ def _use_layer(name):
         vs.Layer(name)
 
 
-def make_poly(verts, closed):
+def make_poly(verts, closed, exact=False):
+    """Polygon/polyline from [x, y, type, radius] vertices. Drawing takes
+    corners (0) and arcs (3) only. exact=True (restoring a snapshot) also
+    takes Bezier (1), cubic (2) and radius (4) vertices - imported splines
+    are polylines with Bezier vertices, and a revert must rebuild them as
+    they were (live 2026: CurveTo/CurveThrough/ArcTo, then the vertex
+    types Vectorworks doesn't set itself)."""
     if closed:
         vs.ClosePoly()
     else:
@@ -731,22 +746,51 @@ def make_poly(verts, closed):
     vs.BeginPoly()
     for v in verts:
         t = int(v[2]) if len(v) > 2 else 0
-        if t == 3:
-            vs.ArcTo((float(v[0]), float(v[1])), float(v[3]))
+        p = (float(v[0]), float(v[1]))
+        r = float(v[3]) if len(v) > 3 else 0.0
+        if t == 3 or (exact and t == 4):
+            vs.ArcTo(p, r)
         elif t == 0:
-            vs.AddPoint((float(v[0]), float(v[1])))
+            vs.AddPoint(p)
+        elif exact and t == 1:
+            vs.CurveTo(p)
+        elif exact and t == 2:
+            vs.CurveThrough(p)
         else:
             raise ValueError("vertex type %d can't be drawn exactly; use corners and arcs" % t)
     vs.EndPoly()
     h = vs.LNewObj()
     if _is_nil(h):
         raise RuntimeError("Vectorworks did not create the polygon")
+    if exact:
+        _exact_vertex_types(h, verts)
     return h
 
 
-def add_holes(h, holes):
+def _exact_vertex_types(h, verts):
+    """Set the vertex types/radii Vectorworks didn't take from BeginPoly
+    (a radius vertex comes out as an arc vertex)."""
+    n = vs.GetVertNum(h)
+    if n != len(verts):
+        return 0
+    fixed = 0
+    for i, v in enumerate(verts):
+        t = int(v[2]) if len(v) > 2 else 0
+        if t not in (3, 4):
+            continue
+        r = float(v[3]) if len(v) > 3 else 0.0
+        p, gt, gr = vs.GetPolylineVertex(h, i + 1)
+        if int(gt) != t or abs(float(gr) - r) > 1e-9:
+            vs.SetPolylineVertex(h, i + 1, (float(v[0]), float(v[1])), t, r, False)
+            fixed += 1
+    if fixed:
+        vs.ResetBBox(h)
+    return fixed
+
+
+def add_holes(h, holes, exact=False):
     for hv in holes or []:
-        hh = make_poly(hv, True)
+        hh = make_poly(hv, True, exact)
         ok, h2 = vs.AddHole(h, hh)
         vs.DelObject(hh)
         if not ok or _is_nil(h2):
@@ -1375,7 +1419,7 @@ def _rebuild(rec):
         if abs(a) > 1e-12:
             vs.HRotate(vs.LNewObj(), (c[0], c[1]), a)
     elif k in ("polygon", "polyline"):
-        return add_holes(make_poly(rec["vertices"], rec["closed"]), rec.get("holes"))
+        return add_holes(make_poly(rec["vertices"], rec["closed"], exact=True), rec.get("holes"), exact=True)
     elif k == "arc":
         c = rec["center"]
         vs.ArcByCenter(c[0], c[1], rec["radius"], rec["start_angle"], rec["sweep"])
@@ -1529,7 +1573,47 @@ def revert2d(ops):
             _use_layer(home)
 
 
+RESTORABLE = ("line", "rect", "oval", "polygon", "polyline", "arc", "text", "dimension", "locus", "symbol",
+              "group")
+
+
+def _unrestorable(snap):
+    """Why a snapshot can't be rebuilt exactly, or None."""
+    rec = snap.get("rec") or {}
+    k = rec.get("kind")
+    if k not in RESTORABLE:
+        return "%s %s" % (k, rec.get("uuid"))
+    if k == "group":
+        for c in snap.get("children") or []:
+            why = _unrestorable(c)
+            if why:
+                return why
+    if k in ("polygon", "polyline"):
+        for vl in [rec.get("vertices") or []] + list(rec.get("holes") or []):
+            for v in vl:
+                if len(v) > 2 and int(v[2]) not in (0, 1, 2, 3, 4):
+                    return "%s %s (vertex type %s)" % (k, rec.get("uuid"), v[2])
+    return None
+
+
+def _check_restorable(ops):
+    """Refuse a revert before it changes anything when a snapshot can't be
+    rebuilt - a revert that stops halfway leaves the drawing in neither
+    state (seen live, 0.7 beta: Bezier vertices)."""
+    bad = []
+    for op in ops:
+        if op.get("op") == "replaced":
+            for s in op.get("before") or []:
+                why = _unrestorable(s)
+                if why:
+                    bad.append(why)
+    if bad:
+        raise NotEditable("can't revert this step, nothing was changed: %d object(s) can't be rebuilt (%s)"
+                          % (len(bad), ", ".join(bad[:5])))
+
+
 def _revert2d(ops):
+    _check_restorable(ops)
     mapping, deleted, restored, missing, kept, restack = {}, 0, 0, [], [], []
     home = _str(vs.GetLName(vs.ActLayer()))
     replaced = [op for op in ops if op.get("op") == "replaced"]  # ("attrs" ops keep a dict in "before")
@@ -1936,6 +2020,11 @@ def group_objects(groups):
             gh = vs.FSActLayer()
             if _is_nil(gh) or vs.GetTypeN(gh) != 11:
                 raise RuntimeError("Vectorworks did not create the group")
+            # the group's class: the members' class when they share one, else
+            # the none class - never whatever class happens to be active
+            # (live 0.7 beta: groups landed in a leftover test class)
+            cls = set(_str(vs.GetClass(h)) for h in hs)
+            vs.SetClass(gh, g.get("class") or (cls.pop() if len(cls) == 1 else none_class()))
             if g.get("name"):
                 _set_name(gh, g["name"])
             vs.DSelectAll()
