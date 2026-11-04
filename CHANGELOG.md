@@ -55,6 +55,13 @@ Nachgestellt mit echten Rhino-Exporten; die Ursachen sind behoben.
 - **Prüfbild:** höchstens 60 Markierungen (die schlimmsten zuerst), damit die
   Zeichnung sichtbar bleibt; `vw2d_preview(marks=false)` zeigt die Zeichnung
   ohne Markierungen.
+- **„Nach Klasse“ behält das Aussehen:** Importierte Klassen passen selten
+  zu ihren Objekten – im Test wären die Umrisse eines VectorView-Schnitts
+  mit „nach Klasse“ zu schwarzen Flächen geworden. Jetzt übernimmt eine
+  Klasse vorher das Aussehen ihrer Objekte, wenn diese alle gleich aussehen
+  und noch nichts anderes der Klasse folgt; auf dem Bildschirm ändert sich
+  nichts. Wo das nicht geht (Objekte einer Klasse sehen verschieden aus),
+  nennt die Antwort die Klassen. Rückgängig stellt auch die Klasse zurück.
 - **Sortieren nach Bereich:** `vw2d_organize` kennt `bbox` (liegt im Bereich)
   und `touches` (reicht hinein) – z. B. um einen Vorhang in eine eigene Klasse
   zu legen.

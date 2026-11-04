@@ -56,6 +56,10 @@ touches Vectorworks.
   that aren't simplified keep every point (`context` = the rest of the
   layer when the scope is narrower). Live (VectorView section, 557 fills):
   61 389 -> 18 109 points, 0 overlap errors; each outline on its own: 126.
+- 'By class' keeps the look: `vwlib2d.keep_looks` (from `set_attributes`
+  and `organize_apply`) gives a class the common look of its objects when
+  they all agree (fill doesn't count for lines) and no other object follows
+  the class yet; journal op `class_look` restores the class on revert.
 - Revert must be exact: `make_poly(..., exact=True)` (only `_rebuild`) also
   draws Bezier (1), cubic (2) and radius (4) vertices - CurveTo /
   CurveThrough / ArcTo, then `_exact_vertex_types` sets what Vectorworks

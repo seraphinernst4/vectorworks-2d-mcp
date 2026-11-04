@@ -79,7 +79,10 @@ Nutzer** sie haben will.
    Nicht „bis fehlerfrei“ reparieren.
 3. **Sortieren und Linienstärken:** `vw2d_organize` (auch nach Bereich:
    `bbox`/`touches`, z. B. ein Vorhang), dann Attribute nach Klasse und
-   Linienstärken der Klassen mit `vw2d_setup`.
+   Linienstärken der Klassen mit `vw2d_setup`. „Nach Klasse“ behält das
+   Aussehen (die Klasse übernimmt es vorher); nennt die Antwort Klassen in
+   `look_changed_mixed_attributes`, sieht es dort anders aus – dem Nutzer
+   sagen und die Klassenattribute setzen.
 4. **Verbinden:** `vw2d_join` macht aus losen Stücken Linienzüge
    (geschlossene ohne Füllung).
 5. **Vereinfachen:** `vw2d_simplify` dünnt Punkte aus (Toleranz aus dem
