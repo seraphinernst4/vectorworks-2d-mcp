@@ -8,12 +8,14 @@ from imported splines) are simplified from Vectorworks' polygonization.
 Closed areas must stay valid (no self-intersection); otherwise the object is
 simplified less (half the tolerance, then not at all).
 
-Neighbours stay seamless: where two outlines share a run of points (the
-faces of a VectorView/Make2D export, adjacent fills), that run is simplified
-the same way in both (same points, canonical direction), and a run shared
-with an object that is not simplified keeps all its points. Simplifying
-each outline on its own opened gaps and overlaps between neighbours (live:
-646 overlaps after simplifying a VectorView section).
+Neighbours stay seamless: a point several outlines share (the faces of a
+VectorView/Make2D export, adjacent fills) is kept by all of them as soon as
+one keeps it, and a point that lies on a neighbour's edge (T-junction) keeps
+that edge; each stretch between kept points is simplified again, so the
+tolerance still holds. Points closer than 5 % of the tolerance count as one
+(exporters write shared corners with noise). Simplifying each outline on its
+own opened gaps and overlaps between neighbours (live: 646 overlaps after
+simplifying a VectorView section).
 """
 
 from __future__ import annotations
@@ -101,61 +103,65 @@ def _context_points(rec: dict) -> list:
     return pts
 
 
-def _runs(pts: list, sets: list, closed: bool):
-    """Split an outline at its anchors (points where the set of objects
-    sharing them changes). Yields (start, end) index pairs along the outline
-    (end may wrap past n for closed outlines) or None when a closed outline
-    has no anchor."""
+def _constrained(pts: list, closed: bool, forced: set, tol: float) -> list[int]:
+    """Douglas-Peucker that keeps the forced points: each stretch between
+    two of them is simplified on its own (deviation stays within tol)."""
     n = len(pts)
+    if not forced:
+        return _dp_closed(pts, tol) if closed else dp(pts, tol)
+    f = sorted(forced | ({0, n - 1} if not closed else set()))
+    keep = set(f)
+    pairs = list(zip(f[:-1], f[1:]))
     if closed:
-        anchors = [k for k in range(n) if sets[k] and (sets[k] != sets[k - 1] or sets[k] != sets[(k + 1) % n])]
-        if not anchors:
-            return None
-        return [(a, anchors[(i + 1) % len(anchors)] + (n if i + 1 >= len(anchors) else 0))
-                for i, a in enumerate(anchors)]
-    anchors = [0] + [k for k in range(1, n - 1) if sets[k] and (sets[k] != sets[k - 1] or sets[k] != sets[k + 1])] \
-        + [n - 1]
-    return list(zip(anchors[:-1], anchors[1:]))
-
-
-def _simplify_shared(pts: list, sets: list, closed: bool, tol: float, fixed: set,
-                     tol_free: float | None = None) -> list[int] | None:
-    """Kept indices with shared runs simplified canonically (None: keep all).
-    tol_free: tolerance for the runs no other object shares (a retry may
-    lower it; shared runs keep tol so they stay equal to the neighbour's)."""
-    n = len(pts)
-    runs = _runs(pts, sets, closed)
-    if runs is None:
-        return None  # the whole outline is shared with the same objects: leave it
-    keep = set()
-    for a, b in runs:
+        pairs.append((f[-1], f[0] + n))
+    for a, b in pairs:
         idx = [k % n for k in range(a, b + 1)]
-        run = [pts[k] for k in idx]
-        inner = [sets[k] for k in idx[1:-1]]
-        shared = inner[0] if inner else frozenset()
-        if shared and (shared & fixed or run[0] == run[-1]):
-            local = list(range(len(run)))  # shared with an object that stays: keep every point
-        elif shared:
-            rev = tuple(run[0]) > tuple(run[-1])  # the neighbour sees the same run: same direction, same result
-            local = dp(run[::-1] if rev else run, tol)
-            if rev:
-                local = [len(run) - 1 - i for i in local]
-        else:
-            local = dp(run, tol if tol_free is None else tol_free)
-        keep.update(idx[i] for i in local)
+        keep.update(idx[i] for i in dp([pts[k] for k in idx], tol))
     return sorted(keep)
 
 
+def _tjunctions(allpts: list, cands: dict, eps: float) -> dict:
+    """{(obj, point index): [(cand, k, k+1), ...]}: points that lie on the
+    inside of a candidate's edge (not at its ends) - where outlines meet in a
+    T, the edge must stay when the point stays."""
+    import numpy as np
+    import shapely
+
+    segs, owner = [], []
+    for i, (pts, closed) in cands.items():
+        n = len(pts)
+        for k in range(n if closed else n - 1):
+            segs.append((pts[k], pts[(k + 1) % n]))
+            owner.append((i, k, (k + 1) % n))
+    if not segs:
+        return {}
+    lines = shapely.linestrings([[a, b] for a, b in segs])
+    tree = shapely.STRtree(lines)
+    flat = [(i, k, p) for i, pts in allpts.items() for k, p in enumerate(pts)]
+    if not flat:
+        return {}
+    pts_geo = shapely.points(np.array([[p[0], p[1]] for _i, _k, p in flat]))
+    pi, si = tree.query(pts_geo, predicate="dwithin", distance=eps)
+    out: dict = {}
+    for a, b in zip(pi.tolist(), si.tolist()):
+        i, k, p = flat[a]
+        c, s0, s1 = owner[b]
+        if c == i:
+            continue
+        (ax, ay), (bx, by) = segs[b]
+        if (abs(p[0] - ax) <= eps and abs(p[1] - ay) <= eps) or (abs(p[0] - bx) <= eps and abs(p[1] - by) <= eps):
+            continue  # at the edge's end: a shared point, not a T
+        out.setdefault((i, k), []).append((c, s0, s1))
+    return out
+
+
 def plan_simplify(records: list[dict], tol: float, min_vertices: int = 4,
-                  context: list[dict] | None = None) -> dict[str, Any]:
+                  context: list[dict] | None = None, share_eps: float | None = None) -> dict[str, Any]:
     """Returns {"changes": [{uuid, verts, closed, before, after}], "vertices_before",
     "vertices_after", "objects": n, "skipped": {reason: n}}. context: other
     objects of the drawing (not simplified) whose outlines must stay shared."""
-    q = max(tol * 1e-6, 1e-12)
-
-    def key(p):
-        return (round(p[0] / q), round(p[1] / q))
-
+    eps = tol * 0.05 if share_eps is None else share_eps
+    q = max(eps, 1e-12)
     cands, skipped = {}, {}
     for i, rec in enumerate(records):
         pts, info = source_points(rec)
@@ -167,62 +173,105 @@ def plan_simplify(records: list[dict], tol: float, min_vertices: int = 4,
         if len(pts) < max(min_vertices, 3 if closed else 2):
             continue
         cands[i] = (pts, closed)
-    owners: dict[tuple, set] = {}
     allrecs = list(records) + list(context or [])
-    for i, rec in enumerate(allrecs):
-        for p in (cands[i][0] if i in cands else _context_points(rec)):
-            owners.setdefault(key(p), set()).add(i)
-    fixed = set(range(len(allrecs))) - set(cands)
-    reasons: dict[int, str | None] = {}
-    changes: dict[int, list[int]] = {}
-    for _round in range(4):  # an object that ends up unchanged pins its shared runs in its neighbours
-        changes, done = {}, {}
-        for i, (pts, closed) in cands.items():
-            if i in fixed:
-                continue
-            rec = records[i]
-            sets = [frozenset(owners.get(key(p), ()) - {i}) for p in pts]
-            any_shared = any(sets)
-            idx = None
-            for t in (tol, tol / 2):
-                if any_shared:
-                    cand = _simplify_shared(pts, sets, closed, tol, fixed, tol_free=t)
-                    if cand is None:
+    allpts = {i: (cands[i][0] if i in cands else _context_points(r)) for i, r in enumerate(allrecs)}
+
+    # clusters: points within eps are one point
+    cells: dict[tuple, list] = {}
+    reps: list[tuple] = []
+    clus: dict[int, list[int]] = {}
+    for i, pts in allpts.items():
+        ids = []
+        for p in pts:
+            kx, ky = math.floor(p[0] / q), math.floor(p[1] / q)
+            hit = None
+            for dx in (-1, 0, 1):
+                for dy in (-1, 0, 1):
+                    for c in cells.get((kx + dx, ky + dy), ()):
+                        r = reps[c]
+                        if abs(r[0] - p[0]) <= eps and abs(r[1] - p[1]) <= eps:
+                            hit = c
+                            break
+                    if hit is not None:
                         break
+                if hit is not None:
+                    break
+            if hit is None:
+                hit = len(reps)
+                reps.append((p[0], p[1]))
+                cells.setdefault((kx, ky), []).append(hit)
+            ids.append(hit)
+        clus[i] = ids
+    users: dict[int, set] = {}
+    for i, ids in clus.items():
+        for c in ids:
+            users.setdefault(c, set()).add(i)
+    shared = {c for c, u in users.items() if len(u) > 1}
+    tj = _tjunctions(allpts, cands, eps) if len(allrecs) > 1 else {}
+
+    # objects that are not simplified keep all their points
+    base = set()
+    for i in allpts:
+        if i not in cands:
+            base.update(clus[i])
+    tol_of = {i: tol for i in cands}
+    keepall: set = set()
+    forced = {i: {k for k, c in enumerate(clus[i]) if c in base} for i in cands}
+    keep: dict[int, list[int]] = {}
+    for _outer in range(6):  # validity: simplify less, then not at all
+        for _inner in range(50):  # until the shared points agree
+            K = set(base)
+            extra: dict[int, set] = {i: set() for i in cands}
+            for i, (pts, closed) in cands.items():
+                if i in keepall:
+                    keep[i] = list(range(len(pts)))
                 else:
-                    cand = _dp_closed(pts, t) if closed else dp(pts, t)
-                if closed:
-                    if len(cand) < 3:
-                        continue
-                    poly = Polygon([pts[k] for k in cand])
-                    if not poly.is_valid or poly.area <= 0:
-                        continue
-                idx = cand
+                    keep[i] = _constrained(pts, closed, forced[i], tol_of[i])
+                    if len(keep[i]) >= len(records[i].get("vertices") or []):
+                        keep[i] = list(range(len(pts)))  # stays as it is: all its points stay for the neighbours
+                for k in keep[i]:
+                    K.add(clus[i][k])
+                    for c, s0, s1 in tj.get((i, k), ()):
+                        extra[c].update((s0, s1))
+            for i in allpts:
+                if i not in cands:
+                    for k in range(len(allpts[i])):
+                        for c, s0, s1 in tj.get((i, k), ()):
+                            extra[c].update((s0, s1))
+            changed = False
+            for i in cands:
+                nf = {k for k, c in enumerate(clus[i]) if c in K and c in shared} | extra[i] | forced[i]
+                if nf != forced[i]:
+                    forced[i], changed = nf, True
+            if not changed:
                 break
-            if idx is None:
-                done[i] = "would become invalid" if not any_shared or _runs(pts, sets, closed) is not None \
-                    else "shared outline"
-                continue
-            if len(idx) >= len(rec.get("vertices") or []):
-                done[i] = None  # nothing gained (curves stay curves when they are compact already)
-                continue
-            changes[i] = idx
-        reasons.update(done)
-        newly = set(done) - fixed
-        if not newly:
+        bad = []
+        for i, (pts, closed) in cands.items():
+            if closed and i not in keepall:
+                idx = keep[i]
+                poly = Polygon([pts[k] for k in idx]) if len(idx) >= 3 else None
+                if poly is None or not poly.is_valid or poly.area <= 0:
+                    bad.append(i)
+        if not bad:
             break
-        fixed |= newly
+        for i in bad:
+            if tol_of[i] > tol / 2:
+                tol_of[i] = tol / 2
+            else:
+                keepall.add(i)
     out, vb, va = [], 0, 0
-    for i, why in reasons.items():
-        if why and i not in changes:
-            skipped[why] = skipped.get(why, 0) + 1
-    for i, idx in changes.items():
-        pts, closed = cands[i]
+    for i, (pts, closed) in cands.items():
         rec = records[i]
+        nv = len(rec.get("vertices") or [])
+        if i in keepall:
+            skipped["would become invalid"] = skipped.get("would become invalid", 0) + 1
+            continue
+        idx = keep.get(i) or list(range(len(pts)))
+        if len(idx) >= nv:
+            continue  # nothing gained (curves stay curves when they are compact already)
         verts = [[pts[k][0], pts[k][1], CORNER, 0.0] for k in idx]
-        out.append({"uuid": rec["uuid"], "verts": verts, "closed": closed, "before": len(rec.get("vertices") or []),
-                    "after": len(verts)})
-        vb += len(rec.get("vertices") or [])
+        out.append({"uuid": rec["uuid"], "verts": verts, "closed": closed, "before": nv, "after": len(verts)})
+        vb += nv
         va += len(verts)
     return {"changes": out, "objects": len(out), "vertices_before": vb, "vertices_after": va,
             "skipped": skipped}

@@ -90,6 +90,18 @@ def _round(v):
     return v
 
 
+def _canon_ring(vs_):
+    """Same ring, same start and direction (rounded vertices)."""
+    r = [tuple(_round(v)) for v in vs_]
+    if len(r) < 3:
+        return [list(v) for v in r]
+    cands = []
+    for seq in (r, r[::-1]):
+        k = min(range(len(seq)), key=lambda i: seq[i][:2])
+        cands.append(seq[k:] + seq[:k])
+    return [list(v) for v in min(cands)]
+
+
 def fingerprint(layer):
     """Everything a revert must bring back, without uuids: geometry with
     vertex types, class, attributes, group membership, stacking order."""
@@ -99,6 +111,10 @@ def fingerprint(layer):
     for r in recs:
         d = {k: v for k, v in r.items() if k not in ("uuid", "parent", "approx_polygon", "name")}
         d["parent"] = idx.get(r.get("parent")) if r.get("parent") else None
+        if d.get("closed") and d.get("vertices"):  # a ring may come back starting elsewhere (AddHole)
+            d["vertices"] = _canon_ring(d["vertices"])
+        if d.get("holes"):
+            d["holes"] = [_canon_ring(h) for h in d["holes"]]
         if d.get("holes"):  # Vectorworks may hand holes back in another order
             d["holes"] = sorted(d["holes"], key=lambda h: json.dumps(_round(h)))
         for k in ("area", "perimeter", "length"):  # derived; float noise of the user origin shift
@@ -491,10 +507,46 @@ def phase_diffs():
     run("diff vv revert import", lambda: pick(generic.vw_revert_last(), ("reverted_tool", "deleted")))
 
 
+def phase_simpdiag():
+    """Seams between neighbouring fills after simplify (VectorView), server side only."""
+    from vwmcp.geom import checks as K
+    from vwmcp.geom.shapes import units_tolerances
+    from vwmcp.geom.simplify import plan_simplify
+    out = cleanup.vw2d_import(path=T + "vv_schnitt.dwg")
+    lay = out["imported"]["new_layers"][0]
+    data = draw2d._read(layer=lay, geometry=True, allow_temp=True, limit=200000)
+    units = data["units"]
+    tol = units_tolerances(units, 10.0)["tol"]
+
+    def score(plan):
+        changes = [{"uuid": c["uuid"], "verts": c["verts"], "closed": c["closed"], "holes": []} for c in plan["changes"]]
+        after = cleanup._after_records(data["objects"], changes, [])
+        r = K.run_checks(after, units, 1.0, checks=["overlap"], none_class=data["none_class"], compare="class",
+                         overlap_fills_only=True)
+        worst = sorted(r["issues"], key=lambda i: -(i.get("thickness_mm") or 0))[:3]
+        return {"summary": pick(r["summary"], ("errors", "warnings")), "vertices": [plan["vertices_before"],
+                plan["vertices_after"]], "objects": plan["objects"],
+                "worst": [pick(i, ("thickness_mm", "area", "at", "message")) for i in worst]}
+    run("diag base", lambda: score({"changes": [], "vertices_before": 0, "vertices_after": 0, "objects": 0}))
+    t0 = time.time()
+    seam = plan_simplify(data["objects"], tol, min_vertices=8)
+    run("diag seamless", lambda: dict(score(seam), seconds=round(time.time() - t0, 2)))
+    ind = {"changes": [], "vertices_before": 0, "vertices_after": 0, "objects": 0}
+    for r in data["objects"]:
+        p = plan_simplify([r], tol, min_vertices=8)
+        ind["changes"] += p["changes"]
+        ind["vertices_before"] += p["vertices_before"]
+        ind["vertices_after"] += p["vertices_after"]
+        ind["objects"] += p["objects"]
+    run("diag independent", lambda: score(ind))
+    run("diag revert import", lambda: pick(generic.vw_revert_last(), ("reverted_tool", "deleted")))
+
+
 PHASES = {"stock": phase_stock, "import": phase_import, "check": phase_check, "join": phase_join,
           "simplify": phase_simplify, "organize": phase_organize_group, "profile": phase_profile, "big": phase_big,
           "workflow": phase_workflow, "exact": phase_exact, "scenarios": phase_scenarios,
-          "vectorview": phase_vectorview, "diffs": phase_diffs}
+          "vectorview": phase_vectorview, "diffs": phase_diffs,
+          "simpdiag": phase_simpdiag}
 
 if __name__ == "__main__":
     log("start", phases=sys.argv[1:], version=__import__("vwmcp").__version__)

@@ -622,3 +622,48 @@ def test_simplify_run_shared_with_a_fixed_neighbour_stays():
     plan = plan_simplify([lower2], 0.001, context=[upper])
     kept = {(v[0], v[1]) for v in plan["changes"][0]["verts"]}
     assert set(edge) <= kept and len(kept) < len(lower2["vertices"])
+
+
+def test_simplify_seamless_with_exporter_noise():
+    """VectorView writes a shared corner with noise (0.02 mm): still one
+    edge, still seamless."""
+    from shapely.geometry import Polygon as P
+
+    from vwmcp.geom.simplify import plan_simplify
+
+    edge = _wavy_edge(0, 1, 0.5, 40)
+    noisy = [(x + 2e-8, y - 2e-8) for x, y in edge]  # 0.02 µm... and 0.02 mm below
+    noisy = [(x + 2e-5, y - 1e-5) for x, y in edge]
+    lower = _poly([(0, 0), (1, 0)] + noisy[::-1], closed=True)
+    upper = _poly(edge + [(1, 1), (0, 1)], closed=True)
+    plan = plan_simplify([lower, upper], 0.001)
+    got = {c["uuid"]: P([(v[0], v[1]) for v in c["verts"]]) for c in plan["changes"]}
+    a, b = got[lower["uuid"]], got[upper["uuid"]]
+    assert a.intersection(b).area < 1.0 * 3e-5  # at most the noise along the 1 m edge
+    assert all(len(c["verts"]) < 20 for c in plan["changes"])
+
+
+def test_simplify_seamless_with_t_junction():
+    """A long upper face over two lower faces: the corner between the lower
+    faces lies on the upper face's edge (a T). The result stays seamless."""
+    import math as _m
+
+    from shapely.geometry import Polygon as P
+
+    from vwmcp.geom.simplify import plan_simplify
+
+    edge = [(k / 200, 0.5 + 0.05 * _m.sin(k / 200 * 9)) for k in range(201)]
+    left = _poly([(0, 0), (0.5, 0)] + edge[:101][::-1], closed=True)
+    right = _poly([(0.5, 0), (1, 0)] + edge[100:][::-1], closed=True)
+    # the upper face has no vertex at x = 0.5 (it runs past it)
+    up_edge = [p for k, p in enumerate(edge) if k != 100]
+    upper = _poly(up_edge + [(1, 1), (0, 1)], closed=True)
+    plan = plan_simplify([left, right, upper], 0.002)
+    got = {c["uuid"]: P([(v[0], v[1]) for v in c["verts"]]) for c in plan["changes"]}
+    shapes = [got.get(r["uuid"]) or P([(v[0], v[1]) for v in r["vertices"]]) for r in (left, right, upper)]
+    for i in range(3):
+        for j in range(i + 1, 3):
+            assert shapes[i].intersection(shapes[j]).area < 1e-9
+    union = shapes[0].union(shapes[1]).union(shapes[2])
+    assert abs(union.area - 1.0) < 1e-6 and union.geom_type == "Polygon"
+    assert plan["vertices_after"] < plan["vertices_before"] / 3
