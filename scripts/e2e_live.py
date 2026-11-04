@@ -435,16 +435,29 @@ def phase_vectorview():
                                 ("joined_pieces", "polylines", "closed", "objects_after", "applied")))
     run("vv simplify dry", lambda: pick(res(cleanup.vw2d_simplify(layer=lay), "vv_simplify"),
                                         ("tolerance_mm", "objects", "vertices_before", "vertices_after")))
-    run("vv simplify apply", lambda: pick(res(cleanup.vw2d_simplify(layer=lay, dry_run=False, image=False)),
-                                          ("tolerance_mm", "objects", "vertices_before", "vertices_after", "applied")))
-    run("vv by_class", lambda: {"ok_": bool(res(draw2d.vw2d_fix("by_class", layer=lay, image=False)))})
+    def simp():
+        out = pick(res(cleanup.vw2d_simplify(layer=lay, dry_run=False, image=False)),
+                   ("tolerance_mm", "objects", "vertices_before", "vertices_after", "applied"))
+        state["applied"] = state.get("applied", 1) + (1 if out.get("applied") else 0)
+        return out
+    state["applied"] = 1  # the join
+    run("vv simplify apply", simp)
+
+    def bycls():
+        n0 = len(J.path.read_text(encoding="utf-8").splitlines()) if J.path.exists() else 0
+        r = res(draw2d.vw2d_fix("by_class", layer=lay, image=False))
+        n1 = len(J.path.read_text(encoding="utf-8").splitlines()) if J.path.exists() else 0
+        state["applied"] += 1 if n1 > n0 else 0
+        return {"journaled": n1 > n0, "summary": pick(r.get("summary") or {}, ("errors", "warnings"))}
+    run("vv by_class", bycls)
     run("vv check after cleanup", lambda: pick(res(draw2d.vw2d_check(layer=lay, image=False, max_issues=1,
                                                                      preset="drawing"))["summary"],
                                                ("errors", "warnings", "by_kind")))
     run("vv preview after cleanup", lambda: {"objects": res(draw2d.vw2d_preview(layer=lay, marks=False, width_px=1600),
                                                             "vv_cleaned").get("objects")})
-    run("vv revert 3 steps", lambda: dict(
-        steps=[pick(generic.vw_revert_last(), ("reverted_tool", "deleted", "restored")) for _ in range(3)],
+    run("vv revert cleanup", lambda: dict(
+        steps=[pick(generic.vw_revert_last(), ("reverted_tool", "deleted", "restored"))
+               for _ in range(state.get("applied", 1))],
         compare=same(fp0, fingerprint(lay))))
     run("vv revert import", lambda: pick(generic.vw_revert_last(), ("reverted_tool", "deleted", "missing")))
 
