@@ -1830,24 +1830,44 @@ def _merge_looks(looks):
     return out
 
 
-def keep_looks(hs):
+def looks_now(hs):
+    """Each object's look as it shows now (in its present class) - taken
+    before objects move to another class."""
+    cache = {}
+    out = []
+    for h in hs:
+        c = _str(vs.GetClass(h))
+        try:
+            if c not in cache:
+                cache[c] = _class_look(c)
+            out.append(_obj_look(h, cache[c]) if (vs.GetTypeN(h) in SHAPE_TYPES or vs.GetTypeN(h) in (10, 17, 63))
+                       else None)
+        except Exception:  # noqa: BLE001
+            out.append(None)
+    return out
+
+
+def keep_looks(hs, before=None):
     """Before objects switch to 'by class': a class whose objects here all
     look the same, and that no other object follows yet, takes that look -
     so the drawing looks exactly as before (imported classes rarely match
     their objects: VectorView outlines would turn into black fills). Returns
     (journal ops, report). Classes with mixed looks are reported, not
     changed."""
-    by = {}
-    for h in hs:
-        if vs.GetTypeN(h) in SHAPE_TYPES or vs.GetTypeN(h) in (10, 17, 63):
+    if before is None:
+        before = looks_now(hs)
+    by, seen = {}, {}
+    for h, lk in zip(hs, before):
+        if lk is not None:
             by.setdefault(_str(vs.GetClass(h)), []).append(h)
+            seen[str(h)] = lk
     ops, rep = [], {"adopted": [], "mixed": [], "shared": []}
     for c, items in by.items():
         try:
             cl = _class_look(c)
         except Exception:  # noqa: BLE001 - e.g. a class Vectorworks won't report
             continue
-        merged = _merge_looks([_obj_look(h, cl) for h in items])
+        merged = _merge_looks([seen[str(h)] for h in items])
         if merged is None:
             rep["mixed"].append(c)
             continue
@@ -1901,11 +1921,12 @@ def set_attributes(uuids, attributes, layer=None):
         target = vs.GetLayerByName(layer)
     looks = None
     if attributes.get("by_class") and attributes.get("keep_look", True):
+        before = looks_now(hs)  # as they show now, in their present class
         if attributes.get("class"):
             ensure_class(attributes["class"])
             for h in hs:
                 vs.SetClass(h, attributes["class"])
-        cops, looks = keep_looks(hs)
+        cops, looks = keep_looks(hs, before)
         ops = cops + ops
     for h in hs:
         apply_attrs(h, attributes)
@@ -1939,6 +1960,8 @@ def organize_apply(moves):
             if m.get("layer"):
                 ensure_layer(m["layer"])
                 target = vs.GetLayerByName(m["layer"])
+            keep = m.get("by_class") and m.get("keep_look", True)
+            before = looks_now([hmap.get(u) or handle(u) for u in m["uuids"]]) if keep else None
             for u in m["uuids"]:
                 h = hmap.get(u) or handle(u)
                 op = {"op": "attrs", "uuid": u, "class_before": _str(vs.GetClass(h)),
@@ -1959,8 +1982,8 @@ def organize_apply(moves):
                     vs.SetParent(h, target)
             if m.get("by_class"):
                 hs = [hmap.get(u) or handle(u) for u in m["uuids"]]
-                if m.get("keep_look", True):
-                    cops, rep = keep_looks(hs)
+                if keep:
+                    cops, rep = keep_looks(hs, before)
                     class_ops += cops
                     for k, v in rep.items():
                         looks.setdefault(k, [])

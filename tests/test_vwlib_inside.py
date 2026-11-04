@@ -471,3 +471,20 @@ def test_by_class_keeps_the_look_of_imported_classes():
     # revert puts the class back
     before = [o for o in ops if o["class"] == "VV_Fill"][0]["before"]
     assert before["fpat"] == 2 and before["fill_fore"] == list(B)
+
+
+def test_by_class_look_is_taken_in_the_old_class():
+    """Objects whose pen already followed their old class (Make2D fills:
+    grey) must keep that grey in the new class (live: they turned black)."""
+    W, G, B = (65535, 65535, 65535), (32896, 32896, 32896), (0, 0, 0)
+    objs = [types.SimpleNamespace(cls="Make2D$Fills", t=5, a=dict(pen=B, fill=G, fpat=1, lw=0)) for _ in range(2)]
+    classes = {"Make2D$Fills": {"fpat": 1, "fill": G, "pen": G, "lw": 0}, "Fuellung": {"fpat": 2, "fill": B, "pen": B,
+                                                                                         "lw": 10}}
+    fns, _W, _B = _look_vs(objs, classes)
+    fns["IsPenColorByClass"] = lambda h: h.cls == "Make2D$Fills" or h.a.get("bc", False)
+    ns = _ns(**fns)
+    before = ns["looks_now"](objs)
+    for o in objs:
+        o.cls = "Fuellung"
+    ops, rep = ns["keep_looks"](objs, before)
+    assert rep["adopted"] == ["Fuellung"] and tuple(classes["Fuellung"]["pen"]) == G
