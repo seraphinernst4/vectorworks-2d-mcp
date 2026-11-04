@@ -582,3 +582,43 @@ def test_check_preset_drawing_hairline_overlap_of_fills_is_a_warning(fake):
     fake([a, big])
     drawing = json.loads(draw2d.vw2d_check(layer="L", image=False, preset="drawing"))
     assert drawing["summary"]["errors"] == 1
+
+
+def _wavy_edge(x0, x1, y, n, amp=0.0004):
+    """A slightly wavy edge (0.4 mm in m units) from x0 to x1."""
+    return [(x0 + (x1 - x0) * k / n, y + (amp if k % 2 else 0.0)) for k in range(n + 1)]
+
+
+def test_simplify_keeps_neighbours_seamless():
+    """Two fills sharing a wavy edge (VectorView faces): simplified, the
+    edge is the same in both - no gaps or overlaps (live 0.7 beta: 646
+    overlaps after simplifying a VectorView section)."""
+    from shapely.geometry import Polygon as P
+
+    from vwmcp.geom.simplify import plan_simplify
+
+    edge = _wavy_edge(0, 1, 0.5, 40)
+    lower = _poly([(0, 0), (1, 0)] + edge[::-1], closed=True)
+    upper = _poly(edge + [(1, 1), (0, 1)], closed=True)
+    plan = plan_simplify([lower, upper], 0.001)
+    assert plan["objects"] == 2
+    got = {c["uuid"]: P([(v[0], v[1]) for v in c["verts"]]) for c in plan["changes"]}
+    a, b = got[lower["uuid"]], got[upper["uuid"]]
+    assert a.intersection(b).area < 1e-12  # no overlap
+    assert abs(a.union(b).area - 1.0) < 1e-9 and a.union(b).geom_type == "Polygon"  # no gap
+    assert all(len(c["verts"]) < 20 for c in plan["changes"])  # and it did simplify
+
+
+def test_simplify_run_shared_with_a_fixed_neighbour_stays():
+    from vwmcp.geom.simplify import plan_simplify
+
+    edge = _wavy_edge(0, 1, 0.5, 40)
+    lower = _poly([(0, 0), (1, 0)] + edge[::-1], closed=True)
+    upper = _poly(edge + [(1, 1), (0, 1)], closed=True)
+    plan = plan_simplify([lower], 0.001, context=[upper])  # upper is not being simplified
+    assert plan["objects"] == 0 or len(plan["changes"][0]["verts"]) == len(lower["vertices"])
+    # a free wavy edge on the other side is simplified, the shared one stays
+    lower2 = _poly(_wavy_edge(0, 1, 0, 40) + edge[::-1], closed=True)
+    plan = plan_simplify([lower2], 0.001, context=[upper])
+    kept = {(v[0], v[1]) for v in plan["changes"][0]["verts"]}
+    assert set(edge) <= kept and len(kept) < len(lower2["vertices"])

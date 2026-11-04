@@ -99,6 +99,11 @@ def fingerprint(layer):
     for r in recs:
         d = {k: v for k, v in r.items() if k not in ("uuid", "parent", "approx_polygon", "name")}
         d["parent"] = idx.get(r.get("parent")) if r.get("parent") else None
+        if d.get("holes"):  # Vectorworks may hand holes back in another order
+            d["holes"] = sorted(d["holes"], key=lambda h: json.dumps(_round(h)))
+        for k in ("area", "perimeter", "length"):  # derived; float noise of the user origin shift
+            if isinstance(d.get(k), float):
+                d[k] = round(d[k], 9)
         out.append(json.dumps(_round(d), sort_keys=True, ensure_ascii=False))
     return out
 
@@ -442,6 +447,9 @@ def phase_vectorview():
         return out
     state["applied"] = 1  # the join
     run("vv simplify apply", simp)
+    run("vv check after simplify", lambda: pick(res(draw2d.vw2d_check(layer=lay, image=False, max_issues=1,
+                                                                      preset="drawing"))["summary"],
+                                                ("errors", "warnings", "by_kind")))
 
     def bycls():
         n0 = len(J.path.read_text(encoding="utf-8").splitlines()) if J.path.exists() else 0

@@ -284,7 +284,9 @@ def vw2d_simplify(
     original points so the outline never deviates by more than tolerance_mm
     (real size). Default tolerance: the profile's simplify_paper_mm times the
     layer scale (0.1 mm on paper at 1:100 = 10 mm). Corners stay exactly
-    where they are; outlines with true arcs are left alone; areas stay valid.
+    where they are; outlines with true arcs are left alone; areas stay valid;
+    neighbours stay seamless (a shared edge is thinned the same way in both,
+    or not at all when the neighbour isn't simplified).
     Only objects with at least min_vertices points.
 
     dry_run=True (default) reports the reduction and shows before (red) /
@@ -299,7 +301,14 @@ def vw2d_simplify(
         scale = _layer_scale({r.get("layer") for r in data["objects"]})
         tolerance_mm = profile.load()["simplify_paper_mm"] * scale
     t = units_tolerances(units, tolerance_mm)
-    plan = plan_simplify(data["objects"], t["tol"], min_vertices=min_vertices)
+    context = []
+    if uuids or class_name or selection or bbox:
+        # neighbours outside the scope keep their outline: what they share stays shared
+        inscope = {r["uuid"] for r in data["objects"]}
+        for lay in sorted({r.get("layer") for r in data["objects"] if r.get("layer")}):
+            context += [r for r in _read(layer=lay, geometry=True, allow_temp=False, limit=200000)["objects"]
+                        if r["uuid"] not in inscope]
+    plan = plan_simplify(data["objects"], t["tol"], min_vertices=min_vertices, context=context)
     summary = {"document": data["document"], "tolerance_mm": round(tolerance_mm, 4), "objects": plan["objects"],
                "vertices_before": plan["vertices_before"], "vertices_after": plan["vertices_after"]}
     if plan["skipped"]:
