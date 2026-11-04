@@ -118,8 +118,11 @@ def _runs(pts: list, sets: list, closed: bool):
     return list(zip(anchors[:-1], anchors[1:]))
 
 
-def _simplify_shared(pts: list, sets: list, closed: bool, tol: float, fixed: set) -> list[int] | None:
-    """Kept indices with shared runs simplified canonically (None: keep all)."""
+def _simplify_shared(pts: list, sets: list, closed: bool, tol: float, fixed: set,
+                     tol_free: float | None = None) -> list[int] | None:
+    """Kept indices with shared runs simplified canonically (None: keep all).
+    tol_free: tolerance for the runs no other object shares (a retry may
+    lower it; shared runs keep tol so they stay equal to the neighbour's)."""
     n = len(pts)
     runs = _runs(pts, sets, closed)
     if runs is None:
@@ -138,7 +141,7 @@ def _simplify_shared(pts: list, sets: list, closed: bool, tol: float, fixed: set
             if rev:
                 local = [len(run) - 1 - i for i in local]
         else:
-            local = dp(run, tol)
+            local = dp(run, tol if tol_free is None else tol_free)
         keep.update(idx[i] for i in local)
     return sorted(keep)
 
@@ -183,7 +186,7 @@ def plan_simplify(records: list[dict], tol: float, min_vertices: int = 4,
             idx = None
             for t in (tol, tol / 2):
                 if any_shared:
-                    cand = _simplify_shared(pts, sets, closed, t, fixed)
+                    cand = _simplify_shared(pts, sets, closed, tol, fixed, tol_free=t)
                     if cand is None:
                         break
                 else:

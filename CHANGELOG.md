@@ -27,10 +27,15 @@ Nachgestellt mit echten Rhino-Exporten; die Ursachen sind behoben.
   (getestet: alles kommt an).
 - **`vw2d_join`:** lose Stücke (Make2D, VectorView, DWG) zu Linienzügen
   verbinden – nur gleiche Ebene, Klasse, Gruppe und gleiches Aussehen;
-  geschlossene Züge werden Flächen ohne Füllung.
+  geschlossene Züge werden Flächen ohne Füllung (Schleifen, die sich selbst
+  kreuzen, bleiben offene Linienzüge).
 - **`vw2d_simplify`:** Punkte ausdünnen, ohne die Form zu verändern (eine
   Teilmenge der Originalpunkte, Abweichung höchstens die Toleranz; Standard
-  0,1 mm auf dem Papier × Maßstab), mit Vorher-Nachher-Bild.
+  0,1 mm auf dem Papier × Maßstab), mit Vorher-Nachher-Bild. Nachbarn
+  bleiben fugenlos: eine gemeinsame Kante wird in beiden Flächen gleich
+  ausgedünnt (oder gar nicht, wenn der Nachbar bleibt) – jede Fläche für sich
+  zu vereinfachen hatte im Test an einem VectorView-Schnitt Hunderte
+  Überlappungen erzeugt.
 - **`vw2d_group`:** Objekte gruppieren (nach Bereich, Klasse, Auswahl);
   rückgängig machbar. Die Gruppe bekommt die Klasse ihrer Objekte (oder
   `group_class`), nicht die gerade aktive.
@@ -44,8 +49,9 @@ Nachgestellt mit echten Rhino-Exporten; die Ursachen sind behoben.
   auf Füllflächen, die solche Zeichnungen von Natur aus haben (ein normaler
   Make2D-Grundriss hatte vorher 4955 „Fehler“). Überlappung zählt dort nur
   zwischen Füllflächen – ein Fensterumriss in einer Fassade ist Zeichnung,
-  kein Fehler; doppelte Linien zählen weiter. Keine Reparaturschleife mehr
-  auf Importen.
+  kein Fehler; doppelte Linien zählen weiter; haarfeine Überlappungen
+  (Rechenungenauigkeit des Exports, im Test 0,02 mm bei VectorView) sind nur
+  Warnungen. Keine Reparaturschleife mehr auf Importen.
 - **Prüfbild:** höchstens 60 Markierungen (die schlimmsten zuerst), damit die
   Zeichnung sichtbar bleibt; `vw2d_preview(marks=false)` zeigt die Zeichnung
   ohne Markierungen.

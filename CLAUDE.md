@@ -48,6 +48,11 @@ touches Vectorworks.
 - `vw2d_check(preset="drawing")` for Make2D/VectorView/DWG drawings
   (`run_checks(overlap_fills_only=True)`: nested unfilled outlines are no
   overlap; duplicates still count).
+- `geom/simplify.py` keeps neighbours seamless: points shared by several
+  outlines split an outline into runs; a shared run is thinned with a
+  canonical direction (the neighbour gets the same result) and kept whole
+  when shared with an object that isn't simplified (`context` = the rest of
+  the layer when the scope is narrower).
 - Revert must be exact: `make_poly(..., exact=True)` (only `_rebuild`) also
   draws Bezier (1), cubic (2) and radius (4) vertices - CurveTo /
   CurveThrough / ArcTo, then `_exact_vertex_types` sets what Vectorworks

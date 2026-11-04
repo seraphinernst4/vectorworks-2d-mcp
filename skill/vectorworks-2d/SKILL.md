@@ -84,7 +84,8 @@ Nutzer** sie haben will.
    (geschlossene ohne Füllung).
 5. **Vereinfachen:** `vw2d_simplify` dünnt Punkte aus (Toleranz aus dem
    Profil: Papier-mm × Maßstab), erst Vorschau rot/schwarz zeigen, dann
-   `dry_run=false`. Organisches bleibt organisch – nur weniger Punkte.
+   `dry_run=false`. Organisches bleibt organisch – nur weniger Punkte;
+   gemeinsame Kanten von Nachbarflächen bleiben fugenlos.
 6. **Gruppieren:** `vw2d_group` (nach Bereich, Klasse oder Auswahl; die
    Gruppe bekommt die Klasse ihrer Objekte, `group_class` wählt eine andere).
 7. Große Zeichnungen Bereich für Bereich; über `confirm_above` Objekten erst
