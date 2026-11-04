@@ -32,11 +32,19 @@ Nachgestellt mit echten Rhino-Exporten; die Ursachen sind behoben.
   Teilmenge der Originalpunkte, Abweichung höchstens die Toleranz; Standard
   0,1 mm auf dem Papier × Maßstab), mit Vorher-Nachher-Bild.
 - **`vw2d_group`:** Objekte gruppieren (nach Bereich, Klasse, Auswahl);
-  rückgängig machbar.
+  rückgängig machbar. Die Gruppe bekommt die Klasse ihrer Objekte (oder
+  `group_class`), nicht die gerade aktive.
+- **Rückgängig ist exakt:** Auch importierte Splines (Polylinien mit
+  Bézier-Punkten) kommen beim Zurücknehmen genau so zurück, wie sie waren –
+  im Test Objekt für Objekt verglichen, samt Reihenfolge und Attributen. Kann
+  ein Objekt nicht wiederhergestellt werden, bricht Rückgängig ab, bevor es
+  etwas ändert (statt halb zurückgenommen stehen zu bleiben).
 - **Prüfen von Schnitten und Importen:** `vw2d_check(preset="drawing")` meldet
   nur echte Probleme – nicht die Fugen zwischen Make2D-Stücken und Umrisse
   auf Füllflächen, die solche Zeichnungen von Natur aus haben (ein normaler
-  Make2D-Grundriss hatte vorher 4955 „Fehler“). Keine Reparaturschleife mehr
+  Make2D-Grundriss hatte vorher 4955 „Fehler“). Überlappung zählt dort nur
+  zwischen Füllflächen – ein Fensterumriss in einer Fassade ist Zeichnung,
+  kein Fehler; doppelte Linien zählen weiter. Keine Reparaturschleife mehr
   auf Importen.
 - **Prüfbild:** höchstens 60 Markierungen (die schlimmsten zuerst), damit die
   Zeichnung sichtbar bleibt; `vw2d_preview(marks=false)` zeigt die Zeichnung
@@ -49,6 +57,10 @@ Nachgestellt mit echten Rhino-Exporten; die Ursachen sind behoben.
   Claudes Gedächtnis mit Kennungen.
 - Kein Massenbearbeiten mit `vw_exec_python` mehr empfohlen; fehlt ein
   Werkzeug, sagt Claude das.
+- Klare Fehler statt leerer Ergebnisse: unbekannte Ebene oder Klasse,
+  Rhino-Datei statt DWG/DXF (mit Hinweis, wie man exportiert), Toleranz 0.
+- Schneller: die Prüfung naher Punkte auf langen Linienzügen braucht ein
+  Fünfzehntel der Zeit; das Bild ohne Markierungen prüft gar nicht erst.
 
 ## 0.6.5 – 03.11.2026
 

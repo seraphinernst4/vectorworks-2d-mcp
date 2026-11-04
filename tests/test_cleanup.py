@@ -194,6 +194,15 @@ def test_join_closed_loop_has_no_fill():
     assert ch["attrs"] == {"fill": "none"}
 
 
+def test_join_self_crossing_loop_stays_open():
+    """A figure eight closed into a polygon would fill oddly (live: 6
+    self-intersection errors after joining a section)."""
+    pts = [(0, 0), (2, 2), (2, 0), (0, 2), (0, 0)]
+    plan = plan_join([_line(pts[i], pts[i + 1]) for i in range(4)], 1e-6)
+    assert plan["chains"] == 1 and plan["changes"][0]["closed"] is False
+    assert len(plan["changes"][0]["verts"]) == 5 and "attrs" not in plan["changes"][0]
+
+
 def test_join_tolerance_and_exact_shared_point():
     a = _line((0, 0), (1, 0))
     b = _line((1.0004, 0), (2, 0))  # 0.4 mm gap in a metre document

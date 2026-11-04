@@ -19,6 +19,20 @@ from typing import Any
 CORNER, ARC = 0, 3
 
 
+def _simple_ring(verts: list[list]) -> bool:
+    """Does the closed chain (last vertex = first) not cross itself? (On the
+    vertex points; arc vertices count as their corner point.)"""
+    from shapely.geometry import LinearRing
+
+    pts = [(float(v[0]), float(v[1])) for v in verts]
+    if len(pts) < 4:
+        return True
+    try:
+        return LinearRing(pts).is_simple
+    except ValueError:
+        return False
+
+
 def _attr_key(rec: dict) -> tuple:
     a = rec.get("attrs") or {}
     bc = a.get("by_class") or {}
@@ -183,6 +197,8 @@ def plan_join(records: list[dict], tol: float, include_curves: bool = True,
                 if verts:
                     pv = pv[1:]  # shared end point: the previous piece's end point stays (exact join)
                 verts += pv
+            if closed and not _simple_ring(verts):
+                closed = False  # crosses itself: stays an open polyline (a closed one would fill oddly)
             if closed:
                 verts = verts[:-1]
             keep = items[chain[0][0]][0]

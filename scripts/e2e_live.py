@@ -107,8 +107,16 @@ def same(a, b):
     """Ordered and unordered comparison of two fingerprints."""
     from collections import Counter
     ca, cb = Counter(a), Counter(b)
-    return {"objects": [len(a), len(b)], "exact_order": a == b, "same_set": ca == cb,
-            "missing": sum((ca - cb).values()), "extra": sum((cb - ca).values())}
+    out = {"objects": [len(a), len(b)], "exact_order": a == b, "same_set": ca == cb,
+           "missing": sum((ca - cb).values()), "extra": sum((cb - ca).values())}
+    if ca != cb:  # what differs: the first missing/extra records, key by key
+        miss, extra = list((ca - cb).elements())[:3], list((cb - ca).elements())[:3]
+        diffs = []
+        for m, e in zip(miss, extra):
+            dm, de = json.loads(m), json.loads(e)
+            diffs.append({k: [dm.get(k), de.get(k)] for k in sorted(set(dm) | set(de)) if dm.get(k) != de.get(k)})
+        out["diffs"] = json.loads(json.dumps(diffs)[:3000]) if len(json.dumps(diffs)) <= 3000 else json.dumps(diffs)[:3000]
+    return out
 
 
 def pick(d, keys):
@@ -152,7 +160,7 @@ def phase_check():
     run("preview marks", lambda: {
         "with": res(draw2d.vw2d_preview(layer="testschnitt", width_px=1200), "preview_testschnitt_marks")["summary"]["errors"],
         "without": res(draw2d.vw2d_preview(layer="testschnitt", width_px=1200, marks=False),
-                       "preview_testschnitt_clean")["summary"]["errors"]})
+                       "preview_testschnitt_clean")})
 
 
 def phase_join():
@@ -353,12 +361,14 @@ def phase_scenarios():
     run("revert explicit join", lambda: dict(pick(generic.vw_revert_last(), ("reverted_tool", "restored", "missing")),
                                              count_now=count(lay)))
     # own rules land in the instructions every chat starts with
-    run("rule add", lambda: {"rules": cleanup.vw2d_profile("add_rule", rule="Bestand und Ruinen organisch lassen, "
-                                                                            "nur vereinfachen")["settings"].get("rules")})
+    def rules_of(out):
+        return next((row["value"] for row in out["settings"] if row["key"] == "rules"), None)
+    run("rule add", lambda: {"rules": rules_of(cleanup.vw2d_profile("add_rule", rule="Bestand und Ruinen organisch "
+                                                                                     "lassen, nur vereinfachen"))})
     run("rule in instructions", lambda: {"in_instructions": "Ruinen organisch" in app.build_instructions(profile.load()),
                                          "tolerance_text": [ln for ln in app.build_instructions(profile.load())
-                                                            .splitlines() if "3 mm" in ln][:2]})
-    run("rule remove", lambda: {"rules": cleanup.vw2d_profile("remove_rule", index=0)["settings"].get("rules")})
+                                                            .splitlines() if "tolerance_mm=3" in ln][:2]})
+    run("rule remove", lambda: {"rules": rules_of(cleanup.vw2d_profile("remove_rule", index=1))})
     run("profile wrong value", lambda: expect_error(lambda: cleanup.vw2d_profile("set", values={"detail": "egal"}),
                                                     "detail"))
     run("profile negative", lambda: expect_error(lambda: cleanup.vw2d_profile("set", values={"confirm_above": -5}),
@@ -432,10 +442,31 @@ def phase_vectorview():
     run("vv revert import", lambda: pick(generic.vw_revert_last(), ("reverted_tool", "deleted", "missing")))
 
 
+def phase_diffs():
+    """Where an inexact revert differs (one tool at a time)."""
+    def cycle(lay, step, fn):
+        def one():
+            fp0 = fingerprint(lay)
+            r = fn()
+            rv = pick(generic.vw_revert_last(), ("reverted_tool", "deleted", "restored", "missing"))
+            return {"result": r, "revert": rv, "compare": same(fp0, fingerprint(lay))}
+        run("diff %s %s" % (step, lay), one)
+    join = lambda lay: lambda: pick(res(cleanup.vw2d_join(layer=lay, dry_run=False, image=False)),  # noqa: E731
+                                    ("joined_pieces", "applied"))
+    for lay in ("m2d_iso_schnitt", "m2d_grundriss", "testschnitt"):
+        cycle(lay, "join", join(lay))
+    cycle("m2d_grundriss", "by_class",
+          lambda: pick(res(draw2d.vw2d_fix("by_class", layer="m2d_grundriss", image=False)), ("summary",)))
+    out = cleanup.vw2d_import(path=T + "vv_schnitt.dwg")
+    lay = out["imported"]["new_layers"][0]
+    cycle(lay, "join", join(lay))
+    run("diff vv revert import", lambda: pick(generic.vw_revert_last(), ("reverted_tool", "deleted")))
+
+
 PHASES = {"stock": phase_stock, "import": phase_import, "check": phase_check, "join": phase_join,
           "simplify": phase_simplify, "organize": phase_organize_group, "profile": phase_profile, "big": phase_big,
           "workflow": phase_workflow, "exact": phase_exact, "scenarios": phase_scenarios,
-          "vectorview": phase_vectorview}
+          "vectorview": phase_vectorview, "diffs": phase_diffs}
 
 if __name__ == "__main__":
     log("start", phases=sys.argv[1:], version=__import__("vwmcp").__version__)

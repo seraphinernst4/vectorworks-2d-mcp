@@ -45,7 +45,19 @@ touches Vectorworks.
   rational splines from DWG/DXF; Rhino writes no splines into R12 DXF.
   Rhino export (DWG 2018) with splines/polycurves as polylines brings
   everything.
-- `vw2d_check(preset="drawing")` for Make2D/VectorView/DWG drawings.
+- `vw2d_check(preset="drawing")` for Make2D/VectorView/DWG drawings
+  (`run_checks(overlap_fills_only=True)`: nested unfilled outlines are no
+  overlap; duplicates still count).
+- Revert must be exact: `make_poly(..., exact=True)` (only `_rebuild`) also
+  draws Bezier (1), cubic (2) and radius (4) vertices - CurveTo /
+  CurveThrough / ArcTo, then `_exact_vertex_types` sets what Vectorworks
+  doesn't (radius vertices). `_check_restorable` refuses a revert before it
+  changes anything. Drawing tools still take corners and arcs only.
+- Live E2E: `scripts/e2e_live.py <phases>` on the Mac with the extension's
+  Python, journal/profile isolated in `$VWMCP_E2E_OUT`; `exact` compares a
+  full fingerprint (geometry, vertex types, attributes, order) before and
+  after revert. Start it detached and don't send Vectorworks requests while
+  it runs.
 
 ## Planning (0.6, Raumpilot knowledge)
 

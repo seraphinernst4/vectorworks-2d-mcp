@@ -108,9 +108,10 @@ def run_checks(records: list[dict], units: dict, tolerance_mm: float = 1.0,
     gaps and near misses: 'layer' (same layer, default), 'class' (same
     class and layer) or 'all'. ignore_classes: class names (or 'Prefix*')
     left out of geometric checks, e.g. furniture or hatch classes that
-    overlap on purpose. overlap_fills_only: overlaps only between filled
-    areas (drawings: an unfilled outline inside another - a window in a
-    facade - is a drawing, not an error; duplicates still count)."""
+    overlap on purpose. overlap_fills_only: overlaps and self-intersections
+    only for filled areas (drawings: an unfilled outline inside another - a
+    window in a facade - is a drawing, not an error; duplicates still
+    count)."""
     ignored = _class_matcher(ignore_classes)
     records_all = records
     records = [r for r in records if not ignored(r.get("class", ""))]
@@ -134,6 +135,8 @@ def run_checks(records: list[dict], units: dict, tolerance_mm: float = 1.0,
 
     # ---- validity -----------------------------------------------------------
     for s in areas:
+        if overlap_fills_only and not s.filled:
+            continue  # drawings: an unfilled outline crossing itself is just lines
         if not s.is_valid(chord) and "self_intersection" in checks:
             from shapely.validation import explain_validity
             raw = Polygon(C.discretize(s.rings[0], chord))

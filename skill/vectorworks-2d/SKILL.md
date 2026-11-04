@@ -74,8 +74,9 @@ Nutzer** sie haben will.
    in Rhino als DWG 2018 mit „Splines und Polykurven als Polylinien“ neu
    exportieren.
 2. **Prüfen:** `vw2d_check(preset="drawing")` – lose Stücke, Fugen zwischen
-   Make2D-Stücken und Umrisse auf Füllflächen sind bei solchen Zeichnungen
-   normal und kein Fehler. Nicht „bis fehlerfrei“ reparieren.
+   Make2D-Stücken, Umrisse auf Füllflächen und Umrisse in Umrissen (Fenster
+   in der Fassade) sind bei solchen Zeichnungen normal und kein Fehler.
+   Nicht „bis fehlerfrei“ reparieren.
 3. **Sortieren und Linienstärken:** `vw2d_organize` (auch nach Bereich:
    `bbox`/`touches`, z. B. ein Vorhang), dann Attribute nach Klasse und
    Linienstärken der Klassen mit `vw2d_setup`.
@@ -84,7 +85,8 @@ Nutzer** sie haben will.
 5. **Vereinfachen:** `vw2d_simplify` dünnt Punkte aus (Toleranz aus dem
    Profil: Papier-mm × Maßstab), erst Vorschau rot/schwarz zeigen, dann
    `dry_run=false`. Organisches bleibt organisch – nur weniger Punkte.
-6. **Gruppieren:** `vw2d_group` (nach Bereich, Klasse oder Auswahl).
+6. **Gruppieren:** `vw2d_group` (nach Bereich, Klasse oder Auswahl; die
+   Gruppe bekommt die Klasse ihrer Objekte, `group_class` wählt eine andere).
 7. Große Zeichnungen Bereich für Bereich; über `confirm_above` Objekten erst
    an einem Ausschnitt zeigen und auf das OK warten. Kein Massenbearbeiten
    mit `vw_exec_python` – fehlt ein Werkzeug, das sagen.
