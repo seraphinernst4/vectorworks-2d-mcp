@@ -13,7 +13,7 @@ from mcp.server.mcpserver.exceptions import ToolError
 
 from vwmcp import app, documents, profile
 from vwmcp import trigger as trig
-from vwmcp.client import Bridge, BridgeTimeout, WrongDocument
+from vwmcp.client import Bridge, BridgeTimeout, NoDocumentOpen, WrongDocument
 from vwmcp.journal import Journal
 from vwmcp.tools import documents as T
 from vwmcp.tools import generic
@@ -358,19 +358,25 @@ class FakeMac:
         self.ignore_background_switch = False
         self.running = True
         self.drop_while_loading = 0
+        self.suffix = ""
 
     def ui(self, pid):
-        wins = [{"name": n, "subrole": "AXStandardWindow", "main": n == self.vs.doc["name"]} for n in self.docs]
+        wins = [{"name": n + self.suffix, "subrole": "AXStandardWindow", "main": n == self.vs.doc["name"]}
+                for n in self.docs]
         if not self.docs:
             wins.append({"name": "Vectorworks Design Suite 2026", "subrole": "AXStandardWindow", "main": True})
         if self.dialog:
             wins.append({"name": self.dialog, "subrole": "AXDialog", "modal": True})
         menu = [{"name": "Paletten"}, {"name": None}] + [
-            {"name": n, "mark": "✓" if n == self.vs.doc["name"] else None} for n in self.docs]
+            {"name": n + self.suffix, "mark": "✓" if n == self.vs.doc["name"] else None} for n in self.docs]
         return {"windows": wins, "menu": menu}
 
     def switch(self, pid, title, front):
         self.switches.append((title, front))
+        if self.suffix and title.endswith(self.suffix):
+            title = title[: -len(self.suffix)]
+        elif self.suffix:
+            return "not_found"  # the real title has the note
         if title not in self.docs:
             return "not_found"
         if front or not self.ignore_background_switch:
@@ -617,3 +623,117 @@ def test_instructions_and_profile_explain_documents():
     assert profile.defaults()["documents"] == "guard"
     assert "WRONG DOCUMENT" in profile.rule_text("documents", "guard")
     assert json.dumps(profile.table())  # the launcher's copy stays serialisable
+
+
+# ------------------------------------------------- live findings 2026-11-13
+
+STUDENT = " - AUSBILDUNGSVERSION - DOKUMENT MIT WASSERZEICHEN"
+LIVE_MENU = ["Startbildschirm", "Paletten", "Einstellungen Paletten", "Einstellungen Objektmaßanzeige",
+             "Einstellungen Multifunktionsleiste", "Einstellungen Bearbeitenmodus", "Fenster vergrößern",
+             "Dokument-Reiter anzeigen", "Aktives Dokument lösen", "Enko4-Test.vwx" + STUDENT]
+
+
+def test_clean_title():
+    assert documents.clean_title("Enko4-Test.vwx" + STUDENT) == "Enko4-Test.vwx"
+    assert documents.clean_title("Enko4-Test" + STUDENT) == "Enko4-Test"
+    assert documents.clean_title("Plan - EG.vwx") == "Plan - EG.vwx"
+    assert documents.clean_title("Plan - EG") == "Plan - EG"  # not a capital note
+    assert documents.clean_title("Ohne Titel 1" + STUDENT) == "Ohne Titel 1"
+
+
+def test_live_window_menu_with_and_without_separators():
+    win = [{"name": "Enko4-Test.vwx" + STUDENT, "subrole": "AXStandardWindow", "main": True}]
+    for menu in ([{"name": n} for n in LIVE_MENU],  # as listed (separators not shown)
+                 [{"name": n} for n in LIVE_MENU[:-1]] + [{"name": ""}, {"name": LIVE_MENU[-1], "mark": "✓"}]):
+        docs = documents.documents_from_ui({"windows": win, "menu": menu})
+        assert [(d["name"], d["title"]) for d in docs] == [("Enko4-Test.vwx", "Enko4-Test.vwx" + STUDENT)]
+
+
+def test_student_titles_switch_and_open(mac, vs, pin, tmp_path):
+    mac.suffix = STUDENT
+    out = T.vw_documents()
+    assert [d["name"] for d in out["documents"]] == ["Plan.vwx", "Detail.vwx"]
+    out = T.vw_switch_document("Detail")
+    assert out["switched"] and mac.switches == [("Detail.vwx" + STUDENT, False)]
+    f = tmp_path / "Neu.vwx"
+    f.write_text("x")
+    out = T.vw_open_document(str(f))
+    assert out["opened"] and pin.current()["name"] == "Neu.vwx"
+
+
+# ---------------------------------------------------------------- preflight
+
+
+class Probe:
+    def __init__(self, ui):
+        self.ui, self.reads = ui, 0
+
+    def __call__(self, pid):
+        self.reads += 1
+        if isinstance(self.ui, Exception):
+            raise self.ui
+        return self.ui
+
+
+DOC_UI = {"windows": [{"name": "Plan.vwx" + STUDENT, "subrole": "AXStandardWindow", "main": True}]}
+START_UI = {"windows": [{"name": "Vectorworks Design Suite 2026", "subrole": "AXStandardWindow", "main": True}]}
+
+
+def _pre(ui, clock, pid=7):
+    procs = [{"name": "Vectorworks 2026", "pid": pid, "uptime": 99.0, "bundle": "b"}]
+    probe = Probe(ui)
+    return documents.Preflight(idle=900, clock=clock, processes=lambda: procs, reader=probe), probe, procs
+
+
+def test_preflight_sends_nothing_without_a_document(bridge, vs, clock):
+    pre, probe, _ = _pre(START_UI, clock)
+    bridge.preflight = pre
+    with pytest.raises(NoDocumentOpen) as e:
+        bridge.run("vs.Touch()")
+    assert e.value.never_ran and "No document is open" in str(e.value) and "vw_open_document" in str(e.value)
+    assert vs.touched == [] and not list((bridge.jobs).glob("*")) if bridge.jobs.exists() else True
+
+
+def test_preflight_reports_a_dialog(bridge, clock):
+    ui = {"windows": DOC_UI["windows"] + [{"name": None, "subrole": "AXDialog", "texts": ["Speichern?"],
+                                           "buttons": ["Nein", "Ja"]}]}
+    pre, _, _ = _pre(ui, clock)
+    bridge.preflight = pre
+    with pytest.raises(NoDocumentOpen, match="Speichern"):
+        bridge.run("1")
+
+
+def test_preflight_checks_once_per_vectorworks_and_after_a_pause(bridge, vs, clock):
+    pre, probe, procs = _pre(DOC_UI, clock)
+    bridge.preflight = pre
+    for _ in range(3):
+        assert bridge.run("vs.Touch()\n1")["ok"]
+    reads = probe.reads
+    assert reads >= 1
+    procs[0]["pid"] = 8  # Vectorworks restarted
+    bridge.run("1")
+    assert probe.reads == reads + 1
+    clock.t += 1000  # a pause
+    bridge.run("1")
+    assert probe.reads == reads + 2
+
+
+def test_preflight_without_accessibility_lets_the_call_through(bridge, clock):
+    pre, _, _ = _pre(documents.DocumentsError("no Accessibility"), clock)
+    bridge.preflight = pre
+    assert bridge.run("5")["value"] == 5 and "Accessibility" in pre.unavailable
+
+
+def test_preflight_can_be_switched_off(bridge, clock, monkeypatch):
+    monkeypatch.setenv("VWMCP_PREFLIGHT", "0")
+    pre, probe, _ = _pre(START_UI, clock)
+    bridge.preflight = pre
+    assert bridge.run("6")["value"] == 6 and probe.reads == 0
+
+
+def test_documents_tool_never_asks_vectorworks_on_the_start_screen(mac, vs, bridge):
+    mac.docs.clear()
+    called = []
+    bridge.trigger = lambda: called.append(1)
+    out = T.vw_documents()
+    assert out["documents"] == [] and called == [] and "No document is open" in out["note"]

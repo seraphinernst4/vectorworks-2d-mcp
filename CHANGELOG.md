@@ -28,6 +28,15 @@
   fallen). Ein Aufruf dauert höchstens ~50 s (über die Verbindung zum Mac sind
   nur ~80 s möglich); braucht es länger, meldet Keystone „starting“/„loading“
   und der nächste Aufruf macht weiter – die Datei wird nie doppelt geöffnet.
+- **Absturzursache gefunden und abgestellt:** Jede Keystone-Anfrage, während
+  Vectorworks nur den Startbildschirm zeigt (kein Dokument offen), brachte
+  Vectorworks zum Absturz (live bestätigt mit 2026 und 2027 per
+  Absturzbericht). Keystone prüft jetzt vor der ersten Anfrage, nach einem
+  Neustart von Vectorworks und nach einer Pause über die Fensterliste, ob ein
+  Dokument offen ist, und schickt sonst nichts. (Braucht die Freigabe unter
+  Bedienungshilfen; ohne sie warnt `vw_ping`.)
+- **Studentenlizenzen:** Fenstertitel wie „Plan.vwx - AUSBILDUNGSVERSION -
+  DOKUMENT MIT WASSERZEICHEN“ werden erkannt.
 - Zeigt Vectorworks einen Dialog, nennt Keystone Titel, Text und Knöpfe.
 - macOS fragt beim ersten Wechsel, ob Claude „System Events“ steuern darf;
   dazu braucht Claude die Freigabe unter Bedienungshilfen. Fehlt etwas, sagt

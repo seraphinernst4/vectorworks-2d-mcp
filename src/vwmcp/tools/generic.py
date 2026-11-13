@@ -93,6 +93,14 @@ def vw_ping() -> dict:
             out["update_available"] = {"latest": u["latest"], "hint": update.notice(u)}
     except Exception:  # noqa: BLE001 - the ping must never fail because of the update check
         pass
+    try:
+        from vwmcp import documents
+
+        if documents.PREFLIGHT.unavailable:
+            warnings.append("Keystone can't check whether a document is open before it sends a request (a request "
+                            "without a document crashes Vectorworks): " + documents.PREFLIGHT.unavailable)
+    except Exception:  # noqa: BLE001 - the ping must never fail because of this
+        pass
     if warnings:
         out["warning"] = " ".join(warnings)
     return out

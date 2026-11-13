@@ -52,6 +52,12 @@ class TriggerError(BridgeError):
     pass
 
 
+class NoDocumentOpen(BridgeError):
+    """The preflight found no document (or a dialog) in Vectorworks: nothing was sent."""
+
+    never_ran = True
+
+
 class WrongDocument(BridgeError):
     """A guarded job found another document in front than the one Keystone
     works in. The guard runs before the job: nothing ran, nothing changed."""
@@ -102,6 +108,9 @@ class Bridge:
         # document guard (vwmcp.documents.DocumentPin): prepare(bridge) -> guard
         # source or None, finish(result) raises WrongDocument. None: no guard.
         self.guard = None
+        # preflight(bridge): raises (e.g. vwmcp.documents.NoDocument) when
+        # Vectorworks can't take a job safely. None: no preflight.
+        self.preflight = None
 
     # ------------------------------------------------------------ helpers
 
@@ -168,6 +177,13 @@ class Bridge:
         WrongDocument, nothing ran). claim_timeout: wait this long for
         Vectorworks to take the job (default self.claim_timeout)."""
         timeout = self.timeout if timeout is None else timeout
+        if self.preflight is not None:
+            try:
+                self.preflight(self)
+            except BridgeError:
+                raise
+            except Exception as e:  # noqa: BLE001 - the preflight's own reason, as a never-ran error
+                raise NoDocumentOpen(str(e)) from e
         guard = self.guard if guarded else None
         # outside the lock: preparing may run a short unguarded job itself
         guard_src = guard.prepare(self) if guard is not None else None

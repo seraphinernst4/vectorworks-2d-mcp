@@ -70,6 +70,23 @@ layer 0, title = document name), then `screencapture -x -o -l <id> out.png`.
 That works even when the window is covered. It needs Screen Recording
 permission for the calling app.
 
+## Documents and windows (live, 2026-11-13)
+
+- No `vs.*` function lists, switches or opens documents. A job while only the
+  start screen is open (no document) segfaults Vectorworks (2026 U7 and 2027
+  U1: EXC_BAD_ACCESS at 0x1c7 in the first `vs.*` call). Check the window list
+  first (`documents.Preflight`).
+- Window titles and Window-menu entries of student licences carry a note:
+  "Enko4-Test.vwx - AUSBILDUNGSVERSION - DOKUMENT MIT WASSERZEICHEN".
+- VW 2026 Window menu ("Fenster"): Startbildschirm, Paletten, Einstellungen …,
+  Fenster vergrößern, Dokument-Reiter anzeigen, Aktives Dokument lösen, then
+  the open documents.
+- `GetFPathName` returns a POSIX path on 2026 (macOS).
+- `open -a "Vectorworks 2027.app" file` while 2027 wasn't running: the start
+  screen came up and the file was not opened. Start first, then hand over.
+  2027 shows an untitled "Vectorworks-Bibliotheken aktualisieren" notice
+  (AXDialog) on first start.
+
 ## AppleScript
 
 See `architecture.md`: only `run VectorScript` calling

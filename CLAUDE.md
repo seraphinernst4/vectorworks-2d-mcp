@@ -100,11 +100,14 @@ touches Vectorworks.
   file first (2027's start screen dropped a file handed over at launch), then
   hand it over. Which app: VWMCP_APP, else `~/.vwmcp/last_app` (written by
   the trigger), else the newest *tested* version, else the newest.
-- Live findings 2026-11-13 (2027): the start screen and the library-update
-  notice (AXDialog, untitled) are no documents; `vw_documents` lists raw
-  windows when it finds no document. Open question: did a bridge request
-  with no document open (start screen) crash Vectorworks? Check
-  `~/Library/Logs/DiagnosticReports/Vectorworks-*.ips`.
+- Live findings 2026-11-13: student licences put a note into every window
+  title and Window-menu entry ("Plan.vwx - AUSBILDUNGSVERSION - DOKUMENT MIT
+  WASSERZEICHEN"): `clean_title` gives the name, switching uses the exact
+  title. VW 2026's Window menu ends with the documents (after "Dokument-Reiter
+  anzeigen", "Aktives Dokument lösen"); tail entries count only when they look
+  like documents. GetFPathName is a POSIX path on 2026. The start screen
+  ("Vectorworks Design Suite 2027", menu item "Startbildschirm") and the
+  library-update notice (AXDialog, untitled) are no documents.
 - Live-tested parts and open questions (window titles, Window menu layout,
   tabs, behaviour of `open` on an open file): record in `docs/vs-notes.md`.
 
@@ -169,6 +172,12 @@ touches Vectorworks.
 
 ## Hard rules (learned by crashing the user's Vectorworks)
 
+- **Never** send a job while **no document is open** (start screen): both live
+  crashes on 2026-11-13 (VW 2026 and 2027, SIGSEGV at 0x1c7 inside the first
+  `vs.*` call of the job) happened that way - probably also what "crashes
+  during launch" meant. `documents.PREFLIGHT` (Bridge.preflight) checks the
+  window list once per Vectorworks process and after a pause and refuses
+  (`NoDocumentOpen`, never ran); without Accessibility it can't check.
 - **Never** send `run Python script` over AppleScript. Writes, or any call during
   launch / a modal dialog, segfault Vectorworks 2026. The only Apple Event the
   server sends is the short VectorScript hop (`PythonExecute` of the bridge, or

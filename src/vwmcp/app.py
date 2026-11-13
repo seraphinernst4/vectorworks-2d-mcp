@@ -128,6 +128,9 @@ SEVERAL DOCUMENTS (open files):
   front, take it over with vw_switch_document (nothing moves) and go on;
   otherwise switch back and tell the user. Never edit a document the user
   didn't mean. vw_revert_last works per document.
+- With no document open (Vectorworks' start screen) Keystone sends nothing -
+  a script there crashes Vectorworks. Open the file with vw_open_document
+  (ask the user which one) instead of retrying.
 
 GENERAL
 - Vectorworks merges back-to-back MCP edits into one Cmd-Z step, so to undo
@@ -208,6 +211,7 @@ def get_bridge() -> Bridge:
 
     b = Bridge()
     b.guard = documents.PIN  # every call checks that Keystone's document is in front
+    b.preflight = documents.PREFLIGHT  # never send a script while no document is open (crashes Vectorworks)
     return b
 
 

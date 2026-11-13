@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import sys
 import threading
@@ -99,6 +100,24 @@ def stem(s: str | None) -> str:
 def same_name(a: str | None, b: str | None) -> bool:
     """Window titles may hide the extension (Finder setting)."""
     return bool(norm(a)) and (norm(a) == norm(b) or stem(a) == stem(b))
+
+
+# Window titles carry notes after the file name, e.g. student licences:
+# "Plan.vwx - AUSBILDUNGSVERSION - DOKUMENT MIT WASSERZEICHEN" (VW 2026, live)
+_EXT_IN_TITLE = re.compile(r"\.(vwx|sta)(?=$|\s)", re.I)
+_CAPS_NOTE = re.compile(r"\s+[-\u2013\u2014]\s+[^a-z\u00e0-\u00ff]{8,}$")  # long capital note, not "- EG"
+# the start screen and other non-document windows
+_NOT_DOCUMENT = re.compile(r"^(vectorworks(\s+(design suite|design|architect|landmark|spotlight|fundamentals|"
+                           r"braceworks|connectcad))?(\s+20\d\d)?|startbildschirm|start screen|home)$")
+
+
+def clean_title(title: str | None) -> str:
+    """The document name in a window title (without licence notes)."""
+    t = (title or "").strip()
+    m = _EXT_IN_TITLE.search(t)
+    if m:
+        return t[: m.end()]
+    return _CAPS_NOTE.sub("", t)
 
 
 def looks_like_document(title: str | None) -> bool:
@@ -397,7 +416,7 @@ def documents_from_ui(ui: dict) -> list[dict]:
     windows are."""
     std = [w for w in ui.get("windows") or []
            if w.get("name") and w.get("subrole") in (None, "AXStandardWindow") and not w.get("modal")
-           and not (norm(w["name"]).startswith("vectorworks") and not looks_like_document(w["name"]))]  # start screen
+           and not _NOT_DOCUMENT.match(norm(clean_title(w["name"])))]
     std_names = {norm(w["name"]) for w in std}
     tail: list[dict] = []
     for item in reversed(ui.get("menu") or []):
@@ -406,15 +425,18 @@ def documents_from_ui(ui: dict) -> list[dict]:
         tail.append(item)
     tail.reverse()
     docs: list[dict] = []
-    if tail and any(norm(i["name"]) in std_names or looks_like_document(i["name"]) for i in tail):
+    if tail and any(norm(i["name"]) in std_names or looks_like_document(clean_title(i["name"])) for i in tail):
         for i in tail:
-            docs.append({"name": i["name"], "active": (i.get("mark") or "").strip() not in ("", "missing value"),
-                         "source": "menu"})
-        seen = {norm(d["name"]) for d in docs}
-        docs += [{"name": w["name"], "active": bool(w.get("main")), "source": "window"}
-                 for w in std if norm(w["name"]) not in seen]
+            if not (norm(i["name"]) in std_names or looks_like_document(clean_title(i["name"]))):
+                continue  # a command (if the menu reports no separator), not a document
+            docs.append({"name": clean_title(i["name"]), "title": i["name"],
+                         "active": (i.get("mark") or "").strip() not in ("", "missing value"), "source": "menu"})
+        seen = {norm(d["title"]) for d in docs}
+        docs += [{"name": clean_title(w["name"]), "title": w["name"], "active": bool(w.get("main")),
+                  "source": "window"} for w in std if norm(w["name"]) not in seen]
     else:
-        docs = [{"name": w["name"], "active": bool(w.get("main")), "source": "window"} for w in std]
+        docs = [{"name": clean_title(w["name"]), "title": w["name"], "active": bool(w.get("main")),
+                 "source": "window"} for w in std]
     return docs
 
 
@@ -460,6 +482,63 @@ def open_file(bundle: str, path: str | None, front: bool,
         raise DocumentsError("macOS didn't hand the file to Vectorworks within 30 s.") from None
     if r.returncode != 0:
         raise DocumentsError("macOS couldn't open the file in Vectorworks: " + (r.stderr or "").strip())
+
+
+class NoDocument(Exception):
+    """Raised by Preflight; the server maps it to a BridgeError that never ran."""
+
+
+class Preflight:
+    """Before Keystone sends anything to a Vectorworks it hasn't checked yet
+    (first call, Vectorworks restarted, or a pause): is a document open, and
+    no dialog in the way? Seen live (2026 and 2027, SIGSEGV at 0x1c7 in a
+    vs.* call): a script while only the start screen is open crashes
+    Vectorworks. Needs Accessibility; without it nothing can be checked and
+    the call goes ahead as before."""
+
+    def __init__(self, idle: float = PIN_IDLE, clock: Callable[[], float] = time.monotonic,
+                 processes: Callable[[], list[dict]] | None = None, reader: Callable[[int], dict] | None = None):
+        self.idle = idle
+        self.clock = clock
+        self.processes = processes
+        self.reader = reader
+        self.checked_pid: int | None = None
+        self.last = 0.0
+        self.unavailable = None  # why it can't check (no Accessibility), for vw_ping
+
+    def __call__(self, bridge=None) -> None:
+        if sys.platform != "darwin" and self.reader is None:
+            return
+        if os.environ.get("VWMCP_PREFLIGHT", "1").strip() == "0":
+            return
+        proc = find_process(self.processes)
+        if proc is None:
+            return  # the trigger says it isn't running
+        now = self.clock()
+        if proc["pid"] == self.checked_pid and now - self.last < self.idle:
+            self.last = now
+            return
+        try:
+            ui = (self.reader or read_ui)(proc["pid"])
+        except DocumentsError as e:
+            self.unavailable = str(e)
+            return
+        self.unavailable = None
+        dlg = dialog_of(ui)
+        if dlg:
+            raise NoDocument("Vectorworks shows a dialog (%s); nothing was sent. Tell the user what it asks; they "
+                             "answer it in Vectorworks, then try again." % dlg)
+        if not documents_from_ui(ui):
+            raise NoDocument("No document is open in Vectorworks (start screen), so Keystone sent nothing: a "
+                             "script without a document crashes Vectorworks. Open one first - vw_open_document "
+                             "with the file's path - or ask the user which file to open.")
+        self.checked_pid, self.last = proc["pid"], now
+
+    def forget(self) -> None:
+        self.checked_pid = None
+
+
+PREFLIGHT = Preflight()
 
 
 def installed_bundle(found: list[Path] | None = None, tested: list[str] | None = None) -> str | None:
