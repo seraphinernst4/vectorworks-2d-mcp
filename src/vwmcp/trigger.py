@@ -113,6 +113,24 @@ def running_apps() -> list[tuple[str, float]]:
     return parse_ps(ps.stdout)
 
 
+def remember_app(root: Path, name: str) -> None:
+    """Remember which Vectorworks Keystone works with (to start that one, not
+    simply the newest installed, when a file is to be opened)."""
+    path = Path(root) / "last_app"
+    with contextlib.suppress(OSError):
+        if not path.is_file() or path.read_text(encoding="utf-8").strip() != name:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(name + "\n", encoding="utf-8")
+
+
+def last_app(root: Path) -> str | None:
+    with contextlib.suppress(OSError):
+        name = (Path(root) / "last_app").read_text(encoding="utf-8").strip()
+        if re.fullmatch(r"Vectorworks 20\d\d", name):
+            return name
+    return None
+
+
 def configured_app() -> str | None:
     """VWMCP_APP if set to a real name (not empty, not an unsubstituted ${...})."""
     app = (os.environ.get("VWMCP_APP") or "").strip()
@@ -147,6 +165,7 @@ class MacTrigger:
         self._pending: list[tuple[subprocess.Popen, float]] = []
         self.target: str | None = None  # app name of the last trigger
         self._target_start: float | None = None  # its process start (monotonic estimate)
+        self._remembered: str | None = None
         self.last_rc: int | None = None  # exit code of the last finished osascript
         self._misses = 0
 
@@ -189,6 +208,9 @@ class MacTrigger:
             return  # enough events queued; they will run the job when Vectorworks is free
         vss_text = DIRECT_VSS if self.direct else MENU_VSS
         script = f'tell application "{app}" to run VectorScript "{vss_text}"'
+        if app != self._remembered:
+            remember_app(self.root, app)
+            self._remembered = app
         self.target = app
         self._target_start = time.monotonic() - up
         self._pending.append((self.spawn(["osascript", "-e", script]), time.monotonic()))

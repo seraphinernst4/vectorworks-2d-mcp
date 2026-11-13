@@ -93,6 +93,18 @@ touches Vectorworks.
   pins the document in front (one extra short job). Unguarded: `vw_ping`,
   `vw_document_info`, live `vw_vs_lookup`, bridge reload, the document tools.
   Profile `documents: follow` or `VWMCP_DOC_GUARD=0` turn it off.
+- Opening: one tool call must stay under the ~80 s a call to a linked
+  computer may take (`STEP_S` 50 s); longer starts/loads return status
+  starting/loading and the next call continues (`_PENDING` keeps a handed-over
+  file from being opened twice). Not running: start Vectorworks without the
+  file first (2027's start screen dropped a file handed over at launch), then
+  hand it over. Which app: VWMCP_APP, else `~/.vwmcp/last_app` (written by
+  the trigger), else the newest *tested* version, else the newest.
+- Live findings 2026-11-13 (2027): the start screen and the library-update
+  notice (AXDialog, untitled) are no documents; `vw_documents` lists raw
+  windows when it finds no document. Open question: did a bridge request
+  with no document open (start screen) crash Vectorworks? Check
+  `~/Library/Logs/DiagnosticReports/Vectorworks-*.ips`.
 - Live-tested parts and open questions (window titles, Window menu layout,
   tabs, behaviour of `open` on an open file): record in `docs/vs-notes.md`.
 

@@ -6,6 +6,7 @@ How it works and why it goes through macOS: see vwmcp.documents.
 from __future__ import annotations
 
 import time
+from pathlib import Path
 
 from mcp.server.mcpserver.exceptions import ToolError
 from mcp.types import ToolAnnotations
@@ -89,8 +90,9 @@ def vw_documents() -> dict:
     out["keystone_document"] = _pin_info(pinned) if pinned else None
     out["guard"] = "on" if pin.enabled() else "off (profile: always the document in front)"
     if not docs:
-        out["note"] = ("No document window found. If Vectorworks shows documents, tell the developer: the "
-                       "window list of this Vectorworks version needs adjusting.")
+        out["windows"] = [{"name": w.get("name"), "subrole": w.get("subrole")} for w in ui.get("windows") or []]
+        out["note"] = ("No document is open (start screen?). If Vectorworks shows documents, tell the developer: "
+                       "the window list of this Vectorworks version needs adjusting (see windows).")
     return out
 
 
@@ -142,85 +144,131 @@ def vw_switch_document(document: str, front: bool = False) -> dict:
     return {"document": _pin_info(active), "switched": True, "method": method}
 
 
+# One call must stay well under the ~80 s a call to a linked computer may
+# take; longer work (starting Vectorworks, loading a big file) goes on in
+# Vectorworks and the next call picks it up.
+STEP_S = 50.0
+_PENDING: dict[str, dict] = {}  # file -> {"since", "before"}: handed to Vectorworks, not visible yet
+PENDING_FOR = 180.0  # a file handed over that never shows up: hand it over again after this
+
+
+def _wait_ready(deadline: float) -> dict | None:
+    """Wait until Vectorworks runs long enough and answers macOS; None if the
+    time is up first."""
+    while _clock() < deadline:
+        proc = documents.find_process()
+        if proc is not None and proc["uptime"] >= trig.MIN_UPTIME:
+            try:
+                ui = documents.read_ui(proc["pid"])
+            except DocumentsError:
+                ui = None
+            if ui is not None and ui.get("windows"):
+                return proc
+        _sleep(1.0)
+    return None
+
+
+def _find_new(docs: list[dict], file, template: bool, before: set[str]) -> str | None:
+    if template:
+        new = [d for d in docs if documents.norm(d["name"]) not in before]
+        return new[0]["name"] if new else None
+    hit = [d for d in docs if documents.same_name(d["name"], file.name)]
+    return hit[0]["name"] if hit else None
+
+
 @mcp.tool(annotations=SWITCH)
-def vw_open_document(path: str, front: bool = False, wait_s: float = 90.0) -> dict:
+def vw_open_document(path: str, front: bool = False, wait_s: float = STEP_S) -> dict:
     """Open a Vectorworks file (.vwx) by its full path and work in it from
     now on; a template (.sta) opens as a new untitled document. Starts
-    Vectorworks if needed. A file that is already open is only brought to
-    the front. No dialogs from Keystone - but Vectorworks may ask something
-    itself (e.g. converting a file from an older version): then the user
-    must answer it. front=True brings Vectorworks in front of other apps.
-    wait_s: how long to wait for the document (big files, starting)."""
+    Vectorworks if needed (the version you work with). A file that is
+    already open is only brought to the front. No dialogs from Keystone -
+    but Vectorworks may ask something itself (e.g. converting a file from
+    an older version): then the user must answer it. One call waits at most
+    ~50 s: if the result says status "starting" or "loading", call
+    vw_open_document again with the same path - it goes on from there and
+    never opens the file twice. front=True brings Vectorworks in front of
+    other apps."""
     try:
         file = documents.check_openable(path)
     except DocumentsError as e:
         raise ToolError(str(e)) from e
     template = file.suffix.lower() == ".sta"
-    proc = documents.find_process()
-    before: set[str] = set()
-    if proc is not None:
-        ui = _ui(proc["pid"])
-        _blocked_by(ui)
-        docs = documents.documents_from_ui(ui)
-        before = {documents.norm(d["name"]) for d in docs}
-        same = [d for d in docs if documents.same_name(d["name"], file.name)]
-        if same and not template:
-            active = _active()
-            if not documents.same_name(active.get("name"), same[0]["name"]):
-                active, _method = _switch(proc, same[0]["name"], front)
-            if active.get("path") and not documents.same_file(active["path"], file):
-                raise ToolError("Another file called '%s' is open (%s). Close or rename one of them first."
-                                % (file.name, documents.posix_path(active["path"])))
-            documents.PIN.set(active)
-            return {"document": _pin_info(active), "opened": False, "note": "Was already open; now in front."}
-        bundle = proc.get("bundle")
-    else:
-        bundle = documents.installed_bundle()
-    if not bundle:
-        raise ToolError("Can't find the Vectorworks app to open the file with.")
-    try:
-        documents.open_file(bundle, str(file), front)
-    except DocumentsError as e:
-        raise ToolError(str(e)) from e
+    key = str(file)
+    deadline = _clock() + max(5.0, min(wait_s, STEP_S))
+    pending = _PENDING.get(key)
+    if pending and _clock() - pending["since"] > PENDING_FOR:
+        _PENDING.pop(key, None)
+        pending = None
 
-    deadline = _clock() + max(5.0, wait_s)
-    found = None
-    last_error = None
-    while _clock() < deadline:
+    proc = documents.find_process()
+    if proc is None:
+        bundle = documents.installed_bundle()
+        if not bundle:
+            raise ToolError("Can't find the Vectorworks app to open the file with.")
+        try:
+            documents.open_file(bundle, None, front)  # start it first: a file handed over while it
+        except DocumentsError as e:              # starts may be dropped (start screen)
+            raise ToolError(str(e)) from e
+        app_name = Path(bundle).stem
+        proc = _wait_ready(deadline)
+        if proc is None:
+            return {"status": "starting", "application": app_name,
+                    "note": "Vectorworks is starting. Call vw_open_document again with the same path in about "
+                            "20 s; it goes on from there."}
+    elif proc["uptime"] < trig.MIN_UPTIME:
+        proc = _wait_ready(deadline)
+        if proc is None:
+            return {"status": "starting", "note": "Vectorworks is still starting. Call vw_open_document again "
+                                                  "with the same path in about 20 s."}
+
+    ui = _ui(proc["pid"])
+    _blocked_by(ui)
+    docs = documents.documents_from_ui(ui)
+    before = pending["before"] if pending else {documents.norm(d["name"]) for d in docs}
+    found = _find_new(docs, file, template, before) if (pending or not template) else None
+    if found and not pending and not template:  # was open before this call
+        active = _active()
+        if not documents.same_name(active.get("name"), found):
+            active, _method = _switch(proc, found, front)
+        if active.get("path") and not documents.same_file(active["path"], file):
+            raise ToolError("Another file called '%s' is open (%s). Close or rename one of them first."
+                            % (file.name, documents.posix_path(active["path"])))
+        documents.PIN.set(active)
+        return {"document": _pin_info(active), "opened": False, "note": "Was already open; now in front."}
+
+    if not found and not pending:
+        try:
+            documents.open_file(proc.get("bundle") or documents.installed_bundle() or "", key, front)
+        except DocumentsError as e:
+            raise ToolError(str(e)) from e
+        _PENDING[key] = pending = {"since": _clock(), "before": before}
+
+    while not found and _clock() < deadline:
         _sleep(1.0)
-        proc = documents.find_process()
-        if proc is None or proc["uptime"] < trig.MIN_UPTIME:
-            continue  # still starting
         try:
             ui = documents.read_ui(proc["pid"])
-        except DocumentsError as e:  # busy loading: ask again
-            last_error = str(e)
+        except DocumentsError:  # busy loading: ask again
             continue
         dlg = documents.dialog_of(ui)
         if dlg:
-            raise ToolError("Vectorworks asks something while opening the file ('%s'). Ask the user to answer it "
-                            "(e.g. convert from an older version), then check with vw_documents and call "
-                            "vw_switch_document." % dlg)
-        docs = documents.documents_from_ui(ui)
-        if template:
-            new = [d for d in docs if documents.norm(d["name"]) not in before]
-            found = new[0]["name"] if new else None
-        else:
-            hit = [d for d in docs if documents.same_name(d["name"], file.name)]
-            found = hit[0]["name"] if hit else None
-        if found:
-            break
+            raise ToolError("Vectorworks asks something while opening '%s': %s. Tell the user what it asks; they "
+                            "answer it in Vectorworks. Then call vw_open_document again with the same path."
+                            % (file.name, dlg))
+        found = _find_new(documents.documents_from_ui(ui), file, template, before)
     if not found:
-        raise ToolError("Vectorworks didn't show '%s' within %g s%s. Check Vectorworks (a big file may still be "
-                        "loading), then vw_documents." % (file.name, wait_s, " (%s)" % last_error if last_error else ""))
-    active = _active(VERIFY_CLAIM_S)
+        return {"status": "loading", "file": key,
+                "note": "Vectorworks is still loading '%s'. Call vw_open_document again with the same path in "
+                        "about 20 s (it won't open the file twice), or check with vw_documents." % file.name}
+
+    _PENDING.pop(key, None)
+    active = _active(max(5.0, min(VERIFY_CLAIM_S, deadline - _clock() + 10.0)))
     if not documents.same_name(active.get("name"), found):
         active, _method = _switch(proc, found, front)
     if not template and active.get("path") and not documents.same_file(active["path"], file):
         raise ToolError("Vectorworks opened '%s' but reports the path %s. Check with vw_documents."
                         % (found, documents.posix_path(active["path"])))
     documents.PIN.set(active)
-    out = {"document": _pin_info(active), "opened": True}
+    out = {"document": _pin_info(active), "opened": True, "application": proc["name"]}
     if template:
         out["note"] = "New untitled document from the template; save it under a name when the user wants to keep it."
     return out

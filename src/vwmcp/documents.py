@@ -248,9 +248,14 @@ function run(argv) {
   for (var i = 0; i < ws.length; i++) {
     var w = ws[i], name = null;
     try { name = w.name(); } catch (e) {}
-    out.windows.push({name: str(name), subrole: str(attr(w, "AXSubrole")), document: str(attr(w, "AXDocument")),
-                      main: attr(w, "AXMain") === true, minimized: attr(w, "AXMinimized") === true,
-                      modal: attr(w, "AXModal") === true});
+    var info = {name: str(name), subrole: str(attr(w, "AXSubrole")), document: str(attr(w, "AXDocument")),
+                main: attr(w, "AXMain") === true, minimized: attr(w, "AXMinimized") === true,
+                modal: attr(w, "AXModal") === true};
+    if (info.modal || info.subrole === "AXDialog" || info.subrole === "AXSystemDialog") {
+      try { info.texts = w.staticTexts.value().map(str); } catch (e) {}
+      try { info.buttons = w.buttons.name().map(str); } catch (e) {}
+    }
+    out.windows.push(info);
   }
   try {
     var bar = p.menuBars[0].menuBarItems();
@@ -339,15 +344,20 @@ def run_js(script: str, *args: str, timeout: float = OSA_TIMEOUT,
     return (r.stdout or "").strip()
 
 
+def _root() -> Path:
+    return Path(os.environ.get("VWMCP_HOME", Path.home() / ".vwmcp"))
+
+
 def find_process(processes: Callable[[], list[dict]] | None = None) -> dict | None:
-    """The Vectorworks Keystone talks to (VWMCP_APP preferred), or None."""
+    """The Vectorworks Keystone talks to (VWMCP_APP, else the one it worked
+    with last, else the most recently started), or None."""
     procs = (processes or trig.running_processes)()
     if not procs:
         return None
-    want = trig.configured_app()
-    for p in procs:
-        if want and p["name"] == want:
-            return p
+    for want in (trig.configured_app(), trig.last_app(_root())):
+        for p in procs:
+            if want and p["name"] == want:
+                return p
     return procs[0]
 
 
@@ -363,10 +373,18 @@ def read_ui(pid: int, runner=None) -> dict:
 
 
 def dialog_of(ui: dict) -> str | None:
-    """Title of a dialog Vectorworks shows (it blocks every request), or None."""
+    """A dialog Vectorworks shows (it may block every request): its title,
+    text and buttons in one line, or None."""
     for w in ui.get("windows") or []:
         if w.get("subrole") in ("AXDialog", "AXSystemDialog") or w.get("modal"):
-            return w.get("name") or "(untitled dialog)"
+            parts = [w.get("name") or "untitled dialog"]
+            texts = [t for t in (w.get("texts") or []) if t and t.strip()]
+            if texts:
+                parts.append(" / ".join(t.strip() for t in texts)[:400])
+            buttons = [b for b in (w.get("buttons") or []) if b and b.strip()]
+            if buttons:
+                parts.append("buttons: " + ", ".join(buttons))
+            return " - ".join(parts)
     return None
 
 
@@ -378,7 +396,8 @@ def documents_from_ui(ui: dict) -> list[dict]:
     tail looks like documents it is the list; otherwise the standard
     windows are."""
     std = [w for w in ui.get("windows") or []
-           if w.get("name") and w.get("subrole") in (None, "AXStandardWindow") and not w.get("modal")]
+           if w.get("name") and w.get("subrole") in (None, "AXStandardWindow") and not w.get("modal")
+           and not (norm(w["name"]).startswith("vectorworks") and not looks_like_document(w["name"]))]  # start screen
     std_names = {norm(w["name"]) for w in std}
     tail: list[dict] = []
     for item in reversed(ui.get("menu") or []):
@@ -428,12 +447,13 @@ def switch_window(pid: int, title: str, front: bool, runner=None) -> str:
     return out
 
 
-def open_file(bundle: str, path: str, front: bool,
+def open_file(bundle: str, path: str | None, front: bool,
               runner: Callable[..., subprocess.CompletedProcess] | None = None) -> None:
-    """Hand the file to Vectorworks through Launch Services (no dialog)."""
+    """Hand the file to Vectorworks through Launch Services (no dialog);
+    path=None only starts Vectorworks."""
     if sys.platform != "darwin" and runner is None:
         raise DocumentsError("Opening documents works on macOS only (for now).")
-    args = ["open"] + ([] if front else ["-g"]) + ["-a", bundle, path]
+    args = ["open"] + ([] if front else ["-g"]) + ["-a", bundle] + ([path] if path else [])
     try:
         r = (runner or subprocess.run)(args, capture_output=True, text=True, timeout=30)
     except subprocess.TimeoutExpired:
@@ -442,20 +462,28 @@ def open_file(bundle: str, path: str, front: bool,
         raise DocumentsError("macOS couldn't open the file in Vectorworks: " + (r.stderr or "").strip())
 
 
-def installed_bundle() -> str | None:
-    """Newest installed Vectorworks app (VWMCP_APP preferred), for opening a
-    file while Vectorworks isn't running."""
-    want = trig.configured_app()
-    found = []
-    for base in (Path("/Applications"), Path.home() / "Applications"):
-        if not base.is_dir():
-            continue
-        found.extend(base.glob("Vectorworks 20*/Vectorworks 20*.app"))
-    if want:
-        for app in found:
-            if app.stem == want:
-                return str(app)
-    return str(max(found, key=lambda a: a.stem)) if found else None
+def installed_bundle(found: list[Path] | None = None, tested: list[str] | None = None) -> str | None:
+    """The Vectorworks app to start when it isn't running: the configured one
+    (VWMCP_APP), else the one Keystone worked with last, else the newest
+    version Keystone is tested with, else the newest installed. (Not simply
+    the newest: a 2026 user with 2027 installed must get 2026.)"""
+    if found is None:
+        found = []
+        for base in (Path("/Applications"), Path.home() / "Applications"):
+            if base.is_dir():
+                found.extend(base.glob("Vectorworks 20*/Vectorworks 20*.app"))
+    if not found:
+        return None
+    if tested is None:
+        from vwmcp import app as _app  # late: app imports modules that import this one
+
+        tested = ["Vectorworks " + y for y in _app.TESTED_VW_MAJORS.values()]
+    by_name = {Path(a).stem: a for a in found}
+    for want in (trig.configured_app(), trig.last_app(_root())):
+        if want and want in by_name:
+            return str(by_name[want])
+    ok = [n for n in by_name if n in tested]
+    return str(by_name[max(ok)] if ok else by_name[max(by_name)])
 
 
 def check_openable(path: str) -> Path:

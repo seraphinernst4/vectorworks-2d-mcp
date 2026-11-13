@@ -20,6 +20,15 @@
   im Profil („Mehrere offene Dokumente“: schützen / immer das vordere).
 - `vw_revert_last` nimmt in einem falschen Dokument nichts zurück und behält
   den Schritt; `vw_document_info` zeigt, in welchem Dokument Keystone arbeitet.
+- **Öffnen, wenn Vectorworks nicht läuft:** Keystone startet die Version,
+  mit der du arbeitest (es merkt sich die zuletzt benutzte; sonst die neueste
+  getestete – nicht einfach die neueste installierte, im Test startete sonst
+  2027 statt 2026), wartet, bis Vectorworks bereit ist, und übergibt dann
+  erst die Datei (beim Start übergebene Dateien ließ der Startbildschirm
+  fallen). Ein Aufruf dauert höchstens ~50 s (über die Verbindung zum Mac sind
+  nur ~80 s möglich); braucht es länger, meldet Keystone „starting“/„loading“
+  und der nächste Aufruf macht weiter – die Datei wird nie doppelt geöffnet.
+- Zeigt Vectorworks einen Dialog, nennt Keystone Titel, Text und Knöpfe.
 - macOS fragt beim ersten Wechsel, ob Claude „System Events“ steuern darf;
   dazu braucht Claude die Freigabe unter Bedienungshilfen. Fehlt etwas, sagt
   Claude genau, wo man es einschaltet.

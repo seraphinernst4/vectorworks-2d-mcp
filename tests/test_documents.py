@@ -357,9 +357,12 @@ class FakeMac:
         self.uptime = 3600.0
         self.ignore_background_switch = False
         self.running = True
+        self.drop_while_loading = 0
 
     def ui(self, pid):
         wins = [{"name": n, "subrole": "AXStandardWindow", "main": n == self.vs.doc["name"]} for n in self.docs]
+        if not self.docs:
+            wins.append({"name": "Vectorworks Design Suite 2026", "subrole": "AXStandardWindow", "main": True})
         if self.dialog:
             wins.append({"name": self.dialog, "subrole": "AXDialog", "modal": True})
         menu = [{"name": "Paletten"}, {"name": None}] + [
@@ -376,6 +379,12 @@ class FakeMac:
 
     def open(self, bundle, path, front, runner=None):
         self.opened.append((bundle, path, front))
+        self.running = True
+        if path is None:
+            return  # only started
+        if self.drop_while_loading:
+            self.drop_while_loading -= 1
+            return  # still loading: not visible yet
         name = Path(path).name if not path.endswith(".sta") else "Ohne Titel 1"
         self.docs[name] = path if not path.endswith(".sta") else ""
         self.vs.doc = {"name": name, "path": self.docs[name]}
@@ -488,12 +497,30 @@ def test_open_a_template_makes_a_new_document(mac, vs, tmp_path):
     assert out["document"]["name"] == "Ohne Titel 1" and "template" in out["note"]
 
 
-def test_open_starts_vectorworks(mac, vs, tmp_path):
+def test_open_starts_vectorworks_first_then_hands_over_the_file(mac, vs, tmp_path):
     mac.running = False
+    mac.docs.clear()
     f = tmp_path / "Neu.vwx"
     f.write_text("x")
     out = T.vw_open_document(str(f))
-    assert out["opened"] and mac.opened[0][0].endswith("Vectorworks 2026.app")
+    assert out["opened"] and out["document"]["name"] == "Neu.vwx"
+    bundle = "/Applications/Vectorworks 2026/Vectorworks 2026.app"
+    assert mac.opened == [(bundle, None, False), (bundle, str(f), False)]
+
+
+def test_open_reports_starting_when_vectorworks_takes_long(mac, vs, tmp_path, monkeypatch):
+    mac.running = False
+    real = mac.open
+
+    def slow_start(bundle, path, front, runner=None):
+        real(bundle, path, front)
+        mac.running = False  # not up within this call
+
+    monkeypatch.setattr(documents, "open_file", slow_start)
+    f = tmp_path / "Neu.vwx"
+    f.write_text("x")
+    out = T.vw_open_document(str(f))
+    assert out["status"] == "starting" and "again" in out["note"]
 
 
 def test_open_reports_a_dialog_from_vectorworks(mac, vs, tmp_path, monkeypatch):
@@ -510,12 +537,74 @@ def test_open_reports_a_dialog_from_vectorworks(mac, vs, tmp_path, monkeypatch):
         T.vw_open_document(str(f))
 
 
-def test_open_gives_up_after_wait(mac, vs, tmp_path, monkeypatch):
+def test_a_slow_file_is_picked_up_by_the_next_call_and_never_opened_twice(mac, vs, tmp_path, monkeypatch):
+    monkeypatch.setattr(T, "_PENDING", {})
     f = tmp_path / "Riesig.vwx"
     f.write_text("x")
-    monkeypatch.setattr(documents, "open_file", lambda *a, **kw: None)  # never appears
-    with pytest.raises(ToolError, match="didn't show 'Riesig.vwx' within 10 s"):
-        T.vw_open_document(str(f), wait_s=10)
+    mac.drop_while_loading = 1
+    out = T.vw_open_document(str(f), wait_s=10)
+    assert out["status"] == "loading" and "again" in out["note"]
+    mac.docs["Riesig.vwx"] = str(f)  # Vectorworks finished loading meanwhile
+    vs.doc = {"name": "Riesig.vwx", "path": str(f)}
+    out = T.vw_open_document(str(f))
+    assert out["opened"] and out["document"]["name"] == "Riesig.vwx"
+    assert [o[1] for o in mac.opened] == [str(f)]  # handed over once
+
+
+def test_one_call_stays_under_the_remote_limit(mac, vs, tmp_path, monkeypatch):
+    monkeypatch.setattr(T, "_PENDING", {})
+    f = tmp_path / "Riesig.vwx"
+    f.write_text("x")
+    mac.drop_while_loading = 1
+    start = T._clock()
+    T.vw_open_document(str(f), wait_s=600)
+    assert T._clock() - start <= T.STEP_S + 1
+
+
+def test_dialog_text_and_buttons_are_reported():
+    ui = {"windows": [{"name": None, "subrole": "AXDialog", "texts": ["Vectorworks-Bibliotheken aktualisieren",
+                                                                    "Die Liste ... ist nicht mehr aktuell."],
+                       "buttons": ["Schließen", "Aktualisieren"]}]}
+    d = documents.dialog_of(ui)
+    assert d.startswith("untitled dialog - Vectorworks-Bibliotheken") and "buttons: Schließen, Aktualisieren" in d
+
+
+def test_start_screen_is_no_document():
+    ui = {"windows": [{"name": "Vectorworks Design Suite 2027", "subrole": "AXStandardWindow", "main": True}],
+          "menu": [{"name": "Paletten"}]}
+    assert documents.documents_from_ui(ui) == []
+
+
+def test_start_the_version_the_user_works_with(monkeypatch, tmp_path):
+    monkeypatch.setenv("VWMCP_HOME", str(tmp_path))
+    monkeypatch.delenv("VWMCP_APP", raising=False)
+    apps = [Path("/Applications/Vectorworks 2026/Vectorworks 2026.app"),
+            Path("/Applications/Vectorworks 2027/Vectorworks 2027.app")]
+    tested = ["Vectorworks 2026"]
+    assert documents.installed_bundle(apps, tested).endswith("Vectorworks 2026.app")  # newest tested
+    assert documents.installed_bundle(apps, []).endswith("Vectorworks 2027.app")  # nothing tested: newest
+    trig.remember_app(tmp_path, "Vectorworks 2027")
+    assert documents.installed_bundle(apps, tested).endswith("Vectorworks 2027.app")  # the one used last
+    monkeypatch.setenv("VWMCP_APP", "Vectorworks 2026")
+    assert documents.installed_bundle(apps, tested).endswith("Vectorworks 2026.app")  # configured wins
+    assert documents.installed_bundle([], tested) is None
+
+
+def test_trigger_remembers_the_vectorworks_it_talks_to(tmp_path):
+    t = trig.MacTrigger(tmp_path, apps=lambda: [("Vectorworks 2026", 100.0)], spawn=lambda a: None, min_uptime=0)
+    t._reap = lambda: None
+    t()
+    assert trig.last_app(tmp_path) == "Vectorworks 2026"
+
+
+def test_find_process_prefers_the_last_used_version(monkeypatch, tmp_path):
+    monkeypatch.setenv("VWMCP_HOME", str(tmp_path))
+    monkeypatch.delenv("VWMCP_APP", raising=False)
+    procs = [{"name": "Vectorworks 2027", "pid": 2, "uptime": 5.0, "bundle": "b27"},
+             {"name": "Vectorworks 2026", "pid": 1, "uptime": 50.0, "bundle": "b26"}]
+    assert documents.find_process(lambda: procs)["pid"] == 2
+    trig.remember_app(tmp_path, "Vectorworks 2026")
+    assert documents.find_process(lambda: procs)["pid"] == 1
 
 
 def test_tools_are_registered():
