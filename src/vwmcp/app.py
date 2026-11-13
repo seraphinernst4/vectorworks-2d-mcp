@@ -122,6 +122,11 @@ SEVERAL DOCUMENTS (open files):
   vw_open_document opens a file by its path (.vwx; a .sta template opens as
   a new untitled document). Switch on your own when the task needs another
   file (copy from A to B, compare, work through several plans) and say so.
+- Keystone works in the background: Vectorworks may stay behind the user's
+  other apps, nothing needs to be in view. Don't pass front=True unless the
+  user wants to see Vectorworks. (Inside Vectorworks a script always runs in
+  the document that is in front there - Vectorworks' own limit - so working
+  in one document while the user draws in another isn't possible.)
 - Keystone stays in the document it works in: when a different one is in
   front (the user clicked another), calls stop with "WRONG DOCUMENT" before
   anything runs. If the user's latest message is about the document now in

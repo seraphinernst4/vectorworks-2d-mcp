@@ -446,11 +446,20 @@ def test_switch_brings_the_document_to_front_and_pins_it(mac, vs, pin):
     assert vs.touched == ["Detail.vwx"]
 
 
-def test_switch_retries_with_vectorworks_in_front(mac, vs):
+def test_switch_stays_in_the_background(mac, vs):
     mac.ignore_background_switch = True
-    out = T.vw_switch_document("Detail.vwx")
-    assert mac.switches == [("Detail.vwx", False), ("Detail.vwx", True)]
-    assert "front" in out["method"]
+    with pytest.raises(ToolError, match="front=True"):
+        T.vw_switch_document("Detail.vwx")
+    assert mac.switches == [("Detail.vwx", False), ("Detail.vwx", False)]  # never brought forward on its own
+    out = T.vw_switch_document("Detail.vwx", front=True)  # only when asked
+    assert mac.switches[-1] == ("Detail.vwx", True) and "front" in out["method"]
+
+
+def test_open_stays_in_the_background(mac, vs, tmp_path):
+    f = tmp_path / "Hinten.vwx"
+    f.write_text("x")
+    T.vw_open_document(str(f))
+    assert all(front is False for _b, _p, front in mac.opened) and all(not fr for _t, fr in mac.switches)
 
 
 def test_switch_to_the_document_in_front_only_takes_it_over(mac, vs, pin):

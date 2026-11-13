@@ -82,6 +82,11 @@ permission for the calling app.
   Fenster vergrößern, Dokument-Reiter anzeigen, Aktives Dokument lösen, then
   the open documents.
 - `GetFPathName` returns a POSIX path on 2026 (macOS).
+- Live (0.8.0, VW 2026, two real documents): `vw_switch_document` via AXPress
+  on the Window-menu entry works with Vectorworks in the background (it does
+  not come forward); a switch made by the user (menu) makes the next guarded
+  call stop with WRONG DOCUMENT before anything runs; taking over the front
+  document moves nothing; `vw_open_document` on an open file only switches.
 - `open -a "Vectorworks 2027.app" file` while 2027 wasn't running: the start
   screen came up and the file was not opened. Start first, then hand over.
   2027 shows an untitled "Vectorworks-Bibliotheken aktualisieren" notice

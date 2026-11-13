@@ -35,6 +35,11 @@
   Neustart von Vectorworks und nach einer Pause über die Fensterliste, ob ein
   Dokument offen ist, und schickt sonst nichts. (Braucht die Freigabe unter
   Bedienungshilfen; ohne sie warnt `vw_ping`.)
+- **Immer im Hintergrund:** Wechseln und Öffnen holen Vectorworks nicht vor
+  deine anderen Programme (live geprüft: Wechsel über das Fenster-Menü im
+  Hintergrund). Nach vorne kommt es nur, wenn du es sehen willst. Grenze von
+  Vectorworks: Ein Skript läuft immer im Dokument, das *in Vectorworks* vorne
+  ist – gleichzeitig in einem anderen Dokument selbst zeichnen geht nicht.
 - **Studentenlizenzen:** Fenstertitel wie „Plan.vwx - AUSBILDUNGSVERSION -
   DOKUMENT MIT WASSERZEICHEN“ werden erkannt.
 - Zeigt Vectorworks einen Dialog, nennt Keystone Titel, Text und Knöpfe.

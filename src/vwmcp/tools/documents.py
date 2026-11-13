@@ -98,26 +98,29 @@ def vw_documents() -> dict:
 
 
 def _switch(proc: dict, doc: dict, front: bool) -> tuple[dict, str]:
-    """Bring the document's window to the front and verify it inside
-    Vectorworks; one retry with Vectorworks brought to the front."""
+    """Bring the document's window to the front inside Vectorworks and verify
+    it there. Vectorworks itself stays behind the user's apps unless
+    front=True: Keystone works in the background (the user's wish)."""
     title, name = doc.get("title") or doc["name"], doc["name"]
     tried = []
-    for bring in ([front] if front else [False, True]):
+    active = {}
+    for attempt in range(2):  # a second background try: the first switch may still be on its way
         try:
-            method = documents.switch_window(proc["pid"], title, bring)
+            method = documents.switch_window(proc["pid"], title, front)
         except DocumentsError as e:
             raise ToolError(str(e)) from e
         tried.append(method)
         if method == "not_found":
             raise ToolError("Vectorworks has no window '%s' any more (closed meanwhile?). Check with vw_documents."
                             % name)
-        _sleep(0.3)
+        _sleep(0.3 if attempt == 0 else 1.0)
         active = _active(VERIFY_CLAIM_S)
         if documents.same_name(active.get("name"), name):
-            return active, method + (" (Vectorworks brought to the front)" if bring else "")
-    raise ToolError("Asked macOS to bring '%s' to the front (%s), but Vectorworks still works in '%s'. Ask the user "
-                    "to click the document once, then call vw_switch_document again."
-                    % (name, ", ".join(tried), active.get("name")))
+            return active, method + (" (Vectorworks brought in front of other apps)" if front else "")
+    hint = ("" if front else " In the background it didn't work: ask the user whether Keystone may bring "
+            "Vectorworks in front of their apps (front=True), or to click the document once.")
+    raise ToolError("Asked macOS to bring '%s' to the front in Vectorworks (%s), but Vectorworks still works in '%s'.%s"
+                    % (name, ", ".join(tried), active.get("name"), hint))
 
 
 @mcp.tool(annotations=SWITCH)
@@ -127,8 +130,8 @@ def vw_switch_document(document: str, front: bool = False) -> dict:
     is fine, or its path). Checked inside Vectorworks afterwards. If it is
     already in front, Keystone just takes it over (nothing moves) - that is
     the answer to WRONG DOCUMENT when the user switched on purpose.
-    front=True also brings the Vectorworks app in front of other apps
-    (default: the user's focus stays where it is)."""
+    Works in the background: Vectorworks stays behind the user's apps.
+    front=True brings it forward - only when the user wants to see it."""
     proc = _process()
     ui = _ui(proc["pid"])
     _blocked_by(ui)
@@ -188,8 +191,8 @@ def vw_open_document(path: str, front: bool = False, wait_s: float = STEP_S) -> 
     an older version): then the user must answer it. One call waits at most
     ~50 s: if the result says status "starting" or "loading", call
     vw_open_document again with the same path - it goes on from there and
-    never opens the file twice. front=True brings Vectorworks in front of
-    other apps."""
+    never opens the file twice. Works in the background: Vectorworks stays
+    behind the user's apps; front=True only when the user wants to see it."""
     try:
         file = documents.check_openable(path)
     except DocumentsError as e:
