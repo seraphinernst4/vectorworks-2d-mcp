@@ -3,7 +3,7 @@
 Mac-native MCP server for exact, well-organised 2D drawing in Vectorworks.
 Fork of https://github.com/giorgiomoroder/vectorworks-mcp (MIT), repo
 https://github.com/seraphinernst4/vectorworks-2d-mcp. Status: **v0.7.0
-beta**, tested on Vectorworks 2026 Update 7 (German) on macOS; Vectorworks
+beta** (0.8.0: several documents), tested on Vectorworks 2026 Update 7 (German) on macOS; Vectorworks
 2027 prepared (Python 3.14), not live-tested. Read `docs/architecture.md`,
 `docs/api-pitfalls.md` and `docs/vs-notes.md` before changing anything that
 touches Vectorworks.
@@ -70,6 +70,31 @@ touches Vectorworks.
   full fingerprint (geometry, vertex types, attributes, order) before and
   after revert. Start it detached and don't send Vectorworks requests while
   it runs.
+
+## Several documents (0.8)
+
+- `src/vwmcp/documents.py`: no `vs.*` function lists, switches or opens
+  documents, and every script runs in the document in front. Listing and
+  switching go through macOS UI scripting from the **server** (JXA +
+  System Events: windows of the Vectorworks pid, Window menu "Fenster"/
+  "Window" - its tail after the last separator lists all documents, also
+  background tabs; switch = AXPress on that menu item, else AXRaise/AXMain);
+  opening through `open [-g] -a <Vectorworks.app> file`. Never from inside
+  Vectorworks (a script waiting for Vectorworks' own UI blocks it). Every
+  switch/open is verified with a short unguarded job (GetFName /
+  GetFPathName, `claim_timeout` 30 s). Needs Automation (System Events) and
+  Accessibility for Claude; `explain_osa_error` names the setting.
+- The pin (`documents.PIN`, set as `Bridge.guard` in `app.get_bridge`):
+  `prepare()` returns a generated helper library that runs first in the job
+  and raises `WrongDocument` when another document is in front (compares
+  Vectorworks' answers with its answers at pin time: same path format, NFC,
+  casefold); `finish()` turns that into `client.WrongDocument`
+  (`never_ran=True`). The first call after `PIN_IDLE` (900 s) without calls
+  pins the document in front (one extra short job). Unguarded: `vw_ping`,
+  `vw_document_info`, live `vw_vs_lookup`, bridge reload, the document tools.
+  Profile `documents: follow` or `VWMCP_DOC_GUARD=0` turn it off.
+- Live-tested parts and open questions (window titles, Window menu layout,
+  tabs, behaviour of `open` on an open file): record in `docs/vs-notes.md`.
 
 ## Planning (0.6, Raumpilot knowledge)
 

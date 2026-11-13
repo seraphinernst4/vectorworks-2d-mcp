@@ -31,6 +31,7 @@ bevor du sie siehst.
 | **Stil** | Gezeichnet wird zuerst im Raumpilot-Stil (schlichte Umrisse, Bewegungsflächen hellblau). Das ist nur die erste Ebene: Du legst deinen Bürostil fest (Klassen, Farben, Bewegungsflächen an/aus) und ordnest jedem Element **eure eigenen Symbole** zu – auch aus einer Bibliotheksdatei. |
 | **Ansichten** | Detaillierte Symbole für Ansichten und Schnitte (Sanitär, Möbel, Bäume, Personen, Fahrzeuge). |
 | **Importe bereinigen** | DWG/DXF ohne Dialog importieren und aufnehmen: was angekommen ist, was Vectorworks weggelassen hat (z. B. Kreise und Ringe aus Rhino) und wie zerstückelt die Zeichnung ist. Lose Make2D-/VectorView-Stücke zu Linienzügen verbinden, organische Formen ausdünnen, ohne sie zu verändern (Vorher-Nachher-Bild), gruppieren, nach Bereich in Klassen sortieren, Schnitte mit eigener Prüfvorgabe prüfen. |
+| **Mehrere Dokumente** | Claude sieht, welche Vectorworks-Dateien offen sind, wechselt selbst zwischen ihnen und öffnet Dateien (auch Vorlagen als neues Dokument) – z. B. um etwas aus einem Plan in einen anderen zu übernehmen oder mehrere Pläne nacheinander zu bearbeiten. Jeder Wechsel wird in Vectorworks geprüft. **Schutz:** Klickst du während der Arbeit ein anderes Dokument an, hält Claude an, statt im falschen Dokument weiterzuzeichnen. |
 | **Dein Profil** | Wie Claude arbeitet, stellst du ein: Detailtreue, Teile vereinigen ja/nein/fragen, Flächen, Bögen, Klassen, Attribute, Prüfmodus, ab wie vielen Objekten erst nachgefragt wird, Toleranzen und eigene Regeln in deinen Worten. Was du im Chat verlangst, geht immer vor. |
 | **Rückgängig** | `vw_revert_last` macht genau den letzten Schritt von Claude rückgängig (Geometrie, Attribute, Klasse, Name, Stapelreihenfolge – auch Import, Verbinden, Vereinfachen, Gruppieren). |
 
@@ -155,7 +156,8 @@ Alle Werkzeuge: `vw2d_read`, `vw2d_structure`, `vw2d_resources`, `vw2d_setup`,
 `vw2d_set_attributes`, `vw2d_delete`, `vw2d_check`, `vw2d_preview`,
 `vw2d_fix`, `vw2d_select`, `vw2d_organize`, `vw2d_assets`,
 `vw2d_place_asset`, `vw2d_import`, `vw2d_join`, `vw2d_simplify`,
-`vw2d_group`, `vw2d_profile`, die Planungswerkzeuge `vw2d_knowledge`,
+`vw2d_group`, `vw2d_profile`, für mehrere Dokumente `vw_documents`,
+`vw_switch_document`, `vw_open_document`, die Planungswerkzeuge `vw2d_knowledge`,
 `vw2d_plan_room`, `vw2d_check_room`, `vw2d_place_element`, `vw2d_style`,
 dazu `vw_update` und aus dem Original `vw_ping`,
 `vw_document_info`, `vw_list_layers`, `vw_list_classes`, `vw_get_selection`,
@@ -173,6 +175,15 @@ dazu `vw_update` und aus dem Original `vw_ping`,
   15 Sekunden an (meist, weil ein Dialog offen ist), bricht Claude ihn ab –
   und er läuft garantiert **nicht** später nach, wenn du den Dialog
   schließt. Dialog schließen, nochmal fragen.
+- **Mehrere Dokumente:** Claude arbeitet immer im vorderen Dokument und
+  merkt sich, in welchem es gerade arbeitet. Holst du währenddessen ein
+  anderes nach vorne, bricht der nächste Auftrag ab, bevor er etwas
+  verändert; Claude wechselt dann zurück oder übernimmt dein Dokument, wenn
+  du es so meinst. Nach 15 Minuten Pause gilt wieder einfach das vordere
+  Dokument. Wer das nicht will: im Profil „Mehrere offene Dokumente“ auf
+  „Immer im gerade vorderen Dokument arbeiten“ stellen. Zum Wechseln und
+  Öffnen fragt macOS beim ersten Mal, ob Claude „System Events“ steuern darf,
+  und Claude braucht die Freigabe unter Bedienungshilfen (siehe Fehlersuche).
 - **Lange Aufträge** (z. B. eine Prüfung großer Pläne): Hat Vectorworks einen
   Auftrag angenommen, wartet Claude bis zu 10 Minuten auf das Ergebnis.
   Gemessen mit 10 000 Objekten: prüfen 2,4 s, Duplikate löschen 5 s,
@@ -213,6 +224,8 @@ GitHub nach der Versionsnummer – ohne Daten von dir; abschalten mit
 | Fenster „Skriptfehler“ in Vectorworks | Selten geworden (falsche Argumente fängt Keystone ab). OK klicken und Claude bitten, es anders zu versuchen. |
 | `vw_ping` warnt wegen der Brücken-Version | Nochmal pingen (Keystone lädt die neue Brücke selbst nach); hilft das nicht, Vectorworks neu starten. |
 | Werkzeuge doppelt („vectorworks“ und „Keystone for Vectorworks“) | Terminal-Installer einmal ausführen – er entfernt den alten Eintrag. |
+| „WRONG DOCUMENT“ | Ein anderes Dokument ist vorne als das, in dem Claude arbeitet. Nichts wurde verändert; Claude wechselt zurück oder übernimmt das vordere, wenn du das sagst. |
+| Dokumente wechseln/öffnen: „System Events“ oder „Bedienungshilfen“ | Systemeinstellungen ▸ Datenschutz & Sicherheit ▸ Automation ▸ Claude: „System Events“ an; und ▸ Bedienungshilfen: Claude an (danach evtl. Claude neu starten). |
 | Keine macOS-Nachfrage, nichts passiert | Systemeinstellungen ▸ Datenschutz & Sicherheit ▸ Automation: Claude darf Vectorworks steuern. |
 
 ## Für Entwickler

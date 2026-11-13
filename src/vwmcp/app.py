@@ -66,7 +66,8 @@ EXACT 2D DRAWING (vw2d_* tools):
 - Workflow: 1) vw2d_structure / vw2d_read to understand the drawing,
   2) draw/edit, 3) check and fix as the profile's check mode says,
   4) show the result (vw2d_preview, vw2d_select) so the user sees it.
-- Work in the document that is open; 2D tasks stay 2D.
+- Work in the document that is open (another one only when the user names
+  it: see SEVERAL DOCUMENTS); 2D tasks stay 2D.
 - Sorting a drawing onto classes/layers: vw2d_structure, then vw2d_organize
   with rules as a dry run (match by class, kind, size, area, bbox...), show
   what would change and what stays unmatched, refine, then apply.
@@ -113,6 +114,20 @@ PLANNING (Raumpilot knowledge: what space things need, standard situations):
   library file). Never change a user's style without being asked.
 - Elevations/sections of furniture, sanitary objects, trees, people and
   cars: vw2d_assets / vw2d_place_asset (view "front" / "side").
+
+SEVERAL DOCUMENTS (open files):
+- Every call works in the document that is in front in Vectorworks.
+  vw_documents lists the open ones (which is in front, which one Keystone
+  works in); vw_switch_document brings another open one to the front;
+  vw_open_document opens a file by its path (.vwx; a .sta template opens as
+  a new untitled document). Switch on your own when the task needs another
+  file (copy from A to B, compare, work through several plans) and say so.
+- Keystone stays in the document it works in: when a different one is in
+  front (the user clicked another), calls stop with "WRONG DOCUMENT" before
+  anything runs. If the user's latest message is about the document now in
+  front, take it over with vw_switch_document (nothing moves) and go on;
+  otherwise switch back and tell the user. Never edit a document the user
+  didn't mean. vw_revert_last works per document.
 
 GENERAL
 - Vectorworks merges back-to-back MCP edits into one Cmd-Z step, so to undo
@@ -189,7 +204,11 @@ mcp = KeystoneServer(DISPLAY_NAME, title=DISPLAY_NAME, instructions=INSTRUCTIONS
 
 @functools.cache
 def get_bridge() -> Bridge:
-    return Bridge()
+    from vwmcp import documents
+
+    b = Bridge()
+    b.guard = documents.PIN  # every call checks that Keystone's document is in front
+    return b
 
 
 @functools.cache
@@ -197,20 +216,21 @@ def get_journal() -> Journal:
     return Journal(get_bridge().root / "journal.jsonl")
 
 
-def vw(fn: str, **kwargs):
-    """Call a vwlib helper, mapping failures to MCP tool errors."""
+def vw(fn: str, *, _guarded: bool = True, **kwargs):
+    """Call a vwlib helper, mapping failures to MCP tool errors.
+    _guarded=False: also in another document than Keystone's (reports only)."""
     try:
-        return calls.call(get_bridge(), fn, **kwargs)
+        return calls.call(get_bridge(), fn, _guarded=_guarded, **kwargs)
     except calls.VWError as e:
         raise ToolError(f"{e}\n\n{e.traceback}".strip()) from e
     except BridgeError as e:
         raise ToolError(str(e)) from e
 
 
-def vw2d(fn: str, timeout: float | None = None, **kwargs):
+def vw2d(fn: str, timeout: float | None = None, *, _guarded: bool = True, **kwargs):
     """Call a vwlib2d helper (2D tools), mapping failures to MCP tool errors."""
     try:
-        return calls.call2d(get_bridge(), fn, timeout=timeout, **kwargs)
+        return calls.call2d(get_bridge(), fn, timeout=timeout, _guarded=_guarded, **kwargs)
     except calls.VWError as e:
         raise ToolError(f"{e}\n\n{e.traceback}".strip()) from e
     except BridgeError as e:

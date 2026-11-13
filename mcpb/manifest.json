@@ -72,6 +72,9 @@
     { "name": "vw2d_style", "description": "The drawing style: Raumpilot look as first layer, your office's classes, colours and own symbols on top." },
     { "name": "vw2d_assets", "description": "Detailed symbols for elevations and sections (sanitary, furniture, trees, people, cars)." },
     { "name": "vw2d_place_asset", "description": "Places those symbols exactly, oriented to the wall." },
+    { "name": "vw_documents", "description": "Lists the open documents: which one is in front, which one Claude works in." },
+    { "name": "vw_switch_document", "description": "Switches to another open document (checked in Vectorworks)." },
+    { "name": "vw_open_document", "description": "Opens a Vectorworks file or template by its path." },
     { "name": "vw_revert_last", "description": "Undoes exactly Claude's last step." },
     { "name": "vw_ping", "description": "Checks the connection to Vectorworks (and whether a newer Keystone is out)." },
     { "name": "vw_update", "description": "Finds the newest Keystone, downloads it and opens the install dialog." }

@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.8.0 – 13.11.2026
+
+- **Mehrere Dokumente:** Claude sieht die offenen Vectorworks-Dateien
+  (`vw_documents`), wechselt selbst zwischen ihnen (`vw_switch_document`)
+  und öffnet Dateien über ihren Pfad (`vw_open_document`; eine `.sta`-Vorlage
+  wird ein neues, unbenanntes Dokument; startet Vectorworks bei Bedarf). Die
+  Skript-Schnittstelle von Vectorworks kann das nicht – Keystone geht über
+  macOS (Fenster-Menü/Fenster über „System Events“, Öffnen über Launch
+  Services) und prüft danach in Vectorworks, ob wirklich das richtige
+  Dokument vorne ist. Dein Fokus bleibt, wo er ist (Vectorworks kommt nur
+  nach vorne, wenn es anders nicht geht oder du es willst).
+- **Schutz vor dem falschen Dokument:** Keystone merkt sich, in welchem
+  Dokument es arbeitet. Jeder Auftrag prüft in Vectorworks zuerst, ob genau
+  dieses Dokument vorne ist, und bricht sonst ab, bevor irgendetwas läuft
+  („WRONG DOCUMENT“). Vorher landeten Änderungen im gerade angeklickten
+  Dokument, wenn man während der Arbeit kurz in eine andere Datei schaute.
+  Nach 15 Minuten ohne Auftrag gilt wieder das vordere Dokument. Einstellbar
+  im Profil („Mehrere offene Dokumente“: schützen / immer das vordere).
+- `vw_revert_last` nimmt in einem falschen Dokument nichts zurück und behält
+  den Schritt; `vw_document_info` zeigt, in welchem Dokument Keystone arbeitet.
+- macOS fragt beim ersten Wechsel, ob Claude „System Events“ steuern darf;
+  dazu braucht Claude die Freigabe unter Bedienungshilfen. Fehlt etwas, sagt
+  Claude genau, wo man es einschaltet.
+
 ## 0.7.0 – 04.11.2026
 
 Anlass: Eine Kommilitonin ließ einen Rhino-Schnitt bereinigen (Linienstärken,

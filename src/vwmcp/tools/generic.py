@@ -35,9 +35,9 @@ result = [{"name": n, "doc": d} for _, n, d in _hits[: _q["limit"]]]
 """
 
 
-def _run_raw(code: str) -> dict:
+def _run_raw(code: str, guarded: bool = True) -> dict:
     try:
-        return app.get_bridge().run(code)
+        return app.get_bridge().run(code, **({} if guarded else {"guarded": False}))
     except BridgeError as e:
         raise ToolError(str(e)) from e
 
@@ -46,13 +46,13 @@ def _run_raw(code: str) -> dict:
 def vw_ping() -> dict:
     """Check the Vectorworks bridge: returns Vectorworks version, active document
     and bridge version. Warns if the installed bridge doesn't match this server."""
-    res = _run_raw(PING_CODE)
+    res = _run_raw(PING_CODE, guarded=False)
     if res.get("ok") and res.get("bridge_version") != app.EXPECTED_BRIDGE_VERSION:
         # an old bridge still in memory: reload it now, then ask again
         bridge = app.get_bridge()
         calls.maybe_reload(bridge)
         if bridge.bridge_version == app.EXPECTED_BRIDGE_VERSION:
-            res = _run_raw(PING_CODE)
+            res = _run_raw(PING_CODE, guarded=False)
     if not res["ok"]:
         raise ToolError(res["error"])
     out = {
@@ -225,7 +225,7 @@ def vw_vs_lookup(query: str, limit: int = 25, live: bool = False) -> list[dict]:
     hits = [] if live else lookup_index(query, limit)
     if hits:
         return hits
-    res = _run_raw(LOOKUP_CODE % __import__("json").dumps({"query": query, "limit": limit}))
+    res = _run_raw(LOOKUP_CODE % __import__("json").dumps({"query": query, "limit": limit}), guarded=False)
     if not res["ok"]:
         raise ToolError(res["error"])
     return [dict(r, source="live") for r in res["value"]]
@@ -233,8 +233,21 @@ def vw_vs_lookup(query: str, limit: int = 25, live: bool = False) -> list[dict]:
 
 @mcp.tool(annotations=READ)
 def vw_document_info() -> dict:
-    """Active document: name, path, units, active layer/class, counts, selection size."""
-    return vw("document_info")
+    """Active document: name, path, units, active layer/class, counts, selection
+    size - and keystone_document, the document Keystone works in (if it
+    differs, other calls stop; see vw_documents / vw_switch_document)."""
+    from vwmcp import documents
+
+    info = vw("document_info", _guarded=False)
+    pinned = documents.PIN.current() if documents.PIN.enabled() else None
+    if pinned:
+        info["keystone_document"] = pinned["name"] or pinned["path"]
+        same = (documents.norm(pinned["path"]) == documents.norm(info.get("path"))
+                if pinned["path"] and info.get("path") else documents.norm(pinned["name"]) == documents.norm(info.get("name")))
+        if not same:
+            info["note"] = ("Keystone works in '%s', but '%s' is in front: other calls stop until you switch "
+                            "(vw_switch_document)." % (documents.label(pinned), info.get("name")))
+    return info
 
 
 @mcp.tool(annotations=READ)

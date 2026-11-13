@@ -127,6 +127,20 @@ SETTINGS: dict[str, dict[str, Any]] = {
         "en": ("Simplifying allows {v} mm deviation on paper (times the layer scale: {v} mm at 1:100 = "
                "{v100} mm real); pass a different tolerance when the user asks."),
     },
+    "documents": {
+        "default": "guard",
+        "de": "Mehrere offene Dokumente",
+        "choices": {
+            "guard": ("Keystone stays in the document it works in: while another document is in front, calls stop "
+                      "with WRONG DOCUMENT (nothing runs). You may switch documents and open files yourself when "
+                      "the task needs it (vw_switch_document, vw_open_document).",
+                      "Im begonnenen Dokument bleiben; ist ein anderes vorne, hält Keystone an"),
+            "follow": ("Keystone always works in the document that is in front, also if it changed meanwhile; "
+                       "check with vw_document_info before edits in a longer task. You may switch documents and "
+                       "open files yourself when the task needs it.",
+                       "Immer im gerade vorderen Dokument arbeiten (kein Schutz)"),
+        },
+    },
     "rules": {
         "default": [],
         "type": "list",

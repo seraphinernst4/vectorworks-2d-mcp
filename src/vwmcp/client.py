@@ -52,6 +52,18 @@ class TriggerError(BridgeError):
     pass
 
 
+class WrongDocument(BridgeError):
+    """A guarded job found another document in front than the one Keystone
+    works in. The guard runs before the job: nothing ran, nothing changed."""
+
+    never_ran = True
+
+    def __init__(self, message: str, active: dict | None = None, expected: dict | None = None):
+        super().__init__(message)
+        self.active = active or {}
+        self.expected = expected or {}
+
+
 def _version_tuple(v: str | None) -> tuple:
     try:
         return tuple(int(x) for x in str(v).split("."))
@@ -87,6 +99,9 @@ class Bridge:
         self._libs: dict[str, dict] = {}
         self.last_timing: dict = {}
         self._housekept = 0.0
+        # document guard (vwmcp.documents.DocumentPin): prepare(bridge) -> guard
+        # source or None, finish(result) raises WrongDocument. None: no guard.
+        self.guard = None
 
     # ------------------------------------------------------------ helpers
 
@@ -145,17 +160,33 @@ class Bridge:
     # ---------------------------------------------------------------- run
 
     def run(self, code: str, timeout: float | None = None, libs: list[dict] | None = None,
-            check: bool = True) -> dict:
+            check: bool = True, guarded: bool = True, claim_timeout: float | None = None) -> dict:
         """Run code inside Vectorworks; return the bridge's result dict.
-        libs: helper libraries (see lib_ref) executed before the code."""
+        libs: helper libraries (see lib_ref) executed before the code.
+        guarded: with a document guard set, the job first checks inside
+        Vectorworks that Keystone's document is the active one (else
+        WrongDocument, nothing ran). claim_timeout: wait this long for
+        Vectorworks to take the job (default self.claim_timeout)."""
         timeout = self.timeout if timeout is None else timeout
+        guard = self.guard if guarded else None
+        # outside the lock: preparing may run a short unguarded job itself
+        guard_src = guard.prepare(self) if guard is not None else None
         with self._lock:
             if time.time() - self._housekept > 600:
                 with contextlib.suppress(OSError):
                     self.housekeep()
-            return self._run_locked(code, timeout, libs, check)
+            if guard_src:
+                if self.supports_libs():
+                    libs = [self.lib_ref("keystone_guard", guard_src), *(libs or [])]
+                else:
+                    code = guard_src + "\n" + code
+            res = self._run_locked(code, timeout, libs, check, claim_timeout)
+        if guard is not None:
+            guard.finish(res)
+        return res
 
-    def _run_locked(self, code: str, timeout: float, libs: list[dict] | None, check: bool) -> dict:
+    def _run_locked(self, code: str, timeout: float, libs: list[dict] | None, check: bool,
+                    claim_timeout: float | None = None) -> dict:
         self.jobs.mkdir(parents=True, exist_ok=True)
         self.results.mkdir(parents=True, exist_ok=True)
         job_id = self._new_job_id()
@@ -165,7 +196,7 @@ class Bridge:
         # ttl: the bridge refuses jobs older than this (orphans of a crashed
         # server); generous, so it never refuses a job we still wait for.
         job = {"id": job_id, "code": code, "created": created,
-               "ttl": self.claim_timeout + 60, "protocol": 2}
+               "ttl": (self.claim_timeout if claim_timeout is None else claim_timeout) + 60, "protocol": 2}
         if libs:
             job["libs"] = libs
         if not check:
@@ -187,7 +218,8 @@ class Bridge:
             claimed_at = time.monotonic()
 
         # 1. wait for the claim (or a result, if it was quick)
-        claim_deadline = t0 + self.claim_timeout
+        claim_timeout = self.claim_timeout if claim_timeout is None else claim_timeout
+        claim_deadline = t0 + claim_timeout
         last_fire = t0
         while claimed_at is None:
             if result_path.exists() or not job_path.exists():  # done, or renamed to .working
@@ -196,10 +228,10 @@ class Bridge:
             now = time.monotonic()
             # wall clock too: monotonic time stands still while the Mac sleeps,
             # the bridge's ttl check doesn't
-            if now >= claim_deadline or time.time() - created >= self.claim_timeout:
+            if now >= claim_deadline or time.time() - created >= claim_timeout:
                 if self._cancel(job_path):
-                    msg = self._not_claimed_message()
-                    self.log(f"not claimed in {self.claim_timeout:g}s, cancelled {job_id}: {msg}")
+                    msg = self._not_claimed_message(claim_timeout)
+                    self.log(f"not claimed in {claim_timeout:g}s, cancelled {job_id}: {msg}")
                     err = BridgeTimeout(msg)
                     err.never_ran = True
                     raise err
@@ -251,19 +283,20 @@ class Bridge:
         probe = getattr(self.trigger, "in_flight", None)
         return bool(probe()) if callable(probe) else False
 
-    def _not_claimed_message(self) -> str:
+    def _not_claimed_message(self, claim_timeout: float | None = None) -> str:
+        claim_timeout = self.claim_timeout if claim_timeout is None else claim_timeout
         probe = getattr(self.trigger, "pending_for", None)
         stuck = probe() if callable(probe) else 0.0
         if stuck and stuck > 5:
             return (
-                f"Vectorworks did not take the request within {self.claim_timeout:g}s: it has "
+                f"Vectorworks did not take the request within {claim_timeout:g}s: it has "
                 "not answered for a while, so a dialog is probably open (or it is busy). "
                 "Close the dialog in Vectorworks and try again. The request was cancelled "
                 "and will not run later."
             )
         menu = not getattr(self.trigger, "direct", True)  # menu, or auto still on the menu
         return (
-            f"Vectorworks did not take the request within {self.claim_timeout:g}s. Check that "
+            f"Vectorworks did not take the request within {claim_timeout:g}s. Check that "
             "a document is open and no dialog is showing"
             + (" and that the 'MCP Run Job' menu command is in your workspace" if menu else "")
             + ". The request was cancelled and will not run later."

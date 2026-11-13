@@ -49,6 +49,7 @@ DIRECT_VSS = ("PROCEDURE T; BEGIN PythonBeginContext; "
               "__import__(''vwmcp.vwmcp_bridge'', fromlist=[''run_pending'']).run_pending()'); "
               "PythonEndContext; END; RUN(T);")
 _APP_RE = re.compile(r"/(Vectorworks 20\d\d)\.app/Contents/MacOS/Vectorworks(?:$|\s+-)")
+_BUNDLE_RE = re.compile(r"^(.*/Vectorworks 20\d\d\.app)/Contents/MacOS/Vectorworks(?:$|\s+-)")
 
 
 def parse_etime(text: str) -> int:
@@ -75,6 +76,33 @@ def parse_ps(text: str) -> list[tuple[str, float]]:
                 apps.append((m.group(1), float(parse_etime(parts[1]))))
     apps.sort(key=lambda a: a[1])
     return apps
+
+
+def parse_ps_processes(text: str) -> list[dict]:
+    """Vectorworks processes in `ps -axo pid=,etime=,command=` output:
+    {"name", "pid", "uptime", "bundle"} (bundle = path of the .app), most
+    recently started first."""
+    procs = []
+    for line in text.splitlines():
+        parts = line.strip().split(None, 2)
+        if len(parts) < 3 or not parts[0].isdigit():
+            continue
+        cmd = parts[2].strip()
+        m = _APP_RE.search(cmd)
+        if not m:
+            continue
+        b = _BUNDLE_RE.match(cmd)
+        with contextlib.suppress(ValueError):
+            procs.append({"name": m.group(1), "pid": int(parts[0]), "uptime": float(parse_etime(parts[1])),
+                          "bundle": b.group(1) if b else None})
+    procs.sort(key=lambda p: p["uptime"])
+    return procs
+
+
+def running_processes() -> list[dict]:
+    """Running Vectorworks processes with pid and app bundle (see parse_ps_processes)."""
+    ps = subprocess.run(["ps", "-axo", "pid=,etime=,command="], capture_output=True, text=True)
+    return parse_ps_processes(ps.stdout)
 
 
 def running_apps() -> list[tuple[str, float]]:

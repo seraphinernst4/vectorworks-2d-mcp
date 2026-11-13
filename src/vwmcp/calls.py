@@ -38,14 +38,16 @@ def raise_for_result(res: dict) -> dict:
 
 
 def _run_with_libs(bridge: Bridge, names_sources: list[tuple[str, str]], body: str,
-                   timeout: float | None = None) -> dict:
+                   timeout: float | None = None, guarded: bool = True) -> dict:
     """Run body with helper libraries loaded first: by reference (compiled once
-    per Vectorworks session) when the bridge supports it, else inline."""
+    per Vectorworks session) when the bridge supports it, else inline.
+    guarded=False skips the document guard (see vwmcp.documents)."""
+    kw = {} if guarded else {"guarded": False}
     if bridge.supports_libs():
         libs = [bridge.lib_ref(n, s) for n, s in names_sources]
-        return bridge.run(body, timeout=timeout, libs=libs)
+        return bridge.run(body, timeout=timeout, libs=libs, **kw)
     code = "\n".join(s for _, s in names_sources) + "\n" + body
-    res = bridge.run(code, timeout=timeout)
+    res = bridge.run(code, timeout=timeout, **kw)
     maybe_reload(bridge)
     return res
 
@@ -61,7 +63,7 @@ def maybe_reload(bridge: Bridge) -> None:
         return
     bridge._reload_tried = True
     try:
-        res = bridge.run(RELOAD_CODE, timeout=30, check=False)
+        res = bridge.run(RELOAD_CODE, timeout=30, check=False, guarded=False)
         if res.get("ok") and res.get("value"):
             bridge.bridge_version = res["value"]
             bridge.log(f"reloaded the bridge in Vectorworks: now {res['value']}")
@@ -69,18 +71,18 @@ def maybe_reload(bridge: Bridge) -> None:
         bridge.log(f"bridge reload failed: {e}")
 
 
-def call(bridge: Bridge, fn: str, **kwargs):
+def call(bridge: Bridge, fn: str, _guarded: bool = True, **kwargs):
     """Run vwlib.<fn>(**kwargs) in Vectorworks and return its value."""
     # json.dumps -> repr gives a Python string literal, safe for any content.
     body = (
         "import json as _json\n"
         f"result = {fn}(**_json.loads({json.dumps(kwargs)!r}))\n"
     )
-    res = _run_with_libs(bridge, [("vwlib", VWLIB_SOURCE)], body)
+    res = _run_with_libs(bridge, [("vwlib", VWLIB_SOURCE)], body, guarded=_guarded)
     return raise_for_result(res)["value"]
 
 
-def call2d(bridge: Bridge, fn: str, timeout: float | None = None, **kwargs):
+def call2d(bridge: Bridge, fn: str, timeout: float | None = None, _guarded: bool = True, **kwargs):
     """Run vwlib2d.<fn>(**kwargs) (with vwlib loaded first) in Vectorworks.
     Results travel as a JSON string so floats round-trip bit-exactly."""
     body = (
@@ -88,6 +90,6 @@ def call2d(bridge: Bridge, fn: str, timeout: float | None = None, **kwargs):
         f"result = _json.dumps({fn}(**_json.loads({json.dumps(kwargs)!r})))\n"
     )
     res = _run_with_libs(bridge, [("vwlib", VWLIB_SOURCE), ("vwlib2d", VWLIB2D_SOURCE)], body,
-                         timeout=timeout)
+                         timeout=timeout, guarded=_guarded)
     value = raise_for_result(res)["value"]
     return json.loads(value) if isinstance(value, str) else value
